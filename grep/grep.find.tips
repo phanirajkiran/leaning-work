@@ -1,0 +1,126 @@
+http://www.regular-expressions.info/refadv.html
+http://www.cyberciti.biz/faq/grep-regular-expressions/
+
+   Repetition
+
+       A regular expression may be followed by one of several repetition operators:
+       ?      The preceding item is optional and matched at most once.
+       *      The preceding item will be matched zero or more times.
+       +      The preceding item will be matched one or more times.
+       {n}    The preceding item is matched exactly n times.
+       {n,}   The preceding item is matched n or more times.
+       {n,m}  The preceding item is matched at least n times, but not more than m times.
+
+
+       . Matches any single character. 
+
+lyang0@lyang0-OptiPlex-755:~/del$ echo "a332b" |grep -E "[0-9]{2}"
+a332b
+
+grep run[- ]time *.txt
+
+grep '^\.[a-z][a-z]' {line start with "." and 2 lc letters} 
+
+grep '^\.[a-z][a-z]' {line start with "." and 2 lc letters} 
+
+grep -E -i -w 'vivek|raj' /etc/passwd
+
+You can display only lines starting with the word vivek only i.e. do not display vivekgite, vivekg etc:
+grep -w ^vivek /etc/passwd
+
+#Print all lines with exactly two characters:
+grep '^..$' filename
+
+
+#match line only containing foo:
+grep '^foo$' filename
+
+You can also match digits (i.e match vivek1 or Vivek2 etc):
+grep -w '[vV]ivek[0-9]' filename
+
+lyang0@lyang0-OptiPlex-755:~/del$ ifconfig |grep '128\.224\.*'
+          inet addr:128.224.158.164  Bcast:128.224.159.255  Mask:255.255.254.0
+
+lyang0@lyang0-OptiPlex-755:~/del$ ifconfig |grep -o '128\.224\.*'
+128.224.
+128.224.
+
+The following will match word Linux or UNIX in any case:(start with)
+egrep -i '^(linux|unix)' filename
+
+#How Do I do OR with grep?
+grep -E 'word1|word2' filename (must -E)
+
+How Do I do AND with grep?
+Use the following syntax to display all lines that contain both 'word1' and 'word2'
+grep 'word1' filenae | grep 'word2'
+
+
+#You can test how often a character must be repeated in sequence using the following syntax:
+{N}
+{N,}
+{min,max}
+#Match a character "v" two times:
+egrep "v{2}" filename
+
+#The following will match both "col" and "cool":
+egrep 'co{1,2}l' filename
+
+#The following will match any row of at least three letters 'c'.
+egrep 'c{3,}' filename
+
+
+How Do I Show Only The Matches, Not The Lines?
+Use the following syntax:
+grep -o regex filename
+
+grep -o "i" a.txt
+It returns only i
+
+grep -A2 -B2 "PLMNCode=455F00" contents
+
+#contains both "a" and "b"
+grep "a.*b" text
+grep "a" text |grep "b"
+
+
+#Addinging the option -E allowed to removed the "\" for the special characters and the code worked as expected.
+grep "^\([^x]*x\)\{3\}[^x]*$" /usr/share/dict/words
+grep -E "^([^x]*x){3}[^x]*$" /usr/share/dict/words
+
+#escape
+lyang0@lyang0-OptiPlex-755:~/WORK/git2$ echo "xx.y" |egrep "xx\.y"
+xx.y
+lyang0@lyang0-OptiPlex-755:~/WORK/git2$ echo "xx.y" |egrep "xx[.]y"
+xx.y
+
+###find 
+find . -name "file*" -printf "%f\n"
+
+
+find . -name "*.h" -printf "My name is: %f\n"
+
+find . -type f -printf "($PWD) /%P\n"
+
+find -name "*.xls" -o -name "*.csv"
+If you absolutely want to use regex simply use
+find -regex ".*\.\(xls\|csv\)"
+
+
+for i in `ls -laR|egrep -e '(.js|.css)'`; do find . -name $i -print|xargs grep -H searchBg; done;
+
+
+find -name "*.css" -o -name "*.js"
+find . -type f \( -name '*.css' -o -name '*.js' \) -print0
+
+This will match b.ext, b01.ext, b001.ext and b0001.ext, etc. If you don't want to match beyond 001, then change to
+find . -regex '.*[^0-9]\(00?1\)?.sql'
+
+find -regextype awk -regex '.*json-[a-z]+\.[ch]'
+The regex option with find is funky to say the least. You have to account for the that leading "./" in the path leading to the file in your regex.
+
+This works, but tweak to your tastes:
+
+find /buildarea/lyang0/x86.patched/bitbake_build/tmp/work/x86_kvm_guest-wrs-linux/linux-windriver-3.4-r0/sstate-build-deploy-rpm/ \( -name "*.la" -o -name "*-config" -o -name "*_config" \) -type f
+
+
