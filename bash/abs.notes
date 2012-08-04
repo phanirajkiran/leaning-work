@@ -264,3 +264,109 @@ http://stackoverflow.com/questions/2829613/how-do-you-tell-if-a-string-contains-
 
 
 [ $? -eq 0 ] && echo "pass" || echo "fail"
+
+Arithmetic Expansion
+
+z=$(($z+3))
+z=$((z+3)) 
+let z=z+3
+
+grep regex
+
+lyang0@lyang0-OptiPlex-755:~/del$ echo a111b | grep -E 'a1+b' (=egrep)
+a111b
+lyang0@lyang0-OptiPlex-755:~/del$ echo a111b | grep 'a1\+b'
+a111b
+
+lyang0@lyang0-OptiPlex-755:~/del$ echo "read" |egrep 're(a|e)d' 
+read
+lyang0@lyang0-OptiPlex-755:~/del$ echo "read" |egrep 're[ae]d' 
+read
+lyang0@lyang0-OptiPlex-755:~/del$ echo "reed" |egrep 're[ae]d' 
+reed
+
+#Globbing
+bash$ ls -l [ab]*
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 a.1
+ -rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+
+bash$ ls -l [a-c]*
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 a.1
+ -rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+ -rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 c.1
+
+bash$ ls -l {b*,c*,*est*}
+-rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 b.1
+ -rw-rw-r--    1 bozo  bozo         0 Aug  6 18:42 c.1
+ -rw-rw-r--    1 bozo  bozo       758 Jul 30 09:02 test1.txt
+
+for file in [jx]*
+
+if [[ $mail =~ "^From " ]]   # Match "From" field in message.
+
+#Here documents are a special case of redirected code blocks. That being the case, it should be possible to feed the output of a here document into the stdin for a while loop.
+#
+#
+#
+
+function doesOutput()
+ # Could be an external command too, of course.
+ # Here we show you can use a function as well.
+{
+  ls -al *.jpg | awk '{print $5,$9}'
+}
+
+
+nr=0          #  We want the while loop to be able to manipulate these and
+totalSize=0   #+ to be able to see the changes after the 'while' finished.
+
+while read fileSize fileName ; do
+  echo "$fileName is $fileSize bytes"
+  let nr++
+  totalSize=$((totalSize+fileSize))   # Or: "let totalSize+=fileSize"
+done<<EOF
+$(doesOutput)
+EOF
+
+while [ 1 ]   # Endless loop.
+
+# Gives difference in command output
+lyang0@lyang0-OptiPlex-755:~/del$ diff -u <(ls) <(ls -lrt)
+
+#read
+while read  des what mask iface; do
+  echo $des $what $mask $iface
+done < <(route -n) 
+
+[ ! -f "$file" ] || (rm -f $file; echo "File \"$file\" deleted.")
+
+
+
+#  Cleans up the temp file if script interrupted by control-c.
+trap 'rm -f $TEMPFILE; exit $USER_INTERRUPT' TERM INT
+
+# trap '' SIGNAL (two adjacent apostrophes) disables SIGNAL for the remainder of the script. trap SIGNAL restores the functioning of SIGNAL once more. This is useful to protect a critical portion of a script from an undesirable interrupt.
+ 
+
+	trap '' 2  # Signal 2 is Control-C, now disabled.
+	command
+	command
+	command
+	trap 2     # Reenables Control-C
+
+###cat
+###
+##
+cat <<End-of-message
+-------------------------------------
+This is line 1 of the message.
+This is line 2 of the message.
+This is line 3 of the message.
+This is line 4 of the message.
+This is the last line of the message.
+-------------------------------------
+End-of-message
+
+#  Replacing line 7, above, with
+#+   cat > $Newfile <<End-of-message
+
