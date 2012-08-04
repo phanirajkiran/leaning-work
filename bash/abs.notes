@@ -36,6 +36,23 @@ echo ${stringZ#a*C}      # 123ABCabc
 echo ${stringZ##a*C}     # abc
 # Strip out longest match between 'a' and 'C'.
 
+lyang0@lyang0-OptiPlex-755:~/WORK/git2$ a="x~back end~20120801.TXT 2KB"
+lyang0@lyang0-OptiPlex-755:~/WORK/git2$ echo ${a% *}
+x~back end~20120801.TXT
+lyang0@lyang0-OptiPlex-755:~/WORK/git2$ echo ${a##* }
+2KB
+
+lyang0@lyang0-OptiPlex-755:~/WORK/git2$ a="sda36"
+lyang0@lyang0-OptiPlex-755:~/WORK/git2$ echo ${a##sda}
+36
+
+while read -r line; do
+  file=${line% *}
+  size=${line##* }
+  array+=( "$file" )
+  printf '%s' "$file"
+  ...
+done
 
 
  echo "Length of var01 = ${#var01}"
