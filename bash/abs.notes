@@ -408,4 +408,7 @@ shopt -s extglob #open
 shopt -u extglob #close
 rm *@(jpg|png) #delete the end with jpg or png
 
+ls -l !(*.*)
+ls -l -d !(*.*)
+
 
