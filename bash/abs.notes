@@ -404,3 +404,8 @@ done
 
 #ls -S sorts by file size. The largest one comes first.
 
+shopt -s extglob #open
+shopt -u extglob #close
+rm *@(jpg|png) #delete the end with jpg or png
+
+
