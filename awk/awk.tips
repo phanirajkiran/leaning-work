@@ -1,0 +1,26 @@
+
+The line behand one line
+{
+TextRel 203 0 0 "WELL:"
+SetPosAbs 1287 -6676
+TextRel 210 0 0 "AEP #2"
+
+The marker is WELL:, but the string I need is "AEP #2". Can grep/sed handle this or is some sort of read command required?
+}
+awk '/"WELL:"/{getline;getline;print $5, $6; exit}' asciipds
+
+
+#FS
+1)Two FS, and pass the variable, and tell the specifc line 
+awk -F: 'NR==1 { D=$3 } /Kbytes/ { FS=" "; $0=$0; print D, substr($(NF-1), 2); }' datafile
+
+info:3260648:050512:000253:  0: begin 
+info:3260648:050512:000253:  0:       DEST_FN: 
+info:3260648:050512:000253:  0:   remote host: 
+:
+:
+750 bytes sent in 0.1604 seconds (4.567 Kbytes/s)
+
+
+#arithmetic
+awk '/tom/ {count++;} END {print "tom was found "count" times"}' file
