@@ -1,0 +1,94 @@
+umount -l
+
+find ./ -name bzImage -exec scp '{}' root@128.224.165.205:/ \;
+find . -name 'fileA_*' -or -name 'fileB_*'
+
+http://en.wikipedia.org/wiki/Find
+
+
+
+grep 'BOOTIMAGE_RAM0SIZE=' /lpg-build/cdc/fast_prod/wrlinux4.3/dvd_install/lx23h_10fa/wrlinux-4/layers/bsps/ -r | awk -F'/' '{printf "%s=\n", $14}' >1 && grep 'BOOTIMAGE_RAM0SIZE=' /lpg-build/cdc/fast_prod/wrlinux4.3/dvd_install/lx23h_10fa/wrlinux-4/layers/bsps/ -r | awk '{print $6}' |awk -F'=' '{print $2}' >2 && paste -d 1 2 >file3
+
+paste -d '' 1 2 >file3 && cat file3
+
+http://bbs.chinaunix.net/thread-175744-1-1.html fuzhi 
+
+
+grep 'BOOTIMAGE_RAM0SIZE=' /lpg-build/cdc/fast_prod/wrlinux4.3/dvd_install/lx23h_10fa/wrlinux-4/layers/bsps/ -r | sed -n 's/\(.*\)board\/\(.*\)\/\(.*\)BOOTIMAGE_RAM0SIZE\(.*\)/\2\4/p'
+
+for i in `find . -name "*.gz" -print 2>/dev/null
+
+
+kill -9 $(pidof qemu-system-x86_64);
+
+http://serverfault.com/questions/101982/get-list-of-dhcp-clients-with-kvmlibvirt?
+
+<interface type='bridge'>
+<mac address='54:52:00:1c:6e:71'/>
+<source bridge='virbr0'/>
+<model type='virtio'/>
+</interface>
+
+
+ADDITIONAL_BOARD_NAME=("fsl_p4080" "fsl_p50x0")
+for i in ${ADDITIONAL_BOARD_NAME[@]} ;
+
+
+touch myfile{0,1,2,3,4,5,6}
+mkdir /usr/local/src/bash/{old,new,dist,bugs}
+
+ls !(myfile[0-5])
+rm myfile[4-5] 只能是个范围的时候这样表示
+ls hyp1311@(Sep|Aug)* 多种模式
+http://www.unix.com/shell-programming-scripting/185649-rm-regular-expression.html#post302636913
+
+cat /proc/cpuinfo |awk '/processor/{i++}END{print i}'
+for i in `seq 2 10`;do echo $i;done
+
+lyang0@lyang0-OptiPlex-755:~/tmp$ awk -F '350' '{print NF}' $pathname
+awk: cmd. line:1: fatal: cannot open file `/ctxfs/dm/350/junk.pdf' for reading (No such file or directory)
+lyang0@lyang0-OptiPlex-755:~/tmp$ awk -F '350' '{print NF}' $pathname^C
+
+echo "$pathname" |awk -F '350' '{print $NF}'
+
+
+cat $1 | while read LINE
+do
+   echo $LINE | awk -F, '{for(i=1;i<=NF;i++){ print $i }}' | while read WORD
+   do
+      awk '{$1 $2 $3 $4}'
+   done
+done
+
+
+http://www.unix.com/shell-programming-scripting/185709-how-find-these-records.html
+
+grep "^ \{5\}" input_file
+
+rm -rf hyp1311@(Aug|Sep|Oct)*
+ grep '[Ff]irst' *.txt
+ 
+grep -q "$username" /etc/passwd ?
+
+
+逻辑
+[lyang0@pek-lpgbuild7 wrlinux-x]$ git show 8a51a202591d5db321e7a8ad71ac72fc1b3e11a9
+commit 8a51a202591d5db321e7a8ad71ac72fc1b3e11a9
+Author: Jeff Polk <jeff.polk@windriver.com>
+Date:   Thu Apr 26 08:58:03 2012 -0600
+
+    Default downloads to on for now
+
+diff --git a/wrlinux/configure b/wrlinux/configure
+index 9f87ca0..13b413d 100755
+--- a/wrlinux/configure
++++ b/wrlinux/configure
+@@ -309,7 +309,7 @@ INHERIT += "wrlcompat"
+ EOF
+ 
+ echo "# Disable network access for the fetcher" >>$local_conf
+-if [ "X$enable_internet_download" != Xyes ]; then
++if [ "X$enable_internet_download" = Xno ]; then
+        echo "BB_NO_NETWORK ?= \"1\"" >>$local_conf
+ else
+        echo "#BB_NO_NETWORK ?= \"1\"" >>$local_conf

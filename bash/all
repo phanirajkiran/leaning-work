@@ -1,0 +1,83 @@
+BUILD_DIR=$(pwd)
+BRANDING_VALUE=$(sed -n -e "s/^${THE_KEY}=\(.*\)\$/\1/p" "${BRANDING_FILE}")
+sed -i -e "s|$origstr|$newstr|g" "$file"
+UNAME_RELEASE=`(sed 1q /etc/motd | awk '{print substr($5,1,3)}') 2>/dev/null`
+$showfiltfmts scale | awk -F '[ \r]' '/^OUTPUT/{ fmt=substr($3, 5); print fmt }' | sort | comm -23 - $exclude_fmts >$out_fmts
+
+
+http://www.thegeekstuff.com/2009/10/unix-sed-tutorial-advanced-sed-substitution-examples/
+
+增加法
+grep 'BOOTIMAGE_RAM0SIZE=' /lpg-build/cdc/fast_prod/wrlinux4.3/dvd_install/lx23h_10fa/wrlinux-4/layers/bsps/ -r | sed 's/\w\+/ & /g'
+
+减少法
+grep 'BOOTIMAGE_RAM0SIZE=' /lpg-build/cdc/fast_prod/wrlinux4.3/dvd_install/lx23h_10fa/wrlinux-4/layers/bsps/ -r |sed  's/\// /g;s/=/ /g' |awk '{print $13 "=" $21}'
+ifconfig |sed 's/:/ /g' |awk '/Bcast/{print $3}'
+
+
+grep 'BOOTIMAGE_RAM0SIZE=' /lpg-build/cdc/fast_prod/wrlinux4.3/dvd_install/lx23h_10fa/wrlinux-4/layers/bsps/ -r |sed 's/\(.*\)\bboard\/\(.*\)\b\/README\(.*\)/\2/g'
+ 
+http://hi.baidu.com/afantihome/blog/item/c22f50a4a2b66df99152ee6e.html
+
+
+IC_NUM=$(($IC_NUM+1))
+let OPTION_COUNT=$OPTIND-1
+let CURRENT_STEP+=1
+
+if [ -z "${BRANDING_VALUE}" ] ; then
+  echo "error: failed to find key '${THE_KEY}'" >&2
+  exit 1
+fi
+
+if [ "$#" -lt 4 ] ; then
+	echo "TEST SYNTAX ERROR: repeat_test() requires at least 4 arguments!"
+	exit 255
+fi
+
+d
+for x in `echo "$xdg_user_dir" | sed 's/:/ /g'`; do
+
+
+http://www.unix.com/shell-programming-scripting/185387-basename-subshell.html
+find . -type f| while read f
+do
+    grep -l "${f##*/}" "$f"
+done
+
+find . -type f -mtime +$k | while read i ; do
+    echo "$i"
+done
+
+
+
+awk:
+Me:
+echo "44ffffdfd xfdfd" |awk '/xfdfd/ && $1 ~/^[0-9]/ {print $1}'
+
+ifconfig |awk -F ':' '/inet addr/ && /Bcast/ {print $4}  contains two 
+
+cat xx |sed -n '/Speed/s/.* \([0-9]*\)Mb.*/\1/gp' xx
+
+
+Learned:
+
+ifconfig | grep -m 2 "inet addr"
+
+
+Python001
+QA:
+if [ ${#@} -lt 2 ] ; then
+
+
+cat /proc/cpuinfo |awk '$1=="processor" && $3==6,$1=="power"'
+
+
+awk '/Speed/ {sub("Mb/s","",$2);print $2}' xx
+awk '/Speed/{print $2+0}' xx
+
+Hi, by adding the number 0 to the string contained in $2, it is forced into numeric context, so "Mb/s" gets dropped and 1000 remains...
+This would be an alternative way of doing the same..
+
+Code:
+awk '/Speed/{print int($2)}' xx
+

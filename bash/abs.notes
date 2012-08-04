@@ -1,0 +1,266 @@
+路径:
+LOG_DIR=/var/log
+if [ `pwd` != "$LOG_DIR" ]  # or   if [ "$PWD" != "$LOG_DIR" ]
+# Far more efficient is:
+#
+# cd /var/log || {
+#   echo "Cannot change to necessary directory." >&2
+#   exit $E_XCD;
+# }
+
+bash$ echo $(ls -l)
+total 8 -rw-rw-r-- 1 bo bo 13 Aug 21 12:57 t.sh -rw-rw-r-- 1 bo bo 78 Aug 21 12:57 u.sh
+
+
+bash$ echo "$(ls -l)"
+total 8
+ -rw-rw-r--  1 bo bo  13 Aug 21 12:57 t.sh
+ -rw-rw-r--  1 bo bo  78 Aug 21 12:57 u.sh
+ 
+ 长度
+ ${var#Pattern} Remove from $var the shortest part of $Pattern that matches the front end of $var.
+ 
+ 
+截断
+${var##Pattern} Remove from $var the longest part of $Pattern that matches the front end of $var.
+echo ${#stringZ} 
+
+
+stringZ=abcABC123ABCabc
+#       |----|          shortest
+#       |----------|    longest
+
+echo ${stringZ#a*C}      # 123ABCabc
+# Strip out shortest match between 'a' and 'C'.
+
+echo ${stringZ##a*C}     # abc
+# Strip out longest match between 'a' and 'C'.
+
+
+
+ echo "Length of var01 = ${#var01}"
+ For an array, ${#array[*]} and ${#array[@]} give the number of elements in the array.
+ echo "${PWD##*/}" PWD钱不用${}
+ 
+ 替换
+ ${var/Pattern/Replacement}
+First match of Pattern, within var replaced with Replacement.
+
+If Replacement is omitted, then the first match of Pattern is replaced by nothing, that is, deleted.
+c=BB34
+echo "c = $c"            # c = BB34
+d=${c/BB/23}             # Substitute "23" for "BB".
+
+
+
+echo '$hello'  # $hello
+hello="A B  C   D"
+echo $hello   # A B C D
+echo "$hello" # A B  C   D
+if [ -z "$unassigned" ]
+then
+  echo "\$unassigned is NULL."
+fi     # $unassigned is NULL.
+echo "The value of \"a\" is now $a."
+
+bash$ echo -e x\ty
+xty
+bash$ echo -e "x\ty"
+x       y
+
+===================================================
+算术:
+http://tldp.org/LDP/abs/html/arithexp.html
+# Assignment using 'let'
+let a=16+5
+let "a += 1"
+let "index = $index + 1"
+
+((a += 1))             # let "a+=1"
+a=$(($a+1))
+
+z=$(($z+3))
+z=$((z+3))                                  #  Also correct
+  (( n += 1 ))                              # Increment.
+a=`expr 5 % 3`
+
+a=`ls -l`
+R=$(cat /etc/redhat-release)
+arch=$(uname -m)
+
+if [ -n "${10}" ]  # Parameters > $9 must be enclosed in {brackets}.
+args=$#           # Number of args passed.
+
+var="'(]\\{}\$\""
+echo $var        # '(]\{}$"
+IFS='\'
+echo $var        # '(] {}$"     \ converted to space. Why?
+echo "$var"      # '(]\{}$"
+
+
+
+流控:
+case `basename $0` in    # Or:    case ${0##*/} in
+    "wh"       ) whois $1@whois.tucows.com;;
+    "wh-ripe"  ) whois $1@whois.ripe.net;;
+    "wh-apnic" ) whois $1@whois.apnic.net;;
+    "wh-cw"    ) whois $1@whois.cw.net;;
+    *          ) echo "Usage: `basename $0` [domain-name]";;
+esac 
+
+case "$variable" in 
+ 
+ 
+  case "$1" in
+    -d|--debug)
+
+case $( arch ) in   # $( arch ) returns machine architecture.
+                    # Equivalent to 'uname -m' ...
+  i386 ) echo "80386-based machine";;
+  i486 ) echo "80486-based machine";;
+  i586 ) echo "Pentium-based machine";;
+  i686 ) echo "Pentium2+-based machine";;
+  *    ) echo "Other type of machine";;
+esac
+
+exit 0
+==========================================
+List="one two three"
+for a in $List     # Splits the variable in parts at whitespace.
+do
+  echo "$a"
+done
+
+NUMBERS="9 7 3 8 37.53"
+
+for number in `echo $NUMBERS`  # for number in 9 7 3 8 37.53
+
+
+for planet in "Mercury 36" "Venus 67" "Earth 93"  "Mars 142" "Jupiter 483"
+
+for file in *
+
+
+
+for file in $( find $directory -type f -name '*' | sort )
+
+
+generate_list ()
+{
+  echo "one two three"
+}
+
+for word in $(generate_list)  # Let "word" grab output of function.
+do
+  echo "$word"
+done
+
+for a in `seq 10`
+for a in {1..10}
+
+LIMIT=10
+for ((a=1; a <= LIMIT ; a++))  # Double parentheses, and naked "LIMIT"
+
+for file in [jx]*
+
+for name in $(awk 'BEGIN{FS=":"}{print $1}' < "$PASSWORD_FILE" )
+===============================================================
+while [ "$var0" -lt "$LIMIT" ]
+
+while read line   # As long as there is another line to read ...
+do
+  ...
+done <"$datafile"
+
+while true
+
+while :; do cat /proc/irq/*/smp_affinity ; sleep 10;done
+============================================================================================================
+let "num = (( 200 || 11 ))"
+echo $num   # 1
+
+=========================
+if [ $xyz ]   # Tests if $xyz is null, but...
+              # it's only an uninitialized variable.
+then
+  echo "Uninitialized variable is true."
+else
+  echo "Uninitialized variable is false."
+  
+if [ -x "$filename" ]; then
+
+if [[ -e $file ]]
+Using the [[ ... ]] test construct, rather than [ ... ] can prevent many logic errors in scripts. For example, the &&, ||, <, and > operators work within a [[ ]] test, despite giving an error within a [ ] construct.
+
+
+The "if COMMAND" construct returns the exit status of COMMAND.
+if cd "$dir" 2>/dev/null; then 
+
+var1=20
+var2=22
+[ "$var1" -ne "$var2" ] && echo "$var1 is not equal to $var2"
+
+fi            # Uninitialized variable is false.
+
+# (( ... )) also useful in an if-then test.
+
+var1=5
+var2=4
+
+if (( var1 > var2 ))
+then #^      ^      Note: Not $var1, $var2. Why?
+  echo "$var1 is greater than $var2"
+fi     # 5 is greater than 4
+
+exit 0
+
+a=3
+
+if [ "$a" -gt 0 ]
+then
+  if [ "$a" -lt 5 ]
+  then
+    echo "The value of \"a\" lies somewhere between 0 and 5."
+  fi
+fi
+
+# Same result as:
+
+if [ "$a" -gt 0 ] && [ "$a" -lt 5 ]
+then
+  echo "The value of \"a\" lies somewhere between 0 and 5."
+fi
+
+ if [[ "$inner" -eq 7 && "$outer" = "III" ]]
+
+文件判断
+
+http://tldp.org/LDP/abs/html/fto.html
+
+比较判断
+
+http://tldp.org/LDP/abs/html/comparison-ops.html
+http://tldp.org/LDP/abs/html/opprecedence.html
+
+====================================================================================================================
+数组http://tldp.org/LDP/abs/html/arrays.html#EX66
+area2=( zero one two three four )
+
+echo -n "area2[0] = "
+echo ${area2[0]}
+area3=([17]=seventeen [24]=twenty-four)
+echo ${area3[24]}
+
+# Doing it with a "for" loop instead:
+#   for i in "${colors[@]}"
+#   do
+#     echo "$i"
+#   done
+# (Thanks, S.C.)
+
+=========================
+http://stackoverflow.com/questions/229551/string-contains-in-bash
+http://stackoverflow.com/questions/2829613/how-do-you-tell-if-a-string-contains-another-string-in-unix-shell-scripting
+
+
+[ $? -eq 0 ] && echo "pass" || echo "fail"
