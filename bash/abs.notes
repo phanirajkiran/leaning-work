@@ -370,3 +370,20 @@ End-of-message
 #  Replacing line 7, above, with
 #+   cat > $Newfile <<End-of-message
 
+#set
+set -- a b
+echo $1
+echo $2
+
+
+find /path/to/base -type d | while read LINE
+do
+        set -- $(ls -S "$LINE"/*.gz)
+        [ "$#" -eq 2 ] || continue # Ignore folders that don't have 2 files
+
+        echo "Keeping $1"
+        echo rm "$2"
+done
+
+#ls -S sorts by file size. The largest one comes first.
+
