@@ -1,0 +1,28 @@
+###find
+find . -name "file*" -printf "%f\n"
+
+
+find . -name "*.h" -printf "My name is: %f\n"
+
+find . -type f -printf "($PWD) /%P\n"
+
+find -name "*.xls" -o -name "*.csv"
+If you absolutely want to use regex simply use
+find -regex ".*\.\(xls\|csv\)"
+
+
+for i in `ls -laR|egrep -e '(.js|.css)'`; do find . -name $i -print|xargs grep -H searchBg; done;
+
+
+find -name "*.css" -o -name "*.js"
+find . -type f \( -name '*.css' -o -name '*.js' \) -print0
+
+This will match b.ext, b01.ext, b001.ext and b0001.ext, etc. If you don't want to match beyond 001, then change to
+find . -regex '.*[^0-9]\(00?1\)?.sql'
+
+find -regextype awk -regex '.*json-[a-z]+\.[ch]'
+The regex option with find is funky to say the least. You have to account for the that leading "./" in the path leading to the file in your regex.
+
+This works, but tweak to your tastes:
+
+find /buildarea/lyang0/x86.patched/bitbake_build/tmp/work/x86_kvm_guest-wrs-linux/linux-windriver-3.4-r0/sstate-build-deploy-rpm/ \( -name "*.la" -o -name "*-config" -o -name "*_config" \) -type f
