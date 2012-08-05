@@ -1,3 +1,5 @@
+# the pro bash
+http://uod.ac/it/wp-content/uploads/2011/04/Pro-Bash-Programming-Scripting-the-GNU-Linux-Shell-Expert-039-s-Voice-in-Linux.pdf
 路径:
 LOG_DIR=/var/log
 if [ `pwd` != "$LOG_DIR" ]  # or   if [ "$PWD" != "$LOG_DIR" ]
