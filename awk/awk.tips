@@ -21,6 +21,14 @@ info:3260648:050512:000253:  0:   remote host:
 :
 750 bytes sent in 0.1604 seconds (4.567 Kbytes/s)
 
+#pass the external variable to awk
+echo "AB|CD|EF|GH|IJ" | awk -v var1="B" -F\| '$1~/A/ && $1~var1'
+
 
 #arithmetic
 awk '/tom/ {count++;} END {print "tom was found "count" times"}' file
+awk '{s+=$1} END {print s}' 
+
+#multi separator 
+awk -F'[,;]' '{print $7}' infile
+
