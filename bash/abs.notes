@@ -17,13 +17,23 @@ total 8
  -rw-rw-r--  1 bo bo  13 Aug 21 12:57 t.sh
  -rw-rw-r--  1 bo bo  78 Aug 21 12:57 u.sh
  
- 长度
- ${var#Pattern} Remove from $var the shortest part of $Pattern that matches the front end of $var.
- 
- 
-截断
-${var##Pattern} Remove from $var the longest part of $Pattern that matches the front end of $var.
 echo ${#stringZ} 
+
+http://tldp.org/LDP/abs/html/parameter-substitution.html
+NOTE: # % only support the [0-9] [a-zA-Z] and * others is not support as far as I know
+${var#Pattern} Remove from $var the shortest part of $Pattern that matches the front end of $var.
+${var##Pattern} Remove from $var the longest part of $Pattern that matches the front end of $var.
+	echo "${filename##*.}"      # Extension of filename.
+	echo "${PWD##*/}"           # Basename of current working directory.
+	echo "${0##*/}"             # Name of script.
+
+ 
+
+
+${var%Pattern} Remove from $var the shortest part of $Pattern that matches the back end of $var. 
+${var%%Pattern} Remove from $var the longest part of $Pattern that matches the back end of $var. 
+
+
 
 
 stringZ=abcABC123ABCabc
@@ -35,6 +45,34 @@ echo ${stringZ#a*C}      # 123ABCabc
 
 echo ${stringZ##a*C}     # abc
 # Strip out longest match between 'a' and 'C'.
+
+${var/Pattern/Replacement} First match of Pattern, within var replaced with Replacement.
+b=${a/23/BB}             # Substitute "BB" for "23".
+
+${var//Pattern/Replacement} Global replacement. All matches of Pattern, within var replaced with Replacement.
+
+
+${#string}
+expr length $string
+
+${string:position:length}
+Extracts $length characters of substring from $string at $position.
+
+echo ${stringZ:0}                            # abcABC123ABCabc
+echo ${stringZ:1}                            # bcABC123ABCabc
+echo ${stringZ:7}                            # 23ABCabc
+
+http://tldp.org/LDP/abs/html/string-manipulation.html#EXPRPAREN
+Extracts $substring at beginning of $string, where $substring is a regular expression
+stringZ=abcABC123ABCabc
+#       =======	    
+
+echo `expr match "$stringZ" '\(.[b-c]*[A-Z]..[0-9]\)'`   # abcABC1
+
+
+
+
+
 
 lyang0@lyang0-OptiPlex-755:~/WORK/git2$ a="x~back end~20120801.TXT 2KB"
 lyang0@lyang0-OptiPlex-755:~/WORK/git2$ echo ${a% *}
