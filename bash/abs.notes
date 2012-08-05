@@ -345,7 +345,32 @@ done<<EOF
 $(doesOutput)
 EOF
 
+
+
+
+find ... | while read LINE
+do
+...
+done
+
+#If you need to use the same results more than once, you could save find's output into a temporary file and read from that.
+while read LINE
+do
+...
+done < /tmp/filename
+
+
+#Endless loop:
+
 while [ 1 ]   # Endless loop.
+
+while :
+do
+   operation-1
+   operation-2
+   ...
+   operation-n
+done
 
 # Gives difference in command output
 lyang0@lyang0-OptiPlex-755:~/del$ diff -u <(ls) <(ls -lrt)
