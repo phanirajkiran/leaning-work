@@ -6,4 +6,21 @@ field2
 field3 field4
 
 awk -v RS="" '{for(i=1;i<=NF;i++)printf("\"%s\";",$i)}' input.txt
+1)loop must in the {}?
+2)for if while--> don't use the ;
+
+
+awk '/[1-9][0-9]* rows affected/' RS=\= infile
+
+http://blog.51yip.com/shell/1151.html
+http://www.unix.com/shell-programming-scripting/195387-fetch-section-file.html
+
+
+
+advacned "awk and sed"
+http://www.unix.com/shell-programming-scripting/195527-script-using-sed-search-all-patterns-after-last-patter-insert-newline-comma-sep-value.html
+
+awk '{if (match($0,/Campbell/)) print; else { if (p) print p; p=$0 } } END {if (p) print p}' songs
+http://www.unix.com/shell-programming-scripting/195549-making-play-list.html
+
 
