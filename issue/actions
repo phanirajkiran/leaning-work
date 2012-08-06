@@ -14,6 +14,7 @@ awk '/[1-9][0-9]* rows affected/' RS=\= infile
 
 http://blog.51yip.com/shell/1151.html
 http://www.unix.com/shell-programming-scripting/195387-fetch-section-file.html
+awk '/client/{++c}c==4 && !/[=]/{print}' inputfile
 
 
 
@@ -23,4 +24,14 @@ http://www.unix.com/shell-programming-scripting/195527-script-using-sed-search-a
 awk '{if (match($0,/Campbell/)) print; else { if (p) print p; p=$0 } } END {if (p) print p}' songs
 http://www.unix.com/shell-programming-scripting/195549-making-play-list.html
 
+one think
+lyang0@lyang0-OptiPlex-755:~/del$ cat 3
+winter_kool
+sugar_"sweet
 
+lyang0@lyang0-OptiPlex-755:~/del$ awk '{ T=$0; gsub(/[^a-zA-Z]+/, "", T);print T}' 3
+winterkool
+sugarsweet
+
+lyang0@lyang0-OptiPlex-755:~/del$ awk '{ T=$0; gsub(/[^a-zA-Z]+/, "", T) } (T ~ MATCH)' MATCH="sugarsweet" 3
+sugar_"sweet"
