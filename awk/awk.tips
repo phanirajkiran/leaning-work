@@ -89,6 +89,7 @@ info:3260648:050512:000253:  0:   remote host:
 :
 750 bytes sent in 0.1604 seconds (4.567 Kbytes/s)
 
+#issue action this can be combined for the jianshao fa or increase fa, NO issue action is only for the one line
 #pass the external variable to awk
 echo "AB|CD|EF|GH|IJ" | awk -v var1="B" -F\| '$1~/A/ && $1~var1'
 
