@@ -60,10 +60,7 @@ ID_12 4
 
 sudo ethtool eth1 |awk '/Speed/{split($2,T,"Mb/s"); print T[1]}'
 
-pipe
-awk 'BEGIN{"date"|getline var;split(var,a);print a[4]}' 
-
-
+awk -F ':' '{split($1,T,"/");split($2,I,"=");print T[14] "=" I[3]}'
 
 
 The line behand one line
