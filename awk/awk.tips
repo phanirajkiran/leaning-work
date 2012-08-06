@@ -29,6 +29,7 @@ ID_3787 4
 ID_0098 1
 ID_12 4
 
+awk '/Speed/ {sub("Mb/s","",$2);print $2}'
 
 str = "water, water, everywhere"
 sub(/at/, "ith", str)
@@ -62,6 +63,9 @@ sudo ethtool eth1 |awk '/Speed/{split($2,T,"Mb/s"); print T[1]}'
 
 awk -F ':' '{split($1,T,"/");split($2,I,"=");print T[14] "=" I[3]}'
 
+#getline
+#pipe
+awk 'BEGIN{"date"|getline var;split(var,a);print a[4]}'
 
 The line behand one line
 {
@@ -98,3 +102,6 @@ awk -F'[,;]' '{print $7}' infile
 
 #1
 $ awk '{$0="10.0.0.1,"$0}1' test.txt
+
+
+
