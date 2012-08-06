@@ -80,7 +80,7 @@ It returns only i
 grep -A2 -B2 "PLMNCode=455F00" contents
 
 #contains both "a" and "b"
-grep "a.*b" text
+grep -e 'aa.*bb' -e 'bb.*aa'
 grep "a" text |grep "b"
 
 
