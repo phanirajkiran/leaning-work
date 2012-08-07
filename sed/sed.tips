@@ -1,3 +1,8 @@
 lyang0@lyang0-OptiPlex-755:~/del$ echo "mmm1000" |sed 's/[^0-9]//g'
 1000
 
+在文件file.txt中含有insert的行前面加入文件insert.file
+[root@linuxso.com zhaoyj]# sed -e '/insert/{h;s/.*/cat insert.file/e;G}' file.txt 
+
+在文件file.txt中含有insert的行后面加入文件insert.file
+[root@linuxso.com zhaoyj]# sed -e '/insert/{p;s/.*/cat insert.file/e;}' file.txt 
