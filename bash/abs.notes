@@ -414,6 +414,14 @@ done
 
 # Gives difference in command output
 lyang0@lyang0-OptiPlex-755:~/del$ diff -u <(ls) <(ls -lrt)
+[lyang0@pek-lpgbuild9 lb08a_12sp]$ diff <(ls wrlinux-5/) <(ls /buildarea1/lyang0/wrlinux-x/)
+2c2
+< docs
+---
+> Documentation
+5d4
+< package.properties
+
 
 #read
 while read  des what mask iface; do
@@ -476,4 +484,14 @@ rm *@(jpg|png) #delete the end with jpg or png
 ls -l !(*.*)
 ls -l -d !(*.*)
 
+#for cat EOF
+1、追加文件
 
+cat << EOF >> test.sh
+something 
+EOF
+2、换一种写法
+
+cat > test.sh << EOF
+something 
+EOF
