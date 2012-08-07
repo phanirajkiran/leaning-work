@@ -1,0 +1,8 @@
+git push origin test:master // 提交本地test分支作为远程的master分支
+git push origin test:test              // 提交本地test分支作为远程的test分支
+
+$ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
+<<===>> 等价于下面的
+$ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
+$ git push origin master 
+需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支
