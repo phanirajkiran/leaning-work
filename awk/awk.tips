@@ -38,6 +38,16 @@ sub(/at/, "ith", str)
 how to replace the first `|' on each line with an `&': 
 awk '{ sub(/\|/, "\\&"); print }'
 
+lyang0@lyang0-OptiPlex-755:~$ echo "fdsfs35" |awk '{sub(/[a-z]+/,"");print}'
+35
+lyang0@lyang0-OptiPlex-755:~$ echo "fdsfs35" |awk '{sub(/[a-z]+/,"&|");print}'
+fdsfs|35
+lyang0@lyang0-OptiPlex-755:~$ echo "fdsfs35" |awk '{sub(/[a-z]+/,"& ");print}'
+fdsfs 35
+
+#handle the field
+lyang0@lyang0-OptiPlex-755:~/delmeme$ awk -F/ '{T=$4;sub(/[a-z]+/,"",T);print T}' 3
+55
 
 
 #substr
