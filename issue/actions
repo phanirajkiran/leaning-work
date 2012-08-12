@@ -35,3 +35,27 @@ sugarsweet
 
 lyang0@lyang0-OptiPlex-755:~/del$ awk '{ T=$0; gsub(/[^a-zA-Z]+/, "", T) } (T ~ MATCH)' MATCH="sugarsweet" 3
 sugar_"sweet"
+
+
+
+
+awk 'BEGIN {FS="\|\^"} {sum+=$5+$8} END {print sum}' infile
+
+VARA='hello|welcome|gone|fantastic|superb|nicecar'
+
+
+lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo $VARA | awk -F"|" '{for(i=1;i<=NF;i++)print "(" $i ")"}' |xargs -n9
+(hello) (welcome) (gone) (fantastic) (superb) (nicecar)
+
+lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo $VARA | awk -F"|" '{for(i=1;i<=NF;i++){$i="("substr($i,1)")"};print}'
+((hello) (welcome) (gone) (fantastic) (superb) (nicecar))
+
+
+lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo $VARA | awk -F"|" '{for(i=1;i<=NF;i++){sub(/.*/,"(&)",$i)};print}'
+(hello) (welcome) (gone) (fantastic) (superb) (nicecar)
+
+
+lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo 'hello|welcome|gone|fantastic|superb|nicecar' | awk -F'|' '{$0="(" $0 ")"}$1=$1' OFS=') ('
+(hello) (welcome) (gone) (fantastic) (superb) (nicecar)
+
+http://www.unix.com/shell-programming-scripting/196523-awk-related-question-loop-difficult-scenario-2.html
