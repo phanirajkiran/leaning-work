@@ -1,4 +1,4 @@
-1)LDFLAGS = "--allow-multiple-definition"
+1)LDFLAGS = -allow-multiple-definition
 will fix below 
 /buildarea1/lyang0/kftp2/bitbake_build/tmp/sysroots/fsl-p4080/usr/lib/libc.a(malloc.o): In function `free':
 malloc.c:(.text+0x5c50): multiple definition of `free'
