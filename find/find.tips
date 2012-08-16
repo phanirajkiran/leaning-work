@@ -26,3 +26,7 @@ The regex option with find is funky to say the least. You have to account for th
 This works, but tweak to your tastes:
 
 find /buildarea/lyang0/x86.patched/bitbake_build/tmp/work/x86_kvm_guest-wrs-linux/linux-windriver-3.4-r0/sstate-build-deploy-rpm/ \( -name "*.la" -o -name "*-config" -o -name "*_config" \) -type f
+
+#judge find or not 
+[ -n "$(find . -name 'filename' 2>/dev/null)" ]
+
