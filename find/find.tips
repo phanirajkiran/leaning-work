@@ -32,4 +32,9 @@ find /buildarea/lyang0/x86.patched/bitbake_build/tmp/work/x86_kvm_guest-wrs-linu
 if [ "X" != X ]::::
 lyang0@lyang0-OptiPlex-755:~/del$ if [ X`find -name xyz` != X ];then echo "hello";fi
 hello
-
+lyang0@lyang0-OptiPlex-755:~/del$ if [ X`find -name xyz` = X./xyz ];then echo "hello";fi
+hello
+lyang0@lyang0-OptiPlex-755:~/del$ if [ X`find -name xyz` = X"./xyz" ];then echo "hello";fi
+hello
+lyang0@lyang0-OptiPlex-755:~/del$ if [ X`find -name xyz -exec basename {} \;` = X"xyz" ];then echo "hello";fi
+hello
