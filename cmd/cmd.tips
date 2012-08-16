@@ -1,0 +1,24 @@
+lyang0@lyang0-OptiPlex-755:~/del$ cat 10 
+2
+5
+120
+208
+7
+28
+45
+6
+33
+120
+7
+208
+lyang0@lyang0-OptiPlex-755:~/del$ sort -n 10|uniq -c
+      1 2
+      1 5
+      1 6
+      2 7
+      1 28
+      1 33
+      1 45
+      2 120
+      2 208
+
