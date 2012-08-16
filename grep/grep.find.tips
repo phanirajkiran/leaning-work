@@ -84,11 +84,13 @@ grep -e 'aa.*bb' -e 'bb.*aa'
 grep "a" text |grep "b"
 同时匹配kobe和james:
 sed -n '/kobe/{/james/p}'        
-
 awk '/kobe/&&/james/{ print $0 }'
-
 grep -E '(kobe.*james|james.*kobe)'    
 
+匹配kobe或james:
+sed -n '/\(kobe\|james\)/p'
+awk '/kobe/||/james/{ print $0 }'
+grep -E '(kobe|james)'
 
 
 #Addinging the option -E allowed to removed the "\" for the special characters and the code worked as expected.
