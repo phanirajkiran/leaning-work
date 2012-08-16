@@ -1,0 +1,20 @@
+lyang0@lyang0-OptiPlex-755:~/delmeme$ sed -n '/[1-2]\+/p' 5
+12 34 56
+12
+lyang0@lyang0-OptiPlex-755:~/delmeme$ awk '/[1-2]+/' 5
+12 34 56
+12
+
+lyang0@lyang0-OptiPlex-755:~/delmeme$ sed -n '/34\|56/p' 5
+12 34 56
+34
+56
+56 78 34
+
+Notes:
+1)sed
+  +
+  ?
+  {}
+  |
+need add "\"
