@@ -1,0 +1,13 @@
+1)
+1)
+BEGIN{}
+{}
+END{}
+
+examples:
+BEGIN { FS=':'; print "This is the first line\n" }
+{ print "LINE",NR,$1 }
+END { print "This is the last line\n" } 
+
+cat /etc/passwd | awk 'BEGIN { FS=":"; print "This is the first line\n" } \
+{ print "LINE",NR,$1 } END { print "This is the last line\n" }'

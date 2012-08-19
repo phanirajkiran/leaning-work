@@ -1,0 +1,15 @@
+https://github.com/AlexMarlo/_bash/blob/master/count_fard_traffic.sh
+
+https://github.com/c-oreills/bash/tree/master/examples/scripts.v2
+
+https://github.com/dgeng/tapl/blob/master/code/awkcode
+
+https://github.com/PaulReiber/Log-Dissector/blob/master/LogDissector.awk
+
+http://docstore.mik.ua/orelly/unix/sedawk/examples/index.htm
+
+BEGIN { FS=':'; print "This is the first line\n" }
+{ print "LINE",NR,$1 }
+END { print "This is the last line\n" }
+
+http://www.adayinthelifeof.nl/2010/12/11/sed-awk-examples/
