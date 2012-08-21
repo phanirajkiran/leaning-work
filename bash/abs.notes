@@ -502,3 +502,18 @@ lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo {A..Z..2}
 A C E G I K M O Q S U W Y
 lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo {1..20..2}
 1 3 5 7 9 11 13 15 17 19
+
+
+#if
+if [[ "$inner" -eq 7 && "$outer" = "III" ]]
+if [[ `echo -n "$1" | wc -c` -eq 1 ]];
+if [ "$a" -gt 0 ] && [ "$a" -lt 5 ]
+if grep -q "vmx" /proc/cpuinfo && zcat /proc/config.gz |grep -q CONFIG_KVM=m;then
+if [[ `grep used file` = "" ]]
+[[ `zcat /proc/config.gz |grep KVM` != "" ]] && [[ `grep  "vmx" /proc/cpuinfo` != "" ]] && echo "hello"  在这个里面的不会输出的 哈哈 
+
+root@x86-64-kvm-guest:/opt/benchmark/kvm/netperf# ./xx.sh 
+./xx.sh: line 2: [: too many arguments
+root@x86-64-kvm-guest:/opt/benchmark/kvm/netperf# cat ./xx.sh
+#!/bin/bash
+[ `zcat /proc/config.gz |grep KVM` != "" ] && [ `grep  "vmx" /proc/cpuinfo` != "" ] && echo "hello" 
