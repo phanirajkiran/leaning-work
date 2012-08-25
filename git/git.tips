@@ -19,3 +19,12 @@ git diff tmp
 git merge tmp
 git branch -d tmp
 
+github
+ssh-keygen -t rsa -C "yanglei.fage@gmail.com"
+
+git init
+do something
+git add .
+git commit -m "init the repos" 
+git remote add origin git@github.com:leiyang/wr-autotest.git
+git push origin master
