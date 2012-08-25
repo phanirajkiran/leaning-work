@@ -22,3 +22,21 @@ lyang0@lyang0-OptiPlex-755:~/del$ sort -n 10|uniq -c
       2 120
       2 208
 
+#diff directory
+
+diff -rq good wrll-runtime-testing.v6
+
+#This command compares two directories and shows you any files that differ between the two. 
+It also shows how to exclude unimportant files like .DS_Store and Thumbs.
+
+diff -qr dirA dirB | grep -v -e 'DS_Store' -e 'Thumbs' | sort
+
+强制umount
+fuser -km /rootfs-tmp
+umount /rootfs-tmp
+
+mount -t iso9660 -o loop ./CentOS-5.4-i386-bin-DVD.iso /mnt/isocds/
+
+
+make modules
+make modules INSTALL_MOD_PATH=xx
