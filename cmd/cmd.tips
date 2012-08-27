@@ -40,3 +40,17 @@ mount -t iso9660 -o loop ./CentOS-5.4-i386-bin-DVD.iso /mnt/isocds/
 
 make modules
 make modules INSTALL_MOD_PATH=xx
+
+[lyang0@pek-lpgbuild8 delme]$ ./xx.sh 
+/buildarea1/lyang0/delme/xx.sh
+[lyang0@pek-lpgbuild8 delme]$ cat xx.sh 
+#!/bin/bash
+
+echo "$(readlink -f $0)"
+
+ssh 用变量 
+ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$local_ip "cd /opt/benchmark/kvm/netperf/;/opt/benchmark/kvm/netperf/netperf-test-new.sh \
+-r $remote_ip -l $local_ip -u root -p root -L $times"
+
+get the script full name 
+redline -f $0
