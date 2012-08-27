@@ -549,3 +549,8 @@ while getopts ':hs:' option; do
 done
 shift $((OPTIND - 1))
 
+[lyang0@pek-lpgbuild8 ~]$ aa=/folk/lyang0/yose*
+[lyang0@pek-lpgbuild8 ~]$ [[ -f `echo $aa` ]] && echo hello
+hello
+
+
