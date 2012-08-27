@@ -552,5 +552,4 @@ shift $((OPTIND - 1))
 [lyang0@pek-lpgbuild8 ~]$ aa=/folk/lyang0/yose*
 [lyang0@pek-lpgbuild8 ~]$ [[ -f `echo $aa` ]] && echo hello
 hello
-
-
+http://stackoverflow.com/questions/2630799/how-can-i-check-if-file-exists-using-patterns
