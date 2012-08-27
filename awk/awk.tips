@@ -118,3 +118,13 @@ $ awk '{$0="10.0.0.1,"$0}1' test.txt
 format output and pass the varialble 
 #!/bin/bash
 awk -v app=$1 -v  pre=$2 '{printf("%s %s %s\n",app,$0,pre);}' input_file
+
+外部变量:
+
+NOTE:.........
+lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo "BOARD_NAME: intel-atom" | awk -v custom="BOARD_NAME" -F: '$0 ~custom{print $2}' 
+ intel-atom
+lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo "BOARD_NAME: intel-atom" | awk -v custom="BOARD_NAMExx" -F: '$0 ~custom{print $2}' 
+lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ 
+
+
