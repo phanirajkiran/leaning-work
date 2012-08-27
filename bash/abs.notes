@@ -1,5 +1,7 @@
 # the pro bash
 http://uod.ac/it/wp-content/uploads/2011/04/Pro-Bash-Programming-Scripting-the-GNU-Linux-Shell-Expert-039-s-Voice-in-Linux.pdf
+http://www.blogjava.net/tinysun/archive/2010/09/30/333468.html
+http://www.cnblogs.com/ebusi/archive/2011/02/09/1950422.html
 路径:
 LOG_DIR=/var/log
 if [ `pwd` != "$LOG_DIR" ]  # or   if [ "$PWD" != "$LOG_DIR" ]
@@ -517,3 +519,33 @@ root@x86-64-kvm-guest:/opt/benchmark/kvm/netperf# ./xx.sh
 root@x86-64-kvm-guest:/opt/benchmark/kvm/netperf# cat ./xx.sh
 #!/bin/bash
 [ `zcat /proc/config.gz |grep KVM` != "" ] && [ `grep  "vmx" /proc/cpuinfo` != "" ] && echo "hello" 
+[ $? = 1 ] && { echo "the guest is not up";exit; } #{ }别忘了空格, 如果一行的话最后一个;别忘了
+$0 the script's name
+
+
+
+参数
+http://stackoverflow.com/questions/5474732/how-can-i-add-a-help-method-to-a-shell-script
+
+usage="$(basename $0) [-h] [-s n] -- program to calculate the answer to life, the universe and everything
+
+where:
+    -h  show this help text
+    -s  set the seed value (default: 42)"
+
+seed=42
+while getopts ':hs:' option; do
+  case "$option" in
+    h) echo "$usage"
+       exit
+       ;;
+    s) seed=$OPTARG
+       ;;
+    ?) printf "illegal option: '%s'\n" "$OPTARG" >&2
+       echo "$usage" >&2
+       exit 1
+       ;;
+  esac
+done
+shift $((OPTIND - 1))
+
