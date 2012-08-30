@@ -137,3 +137,4 @@ awk '{if ($0 ~ /abc/) print $2 ; else print}'
 [lyang0@pek-lpgbuild8 wr-kernel]$ echo "abc:bcd" |awk '{split($0,b,":");print  "\"" b[1] "\"" "is good"}'
 "abc"is good
 
+awk -v m="/opt/ltp/wrLinux_ltp/wr-runltp -s" '{if($0~/desc/){split($12,b,"\"");$12="\""m " "b[2] "\"";print}else print}'
