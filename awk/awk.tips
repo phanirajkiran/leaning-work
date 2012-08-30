@@ -127,4 +127,13 @@ lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo "BOARD_NAME: intel-ato
 lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo "BOARD_NAME: intel-atom" | awk -v custom="BOARD_NAMExx" -F: '$0 ~custom{print $2}' 
 lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ 
 
+awk 不光显示匹配行
+testcase set_details -obj "%(PROJECT)/%(CASE_FOLDER_PATH)/17 TPS/106 sched_setscheduler/20.10.30.17.2916  19-2.run-test" -priority "2 - Medium" -desc "19-2.run-test" -category Runtime -exec_method Automatic
+
+awk '{if($0~desc){split($6,a,"/");split($13,b,"\"");$13= "\""a[1] " "b[2]"\"" ;print}else print}'
+awk '{if ($0 ~ /abc/) print $2 ; else print}'
+
+打印双引号
+[lyang0@pek-lpgbuild8 wr-kernel]$ echo "abc:bcd" |awk '{split($0,b,":");print  "\"" b[1] "\"" "is good"}'
+"abc"is good
 
