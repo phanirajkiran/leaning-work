@@ -553,3 +553,12 @@ shift $((OPTIND - 1))
 [lyang0@pek-lpgbuild8 ~]$ [[ -f `echo $aa` ]] && echo hello
 hello
 http://stackoverflow.com/questions/2630799/how-can-i-check-if-file-exists-using-patterns
+
+
+#ternary operator
+lyang0@lyang0-OptiPlex-755:~$ a=3
+lyang0@lyang0-OptiPlex-755:~$ b=4
+lyang0@lyang0-OptiPlex-755:~$ c=$((a>b?a:b))
+lyang0@lyang0-OptiPlex-755:~$ echo $c
+4
+plus a tip, the <condition>?<statement>:<statement> contruction is called the ternary operator, which should make it easier to search for
