@@ -1,0 +1,80 @@
+common:standard kernel only 
+
+FSL_8572 (Two core 1G)  
+         eTSEC (gianfar with Vitesse PHY)
+         Serial
+         SMP
+         NOR Flash  (JFFS2/CRAMFS/boot from NOR flash)
+         NAND Flash (JFFS2/UBIFS)
+         SATA (Boot from sata)
+         PATA
+         PCI
+         PCI-Express
+         SEC 3.0
+         I2C
+         EEPROM
+         RTC
+         USB_Host
+         Watchdog
+
+
+	IEEE1588
+	EEPROM
+	HW Watchdog
+	Encryption Engine
+	36bit physical address
+	oprofile
+	DMA
+
+
+PCI:
+ Intel(R) PRO/1000 Network Connection
+ Intel Corporation 82540EM Gigabit Ethernet Controller (rev 02)
+
+PCIE:
+ Intel(R) PRO/1000 PCI-Express Gigabit Network Connection,
+ Intel Corporation 82572EI Gigabit Ethernet Controller (rev 06)
+
+
+
+======================================================================================================================================================================================
+
+
+
+8548DS (one core 256M)
+
+         Ethernet
+                . TSEC0  and TSEC1
+         I2C
+         MTD
+                . 64MB of Flash memory on SODIMM
+                . 8MB of on-board Flash memory(boot ROM)
+                . EEPROM
+         PCI-Express
+         PCI-X
+         Serial
+                . ttyS0 and ttyS1
+         Security Engine
+         DMA Engine
+
+	(only NOR flash)
+	RTC
+	EEPROM
+	HW Watchdog
+	Encryption Engine
+	36bit physical address
+	oprofile
+	DMA
+
+
+
+PCI-X: (E1000?)
+ Intel(R) PRO/1000 Network Connection, PCI ID: 8086:1079
+
+PCIE: (E1000E)
+ Intel(R) PRO/1000 PCI-Express Gigabit Network Connection,
+ PCIE ID:8086:107d (rev 06)
+
+PCI:  (E1000)
+  Please refer to 'bootloader/README' in current directory.
+
