@@ -1,0 +1,19 @@
+http://downloadmirror.intel.com/9180/eng/README.txt
+This release includes three Linux* Base Drivers for Intel® Gigabit Network Connections.
+- igb-x.x.x.tar.gz driver supports all 82575/6-, 82580-, and I350-based gigabit network connections.
+- e1000e-x.x.x.x.tar.gz driver supports the Intel® PRO/1000 PCI-E (82563/6/7, 82571/2/3/4/7/8, or 82583) based gigabit network adapters.
+- e1000-x.x.x.tar.gz driver supports Intel® PRO/1000 PCI and PCI-X family of gigabit network connections.
+
+http://cateee.net/lkddb/web-lkddb/E1000E.html
+This driver supports the PCI-Express Intel(R) PRO/1000 gigabit ethernet family of adapters. For PCI or PCI-X e1000 adapters, use the regular e1000 driver For more information on how to identify your adapter, go to the Adapter & Driver ID Guide at:
+
+
+config IGBVF
+        tristate "Intel(R) 82576 Virtual Function Ethernet support"
+        depends on PCI
+        ---help---
+
+config IXGBEVF
+        tristate "Intel(R) 82599 Virtual Function Ethernet support"
+        depends on PCI_MSI
+

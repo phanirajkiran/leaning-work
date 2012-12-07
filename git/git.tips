@@ -28,3 +28,54 @@ git add .
 git commit -m "init the repos" 
 git remote add origin git@github.com:leiyang/wr-autotest.git
 git push origin master
+
+
+git log --format='%H %s' --since="3 day"
+git show master:features/ipmi/ipmi.scc
+
+
+bare clone:
+#git cat-file blob LB18_5.0:README 
+
+no bare clone:
+git show HEAD:README.TXT
+
+??
+git rev-parse --verify master:INSTALL 
+
+git compare different branch file: 
+git diff master:Documentation.ND/kernel-feature-matrix-5.0.txt origin/LB18_5.0:Documentation.ND/kernel-feature-matrix-5.0.txt
+
+To get a comparison of branches in a "status" type format to see which file changes:
+git diff --name-status master..origin/LB18_5.0
+
+
+git tag
+git tag -a 2.00 e3f5043233336d8b4b0731c6a8b42a8fda5535ac
+
+git archive
+git archive --format=tar.gz --prefix=mplayer-1.1  2.00 -o mplayer-1.1.tar.gz
+http://www.kernel.org/pub/software/scm/git/docs/git-archive.html
+
+
+git commit --amend
+can change your git log title
+
+
+
+本地分支推送：git push origin branch_local:branch_remote
+eg: git push ssh://ala-git.wrs.com/git/layers/wr-testing WRLINUX_Penguin_Dev:WRLINUX_Penguin_Dev
+
+
+
+git push origin :kill-this # remove remote
+git checkout master
+git branch -d kill-this # remove local
+
+
+
+#删除远程的master分支  
+git push origin :master  
+#重新创建master分支  
+git push origin master  
+

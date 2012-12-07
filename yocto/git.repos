@@ -1,1 +1,20 @@
+Home Page:
+http://git.yoctoproject.org/cgit/cgit.cgi/
+
 https://github.com/squirly/meta-gumstix
+
+Kernel Cache:
+git://git.yoctoproject.org/yocto-kernel-cache
+
+git://git.yoctoproject.org/meta-ivi
+git://git.yoctoproject.org/meta-systemd
+
+PPC:
+git://git.yoctoproject.org/meta-fsl-ppc
+
+ARM:
+git://git.yoctoproject.org/meta-fsl-arm
+git://git.yoctoproject.org/meta-ti
+
+Intel:
+git://git.yoctoproject.org/meta-intel

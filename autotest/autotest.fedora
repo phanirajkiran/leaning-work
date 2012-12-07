@@ -1,0 +1,9 @@
+1) mkdir /tmp/kvm_autotest_root/isos/linux/
+
+2) lyang0@lyang0-OptiPlex-755:~/del_au/autotest/client/tests/kvm$ sudo scp lyang0@128.224.165.20:/net/pek-nas1/vol/vol2/teamshare/isos/Fedora/FC17/i386/Fedora-17-i386-DVD.iso /tmp/kvm_autotest_root/isos/linux/
+
+3) qemu-kvm -device \? 2>&1 | grep "usb.*bus PCI"
+  # `qemu-kvm -device \? 2>&1 | grep "usb.*bus PCI"`
+  usb_type = vt82c686b-usb-uhci
+
+4) for 32 bit: only Fedora.16.64 ----> only Fedora.16.32

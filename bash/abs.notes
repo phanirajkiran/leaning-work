@@ -497,7 +497,7 @@ EOF
 cat > test.sh << EOF
 something 
 EOF
-
+2最好
 
 #generate the series
 lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo {A..Z..2}

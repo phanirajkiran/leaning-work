@@ -1,0 +1,20 @@
+macVtap:
+macvtap is a relatively recent device driver which was designed to share a physical network interface while using it's own mac address separate from the physical interface it is sharing. One of the primary goals of this driver is actually to ease virtualized bridged network configuration. Virt-manager really needed a driver like this in order to simplify this configuration process.
+#qemu -net nic,model=virtio,addr=1a:46:0b:ca:bc:7b -net tap,fd=3 3<>/dev/tap11
+macvtap can run in three modes; vepa, bridge and private mode.  You need to select bridge mode for bridged networking.
+	vepa (Virtual Ethernet Port Aggregator)
+	bridge
+	private
+
+Example configuration
+http://libvirt.org/formatnetwork.html#examplesDirect
+http://wiki.libvirt.org/page/Guest_can_reach_outside_network,_but_can%27t_reach_host_%28macvtap%29
+
+  ip link add link eth0 name macvtap0 type macvtap mode bridge
+  qemu-kvm -nographic -kernel /boot/vmlinuz-guest \
+    -append "console=ttyS0 root=/dev/vda" \
+    -drive file=/tmp/testroot.img,if=virtio,cache=none \
+    -net nic,model=virtio,macaddr=$(< /sys/class/net/macvtap0/address) \
+    -net tap,fd=3 3<>/dev/tap$(< /sys/class/net/macvtap0/ifindex)
+
+https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/App_Macvtap.html

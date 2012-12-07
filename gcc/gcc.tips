@@ -21,3 +21,5 @@ file or directory
 态库。
 
 echo "mpatrolmt unwind bfd iberty pthread" |sed -n 's/([a-z]+)/&xx/gp'
+
+gcc -pg -g2 -o gp-test{,.c}
