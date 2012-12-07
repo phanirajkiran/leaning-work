@@ -1,0 +1,64 @@
+#!/usr/bin/expect 
+
+set timeout  60 
+set host [lindex $argv 0]
+set name root 
+set password root 
+spawn  ssh $host -l $name 
+expect { 
+   "(yes/no)?" { 
+       send "yes\n"
+       expect "assword:"
+       send "$password\n"
+   } 
+       "assword:" { 
+       send "$password\n"
+   } 
+} 
+expect "Wind"
+send "uname -a\n"
+expect "Linux"
+interact
+
+
+                echo "Generate SHH Public KEY "
+                rm -rf /root/.ssh/* >> /dev/null 2>&1
+                sleep 10
+                expect <<- END
+                spawn ssh-keygen -t rsa
+
+                expect {
+                "Enter file in which to save the key (/root/.ssh/id_rsa):"
+{send "\r"}
+                        }
+                expect {
+                "Enter passphrase (empty for no passphrase):"          {send "\r"}
+                        }
+
+                expect {
+                "Enter same passphrase again:"          {send "\r"}
+                        }
+                
+                expect eof
+                exit
+END
+                echo ==========
+                echo ""
+#               echo "Waiting 10 Sec"
+                sleep 10
+                echo ========== 
+                echo "Copy SSH Public KEY to remote HOST"
+                expect <<- END
+                spawn scp -r /root/.ssh/id_rsa.pub root@10.0.2.3:/root/.ssh/authorized_keys
+
+                expect {
+                "(yes/no)?"         {send "yes\r"}      
+                        }
+
+                expect {
+                "password:"         {send "root\r"}
+                        }
+
+                expect eof
+                exit 
+END

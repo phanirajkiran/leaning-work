@@ -1,0 +1,102 @@
+[lyang0@pek-lpgtest3 wr-kernel]$ cat templates/default/template.conf 
+# force override KERNEL_* to point to the RAW toolchain vs any
+# wrappers that are in place
+
+QEMU_LINARO_TEMPLATE ?= "${@bb.utils.contains("MACHINE", "beagleboard", "templates/feature/qemu-linaro/template.conf", "empty.conf", d)}"
+require ${QEMU_LINARO_TEMPLATE}
+
+2)from enable-board and --enable-kernel to determine the scc selection for 64 or 32
+lyang0@pek-lpgtest1:/buildarea1/lyang0/intel-atom-cgl-64/build/linux-windriver-cgl-3.4-r0/linux/meta/cfg$ ls kernel-cache/bsp/intel-atom/ |grep atom
+intel-atom-64-cgl.scc
+intel-atom-64-preempt-rt.scc
+intel-atom-64-standard.scc
+intel-atom-64.cfg
+intel-atom-64.scc
+intel-atom-cgl.scc
+intel-atom-preempt-rt.scc
+intel-atom-standard.scc
+intel-atom.cfg
+intel-atom.scc
+
+
+3)
+image.bbclass, line 9
+---------------------
+RDEPENDS += "${IMAGE_INSTALL} ${LINGUAS_INSTALL} ${NORMAL_FEATURE_INSTALL}
+${ROOTFS_BOOTSTRAP_INSTALL}"
+
+4)
+FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+5)
+do_install ----> images
+file-{PN}
+file-xxx is packages-split
+
+6)
+| Processing task-core-wr-db...
+| error: Failed dependencies:
+| 	libavutil.so.51(LIBAVUTIL_51)(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavfilter.so.3()(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavformat.so.54(LIBAVFORMAT_54)(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavdevice.so.54(LIBAVDEVICE_54)(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavcodec.so.54()(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavformat.so.54()(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavfilter.so.3(LIBAVFILTER_3)(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavcodec.so.54(LIBAVCODEC_54)(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavutil.so.51()(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libswscale.so.2(LIBSWSCALE_2)(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libswresample.so.0(LIBSWRESAMPLE_0)(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libavdevice.so.54()(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libswscale.so.2()(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| 	libswresample.so.0()(64bit) is needed by ffmpeg-1.0-r17.1.x86_64
+| ERROR: Function failed: do_rootfs (see /buildarea1/lyang0/intel-atom-cgl-64/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/wrlinux-image-glibc-cgl-1.0-r2/temp/do_rootfs/log.do_rootfs.29606 for further information)
+
+
+        --libdir=${libdir} \
+        --shlibdir=${libdir} \
+
+I find packages-split lib64 is null 
+
+7) following above 6 it gives below wanrning as before
+WARNING: For recipe ffmpeg, the following files/directories were installed but not shipped in any package:
+WARNING:   /usr/lib/libavcodec.so.54
+WARNING:   /usr/lib/libavdevice.so
+WARNING:   /usr/lib/libavutil.so
+WARNING:   /usr/lib/libavdevice.so.54
+WARNING:   /usr/lib/libavfilter.so.3.17.100
+WARNING:   /usr/lib/libavcodec.so
+WARNING:   /usr/lib/libswresample.so.0
+WARNING:   /usr/lib/libswscale.so.2
+WARNING:   /usr/lib/libswscale.so.2.1.101
+WARNING:   /usr/lib/libswscale.so
+
+becasue the file_{PN} is usr/lib64 not /usr/lib 
+
+ffmpeg's Makefile defualt libdir is lib, but in bb $libdir is lib64, so usr/lib64 is null in images so not packages-split, to usr/lib64
+
+
+
+
+
+8)rootfs.cfg???
+
+
+9)make bbc BBCMD="bitbake linux-windriver"
+
+10) mv run* xx, 在xx的最后一行加入bash ./xx --norc 然后env打印出当前的变量
+
+11)对于linux-windriver bb FILES_{PN} 不管用,我们可以自己创建一个包
+
+RDEPENDS += "inifile"
+PACKAGES += "inifile"
+do_install_append() {
+       install -d ${D}/opt/wr-test
+       INI_FILE=`echo "${MACHINE}" |sed 's/-32$//g;s/_32$//g'`
+       echo ${INI_FILE}
+       install -m 0755 ${WORKDIR}/${INI_FILE}.ini ${D}/opt/wr-test
+}
+
+FILES_inifile += "/opt/wr-test/*
+
+12)bb里的变量要用{} 括起来,不括的话从他的LOG 里看到的没解析 

@@ -54,3 +54,14 @@ ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@$local_ip "
 
 get the script full name 
 redline -f $0
+ $(dirname $(readlink -f $0))"
+
+egrep:
+ -i, --ignore-case         ignore case distinctions
+egrep -i "eth0.*rx" /proc/interrupts
+
+grep -c ^processor /proc/cpuinfo`
+
+ls export/images/ -lrt |grep ^l |grep -E 'bz2|gz'$
+
+grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’）

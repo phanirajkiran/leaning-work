@@ -17,6 +17,14 @@ sed中需转义使用的RE：
 支持八进制，格式为“\o + 两位或三位八进制数”，如“\o077 或\o77 均代表字符 ？，\o101代表字符 A ”
 http://www.ixpub.net/thread-1463174-1-1.html
 
+x\{m\}
+重复字符x，m次，如：/0\{5\}/匹配包含5个o的行。
+
+x\{m,\}
+重复字符x,至少m次，如：/o\{5,\}/匹配至少有5个o的行。
+
+x\{m,n\}
+重复字符x，至少m次，不多于n次，如：/o\{5,10\}/匹配5--10个o的行。
 
 
 lyang0@lyang0-OptiPlex-755:~/del$ echo "mmm1000" |sed 's/[^0-9]//g'
@@ -27,3 +35,28 @@ lyang0@lyang0-OptiPlex-755:~/del$ echo "mmm1000" |sed 's/[^0-9]//g'
 
 在文件file.txt中含有insert的行后面加入文件insert.file
 [root@linuxso.com zhaoyj]# sed -e '/insert/{p;s/.*/cat insert.file/e;}' file.txt 
+
+#match the whole word
+sed -n '/\(ok\)\{3\}/p'
+OR
+sed -n '/\(ok\)\1\1/p'
+
+
+lyang0@lyang0-OptiPlex-755:~/del$ sed 's/[a-zA-Z]*//2gp' 9
+a   
+a   
+1 12 345 
+1 12 345 
+xd_ '
+xd_ '
+lyang0@lyang0-OptiPlex-755:~/del$ sed 's/[a-zA-Z]*//2p' 9
+a  ab abcd
+a  ab abcd
+1 12 345 a
+1 12 345 a
+xd_ he's
+xd_ he's
+
+Sed 变量, 还有里面有' '的要用""来括起来
+
+sed 's/foo/bar/4'                # 只替换每一行中的第四个“foo”字串

@@ -1,3 +1,5 @@
 http://forums.fedoraforum.org/showthread.php?t=181331
 
 mv initramfs-xyz-.img initramfs.cpio.gz && gunzip initramfs.cpio.gz && cpio -iv initramfs.cpio
+
+https://access.redhat.com/knowledge/docs/Red_Hat_Enterprise_Linux/

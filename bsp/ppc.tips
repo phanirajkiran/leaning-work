@@ -5,8 +5,10 @@ common:
 
 FSL_8572 (Two core 1G)  
          eTSEC (gianfar with Vitesse PHY,4)
-         Serial
-         SMP
+	 ----modprobe gianfar_driver
+
+         Serial  
+         SMP   Y
          NOR Flash  (JFFS2/CRAMFS/boot from NOR flash)
          NAND Flash (JFFS2/UBIFS)
          SATA (Boot from sata)
@@ -18,16 +20,16 @@ FSL_8572 (Two core 1G)
          EEPROM
          RTC
          USB_Host
-         Watchdog
+         Watchdog   Y
 
 
-	 IEEE1588
+	 IEEE1588 (CONFIG_PTP_1588_CLOCK_GIANFAR) 
 	 EEPROM
 	 HW Watchdog
 	 Encryption Engine
 	 36bit physical address
 	 oprofile
-	 DMA
+	 DMA           Y
 
 
 PCI:(CONFIG_E1000)
@@ -52,7 +54,7 @@ PCIE:(CONFIG_E1000E)
          MTD
                 . 64MB of Flash memory on SODIMM
                 . 8MB of on-board Flash memory(boot ROM)
-                . EEPROM
+                . EEPROM (The EEPROM is accessed using the MTD interface? NO,CONFIG_EEPROM_AT24)
          PCI-Express
          PCI-X
          Serial
@@ -62,8 +64,8 @@ PCIE:(CONFIG_E1000E)
 
 	 (only NOR flash)
 	 RTC
-	 EEPROM
-	 HW Watchdog
+	 EEPROM (CONFIG_EEPROM_AT24)
+	 HW Watchdog (watchdog damemon?)
 	 Encryption Engine
 	 36bit physical address
 	 oprofile
@@ -91,3 +93,30 @@ Reference
   http://twiki.wrs.com/PBUeng/LinuxProdBspTarget1333
 3)Boardinfo
   http://twiki.wrs.com/PGinventory/BoardInfo1093
+4)freescale
+  http://cache.freescale.com/files/soft_dev_tools/doc/support_info/SDK_1.0.3_PATCH_RN.txt
+
+
+Q1:Which kernel config should be enabled for HW watchdog?
+   CONFIG_BOOKE_WDT
+
+
+Q2:Which nic driver is used by PCI-X
+
+http://downloadmirror.intel.com/9180/eng/README.txt
+  igb-x.x.x.tar.gz driver supports all 82575/6-, 82580-, and I350-based gigabit network connections.
+  e1000e-x.x.x.x.tar.gz driver supports the Intel® PRO/1000 PCI-E (82563/6/7, 82571/2/3/4/7/8, or 82583) based gigabit network adapters.
+  e1000-x.x.x.tar.gz driver supports Intel® PRO/1000 PCI and PCI-X family of gigabit network connections.
+
+And 8086:1079 is E1000 so it's driver is E1000
+
+
+
+
+watchdog:
+http://www.freescale.com/infocenter/index.jsp?topic=%2FQORIQSDK%2F2151431.html
+
+
+Q3:SPE
+testfloat is in the SDK
+http://www.freescale.com/infocenter/topic/QORIQSDK/2151443.html

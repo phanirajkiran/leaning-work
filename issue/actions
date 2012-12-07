@@ -59,3 +59,5 @@ lyang0@lyang0-OptiPlex-755:~/community/leaning-work$ echo 'hello|welcome|gone|fa
 (hello) (welcome) (gone) (fantastic) (superb) (nicecar)
 
 http://www.unix.com/shell-programming-scripting/196523-awk-related-question-loop-difficult-scenario-2.html
+
+http://stackoverflow.com/questions/2652753/loading-variables-from-a-text-file-into-bash-script
