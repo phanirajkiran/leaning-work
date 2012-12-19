@@ -37,7 +37,18 @@ e1000e 0000:05:00.0: eth0: MAC: 0, PHY: 4, PBA No: D50868-003
 得知0000:05:00.0 被host的eth0 设备使用, 可以从ethtool 得知他是e1000的驱动,或者登陆网站:  查询
 
 
+================================================
 
+get random ip
+
+#!/bin/sh
+# generate a random mac address for the qemu nic
+printf 'DE:AD:BE:EF:%02X:%02X\n' $((RANDOM%256)) $((RANDOM%256))
+
+http://doc.opensuse.org/documentation/html/openSUSE/opensuse-kvm/cha.qemu.running.html
+
+Great:user
+http://unix.stackexchange.com/questions/7967/how-to-connect-a-kvm-guest-to-the-internet-with-wireless
 
 
 
