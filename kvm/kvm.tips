@@ -4,3 +4,42 @@ export LD_LIBRARY_PATH=/home/user/lib:$LD_LIBRARY_PATH
 /etc/ld.so.conf
 ldconfig
 
+
+#qemu-system-x86_64 -device ? 2>&1 | grep -i pci-assign 
+# qemu-system-x86_64 -net nic,model=?
+qemu: Supported NIC models:
+ne2k_pci,i82551,i82557b,i82559er,rtl8139,e1000,pcnet,virtio
+
+
+qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio,vlan_id=1 -net tap,fd=3,vlan_id=1 3<>/dev/tap8 -hda /boot/guest_raw.img  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=dhcp"  -nographic  -net nic model=e1000,vlan=2 -net user,vlan=2
+
+Below is to remove the device from host
+Unbind the device from the host by using the echo command. For example:
+
+   echo "8086 10fb" > /sys/bus/pci/drivers/pci-stub/new_id
+   echo "0000:00:15.0" > /sys/bus/pci/devices/0000:00:15.0/driver/unbind
+   echo "0000:00:15.0" > /sys/bus/pci/drivers/pci-stub/bind
+
+=====================
+root@intel_5500_server:~# lspci -nn |grep "Ethernet controller"
+01:00.0 Ethernet controller [0200]: Intel Corporation 82575EB Gigabit Network Connection [8086:10a7] (rev 02)
+01:00.1 Ethernet controller [0200]: Intel Corporation 82575EB Gigabit Network Connection [8086:10a7] (rev 02)
+05:00.0 Ethernet controller [0200]: Intel Corporation 82571EB Gigabit Ethernet Controller [8086:105e] (rev 06)
+05:00.1 Ethernet controller [0200]: Intel Corporation 82571EB Gigabit Ethernet Controller [8086:105e] (rev 06)
+
+得知,一个设备两个网口
+
+#dmesg |grep eth0
+e1000e 0000:05:00.0: eth0: (PCI Express:2.5GT/s:Width x4) 00:15:17:bb:5e:88
+e1000e 0000:05:00.0: eth0: Intel(R) PRO/1000 Network Connection
+e1000e 0000:05:00.0: eth0: MAC: 0, PHY: 4, PBA No: D50868-003
+
+得知0000:05:00.0 被host的eth0 设备使用, 可以从ethtool 得知他是e1000的驱动,或者登陆网站:  查询
+
+
+
+
+
+
+
+
