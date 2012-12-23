@@ -65,3 +65,11 @@ grep -c ^processor /proc/cpuinfo`
 ls export/images/ -lrt |grep ^l |grep -E 'bz2|gz'$
 
 grep -w pattern files ：只匹配整个单词，而不是字符串的一部分（如匹配‘magic’，而不是‘magical’）
+
+diff 比较两个命令的输出
+diff <(ifconfig -a ) <(ifconfig)
+
+
+
+cat <pipe2 > pipe1
+cmp <(ls /dir1) <(ls /dir2)

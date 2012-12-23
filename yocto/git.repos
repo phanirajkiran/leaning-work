@@ -18,3 +18,12 @@ git://git.yoctoproject.org/meta-ti
 
 Intel:
 git://git.yoctoproject.org/meta-intel
+
+git://git.yoctoproject.org/meta-virtualization
+http://git.yoctoproject.org/git/meta-virtualization
+
+git://git.yoctoproject.org/meta-xilinx
+http://git.yoctoproject.org/git/meta-xilinx
+
+git://git.yoctoproject.org/yocto-docs
+http://git.yoctoproject.org/git/yocto-docs

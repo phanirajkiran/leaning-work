@@ -562,3 +562,7 @@ lyang0@lyang0-OptiPlex-755:~$ c=$((a>b?a:b))
 lyang0@lyang0-OptiPlex-755:~$ echo $c
 4
 plus a tip, the <condition>?<statement>:<statement> contruction is called the ternary operator, which should make it easier to search for
+
+
+alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+alias scp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'

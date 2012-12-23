@@ -52,5 +52,53 @@ http://unix.stackexchange.com/questions/7967/how-to-connect-a-kvm-guest-to-the-i
 
 
 
+http://lists.gnu.org/archive/html/qemu-devel/2011-09/msg03778.html
+http://www.spinics.net/lists/kvm/msg52733.html
 
 
+===========================================
+
+/usr/libexec/qemu-kvm -device pci-assign,\?",we get the following messages.
+pci-assign.host=pci-hostaddr
+pci-assign.iommu=uint32
+pci-assign.bootindex=int32
+pci-assign.configfd=string
+https://bugzilla.redhat.com/show_bug.cgi?id=678731
+
+
+
+==================================================
+root@intel_5500_server:~# ls /sys/bus/pci/devices/0000:01:00.0/driver/module/drivers
+pci:igb
+great http://toomeek.waw.pl/blog/?m=201208
+
+
+==============================
+great for external networking http://lists.gnu.org/archive/html/qemu-devel/2011-09/msg03778.html
+
+great for macvtap http://virt.kernelnewbies.org/MacVTap
+
+
+
+============================================================================
+
+        <serial type='tcp'>
+                <source mode='bind' host='127.0.0.1' service='2445'/>
+                <protocol type='telnet'/>
+                <target port='1'/>
+        </serial>
+        <console type='tcp'>
+              <source mode='bind' host='127.0.0.1' service='2445'/>
+              <protocol type='telnet'/>
+              <target port='1'/>
+        </console>
+
+
+    <serial type='pty'>
+      <target port='0'/>
+    </serial>
+    <console type='pty'>
+      <target type='serial' port='0'/>
+    </console>
+
+====================================================

@@ -1,0 +1,116 @@
+============================================================================
+
+        <serial type='tcp'>
+                <source mode='bind' host='127.0.0.1' service='2445'/>
+                <protocol type='telnet'/>
+                <target port='1'/>
+        </serial>
+        <console type='tcp'>
+              <source mode='bind' host='127.0.0.1' service='2445'/>
+              <protocol type='telnet'/>
+              <target port='1'/>
+        </console>
+
+
+    <serial type='pty'>
+      <target port='0'/>
+    </serial>
+    <console type='pty'>
+      <target type='serial' port='0'/>
+    </console>
+
+====================================================
+
+#cat /var/log/libvirt/qemu/vm1.log
+qemu-system-x86_64: -device pci-assign,host=05:00.1,id=hostdev0,bus=pci.0,addr=0x4: Failed to assign device "hostdev0" : Operation not permitted
+qemu-system-x86_64: -device pci-assign,host=05:00.1,id=hostdev0,bus=pci.0,addr=0x4: Device 'kvm-pci-assign' could not be initialized
+fix: --enable-kvm
+
+
+================================================
+
+ip link add link eth0 name v0 type macvtap mode {vepa,bridge,private}
+
+==========================================================
+disable libvirt 
+
+http://publib.boulder.ibm.com/infocenter/lnxinfo/v3r0m0/index.jsp?topic=%2Fliaat%2Fliaatlibvirtaddpassdev.htm
+By default, libvirt uses the vhost-net in-kernel support if it is available.
+
+To disable vhost-net in-kernel support, complete the following steps:
+Shut down the guest operating system.
+Edit the guest XML definition with the virsh edit command. For example:
+virsh edit guest-name
+Change the network definition to use the "qemu" driver type. For example:
+<interface type='bridge'>
+  ...
+  <model type='virtio'/>
+  <driver name='qemu'/>
+  ...
+</interface>
+Start the guest operating system.
+
+
+
+==========================================================================
+xml to cmd
+root@intel_5500_server:/tmp# virsh domxml-to-native qemu-argv virtio.xml 
+LC_ALL=C PATH=/sbin:/usr/sbin:/bin:/usr/bin HOME=/ /usr/bin/qemu-system-x86_64 -S -M pc-0.11 -enable-kvm -m 1000 -smp 1,sockets=1,cores=1,threads=1 -name vm1 -uuid e2a8fee7-12e0-2233-2052-249d3d41cfd4 -nographic -no-user-config -nodefaults -chardev socket,id=charmonitor,path=/var/lib/libvirt/qemu/vm1.monitor,server,nowait -mon chardev=charmonitor,id=monitor,mode=control -rtc base=utc -no-shutdown -no-acpi -kernel /boot/bzImage -append console=ttyS0 root=/dev/hda rw ip=dhcp -device piix3-usb-uhci,id=usb -drive file=/boot/guest_raw.img,if=none,id=drive-ide0-0-0,format=raw -device ide-hd,bus=ide.0,unit=0,drive=drive-ide0-0-0,id=ide0-0-0,bootindex=1 -netdev tap,id=hostnet0 -device rtl8139,netdev=hostnet0,id=net0,mac=00:00:00:00:00:00 -chardev socket,id=charserial0,host=127.0.0.1,port=2445,telnet,server,nowait -device isa-serial,chardev=charserial0,id=serial0 -device virtio-balloon-pci,id=balloon0
+
+==========================================================================
+xmd to xml
+
+http://libvirt.org/drvqemu.html
+
+root@intel_5500_server:~# cat > demo.args <<EOF
+> qemu-system-x86_64 -nographic -k en-us -m 1024 -net user,hostname="kvm-guest",hostfwd=tcp::5555-:22 -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -drive if=virtio,file=/boot/usb.img -nographic
+> EOF
+root@intel_5500_server:~# virsh domxml-from-native qemu-argv demo.args
+<domain type='qemu' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <name>unnamed</name>
+  <uuid>4b78a679-87f5-3c01-ce4d-afff96b2399c</uuid>
+  <memory unit='KiB'>1048576</memory>
+  <currentMemory unit='KiB'>1048576</currentMemory>
+  <vcpu placement='static'>1</vcpu>
+  <os>
+    <type arch='x86_64'>hvm</type>
+  </os>
+  <features>
+    <acpi/>
+  </features>
+  <clock offset='utc'/>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <devices>
+    <emulator>qemu-system-x86_64</emulator>
+    <disk type='file' device='disk'>
+      <source file='/boot/usb.img'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <interface type='user'>
+      <mac address='1a:46:0b:ca:bc:7b'/>
+      <model type='virtio'/>
+    </interface>
+    <memballoon model='virtio'/>
+  </devices>
+  <qemu:commandline>
+    <qemu:arg value='-k'/>
+    <qemu:arg value='en-us'/>
+  </qemu:commandline>
+</domain>
+============================================================================
+
+virsh dumpxml guest1-rhel6-64
+virsh dumpxml GuestID > guest.xml
+
+============================================================
+
+https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/sect-Virtualization_Host_Configuration_and_Guest_Installation_Guide-SR_IOV-How_SR_IOV_Libvirt_Works.html
+
+http://publib.boulder.ibm.com/infocenter/lnxinfo/v3r0m0/index.jsp?topic=%2Fliaat%2Fliaatlibvirtaddpassdev.htm
+
+
+=========================================================
+http://liuzhijun.iteye.com/blog/1670169
+libvirt 

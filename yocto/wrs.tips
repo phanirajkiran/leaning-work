@@ -100,3 +100,51 @@ do_install_append() {
 FILES_inifile += "/opt/wr-test/*
 
 12)bb里的变量要用{} 括起来,不括的话从他的LOG 里看到的没解析 
+
+
+
+
+'make export-sdk' or 'bitbake -c populate_sdk'
+Busybox
+Firstly. bakup the .config and then make -C build busybox.menuconfig then change the config and diff the bak to be in the bbappend
+
+
+
+=======================================================
+
+[lyang0@pek-lpgtest4 temp]$ grep "ARCH" * -r |grep unset
+do_compile/run.do_compile.21600:unset TARGET_ARCH
+do_compile_kernelmodules/run.do_compile_kernelmodules.8624:unset TARGET_ARCH
+do_compile_with_initramfs/run.do_compile_with_initramfs.17360:unset TARGET_ARCH
+do_configure/run.do_configure.16575:unset TARGET_ARCH
+do_deploy/run.do_deploy.7405:unset TARGET_ARCH
+do_deploy/run.do_deploy.sstate_create_package.7405:unset TARGET_ARCH
+do_install/run.do_install.17362:unset TARGET_ARCH
+do_kernel_build_guest/run.do_kernel_build_guest.7389:unset TARGET_ARCH
+do_kernel_checkout/run.do_kernel_checkout.11907:unset TARGET_ARCH
+do_kernel_configme/run.do_kernel_configme.2884:unset TARGET_ARCH
+do_kernel_kfeat/run.do_kernel_kfeat.16563:unset TARGET_ARCH
+do_kernel_link_vmlinux/run.do_kernel_link_vmlinux.8626:unset TARGET_ARCH
+do_patch/run.do_patch.12786:unset TARGET_ARCH
+do_populate_lic/run.do_populate_lic.sstate_create_package.2885:unset TARGET_ARCH
+do_populate_sysroot/run.do_populate_sysroot.sstate_create_package.7390:unset TARGET_ARCH
+do_populate_sysroot/run.do_populate_sysroot.sysroot_stage_all.7390:unset TARGET_ARCH
+do_sizecheck/run.do_sizecheck.8625:unset TARGET_ARCH
+do_unpack/run.do_unpack.wrl_buildlink.11896:unset TARGET_ARCH
+do_validate_branches/run.do_validate_branches.12781:unset TARGET_ARCH
+
+[lyang0@pek-lpgtest4 temp]$ grep "ARCH" * -r |grep -v TARGET
+do_compile/run.do_compile.21600:export ARCH="x86"
+do_compile/run.do_compile.21600:export UBOOT_ARCH="x86"
+do_compile_kernelmodules/run.do_compile_kernelmodules.8624:export ARCH="x86"
+do_compile_kernelmodules/run.do_compile_kernelmodules.8624:export UBOOT_ARCH="x86"
+do_compile_with_initramfs/run.do_compile_with_initramfs.17360:export ARCH="x86"
+do_compile_with_initramfs/run.do_compile_with_initramfs.17360:export UBOOT_ARCH="x86"
+do_configure/run.do_configure.16575:export ARCH="x86"
+do_configure/run.do_configure.16575:export UBOOT_ARCH="x86"
+do_deploy/run.do_deploy.9634:export UBOOT_ARCH="x86"
+do_deploy/run.do_deploy.9634:export ARCH="x86"
+do_deploy/run.do_deploy.sstate_create_package.9634:export UBOOT_ARCH="x86"
+do_deploy/run.do_deploy.sstate_create_package.9634:export ARCH="x86"
+do_deploy/run.do_deploy.7405:export ARCH="x86"
+do_deploy/run.do_deploy.7405:export UBOOT_ARCH="x86"
