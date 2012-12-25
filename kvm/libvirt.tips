@@ -114,3 +114,8 @@ http://publib.boulder.ibm.com/infocenter/lnxinfo/v3r0m0/index.jsp?topic=%2Fliaat
 =========================================================
 http://liuzhijun.iteye.com/blog/1670169
 libvirt 
+
+
+================================================================
+--enable-kvm
+http://www.redhat.com/archives/libvir-list/2009-November/msg00522.html

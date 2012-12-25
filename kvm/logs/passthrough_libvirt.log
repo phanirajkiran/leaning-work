@@ -1,0 +1,37 @@
+********************************************************************
+Firstly,create the publickey for passwordless login and other env
+
+kvm                   403168  1 kvm_intel
+kvm_intel             128807  0 
+kvm has been loaded
+load kvm-intel module successfully
+load pci-stub module successfully
+de:ef:be:ae:94:61
+0x01
+0x00
+0x1
+********************************************************************
+Destroy the exsiting vm wtih libvirt 
+
+create the xml for testing
+start guest with libvirt
+Domain vm1 defined from /opt/kvm/usecases/passthrough_libvirt.xml
+
+Domain vm1 started
+
+start vm1...
+The Guest MAC is de:ef:be:ae:94:61 
+
+GUEST_IP is 128.224.165.247 
+
+********************************************************************
+ssh to the guest and run the command lspci -nn |grep 8086:10a7 
+
+00:04.0 Ethernet controller [0200]: Intel Corporation 82575EB Gigabit Network Connection [8086:10a7] (rev 02)
+Run lspci -nn |grep 8086:10a7 on guest sucessfully
+********************************************************************
+Guest is distoried 
+
+********************************************************************
+TEST STATUS:
+            "PASSTHROUGH_LIBVIRT" TEST ---> PASS

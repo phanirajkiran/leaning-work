@@ -1,0 +1,38 @@
+1)
+root@intel_5500_server:/opt/kvm/virt-test# lsusb -d 1d6b:0002 -vv |awk '/iManufacturer/{print $NF}'
+ehci_hcd
+ehci_hcd
+root@intel_5500_server:/opt/kvm/virt-test# lsusb -s 001:001 -vv |awk '/iManufacturer/{print $NF}'
+ehci_hcd
+
+
+root@intel_5500_server:/# lsusb -vv |grep "ehci" -B4 |awk '/idVendor/||/idProduct/{print $1 $2}'
+idVendor0x1d6b
+idProduct0x0002
+idVendor0x1d6b
+idProduct0x0002
+
+
+
+10:20:17 ERROR|   File "/opt/kvm/virt-test/tests/boot.py", line 51, in check_usb_device
+10:20:17 ERROR|     "'lsusb -v' output:\n %s" % (item, o))
+10:20:17 ERROR| TestFail: Could not find item '0627:0001' in guest, 'lsusb -v' output:
+
+root@intel_5500_server:/opt/kvm/virt-test# lsusb
+Bus 005 Device 002: ID 046b:ff10 American Megatrends, Inc. 
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 007 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 008 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+
+
+http://www.pclinuxos.com/forum/index.php/topic,98786.0.html
+xhci 
+obj-$(CONFIG_USB_EHCI_HCD)      += ehci-hcd.o
+
+2)still need to change nc.x86_64
+status: 0,    output: 'nc: Protocol not available\nload of migration failed

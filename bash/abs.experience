@@ -1,0 +1,72 @@
+print_steps()
+{
+        echo  "*********************************************************"
+        echo -e $@
+}
+
+print_steps "ni hao a $PWD \n" "xxx"
+
+======================================================================
+Attribute codes:
+00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+
+Text color codes:
+30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+
+Background color codes:
+40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+
+format:
+echo -e '\E[COLOR1;COLOR2mSome text goes here.'
+
+\e[32;01mPASS.\e[0m 即是绿色又要黑体,\e[0m 表示结束加色在PASS 
+
+或者
+
+   1 #!/bin/bash
+   2 # color-echo.sh: Echoing text messages in color.
+   3 
+   4 # Modify this script for your own purposes.
+   5 # It's easier than hand-coding color.
+   6 
+   7 black='\E[30;47m'
+   8 red='\E[31;47m'
+   9 green='\E[32;47m'
+  10 yellow='\E[33;47m'
+  11 blue='\E[34;47m'
+  12 magenta='\E[35;47m'
+  13 cyan='\E[36;47m'
+  14 white='\E[37;47m'
+  15 
+  16 
+  17 alias Reset="tput sgr0"      #  Reset text attributes to normal
+  18                              #+ without clearing screen.
+  19 
+  20 
+  21 cecho ()                     # Color-echo.
+  22                              # Argument $1 = message
+  23                              # Argument $2 = color
+  24 {
+  25 local default_msg="No message passed."
+  26                              # Doesn't really need to be a local variable.
+  27 
+  28 message=${1:-$default_msg}   # Defaults to default message.
+  29 color=${2:-$black}           # Defaults to black, if not specified.
+  30 
+  31   echo -e "$color"
+  32   echo "$message"
+  33   Reset                      # Reset to normal.
+  34 
+  35   return
+  36 }  
+  37 
+  38 
+  39 # Now, let's try it out.
+  40 # ----------------------------------------------------
+  41 cecho "Feeling blue..." $blue
+
+或者:
+
+green='\e[0;32m' # '\e[1;32m' is too bright for white bg.
+endColor='\e[0m'
+echo -e "${green}Welcome \e[5;32;47m $USER \n${endColor}"

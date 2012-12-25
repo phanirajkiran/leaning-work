@@ -1,0 +1,24 @@
+********************************************************************
+Firstly,create the publickey for passwordless login and other env
+
+********************************************************************
+Load the kvm modules 
+
+kvm                   403168  1 kvm_intel
+kvm_intel             128807  0 
+kvm has been loaded
+load kvm-intel module successfully
+load pci-stub module successfully
+********************************************************************
+Destroy the exsiting vm 
+
+********************************************************************
+Start boot the Guest,The Qemu command is :
+
+/usr/bin/qemu-system-x86_64 -smp 2 -m 512 --enable-kvm -device pci-assign,host=01:00.0 -net nic,macaddr=de:ef:be:47:76:7d,model=virtio,vlan=0  -net tap,script=/etc/qemu-ifup,vlan=0 -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=dhcp"  -nographic &
+********************************************************************
+Guest is booting ...
+
+This script will establish a bridge, which
+including a tap0 and eth0. Please be sure
+that brctl, ifconfig and route can be here

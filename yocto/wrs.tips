@@ -148,3 +148,17 @@ do_deploy/run.do_deploy.sstate_create_package.9634:export UBOOT_ARCH="x86"
 do_deploy/run.do_deploy.sstate_create_package.9634:export ARCH="x86"
 do_deploy/run.do_deploy.7405:export ARCH="x86"
 do_deploy/run.do_deploy.7405:export UBOOT_ARCH="x86"
+
+#
+KVM_CONF ?= "${@kvm_contains("TARGET_ARCH", "86", "templates/feature/kvm/template.conf", "empty.conf", d)}"
+require ${KVM_CONF}
+
+def kvm_contains(variable, checkvalues, truevalue, falsevalue, d):
+    val = d.getVar(variable, True)
+    if not val:
+        return falsevalue
+    if checkvalues in val:
+        return truevalue
+    else:
+        return falsevalue
+

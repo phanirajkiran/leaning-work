@@ -1,0 +1,125 @@
+====================================================================
+os boot
+<os>
+  <type>hvm</type>
+  <kernel>/boot/vmlinuz-2.6.24-17-xen</kernel>      
+  <initrd>/boot/initrd.img-2.6.24-17-xen</initrd>   
+  <cmdline></cmdline>                              
+  <root>sda1</root>                                 
+</os>
+
+<<<
+
+
+    type: should be set to bridge or network
+    source : {bridge,network}
+    target: {optional at bridge configuration, not used at network}
+    mac {optional at bridge configuration, not used at network}
+
+
+>>>>>.
+===================================================================
+tap:
+
+    <interface type='bridge'>
+      <source bridge='br0'/>
+      <mac address='52:54:00:7f:46:85'/>
+      <target dev='tap0'/>
+      <script path='/etc/qemu-ifup'/>
+    </interface> 
+http://forums.gentoo.org/viewtopic-p-6400713.html?sid=a9a97cb50f8c6e50585f8092db9a0a80
+
+???
+
+    <interface type='bridge'>
+      <source bridge='eth0'/>
+      <target dev='tap0'/> 
+      <mac address='00:16:3e:01:01:01'/>
+    </interface> 
+
+
+    <interface type='ethernet'>
+      <mac address='52:54:00:7f:46:85'/>
+      <target dev='tap0'/>
+      <script path='/etc/qemu-ifup.tap'/>
+    </interface> 
+
+
+==============================================================
+
+macvtap:
+
+
+
+==============================================================
+dhcp:
+<network>
+  <ip address='192.168.122.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='192.168.122.2' end='192.168.122.254' />
+      <host mac='54:52:00:00:10:00' ip='192.168.122.10' />
+      <host mac='54:52:00:00:10:01' ip='192.168.122.11' />
+      <host mac='54:52:00:00:10:02' ip='192.168.122.12' />
+      <host mac='54:52:00:00:10:03' ip='192.168.122.13' />
+      <host mac='54:52:00:00:10:04' ip='192.168.122.14' />
+      <host mac='54:52:00:00:10:05' ip='192.168.122.15' />
+    </dhcp>
+  </ip>
+</network>
+
+OR:
+
+<ip address='192.168.122.1' netmask='255.255.255.0'>
+  <dhcp>
+    <range start='192.168.122.2' end='192.168.122.254' />
+    <host mac='52:54:00:00:00:11' name='alice' ip='192.168.122.11' />
+    <host mac='52:54:00:00:00:22' name='bob' ip='192.168.122.22' />
+    <host mac='52:54:00:00:00:33' name='eve' ip='192.168.122.33' />
+  </dhcp>
+</ip>
+
+# ping bob
+PING bob.test.berrange.com (192.168.122.22) 56(84) bytes of data.
+64 bytes from bob.test.berrange.com (192.168.122.22): icmp_req=1 ttl=64 time=0.790 ms
+64 bytes from bob.test.berrange.com (192.168.122.22): icmp_req=2 ttl=64 time=0.933 ms
+64 bytes from bob.test.berrange.com (192.168.122.22): icmp_req=3 ttl=64 time=0.854 ms
+
+      <network>
+        <name>sixnet</name>
+        <bridge name="virbr6" />
+        <ip family="ipv6" address="2001:db8:ca2:6::1" prefix="64" >
+          <dhcp>
+            <host name="peter"   ip="2001:db8:ca2:6:6::1" />
+            <host name="dariusz" ip="2001:db8:ca2:6:6::2" />
+          </dhcp>
+        </ip>
+      </network>
+
+==================================================
+disk
+    <disk type='file' device='disk'>
+      <source file='/home/graziano/Prog/ImagesAndISOs/fe.img'/>
+      <target dev='vda' bus='virtio'/>
+    </disk>
+
+<disk type='file' device='disk'>
+  <source file='/images/sgehosts/01/swap.img'/>
+  <target dev='sda2'/>
+</disk>
+=============================================================
+serial 
+I prefer not to use VNC to connect to the VMs, so I added logic for the console (just before the VNC line)
+
+    <serial type='pty'>
+      <target port='0'/>
+    </serial>
+    <console type='pty'>
+      <target type='serial' port='0'/>
+    </console>
+
+virsh console <name>
+
+
+==========================================================
+
+

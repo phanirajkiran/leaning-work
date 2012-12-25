@@ -1,0 +1,41 @@
+********************************************************************
+Firstly,create the publickey for passwordless login and other env
+
+********************************************************************
+Load the kvm modules 
+
+kvm                   403168  1 kvm_intel
+kvm_intel             128807  0 
+kvm has been loaded
+load kvm-intel module successfully
+macvtap                10952  1 vhost_net
+vhost_net              21753  0 
+vhost_net has been loaded
+********************************************************************
+Destroy the exsiting vm wtih libvirt 
+
+Domain vm1 has been undefined
+
+undefine   vm1....
+start guest with libvirt
+Domain vm1 defined from /opt/kvm/usecases/xmls/virtio_libvirt.xml
+
+Domain vm1 started
+
+start vm1...
+The Guest MAC is de:ef:be:52:d3:4f 
+
+GUEST_IP is 128.224.165.250 
+
+********************************************************************
+ssh to the guest and run the command ls /boot/ 
+
+bzImage
+bzImage-3.4.20-WR5.0.1.0_standard
+Run ls /boot/ on guest sucessfully
+********************************************************************
+Guest is distoried 
+
+********************************************************************
+TEST STATUS:
+            "VIRTIO_LIBVIRT" TEST ---> PASS
