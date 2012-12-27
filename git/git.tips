@@ -1,3 +1,5 @@
+git://git.op5.org/git/git.git
+
 git push origin test:master // 提交本地test分支作为远程的master分支
 git push origin test:test              // 提交本地test分支作为远程的test分支
 
@@ -78,4 +80,6 @@ git branch -d kill-this # remove local
 git push origin :master  
 #重新创建master分支  
 git push origin master  
+
+
 

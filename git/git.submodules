@@ -1,0 +1,28 @@
+
+http://git-scm.com/book/en/Git-Tools-Submodules
+
+
+[lyang0@ala-lpggp2 autotest]$ git submodule init
+Submodule 'client/tests' (git://github.com/autotest/autotest-client-tests.git) registered for path 'client/tests'
+Submodule 'server/tests' (git://github.com/autotest/autotest-server-tests.git) registered for path 'server/tests'
+[lyang0@ala-lpggp2 autotest]$ git submodule update
+Cloning into client/tests...
+remote: Counting objects: 11727, done.
+remote: Compressing objects: 100% (3144/3144), done.
+remote: Total 11727 (delta 8483), reused 11703 (delta 8459)
+Receiving objects: 100% (11727/11727), 57.22 MiB | 5.08 MiB/s, done.
+Resolving deltas: 100% (8483/8483), done.
+Submodule path 'client/tests': checked out 'e641069f5b8b85bf590abb97feab9627459ffd4e'
+Cloning into server/tests...
+remote: Counting objects: 228, done.
+remote: Compressing objects: 100% (119/119), done.
+remote: Total 228 (delta 81), reused 216 (delta 75)
+Receiving objects: 100% (228/228), 42.26 KiB, done.
+Resolving deltas: 100% (81/81), done.
+Submodule path 'server/tests': checked out 'e385a556b96ab9359d32ff4b281e667a4061b6ed'
+
+
+git config alias.pullall '!git pull && git submodule update --init --recursive'
+git config fetch.recurseSubmodules true
+
+http://git.op5.org/git/?p=git/git.git;a=commitdiff;h=cabdee2c5ed55aa42784b37c1249829fca9d71b8

@@ -1,0 +1,24 @@
+#!/bin/bash
+#./expect/bash.expect root@128.224.165.205 sleep 10;echo "haole";ifconfig
+#can't use -C or "" for the cmd
+password=root
+ssh()
+{
+             echo "ssh to the target"
+                expect <<- END
+                spawn ssh $@
+		expect {
+   		"(yes/no)?" {
+       			send "yes\n"
+       		expect "assword:"
+     		send "$password\n"
+   		}
+       		"assword:" {
+       		send "$password\n"
+   		}
+		}
+expect "root"
+
+END
+}
+ssh root@128.224.165.205 ifconfig -a 

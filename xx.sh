@@ -1,3 +1,9 @@
+
 #!/bin/bash -x
-cd $PWD;ls |grep "git"
- lspci |grep 0000
+KERNEL=bzImage
+xx()
+{
+	PARA=${@:-$KERNEL}
+	echo $PARA
+}
+xx "$@"

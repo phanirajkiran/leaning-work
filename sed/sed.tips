@@ -1,3 +1,4 @@
+http://www.grymoire.com/Unix/Sed.html
 小结：
 sed中可直接使用的RE：
 *  .  ^  $  [  ]  \  c 
@@ -60,3 +61,78 @@ xd_ he's
 Sed 变量, 还有里面有' '的要用""来括起来
 
 sed 's/foo/bar/4'                # 只替换每一行中的第四个“foo”字串
+
+sed '/foo\|bar/s/green/lei/g' 
+OR
+sed -r '/foo|bar/s/green/lei/g' 
+
+
+sed '/foo/ s/foo/bar/g' filename   # executes more quickly
+
+sed '$d' 删除最后一行
+sed '1d;$d'  Delete the first line AND the last line of a file,
+
+$ sed '/[xX]$/d' file Delete all lines ending with either x or X
+
+
+Delete the lines containing the pattern 'Solaris' only if it is present in the lines from 1 to 4
+$ sed '1,4{/Solaris/d;}' file
+
+变量: 外面用双括号
+sum=27
+sed "s/AMOUNTTOBEREPLACED/$sum/g" File1.txt >> temp
+OR
+sed 's/AMOUNTTOBEREPLACED/'"$sum"'/g'
+
+
+sed 's:/usr/local/bin:/common/bin:' <old >new
+
+The solution requires the special character "&." It corresponds to the pattern found.
+sed 's/[a-z]*/(&)/' <old >new
+
+you use the "-r" command line option, which enables extended regular expressions. The "+" means "one or more matches"
+% echo "123 abc" | sed -r 's/[0-9]+/& &/'
+123 123 abc
+
+sed 's/\([a-z]*\) \([a-z]*\)/\2 \1/'
+
+This flag makes the pattern match case insensitive. This will match abc, aBc, ABC, AbC, etc.: 
+sed '/abc/I' <old >new
+
+sed -e 's/a/A/' -e 's/b/B/' <old >new
+sed -e 's/a/A/g' \
+    -e 's/e/E/g' \
+    -e 's/i/I/g' \
+    -e 's/o/O/g' \
+    -e 's/u/U/g'  <old >new
+
+
+范围:
+sed '101,532 s/A/a/'
+sed '101,$ s/A/a/'
+sed '/start/,/stop/ s/#.*//'
+sed -e '1,/start/ s/#.*//'
+sed -e '1,/start/ s/#.*//' -e '/stop/,$ s/#.*//'
+
+
+
+#!/bin/sh
+# This is a Bourne shell script that removes #-type comments
+# between 'begin' and 'end' words.
+sed -n '
+	/begin/,/end/ {
+	     s/#.*//
+	     s/[ ^I]*$//
+	     /^$/ d
+	     p
+	}
+'
+
+#!/bin/sh
+sed '
+	/begin/,/end/ {
+	    /begin/n # skip over the line that has "begin" on it
+	    s/old/new/
+	}
+'
+

@@ -162,3 +162,8 @@ def kvm_contains(variable, checkvalues, truevalue, falsevalue, d):
     else:
         return falsevalue
 
+
+====================================================
+busybox added command 
+[lyang0@pek-lpgtest4 image]$ cat etc/busybox.links |grep mpstat
+/bin/mpstat

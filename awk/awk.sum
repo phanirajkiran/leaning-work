@@ -1,0 +1,22 @@
+<root>
+    <Main>
+            <someothertag>..</someothertag>
+        <Amt Ccy="EUR">3.1</Amt>
+    </Main>
+                .
+                .
+                .
+                some other tags
+    <Main>
+          <someothertag>..</someothertag>
+             <Amt Ccy="SGD">51</Amt>
+    </Main>
+    <another>
+      <Amt Ccy="EUR">10</Amt>
+     </another>
+</root>
+
+awk '/Amt Ccy/ {sum+=$3} END {print sum}' FS="[<>]" file
+
+===================================================================================
+awk '{ sum+=$1; } END { print sum }'

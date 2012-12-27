@@ -1,0 +1,13 @@
+$$ bash 当前进程的pid 
+ctrl+c触发一个信号给进程,信号名为SIGINT
+
+====================================
+cp -a ./!(aa|bb|zz) zz/
+
+========================================
+#!/bin/sh
+echo -n 'what is the value? '
+read value
+sed  's/XXX/'$value'/' <<EOF
+The value is XXX
+EOF

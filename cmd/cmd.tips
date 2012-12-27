@@ -73,3 +73,6 @@ diff <(ifconfig -a ) <(ifconfig)
 
 cat <pipe2 > pipe1
 cmp <(ls /dir1) <(ls /dir2)
+
+
+xargs -I '{}' du -sh {}

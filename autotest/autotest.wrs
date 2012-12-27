@@ -36,3 +36,8 @@ obj-$(CONFIG_USB_EHCI_HCD)      += ehci-hcd.o
 
 2)still need to change nc.x86_64
 status: 0,    output: 'nc: Protocol not available\nload of migration failed
+
+
+
+3)
+http://bytes.com/topic/python/answers/630215-ulimit-open-sockets
