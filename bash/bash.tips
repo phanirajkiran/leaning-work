@@ -11,3 +11,25 @@ read value
 sed  's/XXX/'$value'/' <<EOF
 The value is XXX
 EOF
+=============================================
+
+diff /etc/httpd/conf/httpd.conf{.bak,}
+
+One caveat about doing this is that the tying operation goes at the end of the command generating the output. This is important if piping the output to another command. This line works as expected:
+find -name test.sh 2>&1 | tee /tmp/output2.txt
+but this line doesn't:
+find -name test.sh | tee /tmp/output2.txt 2>&1
+This works, but again, there's a better way to do it. You can tie the standard error stream to the standard output stream using an ampersand. Once you do this, the error messages goes to wherever you redirect the standard output:
+
+$ find / -name foo > output.txt 2>&1
+
+===========================================
+To display the contents of a file, the simplest command I see is
+
+echo $(<file)
+
+watch "ls -x ; df ."
+==================================================
+
+echo -e "<ESC>\e[A" -----> up key
+echo -e "<ESC>\e[B" -----> down key

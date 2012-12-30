@@ -76,3 +76,10 @@ cmp <(ls /dir1) <(ls /dir2)
 
 
 xargs -I '{}' du -sh {}
+
+
+lyang0@lyang0-OptiPlex-755:~/WORK/leaning-work$ cat gg |uniq -c 
+      2 ff
+      3 ll
+      2 gg
+then sort

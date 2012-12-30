@@ -1,0 +1,5 @@
+http://www.crashcourse.ca/wiki/index.php/Yocto_Project_Quick_Start
+$ git clone git://git.yoctoproject.org/poky.git git
+$ make DOC=bsp-guide
+$ make DOC=yocto-project-qs
+$ make pdf DOC=poky-ref-manual

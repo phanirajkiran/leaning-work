@@ -16,6 +16,12 @@ ARM:
 git://git.yoctoproject.org/meta-fsl-arm
 git://git.yoctoproject.org/meta-ti
 
+https://github.com/Freescale/meta-fsl-demos
+git://github.com/Freescale/meta-fsl-demos.git
+
+https://github.com/Freescale/meta-fsl-arm-extra
+git://github.com/Freescale/meta-fsl-arm-extra.git
+
 Intel:
 git://git.yoctoproject.org/meta-intel
 

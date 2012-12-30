@@ -136,3 +136,5 @@ sed '
 	}
 '
 
+contains BOTH "AA" and "BB" better to use awk
+awk '/AA/ && /BB/' file |sed .....

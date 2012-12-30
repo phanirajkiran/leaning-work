@@ -1,3 +1,5 @@
+http://libvirt.org/drvqemu.html#xmlconfig
+http://libvirt.org/formatdomain.html
 ====================================================================
 os boot
 <os>
@@ -119,7 +121,161 @@ I prefer not to use VNC to connect to the VMs, so I added logic for the console 
 
 virsh console <name>
 
+{
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 ==========================================================
+/lpg-build/cdc/publiclog/wrl50_basic_robin/kernel/kvm/x86-64-kvm-guest/virtio_console.log
+
+1)virtio_console:
+
+    <console type='pty'>
+      <target type='virtio' port='0'/>
+    </console>
+
+{
+
+    <console type='pty'>
+      <target type='virtio' port='1'/>
+    </console>
+    <console type='pty'>
+      <target type='virtio' port='2'/>
+    </console>
+    <console type='pty'>
+      <target type='virtio' port='3'/>
+    </console>
+
+} ??????
+
+libvirt-0.9.8.orig/tests/qemuxml2argvdata/qemuxml2argv-console-virtio-many.args
+
+2) we need to comment out S:2345 which is in the inittab
+
+3)S:2345:respawn:/sbin/getty 115200 hvc0 vt100
+
+
+You can enables these in a libvirt guest by adding devices like
+
+    <channel type='unix'>
+      <source mode='connect' path='/var/lib/libvirt/myguest-org.myservice'/>
+      <target type='virtio' name='org.myservice'/>
+    </channel>
+
+http://lists.fedoraproject.org/pipermail/devel/2011-July/153806.html
+
+This should create a character device /dev/virtio-port/org.myservice in
+the guest, which is connected to a UNIX socket '/var/lib/libvirt/myguest-org.myservice'
+in the host OS.
+
+==============================================================================
+initrd
+  <os>
+    <type>hvm</type>
+    <loader>/usr/lib/xen/boot/hvmloader</loader>
+    <kernel>/root/f8-i386-vmlinuz</kernel>
+    <initrd>/root/f8-i386-initrd</initrd>
+    <cmdline>console=ttyS0 ks=http://example.com/f8-i386/os/</cmdline>
+  </os>
+=================================================================================
+Filesystems 
+A directory on the host that can be accessed directly from the guest
+
+ <devices>
+    <filesystem type='template'>
+      <source name='my-vm-template'/>
+      <target dir='/'/>
+    </filesystem>
+    <filesystem type='mount' accessmode='passthrough'>
+      <driver type='path' wrpolicy='immediate'/>
+      <source dir='/export/to/guest'/>
+      <target dir='/import/from/host'/>
+      <readonly/>
+    </filesystem>
+    ...
+  </devices>
+
+===================================================================================
+usb passthrough 
+http://libvirt.org/formatdomain.html
+  <devices>
+    <hostdev mode='subsystem' type='usb'>
+      <source startupPolicy='optional'>
+        <vendor id='0x1234'/>
+        <product id='0xbeef'/>
+      </source>
+      <boot order='2'/>
+    </hostdev>
+  </devices>
+==========================================================================================
+user:
+  <devices>
+    <interface type='user'/>
+    ...
+    <interface type='user'>
+      <mac address="00:11:22:33:44:55"/>
+    </interface>
+  </devices>
+===========================================================================================
+
+  <devices>
+    <interface type='ethernet'/>
+    ...
+    <interface type='ethernet'>
+      <target dev='vnet7'/>
+      <script path='/etc/qemu-ifup-mynet'/>
+    </interface>
+  </devices>
+
+============================================================================================
+
+
+
+  ...
+  <devices>
+    ...
+    <interface type='direct'>
+      <source dev='eth0' mode='vepa'/>
+    </interface>
+  </devices>
+
+========================================================
+Specifying boot order 
+
+ <devices>
+    <interface type='network'>
+      <source network='default'/>
+      <target dev='vnet1'/>
+      <boot order='1'/>
+    </interface>
+  </devices>
+================================================================
+
+device log
+
+<devices>
+    <serial type="file">
+      <source path="/var/log/vm/vm-serial.log"/>
+      <target port="1"/>
+    </serial>
+  </devices>
+
+===========================================================================
+<domain type='qemu'>  QEMU emulated guest on x86_64
+<domain type='kvm'> KVM hardware accelerated guest on i686
+
+
 
 

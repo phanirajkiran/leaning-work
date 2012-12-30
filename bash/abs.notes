@@ -413,7 +413,9 @@ do
    ...
    operation-n
 done
-
+while true; do
+...
+done
 # Gives difference in command output
 lyang0@lyang0-OptiPlex-755:~/del$ diff -u <(ls) <(ls -lrt)
 [lyang0@pek-lpgbuild9 lb08a_12sp]$ diff <(ls wrlinux-5/) <(ls /buildarea1/lyang0/wrlinux-x/)

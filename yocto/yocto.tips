@@ -1,3 +1,120 @@
 bitbake -c listtasks <recipe> 
 bitbake -c compile linux-windriver
+==================================================================
+OVERRIDES_append = ":${TARGET_ARCH}-${TARGET_OS}"
+
+overrides = localdata.getVar("OVERRIDES", False) + ":virtclass-multilib-" + item
+localdata.setVar("OVERRIDES", overrides)
+==================================================================================
+# Used by multilib code to change the library paths
+baselib = "${BASELIB}"
+baselib[vardepvalue] = "${baselib}"
+BASELIB = "lib"
+BASELIB_powerpc64 = "lib64"
+
+# Path prefixes
+export base_prefix = ""
+export prefix = "/usr"
+export exec_prefix = "/usr"
+
+# Base paths
+export base_bindir = "${base_prefix}/bin"
+export base_sbindir = "${base_prefix}/sbin"
+export base_libdir = "${base_prefix}/${baselib}"
+export nonarch_base_libdir = "${base_prefix}/lib"
+
+# Architecture independent paths
+export datadir = "${prefix}/share"
+export sysconfdir = "${base_prefix}/etc"
+export servicedir = "${base_prefix}/srv"
+export sharedstatedir = "${base_prefix}/com"
+export localstatedir = "${base_prefix}/var"
+export infodir = "${datadir}/info"
+export mandir = "${datadir}/man"
+export docdir = "${datadir}/doc"
+export systemd_unitdir = "/lib/systemd"
+
+# Architecture dependent paths
+export bindir = "${exec_prefix}/bin"
+export sbindir = "${exec_prefix}/sbin"
+export libdir = "${exec_prefix}/${baselib}"
+export libexecdir = "${libdir}/${BPN}"
+export includedir = "${exec_prefix}/include"
+export oldincludedir = "${exec_prefix}/include"
+localedir = "${libdir}/locale"
+===============================================================================
+replace:
+TRANSLATED_TARGET_ARCH ??= "${@d.getVar('TARGET_ARCH', True).replace("_", "-")}"
+
+
+compile:
+
+===============================================================================
+single file : meta-ti
+
+DESCRIPTION = "AM SysInfo"
+HOMEPAGE = "https://gforge.ti.com/gf/project/am_sysinfo/"
+LICENSE = "BSD"
+LIC_FILES_CHKSUM = "file://mem_util/mem_util.c;beginline=1;endline=37;md5=8aa8e714ab729cfe8177298af8a5a25d"
+
+SECTION = "system"
+
+SRCREV = "5"
+PV = "1.0"
+PR = "r1+svnr${SRCPV}"
+
+SRC_URI = "svn://gforge.ti.com/svn/am_sysinfo/;module=trunk;protocol=https;user=anonymous;pswd=''"
+
+S = "${WORKDIR}/trunk"
+
+do_compile() {
+        ${CC} ${CFLAGS} ${LDFLAGS} -o mem_util/mem_util mem_util/mem_util.c
+}
+
+do_install() {
+        install -d ${D}/${bindir}
+        install -m 0755 ${S}/mem_util/mem_util ${D}/${bindir}
+}
+
+======================================================================================
+KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+
+======================================================================================
+unset CFLAGS CPPFLAGS CXXFLAGS LDFLAGS
+
+=======================================================================================
+recipes-ti/gstreamer-ti/gstreamer-ti.inc:export LINUXKERNEL_INSTALL_DIR = "${STAGING_KERNEL_DIR}"
+export后连patch 也认识:
+
+============================================
+if you define a new image class
+
+meta-fsl-arm/conf/machine/include/fsl-default-settings.inc:IMAGE_CLASSES += "image_types_fsl"
+if you define a new image class
+
+
+========================================================
+EXTRA_OEMAKE = "EGL_FLAVOR=x11 BINDIR=${bindir} DATADIR=${datadir}/${PN}"
+
+do_install_append () {
+    install -d ${D}/${datadir}/pixmaps
+    install -d ${D}/${datadir}/applications
+    install -m 0644 ${WORKDIR}/glcubes-ico.png ${D}/${datadir}/pixmaps
+    install -m 0644 ${WORKDIR}/glcubes-demo.desktop ${D}/${datadir}/applications
+}
+
+=====================================================================
+
++LAYERVERSION_cav-octeon2 = "1"
++
++LAYERDEPENDS_cav-octeon2 = "wr-kernel normal"
+
+
+=========================================================================
+print log meta-xilinx
+bbnote "Replacing linux kernel powerpc device tree to match located hardware model: virtex${KERNEL_TARGET}.dts"
+
+==========================================================================
+# Ship kernel modules
+MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
 

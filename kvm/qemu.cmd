@@ -212,3 +212,8 @@ qemu -hda imagefile.img -net nic -net tap,ifname=tap0,script=no,downscript=no
 ==========================================================================
 Audio
 qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio -net tap,script=/etc/qemu-ifup -hda /boot/guest_img.qcow2  -device ich9-usb-uhci1,id=usb1 -device usb-audio,id=usb-audio1,bus=usb1.0,port=1 -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=dhcp"  -nographic 
+
+
+==============================================================================
+usb-image
+qemu-system-x86_64 -nographic -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -drive if=virtio,file=/boot/usb.img -nographic
