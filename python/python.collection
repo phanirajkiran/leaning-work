@@ -1,0 +1,56 @@
+for i in range(len(names)):
+
+
+if os.path.isdir(path):
+if os.path.exists(path):
+pidfile_path = os.path.join(working_directory, pidfile_name)
+os.path.dirname(file_path)
+os.path.islink(source_path)
+link_to = os.readlink(source_path)
+os.symlink(link_to, destination_path)
+os.path.samefile(source_path, destination_path)
+os.unlink(options.flist)
+if 'AUTOTEST_WEB' in os.environ:
+
+:os.chdir(top_dir + '/log')
+if not os.path.isfile('inst-config')
+for cpu in os.listdir(per_cpu):
+
+lockdir = os.environ['AUTODIR']
+os.environ.has_key('BOOTTOOL_DEBUG_RUN')
+
+
+
+split:
+str.split(str="", num=string.count(str)).
+
+to_list = [x for x in re.split('\s|,|;|:', to_string) if x]
+keyval_list = re.split(r'[\s,;:]', raw)
+drone_list = [hostname.strip() for hostname in drones.split(',')]
+config_files = utils.system_output('ls -1 bin/*/CONFIG*').splitlines()
+return float(output.splitlines()[6].split()[4]),
+autotest/client/shared/hosts/base_classes.py:        meminfo = self.run('cat /proc/meminfo').stdout.splitlines()
+autotest/client/shared/hosts/base_classes.py:        for key, val in (line.split(':', 1) for line in meminfo):
+
+
+Split only the first two words in a comma separated string
+
+sentence = "the,cat,sat,on,the,mat"
+print sentence.split(',',2)
+['the', 'cat', 'sat,on,the,mat']
+
+sentence = "the cat sat on the mat"
+print sentence.split()
+['the', 'cat', 'sat', 'on', 'the', 'mat']
+
+sentence = "the,cat,sat,on,the,mat"
+print sentence.split(',')
+['the', 'cat', 'sat', 'on', 'the', 'mat']
+
+strip:
+
+str = "0000000this is string example....wow!!!0000000";
+print str.strip( '0' );
+this is string example....wow!!!
+
+

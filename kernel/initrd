@@ -1,0 +1,23 @@
+qemu-system-x86_64 --enable-kvm -smp 9 -m 2048 -net nic,model=virtio -net tap,script=/etc/qemu-ifup -hda /rootfs.img.raw  -kernel /boot/bzImage  -initrd /boot/initrd.img -append "root=/dev/hda rw console=ttyS0,115200 ip=10.0.2.3 selinux=0" -nographic
+
+find . | cpio --create --'format=newc' | gzip >../initrd.img
+
+qemu-system-x86_64 --enable-kvm -smp 9 -m 2048 -net nic,model=virtio -net tap,script=/etc/qemu-ifup -hda /rootfs.img.raw  -kernel /boot/bzImage  -initrd /boot/wrlinux-image-initramfs-x86-64-kvm-guest.cpio.gz -append "root=/dev/hda rw console=ttyS0,115200 ip=10.0.2.3 selinux=0" -nographic
+
+
+http://tech.uplooking.com/qianrushi/2009/0512/57.html
+
+http://docwiki.gumstix.org/index.php/Root_filesystems
+
+http://wiki.openvz.org/Modifying_initrd_image
+
+http://quietsche-entchen.de/cgi-bin/wiki.cgi/ariane/InitialRamDisk
+
+http://tech.uplooking.com/qianrushi/2009/0512/57.html
+
+
+
+$ make bbs
+$ bitbake linux-windriver-initramfs
+
+http://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt

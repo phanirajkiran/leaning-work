@@ -8,3 +8,5 @@ or
     stdin = "/var/volatile/tmp/guest_daemon_pi"
     stdout = "/var/volatile/tmp/guest_daemon_po"
     stderr = "/var/volatile/tmp/guest_daemon_pe"
+
+client_dir = os.path.join(os.environ['AUTOTEST_PATH'], 'client')

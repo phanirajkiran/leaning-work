@@ -1,0 +1,56 @@
+http://www.littletechtips.com/2009/09/python-dictionary-little-hack.html
+dict = {['Name']: 'Zara', 'Age': 7};
+
+
+SN Methods with Description 
+1 dict.clear()
+Removes all elements of dictionary dict 
+2 dict.copy()
+Returns a shallow copy of dictionary dict 
+2 dict.fromkeys()
+Create a new dictionary with keys from seq and values set to value. 
+3 dict.get(key, default=None)
+For key key, returns value or default if key not in dictionary 
+4 dict.has_key(key)
+Returns true if key in dictionary dict, false otherwise 
+5 dict.items()
+Returns a list of dict's (key, value) tuple pairs 
+6 dict.keys()
+Returns list of dictionary dict's keys 
+7 dict.setdefault(key, default=None)
+Similar to get(), but will set dict[key]=default if key is not already in dict 
+8 dict.update(dict2)
+Adds dictionary dict2's key-values pairs to dict 
+9 dict.values()
+Returns list of dictionary dict2's values 
+
+
+mydict = { "a" : "Alpha", "b" : "Beta", "c" : "Charlie" }
+for key, value in mydict.iteritems():
+print key, value
+
+for key in mydict.iterkeys():
+print key, mydict[key]
+
+
+for value in mydict.itervalues():
+print value
+
+>> d = {'a': 'Arthur', 'b': 'Belling'}
+
+>> d.items()
+[('a', 'Arthur'), ('b', 'Belling')]
+
+>> d.keys()
+['a', 'b']
+
+>> d.values()
+['Arthur', 'Belling']
+
+[(k,v) for k,v in dict.items()]
+
+for i, x in enumerate(listed):
+
+l=[]
+[l.extend([k,v]) for k,v in dict.items()]
+
