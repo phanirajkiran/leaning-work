@@ -13,7 +13,7 @@ qemu-img convert -f raw existing.raw -O qcow2 existing-larger.img
 
 
 ============================================================
-qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,model=e1000 -net tap,script=/etc/qemu-ifup -hda /test.img.raw  -kernel /kernel -append "root=/dev/hda rw console=ttyS0,115200 ip=10.0.2.3 selinux=0" -nographic
+qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,model=e1000 -net tap,script=/etc/qemu-ifup.tap -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=10.0.2.5 selinux=0" -nographic
 #cat /etc/qemu-ifup
 #!/bin/sh
 /sbin/ifconfig $1 10.0.2.2

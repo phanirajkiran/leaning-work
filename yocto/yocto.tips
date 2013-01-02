@@ -118,3 +118,8 @@ bbnote "Replacing linux kernel powerpc device tree to match located hardware mod
 # Ship kernel modules
 MACHINE_EXTRA_RRECOMMENDS = "kernel-modules"
 
+=========================================================
+bind-9.8.1-r4.1/
+PRINC = "1"
+PR .= ".1"
+   bind-9.8.1-r4.1.1/ bind-9.8.1-r5.1/ 

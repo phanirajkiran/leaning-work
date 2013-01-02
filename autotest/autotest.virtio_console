@@ -1,0 +1,10 @@
+#readlink the opend files /proc/1280/fd/4 it always show /var/volatile/tmp/guest....
+two ways to change:
+
+1)change base-files bb
+or 
+2)patch virtio_console change the path for /tmp 
+
+    stdin = "/var/volatile/tmp/guest_daemon_pi"
+    stdout = "/var/volatile/tmp/guest_daemon_po"
+    stderr = "/var/volatile/tmp/guest_daemon_pe"
