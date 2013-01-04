@@ -10,13 +10,17 @@ qemu-img convert -f raw existing.raw -O qcow2 existing-larger.img
 
 #qemu-img convert -O qcow2 /boot/guest_img.raw /boot/guest_img.qcow2;
 #qemu-img resize /boot/guest_img.qcow2 100G;
-
+ sudo brctl showstp $bridge_name
 
 ============================================================
 qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,model=e1000 -net tap,script=/etc/qemu-ifup.tap -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=10.0.2.5 selinux=0" -nographic
 #cat /etc/qemu-ifup
 #!/bin/sh
 /sbin/ifconfig $1 10.0.2.2
+=========================================================
+virtio:
+
+qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio -net tap,script=/etc/qemu-ifup -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=dhcp"  -nographic
 
 ============================================
 vlan:

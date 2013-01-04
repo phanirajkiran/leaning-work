@@ -1,0 +1,5 @@
+Every time I reinstall my system I have to add the line below to my /etc/ssh/ssh_config to avoid ¡°Write failed: Broken pipe¡± issue.
+ServerAliveInterval 120
+It's matter of personal preference, but I use these values:
+ClientAliveInterval 15
+ClientAliveCountMax 3

@@ -1,0 +1,4 @@
+1)strip
+2)cpuset/cpuset.cpus
+3)netperf run dhclient hotplug
+run_dhclient=yes
