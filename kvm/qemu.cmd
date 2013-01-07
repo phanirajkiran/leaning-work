@@ -1,6 +1,6 @@
 http://doc.opensuse.org/documentation/html/openSUSE/opensuse-kvm/cha.qemu.running.html
 http://doc.opensuse.org/products/draft/SLES/SLES-kvm_sd_draft/cha.qemu.running.html
-
+http://gmplib.org/~tege/qemu.html
 
 =====================================================
 qemu-img create -f raw morespace.raw <size>
@@ -21,6 +21,10 @@ qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,model=e1000 -net tap,scri
 virtio:
 
 qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio -net tap,script=/etc/qemu-ifup -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=dhcp"  -nographic
+
+OR change the disk
+
+qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio -net tap,script=/etc/qemu-ifup -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp"  -nographic
 
 ============================================
 vlan:
@@ -153,6 +157,50 @@ In the above example, we want to assign a USB stick connected to the host's USB 
 qemu-kvm [...] -usb -device usb-host,hostbus=2,hostaddr=5
 
 
+http://qemu.weilnetz.de/qemu-doc.html#host_005fusb_005fdevices
+http://www.linux-kvm.org/page/USB_Host_Device_Assigned_to_Guest
+
+#/usr/bin/qemu-kvm -m 1024 -name f15 -drive file=/images/f15.img,if=virtio -usb -device usb-host,hostbus=2,hostaddr=3
+
+http://www.linux-kvm.org/page/USB
+
+sudo losetup /dev/loop0 usb.img
+qemu -hda root.img -usbdevice disk:/dev/loop0
+
+
+qemu-system-ppc -m 1024 -hda ubuntu-ppc.qcow2 \
+    -cdrom ubuntu-10.04-server-powerpc.iso -boot d \
+    -usb -usbdevice disk:ubuntu-10.04-server-powerpc.iso
+
+qemu-system-x86_64 -no-acpi -usb -usbdevice host:096e:0305 -m 1024 -hda win7.img -cdrom winxp.iso
+
+
+qemu -usb -usbdevice keyboard 
+qemu -usb -usbdevice disk:/dev/sda
+qemu -usb -usbdevice host:5.7 -fda usb.img
+
+
+qemu -usb -usbdevice disk:/dev/sda -fda usb.img
+
+The -L tells QEMU where to find its BIOS images, which is not necessary in a standard unix installation. The -m tells how many megabytes of memory to use; the default is 128
+You can use -fda/-fdb for disk image files, and -hda/-hdb/-hdc/-hdd for hard disks. To change boot devices, use -boot {a/b/c/d}. a/b tell it to boot floppy a or b. c for hard disk and d for CDROM.
+
+
+However I've found another solution. Get the USB device VendorID:ProductID with lsusb. Example:
+
+$ lsusb
+...
+Bus 002 Device 007: ID 0781:5406 SanDisk Corp. Cruzer Micro U3
+Pass that to KVM, and ask for the boot menu:
+
+sudo  kvm -m 512 -smp 1 -drive file=/path/to/hardisk/file.img -usb \ 
+-usbdevice host:0781:5406 -boot menu=on
+Press F12 for the menu, choose the usb device, it works. There's probably a way to command the usb boot without needing to call the boot menu, but I didn't find any in man kvm.
+
+qemu-system-x86_64 -snapshot -L test -device piix3-usb-uhci -drive id=usbflash,file=dos-drivec-new,if=none,cache=writeback -device usb-storage,drive=usbflash -chardev stdio,id=seabios -device isa-debugcon,iobase=0x402,chardev=seabios
+
+If a hard disk image is added too, i.e.
+qemu-system-x86_64.exe -boot menu=on -L . -m 256 -usb -usbdevice disk://./PhysicalDrive1 -hda test.imgit defaults to booting it, so USB boot can be used via F12 only. 
 ===================================================
 PCI passthrogh 
 

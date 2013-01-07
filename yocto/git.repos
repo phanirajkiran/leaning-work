@@ -33,3 +33,7 @@ http://git.yoctoproject.org/git/meta-xilinx
 
 git://git.yoctoproject.org/yocto-docs
 http://git.yoctoproject.org/git/yocto-docs
+
+OE:
+git://github.com/openembedded/meta-oe.git
+git://github.com/openembedded/oe-core.git

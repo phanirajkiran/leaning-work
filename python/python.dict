@@ -54,3 +54,17 @@ for i, x in enumerate(listed):
 l=[]
 [l.extend([k,v]) for k,v in dict.items()]
 
+
+def key_for_value(d, value):
+    """Return a key in `d` having a value of `value`."""
+    for k, v in d.iteritems():
+        if v == value:
+            return k
+=======================================================
+def name_the_key(dict, key):
+    return key, dict[key]
+mydict = {'key1':1, 'key2':2, 'key3':3}
+
+key_name, value = name_the_key(mydict, 'key2')
+print 'KEY NAME: %s' % key_name
+print 'KEY VALUE: %s' % value
