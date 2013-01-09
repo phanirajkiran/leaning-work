@@ -1,0 +1,1016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title></title><link rel="stylesheet" href="kernel-style.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div xml:lang="en" class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="kernel-manual"></a></h1></div><div><div class="authorgroup">
+            <div class="author"><h3 class="author"><span class="firstname">Bruce</span> <span class="surname">Ashfield</span></h3><div class="affiliation">
+                    <span class="orgname">Wind River Corporation<br /></span>
+                </div><code class="email">&lt;<a class="email" href="mailto:bruce.ashfield@windriver.com">bruce.ashfield@windriver.com</a>&gt;</code></div>
+        </div></div><div><p class="copyright">Copyright © 2010-2013 Linux Foundation</p></div><div><div class="legalnotice" title="Legal Notice"><a id="idp18520"></a>
+      <p>
+        Permission is granted to copy, distribute and/or modify this document under
+        the terms of the <a class="ulink" href="http://creativecommons.org/licenses/by-sa/2.0/uk/" target="_top">Creative Commons Attribution-Share Alike 2.0 UK: England &amp; Wales</a> as published by Creative Commons.
+      </p>
+      <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+          Due to production processes, there could be differences between the Yocto Project
+          documentation bundled in the release tarball and the
+          <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/kernel-manual/kernel-manual.html" target="_top">Yocto Project Kernel Architecture and Use Manual</a> on
+          the <a class="ulink" href="http://www.yoctoproject.org" target="_top">Yocto Project</a> website.
+          For the latest version of this manual, see the manual on the website.
+      </div>
+    </div></div><div><div class="revhistory"><table border="1" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr>
+            <tr><td align="left">Revision 0.9</td><td align="left">24 November 2010</td></tr><tr><td align="left" colspan="2">The initial document draft released with the Yocto Project 0.9 Release.</td></tr>
+            <tr><td align="left">Revision 1.0</td><td align="left">6 April 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.0 Release.</td></tr>
+            <tr><td align="left">Revision 1.0.1</td><td align="left">23 May 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.0.1 Release.</td></tr>
+            <tr><td align="left">Revision 1.1</td><td align="left">6 October 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.1 Release.</td></tr>
+            <tr><td align="left">Revision 1.2</td><td align="left">April 2012</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.2 Release.</td></tr>
+            <tr><td align="left">Revision 1.3</td><td align="left">October 2012</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.3 Release.</td></tr>
+            <tr><td align="left">Revision 1.4</td><td align="left">Sometime in 2013</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.4 Release.</td></tr>
+        </table></div></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#kernel-doc-intro">1. Yocto Project Kernel Architecture and Use Manual</a></span></dt><dd><dl><dt><span class="section"><a href="#kernel-intro-section">1.1. Introduction</a></span></dt></dl></dd><dt><span class="chapter"><a href="#kernel-concepts">2. Yocto Project Kernel Concepts</a></span></dt><dd><dl><dt><span class="section"><a href="#concepts-org">2.1. Introduction</a></span></dt><dt><span class="section"><a href="#kernel-goals">2.2. Kernel Goals</a></span></dt><dt><span class="section"><a href="#kernel-big-picture">2.3. Yocto Project Kernel Development and Maintenance Overview</a></span></dt><dt><span class="section"><a href="#kernel-architecture">2.4. Kernel Architecture</a></span></dt><dd><dl><dt><span class="section"><a href="#architecture-overview">2.4.1. Overview</a></span></dt><dt><span class="section"><a href="#branching-and-workflow">2.4.2. Branching Strategy and Workflow</a></span></dt><dt><span class="section"><a href="#source-code-manager-git">2.4.3. Source Code Manager - Git</a></span></dt></dl></dd><dt><span class="section"><a href="#kernel-configuration">2.5. Kernel Configuration</a></span></dt><dt><span class="section"><a href="#kernel-tools">2.6. Kernel Tools</a></span></dt></dl></dd><dt><span class="chapter"><a href="#kernel-how-to">3. Working with the Yocto Project Kernel</a></span></dt><dd><dl><dt><span class="section"><a href="#actions-org">3.1. Introduction</a></span></dt><dt><span class="section"><a href="#tree-construction">3.2. Tree Construction</a></span></dt><dt><span class="section"><a href="#build-strategy">3.3. Build Strategy</a></span></dt><dt><span class="section"><a href="#workflow-examples">3.4. Workflow Examples</a></span></dt><dd><dl><dt><span class="section"><a href="#change-inspection-kernel-changes-commits">3.4.1. Change Inspection: Changes/Commits</a></span></dt><dt><span class="section"><a href="#development-saving-kernel-modifications">3.4.2. Development: Saving Kernel Modifications</a></span></dt><dt><span class="section"><a href="#scm-working-with-the-yocto-project-kernel-in-another-scm">3.4.3. Working with the Yocto Project Kernel in Another SCM</a></span></dt><dt><span class="section"><a href="#bsp-creating">3.4.4. Creating a BSP Based on an Existing Similar BSP</a></span></dt><dt><span class="section"><a href="#tip-dirty-string">3.4.5. "-dirty" String</a></span></dt></dl></dd></dl></dd></dl></div>
+    
+
+    <div class="chapter" title="Chapter 1. Yocto Project Kernel Architecture and Use Manual"><div class="titlepage"><div><div><h2 class="title"><a id="kernel-doc-intro"></a>Chapter 1. Yocto Project Kernel Architecture and Use Manual</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#kernel-intro-section">1.1. Introduction</a></span></dt></dl></div><div class="section" title="1.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="kernel-intro-section"></a>1.1. Introduction</h2></div></div></div><p>
+        The Yocto Project presents kernels as a fully patched, history-clean Git
+        repositories.
+        Each repository represents selected features, board support,
+        and configurations extensively tested by the Yocto Project.
+        Yocto Project kernels allow the end user to leverage community
+        best practices to seamlessly manage the development, build and debug cycles.
+    </p><p>
+        This manual describes Yocto Project kernels by providing information
+        on history, organization, benefits, and use.
+        The manual consists of two sections:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>Concepts:</em></span> Describes concepts behind a kernel.
+                You will understand how a kernel is organized and why it is organized in
+                the way it is.  You will understand the benefits of a kernel's organization
+                and the mechanisms used to work with the kernel and how to apply it in your
+                design process.</p></li><li class="listitem"><p><span class="emphasis"><em>Using a Kernel:</em></span> Describes best practices
+                and "how-to" information
+                that lets you put a kernel to practical use.
+                Some examples are how to examine changes in a branch and how to
+                save kernel modifications.</p></li></ul></div><p>
+    </p><p>
+        For more information on the Linux kernel, see the following links:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The Linux Foundation's guide for kernel development
+                process - <a class="ulink" href="http://www.linuxfoundation.org/content/1-guide-kernel-development-process" target="_top">http://www.linuxfoundation.org/content/1-guide-kernel-development-process</a></p></li><li class="listitem"><p>A fairly encompassing guide on Linux kernel development -
+                <a class="ulink" href="http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=blob_plain;f=Documentation/HOWTO;hb=HEAD" target="_top">http://git.kernel.org/?p=linux/kernel/git/torvalds/linux-2.6.git;a=blob_plain;f=Documentation/HOWTO;hb=HEAD</a></p></li></ul></div><p>
+    </p><p>
+        For more discussion on the Yocto Project kernel, you can see these sections
+        in the Yocto Project Development Manual:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#kernel-overview" target="_top">Kernel Overview</a>"</p></li><li class="listitem"><p>
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#kernel-modification-workflow" target="_top">Kernel Modification Workflow</a>"
+                </p></li><li class="listitem"><p>
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#patching-the-kernel" target="_top">Patching the Kernel</a>"</p></li><li class="listitem"><p>
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#configuring-the-kernel" target="_top">Configuring the Kernel</a>"</p></li></ul></div><p>
+    </p><p>
+        For general information on the Yocto Project, visit the website at
+        <a class="ulink" href="http://www.yoctoproject.org" target="_top">http://www.yoctoproject.org</a>.
+    </p></div></div>
+
+    <div class="chapter" title="Chapter 2. Yocto Project Kernel Concepts"><div class="titlepage"><div><div><h2 class="title"><a id="kernel-concepts"></a>Chapter 2. Yocto Project Kernel Concepts</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#concepts-org">2.1. Introduction</a></span></dt><dt><span class="section"><a href="#kernel-goals">2.2. Kernel Goals</a></span></dt><dt><span class="section"><a href="#kernel-big-picture">2.3. Yocto Project Kernel Development and Maintenance Overview</a></span></dt><dt><span class="section"><a href="#kernel-architecture">2.4. Kernel Architecture</a></span></dt><dd><dl><dt><span class="section"><a href="#architecture-overview">2.4.1. Overview</a></span></dt><dt><span class="section"><a href="#branching-and-workflow">2.4.2. Branching Strategy and Workflow</a></span></dt><dt><span class="section"><a href="#source-code-manager-git">2.4.3. Source Code Manager - Git</a></span></dt></dl></dd><dt><span class="section"><a href="#kernel-configuration">2.5. Kernel Configuration</a></span></dt><dt><span class="section"><a href="#kernel-tools">2.6. Kernel Tools</a></span></dt></dl></div><div class="section" title="2.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="concepts-org"></a>2.1. Introduction</h2></div></div></div><p>
+        This chapter provides conceptual information about the kernel:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Kernel Goals</p></li><li class="listitem"><p>Kernel Development and Maintenance Overview</p></li><li class="listitem"><p>Kernel Architecture</p></li><li class="listitem"><p>Kernel Tools</p></li></ul></div><p>
+    </p></div><div class="section" title="2.2. Kernel Goals"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="kernel-goals"></a>2.2. Kernel Goals</h2></div></div></div><p>
+            The complexity of embedded kernel design has increased dramatically.
+            Whether it is managing multiple implementations of a particular feature or tuning and
+            optimizing board specific features, both flexibility and maintainability are key concerns.
+            The Linux kernels available through the Yocto Project are presented with the embedded
+            developer's needs in mind and have evolved to assist in these key concerns.
+            For example, prior methods such as applying hundreds of patches to an extracted
+            tarball have been replaced with proven techniques that allow easy inspection,
+            bisection and analysis of changes.
+            Application of these techniques also creates a platform for performing integration and
+            collaboration with the thousands of upstream development projects.
+        </p><p>
+            With all these considerations in mind, the Yocto Project's kernel and development team
+            strives to attain these goals:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Allow the end user to leverage community best practices to seamlessly
+            manage the development, build and debug cycles.</p></li><li class="listitem"><p>Create a platform for performing integration and collaboration with the
+            thousands of upstream development projects that exist.</p></li><li class="listitem"><p>Provide mechanisms that support many different work flows, front-ends and
+            management techniques.</p></li><li class="listitem"><p>Deliver the most up-to-date kernel possible while still ensuring that
+            the baseline kernel is the most stable official release.</p></li><li class="listitem"><p>Include major technological features as part of the Yocto Project's
+            upward revision strategy.</p></li><li class="listitem"><p>Present a kernel Git repository that, similar to the upstream
+            <code class="filename">kernel.org</code> tree,
+            has a clear and continuous history.</p></li><li class="listitem"><p>Deliver a key set of supported kernel types, where each type is tailored
+            to meet a specific use (e.g. networking, consumer, devices, and so forth).</p></li><li class="listitem"><p>Employ a Git branching strategy that, from a developer's point of view,
+            results in a linear path from the baseline <code class="filename">kernel.org</code>,
+            through a select group of features and
+            ends with their BSP-specific commits.</p></li></ul></div><p>
+        </p></div><div class="section" title="2.3. Yocto Project Kernel Development and Maintenance Overview"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="kernel-big-picture"></a>2.3. Yocto Project Kernel Development and Maintenance Overview</h2></div></div></div><p>
+            Kernels available through the Yocto Project, like other kernels, are based off the Linux
+            kernel releases from <a class="ulink" href="http://www.kernel.org" target="_top">http://www.kernel.org</a>.
+            At the beginning of a major development cycle, the Yocto Project team
+            chooses its kernel based on factors such as release timing, the anticipated release
+            timing of final upstream <code class="filename">kernel.org</code> versions, and Yocto Project
+            feature requirements.
+            Typically, the kernel chosen is in the
+            final stages of development by the community.
+            In other words, the kernel is in the release
+            candidate or "rc" phase and not yet a final release.
+            But, by being in the final stages of external development, the team knows that the
+            <code class="filename">kernel.org</code> final release will clearly be within the early stages of
+            the Yocto Project development window.
+        </p><p>
+            This balance allows the team to deliver the most up-to-date kernel
+            possible, while still ensuring that the team has a stable official release for
+            the baseline Linux kernel version.
+        </p><p>
+            The ultimate source for kernels available through the Yocto Project are released kernels
+            from <code class="filename">kernel.org</code>.
+            In addition to a foundational kernel from <code class="filename">kernel.org</code>, the
+            kernels available contain a mix of important new mainline
+            developments, non-mainline developments (when there is no alternative),
+            Board Support Package (BSP) developments,
+            and custom features.
+            These additions result in a commercially released Yocto Project Linux kernel that caters
+            to specific embedded designer needs for targeted hardware.
+        </p><p>
+            Once a kernel is officially released, the Yocto Project team goes into
+            their next development cycle, or upward revision (uprev) cycle, while still
+            continuing maintenance on the released kernel.
+            It is important to note that the most sustainable and stable way
+            to include feature development upstream is through a kernel uprev process.
+            Back-porting hundreds of individual fixes and minor features from various
+            kernel versions is not sustainable and can easily compromise quality.
+        </p><p>
+            During the uprev cycle, the Yocto Project team uses an ongoing analysis of
+            kernel development, BSP support, and release timing to select the best
+            possible <code class="filename">kernel.org</code> version.
+            The team continually monitors community kernel
+            development to look for significant features of interest.
+            The team does consider back-porting large features if they have a significant advantage.
+            User or community demand can also trigger a back-port or creation of new
+            functionality in the Yocto Project baseline kernel during the uprev cycle.
+        </p><p>
+            Generally speaking, every new kernel both adds features and introduces new bugs.
+            These consequences are the basic properties of upstream kernel development and are
+            managed by the Yocto Project team's kernel strategy.
+            It is the Yocto Project team's policy to not back-port minor features to the released kernel.
+            They only consider back-porting significant technological jumps - and, that is done
+            after a complete gap analysis.
+            The reason for this policy is that back-porting any small to medium sized change
+            from an evolving kernel can easily create mismatches, incompatibilities and very
+            subtle errors.
+        </p><p>
+            These policies result in both a stable and a cutting
+            edge kernel that mixes forward ports of existing features and significant and critical
+            new functionality.
+            Forward porting functionality in the kernels available through the Yocto Project kernel
+            can be thought of as a "micro uprev."
+            The many “micro uprevs” produce a kernel version with a mix of
+            important new mainline, non-mainline, BSP developments and feature integrations.
+            This kernel gives insight into new features and allows focused
+            amounts of testing to be done on the kernel, which prevents
+            surprises when selecting the next major uprev.
+            The quality of these cutting edge kernels is evolving and the kernels are used in leading edge
+            feature and BSP development.
+        </p></div><div class="section" title="2.4. Kernel Architecture"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="kernel-architecture"></a>2.4. Kernel Architecture</h2></div></div></div><p>
+            This section describes the architecture of the kernels available through the
+            Yocto Project and provides information
+            on the mechanisms used to achieve that architecture.
+        </p><div class="section" title="2.4.1. Overview"><div class="titlepage"><div><div><h3 class="title"><a id="architecture-overview"></a>2.4.1. Overview</h3></div></div></div><p>
+                As mentioned earlier, a key goal of the Yocto Project is to present the
+                developer with
+                a kernel that has a clear and continuous history that is visible to the user.
+                The architecture and mechanisms used achieve that goal in a manner similar to the
+                upstream <code class="filename">kernel.org</code>.
+            </p><p>
+                You can think of a Yocto Project kernel as consisting of a baseline Linux kernel with
+                added features logically structured on top of the baseline.
+                The features are tagged and organized by way of a branching strategy implemented by the
+                source code manager (SCM) Git.
+                For information on Git as applied to the Yocto Project, see the
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#git" target="_top">Git</a>" section in the
+                Yocto Project Development Manual.
+            </p><p>
+                The result is that the user has the ability to see the added features and
+                the commits that make up those features.
+                In addition to being able to see added features, the user can also view the history of what
+                made up the baseline kernel.
+            </p><p>
+                The following illustration shows the conceptual Yocto Project kernel.
+            </p><p>
+                </p><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0" width="540"><tr style="height: 630px"><td align="center"><img src="figures/kernel-architecture-overview.png" align="middle" /></td></tr></table><p>
+            </p><p>
+                In the illustration, the "Kernel.org Branch Point"
+                marks the specific spot (or release) from
+                which the Yocto Project kernel is created.
+                From this point "up" in the tree, features and differences are organized and tagged.
+            </p><p>
+                The "Yocto Project Baseline Kernel" contains functionality that is common to every kernel
+                type and BSP that is organized further up the tree.
+                Placing these common features in the
+                tree this way means features don't have to be duplicated along individual branches of the
+                structure.
+            </p><p>
+                From the Yocto Project Baseline Kernel, branch points represent specific functionality
+                for individual BSPs as well as real-time kernels.
+                The illustration represents this through three BSP-specific branches and a real-time
+                kernel branch.
+                Each branch represents some unique functionality for the BSP or a real-time kernel.
+            </p><p>
+                In this example structure, the real-time kernel branch has common features for all
+                real-time kernels and contains
+                more branches for individual BSP-specific real-time kernels.
+                The illustration shows three branches as an example.
+                Each branch points the way to specific, unique features for a respective real-time
+                kernel as they apply to a given BSP.
+            </p><p>
+                The resulting tree structure presents a clear path of markers (or branches) to the
+                developer that, for all practical purposes, is the kernel needed for any given set
+                of requirements.
+            </p></div><div class="section" title="2.4.2. Branching Strategy and Workflow"><div class="titlepage"><div><div><h3 class="title"><a id="branching-and-workflow"></a>2.4.2. Branching Strategy and Workflow</h3></div></div></div><p>
+                The Yocto Project team creates kernel branches at points where functionality is
+                no longer shared and thus, needs to be isolated.
+                For example, board-specific incompatibilities would require different functionality
+                and would require a branch to separate the features.
+                Likewise, for specific kernel features, the same branching strategy is used.
+            </p><p>
+                This branching strategy results in a tree that has features organized to be specific
+                for particular functionality, single kernel types, or a subset of kernel types.
+                This strategy also results in not having to store the same feature twice
+                internally in the tree.
+                Rather, the kernel team stores the unique differences required to apply the
+                feature onto the kernel type in question.
+                </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                    The Yocto Project team strives to place features in the tree such that they can be
+                    shared by all boards and kernel types where possible.
+                    However, during development cycles or when large features are merged,
+                    the team cannot always follow this practice.
+                    In those cases, the team uses isolated branches to merge features.
+                </div><p>
+            </p><p>
+                BSP-specific code additions are handled in a similar manner to kernel-specific additions.
+                Some BSPs only make sense given certain kernel types.
+                So, for these types, the team creates branches off the end of that kernel type for all
+                of the BSPs that are supported on that kernel type.
+                From the perspective of the tools that create the BSP branch, the BSP is really no
+                different than a feature.
+                Consequently, the same branching strategy applies to BSPs as it does to features.
+                So again, rather than store the BSP twice, the team only stores the unique
+                differences for the BSP across the supported multiple kernels.
+            </p><p>
+                While this strategy can result in a tree with a significant number of branches, it is
+                important to realize that from the developer's point of view, there is a linear
+                path that travels from the baseline <code class="filename">kernel.org</code>, through a select
+                group of features and ends with their BSP-specific commits.
+                In other words, the divisions of the kernel are transparent and are not relevant
+                to the developer on a day-to-day basis.
+                From the developer's perspective, this path is the "master" branch.
+                The developer does not need to be aware of the existence of any other branches at all.
+                Of course, there is value in the existence of these branches
+                in the tree, should a person decide to explore them.
+                For example, a comparison between two BSPs at either the commit level or at the line-by-line
+                code <code class="filename">diff</code> level is now a trivial operation.
+            </p><p>
+                Working with the kernel as a structured tree follows recognized community best practices.
+                In particular, the kernel as shipped with the product, should be
+                considered an "upstream source" and viewed as a series of
+                historical and documented modifications (commits).
+                These modifications represent the development and stabilization done
+                by the Yocto Project kernel development team.
+            </p><p>
+                Because commits only change at significant release points in the product life cycle,
+                developers can work on a branch created
+                from the last relevant commit in the shipped Yocto Project kernel.
+                As mentioned previously, the structure is transparent to the developer
+                because the kernel tree is left in this state after cloning and building the kernel.
+            </p></div><div class="section" title="2.4.3. Source Code Manager - Git"><div class="titlepage"><div><div><h3 class="title"><a id="source-code-manager-git"></a>2.4.3. Source Code Manager - Git</h3></div></div></div><p>
+                The Source Code Manager (SCM) is Git.
+                This SCM is the obvious mechanism for meeting the previously mentioned goals.
+                Not only is it the SCM for <code class="filename">kernel.org</code> but,
+                Git continues to grow in popularity and supports many different work flows,
+                front-ends and management techniques.
+            </p><p>
+                You can find documentation on Git at <a class="ulink" href="http://git-scm.com/documentation" target="_top">http://git-scm.com/documentation</a>.
+                You can also get an introduction to Git as it applies to the Yocto Project in the
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#git" target="_top">Git</a>"
+                section in the Yocto Project Development Manual.
+                These referenced sections overview Git and describe a minimal set of
+                commands that allows you to be functional using Git.
+                </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                    You can use as much, or as little, of what Git has to offer to accomplish what
+                    you need for your project.
+                    You do not have to be a "Git Master" in order to use it with the Yocto Project.
+                </div><p>
+            </p></div></div><div class="section" title="2.5. Kernel Configuration"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="kernel-configuration"></a>2.5. Kernel Configuration</h2></div></div></div><p>
+            Kernel configuration, along with kernel features, defines how a kernel
+            image is built for the Yocto Project.
+            Through configuration settings, you can customize a Yocto Project kernel to be
+            specific to particular hardware.
+            For example, you can specify sound support or networking support.
+            This section describes basic concepts behind Kernel configuration within the
+            Yocto Project and references you to other areas for specific configuration
+            applications.
+        </p><p>
+            Conceptually, configuration of a Yocto Project kernel occurs similarly to that needed for any
+            Linux kernel.
+            The build process for a Yocto Project kernel uses a <code class="filename">.config</code> file, which
+            is created through the Linux Kernel Configuration (LKC) tool.
+            You can directly set various configurations in the
+            <code class="filename">.config</code> file by using the <code class="filename">menuconfig</code>
+            tool as built by BitBake.
+            You can also define configurations in the file by using configuration fragments.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                It is not recommended that you edit the <code class="filename">.config</code> file directly.
+            </div><p>
+            Here are some brief descriptions of the ways you can affect the
+            <code class="filename">.config</code> file:
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>The <code class="filename">menuconfig</code> Tool:</em></span>
+                    One of many front-ends that allows you to define kernel configurations.
+                    Some others are <code class="filename">make config</code>,
+                    <code class="filename">make nconfig</code>, and <code class="filename">make gconfig</code>.
+                    In the Yocto Project environment, you must use BitBake to build the
+                    <code class="filename">menuconfig</code> tool before you can use it to define
+                    configurations:
+                    </p><pre class="literallayout">
+     $ bitbake linux-yocto -c menuconfig
+                    </pre><p>
+                    After the tool is built, you can interact with it normally.
+                    You can see how <code class="filename">menuconfig</code> is used to change a simple
+                    kernel configuration in the
+                    "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#configuring-the-kernel" target="_top">Configuring the Kernel</a>"
+                    section of the Yocto Project Development Manual.
+                    For general information on <code class="filename">menuconfig</code>, see
+                    <a class="ulink" href="http://en.wikipedia.org/wiki/Menuconfig" target="_top">http://en.wikipedia.org/wiki/Menuconfig</a>.
+                    </p></li><li class="listitem"><p><span class="emphasis"><em>Configuration Fragments:</em></span> A file with a
+                    list of kernel options just as they would appear syntactically in the
+                    <code class="filename">.config</code> file.
+                    Configuration fragments are typically logical groupings and are assembled
+                    by the OpenEmbedded build system to produce input used by the LKC
+                    that ultimately generates the <code class="filename">.config</code> file.</p><p>The
+                    <code class="filename"><a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-KERNEL_FEATURES" target="_top">KERNEL_FEATURES</a></code>
+                    variable can be used to list configuration fragments.
+                    For further discussion on applying configuration fragments, see the
+                    "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/bsp-guide/bsp-guide.html#bsp-filelayout-kernel" target="_top">Linux Kernel Configuration</a>"
+                    section in the Yocto Project Board Support Package (BSP) Guide.
+                    </p></li></ul></div><p>
+        </p></div><div class="section" title="2.6. Kernel Tools"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="kernel-tools"></a>2.6. Kernel Tools</h2></div></div></div><p>
+            Since most standard workflows involve moving forward with an existing tree by
+            continuing to add and alter the underlying baseline, the tools that manage
+            the Yocto Project's kernel construction are largely hidden from the developer to
+            present a simplified view of the kernel for ease of use.
+        </p><p>
+            Fundamentally, the kernel tools that manage and construct the
+            Yocto Project kernel accomplish the following:
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Group patches into named, reusable features.</p></li><li class="listitem"><p>Allow top-down control of included features.</p></li><li class="listitem"><p>Bind kernel configurations to kernel patches and features.</p></li><li class="listitem"><p>Present a seamless Git repository that blends Yocto Project value
+                    with the <code class="filename">kernel.org</code> history and development.</p></li></ul></div><p>
+        </p></div></div>
+
+    <div class="chapter" title="Chapter 3. Working with the Yocto Project Kernel"><div class="titlepage"><div><div><h2 class="title"><a id="kernel-how-to"></a>Chapter 3. Working with the Yocto Project Kernel</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#actions-org">3.1. Introduction</a></span></dt><dt><span class="section"><a href="#tree-construction">3.2. Tree Construction</a></span></dt><dt><span class="section"><a href="#build-strategy">3.3. Build Strategy</a></span></dt><dt><span class="section"><a href="#workflow-examples">3.4. Workflow Examples</a></span></dt><dd><dl><dt><span class="section"><a href="#change-inspection-kernel-changes-commits">3.4.1. Change Inspection: Changes/Commits</a></span></dt><dt><span class="section"><a href="#development-saving-kernel-modifications">3.4.2. Development: Saving Kernel Modifications</a></span></dt><dt><span class="section"><a href="#scm-working-with-the-yocto-project-kernel-in-another-scm">3.4.3. Working with the Yocto Project Kernel in Another SCM</a></span></dt><dt><span class="section"><a href="#bsp-creating">3.4.4. Creating a BSP Based on an Existing Similar BSP</a></span></dt><dt><span class="section"><a href="#tip-dirty-string">3.4.5. "-dirty" String</a></span></dt></dl></dd></dl></div><div class="section" title="3.1. Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="actions-org"></a>3.1. Introduction</h2></div></div></div><p>
+        This chapter describes how to accomplish tasks involving a kernel's tree structure.
+        The information is designed to help the developer that wants to modify the Yocto
+        Project kernel and contribute changes upstream to the Yocto Project.
+        The information covers the following:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Tree construction</p></li><li class="listitem"><p>Build strategies</p></li><li class="listitem"><p>Workflow examples</p></li></ul></div><p>
+    </p></div><div class="section" title="3.2. Tree Construction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="tree-construction"></a>3.2. Tree Construction</h2></div></div></div><p>
+            This section describes construction of the Yocto Project kernel source repositories
+            as accomplished by the Yocto Project team to create kernel repositories.
+            These kernel repositories are found under the heading "Yocto Linux Kernel" at
+            <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi" target="_top">http://git.yoctoproject.org/cgit.cgi</a>
+            and can be shipped as part of a Yocto Project release.
+            The team creates these repositories by
+            compiling and executing the set of feature descriptions for every BSP/feature
+            in the product.
+            Those feature descriptions list all necessary patches,
+            configuration, branching, tagging and feature divisions found in a kernel.
+            Thus, the Yocto Project kernel repository (or tree) is built.
+        </p><p>
+            The existence of this tree allows you to access and clone a particular
+            Yocto Project kernel repository and use it to build images based on their configurations
+            and features.
+        </p><p>
+            You can find the files used to describe all the valid features and BSPs
+            in the Yocto Project kernel in any clone of the Yocto Project kernel source repository
+            Git tree.
+            For example, the following command clones the Yocto Project baseline kernel that
+            branched off of <code class="filename">linux.org</code> version 3.4:
+            </p><pre class="literallayout">
+     $ git clone git://git.yoctoproject.org/linux-yocto-3.4
+            </pre><p>
+            For another example of how to set up a local Git repository of the Yocto Project
+            kernel files, see the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#local-kernel-files" target="_top">Yocto Project Kernel</a>" bulleted
+            item in the Yocto Project Development Manual.
+        </p><p>
+            Once you have cloned the kernel Git repository on your local machine, you can
+            switch to the <code class="filename">meta</code> branch within the repository.
+            Here is an example that assumes the local Git repository for the kernel is in
+            a top-level directory named <code class="filename">linux-yocto-3.4</code>:
+            </p><pre class="literallayout">
+     $ cd ~/linux-yocto-3.4
+     $ git checkout -b meta origin/meta
+            </pre><p>
+            Once you have checked out and switched to the <code class="filename">meta</code> branch,
+            you can see a snapshot of all the kernel configuration and feature descriptions that are
+            used to build that particular kernel repository.
+            These descriptions are in the form of <code class="filename">.scc</code> files.
+        </p><p>
+            You should realize, however, that browsing your local kernel repository
+            for feature descriptions and patches is not an effective way to determine what is in a
+            particular kernel branch.
+            Instead, you should use Git directly to discover the changes in a branch.
+            Using Git is an efficient and flexible way to inspect changes to the kernel.
+            For examples showing how to use Git to inspect kernel commits, see the following sections
+            in this chapter.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                Ground up reconstruction of the complete kernel tree is an action only taken by the
+                Yocto Project team during an active development cycle.
+                When you create a clone of the kernel Git repository, you are simply making it
+                efficiently available for building and development.
+            </div><p>
+        </p><p>
+            The following steps describe what happens when the Yocto Project Team constructs
+            the Yocto Project kernel source Git repository (or tree) found at
+            <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi" target="_top">http://git.yoctoproject.org/cgit.cgi</a> given the
+            introduction of a new top-level kernel feature or BSP.
+            These are the actions that effectively create the tree
+            that includes the new feature, patch or BSP:
+            </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>A top-level kernel feature is passed to the kernel build subsystem.
+                    Normally, this feature is a BSP for a particular kernel type.</p></li><li class="listitem"><p>The file that describes the top-level feature is located by searching
+                    these system directories:
+                    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The in-tree kernel-cache directories, which are located
+                            in <code class="filename">meta/cfg/kernel-cache</code></p></li><li class="listitem"><p>Areas pointed to by <code class="filename">SRC_URI</code> statements
+                            found in recipes</p></li></ul></div><p>
+                    For a typical build, the target of the search is a
+                    feature description in an <code class="filename">.scc</code> file
+                    whose name follows this format:
+                    </p><pre class="literallayout">
+     &lt;bsp_name&gt;-&lt;kernel_type&gt;.scc
+                    </pre><p>
+                </p></li><li class="listitem"><p>Once located, the feature description is either compiled into a simple script
+                    of actions, or into an existing equivalent script that is already part of the
+                    shipped kernel.</p></li><li class="listitem"><p>Extra features are appended to the top-level feature description.
+                    These features can come from the
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-KERNEL_FEATURES" target="_top"><code class="filename">KERNEL_FEATURES</code></a>
+                    variable in recipes.</p></li><li class="listitem"><p>Each extra feature is located, compiled and appended to the script
+                    as described in step three.</p></li><li class="listitem"><p>The script is executed to produce a series of <code class="filename">meta-*</code>
+                    directories.
+                    These directories are descriptions of all the branches, tags, patches and configurations that
+                    need to be applied to the base Git repository to completely create the
+                    source (build) branch for the new BSP or feature.</p></li><li class="listitem"><p>The base repository is cloned, and the actions
+                    listed in the <code class="filename">meta-*</code> directories are applied to the
+                    tree.</p></li><li class="listitem"><p>The Git repository is left with the desired branch checked out and any
+                    required branching, patching and tagging has been performed.</p></li></ol></div><p>
+        </p><p>
+            The kernel tree is now ready for developer consumption to be locally cloned,
+            configured, and built into a Yocto Project kernel specific to some target hardware.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>The generated <code class="filename">meta-*</code> directories add to the kernel
+                as shipped with the Yocto Project release.
+                Any add-ons and configuration data are applied to the end of an existing branch.
+                The full repository generation that is found in the
+                official Yocto Project kernel repositories at
+                <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi" target="_top">http://git.yoctoproject.org/cgit.cgi</a>
+                is the combination of all supported boards and configurations.</p><p>The technique the Yocto Project team uses is flexible and allows for seamless
+                blending of an immutable history with additional patches specific to a
+                deployment.
+                Any additions to the kernel become an integrated part of the branches.</p></div><p>
+        </p></div><div class="section" title="3.3. Build Strategy"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="build-strategy"></a>3.3. Build Strategy</h2></div></div></div><p>
+            Once a local Git repository of the Yocto Project kernel exists on a development system,
+            you can consider the compilation phase of kernel development - building a kernel image.
+            Some prerequisites exist that are validated by the build process before compilation
+            starts:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-SRC_URI" target="_top"><code class="filename">SRC_URI</code></a> points
+                to the kernel Git repository.</p></li><li class="listitem"><p>A BSP build branch exists.
+                This branch has the following form:
+                </p><pre class="literallayout">
+     &lt;kernel_type&gt;/&lt;bsp_name&gt;
+                </pre></li></ul></div><p>
+            The OpenEmbedded build system makes sure these conditions exist before attempting compilation.
+            Other means, however, do exist, such as as bootstrapping a BSP, see
+            the "<a class="link" href="#workflow-examples" title="3.4. Workflow Examples">Workflow Examples</a>".
+        </p><p>
+            Before building a kernel, the build process verifies the tree
+            and configures the kernel by processing all of the
+            configuration "fragments" specified by feature descriptions in the <code class="filename">.scc</code>
+            files.
+            As the features are compiled, associated kernel configuration fragments are noted
+            and recorded in the <code class="filename">meta-*</code> series of directories in their compilation order.
+            The fragments are migrated, pre-processed and passed to the Linux Kernel
+            Configuration subsystem (<code class="filename">lkc</code>) as raw input in the form
+            of a <code class="filename">.config</code> file.
+            The <code class="filename">lkc</code> uses its own internal dependency constraints to do the final
+            processing of that information and generates the final <code class="filename">.config</code> file
+            that is used during compilation.
+        </p><p>
+            Using the board's architecture and other relevant values from the board's template,
+            kernel compilation is started and a kernel image is produced.
+        </p><p>
+            The other thing that you notice once you configure a kernel is that
+            the build process generates a build tree that is separate from your kernel's local Git
+            source repository tree.
+            This build tree has a name that uses the following form, where
+            <code class="filename">${MACHINE}</code> is the metadata name of the machine (BSP) and "kernel_type" is one
+            of the Yocto Project supported kernel types (e.g. "standard"):
+        </p><pre class="literallayout">
+     linux-${MACHINE}-&lt;kernel_type&gt;-build
+        </pre><p>
+        </p><p>
+            The existing support in the <code class="filename">kernel.org</code> tree achieves this
+            default functionality.
+        </p><p>
+            This behavior means that all the generated files for a particular machine or BSP are now in
+            the build tree directory.
+            The files include the final <code class="filename">.config</code> file, all the <code class="filename">.o</code>
+            files, the <code class="filename">.a</code> files, and so forth.
+            Since each machine or BSP has its own separate build directory in its own separate branch
+            of the Git repository, you can easily switch between different builds.
+        </p></div><div class="section" title="3.4. Workflow Examples"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="workflow-examples"></a>3.4. Workflow Examples</h2></div></div></div><p>
+            As previously noted, the Yocto Project kernel has built-in Git integration.
+            However, these utilities are not the only way to work with the kernel repository.
+            The Yocto Project has not made changes to Git or to other tools that
+            would invalidate alternate workflows.
+            Additionally, the way the kernel repository is constructed results in using
+            only core Git functionality, thus allowing any number of tools or front ends to use the
+            resulting tree.
+        </p><p>
+            This section contains several workflow examples.
+            Many of the examples use Git commands.
+            You can find Git documentation at
+            <a class="ulink" href="http://git-scm.com/documentation" target="_top">http://git-scm.com/documentation</a>.
+            You can find a simple overview of using Git with the Yocto Project in the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#git" target="_top">Git</a>"
+            section of the Yocto Project Development Manual.
+        </p><div class="section" title="3.4.1. Change Inspection: Changes/Commits"><div class="titlepage"><div><div><h3 class="title"><a id="change-inspection-kernel-changes-commits"></a>3.4.1. Change Inspection: Changes/Commits</h3></div></div></div><p>
+                A common question when working with a kernel is:
+                "What changes have been applied to this tree?"
+            </p><p>
+                In projects that have a collection of directories that
+                contain patches to the kernel, it is possible to inspect or "grep" the contents
+                of the directories to get a general feel for the changes.
+                This sort of patch inspection is not an efficient way to determine what has been
+                done to the kernel.
+                The reason it is inefficient is because there are many optional patches that are
+                selected based on the kernel type and the feature description.
+                Additionally, patches could exist in directories that are not included in the search.
+            </p><p>
+                A more efficient way to determine what has changed in the branch is to use
+                Git and inspect or search the kernel tree.
+                This method gives you a full view of not only the source code modifications,
+                but also provides the reasons for the changes.
+            </p><div class="section" title="3.4.1.1. What Changed in a Kernel?"><div class="titlepage"><div><div><h4 class="title"><a id="what-changed-in-a-kernel"></a>3.4.1.1. What Changed in a Kernel?</h4></div></div></div><p>
+                    Following are a few examples that show how to use Git commands to examine changes.
+                    Because Git repositories in the Yocto Project do not break existing Git
+                    functionality, and because there exists many permutations of these types of
+                    Git commands, many methods exist by which you can discover changes.
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                        In the following examples, unless you provide a commit range,
+                        <code class="filename">kernel.org</code> history is blended with Yocto Project
+                        kernel changes.
+                        You can form ranges by using branch names from the kernel tree as the
+                        upper and lower commit markers with the Git commands.
+                        You can see the branch names through the web interface to the
+                        Yocto Project source repositories at
+                        <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi" target="_top">http://git.yoctoproject.org/cgit.cgi</a>.
+                        For example, the branch names for the <code class="filename">linux-yocto-3.4</code>
+                        kernel repository can be seen at
+                        <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi/linux-yocto-3.4/refs/heads" target="_top">http://git.yoctoproject.org/cgit.cgi/linux-yocto-3.4/refs/heads</a>.
+                    </div><p>
+                    To see a full range of the changes, use the
+                    <code class="filename">git whatchanged</code> command and specify a commit range
+                    for the branch (<code class="filename">&lt;commit&gt;..&lt;commit&gt;</code>).
+                </p><p>
+                    Here is an example that looks at what has changed in the
+                    <code class="filename">emenlow</code> branch of the
+                    <code class="filename">linux-yocto-3.4</code> kernel.
+                    The lower commit range is the commit associated with the
+                    <code class="filename">standard/base</code> branch, while
+                    the upper commit range is the commit associated with the
+                    <code class="filename">standard/emenlow</code> branch.
+                    </p><pre class="literallayout">
+     $ git whatchanged origin/standard/base..origin/standard/emenlow
+                    </pre><p>
+                </p><p>
+                    To see a summary of changes use the <code class="filename">git log</code> command.
+                    Here is an example using the same branches:
+                    </p><pre class="literallayout">
+     $ git log --oneline origin/standard/base..origin/standard/emenlow
+                    </pre><p>
+                    The <code class="filename">git log</code> output might be more useful than
+                    the <code class="filename">git whatchanged</code> as you get
+                    a short, one-line summary of each change and not the entire commit.
+                </p><p>
+                    If you want to see code differences associated with all the changes, use
+                    the <code class="filename">git diff</code> command.
+                    Here is an example:
+                    </p><pre class="literallayout">
+     $ git diff origin/standard/base..origin/standard/emenlow
+                    </pre><p>
+                </p><p>
+                    You can see the commit log messages and the text differences using the
+                    <code class="filename">git show</code> command:
+                    Here is an example:
+                    </p><pre class="literallayout">
+     $ git show origin/standard/base..origin/standard/emenlow
+                    </pre><p>
+                </p><p>
+                    You can create individual patches for each change by using the
+                    <code class="filename">git format-patch</code> command.
+                    Here is an example that that creates patch files for each commit and
+                    places them in your <code class="filename">Documents</code> directory:
+                    </p><pre class="literallayout">
+     $ git format-patch -o $HOME/Documents origin/standard/base..origin/standard/emenlow
+                    </pre><p>
+                </p></div><div class="section" title="3.4.1.2. Show a Particular Feature or Branch Change"><div class="titlepage"><div><div><h4 class="title"><a id="show-a-particular-feature-or-branch-change"></a>3.4.1.2. Show a Particular Feature or Branch Change</h4></div></div></div><p>
+                    Developers use tags in the Yocto Project kernel tree to divide changes for significant
+                    features or branches.
+                    Once you know a particular tag, you can use Git commands
+                    to show changes associated with the tag and find the branches that contain
+                    the feature.
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                        Because BSP branch, <code class="filename">kernel.org</code>, and feature tags are all
+                        present, there could be many tags.
+                    </div><p>
+                    The <code class="filename">git show &lt;tag&gt;</code> command shows changes that are tagged by
+                    a feature.
+                    Here is an example that shows changes tagged by the <code class="filename">systemtap</code>
+                    feature:
+                    </p><pre class="literallayout">
+     $ git show systemtap
+                    </pre><p>
+                    You can use the <code class="filename">git branch --contains &lt;tag&gt;</code> command
+                    to show the branches that contain a particular feature.
+                    This command shows the branches that contain the <code class="filename">systemtap</code>
+                    feature:
+                    </p><pre class="literallayout">
+     $ git branch --contains systemtap
+                    </pre><p>
+                </p><p>
+                    You can use many other comparisons to isolate BSP and kernel changes.
+                    For example, you can compare against <code class="filename">kernel.org</code> tags
+                    such as the <code class="filename">v3.4</code> tag.
+                </p></div></div><div class="section" title="3.4.2. Development: Saving Kernel Modifications"><div class="titlepage"><div><div><h3 class="title"><a id="development-saving-kernel-modifications"></a>3.4.2. Development: Saving Kernel Modifications</h3></div></div></div><p>
+                Another common operation is to build a BSP supplied by the Yocto Project, make some
+                changes, rebuild, and then test.
+                Those local changes often need to be exported, shared or otherwise maintained.
+            </p><p>
+                Since the Yocto Project kernel source tree is backed by Git, this activity is
+                much easier as compared to with previous releases.
+                Because Git tracks file modifications, additions and deletions, it is easy
+                to modify the code and later realize that you need to save the changes.
+                It is also easy to determine what has changed.
+                This method also provides many tools to commit, undo and export those modifications.
+            </p><p>
+                This section and its sub-sections, describe general application of Git's
+                <code class="filename">push</code> and <code class="filename">pull</code> commands, which are used to
+                get your changes upstream or source your code from an upstream repository.
+                The Yocto Project provides scripts that help you work in a collaborative development
+                environment.
+                For information on these scripts, see the
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#pushing-a-change-upstream" target="_top">Using Scripts to Push a Change
+                Upstream and Request a Pull</a>" and
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#submitting-a-patch" target="_top">Using Email to Submit a Patch</a>"
+                sections in the Yocto Project Development Manual.
+            </p><p>
+                There are many ways to save kernel modifications.
+                The technique employed
+                depends on the destination for the patches:
+
+                </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Bulk storage</p></li><li class="listitem"><p>Internal sharing either through patches or by using Git</p></li><li class="listitem"><p>External submissions</p></li><li class="listitem"><p>Exporting for integration into another Source Code
+                        Manager (SCM)</p></li></ul></div><p>
+            </p><p>
+                Because of the following list of issues, the destination of the patches also influences
+                the method for gathering them:
+
+                </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Bisectability</p></li><li class="listitem"><p>Commit headers</p></li><li class="listitem"><p>Division of subsystems for separate submission or review</p></li></ul></div><p>
+            </p><div class="section" title="3.4.2.1. Bulk Export"><div class="titlepage"><div><div><h4 class="title"><a id="bulk-export"></a>3.4.2.1. Bulk Export</h4></div></div></div><p>
+                    This section describes how you can "bulk" export changes that have not
+                    been separated or divided.
+                    This situation works well when you are simply storing patches outside of the kernel
+                    source repository, either permanently or temporarily, and you are not committing
+                    incremental changes during development.
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                        This technique is not appropriate for full integration of upstream submission
+                        because changes are not properly divided and do not provide an avenue for per-change
+                        commit messages.
+                        Therefore, this example assumes that changes have not been committed incrementally
+                        during development and that you simply must gather and export them.
+                    </div><p>
+                    </p><pre class="literallayout">
+     # bulk export of ALL modifications without separation or division
+     # of the changes
+
+     $ git add .
+     $ git commit -s -a -m &lt;msg&gt;
+        or
+     $ git commit -s -a # and interact with $EDITOR
+                    </pre><p>
+                </p><p>
+                    The previous operations capture all the local changes in the project source
+                    tree in a single Git commit.
+                    And, that commit is also stored in the project's source tree.
+                </p><p>
+                    Once the changes are exported, you can restore them manually using a template
+                    or through integration with the <code class="filename">default_kernel</code>.
+                </p></div><div class="section" title="3.4.2.2. Incremental/Planned Sharing"><div class="titlepage"><div><div><h4 class="title"><a id="incremental-planned-sharing"></a>3.4.2.2. Incremental/Planned Sharing</h4></div></div></div><p>
+                    This section describes how to save modifications when you are making incremental
+                    commits or practicing planned sharing.
+                    The examples in this section assume that you have incrementally committed
+                    changes to the tree during development and now need to export them.
+                    The sections that follow
+                    describe how you can export your changes internally through either patches or by
+                    using Git commands.
+                </p><p>
+                    During development, the following commands are of interest.
+                    For full Git documentation, refer to the Git documentation at
+                    <a class="ulink" href="http://github.com" target="_top">http://github.com</a>.
+
+                    </p><pre class="literallayout">
+     # edit a file
+     $ vi &lt;path&gt;/file
+     # stage the change
+     $ git add &lt;path&gt;/file
+     # commit the change
+     $ git commit -s
+     # remove a file
+     $ git rm &lt;path&gt;/file
+     # commit the change
+     $ git commit -s
+
+     ... etc.
+                    </pre><p>
+                </p><p>
+                    Distributed development with Git is possible when you use a universally
+                    agreed-upon unique commit identifier (set by the creator of the commit) that maps to a
+                    specific change set with a specific parent.
+                    This identifier is created for you when
+                    you create a commit, and is re-created when you amend, alter or re-apply
+                    a commit.
+                    As an individual in isolation, this is of no interest.
+                    However, if you
+                    intend to share your tree with normal Git <code class="filename">push</code> and
+                    <code class="filename">pull</code> operations for
+                    distributed development, you should consider the ramifications of changing a
+                    commit that you have already shared with others.
+                </p><p>
+                    Assuming that the changes have not been pushed upstream, or pulled into
+                    another repository, you can update both the commit content and commit messages
+                    associated with development by using the following commands:
+
+                    </p><pre class="literallayout">
+     $ Git add &lt;path&gt;/file
+     $ Git commit --amend
+     $ Git rebase or Git rebase -i
+                    </pre><p>
+                </p><p>
+                    Again, assuming that the changes have not been pushed upstream, and that
+                    no pending works-in-progress exist (use <code class="filename">git status</code> to check), then
+                    you can revert (undo) commits by using the following commands:
+
+                    </p><pre class="literallayout">
+     # remove the commit, update working tree and remove all
+     # traces of the change
+     $ git reset --hard HEAD^
+     # remove the commit, but leave the files changed and staged for re-commit
+     $ git reset --soft HEAD^
+     # remove the commit, leave file change, but not staged for commit
+     $ git reset --mixed HEAD^
+                    </pre><p>
+                </p><p>
+                    You can create branches, "cherry-pick" changes, or perform any number of Git
+                    operations until the commits are in good order for pushing upstream
+                    or for pull requests.
+                    After a <code class="filename">push</code> or <code class="filename">pull</code> command,
+                    commits are normally considered
+                    "permanent" and you should not modify them.
+                    If the commits need to be changed, you can incrementally do so with new commits.
+                    These practices follow standard Git workflow and the <code class="filename">kernel.org</code> best
+                    practices, which is recommended.
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                        It is recommended to tag or branch before adding changes to a Yocto Project
+                        BSP or before creating a new one.
+                        The reason for this recommendation is because the branch or tag provides a
+                        reference point to facilitate locating and exporting local changes.
+                    </div><p>
+                </p><div class="section" title="3.4.2.2.1. Exporting Changes Internally by Using Patches"><div class="titlepage"><div><div><h5 class="title"><a id="export-internally-via-patches"></a>3.4.2.2.1. Exporting Changes Internally by Using Patches</h5></div></div></div><p>
+                        This section describes how you can extract committed changes from a working directory
+                        by exporting them as patches.
+                        Once the changes have been extracted, you can use the patches for upstream submission,
+                        place them in a Yocto Project template for automatic kernel patching,
+                        or apply them in many other common uses.
+                    </p><p>
+                        This example shows how to create a directory with sequentially numbered patches.
+                        Once the directory is created, you can apply it to a repository using the
+                        <code class="filename">git am</code> command to reproduce the original commit and all
+                        the related information such as author, date, commit log, and so forth.
+                        </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                            The new commit identifiers (ID) will be generated upon re-application.
+                            This action reflects that the commit is now applied to an underlying commit
+                            with a different ID.
+                        </div><p>
+                        </p><pre class="literallayout">
+     # &lt;first-commit&gt; can be a tag if one was created before development
+     # began. It can also be the parent branch if a branch was created
+     # before development began.
+
+     $ git format-patch -o &lt;dir&gt; &lt;first commit&gt;..&lt;last commit&gt;
+                        </pre><p>
+                    </p><p>
+                        In other words:
+                        </p><pre class="literallayout">
+     # Identify commits of interest.
+
+     # If the tree was tagged before development
+     $ git format-patch -o &lt;save dir&gt; &lt;tag&gt;
+
+     # If no tags are available
+     $ git format-patch -o &lt;save dir&gt; HEAD^  # last commit
+     $ git format-patch -o &lt;save dir&gt; HEAD^^ # last 2 commits
+     $ git whatchanged # identify last commit
+     $ git format-patch -o &lt;save dir&gt; &lt;commit id&gt;
+     $ git format-patch -o &lt;save dir&gt; &lt;rev-list&gt;
+                        </pre><p>
+                    </p></div><div class="section" title="3.4.2.2.2. Exporting Changes Internally by Using Git"><div class="titlepage"><div><div><h5 class="title"><a id="export-internally-via-git"></a>3.4.2.2.2. Exporting Changes Internally by Using Git</h5></div></div></div><p>
+                        This section describes how you can export changes from a working directory
+                        by pushing the changes into a master repository or by making a pull request.
+                        Once you have pushed the changes to the master repository, you can then
+                        pull those same changes into a new kernel build at a later time.
+                    </p><p>
+                        Use this command form to push the changes:
+                        </p><pre class="literallayout">
+     $ git push ssh://&lt;master_server&gt;/&lt;path_to_repo&gt;
+        &lt;local_branch&gt;:&lt;remote_branch&gt;
+                        </pre><p>
+                    </p><p>
+                        For example, the following command pushes the changes from your local branch
+                        <code class="filename">yocto/standard/common-pc/base</code> to the remote branch with the same name
+                        in the master repository <code class="filename">//git.mycompany.com/pub/git/kernel-3.4</code>.
+                        </p><pre class="literallayout">
+     $ git push ssh://git.mycompany.com/pub/git/kernel-3.4 \
+        yocto/standard/common-pc/base:yocto/standard/common-pc/base
+                        </pre><p>
+                    </p><p>
+                        A pull request entails using the <code class="filename">git request-pull</code> command to compose
+                        an email to the
+                        maintainer requesting that a branch be pulled into the master repository, see
+                        <a class="ulink" href="http://github.com/guides/pull-requests" target="_top">http://github.com/guides/pull-requests</a> for an example.
+                        </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                            Other commands such as <code class="filename">git stash</code> or branching can also be used to save
+                            changes, but are not covered in this document.
+                        </div><p>
+                    </p></div></div><div class="section" title="3.4.2.3. Exporting Changes for External (Upstream) Submission"><div class="titlepage"><div><div><h4 class="title"><a id="export-for-external-upstream-submission"></a>3.4.2.3. Exporting Changes for External (Upstream) Submission</h4></div></div></div><p>
+                    This section describes how to export changes for external upstream submission.
+                    If the patch series is large or the maintainer prefers to pull
+                    changes, you can submit these changes by using a pull request.
+                    However, it is common to send patches as an email series.
+                    This method allows easy review and integration of the changes.
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                        Before sending patches for review be sure you understand the
+                        community standards for submitting and documenting changes and follow their best practices.
+                        For example, kernel patches should follow standards such as:
+                        <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+                                <a class="ulink" href="http://linux.yyz.us/patch-format.html" target="_top">http://linux.yyz.us/patch-format.html</a></p></li><li class="listitem"><p>Documentation/SubmittingPatches (in any linux
+                                kernel source tree)</p></li></ul></div></div><p>
+                </p><p>
+                    The messages used to commit changes are a large part of these standards.
+                    Consequently, be sure that the headers for each commit have the required information.
+                    For information on how to follow the Yocto Project commit message standards, see the
+                    "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#how-to-submit-a-change" target="_top">How to Submit a
+                    Change</a>" section in the Yocto Project Development Manual.
+                </p><p>
+                    If the initial commits were not properly documented or do not meet those standards,
+                    you can re-base by using the <code class="filename">git rebase -i</code> command to
+                    manipulate the commits and
+                    get them into the required format.
+                    Other techniques such as branching and cherry-picking commits are also viable options.
+                </p><p>
+                    Once you complete the commits, you can generate the email that sends the patches
+                    to the maintainer(s) or lists that review and integrate changes.
+                    The command <code class="filename">git send-email</code> is commonly used to ensure
+                    that patches are properly
+                    formatted for easy application and avoid mailer-induced patch damage.
+                </p><p>
+                    The following is an example of dumping patches for external submission:
+                    </p><pre class="literallayout">
+     # dump the last 4 commits
+     $ git format-patch --thread -n -o ~/rr/ HEAD^^^^
+     $ git send-email --compose --subject '[RFC 0/N] &lt;patch series summary&gt;' \
+      --to foo@yoctoproject.org --to bar@yoctoproject.org \
+      --cc list@yoctoproject.org  ~/rr
+     # the editor is invoked for the 0/N patch, and when complete the entire
+     # series is sent via email for review
+                    </pre><p>
+                </p></div><div class="section" title="3.4.2.4. Exporting Changes for Import into Another SCM"><div class="titlepage"><div><div><h4 class="title"><a id="export-for-import-into-other-scm"></a>3.4.2.4. Exporting Changes for Import into Another SCM</h4></div></div></div><p>
+                    When you want to export changes for import into another
+                    Source Code Manager (SCM), you can use any of the previously discussed
+                    techniques.
+                    However, if the patches are manually applied to a secondary tree and then
+                    that tree is checked into the SCM, you can lose change information such as
+                    commit logs.
+                    This process is not recommended.
+                </p><p>
+                    Many SCMs can directly import Git commits, or can translate Git patches so that
+                    information is not lost.
+                    Those facilities are SCM-dependent and you should use them whenever possible.
+                </p></div></div><div class="section" title="3.4.3. Working with the Yocto Project Kernel in Another SCM"><div class="titlepage"><div><div><h3 class="title"><a id="scm-working-with-the-yocto-project-kernel-in-another-scm"></a>3.4.3. Working with the Yocto Project Kernel in Another SCM</h3></div></div></div><p>
+                This section describes kernel development in an SCM other than Git,
+                which is not the same as exporting changes to another SCM described earlier.
+                For this scenario, you use the OpenEmbedded build system to
+                develop the kernel in a different SCM.
+                The following must be true for you to accomplish this:
+                </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The delivered Yocto Project kernel must be exported into the second
+                        SCM.</p></li><li class="listitem"><p>Development must be exported from that secondary SCM into a
+                        format that can be used by the OpenEmbedded build system.</p></li></ul></div><p>
+            </p><div class="section" title="3.4.3.1. Exporting the Delivered Kernel to the SCM"><div class="titlepage"><div><div><h4 class="title"><a id="exporting-delivered-kernel-to-scm"></a>3.4.3.1. Exporting the Delivered Kernel to the SCM</h4></div></div></div><p>
+                    Depending on the SCM, it might be possible to export the entire Yocto Project
+                    kernel Git repository, branches and all, into a new environment.
+                    This method is preferred because it has the most flexibility and potential to maintain
+                    the meta data associated with each commit.
+                </p><p>
+                    When a direct import mechanism is not available, it is still possible to
+                    export a branch (or series of branches) and check them into a new repository.
+                </p><p>
+                    The following commands illustrate some of the steps you could use to
+                    import the <code class="filename">yocto/standard/common-pc/base</code>
+                    kernel into a secondary SCM:
+                    </p><pre class="literallayout">
+     $ git checkout yocto/standard/common-pc/base
+     $ cd .. ; echo linux/.git &gt; .cvsignore
+     $ cvs import -m "initial import" linux MY_COMPANY start
+                    </pre><p>
+                </p><p>
+                    You could now relocate the CVS repository and use it in a centralized manner.
+                </p><p>
+                    The following commands illustrate how you can condense and merge two BSPs into a
+                    second SCM:
+                    </p><pre class="literallayout">
+     $ git checkout yocto/standard/common-pc/base
+     $ git merge yocto/standard/common-pc-64/base
+     # resolve any conflicts and commit them
+     $ cd .. ; echo linux/.git &gt; .cvsignore
+     $ cvs import -m "initial import" linux MY_COMPANY start
+                    </pre><p>
+                </p></div><div class="section" title="3.4.3.2. Importing Changes for the Build"><div class="titlepage"><div><div><h4 class="title"><a id="importing-changes-for-build"></a>3.4.3.2. Importing Changes for the Build</h4></div></div></div><p>
+                    Once development has reached a suitable point in the second development
+                    environment, you need to export the changes as patches.
+                    To export them, place the changes in a recipe and
+                    automatically apply them to the kernel during patching.
+                </p></div></div><div class="section" title="3.4.4. Creating a BSP Based on an Existing Similar BSP"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-creating"></a>3.4.4. Creating a BSP Based on an Existing Similar BSP</h3></div></div></div><p>
+                This section overviews the process of creating a BSP based on an
+                existing similar BSP.
+                The information is introductory in nature and does not provide step-by-step examples.
+                For detailed information on how to create a new BSP, see
+                the "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/bsp-guide/bsp-guide.html#creating-a-new-bsp-layer-using-the-yocto-bsp-script" target="_top">Creating a New BSP Layer Using the yocto-bsp Script</a>" section in the
+                Yocto Project Board Support Package (BSP) Developer's Guide, or see the
+                <a class="ulink" href="https://wiki.yoctoproject.org/wiki/Transcript:_creating_one_generic_Atom_BSP_from_another" target="_top">Transcript:_creating_one_generic_Atom_BSP_from_another</a>
+                wiki page.
+            </p><p>
+                The basic steps you need to follow are:
+                </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><span class="emphasis"><em>Make sure you have set up a local Source Directory:</em></span>
+                        You must create a local
+                        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>
+                        by either creating a Git repository (recommended) or
+                        extracting a Yocto Project release tarball.</p></li><li class="listitem"><p><span class="emphasis"><em>Choose an existing BSP available with the Yocto Project:</em></span>
+                        Try to map your board features as closely to the features of a BSP that is
+                        already supported and exists in the Yocto Project.
+                        Starting with something as close as possible to your board makes developing
+                        your BSP easier.
+                        You can find all the BSPs that are supported and ship with the Yocto Project
+                        on the Yocto Project's Download page at
+                        <a class="ulink" href="http://www.yoctoproject.org/download" target="_top">http://www.yoctoproject.org/download</a>.</p></li><li class="listitem"><p><span class="emphasis"><em>Be sure you have the Base BSP:</em></span>
+                        You need to either have a local Git repository of the base BSP set up or
+                        have downloaded and extracted the files from a release BSP tarball.
+                        Either method gives you access to the BSP source files.</p></li><li class="listitem"><p><span class="emphasis"><em>Make a copy of the existing BSP, thus isolating your new
+                        BSP work:</em></span>
+                        Copying the existing BSP file structure gives you a new area in which to work.</p></li><li class="listitem"><p><span class="emphasis"><em>Make configuration and recipe changes to your new BSP:</em></span>
+                        Configuration changes involve the files in the BSP's <code class="filename">conf</code>
+                        directory.
+                        Changes include creating a machine-specific configuration file and editing the
+                        <code class="filename">layer.conf</code> file.
+                        The configuration changes identify the kernel you will be using.
+                        Recipe changes include removing, modifying, or adding new recipe files that
+                        instruct the build process on what features to include in the image.</p></li><li class="listitem"><p><span class="emphasis"><em>Prepare for the build:</em></span>
+                        Before you actually initiate the build, you need to set up the build environment
+                        by sourcing the environment initialization script.
+                        After setting up the environment, you need to make some build configuration
+                        changes to the <code class="filename">local.conf</code> and <code class="filename">bblayers.conf</code>
+                        files.</p></li><li class="listitem"><p><span class="emphasis"><em>Build the image:</em></span>
+                        The OpenEmbedded build system uses BitBake to create the image.
+                        You need to decide on the type of image you are going to build (e.g. minimal, base,
+                        core, sato, and so forth) and then start the build using the <code class="filename">bitbake</code>
+                        command.</p></li></ol></div><p>
+            </p></div><div class="section" title="3.4.5. &quot;-dirty&quot; String"><div class="titlepage"><div><div><h3 class="title"><a id="tip-dirty-string"></a>3.4.5. "-dirty" String</h3></div></div></div><p>
+                If kernel images are being built with "-dirty" on the end of the version
+                string, this simply means that modifications in the source
+                directory have not been committed.
+                </p><pre class="literallayout">
+     $ git status
+                </pre><p>
+            </p><p>
+                You can use the above Git command to report modified, removed, or added files.
+                You should commit those changes to the tree regardless of whether they will be saved,
+                exported, or used.
+                Once you commit the changes you need to rebuild the kernel.
+            </p><p>
+                To brute force pickup and commit all such pending changes, enter the following:
+                </p><pre class="literallayout">
+     $ git add .
+     $ git commit -s -a -m "getting rid of -dirty"
+                </pre><p>
+            </p><p>
+                Next, rebuild the kernel.
+            </p></div></div></div>
+
+
+
+</div></body></html>

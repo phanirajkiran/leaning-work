@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title></title><link rel="stylesheet" href="qs-style.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div class="article"><div class="titlepage"><hr /></div><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0" width="540"><tr style="height: 90px"><td align="right"><img src="figures/yocto-project-transp.png" align="right" width="135" /></td></tr></table><div class="section" title="The Yocto Project Quick Start"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="fake-title"></a>The Yocto Project Quick Start</h2></div></div></div><p>Copyright © 2010-2013 Linux Foundation</p></div><div class="section" title="Welcome!"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="welcome"></a>Welcome!</h2></div></div></div><p>
+        Welcome to the Yocto Project!
+        The Yocto Project is an open-source collaboration project focused on embedded Linux
+        developers.
+        Among other things, the Yocto Project uses a build system based on the Poky project
+        to construct complete Linux images.
+        The Poky project, in turn, draws from and contributes back to the OpenEmbedded project.
+    </p><p>
+        If you don't have a system that runs Linux and you want to give the Yocto Project a test run,
+        you might consider using the Yocto Project Build Appliance.
+        The Build Appliance allows you to build and boot a custom embedded Linux image with the Yocto
+        Project using a non-Linux development system.
+        See the <a class="ulink" href="http://www.yoctoproject.org/documentation/build-appliance" target="_top">Yocto
+        Project Build Appliance</a> for more information.
+    </p><p>
+        On the other hand, if you know all about open-source development, Linux development environments,
+        Git source repositories and the like and you just want some quick information that lets you try out
+        the Yocto Project on your Linux system, skip right to the
+        "<a class="link" href="#super-user" title="Super User">Super User</a>" section at the end of this quick start.
+    </p><p>
+        For the rest of you, this short document will give you some basic information about the environment and
+        let you experience it in its simplest form.
+        After reading this document, you will have a basic understanding of what the Yocto Project is
+        and how to use some of its core components.
+        This document steps you through a simple example showing you how to build a small image
+        and run it using the Quick EMUlator (QEMU emulator).
+    </p><p>
+        For more detailed information on the Yocto Project, you should check out these resources:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>Website:</em></span> The <a class="ulink" href="http://www.yoctoproject.org" target="_top">Yocto Project Website</a>
+                provides the latest builds, breaking news, full development documentation, and a rich Yocto
+                Project Development Community into which you can tap.
+                </p></li><li class="listitem"><p><span class="emphasis"><em>FAQs:</em></span> Lists commonly asked Yocto Project questions and answers.
+                You can find two FAQs: <a class="ulink" href="https://wiki.yoctoproject.org/wiki/FAQ" target="_top">Yocto Project FAQ</a> on
+                a wiki, and the
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#faq" target="_top">FAQ</a>" chapter in
+                the Yocto Project Reference Manual.
+                </p></li><li class="listitem"><p><span class="emphasis"><em>Developer Screencast:</em></span> The
+                <a class="ulink" href="http://vimeo.com/36450321" target="_top">Getting Started with the Yocto Project - New
+                Developer Screencast Tutorial</a> provides a 30-minute video for the user
+                new to the Yocto Project but familiar with Linux build systems.</p></li></ul></div><p>
+    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+        Due to production processes, there could be differences between the Yocto Project
+        documentation bundled in a released tarball and the
+        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/yocto-project-qs/yocto-project-qs.html" target="_top">Yocto Project Quick Start</a> on
+        the <a class="ulink" href="http://www.yoctoproject.org" target="_top">Yocto Project</a> website.
+        For the latest version of this manual, see the manual on the website.
+    </div></div><div class="section" title="Introducing the Yocto Project Development Environment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="yp-intro"></a>Introducing the Yocto Project Development Environment</h2></div></div></div><p>
+        The Yocto Project through the OpenEmbedded build system provides an open source development
+        environment targeting the ARM, MIPS, PowerPC and x86 architectures for a variety of
+        platforms including x86-64 and emulated ones.
+        You can use components from the Yocto Project to design, develop, build, debug, simulate,
+        and test the complete software stack using Linux, the X Window System, GNOME Mobile-based
+        application frameworks, and Qt frameworks.
+    </p><div class="mediaobject" align="center"><table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0" width="100%"><tr><td align="center"><img src="figures/yocto-environment.png" align="middle" width="100%" /></td></tr></table><div class="caption"><p>The Yocto Project Development Environment</p></div></div><p>
+        Here are some highlights for the Yocto Project:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Provides a recent Linux kernel along with a set of system commands and libraries suitable for the embedded environment.</p></li><li class="listitem"><p>Makes available system components such as X11, GTK+, Qt, Clutter, and SDL
+            (among others) so you can create a rich user experience on devices
+            that have display hardware.
+            For devices that don't have a display or where you wish to use alternative UI
+            frameworks, these components need not be installed.</p></li><li class="listitem"><p>Creates a focused and stable core compatible with the OpenEmbedded
+            project with which you can easily and reliably build and develop.</p></li><li class="listitem"><p>Fully supports a wide range of hardware and device emulation through the QEMU
+            Emulator.</p></li></ul></div><p>
+        The Yocto Project can generate images for many kinds of devices.
+        However, the standard example machines target QEMU full-system emulation for x86, x86-64, ARM, MIPS,
+        and PPC-based architectures as well as specific hardware such as the
+        <span class="trademark">Intel</span>® Desktop Board DH55TC.
+        Because an image developed with the Yocto Project can boot inside a QEMU emulator, the
+        development environment works nicely as a test platform for developing embedded software.
+    </p><p>
+        Another important Yocto Project feature is the Sato reference User Interface.
+        This optional GNOME mobile-based UI, which is intended for devices with
+        restricted screen sizes, sits neatly on top of a device using the
+        GNOME Mobile Stack and provides a well-defined user experience.
+        Implemented in its own layer, it makes it clear to developers how they can implement
+        their own user interface on top of a Linux image created with the Yocto Project.
+    </p></div><div class="section" title="What You Need and How You Get It"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="yp-resources"></a>What You Need and How You Get It</h2></div></div></div><p>
+        You need these things to develop in the Yocto Project environment:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>A host system running a supported Linux distribution (i.e. recent releases of
+                Fedora, openSUSE, CentOS, and Ubuntu).
+                If the host system supports multiple cores and threads, you can configure the
+                Yocto Project build system to decrease the time needed to build images
+                significantly.
+            </p></li><li class="listitem"><p>The right packages.</p></li><li class="listitem"><p>A release of the Yocto Project.</p></li></ul></div><div class="section" title="The Linux Distribution"><div class="titlepage"><div><div><h3 class="title"><a id="the-linux-distro"></a>The Linux Distribution</h3></div></div></div><p>
+            The Yocto Project team is continually verifying more and more Linux
+            distributions with each release.
+            In general, if you have the current release minus one of the following
+            distributions you should have no problems.
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Ubuntu</p></li><li class="listitem"><p>Fedora</p></li><li class="listitem"><p>openSUSE</p></li><li class="listitem"><p>CentOS</p></li></ul></div><p>
+            For a more detailed list of distributions that support the Yocto Project,
+            see the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#detailed-supported-distros" target="_top">Supported Linux Distributions</a>" section
+            in the Yocto Project Reference Manual.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                For notes about using the Yocto Project on a RHEL 4-based host, see the
+                <a class="ulink" href="https://wiki.yoctoproject.org/wiki/BuildingOnRHEL4" target="_top">BuildingOnRHEL4</a>
+                wiki page.
+            </div><p>
+            </p><p>
+            The OpenEmbedded build system should be able to run on any modern distribution with Python 2.6 or 2.7.
+            Earlier releases of Python are known to not work and the system does not support Python 3 at this time.
+            This document assumes you are running one of the previously noted distributions on your Linux-based
+            host systems.
+        </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+            If you attempt to use a distribution not in the above list, you may or may not have success - you
+            are venturing into untested territory.
+            Refer to
+            <a class="ulink" href="http://www.openembedded.org/index.php?title=OEandYourDistro" target="_top">OE and Your Distro</a> and
+            <a class="ulink" href="http://www.openembedded.org/index.php?title=Required_software" target="_top">Required Software</a>
+            for information for other distributions used with the OpenEmbedded project, which might be
+            a starting point for exploration.
+            If you go down this path, you should expect problems.
+            When you do, please go to <a class="ulink" href="http://bugzilla.yoctoproject.org" target="_top">Yocto Project Bugzilla</a>
+            and submit a bug.
+            We are interested in hearing about your experience.
+        </p></div></div><div class="section" title="The Packages"><div class="titlepage"><div><div><h3 class="title"><a id="packages"></a>The Packages</h3></div></div></div><p>
+            Packages and package installation vary depending on your development system
+            and on your intent.
+            For example, if you want to build an image that can run
+            on QEMU in graphical mode (a minimal, basic build
+            requirement), then the number of packages is different than if you want to
+            build an image on a headless system or build out the Yocto Project
+            documentation set.
+            Collectively, the number of required packages is large
+            if you want to be able to cover all cases.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>In general, you need to have root access and then install the
+                required packages.
+                Thus, the commands in the following section may or may not work
+                depending on whether or not your Linux distribution has
+                <code class="filename">sudo</code> installed.</div><p>
+        </p><p>
+            The next few sections list, by supported Linux Distributions, the required
+            packages needed to build an image that runs on QEMU in graphical mode
+            (e.g. essential plus graphics support).
+        </p><p>
+            For lists of required packages for other scenarios, see the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#required-packages-for-the-host-development-system" target="_top">Required Packages for the Host Development System</a>"
+            section in the Yocto Project Reference Manual.
+        </p><div class="section" title="Ubuntu"><div class="titlepage"><div><div><h4 class="title"><a id="ubuntu"></a>Ubuntu</h4></div></div></div><p>
+                The essential packages you need for a supported Ubuntu distribution
+                are shown in the following command:
+                </p><pre class="literallayout">
+     $ sudo apt-get install gawk wget git-core diffstat unzip texinfo \
+     build-essential chrpath libsdl1.2-dev xterm
+                </pre><p>
+            </p></div><div class="section" title="Fedora"><div class="titlepage"><div><div><h4 class="title"><a id="fedora"></a>Fedora</h4></div></div></div><p>
+                The essential packages you need for a supported Fedora distribution
+                are shown in the following command:
+                </p><pre class="literallayout">
+     $ sudo yum install gawk make wget tar bzip2 gzip python unzip perl patch \
+     diffutils diffstat git cpp gcc gcc-c++ eglibc-devel texinfo chrpath \
+     ccache SDL-devel xterm
+                </pre><p>
+            </p></div><div class="section" title="openSUSE"><div class="titlepage"><div><div><h4 class="title"><a id="opensuse"></a>openSUSE</h4></div></div></div><p>
+                The essential packages you need for a supported openSUSE
+                distribution are shown in the following command:
+                </p><pre class="literallayout">
+     $ sudo zypper install python gcc gcc-c++ git chrpath make wget python-xml \
+     diffstat texinfo python-curses libSDL-devel xterm
+                </pre><p>
+            </p></div><div class="section" title="CentOS"><div class="titlepage"><div><div><h4 class="title"><a id="centos"></a>CentOS</h4></div></div></div><p>
+                The essential packages you need for a supported CentOS
+                distribution are shown in the following command:
+                </p><pre class="literallayout">
+     $ sudo yum -y install gawk make wget tar bzip2 gzip python unzip perl patch \
+     diffutils diffstat git cpp gcc gcc-c++ glibc-devel texinfo chrpath SDL-devel xterm
+                </pre><p>
+                </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>Depending on the CentOS version you are using, other requirements
+                    and dependencies might exist.
+                    For details, you should look at the CentOS sections on the
+                    <a class="ulink" href="https://wiki.yoctoproject.org/wiki/Poky/GettingStarted/Dependencies" target="_top">Poky/GettingStarted/Dependencies</a>
+                    wiki page.</div><p>
+            </p></div></div><div class="section" title="Yocto Project Release"><div class="titlepage"><div><div><h3 class="title"><a id="releases"></a>Yocto Project Release</h3></div></div></div><p>
+            You can download the latest Yocto Project release by going to the
+            <a class="ulink" href="http://www.yoctoproject.org/download" target="_top">Yocto Project Download page</a>.
+            Just go to the page and click the "Yocto Downloads" link found in the "Download"
+            navigation pane to the right to view all available Yocto Project releases.
+            Then, click the "Yocto Release" link for the release you want from the list to
+            begin the download.
+            Nightly and developmental builds are also maintained at
+            <a class="ulink" href="http://autobuilder.yoctoproject.org/nightly/" target="_top">http://autobuilder.yoctoproject.org/nightly/</a>.
+            However, for this document a released version of Yocto Project is used.
+        </p><p>
+            You can also get the Yocto Project files you need by setting up (cloning in Git terms)
+            a local copy of the <code class="filename">poky</code> Git repository on your host development
+            system.
+            Doing so allows you to contribute back to the Yocto Project project.
+            For information on how to get set up using this method, see the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#local-yp-release" target="_top">Yocto
+            Project Release</a>" item in the Yocto Project Development Manual.
+        </p></div></div><div class="section" title="A Quick Test Run"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="test-run"></a>A Quick Test Run</h2></div></div></div><p>
+        Now that you have your system requirements in order, you can give the Yocto Project a try.
+        This section presents some steps that let you do the following:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Build an image and run it in the QEMU emulator</p></li><li class="listitem"><p>Use a pre-built image and run it in the QEMU emulator</p></li></ul></div><div class="section" title="Building an Image"><div class="titlepage"><div><div><h3 class="title"><a id="building-image"></a>Building an Image</h3></div></div></div><p>
+            In the development environment you will need to build an image whenever you change hardware
+            support, add or change system libraries, or add or change services that have dependencies.
+        </p><div class="mediaobject" align="center"><img src="figures/building-an-image.png" align="middle" /><div class="caption"><p>Building an Image</p></div></div><p>
+             Use the following commands to build your image.
+             The OpenEmbedded build process creates an entire Linux distribution, including the toolchain,
+             from source.
+         </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+             The build process using Sato currently consumes about 50GB of disk space.
+             To allow for variations in the build process and for future package expansion, we
+             recommend having at least 100GB of free disk space.
+         </p></div><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+             By default, the build process searches for source code using a pre-determined order
+             through a set of locations.
+             If you encounter problems with the build process finding and downloading source code, see the
+             "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#how-does-the-yocto-project-obtain-source-code-and-will-it-work-behind-my-firewall-or-proxy-server" target="_top">How does the OpenEmbedded build system obtain source code and will it work behind my
+             firewall or proxy server?</a>" in the Yocto Project Reference Manual.
+         </p></div><p>
+             </p><pre class="literallayout">
+     $ wget http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/poky-tbd-8.0.tar.bz2
+     $ tar xjf poky-tbd-8.0.tar.bz2
+     $ cd poky-tbd-8.0
+     $ source oe-init-build-env
+             </pre><p>
+         </p><div class="tip" title="Tip" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Tip</h3><p>
+             To help conserve disk space during builds, you can add the following statement
+             to your project's configuration file, which for this example
+             is <code class="filename">poky-tbd-8.0-build/conf/local.conf</code>.
+             Adding this statement deletes the work directory used for building a package
+             once the package is built.
+             </p><pre class="literallayout">
+     INHERIT += "rm_work"
+             </pre><p>
+         </p></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In the previous example, the first command retrieves the Yocto Project
+                 release tarball from the source repositories using the
+                 <code class="filename">wget</code> command.
+                 Alternatively, you can go to the
+                 <a class="ulink" href="http://www.yoctoproject.org/download" target="_top">Yocto Project website's Downloads page</a>
+                 to retrieve the tarball.</p></li><li class="listitem"><p>The second command extracts the files from the tarball and places
+                 them into a directory named <code class="filename">poky-tbd-8.0</code> in the current
+                 directory.</p></li><li class="listitem"><p>The third and fourth commands change the working directory to the
+                 <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>
+                 and run the Yocto Project
+                 <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#structure-core-script" target="_top">environment setup script</a>.
+                 Running this script defines OpenEmbedded build environment settings needed to
+                 complete the build.
+                 The script also creates the
+                 <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>,
+                 which is <code class="filename">build</code> in this case and is located in the
+                 Source Directory.
+                 After the script runs, your current working directory is set
+                 to the Build Directory.
+                 Later, when the build completes, the Build Directory contains all the files
+                 created during the build.
+                 </p></li></ul></div><p>
+             Take some time to examine your <code class="filename">local.conf</code> file
+             in your project's configuration directory, which is found in the Build Directory.
+             The defaults in that file should work fine.
+             However, there are some variables of interest at which you might look.
+         </p><p>
+             By default, the target architecture for the build is <code class="filename">qemux86</code>,
+             which produces an image that can be used in the QEMU emulator and is targeted at an
+             <span class="trademark">Intel</span>® 32-bit based architecture.
+             To change this default, edit the value of the <code class="filename">MACHINE</code> variable
+             in the configuration file before launching the build.
+         </p><p>
+             Another couple of variables of interest are the
+             <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-BB_NUMBER_THREADS" target="_top"><code class="filename">BB_NUMBER_THREADS</code></a> and the
+             <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-PARALLEL_MAKE" target="_top"><code class="filename">PARALLEL_MAKE</code></a> variables.
+             By default, these variables are commented out.
+             However, if you have a multi-core CPU you might want to uncomment
+             the lines and set both variables equal to twice the number of your
+             host's processor cores.
+             Setting these variables can significantly shorten your build time.
+         </p><p>
+            Another consideration before you build is the package manager used when creating
+            the image.
+            By default, the OpenEmbedded build system uses the RPM package manager.
+            You can control this configuration by using the
+            <code class="filename"><a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-PACKAGE_CLASSES" target="_top"><code class="filename">PACKAGE_CLASSES</code></a></code> variable.
+             For additional package manager selection information, see
+             "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#ref-classes-package" target="_top">Packaging - <code class="filename">package*.bbclass</code></a>"
+             in the Yocto Project Reference Manual.
+        </p><p>
+             Continue with the following command to build an OS image for the target, which is
+             <code class="filename">core-image-sato</code> in this example.
+             For information on the <code class="filename">-k</code> option use the
+             <code class="filename">bitbake --help</code> command or see the
+             "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#usingpoky-components-bitbake" target="_top">BitBake</a>" section in
+             the Yocto Project Reference Manual.
+             </p><pre class="literallayout">
+     $ bitbake -k core-image-sato
+             </pre><p>
+             </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                 BitBake requires Python 2.6 or 2.7.  For more information on this requirement,
+                 see the
+                 <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#faq" target="_top">FAQ</a> in the Yocto Project Reference
+                 Manual.
+             </p></div><p>
+             The final command runs the image:
+             </p><pre class="literallayout">
+     $ runqemu qemux86
+             </pre><p>
+             </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                 Depending on the number of processors and cores, the amount or RAM, the speed of your
+                 Internet connection and other factors, the build process could take several hours the first
+                 time you run it.
+                 Subsequent builds run much faster since parts of the build are cached.
+             </p></div><p>
+         </p></div><div class="section" title="Using Pre-Built Binaries and QEMU"><div class="titlepage"><div><div><h3 class="title"><a id="using-pre-built"></a>Using Pre-Built Binaries and QEMU</h3></div></div></div><p>
+            If hardware, libraries and services are stable, you can get started by using a pre-built binary
+            of the filesystem image, kernel, and toolchain and run it using the QEMU emulator.
+            This scenario is useful for developing application software.
+        </p><div class="mediaobject" align="center"><img src="figures/using-a-pre-built-image.png" align="middle" /><div class="caption"><p>Using a Pre-Built Image</p></div></div><p>
+            For this scenario, you need to do several things:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Install the appropriate stand-alone toolchain tarball.</p></li><li class="listitem"><p>Download the pre-built image that will boot with QEMU.
+                You need to be sure to get the QEMU image that matches your target machine’s
+                architecture (e.g. x86, ARM, etc.).</p></li><li class="listitem"><p>Download the filesystem image for your target machine's architecture.
+                </p></li><li class="listitem"><p>Set up the environment to emulate the hardware and then start the QEMU emulator.
+                </p></li></ul></div><div class="section" title="Installing the Toolchain"><div class="titlepage"><div><div><h4 class="title"><a id="installing-the-toolchain"></a>Installing the Toolchain</h4></div></div></div><p>
+                You can download a tarball installer, which includes the pre-built toolchain, the
+                <code class="filename">runqemu</code>
+                script, and support files from the appropriate directory under
+                <a class="ulink" href="http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/toolchain/" target="_top">http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/toolchain/</a>.
+                Toolchains are available for 32-bit and 64-bit development systems from the
+                <code class="filename">i686</code> and <code class="filename">x86-64</code> directories, respectively.
+                Each type of development system supports five target architectures.
+                The names of the tarball installer scripts are such that a string representing the
+                host system appears first in the filename and then is immediately followed by a
+                string representing the target architecture.
+            </p><pre class="literallayout">
+     poky-eglibc-&lt;<span class="emphasis"><em>host_system</em></span>&gt;-&lt;<span class="emphasis"><em>arch</em></span>&gt;-toolchain-gmae-&lt;<span class="emphasis"><em>release</em></span>&gt;.sh
+
+     Where:
+         &lt;<span class="emphasis"><em>host_system</em></span>&gt; is a string representing your development system:
+                i686 or x86_64.
+
+         &lt;<span class="emphasis"><em>arch</em></span>&gt; is a string representing the target architecture:
+                i586, x86_64, powerpc, mips, or arm.
+
+         &lt;<span class="emphasis"><em>release</em></span>&gt; is the version of Yocto Project.
+            </pre><p>
+                For example, the following toolchain installer is for a 64-bit development
+                host system and a 32-bit target architecture:
+            </p><pre class="literallayout">
+     poky-eglibc-x86_64-i586-toolchain-gmae-1.4.sh
+            </pre><p>
+                Toolchains are self-contained and by default are installed into <code class="filename">/opt/poky</code>.
+                However, when you run the toolchain installer, you can choose an installation directory.
+            </p><p>
+                The following command shows how to run the installer given a toolchain tarball
+                for a 64-bit development host system and a 32-bit target architecture.
+                You must change the permissions on the toolchain
+                installer script so that it is executable.
+            </p><p>
+                The example assumes the toolchain installer is located in <code class="filename">~/Downloads/</code>.
+                </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                    If you do not have write permissions for the directory into which you are installing
+                    the toolchain, the toolchain installer notifies you and exits.
+                    Be sure you have write permissions in the directory and run the installer again.
+                </div><p>
+            </p><p>
+                </p><pre class="literallayout">
+     $ ~/Downloads/poky-eglibc-x86_64-i586-toolchain-gmae-1.4.sh
+                </pre><p>
+            </p><p>
+                For more information on how to install tarballs, see the
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/adt-manual/adt-manual.html#using-an-existing-toolchain-tarball" target="_top">Using a Cross-Toolchain Tarball</a>" and
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/adt-manual/adt-manual.html#using-the-toolchain-from-within-the-build-tree" target="_top">Using BitBake and the Build Directory</a>" sections in the Yocto Project Application Developer's Guide.
+            </p></div><div class="section" title="Downloading the Pre-Built Linux Kernel"><div class="titlepage"><div><div><h4 class="title"><a id="downloading-the-pre-built-linux-kernel"></a>Downloading the Pre-Built Linux Kernel</h4></div></div></div><p>
+                You can download the pre-built Linux kernel suitable for running in the QEMU emulator from
+                <a class="ulink" href="http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/machines/qemu" target="_top">http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/machines/qemu</a>.
+                Be sure to use the kernel that matches the architecture you want to simulate.
+                Download areas exist for the five supported machine architectures:
+                <code class="filename">qemuarm</code>, <code class="filename">qemumips</code>, <code class="filename">qemuppc</code>,
+                <code class="filename">qemux86</code>, and <code class="filename">qemux86-64</code>.
+            </p><p>
+                Most kernel files have one of the following forms:
+                </p><pre class="literallayout">
+     *zImage-qemu&lt;<span class="emphasis"><em>arch</em></span>&gt;.bin
+     vmlinux-qemu&lt;<span class="emphasis"><em>arch</em></span>&gt;.bin
+
+     Where:
+         &lt;<span class="emphasis"><em>arch</em></span>&gt; is a string representing the target architecture:
+                x86, x86-64, ppc, mips, or arm.
+                </pre><p>
+            </p><p>
+                You can learn more about downloading a Yocto Project kernel in the
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#local-kernel-files" target="_top">Yocto Project Kernel</a>"
+                bulleted item in the Yocto Project Development Manual.
+            </p></div><div class="section" title="Downloading the Filesystem"><div class="titlepage"><div><div><h4 class="title"><a id="downloading-the-filesystem"></a>Downloading the Filesystem</h4></div></div></div><p>
+                You can also download the filesystem image suitable for your target architecture from
+                <a class="ulink" href="http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/machines/qemu" target="_top">http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/machines/qemu</a>.
+                Again, be sure to use the filesystem that matches the architecture you want
+                to simulate.
+            </p><p>
+                The filesystem image has two tarball forms: <code class="filename">ext3</code> and
+                <code class="filename">tar</code>.
+                You must use the <code class="filename">ext3</code> form when booting an image using the
+                QEMU emulator.
+                The <code class="filename">tar</code> form can be flattened out in your host development system
+                and used for build purposes with the Yocto Project.
+                </p><pre class="literallayout">
+     core-image-&lt;<span class="emphasis"><em>profile</em></span>&gt;-qemu&lt;<span class="emphasis"><em>arch</em></span>&gt;.ext3
+     core-image-&lt;<span class="emphasis"><em>profile</em></span>&gt;-qemu&lt;<span class="emphasis"><em>arch</em></span>&gt;.tar.bz2
+
+     Where:
+         &lt;<span class="emphasis"><em>profile</em></span>&gt; is the filesystem image's profile:
+                   lsb, lsb-dev, lsb-sdk, lsb-qt3, minimal, minimal-dev, sato, sato-dev, or sato-sdk.
+                   For information on these types of image profiles, see the
+                   "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#ref-images" target="_top">Images</a>" chapter
+                   in the Yocto Project Reference Manual.
+
+         &lt;<span class="emphasis"><em>arch</em></span>&gt; is a string representing the target architecture:
+                x86, x86-64, ppc, mips, or arm.
+                </pre><p>
+            </p></div><div class="section" title="Setting Up the Environment and Starting the QEMU Emulator"><div class="titlepage"><div><div><h4 class="title"><a id="setting-up-the-environment-and-starting-the-qemu-emulator"></a>Setting Up the Environment and Starting the QEMU Emulator</h4></div></div></div><p>
+                Before you start the QEMU emulator, you need to set up the emulation environment.
+                The following command form sets up the emulation environment.
+                </p><pre class="literallayout">
+     $ source /opt/poky/1.4/environment-setup-&lt;<span class="emphasis"><em>arch</em></span>&gt;-poky-linux-&lt;<span class="emphasis"><em>if</em></span>&gt;
+
+     Where:
+         &lt;<span class="emphasis"><em>arch</em></span>&gt; is a string representing the target architecture:
+                i586, x86_64, ppc603e, mips, or armv5te.
+
+         &lt;<span class="emphasis"><em>if</em></span>&gt; is a string representing an embedded application binary interface.
+              Not all setup scripts include this string.
+                </pre><p>
+            </p><p>
+                Finally, this command form invokes the QEMU emulator
+                </p><pre class="literallayout">
+     $ runqemu &lt;<span class="emphasis"><em>qemuarch</em></span>&gt; &lt;<span class="emphasis"><em>kernel-image</em></span>&gt; &lt;<span class="emphasis"><em>filesystem-image</em></span>&gt;
+
+     Where:
+         &lt;<span class="emphasis"><em>qemuarch</em></span>&gt; is a string representing the target architecture: qemux86, qemux86-64,
+                    qemuppc, qemumips, or qemuarm.
+
+         &lt;<span class="emphasis"><em>kernel-image</em></span>&gt; is the architecture-specific kernel image.
+
+         &lt;<span class="emphasis"><em>filesystem-image</em></span>&gt; is the .ext3 filesystem image.
+
+                </pre><p>
+            </p><p>
+                Continuing with the example, the following two commands setup the emulation
+                environment and launch QEMU.
+                This example assumes the root filesystem (<code class="filename">.ext3</code> file) and
+                the pre-built kernel image file both reside in your home directory.
+                The kernel and filesystem are for a 32-bit target architecture.
+                </p><pre class="literallayout">
+     $ cd $HOME
+     $ source /opt/poky/1.4/environment-setup-i586-poky-linux
+     $ runqemu qemux86 bzImage-qemux86.bin \
+     core-image-sato-qemux86.ext3
+                </pre><p>
+            </p><p>
+                The environment in which QEMU launches varies depending on the filesystem image and on the
+                target architecture.
+                For example, if you source the environment for the ARM target
+                architecture and then boot the minimal QEMU image, the emulator comes up in a new
+                shell in command-line mode.
+                However, if you boot the SDK image, QEMU comes up with a GUI.
+                </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>Booting the PPC image results in QEMU launching in the same shell in
+                command-line mode.</div><p>
+            </p></div></div></div><div class="section" title="Super User"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="super-user"></a>Super User
+</h2></div></div></div><p>
+        This section
+        <sup>[<a id="idp6497832" href="#ftn.idp6497832" class="footnote">1</a>]</sup>
+        gives you a minimal description of how to use the Yocto Project to build images
+        for a BeagleBoard xM starting from scratch.
+        The steps were performed on a 64-bit Ubuntu 10.04 system.
+    </p><div class="section" title="Getting the Yocto Project"><div class="titlepage"><div><div><h3 class="title"><a id="getting-yocto"></a>Getting the Yocto Project</h3></div></div></div><p>
+            Set up your <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>
+            one of two ways:
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>Tarball:</em></span>
+                    Use if you want the latest stable release:
+                    </p><pre class="literallayout">
+     $ wget http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/poky-tbd-8.0.tar.bz2
+     $ tar xvjf poky-tbd-8.0.tar.bz2
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Git Repository:</em></span>
+                    Use if you want to work with cutting edge development content:
+                    </p><pre class="literallayout">
+     $ git clone git://git.yoctoproject.org/poky
+                    </pre></li></ul></div><p>
+            The remainder of the section assumes the Git repository method.
+        </p></div><div class="section" title="Setting Up Your Host"><div class="titlepage"><div><div><h3 class="title"><a id="setting-up-your-host"></a>Setting Up Your Host</h3></div></div></div><p>
+            You need some packages for everything to work.
+            Rather than duplicate them here, look at the "<a class="link" href="#packages" title="The Packages">The Packages</a>"
+            section earlier in this quick start.
+        </p></div><div class="section" title="Initializing the Build Environment"><div class="titlepage"><div><div><h3 class="title"><a id="initializing-the-build-environment"></a>Initializing the Build Environment</h3></div></div></div><p>
+            From the parent directory your
+            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>,
+            initialize your environment and provide a meaningful
+            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>
+            name:
+            </p><pre class="literallayout">
+     $ source poky/oe-init-build-env mybuilds
+            </pre><p>
+            At this point, the <code class="filename">mybuilds</code> directory has been created for you
+            and it is now your current working directory.
+            If you don't provide your own directory name it defaults to <code class="filename">build</code>,
+            which is inside the Source Directory.
+        </p></div><div class="section" title="Configuring the local.conf File"><div class="titlepage"><div><div><h3 class="title"><a id="configuring-the-local.conf-file"></a>Configuring the local.conf File</h3></div></div></div><p>
+            Initializing the build environment creates a <code class="filename">conf/local.conf</code> configuration file
+            in the Build Directory.
+            You need to manually edit this file to specify the machine you are building and to optimize
+            your build time.
+            Here are the minimal changes to make:
+            </p><pre class="literallayout">
+     BB_NUMBER_THREADS = "8"
+     PARALLEL_MAKE = "-j 8"
+     MACHINE ?= "beagleboard"
+            </pre><p>
+            Briefly, set <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-BB_NUMBER_THREADS" target="_top"><code class="filename">BB_NUMBER_THREADS</code></a>
+            and <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-PARALLEL_MAKE" target="_top"><code class="filename">PARALLEL_MAKE</code></a> to
+            twice your host processor's number of cores.
+        </p><p>
+            A good deal that goes into a Yocto Project build is simply downloading all of the source
+            tarballs.
+            Maybe you have been working with another build system (OpenEmbedded or Angstrom) for which
+            you've built up a sizable directory of source tarballs.
+            Or perhaps someone else has such a directory for which you have read access.
+            If so, you can save time by adding the <code class="filename">PREMIRRORS</code>
+            statement to your configuration file so that the build process checks
+            local directories first for existing tarballs before checking the
+            Internet.
+            Here is an efficient way to set it up in your <code class="filename">local.conf</code>
+            file:
+            </p><pre class="literallayout">
+     SOURCE_MIRROR_URL ?= "file:///home/you/your-download-dir/"
+     INHERIT += "own-mirrors"
+     BB_GENERATE_MIRROR_TARBALLS = "1"
+     # BB_NO_NETWORK = "1"
+            </pre><p>
+        </p></div><div class="section" title="Building the Image"><div class="titlepage"><div><div><h3 class="title"><a id="building-the-image"></a>Building the Image</h3></div></div></div><p>
+            At this point, you need to select an image to build for the BeagleBoard xM.
+            If this is your first build using the Yocto Project, you should try the smallest and simplest
+            image:
+            </p><pre class="literallayout">
+     $ bitbake core-image-minimal
+            </pre><p>
+            Now you just wait for the build to finish.
+        </p><p>
+            Here are some variations on the build process that could be helpful:
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Fetch all the necessary sources without starting the build:
+                    </p><pre class="literallayout">
+     $ bitbake -c fetchall core-image-minimal
+                    </pre><p>
+                    This variation guarantees that you have all the sources for that BitBake target
+                    should you disconnect from the net and want to do the build later offline.
+                    </p></li><li class="listitem"><p>Specify to continue the build even if BitBake encounters an error.
+                    By default, BitBake aborts the build when it encounters an error.
+                    This command keeps a faulty build going:
+                    </p><pre class="literallayout">
+     $ bitbake -k core-image-minimal
+                    </pre></li></ul></div><p>
+        </p><p>
+            Once you have your image, you can take steps to load and boot it on the target hardware.
+        </p></div></div><div class="footnotes"><br /><hr width="100" align="left" /><div class="footnote"><p><sup>[<a id="ftn.idp6497832" href="#idp6497832" class="para">1</a>] </sup>
+                Kudos and thanks to Robert P. J. Day of
+                <a class="ulink" href="http://www.crashcourse.ca" target="_top">CrashCourse</a> for providing the basis
+                for this "expert" section with information from one of his
+                <a class="ulink" href="http://www.crashcourse.ca/wiki/index.php/Yocto_Project_Quick_Start" target="_top">wiki</a>
+                pages.
+            </p></div></div></div></body></html>

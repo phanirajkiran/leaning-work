@@ -1,0 +1,1181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title></title><link rel="stylesheet" href="bsp-style.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div xml:lang="en" class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="bsp-guide"></a></h1></div><div><div class="authorgroup">
+            <div class="author"><h3 class="author"><span class="firstname">Tom</span> <span class="surname">Zanussi</span></h3><div class="affiliation">
+                    <span class="orgname">Intel Corporation<br /></span>
+                </div><code class="email">&lt;<a class="email" href="mailto:tom.zanussi@intel.com">tom.zanussi@intel.com</a>&gt;</code></div>
+            <div class="author"><h3 class="author"><span class="firstname">Richard</span> <span class="surname">Purdie</span></h3><div class="affiliation">
+                    <span class="orgname">Linux Foundation<br /></span>
+                </div><code class="email">&lt;<a class="email" href="mailto:richard.purdie@linuxfoundation.org">richard.purdie@linuxfoundation.org</a>&gt;</code></div>
+        </div></div><div><p class="copyright">Copyright © 2010-2013 Linux Foundation</p></div><div><div class="legalnotice" title="Legal Notice"><a id="idp19800"></a>
+      <p>
+        Permission is granted to copy, distribute and/or modify this document under
+        the terms of the <a class="ulink" href="http://creativecommons.org/licenses/by-nc-sa/2.0/uk/" target="_top">Creative Commons Attribution-Non-Commercial-Share Alike 2.0 UK: England &amp; Wales</a> as published by Creative Commons.
+      </p>
+      <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+          Due to production processes, there could be differences between the Yocto Project
+          documentation bundled in the release tarball and the
+          <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/bsp-guide/bsp-guide.html" target="_top">Yocto Project Board Support Package (BSP) Developer's Guide</a> on
+          the <a class="ulink" href="http://www.yoctoproject.org" target="_top">Yocto Project</a> website.
+          For the latest version of this manual, see the manual on the website.
+      </div>
+    </div></div><div><div class="revhistory"><table border="1" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr>
+            <tr><td align="left">Revision 0.9</td><td align="left">24 November 2010</td></tr><tr><td align="left" colspan="2">The initial document draft released with the Yocto Project 0.9 Release.</td></tr>
+            <tr><td align="left">Revision 1.0</td><td align="left">6 April 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.0 Release.</td></tr>
+            <tr><td align="left">Revision 1.0.1</td><td align="left">23 May 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.0.1 Release.</td></tr>
+            <tr><td align="left">Revision 1.1</td><td align="left">6 October 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.1 Release.</td></tr>
+            <tr><td align="left">Revision 1.2</td><td align="left">April 2012</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.2 Release.</td></tr>
+            <tr><td align="left">Revision 1.3</td><td align="left">October 2012</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.3 Release.</td></tr>
+            <tr><td align="left">Revision 1.4</td><td align="left">Sometime in 2013</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.4 Release.</td></tr>
+        </table></div></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#bsp">1. Board Support Packages (BSP) - Developer's Guide</a></span></dt><dd><dl><dt><span class="section"><a href="#bsp-layers">1.1. BSP Layers</a></span></dt><dt><span class="section"><a href="#bsp-filelayout">1.2. Example Filesystem Layout</a></span></dt><dd><dl><dt><span class="section"><a href="#bsp-filelayout-license">1.2.1. License Files</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-readme">1.2.2. README File</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-readme-sources">1.2.3. README.sources File</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-binary">1.2.4. Pre-built User Binaries</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-layer">1.2.5. Layer Configuration File</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-machine">1.2.6. Hardware Configuration Options</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-misc-recipes">1.2.7. Miscellaneous Recipe Files</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-recipes-graphics">1.2.8. Display Support Files</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-kernel">1.2.9. Linux Kernel Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="#requirements-and-recommendations-for-released-bsps">1.3. Requirements and Recommendations for Released BSPs</a></span></dt><dd><dl><dt><span class="section"><a href="#released-bsp-requirements">1.3.1. Released BSP Requirements</a></span></dt><dt><span class="section"><a href="#released-bsp-recommendations">1.3.2. Released BSP Recommendations</a></span></dt></dl></dd><dt><span class="section"><a href="#customizing-a-recipe-for-a-bsp">1.4. Customizing a Recipe for a BSP</a></span></dt><dt><span class="section"><a href="#bsp-licensing-considerations">1.5. BSP Licensing Considerations</a></span></dt><dt><span class="section"><a href="#using-the-yocto-projects-bsp-tools">1.6. Using the Yocto Project's BSP Tools</a></span></dt><dd><dl><dt><span class="section"><a href="#common-features">1.6.1. Common Features</a></span></dt><dt><span class="section"><a href="#creating-a-new-bsp-layer-using-the-yocto-bsp-script">1.6.2. Creating a new BSP Layer Using the yocto-bsp Script</a></span></dt><dt><span class="section"><a href="#managing-kernel-patches-and-config-items-with-yocto-kernel">1.6.3. Managing Kernel Patches and Config Items with yocto-kernel</a></span></dt></dl></dd></dl></dd></dl></div>
+    
+
+    <div class="chapter" title="Chapter 1. Board Support Packages (BSP) - Developer's Guide"><div class="titlepage"><div><div><h2 class="title"><a id="bsp"></a>Chapter 1. Board Support Packages (BSP) - Developer's Guide</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#bsp-layers">1.1. BSP Layers</a></span></dt><dt><span class="section"><a href="#bsp-filelayout">1.2. Example Filesystem Layout</a></span></dt><dd><dl><dt><span class="section"><a href="#bsp-filelayout-license">1.2.1. License Files</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-readme">1.2.2. README File</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-readme-sources">1.2.3. README.sources File</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-binary">1.2.4. Pre-built User Binaries</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-layer">1.2.5. Layer Configuration File</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-machine">1.2.6. Hardware Configuration Options</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-misc-recipes">1.2.7. Miscellaneous Recipe Files</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-recipes-graphics">1.2.8. Display Support Files</a></span></dt><dt><span class="section"><a href="#bsp-filelayout-kernel">1.2.9. Linux Kernel Configuration</a></span></dt></dl></dd><dt><span class="section"><a href="#requirements-and-recommendations-for-released-bsps">1.3. Requirements and Recommendations for Released BSPs</a></span></dt><dd><dl><dt><span class="section"><a href="#released-bsp-requirements">1.3.1. Released BSP Requirements</a></span></dt><dt><span class="section"><a href="#released-bsp-recommendations">1.3.2. Released BSP Recommendations</a></span></dt></dl></dd><dt><span class="section"><a href="#customizing-a-recipe-for-a-bsp">1.4. Customizing a Recipe for a BSP</a></span></dt><dt><span class="section"><a href="#bsp-licensing-considerations">1.5. BSP Licensing Considerations</a></span></dt><dt><span class="section"><a href="#using-the-yocto-projects-bsp-tools">1.6. Using the Yocto Project's BSP Tools</a></span></dt><dd><dl><dt><span class="section"><a href="#common-features">1.6.1. Common Features</a></span></dt><dt><span class="section"><a href="#creating-a-new-bsp-layer-using-the-yocto-bsp-script">1.6.2. Creating a new BSP Layer Using the yocto-bsp Script</a></span></dt><dt><span class="section"><a href="#managing-kernel-patches-and-config-items-with-yocto-kernel">1.6.3. Managing Kernel Patches and Config Items with yocto-kernel</a></span></dt></dl></dd></dl></div><p>
+            A Board Support Package (BSP) is a collection of information that
+            defines how to support a particular hardware device, set of devices, or
+            hardware platform.
+            The BSP includes information about the hardware features
+            present on the device and kernel configuration information along with any
+            additional hardware drivers required.
+            The BSP also lists any additional software
+            components required in addition to a generic Linux software stack for both
+            essential and optional platform features.
+        </p><p>
+            This guide presents information about BSP Layers, defines a structure for components
+            so that BSPs follow a commonly understood layout, discusses how to customize
+            a recipe for a BSP, addresses BSP licensing, and provides information that
+            shows you how to create and manage a
+            <a class="link" href="#bsp-layers" title="1.1. BSP Layers">BSP Layer</a> using two Yocto Project
+            <a class="link" href="#using-the-yocto-projects-bsp-tools" title="1.6. Using the Yocto Project's BSP Tools">BSP Tools</a>.
+        </p><div class="section" title="1.1. BSP Layers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="bsp-layers"></a>1.1. BSP Layers</h2></div></div></div><p>
+                The BSP consists of a file structure inside a base directory.
+                Collectively, you can think of the base directory and the file structure
+                as a BSP Layer.
+                BSP Layers use the following naming convention:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;
+                </pre><p>
+                "bsp_name" is a placeholder for the machine or platform name.
+            </p><p>
+                The layer's base directory (<code class="filename">meta-&lt;bsp_name&gt;</code>) is the root
+                of the BSP Layer.
+                This root is what you add to the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-BBLAYERS" target="_top"><code class="filename">BBLAYERS</code></a>
+                variable in the <code class="filename">conf/bblayers.conf</code> file found in the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>.
+                Adding the root allows the OpenEmbedded build system to recognize the BSP
+                definition and from it build an image.
+                Here is an example:
+                </p><pre class="literallayout">
+     BBLAYERS = ?" \
+       /usr/local/src/yocto/meta \
+       /usr/local/src/yocto/meta-yocto \
+       /usr/local/src/yocto/meta-yocto-bsp \
+       /usr/local/src/yocto/meta-mylayer \
+       "
+
+     BBLAYERS_NON_REMOVABLE ?= " \
+       /usr/local/src/yocto/meta \
+       /usr/local/src/yocto/meta-yocto \
+       "
+                </pre><p>
+            </p><p>
+                Some BSPs require additional layers on
+                top of the BSP's root layer in order to be functional.
+                For these cases, you also need to add those layers to the
+                <code class="filename">BBLAYERS</code> variable in order to build the BSP.
+                You must also specify in the "Dependencies" section of the BSP's
+                <code class="filename">README</code> file any requirements for additional
+                layers and, preferably, any
+                build instructions that might be contained elsewhere
+                in the <code class="filename">README</code> file.
+            </p><p>
+                Some layers function as a layer to hold other BSP layers.
+                An example of this type of layer is the <code class="filename">meta-intel</code> layer.
+                The <code class="filename">meta-intel</code> layer contains over 10 individual BSP layers.
+            </p><p>
+                For more detailed information on layers, see the
+                "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#understanding-and-creating-layers" target="_top">Understanding and Creating Layers</a>"
+                section of the Yocto Project Development Manual.
+            </p></div><div class="section" title="1.2. Example Filesystem Layout"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="bsp-filelayout"></a>1.2. Example Filesystem Layout</h2></div></div></div><p>
+                Providing a common form allows end-users to understand and become familiar
+                with the layout.
+                A common format also encourages standardization of software support of hardware.
+            </p><p>
+                The proposed form does have elements that are specific to the
+                OpenEmbedded build system.
+                It is intended that this information can be
+                used by other build systems besides the OpenEmbedded build system
+                and that it will be simple
+                to extract information and convert it to other formats if required.
+                The OpenEmbedded build system, through its standard layers mechanism, can directly
+                accept the format described as a layer.
+                The BSP captures all
+                the hardware-specific details in one place in a standard format, which is
+                useful for any person wishing to use the hardware platform regardless of
+                the build system they are using.
+            </p><p>
+                The BSP specification does not include a build system or other tools -
+                it is concerned with the hardware-specific components only.
+                At the end-distribution point, you can ship the BSP combined with a build system
+                and other tools.
+                However, it is important to maintain the distinction that these
+                are separate components that happen to be combined in certain end products.
+            </p><p>
+                Before looking at the common form for the file structure inside a BSP Layer,
+                you should be aware that some requirements do exist in order for a BSP to
+                be considered compliant with the Yocto Project.
+                For that list of requirements, see the
+                "<a class="link" href="#released-bsp-requirements" title="1.3.1. Released BSP Requirements">Released BSP Requirements</a>"
+                section.
+            </p><p>
+                Below is the common form for the file structure inside a BSP Layer.
+                While you can use this basic form for the standard, realize that the actual structures
+                for specific BSPs could differ.
+
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/
+     meta-&lt;bsp_name&gt;/&lt;bsp_license_file&gt;
+     meta-&lt;bsp_name&gt;/README
+     meta-&lt;bsp_name&gt;/README.sources
+     meta-&lt;bsp_name&gt;/binary/&lt;bootable_images&gt;
+     meta-&lt;bsp_name&gt;/conf/layer.conf
+     meta-&lt;bsp_name&gt;/conf/machine/*.conf
+     meta-&lt;bsp_name&gt;/recipes-bsp/*
+     meta-&lt;bsp_name&gt;/recipes-core/*
+     meta-&lt;bsp_name&gt;/recipes-graphics/*
+     meta-&lt;bsp_name&gt;/recipes-kernel/linux/linux-yocto_&lt;kernel_rev&gt;.bbappend
+                </pre><p>
+            </p><p>
+                Below is an example of the Crown Bay BSP:
+
+                </p><pre class="literallayout">
+     meta-crownbay/COPYING.MIT
+     meta-crownbay/README
+     meta-crownbay/README.sources
+     meta-crownbay/binary/
+     meta-crownbay/conf/
+     meta-crownbay/conf/layer.conf
+     meta-crownbay/conf/machine/
+     meta-crownbay/conf/machine/crownbay.conf
+     meta-crownbay/conf/machine/crownbay-noemgd.conf
+     meta-crownbay/recipes-bsp/
+     meta-crownbay/recipes-bsp/formfactor/
+     meta-crownbay/recipes-bsp/formfactor/formfactor_0.0.bbappend
+     meta-crownbay/recipes-bsp/formfactor/formfactor/
+     meta-crownbay/recipes-bsp/formfactor/formfactor/crownbay/
+     meta-crownbay/recipes-bsp/formfactor/formfactor/crownbay/machconfig
+     meta-crownbay/recipes-bsp/formfactor/formfactor/crownbay-noemgd/
+     meta-crownbay/recipes-bsp/formfactor/formfactor/crownbay-noemgd/machconfig
+     meta-crownbay/recipes-graphics/
+     meta-crownbay/recipes-graphics/xorg-xserver/
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config/
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config/crownbay/
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config/crownbay/xorg.conf
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config/crownbay-noemgd/
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config/crownbay-noemgd/xorg.conf
+     meta-crownbay/recipes-kernel/
+     meta-crownbay/recipes-kernel/linux/
+     meta-crownbay/recipes-kernel/linux/linux-yocto-rt_3.2.bbappend
+     meta-crownbay/recipes-kernel/linux/linux-yocto-rt_3.4.bbappend
+     meta-crownbay/recipes-kernel/linux/linux-yocto_3.2.bbappend
+     meta-crownbay/recipes-kernel/linux/linux-yocto_3.4.bbappend
+                </pre><p>
+            </p><p>
+                The following sections describe each part of the proposed BSP format.
+            </p><div class="section" title="1.2.1. License Files"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-license"></a>1.2.1. License Files</h3></div></div></div><p>
+                You can find these files in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/&lt;bsp_license_file&gt;
+                </pre><p>
+            </p><p>
+                These optional files satisfy licensing requirements for the BSP.
+                The type or types of files here can vary depending on the licensing requirements.
+                For example, in the Crown Bay BSP all licensing requirements are handled with the
+                <code class="filename">COPYING.MIT</code> file.
+            </p><p>
+                Licensing files can be MIT, BSD, GPLv*, and so forth.
+                These files are recommended for the BSP but are optional and totally up to the BSP developer.
+            </p></div><div class="section" title="1.2.2. README File"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-readme"></a>1.2.2. README File</h3></div></div></div><p>
+                You can find this file in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/README
+                </pre><p>
+            </p><p>
+                This file provides information on how to boot the live images that are optionally
+                included in the <code class="filename">binary/</code> directory.
+                The <code class="filename">README</code> file also provides special information needed for
+                building the image.
+            </p><p>
+                At a minimum, the <code class="filename">README</code> file must
+                contain a list of dependencies, such as the names of
+                any other layers on which the BSP depends and the name of
+                the BSP maintainer with his or her contact information.
+            </p></div><div class="section" title="1.2.3. README.sources File"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-readme-sources"></a>1.2.3. README.sources File</h3></div></div></div><p>
+                You can find this file in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/README.sources
+                </pre><p>
+            </p><p>
+                This file provides information on where to locate the BSP source files.
+                For example, information provides where to find the sources that comprise
+                the images shipped with the BSP.
+                Information is also included to help you find the metadata used to generate the images
+                that ship with the BSP.
+            </p></div><div class="section" title="1.2.4. Pre-built User Binaries"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-binary"></a>1.2.4. Pre-built User Binaries</h3></div></div></div><p>
+                You can find these files in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/binary/&lt;bootable_images&gt;
+                </pre><p>
+            </p><p>
+                This optional area contains useful pre-built kernels and user-space filesystem
+                images appropriate to the target system.
+                This directory typically contains graphical (e.g. sato) and minimal live images
+                when the BSP tarball has been created and made available in the
+                <a class="ulink" href="http://www.yoctoproject.org" target="_top">Yocto Project</a> website.
+                You can use these kernels and images to get a system running and quickly get started
+                on development tasks.
+            </p><p>
+                The exact types of binaries present are highly hardware-dependent.
+                However, a README file should be present in the BSP Layer that explains how to use
+                the kernels and images with the target hardware.
+                If pre-built binaries are present, source code to meet licensing requirements must also
+                exist in some form.
+            </p></div><div class="section" title="1.2.5. Layer Configuration File"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-layer"></a>1.2.5. Layer Configuration File</h3></div></div></div><p>
+                You can find this file in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/conf/layer.conf
+                </pre><p>
+            </p><p>
+                The <code class="filename">conf/layer.conf</code> file identifies the file structure as a
+                layer, identifies the
+                contents of the layer, and contains information about how the build
+                system should use it.
+                Generally, a standard boilerplate file such as the following works.
+                In the following example, you would replace "<code class="filename">bsp</code>" and
+                "<code class="filename">_bsp</code>" with the actual name
+                of the BSP (i.e. <code class="filename">&lt;bsp_name&gt;</code> from the example template).
+            </p><p>
+               </p><pre class="literallayout">
+     # We have a conf and classes directory, add to BBPATH
+     BBPATH := "${BBPATH}:${LAYERDIR}"
+
+     # We have a recipes directory, add to BBFILES
+     BBFILES := "${BBFILES} ${LAYERDIR}/recipes-*/*.bb \
+                 ${LAYERDIR}/recipes-*/*.bbappend"
+
+     BBFILE_COLLECTIONS += "bsp"
+     BBFILE_PATTERN_bsp := "^${LAYERDIR}/"
+     BBFILE_PRIORITY_bsp = "6"
+                </pre><p>
+            </p><p>
+                To illustrate the string substitutions, here are the last three statements from the Crown
+                Bay <code class="filename">conf/layer.conf</code> file:
+               </p><pre class="literallayout">
+     BBFILE_COLLECTIONS += "crownbay"
+     BBFILE_PATTERN_crownbay := "^${LAYERDIR}/"
+     BBFILE_PRIORITY_crownbay = "6"
+                </pre><p>
+            </p><p>
+                This file simply makes BitBake aware of the recipes and configuration directories.
+                The file must exist so that the OpenEmbedded build system can recognize the BSP.
+            </p></div><div class="section" title="1.2.6. Hardware Configuration Options"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-machine"></a>1.2.6. Hardware Configuration Options</h3></div></div></div><p>
+                You can find these files in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/conf/machine/*.conf
+                </pre><p>
+            </p><p>
+                The machine files bind together all the information contained elsewhere
+                in the BSP into a format that the build system can understand.
+                If the BSP supports multiple machines, multiple machine configuration files
+                can be present.
+                These filenames correspond to the values to which users have set the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-MACHINE" target="_top"><code class="filename">MACHINE</code></a> variable.
+            </p><p>
+                These files define things such as the kernel package to use
+                (<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-PREFERRED_PROVIDER" target="_top"><code class="filename">PREFERRED_PROVIDER</code></a>
+                of virtual/kernel), the hardware drivers to
+                include in different types of images, any special software components
+                that are needed, any bootloader information, and also any special image
+                format requirements.
+            </p><p>
+                Each BSP Layer requires at least one machine file.
+                However, you can supply more than one file.
+                For example, in the Crown Bay BSP shown earlier in this section, the
+                <code class="filename">conf/machine</code> directory contains two configuration files:
+                <code class="filename">crownbay.conf</code> and <code class="filename">crownbay-noemgd.conf</code>.
+                The <code class="filename">crownbay.conf</code> file is used for the Crown Bay BSP
+                that supports the <span class="trademark">Intel</span>® Embedded
+                Media and Graphics Driver (<span class="trademark">Intel</span>®
+                EMGD), while the <code class="filename">crownbay-noemgd.conf</code> file is used for the
+                Crown Bay BSP that does not support the <span class="trademark">Intel</span>®
+                EMGD.
+            </p><p>
+                This <code class="filename">crownbay.conf</code> file could also include
+                a hardware "tuning" file that is commonly used to
+                define the package architecture and specify
+                optimization flags, which are carefully chosen to give best
+                performance on a given processor.
+            </p><p>
+                Tuning files are found in the <code class="filename">meta/conf/machine/include</code>
+                directory within the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>.
+                Tuning files can also reside in the BSP Layer itself.
+                For example, the <code class="filename">ia32-base.inc</code> file resides in the
+                <code class="filename">meta-intel</code> BSP Layer in <code class="filename">conf/machine/include</code>.
+            </p><p>
+                To use an include file, you simply include them in the machine configuration file.
+                For example, the Crown Bay BSP <code class="filename">crownbay.conf</code> has the
+                following statements:
+                </p><pre class="literallayout">
+     require conf/machine/include/tune-atom.inc
+     require conf/machine/include/ia32-base.inc
+                </pre><p>
+            </p></div><div class="section" title="1.2.7. Miscellaneous Recipe Files"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-misc-recipes"></a>1.2.7. Miscellaneous Recipe Files</h3></div></div></div><p>
+                You can find these files in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/recipes-bsp/*
+                </pre><p>
+            </p><p>
+                This optional directory contains miscellaneous recipe files for the BSP.
+                Most notably would be the formfactor files.
+                For example, in the Crown Bay BSP there is the
+                <code class="filename">formfactor_0.0.bbappend</code> file, which is an append file used
+                to augment the recipe that starts the build.
+                Furthermore, there are machine-specific settings used during the build that are
+                defined by the <code class="filename">machconfig</code> files.
+                In the Crown Bay example, two <code class="filename">machconfig</code> files exist:
+                one that supports the
+                <span class="trademark">Intel</span>® Embedded
+                Media and Graphics Driver (<span class="trademark">Intel</span>®
+                EMGD) and one that does not:
+                </p><pre class="literallayout">
+     meta-crownbay/recipes-bsp/formfactor/formfactor/crownbay/machconfig
+     meta-crownbay/recipes-bsp/formfactor/formfactor/crownbay-noemgd/machconfig
+     meta-crownbay/recipes-bsp/formfactor/formfactor_0.0.bbappend
+                </pre><p>
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                If a BSP does not have a formfactor entry, defaults are established according to
+                the formfactor configuration file that is installed by the main
+                formfactor recipe
+                <code class="filename">meta/recipes-bsp/formfactor/formfactor_0.0.bb</code>,
+                which is found in the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>.
+            </p></div></div><div class="section" title="1.2.8. Display Support Files"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-recipes-graphics"></a>1.2.8. Display Support Files</h3></div></div></div><p>
+                You can find these files in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/recipes-graphics/*
+                </pre><p>
+            </p><p>
+                This optional directory contains recipes for the BSP if it has
+                special requirements for graphics support.
+                All files that are needed for the BSP to support a display are kept here.
+                For example, the Crown Bay BSP contains two versions of the
+                <code class="filename">xorg.conf</code> file.
+                The version in <code class="filename">crownbay</code> builds a BSP that supports the
+                <span class="trademark">Intel</span>® Embedded Media Graphics Driver (EMGD),
+                while the version in <code class="filename">crownbay-noemgd</code> builds
+                a BSP that supports Video Electronics Standards Association (VESA) graphics only:
+                </p><pre class="literallayout">
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config/crownbay/xorg.conf
+     meta-crownbay/recipes-graphics/xorg-xserver/xserver-xf86-config/crownbay-noemgd/xorg.conf
+                </pre><p>
+            </p></div><div class="section" title="1.2.9. Linux Kernel Configuration"><div class="titlepage"><div><div><h3 class="title"><a id="bsp-filelayout-kernel"></a>1.2.9. Linux Kernel Configuration</h3></div></div></div><p>
+                You can find these files in the BSP Layer at:
+                </p><pre class="literallayout">
+     meta-&lt;bsp_name&gt;/recipes-kernel/linux/linux-yocto_*.bbappend
+                </pre><p>
+            </p><p>
+                These files append your specific changes to the main kernel recipe you are using.
+            </p><p>
+                For your BSP, you typically want to use an existing Yocto Project kernel recipe found in the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>
+                at <code class="filename">meta/recipes-kernel/linux</code>.
+                You can append your specific changes to the kernel recipe by using a
+                similarly named append file, which is located in the BSP Layer (e.g.
+                the <code class="filename">meta-&lt;bsp_name&gt;/recipes-kernel/linux</code> directory).
+            </p><p>
+                Suppose you are using the <code class="filename">linux-yocto_3.4.bb</code> recipe to build
+                the kernel.
+                In other words, you have selected the kernel in your
+                <code class="filename">&lt;bsp_name&gt;.conf</code> file by adding these types
+                of statements:
+                </p><pre class="literallayout">
+     PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
+     PREFERRED_VERSION_linux-yocto = "3.4%"
+                </pre><p>
+                </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                    When the preferred provider is assumed by default, the
+                    <code class="filename">PREFERRED_PROVIDER</code> statement does not appear in the
+                    <code class="filename">&lt;bsp_name&gt;.conf</code> file.
+                </div><p>
+                You would use the <code class="filename">linux-yocto_3.4.bbappend</code> file to append
+                specific BSP settings to the kernel, thus configuring the kernel for your particular BSP.
+            </p><p>
+                As an example, look at the existing Crown Bay BSP.
+                The append file used is:
+                </p><pre class="literallayout">
+     meta-crownbay/recipes-kernel/linux/linux-yocto_3.4.bbappend
+                </pre><p>
+                The following listing shows the file.
+                Be aware that the actual commit ID strings in this example listing might be different
+                than the actual strings in the file from the <code class="filename">meta-intel</code>
+                Git source repository.
+                </p><pre class="literallayout">
+     FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+     COMPATIBLE_MACHINE_crownbay = "crownbay"
+     KMACHINE_crownbay  = "crownbay"
+     KBRANCH_crownbay  = "standard/crownbay"
+
+     COMPATIBLE_MACHINE_crownbay-noemgd = "crownbay-noemgd"
+     KMACHINE_crownbay-noemgd  = "crownbay"
+     KBRANCH_crownbay-noemgd  = "standard/crownbay"
+
+     SRCREV_machine_pn-linux-yocto_crownbay ?= "449f7f520350700858f21a5554b81cc8ad23267d"
+     SRCREV_meta_pn-linux-yocto_crownbay ?= "9e3bdb7344054264b750e53fbbb6394cc1c942ac"
+     SRCREV_emgd_pn-linux-yocto_crownbay ?= "86643bdd8cbad616a161ab91f51108cf0da827bc"
+
+     SRCREV_machine_pn-linux-yocto_crownbay-noemgd ?= "449f7f520350700858f21a5554b81cc8ad23267d"
+     SRCREV_meta_pn-linux-yocto_crownbay-noemgd ?= "9e3bdb7344054264b750e53fbbb6394cc1c942ac"
+
+     KSRC_linux_yocto_3_4 ?= "git.yoctoproject.org/linux-yocto-3.4.git"
+     SRC_URI_crownbay = "git://git.yoctoproject.org/linux-yocto-3.4.git;protocol=git;nocheckout=1;branch=${KBRANCH},meta,emgd-1.14;name=machine,meta,emgd"
+     SRC_URI_crownbay-noemgd = "git://git.yoctoproject.org/linux-yocto-3.4.git;protocol=git;nocheckout=1;branch=${KBRANCH},meta;name=machine,meta"
+                </pre><p>
+                This append file contains statements used to support the Crown Bay BSP for both
+                <span class="trademark">Intel</span>® EMGD and the VESA graphics.
+                The build process, in this case, recognizes and uses only the statements that
+                apply to the defined machine name - <code class="filename">crownbay</code> in this case.
+                So, the applicable statements in the <code class="filename">linux-yocto_3.4.bbappend</code>
+                file are follows:
+                </p><pre class="literallayout">
+     FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+
+     COMPATIBLE_MACHINE_crownbay = "crownbay"
+     KMACHINE_crownbay  = "crownbay"
+     KBRANCH_crownbay  = "standard/crownbay"
+
+     SRCREV_machine_pn-linux-yocto_crownbay ?= "449f7f520350700858f21a5554b81cc8ad23267d"
+     SRCREV_meta_pn-linux-yocto_crownbay ?= "9e3bdb7344054264b750e53fbbb6394cc1c942ac"
+     SRCREV_emgd_pn-linux-yocto_crownbay ?= "86643bdd8cbad616a161ab91f51108cf0da827bc"
+                </pre><p>
+                The append file defines <code class="filename">crownbay</code> as the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-COMPATIBLE_MACHINE" target="_top"><code class="filename">COMPATIBLE_MACHINE</code></a>
+                and uses the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-KMACHINE" target="_top"><code class="filename">KMACHINE</code></a> variable to
+                ensure the machine name used by the OpenEmbedded build system maps to the
+                machine name used by the Linux Yocto kernel.
+                The file also uses the optional
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-KBRANCH" target="_top"><code class="filename">KBRANCH</code></a> variable
+                to ensure the build process uses the <code class="filename">standard/default/crownbay</code>
+                kernel branch.
+                Finally, the append file points to specific commits in the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a> Git
+                repository and the <code class="filename">meta</code> Git repository branches to identify the
+                exact kernel needed to build the Crown Bay BSP.
+                </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                    For <code class="filename">crownbay</code>, a specific commit is also needed to point
+                    to the branch that supports EMGD graphics.
+                    At a minimum, every BSP points to the
+                    <code class="filename">machine</code> and <code class="filename">meta</code> commits.
+                </div><p>
+            </p><p>
+                One thing missing in this particular BSP, which you will typically need when
+                developing a BSP, is the kernel configuration file (<code class="filename">.config</code>) for your BSP.
+                When developing a BSP, you probably have a kernel configuration file or a set of kernel
+                configuration files that, when taken together, define the kernel configuration for your BSP.
+                You can accomplish this definition by putting the configurations in a file or a set of files
+                inside a directory located at the same level as your kernel's append file and having the same
+                name as the kernel's main recipe file.
+                With all these conditions met, simply reference those files in a
+                <code class="filename">SRC_URI</code> statement in the append file.
+            </p><p>
+                For example, suppose you had a some configuration options in a file called
+                <code class="filename">network_configs.cfg</code>.
+                You can place that file inside a directory named <code class="filename">/linux-yocto</code> and then add
+                a <code class="filename">SRC_URI</code> statement such as the following to the append file.
+                When the OpenEmbedded build system builds the kernel, the configuration options are
+                picked up and applied.
+                </p><pre class="literallayout">
+     SRC_URI += "file://network_configs.cfg"
+                </pre><p>
+            </p><p>
+                To group related configurations into multiple files, you perform a similar procedure.
+                Here is an example that groups separate configurations specifically for Ethernet and graphics
+                into their own files and adds the configurations
+                by using a <code class="filename">SRC_URI</code> statement like the following in your append file:
+                </p><pre class="literallayout">
+     SRC_URI += "file://myconfig.cfg \
+            file://eth.cfg \
+            file://gfx.cfg"
+                </pre><p>
+            </p><p>
+                The <code class="filename">FILESEXTRAPATHS</code> variable is in boilerplate form in the
+                previous example in order to make it easy to do that.
+                This variable must be in your layer or BitBake will not find the patches or
+                configurations even if you have them in your <code class="filename">SRC_URI</code>.
+                The <code class="filename">FILESEXTRAPATHS</code> variable enables the build process to
+                find those configuration files.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                    Other methods exist to accomplish grouping and defining configuration options.
+                    For example, if you are working with a local clone of the kernel repository,
+                    you could checkout the kernel's <code class="filename">meta</code> branch, make your changes,
+                    and then push the changes to the local bare clone of the kernel.
+                    The result is that you directly add configuration options to the
+                    <code class="filename">meta</code> branch for your BSP.
+                    The configuration options will likely end up in that location anyway if the BSP gets
+                    added to the Yocto Project.
+                </p><p>
+                    In general, however, the Yocto Project maintainers take care of moving the
+                    <code class="filename">SRC_URI</code>-specified
+                    configuration options to the kernel's <code class="filename">meta</code> branch.
+                    Not only is it easier for BSP developers to not have to worry about putting those
+                   configurations in the branch, but having the maintainers do it allows them to apply
+                    'global' knowledge about the kinds of common configuration options multiple BSPs in
+                    the tree are typically using.
+                    This allows for promotion of common configurations into common features.
+                </p></div></div></div><div class="section" title="1.3. Requirements and Recommendations for Released BSPs"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="requirements-and-recommendations-for-released-bsps"></a>1.3. Requirements and Recommendations for Released BSPs</h2></div></div></div><p>
+                Certain requirements exist for a released BSP to be considered
+                compliant with the Yocto Project.
+                Additionally, a single recommendation also exists.
+                This section describes the requirements and recommendation for
+                released BSPs.
+            </p><div class="section" title="1.3.1. Released BSP Requirements"><div class="titlepage"><div><div><h3 class="title"><a id="released-bsp-requirements"></a>1.3.1. Released BSP Requirements</h3></div></div></div><p>
+                    Before looking at BSP requirements, you should consider the following:
+                    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The requirements here assume the BSP layer is a well-formed, "legal"
+                            layer that can be added to the Yocto Project.
+                            For guidelines on creating a layer that meets these base requirements, see the
+                            "<a class="link" href="#bsp-layers" title="1.1. BSP Layers">BSP Layers</a>" and the
+                            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#understanding-and-creating-layers" target="_top">Understanding
+                            and Creating Layers"</a> in the Yocto Project Development Manual.</p></li><li class="listitem"><p>The requirements in this section apply regardless of how you
+                            ultimately package a BSP.
+                            You should consult the packaging and distribution guidelines for your
+                            specific release process.
+                            For an example of packaging and distribution requirements, see the
+                            <a class="ulink" href="https://wiki.yoctoproject.org/wiki/Third_Party_BSP_Release_Process" target="_top">Third
+                            Party BSP Release Process</a> wiki page.</p></li><li class="listitem"><p>The requirements for the BSP as it is made available to a developer
+                            are completely independent of the released form of the BSP.
+                            For example, the BSP metadata can be contained within a Git repository
+                            and could have a directory structure completely different from what appears
+                            in the officially released BSP layer.</p></li><li class="listitem"><p>It is not required that specific packages or package
+                            modifications exist in the BSP layer, beyond the requirements for general
+                            compliance with the Yocto Project.
+                            For example, no requirement exists dictating that a specific kernel or
+                            kernel version be used in a given BSP.</p></li></ul></div><p>
+                </p><p>
+                    Following are the requirements for a released BSP that conforms to the
+                    Yocto Project:
+                    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>Layer Name:</em></span>
+                            The BSP must have a layer name that follows the Yocto
+                            Project standards.
+                            For information on BSP layer names, see the
+                            "<a class="link" href="#bsp-layers" title="1.1. BSP Layers">BSP Layers</a>" section.
+                            </p></li><li class="listitem"><p><span class="emphasis"><em>File System Layout:</em></span>
+                            When possible, use the same directory names in your
+                            BSP layer as listed in the <code class="filename">recipes.txt</code> file.
+                            In particular, you should place recipes
+                            (<code class="filename">.bb</code> files) and recipe
+                            modifications (<code class="filename">.bbappend</code> files) into
+                            <code class="filename">recipes-*</code> subdirectories by functional area
+                            as outlined in <code class="filename">recipes.txt</code>.
+                            If you cannot find a category in <code class="filename">recipes.txt</code>
+                            to fit a particular recipe, you can make up your own
+                            <code class="filename">recipe-*</code> subdirectory.
+                            You can find <code class="filename">recipes.txt</code> in the
+                            <code class="filename">meta</code> directory of the
+                            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>,
+                            or in the OpenEmbedded Core Layer
+                            (<code class="filename">openembedded-core</code>) found at
+                            <a class="ulink" href="http://git.openembedded.org/openembedded-core/tree/meta" target="_top">http://git.openembedded.org/openembedded-core/tree/meta</a>.
+                            </p><p>Within any particular <code class="filename">recipes-*</code> category, the layout
+                            should match what is found in the OpenEmbedded Core
+                            Git repository (<code class="filename">openembedded-core</code>)
+                            or the Source Directory (<code class="filename">poky</code>).
+                            In other words, make sure you place related files in appropriately
+                            related <code class="filename">recipes-*</code> subdirectories specific to the
+                            recipe's function, or within a subdirectory containing a set of closely-related
+                            recipes.
+                            The recipes themselves should follow the general guidelines
+                            for recipes used in the Yocto Project found in the
+                            <a class="ulink" href="https://wiki.yoctoproject.org/wiki/Recipe_%26_Patch_Style_Guide" target="_top">Yocto
+                            Recipe and Patch Style Guide</a>.</p></li><li class="listitem"><p><span class="emphasis"><em>License File:</em></span>
+                            You must include a license file in the
+                            <code class="filename">meta-&lt;bsp_name&gt;</code> directory.
+                            This license covers the BSP metadata as a whole.
+                            You must specify which license to use since there is no
+                            default license if one is not specified.
+                            See the
+                            <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi/meta-intel/tree/meta-fri2/COPYING.MIT" target="_top"><code class="filename">COPYING.MIT</code></a>
+                            file for the Fish River Island 2 BSP in the <code class="filename">meta-fri2</code> BSP layer
+                            as an example.</p></li><li class="listitem"><p><span class="emphasis"><em>README File:</em></span>
+                            You must include a <code class="filename">README</code> file in the
+                            <code class="filename">meta-&lt;bsp_name&gt;</code> directory.
+                            See the
+                            <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi/meta-intel/tree/meta-fri2/README" target="_top"><code class="filename">README</code></a>
+                            file for the Fish River Island 2 BSP in the <code class="filename">meta-fri2</code> BSP layer
+                            as an example.</p><p>At a minimum, the <code class="filename">README</code> file should
+                            contain the following:
+                            </p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>A brief description about the hardware the BSP
+                                    targets.</p></li><li class="listitem"><p>A list of all the dependencies
+                                    on which a BSP layer depends.
+                                    These dependencies are typically a list of required layers needed
+                                    to build the BSP.
+                                    However, the dependencies should also contain information regarding
+                                    any other dependencies the BSP might have.</p></li><li class="listitem"><p>Any required special licensing information.
+                                    For example, this information includes information on
+                                    special variables needed to satisfy a EULA,
+                                    or instructions on information needed to build or distribute
+                                    binaries built from the BSP metadata.</p></li><li class="listitem"><p>The name and contact information for the
+                                    BSP layer maintainer.
+                                    This is the person to whom patches and questions should
+                                    be sent.</p></li><li class="listitem"><p>Instructions on how to build the BSP using the BSP
+                                    layer.</p></li><li class="listitem"><p>Instructions on how to boot the BSP build from
+                                    the BSP layer.</p></li><li class="listitem"><p>Instructions on how to boot the binary images
+                                    contained in the <code class="filename">/binary</code> directory,
+                                    if present.</p></li><li class="listitem"><p>Information on any known bugs or issues that users
+                                    should know about when either building or booting the BSP
+                                    binaries.</p></li></ul></div></li><li class="listitem"><p><span class="emphasis"><em>README.sources File:</em></span>
+                            You must include a <code class="filename">README.sources</code> in the
+                            <code class="filename">meta-&lt;bsp_name&gt;</code> directory.
+                            This file specifies exactly where you can find the sources used to
+                            generate the binary images contained in the
+                            <code class="filename">/binary</code> directory, if present.
+                            See the
+                            <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi/meta-intel/tree/meta-fri2/README.sources" target="_top"><code class="filename">README.sources</code></a>
+                            file for the Fish River Island 2 BSP in the <code class="filename">meta-fri2</code> BSP layer
+                            as an example.</p></li><li class="listitem"><p><span class="emphasis"><em>Layer Configuration File:</em></span>
+                            You must include a <code class="filename">conf/layer.conf</code> in the
+                            <code class="filename">meta-&lt;bsp_name&gt;</code> directory.
+                            This file identifies the <code class="filename">meta-&lt;bsp_name&gt;</code>
+                            BSP layer as a layer to the build system.</p></li><li class="listitem"><p><span class="emphasis"><em>Machine Configuration File:</em></span>
+                            You must include a <code class="filename">conf/machine/&lt;bsp_name&gt;.conf</code>
+                            in the <code class="filename">meta-&lt;bsp_name&gt;</code> directory.
+                            This configuration file defines a machine target that can be built
+                            using the BSP layer.
+                            Multiple machine configuration files define variations of machine
+                            configurations that are supported by the BSP.
+                            If a BSP supports multiple machine variations, you need to
+                            adequately describe each variation in the BSP
+                            <code class="filename">README</code> file.
+                            Do not use multiple machine configuration files to describe disparate
+                            hardware.
+                            If you do have very different targets, you should create separate
+                            BSP layers for each target.
+                            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>It is completely possible for a developer to structure the
+                            working repository as a conglomeration of unrelated BSP
+                            files, and to possibly generate specifically targeted 'release' BSPs
+                            from that directory using scripts or some other mechanism.
+                            Such considerations are outside the scope of this document.</div><p>
+                            </p></li></ul></div><p>
+                </p></div><div class="section" title="1.3.2. Released BSP Recommendations"><div class="titlepage"><div><div><h3 class="title"><a id="released-bsp-recommendations"></a>1.3.2. Released BSP Recommendations</h3></div></div></div><p>
+                    Following are recommendations for a released BSP that conforms to the
+                    Yocto Project:
+                    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>Bootable Images:</em></span>
+                            BSP releases
+                            can contain one or more bootable images.
+                            Including bootable images allows users to easily try out the BSP
+                            on their own hardware.</p><p>In some cases, it might not be convenient to include a
+                            bootable image.
+                            In this case, you might want to make two versions of the
+                            BSP available: one that contains binary images, and one
+                            that does not.
+                            The version that does not contain bootable images avoids
+                            unnecessary download times for users not interested in the images.
+                            </p><p>If you need to distribute a BSP and include bootable images or build kernel and
+                            filesystems meant to allow users to boot the BSP for evaluation
+                            purposes, you should put the images and artifacts within a
+                            <code class="filename">binary/</code> subdirectory located in the
+                            <code class="filename">meta-&lt;bsp_name&gt;</code> directory.
+                            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>If you do include a bootable image as part of the BSP and the image
+                            was built by software covered by the GPL or other open source licenses,
+                            it is your responsibility to understand
+                            and meet all licensing requirements, which could include distribution
+                            of source files.</div></li><li class="listitem"><p><span class="emphasis"><em>Use a Yocto Linux Kernel:</em></span>
+                            Kernel recipes in the BSP should be based on a Yocto Linux kernel.
+                            Basing your recipes on these kernels reduces the costs for maintaining
+                            the BSP and increases its scalability.
+                            See the <code class="filename">Yocto Linux Kernel</code> category in the
+                            <a class="ulink" href="http://git.yoctoproject.org/cgit.cgi" target="_top">Source Repositories</a>
+                            for these kernels.</p></li></ul></div><p>
+                </p></div></div><div class="section" title="1.4. Customizing a Recipe for a BSP"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="customizing-a-recipe-for-a-bsp"></a>1.4. Customizing a Recipe for a BSP</h2></div></div></div><p>
+               If you plan on customizing a recipe for a particular BSP, you need to do the
+               following:
+               </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Include within the BSP layer a <code class="filename">.bbappend</code>
+                       file for the modified recipe.</p></li><li class="listitem"><p>Place the BSP-specific file in the BSP's recipe
+                       <code class="filename">.bbappend</code> file path under a directory named
+                       after the machine.</p></li></ul></div><p>
+           </p><p>
+               To better understand this, consider an example that customizes a recipe by adding
+               a BSP-specific configuration file named <code class="filename">interfaces</code> to the
+               <code class="filename">netbase_5.0.bb</code> recipe for machine "xyz".
+               Do the following:
+               </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Edit the <code class="filename">netbase_4.47.bbappend</code> file so that it
+                       contains the following:
+                       </p><pre class="literallayout">
+     FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+     PRINC := "${@int(PRINC) + 2}"
+                       </pre></li><li class="listitem"><p>Create and place the new <code class="filename">interfaces</code>
+                       configuration file in the BSP's layer here:
+                       </p><pre class="literallayout">
+     meta-xyz/recipes-core/netbase/files/xyz/interfaces
+                       </pre></li></ol></div><p>
+            </p></div><div class="section" title="1.5. BSP Licensing Considerations"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="bsp-licensing-considerations"></a>1.5. BSP Licensing Considerations</h2></div></div></div><p>
+                In some cases, a BSP contains separately licensed Intellectual Property (IP)
+                for a component or components.
+                For these cases, you are required to accept the terms of a commercial or other
+                type of license that requires some kind of explicit End User License Agreement (EULA).
+                Once the license is accepted, the OpenEmbedded build system can then build and
+                include the corresponding component in the final BSP image.
+                If the BSP is available as a pre-built image, you can download the image after
+                agreeing to the license or EULA.
+            </p><p>
+                You could find that some separately licensed components that are essential
+                for normal operation of the system might not have an unencumbered (or free)
+                substitute.
+                Without these essential components, the system would be non-functional.
+                Then again, you might find that other licensed components that are simply
+                'good-to-have' or purely elective do have an unencumbered, free replacement
+                component that you can use rather than agreeing to the separately licensed component.
+                Even for components essential to the system, you might find an unencumbered component
+                that is not identical but will work as a less-capable version of the
+                licensed version in the BSP recipe.
+            </p><p>
+                For cases where you can substitute a free component and still
+                maintain the system's functionality, the Yocto Project website's
+                <a class="ulink" href="http://www.yoctoproject.org/download/all?keys=&amp;download_type=1&amp;download_version=" target="_top">BSP
+                Download Page</a> makes available de-featured BSPs
+                that are completely free of any IP encumbrances.
+                For these cases, you can use the substitution directly and
+                without any further licensing requirements.
+                If present, these fully de-featured BSPs are named appropriately
+                different as compared to the names of the respective
+                encumbered BSPs.
+                If available, these substitutions are your
+                simplest and most preferred options.
+                Use of these substitutions of course assumes the resulting functionality meets
+                system requirements.
+            </p><p>
+                If however, a non-encumbered version is unavailable or
+                it provides unsuitable functionality or quality, you can use an encumbered
+                version.
+            </p><p>
+                A couple different methods exist within the OpenEmbedded build system to
+                satisfy the licensing requirements for an encumbered BSP.
+                The following list describes them in order of preference:
+	        </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><span class="emphasis"><em>Use the <code class="filename">LICENSE_FLAGS</code> variable
+                        to define the recipes that have commercial or other types of
+                        specially-licensed packages:</em></span>
+                        For each of those recipes, you can
+                        specify a matching license string in a
+                        <code class="filename">local.conf</code> variable named
+                        <code class="filename">LICENSE_FLAGS_WHITELIST</code>.
+                        Specifying the matching license string signifies that you agree to the license.
+                        Thus, the build system can build the corresponding recipe and include
+                        the component in the image.
+                        See the
+                        "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#enabling-commercially-licensed-recipes" target="_top">Enabling
+                        Commercially Licensed Recipes</a>" section in the Yocto Project Reference
+                        Manual for details on how to use these variables.</p><p>If you build as you normally would, without
+		        specifying any recipes in the
+		        <code class="filename">LICENSE_FLAGS_WHITELIST</code>, the build stops and
+		        provides you with the list of recipes that you have
+		        tried to include in the image that need entries in
+		        the <code class="filename">LICENSE_FLAGS_WHITELIST</code>.
+		        Once you enter the appropriate license flags into the whitelist,
+		        restart the build to continue where it left off.
+		        During the build, the prompt will not appear again
+		        since you have satisfied the requirement.</p><p>Once the appropriate license flags are on the white list
+		        in the <code class="filename">LICENSE_FLAGS_WHITELIST</code> variable, you
+		        can build the encumbered image with no change at all
+		        to the normal build process.</p></li><li class="listitem"><p><span class="emphasis"><em>Get a pre-built version of the BSP:</em></span>
+                        You can get this type of BSP by visiting the Yocto Project website's
+                        <a class="ulink" href="http://www.yoctoproject.org/download" target="_top">Download</a>
+                        page and clicking on "BSP Downloads".
+                        You can download BSP tarballs that contain proprietary components
+                        after agreeing to the licensing
+                        requirements of each of the individually encumbered
+                        packages as part of the download process.
+                        Obtaining the BSP this way allows you to access an encumbered
+                        image immediately after agreeing to the
+                        click-through license agreements presented by the
+                        website.
+                        Note that if you want to build the image
+                        yourself using the recipes contained within the BSP
+                        tarball, you will still need to create an
+                        appropriate <code class="filename">LICENSE_FLAGS_WHITELIST</code> to match the
+                        encumbered recipes in the BSP.</p></li></ol></div><p>
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                Pre-compiled images are bundled with
+                a time-limited kernel that runs for a
+                predetermined amount of time (10 days) before it forces
+                the system to reboot.
+                This limitation is meant to discourage direct redistribution
+                of the image.
+                You must eventually rebuild the image if you want to remove this restriction.
+            </div></div><div class="section" title="1.6. Using the Yocto Project's BSP Tools"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="using-the-yocto-projects-bsp-tools"></a>1.6. Using the Yocto Project's BSP Tools</h2></div></div></div><p>
+                The Yocto Project includes a couple of tools that enable
+                you to create a <a class="link" href="#bsp-layers" title="1.1. BSP Layers">BSP layer</a>
+                from scratch and do basic configuration and maintenance
+                of the kernel without ever looking at a metadata file.
+                These tools are <code class="filename">yocto-bsp</code> and <code class="filename">yocto-kernel</code>,
+                respectively.
+	    </p><p>
+                The following sections describe the common location and help features as well
+                as provide details for the
+                <code class="filename">yocto-bsp</code> and <code class="filename">yocto-kernel</code> tools.
+            </p><div class="section" title="1.6.1. Common Features"><div class="titlepage"><div><div><h3 class="title"><a id="common-features"></a>1.6.1. Common Features</h3></div></div></div><p>
+                    Designed to have a  command interface somewhat like
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#git" target="_top">Git</a>, each
+                    tool is structured as a set of sub-commands under a
+                    top-level command.
+                    The top-level command (<code class="filename">yocto-bsp</code>
+                    or <code class="filename">yocto-kernel</code>) itself does
+                    nothing but invoke or provide help on the sub-commands
+                    it supports.
+                </p><p>
+                    Both tools reside in the <code class="filename">scripts/</code> subdirectory
+                    of the <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>.
+                    Consequently, to use the scripts, you must <code class="filename">source</code> the
+                    environment just as you would when invoking a build:
+                    </p><pre class="literallayout">
+     $ source oe-init-build-env [build_dir]
+                    </pre><p>
+                </p><p>
+                    The most immediately useful function is to get help on both tools.
+                    The built-in help system makes it easy to drill down at
+                    any time and view the syntax required for any specific command.
+                    Simply enter the name of the command with the <code class="filename">help</code>
+                    switch:
+                    </p><pre class="literallayout">
+     $ yocto-bsp help
+     Usage:
+
+      Create a customized Yocto BSP layer.
+
+      usage: yocto-bsp [--version] [--help] COMMAND [ARGS]
+
+      Current 'yocto-bsp' commands are:
+         create            Create a new Yocto BSP
+         list              List available values for options and BSP properties
+
+      See 'yocto-bsp help COMMAND' for more information on a specific command.
+
+
+     Options:
+       --version    show program's version number and exit
+       -h, --help   show this help message and exit
+       -D, --debug  output debug information
+                    </pre><p>
+                </p><p>
+                    Similarly, entering just the name of a sub-command shows the detailed usage
+                    for that sub-command:
+                    </p><pre class="literallayout">
+     $ yocto-bsp create
+
+     Usage:
+
+      Create a new Yocto BSP
+
+      usage: yocto-bsp create &lt;bsp-name&gt; &lt;karch&gt; [-o &lt;DIRNAME&gt; | --outdir &lt;DIRNAME&gt;]
+             [-i &lt;JSON PROPERTY FILE&gt; | --infile &lt;JSON PROPERTY_FILE&gt;]
+
+      This command creates a Yocto BSP based on the specified parameters.
+      The new BSP will be a new Yocto BSP layer contained by default within
+      the top-level directory specified as 'meta-bsp-name'.  The -o option
+      can be used to place the BSP layer in a directory with a different
+      name and location.
+
+      ...
+                    </pre><p>
+                </p><p>
+                    For any sub-command, you can also use the word 'help' just before the
+                    sub-command to get more extensive documentation:
+                    </p><pre class="literallayout">
+     $ yocto-bsp help create
+
+     NAME
+         yocto-bsp create - Create a new Yocto BSP
+
+     SYNOPSIS
+         yocto-bsp create &lt;bsp-name&gt; &lt;karch&gt; [-o &lt;DIRNAME&gt; | --outdir &lt;DIRNAME&gt;]
+             [-i &lt;JSON PROPERTY FILE&gt; | --infile &lt;JSON PROPERTY_FILE&gt;]
+
+     DESCRIPTION
+         This command creates a Yocto BSP based on the specified
+         parameters.  The new BSP will be a new Yocto BSP layer contained
+         by default within the top-level directory specified as
+         'meta-bsp-name'.  The -o option can be used to place the BSP layer
+         in a directory with a different name and location.
+
+         The value of the 'karch' parameter determines the set of files
+         that will be generated for the BSP, along with the specific set of
+         'properties' that will be used to fill out the BSP-specific
+         portions of the BSP.  The possible values for the 'karch' paramter
+         can be listed via 'yocto-bsp list karch'.
+
+         ...
+                    </pre><p>
+                </p><p>
+                    Now that you know where these two commands reside and how to access information
+                    on them, you should find it relatively straightforward to discover the commands
+                    necessary to create a BSP and perform basic kernel maintenance on that BSP using
+                    the tools.
+                    The next sections provide a concrete starting point to expand on a few points that
+                    might not be immediately obvious or that could use further explanation.
+                </p></div><div class="section" title="1.6.2. Creating a new BSP Layer Using the yocto-bsp Script"><div class="titlepage"><div><div><h3 class="title"><a id="creating-a-new-bsp-layer-using-the-yocto-bsp-script"></a>1.6.2. Creating a new BSP Layer Using the yocto-bsp Script</h3></div></div></div><p>
+                    The <code class="filename">yocto-bsp</code> script creates a new
+                    <a class="link" href="#bsp-layers" title="1.1. BSP Layers">BSP layer</a> for any architecture supported
+                    by the Yocto Project, as well as QEMU versions of the same.
+                    The default mode of the script's operation is to prompt you for information needed
+                    to generate the BSP layer.
+                    For the current set of BSPs, the script prompts you for various important
+                    parameters such as:
+                    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The kernel to use</p></li><li class="listitem"><p>The branch of that kernel to use (or re-use)</p></li><li class="listitem"><p>Whether or not to use X, and if so, which drivers to use</p></li><li class="listitem"><p>Whether to turn on SMP</p></li><li class="listitem"><p>Whether the BSP has a keyboard</p></li><li class="listitem"><p>Whether the BSP has a touchscreen</p></li><li class="listitem"><p>Remaining configurable items associated with the BSP</p></li></ul></div><p>
+                </p><p>
+                    You use the <code class="filename">yocto-bsp create</code> sub-command to create
+                    a new BSP layer.
+                    This command requires you to specify a particular kernel architecture
+                    (<code class="filename">karch</code>) on which to base the BSP.
+                    Assuming you have sourced the environment, you can use the
+                    <code class="filename">yocto-bsp list karch</code> sub-command to list the
+                    architectures available for BSP creation as follows:
+                    </p><pre class="literallayout">
+     $ yocto-bsp list karch
+     Architectures available:
+         qemu
+         x86_64
+         i386
+         powerpc
+         arm
+         mips
+                    </pre><p>
+                </p><p>
+                    The remainder of this section presents an example that uses
+                    <code class="filename">myarm</code> as the machine name and <code class="filename">qemu</code>
+                    as the machine architecture.
+                    Of the available architectures, <code class="filename">qemu</code> is the only architecture
+                    that causes the script to prompt you further for an actual architecture.
+                    In every other way, this architecture is representative of how creating a BSP for
+                    a 'real' machine would work.
+                    The reason the example uses this architecture is because it is an emulated architecture
+                    and can easily be followed without requiring actual hardware.
+                </p><p>
+                    As the <code class="filename">yocto-bsp create</code> command runs, default values for
+                    the prompts appear in brackets.
+                    Pressing enter without supplying anything on the command line or pressing enter
+                    and providing an invalid response causes the script to accept the default value.
+                    Once the script completes, the new <code class="filename">meta-myarm</code> BSP layer
+                    is created in the current working directory.
+                    This example assumes you have source the oe-init-build-env and are currently
+                    in the top-level folder of the
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>.
+                </p><p>
+                    Following is the complete example:
+                    </p><pre class="literallayout">
+     $ yocto-bsp create myarm qemu
+     Which qemu architecture would you like to use? [default: i386]
+	     1) i386    (32-bit)
+	     2) x86_64  (64-bit)
+	     3) ARM     (32-bit)
+	     4) PowerPC (32-bit)
+	     5) MIPS    (32-bit)
+     3
+     Would you like to use the default (3.4) kernel? (y/n) [default: y]
+     Do you need a new machine branch for this BSP (the alternative is to re-use an existing branch)? [y/n] [default: y]
+     Getting branches from remote repo git://git.yoctoproject.org/linux-yocto-3.4.git...
+     Please choose a machine branch to base your new BSP branch on: [default: standard/base]
+             1) standard/arm-versatile-926ejs
+             2) standard/base
+             3) standard/beagleboard
+             4) standard/cedartrail
+             5) standard/crownbay
+             6) standard/emenlow
+             7) standard/fishriver
+             8) standard/fri2
+             9) standard/fsl-mpc8315e-rdb
+             10) standard/mti-malta32
+             11) standard/mti-malta64
+             12) standard/qemuppc
+             13) standard/routerstationpro
+             14) standard/sys940x
+     1
+     Would you like SMP support? (y/n) [default: y]
+     Does your BSP have a touchscreen? (y/n) [default: n]
+     Does your BSP have a keyboard? (y/n) [default: y]
+     New qemu BSP created in meta-myarm
+                    </pre><p>
+                    Let's take a closer look at the example now:
+                    </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>For the <code class="filename">qemu</code> architecture,
+                            the script first prompts you for which emulated architecture to use.
+                            In the example, we use the <code class="filename">arm</code> architecture.
+                            </p></li><li class="listitem"><p>The script then prompts you for the kernel.
+                            The default 3.4 kernel is acceptable.
+                            So, the example accepts the default.
+                            If you enter 'n', the script prompts you to further enter the kernel
+                            you do want to use (e.g. 3.0, 3.2_preempt-rt, and so forth.).</p></li><li class="listitem"><p>Next, the script asks whether you would like to have a new
+                            branch created especially for your BSP in the local
+                            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#local-kernel-files" target="_top">Linux Yocto Kernel</a>
+                            Git repository .
+                            If not, then the script re-uses an existing branch.</p><p>In this example, the default (or 'yes') is accepted.
+                            Thus, a new branch is created for the BSP rather than using a common, shared
+                            branch.
+                            The new branch is the branch committed to for any patches you might later add.
+                            The reason a new branch is the default is that typically
+                            new BSPs do require BSP-specific patches.
+                            The tool thus assumes that most of time a new branch is required.
+                            </p></li><li class="listitem"><p>Regardless of which choice you make in the previous step,
+                            you are now given the opportunity to select a particular machine branch on
+                            which to base your new BSP-specific machine branch
+                            (or to re-use if you had elected to not create a new branch).
+                            Because this example is generating an <code class="filename">arm</code> BSP, the example
+                            uses <code class="filename">#1</code> at the prompt, which selects the arm-versatile branch.
+                            </p></li><li class="listitem"><p>The remainder of the prompts are routine.
+                            Defaults are accepted for each.</p></li><li class="listitem"><p>By default, the script creates the new BSP Layer in the
+                            current working directory of the
+                            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>,
+                            which is <code class="filename">poky</code> in this case.
+                            </p></li></ol></div><p>
+                </p><p>
+                    Once the BSP Layer is created, you must add it to your
+                    <code class="filename">bblayers.conf</code> file.
+                    Here is an example:
+                    </p><pre class="literallayout">
+     BBLAYERS = ?" \
+        /usr/local/src/yocto/meta \
+        /usr/local/src/yocto/meta-yocto \
+        /usr/local/src/yocto/meta-yocto-bsp \
+        /usr/local/src/yocto/meta-myarm \
+        "
+
+     BBLAYERS_NON_REMOVABLE ?= " \
+        /usr/local/src/yocto/meta \
+        /usr/local/src/yocto/meta-yocto \
+        "
+                    </pre><p>
+                    Adding the layer to this file allows the build system to build the BSP and
+                    the <code class="filename">yocto-kernel</code> tool to be able to find the layer and
+                    other metadata it needs on which to operate.
+                </p></div><div class="section" title="1.6.3. Managing Kernel Patches and Config Items with yocto-kernel"><div class="titlepage"><div><div><h3 class="title"><a id="managing-kernel-patches-and-config-items-with-yocto-kernel"></a>1.6.3. Managing Kernel Patches and Config Items with yocto-kernel</h3></div></div></div><p>
+                    Assuming you have created a <a class="link" href="#bsp-layers" title="1.1. BSP Layers">BSP Layer</a> using
+                    <a class="link" href="#creating-a-new-bsp-layer-using-the-yocto-bsp-script" title="1.6.2. Creating a new BSP Layer Using the yocto-bsp Script">
+                    <code class="filename">yocto-bsp</code></a> and you added it to your
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-BBLAYERS" target="_top"><code class="filename">BBLAYERS</code></a>
+                    variable in the <code class="filename">bblayers.conf</code> file, you can now use
+                    the <code class="filename">yocto-kernel</code> script to add patches and configuration
+                    items to the BSP's kernel.
+                </p><p>
+                    The <code class="filename">yocto-kernel</code> script allows you to add, remove, and list patches
+                    and kernel config settings to a BSP's kernel
+                    <code class="filename">.bbappend</code> file.
+                    All you need to do is use the appropriate sub-command.
+                    Recall that the easiest way to see exactly what sub-commands are available
+                    is to use the <code class="filename">yocto-kernel</code> built-in help as follows:
+                    </p><pre class="literallayout">
+     $ yocto-kernel
+     Usage:
+
+      Modify and list Yocto BSP kernel config items and patches.
+
+      usage: yocto-kernel [--version] [--help] COMMAND [ARGS]
+
+      Current 'yocto-kernel' commands are:
+        config list       List the modifiable set of bare kernel config options for a BSP
+        config add        Add or modify bare kernel config options for a BSP
+        config rm         Remove bare kernel config options from a BSP
+        patch list        List the patches associated with a BSP
+        patch add         Patch the Yocto kernel for a BSP
+        patch rm          Remove patches from a BSP
+
+      See 'yocto-kernel help COMMAND' for more information on a specific command.
+
+
+
+     Options:
+       --version    show program's version number and exit
+       -h, --help   show this help message and exit
+       -D, --debug  output debug information
+                    </pre><p>
+                </p><p>
+                    The <code class="filename">yocto-kernel patch add</code> sub-command allows you to add a
+                    patch to a BSP.
+                    The following example adds two patches to the <code class="filename">myarm</code> BSP:
+                    </p><pre class="literallayout">
+     $ yocto-kernel patch add myarm ~/test.patch
+     Added patches:
+             test.patch
+
+     $ yocto-kernel patch add myarm ~/yocto-testmod.patch
+     Added patches:
+             yocto-testmod.patch
+                    </pre><p>
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>Although the previous example adds patches one at a time, it is possible
+                    to add multiple patches at the same time.</div><p>
+                </p><p>
+                    You can verify patches have been added by using the
+                    <code class="filename">yocto-kernel patch list</code> sub-command.
+                    Here is an example:
+                    </p><pre class="literallayout">
+     $ yocto-kernel patch list myarm
+     The current set of machine-specific patches for myarm is:
+             1) test.patch
+             2) yocto-testmod.patch
+                    </pre><p>
+                </p><p>
+                    You can also use the <code class="filename">yocto-kernel</code> script to
+                    remove a patch using the <code class="filename">yocto-kernel patch rm</code> sub-command.
+                    Here is an example:
+                    </p><pre class="literallayout">
+     $ yocto-kernel patch rm myarm
+     Specify the patches to remove:
+             1) test.patch
+             2) yocto-testmod.patch
+     1
+     Removed patches:
+             test.patch
+                    </pre><p>
+                </p><p>
+                    Again, using the <code class="filename">yocto-kernel patch list</code> sub-command,
+                    you can verify that the patch was in fact removed:
+                    </p><pre class="literallayout">
+     $ yocto-kernel patch list myarm
+     The current set of machine-specific patches for myarm is:
+             1) yocto-testmod.patch
+                    </pre><p>
+                </p><p>
+                    In a completely similar way, you can use the <code class="filename">yocto-kernel config add</code>
+                    sub-command to add one or more kernel config item settings to a BSP.
+                    The following commands add a couple of config items to the
+                    <code class="filename">myarm</code> BSP:
+                    </p><pre class="literallayout">
+     $ yocto-kernel config add myarm CONFIG_MISC_DEVICES=y
+     Added items:
+             CONFIG_MISC_DEVICES=y
+
+     $ yocto-kernel config add myarm KCONFIG_YOCTO_TESTMOD=y
+     Added items:
+             CONFIG_YOCTO_TESTMOD=y
+                    </pre><p>
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>Although the previous example adds config items one at a time, it is possible
+                    to add multiple config items at the same time.</div><p>
+                </p><p>
+                    You can list the config items now associated with the BSP.
+                    Doing so shows you the config items you added as well as others associated
+                    with the BSP:
+                    </p><pre class="literallayout">
+     $ yocto-kernel config list myarm
+     The current set of machine-specific kernel config items for myarm is:
+             1) CONFIG_MISC_DEVICES=y
+             2) CONFIG_YOCTO_TESTMOD=y
+                    </pre><p>
+                </p><p>
+                    Finally, you can remove one or more config items using the
+                    <code class="filename">yocto-kernel config rm</code> sub-command in a manner
+                    completely analogous to <code class="filename">yocto-kernel patch rm</code>.
+                </p></div></div></div>
+
+
+
+</div></body></html>

@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title></title><link rel="stylesheet" href="adt-style.css" type="text/css" /><meta name="generator" content="DocBook XSL Stylesheets V1.75.2" /></head><body><div xml:lang="en" class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a id="adt-manual"></a></h1></div><div><div class="authorgroup">
+            <div class="author"><h3 class="author"><span class="firstname">Jessica</span> <span class="surname">Zhang</span></h3><div class="affiliation">
+                    <span class="orgname">Intel Corporation<br /></span>
+                </div><code class="email">&lt;<a class="email" href="mailto:jessica.zhang@intel.com">jessica.zhang@intel.com</a>&gt;</code></div>
+        </div></div><div><p class="copyright">Copyright © 2010-2013 Linux Foundation</p></div><div><div class="legalnotice" title="Legal Notice"><a id="idp18752"></a>
+      <p>
+        Permission is granted to copy, distribute and/or modify this document under
+        the terms of the <a class="ulink" href="http://creativecommons.org/licenses/by-sa/2.0/uk/" target="_top">Creative Commons Attribution-Share Alike 2.0 UK: England &amp; Wales</a> as published by Creative Commons.
+      </p>
+      <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+          Due to production processes, there could be differences between the Yocto Project
+          documentation bundled in the release tarball and the
+          <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/adt-manual/adt-manual.html" target="_top">Yocto Project Application Developer's Guide</a> on
+          the <a class="ulink" href="http://www.yoctoproject.org" target="_top">Yocto Project</a> website.
+          For the latest version of this manual, see the manual on the website.
+      </div>
+
+    </div></div><div><div class="revhistory"><table border="1" width="100%" summary="Revision history"><tr><th align="left" valign="top" colspan="2"><b>Revision History</b></th></tr>
+            <tr><td align="left">Revision 1.0</td><td align="left">6 April 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.0 Release.</td></tr>
+            <tr><td align="left">Revision 1.0.1</td><td align="left">23 May 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.0.1 Release.</td></tr>
+            <tr><td align="left">Revision 1.1</td><td align="left">6 October 2011</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.1 Release.</td></tr>
+            <tr><td align="left">Revision 1.2</td><td align="left">April 2012</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.2 Release.</td></tr>
+            <tr><td align="left">Revision 1.3</td><td align="left">October 2012</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.3 Release.</td></tr>
+            <tr><td align="left">Revision 1.4</td><td align="left">Sometime in 2013</td></tr><tr><td align="left" colspan="2">Released with the Yocto Project 1.4 Release.</td></tr>
+        </table></div></div></div><hr /></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#adt-intro">1. Introduction</a></span></dt><dd><dl><dt><span class="section"><a href="#adt-intro-section">1.1. The Application Development Toolkit (ADT)</a></span></dt><dd><dl><dt><span class="section"><a href="#the-cross-toolchain">1.1.1. The Cross-Toolchain</a></span></dt><dt><span class="section"><a href="#sysroot">1.1.2. Sysroot</a></span></dt><dt><span class="section"><a href="#eclipse-overview">1.1.3. Eclipse Yocto Plug-in</a></span></dt><dt><span class="section"><a href="#the-qemu-emulator">1.1.4. The QEMU Emulator</a></span></dt><dt><span class="section"><a href="#user-space-tools">1.1.5. User-Space Tools</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adt-prepare">2. Preparing for Application Development</a></span></dt><dd><dl><dt><span class="section"><a href="#installing-the-adt">2.1. Installing the ADT and Toolchains</a></span></dt><dd><dl><dt><span class="section"><a href="#using-the-adt-installer">2.1.1. Using the ADT Installer</a></span></dt><dt><span class="section"><a href="#using-an-existing-toolchain-tarball">2.1.2. Using a Cross-Toolchain Tarball</a></span></dt><dt><span class="section"><a href="#using-the-toolchain-from-within-the-build-tree">2.1.3. Using BitBake and the Build Directory</a></span></dt></dl></dd><dt><span class="section"><a href="#setting-up-the-cross-development-environment">2.2. Setting Up the Cross-Development Environment</a></span></dt><dt><span class="section"><a href="#securing-kernel-and-filesystem-images">2.3. Securing Kernel and Filesystem Images</a></span></dt><dd><dl><dt><span class="section"><a href="#getting-the-images">2.3.1. Getting the Images</a></span></dt><dt><span class="section"><a href="#extracting-the-root-filesystem">2.3.2. Extracting the Root Filesystem</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#adt-package">3. Optionally Customizing the Development Packages Installation</a></span></dt><dd><dl><dt><span class="section"><a href="#package-management-systems">3.1. Package Management Systems</a></span></dt><dt><span class="section"><a href="#configuring-the-pms">3.2. Configuring the PMS</a></span></dt></dl></dd><dt><span class="chapter"><a href="#using-the-command-line">4. Using the Command Line</a></span></dt><dd><dl><dt><span class="section"><a href="#autotools-based-projects">4.1. Autotools-Based Projects</a></span></dt><dd><dl><dt><span class="section"><a href="#creating-and-running-a-project-based-on-gnu-autotools">4.1.1. Creating and Running a Project Based on GNU Autotools</a></span></dt><dt><span class="section"><a href="#passing-host-options">4.1.2. Passing Host Options</a></span></dt></dl></dd><dt><span class="section"><a href="#makefile-based-projects">4.2. Makefile-Based Projects</a></span></dt></dl></dd></dl></div>
+    
+
+    <div class="chapter" title="Chapter 1. Introduction"><div class="titlepage"><div><div><h2 class="title"><a id="adt-intro"></a>Chapter 1. Introduction</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#adt-intro-section">1.1. The Application Development Toolkit (ADT)</a></span></dt><dd><dl><dt><span class="section"><a href="#the-cross-toolchain">1.1.1. The Cross-Toolchain</a></span></dt><dt><span class="section"><a href="#sysroot">1.1.2. Sysroot</a></span></dt><dt><span class="section"><a href="#eclipse-overview">1.1.3. Eclipse Yocto Plug-in</a></span></dt><dt><span class="section"><a href="#the-qemu-emulator">1.1.4. The QEMU Emulator</a></span></dt><dt><span class="section"><a href="#user-space-tools">1.1.5. User-Space Tools</a></span></dt></dl></dd></dl></div><p>
+    Welcome to the Yocto Project Application Developer's Guide.
+    This manual provides information that lets you begin developing applications
+    using the Yocto Project.
+</p><p>
+    The Yocto Project provides an application development environment based on
+    an Application Development Toolkit (ADT) and the availability of stand-alone
+    cross-development toolchains and other tools.
+    This manual describes the ADT and how you can configure and install it,
+    how to access and use the cross-development toolchains, how to
+    customize the development packages installation,
+    how to use command line development for both Autotools-based and Makefile-based projects,
+    and an introduction to the Eclipse Yocto Plug-in.
+</p><div class="section" title="1.1. The Application Development Toolkit (ADT)"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="adt-intro-section"></a>1.1. The Application Development Toolkit (ADT)</h2></div></div></div><p>
+        Part of the Yocto Project development solution is an Application Development
+        Toolkit (ADT).
+        The ADT provides you with a custom-built, cross-development
+        platform suited for developing a user-targeted product application.
+    </p><p>
+        Fundamentally, the ADT consists of the following:
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>An architecture-specific cross-toolchain and matching
+                sysroot both built by the OpenEmbedded build system, which uses Poky.
+                The toolchain and sysroot are based on a metadata configuration and extensions,
+                which allows you to cross-develop on the host machine for the target hardware.
+                </p></li><li class="listitem"><p>The Eclipse IDE Yocto Plug-in.</p></li><li class="listitem"><p>The Quick EMUlator (QEMU), which lets you simulate target hardware.
+                </p></li><li class="listitem"><p>Various user-space tools that greatly enhance your application
+                development experience.</p></li></ul></div><p>
+    </p><div class="section" title="1.1.1. The Cross-Toolchain"><div class="titlepage"><div><div><h3 class="title"><a id="the-cross-toolchain"></a>1.1.1. The Cross-Toolchain</h3></div></div></div><p>
+            The cross-toolchain consists of a cross-compiler, cross-linker, and cross-debugger
+            that are used to develop user-space applications for targeted hardware.
+            This toolchain is created either by running the ADT Installer script, a toolchain installer
+            script, or through a
+            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a> that
+            is based on your metadata
+            configuration or extension for your targeted device.
+            The cross-toolchain works with a matching target sysroot.
+        </p></div><div class="section" title="1.1.2. Sysroot"><div class="titlepage"><div><div><h3 class="title"><a id="sysroot"></a>1.1.2. Sysroot</h3></div></div></div><p>
+            The matching target sysroot contains needed headers and libraries for generating
+            binaries that run on the target architecture.
+            The sysroot is based on the target root filesystem image that is built by
+            the OpenEmbedded build system Poky and uses the same metadata configuration
+            used to build the cross-toolchain.
+        </p></div><div class="section" title="1.1.3. Eclipse Yocto Plug-in"><div class="titlepage"><div><div><h3 class="title"><a id="eclipse-overview"></a>1.1.3. Eclipse Yocto Plug-in</h3></div></div></div><p>
+            The Eclipse IDE is a popular development environment and it fully supports
+            development using the Yocto Project.
+            When you install and configure the Eclipse Yocto Project Plug-in into
+            the Eclipse IDE, you maximize your Yocto Project experience.
+            Installing and configuring the Plug-in results in an environment that
+            has extensions specifically designed to let you more easily develop software.
+            These extensions allow for cross-compilation, deployment, and execution of
+            your output into a QEMU emulation session.
+            You can also perform cross-debugging and profiling.
+            The environment also supports a suite of tools that allows you to perform
+            remote profiling, tracing, collection of power data, collection of
+            latency data, and collection of performance data.
+        </p><p>
+            For information about the application development workflow that uses the Eclipse
+            IDE and for a detailed example of how to install and configure the Eclipse
+            Yocto Project Plug-in, see the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#adt-eclipse" target="_top">Working Within Eclipse</a>" section
+            of the Yocto Project Development Manual.
+        </p></div><div class="section" title="1.1.4. The QEMU Emulator"><div class="titlepage"><div><div><h3 class="title"><a id="the-qemu-emulator"></a>1.1.4. The QEMU Emulator</h3></div></div></div><p>
+            The QEMU emulator allows you to simulate your hardware while running your
+            application or image.
+            QEMU is made available a number of ways:
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>If you use the ADT Installer script to install ADT, you can
+                    specify whether or not to install QEMU.</p></li><li class="listitem"><p>If you have downloaded a Yocto Project release and unpacked
+                    it to create a
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a> and
+                    you have sourced
+                    the environment setup script, QEMU is installed and automatically
+                    available.</p></li><li class="listitem"><p>If you have installed the cross-toolchain
+                    tarball and you have sourcing the toolchain's setup environment script, QEMU
+                    is also installed and automatically available.</p></li></ul></div><p>
+        </p></div><div class="section" title="1.1.5. User-Space Tools"><div class="titlepage"><div><div><h3 class="title"><a id="user-space-tools"></a>1.1.5. User-Space Tools</h3></div></div></div><p>
+            User-space tools are included as part of the distribution.
+            You will find these tools helpful during development.
+            The tools include LatencyTOP, PowerTOP, OProfile, Perf, SystemTap, and Lttng-ust.
+            These tools are common development tools for the Linux platform.
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>LatencyTOP:</em></span> LatencyTOP focuses on latency
+                    that causes skips in audio,
+                    stutters in your desktop experience, or situations that overload your server
+                    even when you have plenty of CPU power left.
+                    You can find out more about LatencyTOP at
+                    <a class="ulink" href="http://www.latencytop.org/" target="_top">http://www.latencytop.org/</a>.</p></li><li class="listitem"><p><span class="emphasis"><em>PowerTOP:</em></span> Helps you determine what
+                    software is using the most power.
+                    You can find out more about PowerTOP at
+                    <a class="ulink" href="https://01.org/powertop/" target="_top">https://01.org/powertop/</a>.</p></li><li class="listitem"><p><span class="emphasis"><em>OProfile:</em></span> A system-wide profiler for Linux
+                    systems that is capable of profiling all running code at low overhead.
+                    You can find out more about OProfile at
+                    <a class="ulink" href="http://oprofile.sourceforge.net/about/" target="_top">http://oprofile.sourceforge.net/about/</a>.</p></li><li class="listitem"><p><span class="emphasis"><em>Perf:</em></span> Performance counters for Linux used
+                    to keep track of certain types of hardware and software events.
+                    For more information on these types of counters see
+                    <a class="ulink" href="https://perf.wiki.kernel.org/" target="_top">https://perf.wiki.kernel.org/</a> and click
+                    on “Perf tools.”</p></li><li class="listitem"><p><span class="emphasis"><em>SystemTap:</em></span> A free software infrastructure
+                    that simplifies information gathering about a running Linux system.
+                    This information helps you diagnose performance or functional problems.
+                    SystemTap is not available as a user-space tool through the Eclipse IDE Yocto Plug-in.
+                    See <a class="ulink" href="http://sourceware.org/systemtap" target="_top">http://sourceware.org/systemtap</a> for more information
+                    on SystemTap.</p></li><li class="listitem"><p><span class="emphasis"><em>Lttng-ust:</em></span> A User-space Tracer designed to
+                    provide detailed information on user-space activity.
+                    See <a class="ulink" href="http://lttng.org/ust" target="_top">http://lttng.org/ust</a> for more information on Lttng-ust.
+                    </p></li></ul></div><p>
+        </p></div></div></div>
+
+    <div class="chapter" title="Chapter 2. Preparing for Application Development"><div class="titlepage"><div><div><h2 class="title"><a id="adt-prepare"></a>Chapter 2. Preparing for Application Development</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#installing-the-adt">2.1. Installing the ADT and Toolchains</a></span></dt><dd><dl><dt><span class="section"><a href="#using-the-adt-installer">2.1.1. Using the ADT Installer</a></span></dt><dt><span class="section"><a href="#using-an-existing-toolchain-tarball">2.1.2. Using a Cross-Toolchain Tarball</a></span></dt><dt><span class="section"><a href="#using-the-toolchain-from-within-the-build-tree">2.1.3. Using BitBake and the Build Directory</a></span></dt></dl></dd><dt><span class="section"><a href="#setting-up-the-cross-development-environment">2.2. Setting Up the Cross-Development Environment</a></span></dt><dt><span class="section"><a href="#securing-kernel-and-filesystem-images">2.3. Securing Kernel and Filesystem Images</a></span></dt><dd><dl><dt><span class="section"><a href="#getting-the-images">2.3.1. Getting the Images</a></span></dt><dt><span class="section"><a href="#extracting-the-root-filesystem">2.3.2. Extracting the Root Filesystem</a></span></dt></dl></dd></dl></div><p>
+    In order to develop applications, you need set up your host development system.
+    Several ways exist that allow you to install cross-development tools, QEMU, the
+    Eclipse Yocto Plug-in, and other tools.
+    This chapter describes how to prepare for application development.
+</p><div class="section" title="2.1. Installing the ADT and Toolchains"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="installing-the-adt"></a>2.1. Installing the ADT and Toolchains</h2></div></div></div><p>
+        The following list describes installation methods that set up varying degrees of tool
+        availability on your system.
+        Regardless of the installation method you choose,
+        you must <code class="filename">source</code> the cross-toolchain
+        environment setup script before you use a toolchain.
+        See the "<a class="link" href="#setting-up-the-cross-development-environment" title="2.2. Setting Up the Cross-Development Environment">Setting Up the
+        Cross-Development Environment</a>" section for more information.
+    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Avoid mixing installation methods when installing toolchains for different architectures.
+        For example, avoid using the ADT Installer to install some toolchains and then hand-installing
+        cross-development toolchains by running the toolchain installer for different architectures.
+        Mixing installation methods can result in situations where the ADT Installer becomes
+        unreliable and might not install the toolchain.</p><p>If you must mix installation methods, you might avoid problems by deleting
+        <code class="filename">/var/lib/opkg</code>, thus purging the <code class="filename">opkg</code> package
+        metadata</p></div><p>
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>Use the ADT Installer Script:</em></span>
+                This method is the recommended way to install the ADT because it
+                automates much of the process for you.
+                For example, you can configure the installation to install the QEMU emulator
+                and the user-space NFS, specify which root filesystem profiles to download,
+                and define the target sysroot location.</p></li><li class="listitem"><p><span class="emphasis"><em>Use an Existing Toolchain:</em></span>
+                Using this method, you select and download an architecture-specific
+                toolchain installer and then run the script to hand-install the toolchain.
+                If you use this method, you just get the cross-toolchain and QEMU - you do not
+                get any of the other mentioned benefits had you run the ADT Installer script.</p></li><li class="listitem"><p><span class="emphasis"><em>Use the Toolchain from within the Build Directory:</em></span>
+                If you already have a
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>,
+                you can build the cross-toolchain within the directory.
+                However, like the previous method mentioned, you only get the cross-toolchain and QEMU - you
+                do not get any of the other benefits without taking separate steps.</p></li></ul></div><p>
+    </p><div class="section" title="2.1.1. Using the ADT Installer"><div class="titlepage"><div><div><h3 class="title"><a id="using-the-adt-installer"></a>2.1.1. Using the ADT Installer</h3></div></div></div><p>
+            To run the ADT Installer, you need to get the ADT Installer tarball, be sure
+            you have the necessary host development packages that support the ADT Installer,
+            and then run the ADT Installer Script.
+        </p><p>
+            For a list of the host packages needed to support ADT installation and use, see the
+            "ADT Installer Extras" lists in the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#required-packages-for-the-host-development-system" target="_top">Required Packages for the Host Development System</a>" section
+            of the Yocto Project Reference Manual.
+        </p><div class="section" title="2.1.1.1. Getting the ADT Installer Tarball"><div class="titlepage"><div><div><h4 class="title"><a id="getting-the-adt-installer-tarball"></a>2.1.1.1. Getting the ADT Installer Tarball</h4></div></div></div><p>
+                The ADT Installer is contained in the ADT Installer tarball.
+                You can download the tarball into any directory from the
+                <a class="ulink" href="http://downloads.yoctoproject.org/releases" target="_top">Index of Releases</a>, specifically
+                at
+                <a class="ulink" href="http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/adt_installer" target="_top">http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/adt_installer</a>.
+                Or, you can use BitBake to generate the tarball inside the existing
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>.
+            </p><p>
+                If you use BitBake to generate the ADT Installer tarball, you must
+                <code class="filename">source</code> the environment setup script
+                (<code class="filename">oe-init-build-env</code>) located
+                in the Source Directory before running the <code class="filename">bitbake</code>
+                command that creates the tarball.
+            </p><p>
+                The following example commands download the Poky tarball, set up the
+                <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>,
+                set up the environment while also creating the default Build Directory,
+                and run the <code class="filename">bitbake</code> command that results in the tarball
+                <code class="filename">~/yocto-project/build/tmp/deploy/sdk/adt_installer.tar.bz2</code>:
+                </p><pre class="literallayout">
+     $ cd ~
+     $ mkdir yocto-project
+     $ cd yocto-project
+     $ wget http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/poky-tbd-8.0.tar.bz2
+     $ tar xjf poky-tbd-8.0.tar.bz2
+     $ source poky-tbd-8.0/oe-init-build-env
+     $ bitbake adt-installer
+                </pre><p>
+            </p></div><div class="section" title="2.1.1.2. Configuring and Running the ADT Installer Script"><div class="titlepage"><div><div><h4 class="title"><a id="configuring-and-running-the-adt-installer-script"></a>2.1.1.2. Configuring and Running the ADT Installer Script</h4></div></div></div><p>
+                Before running the ADT Installer script, you need to unpack the tarball.
+                You can unpack the tarball in any directory you wish.
+                For example, this command copies the ADT Installer tarball from where
+                it was built into the home directory and then unpacks the tarball into
+                a top-level directory named <code class="filename">adt-installer</code>:
+                </p><pre class="literallayout">
+     $ cd ~
+     $ cp ~/poky/build/tmp/deploy/sdk/adt_installer.tar.bz2 $HOME
+     $ tar -xjf adt_installer.tar.bz2
+                </pre><p>
+                Unpacking it creates the directory <code class="filename">adt-installer</code>,
+                which contains the ADT Installer script (<code class="filename">adt_installer</code>)
+                and its configuration file (<code class="filename">adt_installer.conf</code>).
+            </p><p>
+                Before you run the script, however, you should examine the ADT Installer configuration
+                file and be sure you are going to get what you want.
+                Your configurations determine which kernel and filesystem image are downloaded.
+            </p><p>
+                The following list describes the configurations you can define for the ADT Installer.
+                For configuration values and restrictions, see the comments in
+                the <code class="filename">adt-installer.conf</code> file:
+
+                </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><code class="filename">YOCTOADT_REPO</code>: This area
+                        includes the IPKG-based packages and the root filesystem upon which
+                        the installation is based.
+                        If you want to set up your own IPKG repository pointed to by
+                        <code class="filename">YOCTOADT_REPO</code>, you need to be sure that the
+                        directory structure follows the same layout as the reference directory
+                        set up at <a class="ulink" href="http://adtrepo.yoctoproject.org" target="_top">http://adtrepo.yoctoproject.org</a>.
+                        Also, your repository needs to be accessible through HTTP.</p></li><li class="listitem"><p><code class="filename">YOCTOADT_TARGETS</code>: The machine
+                        target architectures for which you want to set up cross-development
+                        environments.</p></li><li class="listitem"><p><code class="filename">YOCTOADT_QEMU</code>: Indicates whether
+                        or not to install the emulator QEMU.</p></li><li class="listitem"><p><code class="filename">YOCTOADT_NFS_UTIL</code>: Indicates whether
+                        or not to install user-mode NFS.
+                        If you plan to use the Eclipse IDE Yocto plug-in against QEMU,
+                        you should install NFS.
+                        </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>To boot QEMU images using our userspace NFS server, you need
+                            to be running <code class="filename">portmap</code> or <code class="filename">rpcbind</code>.
+                            If you are running <code class="filename">rpcbind</code>, you will also need to add the
+                            <code class="filename">-i</code> option when <code class="filename">rpcbind</code> starts up.
+                            Please make sure you understand the security implications of doing this.
+                            You might also have to modify your firewall settings to allow
+                            NFS booting to work.</div></li><li class="listitem"><p><code class="filename">YOCTOADT_ROOTFS_&lt;arch&gt;</code>: The root
+                        filesystem images you want to download from the
+                        <code class="filename">YOCTOADT_IPKG_REPO</code> repository.</p></li><li class="listitem"><p><code class="filename">YOCTOADT_TARGET_SYSROOT_IMAGE_&lt;arch&gt;</code>: The
+                        particular root filesystem used to extract and create the target sysroot.
+                        The value of this variable must have been specified with
+                        <code class="filename">YOCTOADT_ROOTFS_&lt;arch&gt;</code>.
+                        For example, if you downloaded both <code class="filename">minimal</code> and
+                        <code class="filename">sato-sdk</code> images by setting
+                        <code class="filename">YOCTOADT_ROOTFS_&lt;arch&gt;</code>
+                        to "minimal sato-sdk", then <code class="filename">YOCTOADT_ROOTFS_&lt;arch&gt;</code>
+                        must be set to either <code class="filename">minimal</code> or
+                        <code class="filename">sato-sdk</code>.</p></li><li class="listitem"><p><code class="filename">YOCTOADT_TARGET_SYSROOT_LOC_&lt;arch&gt;</code>: The
+                        location on the development host where the target sysroot is created.
+                        </p></li></ul></div><p>
+            </p><p>
+                After you have configured the <code class="filename">adt_installer.conf</code> file,
+                run the installer using the following command.
+                Be sure that you are not trying to use cross-compilation tools.
+                When you run the installer, the environment must use a
+                host <code class="filename">gcc</code>:
+                </p><pre class="literallayout">
+     $ cd ~/adt-installer
+     $ ./adt_installer
+                </pre><p>
+                Once the installer begins to run, you are asked to enter the location for
+                cross-toolchain installation.
+                The default location is <code class="filename">/opt/poky/&lt;release&gt;</code>.
+                After selecting the location, you are prompted to run in
+                interactive or silent mode.
+                If you want to closely monitor the installation, choose “I” for interactive
+                mode rather than “S” for silent mode.
+                Follow the prompts from the script to complete the installation.
+            </p><p>
+                Once the installation completes, the ADT, which includes the cross-toolchain, is installed.
+                You will notice environment setup files for the cross-toolchain in
+                <code class="filename">/opt/poky/1.4</code>,
+                and image tarballs in the <code class="filename">adt-installer</code>
+                directory according to your installer configurations, and the target sysroot located
+                according to the <code class="filename">YOCTOADT_TARGET_SYSROOT_LOC_&lt;arch&gt;</code> variable
+                also in your configuration file.
+            </p></div></div><div class="section" title="2.1.2. Using a Cross-Toolchain Tarball"><div class="titlepage"><div><div><h3 class="title"><a id="using-an-existing-toolchain-tarball"></a>2.1.2. Using a Cross-Toolchain Tarball</h3></div></div></div><p>
+            If you want to simply install the cross-toolchain by hand, you can do so by running the
+            toolchain installer.
+            If you use this method to install the cross-toolchain and you still need to install the target
+            sysroot, you will have to extract and install sysroot separately.
+            For information on how to do this, see the
+            "<a class="link" href="#extracting-the-root-filesystem" title="2.3.2. Extracting the Root Filesystem">Extracting the Root Filesystem</a>" section.
+        </p><p>
+            Follow these steps:
+            </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Go to
+                    <a class="ulink" href="http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/toolchain/" target="_top">http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/toolchain/</a>
+                    and find the folder that matches your host development system
+                    (i.e. <code class="filename">i686</code> for 32-bit machines or
+                    <code class="filename">x86-64</code> for 64-bit machines).</p></li><li class="listitem"><p>Go into that folder and download the toolchain installer whose name
+                    includes the appropriate target architecture.
+                    For example, if your host development system is an Intel-based 64-bit system and
+                    you are going to use your cross-toolchain for an Intel-based 32-bit target, go into the
+                    <code class="filename">x86_64</code> folder and download the following installer:
+                    </p><pre class="literallayout">
+     poky-eglibc-x86_64-i586-toolchain-gmae-1.4.sh
+                    </pre><p>
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>As an alternative to steps one and two, you can build the toolchain installer
+                        if you have a <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>.
+                        If you need GMAE, you should use the <code class="filename">bitbake meta-toolchain-gmae</code>
+                        command.
+                        The resulting installation script when run will support such development.
+                        However, if you are not concerned with GMAE,
+                        you can generate the toolchain installer using
+                        <code class="filename">bitbake meta-toolchain</code>.</p><p>Use the appropriate <code class="filename">bitbake</code> command only after you have
+                        sourced the <code class="filename">poky-tbd-8.0/oe-init-build-env</code> script located in the Source
+                        Directory and you have made sure your <code class="filename">conf/local.conf</code>
+                        variables are correct.
+                        In particular, you need to be sure the
+                        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-MACHINE" target="_top"><code class="filename">MACHINE</code></a>
+                        variable matches the architecture for which you are building and that the
+                        <code class="filename">SDKMACHINE</code> variable is correctly set if you are building
+                        a toolchain for an architecture that differs from your current
+                        development host machine.</p><p>When the <code class="filename">bitbake</code> command completes, the
+                        toolchain installer will be in <code class="filename">tmp/deploy/sdk</code> in the
+                        Build Directory.
+                        </p></div><p>
+                    </p></li><li class="listitem"><p>Once you have the installer, run it to install the toolchain.
+                    You must change the permissions on the toolchain installer
+                    script so that it is executable.</p><p>The following command shows how to run the installer given a toolchain tarball
+                    for a 64-bit development host system and a 32-bit target architecture.
+                    The example assumes the toolchain installer is located in <code class="filename">~/Downloads/</code>.
+                    </p><pre class="literallayout">
+     $ ~/Downloads/poky-eglibc-x86_64-i586-toolchain-gmae-1.4.sh
+                    </pre><p>
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                        If you do not have write permissions for the directory into which you are installing
+                        the toolchain, the toolchain installer notifies you and exits.
+                        Be sure you have write permissions in the directory and run the installer again.
+                    </div><p>
+                    Once the tarball is expanded, the cross-toolchain is installed.
+                    You will notice environment setup files for the cross-toolchain in the directory.
+                    </p></li></ol></div><p>
+        </p></div><div class="section" title="2.1.3. Using BitBake and the Build Directory"><div class="titlepage"><div><div><h3 class="title"><a id="using-the-toolchain-from-within-the-build-tree"></a>2.1.3. Using BitBake and the Build Directory</h3></div></div></div><p>
+            A final way of making the cross-toolchain available is to use BitBake
+            to generate the toolchain within an existing
+            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>.
+            This method does not install the toolchain into the
+            <code class="filename">/opt</code> directory.
+            As with the previous method, if you need to install the target sysroot, you must
+            do that separately as well.
+        </p><p>
+            Follow these steps to generate the toolchain into the Build Directory:
+            </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Source the environment setup script
+                    <code class="filename">oe-init-build-env</code> located in the
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>.
+                    </p></li><li class="listitem"><p>At this point, you should be sure that the
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-MACHINE" target="_top"><code class="filename">MACHINE</code></a> variable
+                    in the <code class="filename">local.conf</code> file found in the
+                    <code class="filename">conf</code> directory of the Build Directory
+                    is set for the target architecture.
+                    Comments within the <code class="filename">local.conf</code> file list the values you
+                    can use for the <code class="filename">MACHINE</code> variable.
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>You can populate the Build Directory with the cross-toolchains for more
+                        than a single architecture.
+                        You just need to edit the <code class="filename">MACHINE</code> variable in the
+                        <code class="filename">local.conf</code> file and re-run the BitBake
+                        command.</div></li><li class="listitem"><p>Run <code class="filename">bitbake meta-ide-support</code> to complete the
+                    cross-toolchain generation.
+                    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>If you change out of your working directory after you
+                        <code class="filename">source</code> the environment setup script and before you run
+                        the <code class="filename">bitbake</code> command, the command might not work.
+                        Be sure to run the <code class="filename">bitbake</code> command immediately
+                        after checking or editing the <code class="filename">local.conf</code> but without
+                        changing out of your working directory.</div><p>
+                    Once the <code class="filename">bitbake</code> command finishes,
+                    the cross-toolchain is generated and populated within the Build Directory.
+                    You will notice environment setup files for the cross-toolchain in the
+                    Build Directory in the <code class="filename">tmp</code> directory.
+                    Setup script filenames contain the strings <code class="filename">environment-setup</code>.</p><p>Be aware that when you use this method to install the toolchain you still need
+                    to separately extract and install the sysroot filesystem.
+                    For information on how to do this, see the
+                    "<a class="link" href="#extracting-the-root-filesystem" title="2.3.2. Extracting the Root Filesystem">Extracting the Root Filesystem</a>" section.
+                    </p></li></ol></div><p>
+        </p></div></div><div class="section" title="2.2. Setting Up the Cross-Development Environment"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="setting-up-the-cross-development-environment"></a>2.2. Setting Up the Cross-Development Environment</h2></div></div></div><p>
+        Before you can develop using the cross-toolchain, you need to set up the
+        cross-development environment by sourcing the toolchain's environment setup script.
+        If you used the ADT Installer or hand-installed cross-toolchain,
+        then you can find this script in the <code class="filename">/opt/poky/1.4</code>
+        directory.
+        If you installed the toolchain in the
+        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>,
+        you can find the environment setup
+        script for the toolchain in the Build Directory's <code class="filename">tmp</code> directory.
+    </p><p>
+        Be sure to run the environment setup script that matches the architecture for
+        which you are developing.
+        Environment setup scripts begin with the string “<code class="filename">environment-setup</code>”
+        and include as part of their name the architecture.
+        For example, the toolchain environment setup script for a 64-bit IA-based architecture would
+        be the following:
+        </p><pre class="literallayout">
+     /opt/poky/1.4/environment-setup-x86_64-poky-linux
+        </pre><p>
+    </p></div><div class="section" title="2.3. Securing Kernel and Filesystem Images"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="securing-kernel-and-filesystem-images"></a>2.3. Securing Kernel and Filesystem Images</h2></div></div></div><p>
+        You will need to have a kernel and filesystem image to boot using your
+        hardware or the QEMU emulator.
+        Furthermore, if you plan on booting your image using NFS or you want to use the root filesystem
+        as the target sysroot, you need to extract the root filesystem.
+    </p><div class="section" title="2.3.1. Getting the Images"><div class="titlepage"><div><div><h3 class="title"><a id="getting-the-images"></a>2.3.1. Getting the Images</h3></div></div></div><p>
+            To get the kernel and filesystem images, you either have to build them or download
+            pre-built versions.
+            You can find examples for both these situations in the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/yocto-project-qs/yocto-project-qs.html#test-run" target="_top">A Quick Test Run</a>" section of
+            the Yocto Project Quick Start.
+        </p><p>
+            The Yocto Project ships basic kernel and filesystem images for several
+            architectures (<code class="filename">x86</code>, <code class="filename">x86-64</code>,
+            <code class="filename">mips</code>, <code class="filename">powerpc</code>, and <code class="filename">arm</code>)
+            that you can use unaltered in the QEMU emulator.
+            These kernel images reside in the release
+            area - <a class="ulink" href="http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/machines" target="_top">http://downloads.yoctoproject.org/releases/yocto/yocto-1.4/machines</a>
+            and are ideal for experimentation using Yocto Project.
+            For information on the image types you can build using the OpenEmbedded build system,
+            see the
+            "<a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#ref-images" target="_top">Images</a>" chapter in
+            the Yocto Project Reference Manual.
+        </p><p>
+            If you are planning on developing against your image and you are not
+            building or using one of the Yocto Project development images
+            (e.g. core-image-*-dev), you must be sure to include the development
+            packages as part of your image recipe.
+        </p><p>
+            Furthermore, if you plan on remotely deploying and debugging your
+            application from within the
+            Eclipse IDE, you must have an image that contains the Yocto Target Communication
+            Framework (TCF) agent (<code class="filename">tcf-agent</code>).
+            By default, the Yocto Project provides only one type pre-built image that contains the
+            <code class="filename">tcf-agent</code>.
+            And, those images are SDK (e.g.<code class="filename">core-image-sato-sdk</code>).
+        </p><p>
+            If you want to use a different image type that contains the <code class="filename">tcf-agent</code>,
+            you can do so one of two ways:
+            </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Modify the <code class="filename">conf/local.conf</code> configuration in
+                    the <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>
+                    and then rebuild the image.
+                    With this method, you need to modify the
+                    <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-EXTRA_IMAGE_FEATURES" target="_top"><code class="filename">EXTRA_IMAGE_FEATURES</code></a>
+                    variable to have the value of "tools-debug" before rebuilding the image.
+                    Once the image is rebuilt, the <code class="filename">tcf-agent</code> will be included
+                    in the image and is launched automatically after the boot.</p></li><li class="listitem"><p>Manually build the <code class="filename">tcf-agent</code>.
+                    To build the agent, follow these steps:
+                    </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>Be sure the ADT is installed as described in the
+                            "<a class="link" href="#installing-the-adt" title="2.1. Installing the ADT and Toolchains">Installing the ADT and Toolchains</a>" section.
+                            </p></li><li class="listitem"><p>Set up the cross-development environment as described in the
+                            "<a class="link" href="#setting-up-the-cross-development-environment" title="2.2. Setting Up the Cross-Development Environment">Setting
+                            Up the Cross-Development Environment</a>" section.</p></li><li class="listitem"><p>Get the <code class="filename">tcf-agent</code> source code using
+                            the following commands:
+                            </p><pre class="literallayout">
+     $ git clone http://git.eclipse.org/gitroot/tcf/org.eclipse.tcf.agent.git
+     $ cd agent
+                            </pre></li><li class="listitem"><p>Modify the <code class="filename">Makefile.inc</code> file
+                            for the cross-compilation environment by setting the
+                            <code class="filename">OPSYS</code> and
+                            <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-MACHINE" target="_top"><code class="filename">MACHINE</code></a>
+                            variables according to your target.</p></li><li class="listitem"><p>Use the cross-development tools to build the
+                            <code class="filename">tcf-agent</code>.
+                            Before you "Make" the file, be sure your cross-tools are set up first.
+                            See the "<a class="link" href="#makefile-based-projects" title="4.2. Makefile-Based Projects">Makefile-Based Projects</a>"
+                            section for information on how to make sure the cross-tools are set up
+                            correctly.</p><p>If the build is successful, the <code class="filename">tcf-agent</code> output will
+                            be <code class="filename">obj/$(OPSYS)/$(MACHINE)/Debug/agent</code>.</p></li><li class="listitem"><p>Deploy the agent into the image's root filesystem.</p></li></ol></div><p>
+                </p></li></ul></div><p>
+        </p></div><div class="section" title="2.3.2. Extracting the Root Filesystem"><div class="titlepage"><div><div><h3 class="title"><a id="extracting-the-root-filesystem"></a>2.3.2. Extracting the Root Filesystem</h3></div></div></div><p>
+            You must extract the root filesystem if you want to boot the image using NFS
+            or you want to use the root filesystem as the target sysroot.
+            For example, the Eclipse IDE environment with the Eclipse Yocto Plug-in installed allows you
+            to use QEMU to boot under NFS.
+            Another example is if you want to develop your target application using the
+            root filesystem as the target sysroot.
+        </p><p>
+            To extract the root filesystem, first <code class="filename">source</code>
+            the cross-development environment setup script and then
+            use the <code class="filename">runqemu-extract-sdk</code> command on the
+            filesystem image.
+            For example, the following commands set up the environment and then extract
+            the root filesystem from a previously built filesystem image tarball named
+            <code class="filename">core-image-sato-sdk-qemux86-2011091411831.rootfs.tar.bz2</code>.
+            The example extracts the root filesystem into the <code class="filename">$HOME/qemux86-sato</code>
+            directory:
+            </p><pre class="literallayout">
+     $ source $HOME/poky/build/tmp/environment-setup-i586-poky-linux
+     $ runqemu-extract-sdk \
+        tmp/deploy/images/core-image-sato-sdk-qemux86-2011091411831.rootfs.tar.bz2 \
+        $HOME/qemux86-sato
+            </pre><p>
+            In this case, you could now point to the target sysroot at
+            <code class="filename">$HOME/qemux86-sato</code>.
+        </p></div></div></div>
+
+    <div class="chapter" title="Chapter 3. Optionally Customizing the Development Packages Installation"><div class="titlepage"><div><div><h2 class="title"><a id="adt-package"></a>Chapter 3. Optionally Customizing the Development Packages Installation</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#package-management-systems">3.1. Package Management Systems</a></span></dt><dt><span class="section"><a href="#configuring-the-pms">3.2. Configuring the PMS</a></span></dt></dl></div><p>
+        Because the Yocto Project is suited for embedded Linux development, it is
+        likely that you will need to customize your development packages installation.
+        For example, if you are developing a minimal image, then you might not need
+        certain packages (e.g. graphics support packages).
+        Thus, you would like to be able to remove those packages from your target sysroot.
+    </p><div class="section" title="3.1. Package Management Systems"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="package-management-systems"></a>3.1. Package Management Systems</h2></div></div></div><p>
+        The OpenEmbedded build system supports the generation of sysroot files using
+        three different Package Management Systems (PMS):
+        </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="emphasis"><em>OPKG:</em></span> A less well known PMS whose use
+                originated in the OpenEmbedded and OpenWrt embedded Linux projects.
+                This PMS works with files packaged in an <code class="filename">.ipk</code> format.
+                See <a class="ulink" href="http://en.wikipedia.org/wiki/Opkg" target="_top">http://en.wikipedia.org/wiki/Opkg</a> for more
+                information about OPKG.</p></li><li class="listitem"><p><span class="emphasis"><em>RPM:</em></span> A more widely known PMS intended for GNU/Linux
+                distributions.
+                This PMS works with files packaged in an <code class="filename">.rms</code> format.
+                The build system currently installs through this PMS by default.
+                See <a class="ulink" href="http://en.wikipedia.org/wiki/RPM_Package_Manager" target="_top">http://en.wikipedia.org/wiki/RPM_Package_Manager</a>
+                for more information about RPM.</p></li><li class="listitem"><p><span class="emphasis"><em>Debian:</em></span> The PMS for Debian-based systems
+                is built on many PMS tools.
+                The lower-level PMS tool <code class="filename">dpkg</code> forms the base of the Debian PMS.
+                For information on dpkg see
+                <a class="ulink" href="http://en.wikipedia.org/wiki/Dpkg" target="_top">http://en.wikipedia.org/wiki/Dpkg</a>.</p></li></ul></div><p>
+    </p></div><div class="section" title="3.2. Configuring the PMS"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="configuring-the-pms"></a>3.2. Configuring the PMS</h2></div></div></div><p>
+        Whichever PMS you are using, you need to be sure that the
+        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#var-PACKAGE_CLASSES" target="_top"><code class="filename">PACKAGE_CLASSES</code></a>
+        variable in the <code class="filename">conf/local.conf</code>
+        file is set to reflect that system.
+        The first value you choose for the variable specifies the package file format for the root
+        filesystem at sysroot.
+        Additional values specify additional formats for convenience or testing.
+        See the configuration file for details.
+    </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+        For build performance information related to the PMS, see
+        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/ref-manual/ref-manual.html#ref-classes-package" target="_top">Packaging - <code class="filename">package*.bbclass</code></a>
+        in the Yocto Project Reference Manual.
+    </div><p>
+        As an example, consider a scenario where you are using OPKG and you want to add
+        the <code class="filename">libglade</code> package to the target sysroot.
+    </p><p>
+        First, you should generate the <code class="filename">ipk</code> file for the
+        <code class="filename">libglade</code> package and add it
+        into a working <code class="filename">opkg</code> repository.
+        Use these commands:
+        </p><pre class="literallayout">
+     $ bitbake libglade
+     $ bitbake package-index
+        </pre><p>
+    </p><p>
+        Next, source the environment setup script found in the
+        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#source-directory" target="_top">Source Directory</a>.
+        Follow that by setting up the installation destination to point to your
+        sysroot as <code class="filename">&lt;sysroot_dir&gt;</code>.
+        Finally, have an OPKG configuration file <code class="filename">&lt;conf_file&gt;</code>
+        that corresponds to the <code class="filename">opkg</code> repository you have just created.
+        The following command forms should now work:
+        </p><pre class="literallayout">
+     $ opkg-cl –f &lt;conf_file&gt; -o &lt;sysroot_dir&gt; update
+     $ opkg-cl –f &lt;cconf_file&gt; -o &lt;sysroot_dir&gt; \
+        --force-overwrite install libglade
+     $ opkg-cl –f &lt;cconf_file&gt; -o &lt;sysroot_dir&gt; \
+        --force-overwrite install libglade-dbg
+     $ opkg-cl –f &lt;conf_file&gt; -o &lt;sysroot_dir&gt; \
+        --force-overwrite install libglade-dev
+        </pre><p>
+    </p></div></div>
+
+    <div class="chapter" title="Chapter 4. Using the Command Line"><div class="titlepage"><div><div><h2 class="title"><a id="using-the-command-line"></a>Chapter 4. Using the Command Line</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#autotools-based-projects">4.1. Autotools-Based Projects</a></span></dt><dd><dl><dt><span class="section"><a href="#creating-and-running-a-project-based-on-gnu-autotools">4.1.1. Creating and Running a Project Based on GNU Autotools</a></span></dt><dt><span class="section"><a href="#passing-host-options">4.1.2. Passing Host Options</a></span></dt></dl></dd><dt><span class="section"><a href="#makefile-based-projects">4.2. Makefile-Based Projects</a></span></dt></dl></div><p>
+        Recall that earlier the manual discussed how to use an existing toolchain
+        tarball that had been installed into <code class="filename">/opt/poky</code>,
+        which is outside of the
+        <a class="ulink" href="http://www.yoctoproject.org/docs/1.4/dev-manual/dev-manual.html#build-directory" target="_top">Build Directory</a>
+        (see the section "<a class="link" href="#using-an-existing-toolchain-tarball" title="2.1.2. Using a Cross-Toolchain Tarball">Using a Cross-Toolchain Tarball)</a>".
+        And, that sourcing your architecture-specific environment setup script
+        initializes a suitable cross-toolchain development environment.
+        During the setup, locations for the compiler, QEMU scripts, QEMU binary,
+        a special version of <code class="filename">pkgconfig</code> and other useful
+        utilities are added to the <code class="filename">PATH</code> variable.
+        Variables to assist <code class="filename">pkgconfig</code> and <code class="filename">autotools</code>
+        are also defined so that,
+        for example, <code class="filename">configure.sh</code> can find pre-generated
+        test results for tests that need target hardware on which to run.
+        These conditions allow you to easily use the toolchain outside of the
+        OpenEmbedded build environment on both autotools-based projects and
+        Makefile-based projects.
+    </p><div class="section" title="4.1. Autotools-Based Projects"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="autotools-based-projects"></a>4.1. Autotools-Based Projects</h2></div></div></div><p>
+        Once you have a suitable cross-toolchain installed, it is very easy to
+        develop a project outside of the OpenEmbedded build system.
+        This section presents a simple "Helloworld" example that shows how
+        to set up, compile, and run the project.
+    </p><div class="section" title="4.1.1. Creating and Running a Project Based on GNU Autotools"><div class="titlepage"><div><div><h3 class="title"><a id="creating-and-running-a-project-based-on-gnu-autotools"></a>4.1.1. Creating and Running a Project Based on GNU Autotools</h3></div></div></div><p>
+            Follow these steps to create a simple autotools-based project:
+            </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p><span class="emphasis"><em>Create your directory:</em></span>
+                    Create a clean directory for your project and then make
+                    that directory your working location:
+                    </p><pre class="literallayout">
+     $ mkdir $HOME/helloworld
+     $ cd $HOME/helloworld
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Populate the directory:</em></span>
+                    Create <code class="filename">hello.c</code>, <code class="filename">Makefile.am</code>,
+                    and <code class="filename">configure.in</code> files as follows:
+                    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>For <code class="filename">hello.c</code>, include
+                            these lines:
+                            </p><pre class="literallayout">
+     #include &lt;stdio.h&gt;
+
+     main()
+        {
+           printf("Hello World!\n");
+        }
+                            </pre></li><li class="listitem"><p>For <code class="filename">Makefile.am</code>,
+                            include these lines:
+                            </p><pre class="literallayout">
+     bin_PROGRAMS = hello
+     hello_SOURCES = hello.c
+                            </pre></li><li class="listitem"><p>For <code class="filename">configure.in</code>,
+                            include these lines:
+                            </p><pre class="literallayout">
+     AC_INIT(hello.c)
+     AM_INIT_AUTOMAKE(hello,0.1)
+     AC_PROG_CC
+     AC_PROG_INSTALL
+     AC_OUTPUT(Makefile)
+                            </pre></li></ul></div></li><li class="listitem"><p><span class="emphasis"><em>Source the cross-toolchain
+                    environment setup file:</em></span>
+                    Installation of the cross-toolchain creates a cross-toolchain
+                    environment setup script in <code class="filename">/opt/poky/&lt;release&gt;</code>.
+                    Before you can use the tools to develop your project, you must
+                    source this setup script.
+                    The script begins with the string "environment-setup" and contains
+                    the machine architecture, which is followed by the string
+                    "poky-linux".
+                    Here is an example for an environment setup using the
+                    32-bit Intel x86 Architecture and using the
+                    tbd Yocto Project release:
+                    </p><pre class="literallayout">
+     $ source /opt/poky/1.4/environment-setup-i586-poky-linux
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Generate the local <code class="filename">aclocal.m4</code>
+                    files and create the configure script:</em></span>
+                    The following GNU Autotools generate the local
+                    <code class="filename">aclocal.m4</code> files and create the
+                    configure script:
+                    </p><pre class="literallayout">
+     $ aclocal
+     $ autoconf
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Generate files needed by GNU
+                    coding standards:</em></span>
+                    GNU coding standards require certain files in order for the
+                    project to be compliant.
+                    This command creates those files:
+                    </p><pre class="literallayout">
+     $ touch NEWS README AUTHORS ChangeLog
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Generate the <code class="filename">configure</code>
+                    file:</em></span>
+                    This command generates the <code class="filename">configure</code>:
+                    </p><pre class="literallayout">
+     $ automake -a
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Cross-compile the project:</em></span>
+                    This command compiles the project using the cross-compiler:
+                    </p><pre class="literallayout">
+     $ ./configure ${CONFIGURE_FLAGS}
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Make and install the project:</em></span>
+                    These two commands generate and install the project into the
+                    destination directory:
+                    </p><pre class="literallayout">
+     $ make
+     $ make install DESTDIR=./tmp
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Verify the installation:</em></span>
+                    This command is a simple way to verify the installation
+                    of your project.
+                    Running the command prints the architecture on which
+                    the binary file can run.
+                    This architecture should be the same architecture that
+                    the installed cross-toolchain supports.
+                    </p><pre class="literallayout">
+     $ file ./tmp/usr/local/bin/hello
+                    </pre></li><li class="listitem"><p><span class="emphasis"><em>Execute your project:</em></span>
+                    To execute the project in the shell, simply enter the name.
+                    You could also copy the binary to the actual target hardware
+                    and run the project there as well:
+                    </p><pre class="literallayout">
+     $ ./hello
+                    </pre><p>
+                    As expected, the project displays the "Hello World!" message.
+                    </p></li></ol></div><p>
+        </p></div><div class="section" title="4.1.2. Passing Host Options"><div class="titlepage"><div><div><h3 class="title"><a id="passing-host-options"></a>4.1.2. Passing Host Options</h3></div></div></div><p>
+            For an Autotools-based project, you can use the cross-toolchain by just
+            passing the appropriate host option to <code class="filename">configure.sh</code>.
+            The host option you use is derived from the name of the environment setup
+            script in <code class="filename">/opt/poky</code> resulting from installation of the
+            cross-toolchain tarball.
+            For example, the host option for an ARM-based target that uses the GNU EABI
+            is <code class="filename">armv5te-poky-linux-gnueabi</code>.
+            You will notice that the name of the script is
+            <code class="filename">environment-setup-armv5te-poky-linux-gnueabi</code>.
+            Thus, the following command works:
+            </p><pre class="literallayout">
+     $ ./configure --host=armv5te-poky-linux-gnueabi \
+        --with-libtool-sysroot=&lt;sysroot-dir&gt;
+            </pre><p>
+        </p><p>
+            This single command updates your project and rebuilds it using the appropriate
+            cross-toolchain tools.
+            </p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3>
+                If <code class="filename">configure</code> script results in problems recognizing the
+                <code class="filename">--with-libtool-sysroot=&lt;sysroot-dir&gt;</code> option,
+                regenerate the script to enable the support by doing the following and then
+                re-running the script:
+                <pre class="literallayout">
+     $ libtoolize --automake
+     $ aclocal -I ${OECORE_NATIVE_SYSROOT}/usr/share/aclocal \
+        [-I &lt;dir_containing_your_project-specific_m4_macros&gt;]
+     $ autoconf
+     $ autoheader
+     $ automake -a
+                </pre></div><p>
+        </p></div></div><div class="section" title="4.2. Makefile-Based Projects"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="makefile-based-projects"></a>4.2. Makefile-Based Projects</h2></div></div></div><p>
+        For a Makefile-based project, you use the cross-toolchain by making sure
+        the tools are used.
+        You can do this as follows:
+        </p><pre class="literallayout">
+     CC=arm-poky-linux-gnueabi-gcc
+     LD=arm-poky-linux-gnueabi-ld
+     CFLAGS=”${CFLAGS} --sysroot=&lt;sysroot-dir&gt;”
+     CXXFLAGS=”${CXXFLAGS} --sysroot=&lt;sysroot-dir&gt;”
+        </pre><p>
+    </p></div></div>
+
+
+
+</div></body></html>
