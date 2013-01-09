@@ -28,6 +28,29 @@ meta/classes/rootfs_rpm.bbclass:	${ROOTFS_POSTPROCESS_COMMAND}
 ROOTFS_POSTPROCESS_COMMAND += '${@base_contains("IMAGE_FEATURES", "debug-tweaks ssh-server-openssh", "openssh_allow_empty_password; ", "",d)}'
 ROOTFS_POSTPROCESS_COMMAND += "rootfs_update_timestamp ; "
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+recipes-images/gumstix/gumstix-console-image.bb:
+
+IMAGE_FILE_BLACKLIST += " \
+                        /etc/init.d/NetworkManager \
+                        /etc/init.d/avahi-daemon \
+                        /etc/init.d/dbus-1 \
+                        /etc/init.d/dnsmasq \
+                        /etc/init.d/networking \
+                        /etc/init.d/ntpd \
+                        /etc/init.d/sshd \
+                        /etc/init.d/udev \
+                        /etc/init.d/udev-cache \
+                       "
+remove_blacklist_files() {
+        for i in ${IMAGE_FILE_BLACKLIST}; do
+                rm -rf ${IMAGE_ROOTFS}$i
+        done
+
+}
+
+ROOTFS_POSTPROCESS_COMMAND =+ "remove_blacklist_files ; "
+
 
 ************************************************************************************
 
@@ -100,7 +123,13 @@ DEPLOY_DIR ?= "${TMPDIR}/deploy"
 eg:
 lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^S=
 S="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/linux"
-lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^WORKDIR=
+
+[lyang0@pek-lpgtest4 bitbake_build]$ bitbake -e linux-windriver |grep ^WORKDIR=
+WORKDIR="/buildarea1/lyang0/kvm/bitbake_build/tmp/work/x86_64_kvm_guest-wrs-linux/linux-windriver-3.4-r0"
+
+
+[lyang0@pek-lpgtest4 bitbake_build]$ bitbake -e linux-windriver |grep ^STAGING_KERNEL_DIR=
+STAGING_KERNEL_DIR="/buildarea1/lyang0/kvm/bitbake_build/tmp/sysroots/x86-64-kvm-guest/usr/src/kernel"
 
 lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ ls /buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/deploy-linux-windriver
 System.map-3.4-r0-intel-xeon-core-20130107143313    bzImage-intel-xeon-core.bin				      vmlinux-symbols-intel-xeon-core
