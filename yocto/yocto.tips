@@ -132,3 +132,11 @@ recipes-core/tinylogin/tinylogin_1.4.bbappend
 +ALTERNATIVE_${PN} += "login passwd"
   ALTERNATIVE_LINK_NAME[login] = "${base_bindir}/login"
 +ALTERNATIVE_LINK_NAME[passwd] = "${bindir}/passwd" 
+
+========================================================
+license:
+oe-core/meta/files/common-licenses
+in meta-intel
+# Additional license directories.
+LICENSE_PATH += "${LAYERDIR}/common/custom-licenses"
+

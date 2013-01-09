@@ -37,3 +37,7 @@ http://git.yoctoproject.org/git/yocto-docs
 OE:
 git://github.com/openembedded/meta-oe.git
 git://github.com/openembedded/oe-core.git
+
+OE-classic
+git://git.openembedded.org/openembedded
+

@@ -1,0 +1,7 @@
+inherit task
+
+RDEPENDS_${PN} = "\
+  task-console-image \
+  python \
+
+=====================================
