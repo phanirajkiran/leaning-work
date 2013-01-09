@@ -201,6 +201,65 @@ qemu-system-x86_64 -snapshot -L test -device piix3-usb-uhci -drive id=usbflash,f
 
 If a hard disk image is added too, i.e.
 qemu-system-x86_64.exe -boot menu=on -L . -m 256 -usb -usbdevice disk://./PhysicalDrive1 -hda test.imgit defaults to booting it, so USB boot can be used via F12 only. 
+
+********************************************************************************************************************************************************************
+wrs:
+
+root@intel_5500_server:/opt/kvm/virt-test# lsusb
+Bus 002 Device 003: ID 1307:0165 Transcend Information, Inc. 2GB/4GB Flash Drive
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 005 Device 002: ID 046b:ff10 American Megatrends, Inc. 
+Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 006 Device 002: ID 413c:2105 Dell Computer Corp. Model L100 Keyboard
+Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 007 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+Bus 008 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+
+1)qemu-system-x86_64 -nographic -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -drive if=virtio,file=/boot/usb.img -usb -usbdevice host:1307:0165 -nographic
+
+OR
+
+2)qemu-system-x86_64 -nographic -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -drive if=virtio,file=/boot/usb.img -usb -device usb-host,hostbus=2,hostaddr=3  -nographic
+
+
+qemu-system-x86_64 -nographic -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -device ich9-usb-uhci1 -drive id=aaaaaa,file=/boot/usb.img,if=none -device usb-storage,drive=aaaaaa -nographic
+
+root@localhost:~# df . -h 
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda2       1.9G  1.5G  309M  83% /
+root@localhost:~# ls /dev/sda2
+/dev/sda2
+root@localhost:~# mount /dev/sda1 /mnt 
+root@localhost:~# ls ./mnt
+ls: cannot access ./mnt: No such file or directory
+root@localhost:~# ls /mnt
+help.txt  isolinux.bin	menu.c32    splash.txt	  vesamenu.c32
+initrd	  ldlinux.sys	splash.lss  syslinux.cfg  vmlinuz
+
+
+root@localhost:/sys# find . -name sda*
+./devices/pci0000:00/0000:00:04.0/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/block/sda
+./devices/pci0000:00/0000:00:04.0/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/block/sda/sda1
+./devices/pci0000:00/0000:00:04.0/usb1/1-1/1-1:1.0/host0/target0:0:0/0:0:0:0/block/sda/sda2
+./block/sda
+./class/block/sda
+./class/block/sda1
+./class/block/sda2
+root@localhost:/sys# find . -name hdc 
+./devices/pci0000:00/0000:00:01.1/ide1/1.0/block/hdc
+./block/hdc
+./class/block/hdc
+root@localhost:/sys# lspci 
+00:00.0 Host bridge: Intel Corporation 440FX - 82441FX PMC [Natoma] (rev 02)
+00:01.0 ISA bridge: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II]
+00:01.1 IDE interface: Intel Corporation 82371SB PIIX3 IDE [Natoma/Triton II]
+00:01.3 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 03)
+00:02.0 VGA compatible controller: Cirrus Logic GD 5446
+00:03.0 Ethernet controller: Red Hat, Inc Virtio network device
+00:04.0 USB controller: Intel Corporation 82801I (ICH9 Family) USB UHCI Controller #1 (rev 03)
 ===================================================
 PCI passthrogh 
 

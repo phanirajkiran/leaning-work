@@ -1,0 +1,146 @@
+meta/recipes-core/tasks/task-base.bb
+# packages added by machine config
+#
+RDEPENDS_task-machine-base = "${MACHINE_EXTRA_RDEPENDS}"
+RRECOMMENDS_task-machine-base = "${MACHINE_EXTRA_RRECOMMENDS}"
+
+
+
+MACHINE_EXTRA_RRECOMMENDS = " kernel-modules"
+others:
+MACHINE_EXTRA_RRECOMMENDS = " kernel-module-kvm"
+-------------------------------------------------------------------------------------------------------------
+meta/recipes-core/tasks/task-core-boot.bb
+RRECOMMENDS_task-core-boot = "\
+    ${MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS}"
+-------------------------------------------------------------------------------------------------------------
+# packages added by distribution
+#
+DEPENDS_task-distro-base = "${DISTRO_EXTRA_DEPENDS}"
+
+---------------------------------------------------------------------------------------------
+${@base_contains("MACHINE_FEATURES", "acpi", "task-base-acpi", "",d)} \
+defined in meta/recipes-core/tasks/task-base.bb
+PACKAGES = ' \
+**********************************************************************************************************************
+rootfs
+meta/classes/rootfs_rpm.bbclass:	${ROOTFS_POSTPROCESS_COMMAND}
+ROOTFS_POSTPROCESS_COMMAND += '${@base_contains("IMAGE_FEATURES", "debug-tweaks ssh-server-openssh", "openssh_allow_empty_password; ", "",d)}'
+ROOTFS_POSTPROCESS_COMMAND += "rootfs_update_timestamp ; "
+
+
+************************************************************************************
+
+# IMAGE_FEATURES may contain any available package group
+IMAGE_FEATURES ?= ""
+IMAGE_FEATURES[type] = "list"
+meta/classes/image.bbclass:FEATURE_INSTALL = "${@' '.join(oe.packagegroup.required_packages(oe.data.typed_value('IMAGE_FEATURES', d), d))}"
+
+# Available IMAGE_FEATURES:
+#
+# - apps-console-core
+# - x11-mini            - minimal environment for X11 server 
+# - x11-base            - X11 server + minimal desktop  
+# - x11-sato            - OpenedHand Sato environment
+# - x11-netbook         - Metacity based environment for netbooks
+# - apps-x11-core       - X Terminal, file manager, file editor
+# - apps-x11-games
+# - apps-x11-pimlico    - OpenedHand Pimlico apps
+# - tools-sdk           - SDK
+# - tools-debug         - debugging tools
+# - tools-profile       - profiling tools
+# - tools-testapps      - tools usable to make some device tests
+# - nfs-server          - NFS server (exports / over NFS to everybody)
+# - ssh-server-dropbear - SSH server (dropbear)
+# - ssh-server-openssh  - SSH server (openssh)
+# - debug-tweaks        - makes an image suitable for development
+
+
+---------------------------------------------------------------------------------
+meta/conf/bitbake.conf:IMAGE_FEATURES += "${EXTRA_IMAGE_FEATURES}"
+
+
+meta/classes/buildhistory.bbclass:    imagevars = "DISTRO DISTRO_VERSION USER_CLASSES IMAGE_CLASSES IMAGE_FEATURES IMAGE_LINGUAS IMAGE_INSTALL BAD_RECOMMENDATIONS ROOTFS_POSTPROCESS_COMMAND IMAGE_POSTPROCESS_COMMAND"
+
+-------------------------------------------------------------------
+
+CORE_IMAGE_BASE_INSTALL = '\
+    task-core-boot \
+    task-base-extended \
+    \
+    ${CORE_IMAGE_EXTRA_INSTALL} \
+IMAGE_INSTALL ?= "${CORE_IMAGE_BASE_INSTALL}"
+*******************************************************************************************
+
+KERNEL_IMAGETYPE
+
+
+KERNELOVERRIDE = ":${LINUX_KERNEL_TYPE}:${MACHINE}-${LINUX_KERNEL_TYPE}"
+OVERRIDES .= "${KERNELOVERRIDE}"
+wr-kernel/recipes-kernel/linux/linux-windriver.inc
+
+
+SRC_URI = "git://${KSRC_linux_windriver_3_4};protocol=file;nocheckout=1;branch=${KBRANCH},meta;name=machine,meta${EXTRA_KERNEL_SRC_URI}"
+
+FILESEXTRAPATHS := ":${EXTRA_KERNEL_FILES}:"
+
+
+FILESEXTRAPATHS----> to find where is the file://
+
+
+bitbake.conf:
+IMAGE_ROOTFS = "${WORKDIR}/rootfs"
+WORKDIR = "${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PF}"
+S = "${WORKDIR}/${BP}"
+
+PF = "${PN}-${EXTENDPE}${PV}-${PR}"
+BP = "${BPN}-${PV}"
+DEPLOY_DIR ?= "${TMPDIR}/deploy"
+
+eg:
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^S=
+S="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/linux"
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^WORKDIR=
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ ls /buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/deploy-linux-windriver
+System.map-3.4-r0-intel-xeon-core-20130107143313    bzImage-intel-xeon-core.bin				      vmlinux-symbols-intel-xeon-core
+System.map-intel-xeon-core			    modules-3.4.20-WR5.0.1.0_standard-r0-intel-xeon-core.tgz
+WORKDIR="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0"
+
+DEFAULT_IMAGE=wrlinux-image-glibc-std
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e wrlinux-image-glibc-std |grep ^WORKDIR=
+WORKDIR="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/wrlinux-image-glibc-std-1.0-r4"
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e wrlinux-image-glibc-std |grep ^S=
+S="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/wrlinux-image-glibc-std-1.0-r4/wrlinux-image-glibc-std-1.0"
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^DEPLOYDIR
+DEPLOYDIR="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/deploy-linux-windriver"
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^DEPLOY_DIR_IMAGE
+DEPLOY_DIR_IMAGE="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/deploy/images"
+
+<<<<<<<<<<<<<<<<<<<NOTE: DEPLOY_DIR_IMAGE is a common place, in the conf it call be recognized >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<<<<<<<< all the global var can be got with " bitbake -e  |awk '/^[A-Z_]*=/' " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^D=
+D="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/image"
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^KERNEL_OUTPUT
+KERNEL_OUTPUT="arch/x86/boot/bzImage"
+install -m 0644 ${KERNEL_OUTPUT} ${DEPLOY_DIR_IMAGE}/opt/windriver/${KERNEL_IMAGE_SYMLINK_NAME}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $guest).bin
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e linux-windriver |grep ^B=
+B="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/linux-intel-xeon-core-standard-build"
+install -m 644 ${B}/.config ${DEPLOY_DIR_IMAGE}/opt/windriver/config-${PV}-${PR}-${MACHINE}.${MULTI_CONFIG_BASE_SUFFIX}$(basename $guest).config
+
+
+
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ bitbake -e wrlinux-image-glibc-std |grep ^IMAGE_ROOTFS
+IMAGE_ROOTFS="/buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/wrlinux-image-glibc-std-1.0-r4/rootfs"
+IMAGE_ROOTFS_SIZE="65536"
+IMAGE_ROOTFS_ALIGNMENT="1"
+IMAGE_ROOTFS_EXTRA_SPACE="0"
+lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ ls /buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/wrlinux-image-glibc-std-1.0-r4/rootfs/
+bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  sbin  sys  tmp  usr  var
+

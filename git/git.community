@@ -1,3 +1,6 @@
 git send-email -1 --to openembedded-devel@lists.openembedded.org --to Joe.MacDonald@windriver.com --to meta-virtualization@yoctoproject.org --to bruce.ashfield@gmail.com --to david.c.nystrom@gmail.com --subject-prefix=meta-networking][PATCH
 
  git send-email -2 --to lei.yang@windriver.com --subject-prefix=meta-networking][PATCH:V2
+
+#OE-CORE
+git send-email -1 --to lei.yang@windriver.com --to openembedded-core@lists.openembedded.org --subject-prefix=OE-core][PATCH

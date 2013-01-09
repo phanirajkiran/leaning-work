@@ -123,3 +123,12 @@ bind-9.8.1-r4.1/
 PRINC = "1"
 PR .= ".1"
    bind-9.8.1-r4.1.1/ bind-9.8.1-r5.1/ 
+
+
+========================================================
+recipes-core/tinylogin/tinylogin_1.4.bbappend 
+
+-ALTERNATIVE_${PN} += "login"
++ALTERNATIVE_${PN} += "login passwd"
+  ALTERNATIVE_LINK_NAME[login] = "${base_bindir}/login"
++ALTERNATIVE_LINK_NAME[passwd] = "${bindir}/passwd" 
