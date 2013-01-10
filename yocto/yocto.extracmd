@@ -173,3 +173,8 @@ IMAGE_ROOTFS_EXTRA_SPACE="0"
 lyang0@pek-lpgtest1:/buildarea1/lyang0/kvm_rr/bitbake_build$ ls /buildarea1/lyang0/kvm_rr/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/wrlinux-image-glibc-std-1.0-r4/rootfs/
 bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  sbin  sys  tmp  usr  var
 
+
+[lyang0@pek-lpgtest4 bitbake_build]$ bitbake -e netcat |grep -E "# FILE_DIRNAME|# THISDIR"
+# FILE_DIRNAME=${@os.path.dirname(d.getVar('FILE'))}
+# THISDIR=${@os.path.dirname(d.getVar('FILE', True))}
+

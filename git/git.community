@@ -4,3 +4,11 @@ git send-email -1 --to openembedded-devel@lists.openembedded.org --to Joe.MacDon
 
 #OE-CORE
 git send-email -1 --to lei.yang@windriver.com --to openembedded-core@lists.openembedded.org --subject-prefix=OE-core][PATCH
+
+
+internal
+../../../bin/wrgit send-email -5 --compose --subject 'Review request for WIND00393617 WIND00332031 Add virt-test kvm testing for OVP testing' -to lei.yang@windriver.com -to Haotian.Zhang@windriver.com -to mark.asselstine@windriver.com -cc lpd-eng-tr@windriver.com -cc dennis.hall@windriver.com -cc randy.macleod@windriver.com -cc bruce.ashfield@windriver.com
+
+
+Changes since V2:
+
