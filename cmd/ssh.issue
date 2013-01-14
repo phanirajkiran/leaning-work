@@ -3,3 +3,9 @@ ServerAliveInterval 120
 It's matter of personal preference, but I use these values:
 ClientAliveInterval 15
 ClientAliveCountMax 3
+
+
+on host A:
+ssh-keygen -t rsa
+cat ~/.ssh/id_rsa.pub | ssh lyang0@pek-lpgtest1.wrs.com 'cat >> ~/.ssh/authorized_keys'
+
