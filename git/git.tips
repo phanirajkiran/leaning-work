@@ -23,6 +23,7 @@ git branch -d tmp
 
 github
 ssh-keygen -t rsa -C "yanglei.fage@gmail.com"
+clip < ~/.ssh/id_rsa.pub
 
 git init
 do something

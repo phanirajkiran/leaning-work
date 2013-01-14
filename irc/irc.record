@@ -1,0 +1,26 @@
+http://irc.netsplit.de/channels/details.php?room=%23kvm-arm&net=freenode
+
+libvirt:
+server: irc.oftc.net
+port: 6667 (the usual IRC port)
+channel: #virt
+========================================
+openvswtich
+#openvswitch on irc.freenode.net
+
+=========================================
+ovirt
+IRC: #ovirt on irc.oftc.net 
+
+=========================================
+bash
+The 'official' channel FAQ for freenode's #bash IRC channel is BashFAQ.
+
+=================================
+
+kvm-arm
+chat room '#kvm-arm' on IRC network 'freenode' during the last 2 weeks
+
+=====================================
+git 
+#git channel on the Freenode IRC server (irc.freenode.net).
