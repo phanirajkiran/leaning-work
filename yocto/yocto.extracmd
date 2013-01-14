@@ -83,7 +83,7 @@ meta/classes/image.bbclass:FEATURE_INSTALL = "${@' '.join(oe.packagegroup.requir
 meta/conf/bitbake.conf:IMAGE_FEATURES += "${EXTRA_IMAGE_FEATURES}"
 
 
-meta/classes/buildhistory.bbclass:    imagevars = "DISTRO DISTRO_VERSION USER_CLASSES IMAGE_CLASSES IMAGE_FEATURES IMAGE_LINGUAS IMAGE_INSTALL BAD_RECOMMENDATIONS ROOTFS_POSTPROCESS_COMMAND IMAGE_POSTPROCESS_COMMAND"
+/
 
 -------------------------------------------------------------------
 
