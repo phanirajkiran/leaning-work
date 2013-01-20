@@ -167,3 +167,9 @@ def kvm_contains(variable, checkvalues, truevalue, falsevalue, d):
 busybox added command 
 [lyang0@pek-lpgtest4 image]$ cat etc/busybox.links |grep mpstat
 /bin/mpstat
+
+
+=================================================
+BBFILE_COLLECTIONS += "wr-userspace-base"
+LAYERDEPENDS_wr-userspace-extended = "normal wrlinux wr-userspace-base"
+

@@ -140,3 +140,61 @@ in meta-intel
 # Additional license directories.
 LICENSE_PATH += "${LAYERDIR}/common/custom-licenses"
 
+
+=====================================================
+如果想要makefile 里得到一个系统的变量，需要在BB 里 export GG="$FF"
+然后在makefile 里引用GG
+
+
+
+========================================
+bitbake multipath-tools -c devshell
+
+
+
+=======================================
+
+ALLOW_EMPTY_${PN} = "1"
+FILES_${PN}     = ""
+
+
+========================================
+
+# Note:
+# The "subdir" parameter in the SRC_URI is useful when the input package
+# is rpm, ipk, deb and so on, for example:
+#
+# SRC_URI = "http://foo.com/foo-1.0-r1.i586.rpm;subdir=foo-1.0"
+#
+# Then the files would be unpacked to ${WORKDIR}/foo-1.0, otherwise
+# they would be in ${WORKDIR}.
+#
+
+# Skip the unwanted steps
+do_configure[noexec] = "1"
+do_compile[noexec] = "1"
+
+# Install the files to ${D}
+bin_package_do_install () {
+    # Do it carefully
+    [ -d "${S}" ] || exit 1
+    cd ${S} || exit 1
+    tar --no-same-owner --exclude='./patches' --exclude='./.pc' -cpf - . \
+        | tar --no-same-owner -xpf - -C ${D}
+}
+
+FILES_${PN} = "/"
+
+EXPORT_FUNCTIONS do_install
+~                                                                                                                                                                                                            
+"meta/classes/bin_package.bbclass" 36L, 985C 
+======================================================================
+
+NOTE: All the file will be unpacked to WORKDIR,
+tar.bz2, tar xx.tar.bz2 WORKDIR, so location is WORKIDR/xx
+git: clone git:/// git to WORDIR, so location is WORKIDR/git
+then all the operation(upack:eg: git checkout ..., find the license) is in S, defualt S=WORKDIR/${BP},if not match, eg: WORKDIR/git is not match, so you need S=WORKDIR/git
+WORKDDIR and S is abspath, so find license file by defualt is in S, you can change it to WORKDIR ---> LIC_FILES_CHKSUM = "file://${WORKDIR}/tunctl.c;endline=4;md5=ff3a09996bc5fff6bc5d4e0b4c28f999"
+
+Lei
+

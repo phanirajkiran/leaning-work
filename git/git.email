@@ -1,0 +1,11 @@
+$ git config --global sendemail.smtpserver smtp.gmail.com
+$ git config --global sendemail.smtpserverport 587
+$ git config --global sendemail.smtpencryption tls
+$ git config --global sendemail.smtpuser your_email@gmail.com
+
+Now it's ready: the command git send-email patch-name will ask you for some info about the email sender (you can change the From: field) and recipient, your Gmail password and then it will send the email.
+
+Optionally, it is possible to skip the password prompt by adding it to the configuration with:
+$ git config --global sendemail.smtppass your_password
+
+git config --global sendemail.from yanglei.fage@gmail.com

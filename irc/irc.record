@@ -1,4 +1,5 @@
 http://irc.netsplit.de/channels/details.php?room=%23kvm-arm&net=freenode
+http://freenode.net/irc_servers.shtml#tor
 
 libvirt:
 server: irc.oftc.net
@@ -24,3 +25,5 @@ chat room '#kvm-arm' on IRC network 'freenode' during the last 2 weeks
 =====================================
 git 
 #git channel on the Freenode IRC server (irc.freenode.net).
+
+

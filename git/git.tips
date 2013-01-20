@@ -1,7 +1,17 @@
+how to man 
+lyang001@lyang0-9010:~/git/git_testA$ man git | grep pull | grep request
+       git-request-pull(1)
+lyang001@lyang0-9010:~/git/git_testA$ man git-request-pull
+
 git://git.op5.org/git/git.git
 
 git push origin test:master // 提交本地test分支作为远程的master分支
 git push origin test:test              // 提交本地test分支作为远程的test分支
+
+
+git push git@github.com:leiyang/git_testA.git +work
+To git@github.com:leiyang/git_testA.git
+ * [new branch]      work -> work
 
 $ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
 <<===>> 等价于下面的
@@ -82,5 +92,29 @@ git push origin :master
 #重新创建master分支  
 git push origin master  
 
+
+To fix the commit which is not the most recent one 
+
+If the commit you want to fix isn’t the most recent one:
+
+    #git rebase --interactive $parent_of_flawed_commit
+
+    If you want to fix several flawed commits, pass the parent of the oldest one of them.
+
+    An editor will come up, with a list of all commits since the one you gave.
+    #Change pick to reword (or on old versions of Git, to edit) in front of any commits you want to fix.
+    #Once you save, git will replay the listed commits. 
+
+======================================
+
+    git pull --rebase
+
+    git pull --rebase origin a-black-and-thick-branch
+
+
+=============================================
+
+
+git rev-parse --show-toplevel
 
 

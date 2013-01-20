@@ -1,0 +1,15 @@
+TRL+A -- Select all the items in the current window
+http://allhotkeys.com/ubuntu_hotkeys.html
+
+Ctrl+O = Open (Open a document, not in terminal)
+Ctrl+S = Save (Save the current document, not in terminal)
+Ctrl+E = End (Move cursor to end of line)
+
+Shift+insert = Paste
+
+Shift + Ctrl + C = copy the highlighted command to the clipboard.
+Shift + Ctrl + V (or Shift + Insert) = pastes the contents of the clipboard.
+
+Ctrl + Alt + D = Show Desktop
+
+Ctrl + Q = Quit the current application

@@ -1,3 +1,19 @@
 sudo apt-get update
 sudo apt-get install evolution
 
+
+ERROR: There's no /usr/include/gnu/stubs-32.h on this x86_64 system.
+sudo apt-get install apt-file
+lyang001@lyang0-9010:~/xx$ apt-file search stubs-32.h
+E: The cache is empty. You need to run 'apt-file update' first.
+lyang001@lyang0-9010:~/xx$ apt-file update
+lyang001@lyang0-9010:~/xx$ apt-file search stubs-32.h
+libc6-dev-i386: /usr/include/x86_64-linux-gnu/gnu/stubs-32.h
+
+
+teamviewer
+http://www.teamviewer.com/en/download/linux.aspx
+
+clip:
+sudo apt-get install geomview
+

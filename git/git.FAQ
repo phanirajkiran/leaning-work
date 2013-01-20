@@ -1,0 +1,5 @@
+1>Migrate git repo from Google Code to Github
+
+git remote add github <URL FROM GITHUB>
+git push github HEAD
+

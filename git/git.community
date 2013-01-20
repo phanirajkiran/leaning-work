@@ -12,3 +12,84 @@ internal
 
 Changes since V2:
 
+
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+git send-email -3 --annotate --cover-letter --to yanglei.fage@gmail.com
+git send-email --to lei.yang@windriver.com --annotate --cover-letter origin/master (master --> branch-to-compare-against)
+
+OR
+
+git format-patch <branch-to-compare-against> --cover-letter -o patches/
+
+which will essentially create the appropriate patches for your commits and then
+vim outgoing/0000-cover-letter.patch
+git send-email --to <receiver@example.com> --annotate patches/*
+
+
+=======================================================
+Merging a Pull Request
+
+This is the most common method of fetching and applying changes. It requires adding a remote for the person that sent the pull request, fetching from that repository, merging the requested branch, fixing any conflicts, and pushing the newly merged branch back to the repository:
+
+
+git checkout master
+# Check out your master branch
+
+git remote add cameronmcefee git://github.com/cameronmcefee/Spoon-Knife.git
+# Add a new remote named 'cameronmcefee'
+
+git fetch cameronmcefee
+# Pull in all the commits from the 'cameronmcefee' remote
+
+git merge cameronmcefee/bug-fix
+# Merge 'bug-fix' branch from the 'cameronmcefee' remote into your local master branch
+
+git push origin master
+# Push your newly-merged branch back to GitHub
+
+
+===============================================================
+http://git-blame.blogspot.com.ar/2012/01/using-signed-tag-in-pull-requests.html  ---->  Using signed tag in pull requests
+
+lyang001@lyang0-9010:~/git/git_testA$ git request-pull origin/master git@github.com:leiyang/git_testA.git 
+The following changes since commit a838a2e9dc85e9b3e472a0b233f8e62b471746ce:
+
+  add yy (2013-01-18 20:51:51 +0800)
+
+are available in the git repository at:
+
+  git@github.com:leiyang/git_testA.git myfeature
+
+for you to fetch changes up to 138bd0f87aceae2a496bf7007b41ba403eff3d27:
+
+  add 33 (2013-01-18 21:02:01 +0800)
+
+----------------------------------------------------------------
+Lei Yang (3):
+      add 11
+      add 22
+      add 33
+
+ 0 files changed
+ create mode 100644 11
+ create mode 100644 22
+ create mode 100644 33
+
+
+Then copy to some place , then 
+
+git send-email -3 --annotate --cover-letter --to yanglei.fage@gmail.com
+
+add something and then copy from that place 
+
+
+others: to show patch
+git request-pull -p origin/master git@github.com:leiyang/git_testA.git
+
+or git request-pull origin/master git@github.com:leiyang/git_testA.git | xclip
+鼠标中键粘贴
+
+================================================================

@@ -1,0 +1,8 @@
+
+
+Extract all commits that lead to origin since the inception of the project:
+
+$ git format-patch --root origin
+
+This will create a patch file for each commit you did in fix since branching off master
+git format-patch master..

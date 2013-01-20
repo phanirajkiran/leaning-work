@@ -1,0 +1,13 @@
+1> Super basic tool to export repo and all submodules:
+https://github.com/jwiegley/git-scripts/blob/master/git-archive-all
+
+
+2>
+
+
+https://github.com/git/git/tree/master/contrib/subtree
+ sudo cp git-subtree.sh "$(git --exec-path)"/git-subtree
+
+3> install git 
+
+http://stackoverflow.com/questions/11603510/how-do-i-correctly-install-the-tools-in-gits-contrib-directory

@@ -1,0 +1,4 @@
+git send-email HEAD^
+
+
+git send-email --annotate --cover-letter origin/master
