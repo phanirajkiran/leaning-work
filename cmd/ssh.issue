@@ -9,3 +9,6 @@ on host A:
 ssh-keygen -t rsa
 cat ~/.ssh/id_rsa.pub | ssh lyang0@pek-lpgtest1.wrs.com 'cat >> ~/.ssh/authorized_keys'
 
+ssh 127.0.0.1 -p 5555 "$CMD"
+scp -P 5555 $FILE root@localhost:/tmp
+scp -P 5555 root@localhost:$KERNEL /tmp

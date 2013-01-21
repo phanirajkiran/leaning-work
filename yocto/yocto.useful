@@ -1,0 +1,1 @@
+CFLAGS_append = " -I${S}/libcap/include -fPIC"

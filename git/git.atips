@@ -1,0 +1,86 @@
+http://mislav.uniqpath.com/2010/07/git-tips/
+
+
+Show branches, tags in git log
+ #git log --oneline --decorate
+-------------------------------------------------------------------------------------------
+Diff by highlighting inline word changes instead of whole lines
+
+lyang001@lyang0-9010:~/meta-networking$ git diff --word-diff
+diff --git a/recipes-connectivity/vpnc/vpnc_0.5.3.bb b/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+index 1b2b8bf..fa91523 100644
+--- a/recipes-connectivity/vpnc/vpnc_0.5.3.bb
++++ b/recipes-connectivity/vpnc/vpnc_0.5.3.bb
+@@ -26,5 +26,6 @@ SRC_URI = "http://www.unix-ag.uni-kl.de/~massar/vpnc/vpnc-${PV}.tar.gz \
+           file://long-help \
+           file://default.conf"
+
+SRC_URI[md5sum] = [-"4378f9551d5b077e1770bbe09995afb3"-]{+"4378f9551xffssd5b077e1770bbe09995afb3"+}
+SRC_URI[sha256sum] = "46cea3bd02f207c62c7c6f2f22133382602baeda1dc320747809e94881414884"
+{+add lei+}
+-----------------------------------------------------------------------------------------
+
+$ git push -u origin master
+
+# pushes the "master" branch to "origin" remote and sets up tracking
+However, git push will by default push all branches that have the same name on the remote. To limit this behavior to just the current branch, set this configuration option:
+
+$ git config --global push.default tracking
+----------------------------------------------------------------------------------------
+
+lyang001@lyang0-9010:~/git/git_testA$ git checkout -t origin/myfeature
+Branch myfeature set up to track remote branch myfeature from origin.
+Switched to a new branch 'myfeature'
+
+----------------------------------------------------------------------------------------
+Find out if a change is part of a release
+
+$ git name-rev --name-only 50f3754
+
+"tags/v2.3.8~6"
+
+The name-rev command can tell us the position of a commit relative to tags in the project. The example above is from the Ruby on Rails project. This tells us that this commit is located 6 commits before “v2.3.8” was tagged—we can be certain that this change is now part of Rails 2.3.8, 
+
+lyang001@lyang0-9010:~/meta-networking$ echo e8240e91d474912b1191a2c22bf215ad8234bc6a | git name-rev --stdin
+e8240e91d474912b1191a2c22bf215ad8234bc6a (remotes/origin/LB02A_5.0.1~6)
+
+-------------------------------------------------------------------------------------------
+Find out which branch contains a change
+
+$ git branch --contains 50f3754
+
+lyang001@lyang0-9010:~/meta-networking$ git branch -r --contains db3277935f4aadff0e99bbf537b75f2fe0290073
+  origin/HEAD -> origin/upstream-master
+  origin/LB06_5.0.1
+  origin/LB07_5.0.1
+  origin/LB08_5.0.1
+  origin/LB09_5.0.1
+  origin/LB10_5.0.1
+  origin/LB11_5.0.1
+  origin/LB12_5.0.1
+  origin/LB14_5.0.1
+  origin/LB15_5.0.1
+  origin/LB16_5.0.1
+  origin/LB17_5.0.1
+  origin/LB18_5.0.1
+  origin/LB19_5.0.1
+  origin/LB20_5.0.1
+  origin/upstream-master
+  origin/wr-20121018
+  origin/wr-20130104
+------------------------------------------------------------------------------------------------------
+
+See which changes from a branch are already present upstream
+
+# while on "feature" branch:
+$ git cherry -v master
+lyang001@lyang0-9010:~/kvm_32/layers/oe-core$ git cherry -v origin/upstream-master
+
+The cherry command is useful to see which commits have been cherry-picked from a development branch to the stable branch, for instance. This command compares changes on the current (“feature”) branch to upstream (“master”) and indicates which are present on both with the “–” sign. Changes still missing from upstream are marked with “+”.
+
+------------------------------------------------------------------------
+$ git pull-request | pbcopy
+http://mislav.uniqpath.com/2010/07/git-tips/
+
+
+→ (URL ready for pasting in a chat room)

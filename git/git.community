@@ -10,6 +10,9 @@ internal
 ../../../bin/wrgit send-email -5 --compose --subject 'Review request for WIND00393617 WIND00332031 Add virt-test kvm testing for OVP testing' -to lei.yang@windriver.com -to Haotian.Zhang@windriver.com -to mark.asselstine@windriver.com -cc lpd-eng-tr@windriver.com -cc dennis.hall@windriver.com -cc randy.macleod@windriver.com -cc bruce.ashfield@windriver.com
 
 
+../../../bin/wrgit send-email -14 --compose --subject 'Review request for WIND00387751 Add kvm networking usecase testing ' -to lei.yang@windriver.com -to yang.shi@windriver.com -to Haotian.Zhang@windriver.com -cc Mark.Asselstine@windriver.com -cc lpd-eng-tr@windriver.com -cc Phil.Staub@windriver.com 
+
+
 Changes since V2:
 
 

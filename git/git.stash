@@ -1,0 +1,4 @@
+git stash to save current work which has added,and restory to the last commmit(before your changes saved) 
+then you can do the other commmit work, after you commit it, you can run 
+git stash pop, it will restore you saved work 
+http://www.cppblog.com/deercoder/archive/2011/11/13/160007.html

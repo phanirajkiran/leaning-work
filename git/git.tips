@@ -5,13 +5,8 @@ lyang001@lyang0-9010:~/git/git_testA$ man git-request-pull
 
 git://git.op5.org/git/git.git
 
-git push origin test:master // 提交本地test分支作为远程的master分支
-git push origin test:test              // 提交本地test分支作为远程的test分支
+https://github.com/git/git.git
 
-
-git push git@github.com:leiyang/git_testA.git +work
-To git@github.com:leiyang/git_testA.git
- * [new branch]      work -> work
 
 $ git push ssh://git@dev.lemote.com/rt4ls.git master // 把本地仓库提交到远程仓库的master分支中
 <<===>> 等价于下面的
@@ -19,13 +14,8 @@ $ git remote add origin ssh://git@dev.lemote.com/rt4ls.git
 $ git push origin master 
 需要说明的是，默认情况下这条语句等价于提交本地的master仓库到远程仓库，并作为远程的master分支
 
-删除远程的分支:
-$ git push origin :test              // 刚提交到远程的test将被删除，但是本地还会保存的，不用担心
 
 
-git fetch
-git fetch git://git.openembedded.org/openembedded-core master:upmaster
-git fetch origin master:tmp
 
 git diff tmp 
 git merge tmp

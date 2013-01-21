@@ -1,0 +1,28 @@
+ERROR: QA Issue: non -dev/-dbg/-nativesdk package contains symlink .so: libmpathpersist path '/work/i586-wrs-linux/multipath-tools-git-r0/packages-split/libmpathpersist/usr/lib/libmpathpersist.so'
+ERROR: QA run found fatal errors. Please consider fixing them.
+
+QAPATHTEST[dev-so] = "package_qa_check_dev"
+def package_qa_check_dev(path, name, d, elf, messages):
+    """
+    Check for ".so" library symlinks in non-dev packages
+    """
+
+    if not name.endswith("-dev") and not name.endswith("-dbg") and not name.endswith("-nativesdk") and path.endswith(".so") and os.path.islink(path):
+        messages.append("non -dev/-dbg/-nativesdk package contains symlink .so: %s path '%s'" % \
+                 (name, package_qa_clean_path(path,d)))
+
+FIX:
+FILES_libmultipath-dev = "${libdir}/libmultipath*.so"
+FILES_libmpathpersist-dev = "${libdir}/libmpathpersist*.so"
+can't be in FILES_libmultipath or FILES_libmpathpersist
+
+eg:
+-FILES_${PN} += "${libdir}/dri ${libdir}/xorg/modules/drivers ${libdir}/*.so"
++FILES_${PN} += "${libdir}/dri ${libdir}/xorg/modules/drivers"
++FILES_${PN}-dev += "${libdir}/*.so"
+ FILES_${PN}-dbg += "${libdir}/xorg/modules/drivers/.debug ${libdir}/dri/.debug"
+ 
+@@ -27,9 +28,10 @@ do_install () {
+     install -m 0755 ${S}/lib/dri/*        ${D}${libdir}/dri/
+ 
++    ln -sf libEGL.so.1                    ${D}${libdir}/libEGL.so

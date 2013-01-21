@@ -1,0 +1,2 @@
+Merge into the current branch the remote branch next:
+               $ git pull origin next

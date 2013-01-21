@@ -1,0 +1,16 @@
+lyang001@lyang0-9010:~/git/git_testA$ git remote -v 
+origin	git@github.com:leiyang/git_testA.git (fetch)
+origin	git@github.com:leiyang/git_testA.git (push)
+lyang001@lyang0-9010:~/git/git_testA$ git remote rename origin foobar
+lyang001@lyang0-9010:~/git/git_testA$ git remote -v 
+foobar	git@github.com:leiyang/git_testA.git (fetch)
+foobar	git@github.com:leiyang/git_testA.git (push)
+
+
+
+lyang001@lyang0-9010:~/git/git_testA$ git remote set-url origin git@github.com:leiyang/git_testB.git
+lyang001@lyang0-9010:~/git/git_testA$ git remote -v 
+origin	git@github.com:leiyang/git_testB.git (fetch)
+origin	git@github.com:leiyang/git_testB.git (push)
+
+

@@ -1,0 +1,3 @@
+Add remote branch to local branch 
+git fetch git://git.openembedded.org/openembedded-core master:upmaster
+git fetch origin master:tmp

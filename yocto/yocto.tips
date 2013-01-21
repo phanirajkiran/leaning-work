@@ -198,3 +198,9 @@ WORKDDIR and S is abspath, so find license file by defualt is in S, you can chan
 
 Lei
 
+
+=========================================================================
+PV = "1.0+gitr${SRCPV}"
+
+(06:18:00 PM) lyang0: I have a packages which the latest tag is 1.0. and hasn't update for past two years with new tag, the master is very new, can I use PV = "1.0+gitr${SRCPV}" for this 
+(06:19:02 PM) RP: lyang0: The 1.0 has nothing to do with the git version, its really just a way of saying its later than that
