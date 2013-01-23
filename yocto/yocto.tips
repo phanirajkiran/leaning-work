@@ -204,3 +204,74 @@ PV = "1.0+gitr${SRCPV}"
 
 (06:18:00 PM) lyang0: I have a packages which the latest tag is 1.0. and hasn't update for past two years with new tag, the master is very new, can I use PV = "1.0+gitr${SRCPV}" for this 
 (06:19:02 PM) RP: lyang0: The 1.0 has nothing to do with the git version, its really just a way of saying its later than that
+=========================================================================
+#
+meta-sys940x/conf/machine/sys940x.conf:PREFERRED_VERSION_xserver-xorg ?= "1.9.3"
+
+meta/recipes-graphics/xorg-lib/libx11-trim_1.4.4.bb:RPROVIDES_${PN}-dev = "libx11-dev"
+
+
+meta/recipes-support/libiconv/libiconv_1.11.1.bb:PROVIDES = "virtual/libiconv"
+meta/recipes-support/libiconv/libiconv_1.14.bb:PROVIDES = "virtual/libiconv"
+
+meta/recipes-graphics/xorg-lib/libxext_git.bb:PROVIDES = "xext"
+meta/recipes-graphics/xorg-lib/libxtst_1.2.1.bb:PROVIDES = "xtst"
+
+
+
+PROVIDES = "virtual/libintl virtual/gettext" ??? 
+---------------------------------------------------------------
+meta/recipes-core/kbd/kbd_1.15.2.bb:RPROVIDES_${PN} = "console-tools"
+========> 
+meta/conf/distro/include/default-providers.inc:PREFERRED_PROVIDER_console-tools ?= "kbd"
+
+
+
+meta/recipes-core/gettext/gettext_0.16.1.bb:PROVIDES = "virtual/libintl virtual/gettext"
+=======================> 
+meta/conf/distro/include/tcmode-default.inc:PREFERRED_PROVIDER_virtual/gettext ??= "gettext"
+
+==========================================
+DEFAULT_PREFERENCE = "-1"
+The default preference (when no DEFAULT_PREFERENCE is specified) is zero
+
+===========================================
+[lyang0@ala-lpggp2 meta-oe]$ grep "jpeg" * -r |grep PROVIDES
+meta-oe/recipes-core/jpeg/libjpeg-turbo_svn.bb:PROVIDES = "jpeg"
+
+meta-oe/recipes-support/fltk/fltk_1.1.10.bb:DEPENDS = "alsa-lib zlib jpeg libpng libxext libxft"
+
+
+
+Add RPROVIDES to fix errors when rdepending on jpeg
+this fixes "ERROR: Multiple .bb files are due to be built which each provide jpeg"
++RPROVIDES_${PN} = "jpeg"
+
+
+meta-systemd/recipes-core/systemd/systemd_git.bb:RPROVIDES_udev = "hotplug"
+
+==============================================================
+
+
+RPROVIDES
+Used to explicitly specify what a package provides at runtime. For example hotplug support is
+provided by several packages, such as udev and linux-hotplug. Both declare that they runtime
+provide "hotplug". So any packages that require "hotplug" to work simply declare that it
+RDEPENDS on "hotplug". It’s up to the distribution to specify which actual implementation of
+"virtual/xserver" is used.
+
+
+PROVIDES
+Used to explicitly specify what a package provides at build time. This is typically used when two or
+more packages can provide the same functionality. For example there are several different X servers
+in OpenEmbedded, and each as declared as providing "virtual/xserver". Therefore a package that
+depends on an X server to build can simply declare that it DEPENDS on "virtual/xserver". It’s up to
+the distribution to specify which actual implementation of "virtual/xserver" is used.
+
+
+RREPLACES
+Used to specify that the current package replaces an older package with a different name. During
+package installing the package that is being replaced will be removed since it is no longer needed
+when this package is installed.
+
+

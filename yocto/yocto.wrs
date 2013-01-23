@@ -1,0 +1,10 @@
+KERNELOVERRIDE = ":${LINUX_KERNEL_TYPE}:${MACHINE}-${LINUX_KERNEL_TYPE}"
+OVERRIDES .= "${KERNELOVERRIDE}"
+something like:
+KERNELOVERRIDE=":cgl:intel-xeon-core-cgl"
+-------------------------------------------------------------------------------------------
+
+
+DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+RDEPENDS_${PN} = "${@base_contains('DISTRO_FEATURES', 'pam', '${PAM_DEPS}', '', d)}"
+RDEPENDS_${PN} = "${@base_contains('LINUX_KERNEL_TYPE', 'pam', '', '', d)}"

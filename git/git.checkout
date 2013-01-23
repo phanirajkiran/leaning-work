@@ -1,0 +1,3 @@
+if you change a file,then you can use 
+#git checkout file
+to restore it 

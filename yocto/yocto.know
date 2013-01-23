@@ -1,0 +1,5 @@
+6. when to increment/change PE PV PR
+
+PE: incompatible change.  e.g. git -> svn.  can trigger rebuild.
+PV: usually match with software version.
+PR: the reversion of the bb file itself.  trigger rebuild.

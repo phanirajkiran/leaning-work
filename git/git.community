@@ -12,8 +12,12 @@ internal
 
 ../../../bin/wrgit send-email -14 --compose --subject 'Review request for WIND00387751 Add kvm networking usecase testing ' -to lei.yang@windriver.com -to yang.shi@windriver.com -to Haotian.Zhang@windriver.com -cc Mark.Asselstine@windriver.com -cc lpd-eng-tr@windriver.com -cc Phil.Staub@windriver.com 
 
+if V2:
 
-Changes since V2:
+send-email -14 --compose --subject 'V2:Review request for WIND00387751 Add kvm networking usecase testing ' --subject-prefix="PATCH V2" -to lei.yang@windriver.com -to yang.shi@windriver.com -to Haotian.Zhang@windriver.com -cc Mark.Asselstine@windriver.com -cc lpd-eng-tr@windriver.com -cc Phil.Staub@windriver.com
+
+
+Changes since V1:
 
 
 

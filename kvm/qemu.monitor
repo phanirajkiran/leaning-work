@@ -1,3 +1,28 @@
 http://www.linux-kvm.org/page/Hotadd_pci_devices
 -monitor stdio
 qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:90:FB:24:99:2C,model=e1000 -net tap,script=/etc/qemu-ifup -hda /boot/rootfs.img.qcow2  -kernel /boot/bzImage -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp selinux=0" -nographic  -monitor tcp::4444,server,nowait
+
+以下指令把 Monitor 转发到本地的 TCP 4444 端口, 作为 server 端, nowait 表示不需要等待 client 来激活马上启动 VM. IpAddress 是允许连接的 Client. 如果只想本机连接, IpAddress 填 127.0.0.1, 如果想要所有为空.
+1
+	
+$ qemu-kvm -monitor tcp:IpAddress:4444,server,nowait VM.img
+
+
+Keyboard shortcuts
+During the emulation the following keys are used to control the QEMU.
+Graphical mode
+This is the default mode which uses a VGA console for the output. Keys  Action
+Ctrl+Alt  Toggle mouse and keyboard grab
+Ctrl+Alt+1  Switch to the VGA console (default)
+Ctrl+Alt+2  Switch to the QEMU monitor
+
+
+
+Non-graphical mode
+This mode is enabled by passing the -nographic option. Keys  Action
+Ctrl+A H  Print some help
+Ctrl+A X  Stop and exit
+Ctrl+A C  Switch between console and monitor
+
+
+

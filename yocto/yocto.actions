@@ -1,0 +1,9 @@
+pkg_postinst
+meta/recipes-core/jpeg/jpeg_8c.bb
+
+
+
+PROVIDES_${PN} = "jpegff" can't be used but PROVIDES = "jpegff"
+RPROVIDES_${PN} works 
+
+answer: http://www.crashcourse.ca/wiki/index.php/PROVIDES_and_RPROVIDES

@@ -83,3 +83,9 @@ lyang0@lyang0-OptiPlex-755:~/WORK/leaning-work$ cat gg |uniq -c
       3 ll
       2 gg
 then sort
+
+
+
+pbpaste
+xclip
+clip 

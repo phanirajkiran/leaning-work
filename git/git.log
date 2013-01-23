@@ -1,0 +1,11 @@
+find which commits changed this file 
+git log -GFULL_OPTIMIZATION  meta/conf/bitbake.conf 
+
+lyang001@lyang0-9010:~/kvm_32/layers/oe-core$ git log -GFULL_OPTIMIZATION --pretty=format:%H:%an meta/conf/bitbake.conf
+2864ff6a4b3c3f9b3bbb6d2597243cc5d3715939:Richard Purdie
+5b9877aa55e28ba06410592350e7e5106ebdf6cb:Chris Larson
+b22831fd63164c4db9c0b72934d7d734a6585251:Richard Purdie
+9cb7113790d716a4c5cf7d511535ba87fdecd1ac:Khem Raj
+2096c315df2d7d0a8fbf9df1be73f56b834c3340:Richard Purdie
+b2f192faabe412adce79534e22efe9fb69ee40e2:Richard Purdie
+

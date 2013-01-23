@@ -1,5 +1,12 @@
 http://www.crashcourse.ca/wiki/index.php/Yocto_Project_Quick_Start
+search oe_manual.pdf
 $ git clone git://git.yoctoproject.org/poky.git git
 $ make DOC=bsp-guide
 $ make DOC=yocto-project-qs
 $ make pdf DOC=poky-ref-manual
+
+5. the difference between DEPENDS, RDEPENDS_${PN}
+
+=> how to create bitbake doc:
+   john@buddha:~/oe/bitbake-1.8/doc/manual$ make html
+=> runtime and compile time dependency.

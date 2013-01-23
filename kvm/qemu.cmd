@@ -20,7 +20,7 @@ qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,model=e1000 -net tap,scri
 =========================================================
 virtio:
 
-qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio -net tap,script=/etc/qemu-ifup -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=dhcp"  -nographic
+qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio -net tap,script=/etc/qemu-ifup -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/hda rw console=ttyS0,115200 ip=dhcp"  -nographic
 
 OR change the disk
 
