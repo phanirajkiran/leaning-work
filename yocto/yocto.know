@@ -3,3 +3,8 @@
 PE: incompatible change.  e.g. git -> svn.  can trigger rebuild.
 PV: usually match with software version.
 PR: the reversion of the bb file itself.  trigger rebuild.
+
+where is -native 
+bitbake_build/tmp/work/x86_64-linux/
+install to 
+bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/qemu-system-x86_64

@@ -1,0 +1,22 @@
+<pm215> well, I looked at the definition of DEFAULT_RAM_SIZE in vl.c, but I hope we document it somewhere :-)
+
+
+<lyang0__> yes
+<lyang0__> which driver it will be used? 
+<lyang0__> which order
+<lyang0__> as ata, or as ide? 
+<agraf> pm215: I wouldn't nack a patch to add it
+<lyang0__> if both available 
+<lyang0__> mjt are you tell me don't use 32 bit host? I forget who.
+<agraf> pm215: it's as if nautilus would have a git submodule on gtk
+<mjt> lyang0__: depends on the guest, on initramfs content, etc
+<pm215> mmm. it's only fairly recently debian/ubuntu actually shipped libfdt as a library package though
+<mjt> lyang0__: yes it was me too
+
+<iggy> lyang0__:  you can't determine it from outside the guest... which is what 2 people have tried to tell you (in a round about sort of way)
+
+<mjt> but seriously, who uses the ide drivers these days?
+<mjt> its been some.. 10 years since they've been obsolete/
+<mjt> ?
+<mjt> so really, i don't care... ;)
+<mjt> in 2003 it was somewat "interesting" to explain the difference to people, because the info was new and I felt like a magician who knows some secret info...  now it's just boring :)

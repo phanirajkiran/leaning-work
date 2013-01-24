@@ -1,0 +1,55 @@
+you could use "virtual/bob" or "cricketbats" in its place and it would work, all that matters is that there is a value in PROVIDES that satisfies the value in DEPENDS
+
+<bluelightning> lyang0_: note that "virtual/perf" has no special meaning, it's just a convention
+<bluelightning> the distro configuration is where decisions like this are supposed to be made
+<bluelightning> i.e. policy decisions
+
+[22:07:55] <lyang0_> eg: perf.bb-->  PROVDES="virtual/perf" right,  PROVDES="perf" ,wrong.   but perfxxx.bb-->  PROVDES="virtual/perf" right,  PROVDES="perf" right
+[22:08:01] <lyang0_> what do you think
+[22:08:48] <lyang0_> I just want to learn it not really change/
+[22:08:52] <bluelightning> that will work, but we would not make that change
+[22:08:52] <bluelightning> ok
+
+
+
+<lyang0_> I don't see the different effect for DEPENDS="virtual/libintl" and DEPENDS="virtual/gettext" 
+<lyang0_> if only gettext_0.16.1.bb provide them
+<lyang0_> I mean only 
+<bluelightning> sure, if there is only one provider
+
+
+
+
+<bluelightning> lyang0_: it would need to match up with whatever PV is set to for the git recipe... which traditionally is something like "1.1+git${SRCPV}"
+<bluelightning> lyang0_: you can use % as a wildcard to match the value of SRCPV, e.g. PREFERRED_VERSION_a = "1.1+git%"
+
+
+<lyang0_> bluelightning pkg_postinst I see it alway use if [ "x$D" = "x" ], does it do the thing after the board boot, which means do the thing in the booting ? 
+--> xanium4332 (~xanium433@2001:470:1f09:10:225:90ff:fea2:995f) Ò¼Óëyocto
+<lyang0_> seesm does the thing like init.d? 
+<rburton> lyang0_: assuming it exits after that if, that means it aborts at image creation time (when $D exists) and runs at first boot
+--> andyross (~andy@c-67-171-188-207.hsd1.or.comcast.net) Ò¼Óëyocto
+<lyang0_> first boot?
+<rburton> first boot assuming it works, then never again.
+<lyang0_> I don't uderstand whay first boot it works, then it won't
+<lyang0_> s/whay/why
+<-- gizero (~gizero@host168-65-static.12-87-b.business.telecomitalia.it) ÒÍ³öuit: gizero)
+- {ÈÆ¸üÐÆË һÔ 24 00:00:00 2013}
+<rburton> i don't understand what you mean, sorry
+--> schramae (~schramae@82.119.183.60) Ò¼Óëyocto
+<lyang0_> first boot assuming it works, then never again., I don't understand this 
+<gbrennon> anyone here have ever built sato / x on a imx board?
+<-- zenlinux (~sgarman@c-76-105-137-48.hsd1.or.comcast.net) ÒÍ³öuit: C programmers don't die; they're just cast into void)
+<rburton> gbrennon: send me one and i'll try it :)
+<kergoth> we've built core-image-sato for an imx6qsabrelite, but i'm not sure if we've tested it
+<gbrennon> rburton if i could, i'll send u one :DD the imx board that i'm using i found in my job... no one have never used this
+<-- JimNH2 (~jmchale@23-25-235-113-static.hfc.comcastbusiness.net) ÒÍ³öuit: Leaving)
+<bluelightning> lyang0_: these postinstall scripts are intended for steps that only need to be performed once after the package is installed
+<lyang0_> this install works, do you mean after target booting? not the buildtime do_install? 
+<bluelightning> lyang0_: not the build time do_install, no
+--> himamura (~himamura@p4a8cb3.ibrknt01.ap.so-net.ne.jp) Ò¼Óëyocto
+<bluelightning> the package installation
+<lyang0_> the package installation on target?
+--> JimNH (~jmchale@23-25-235-113-static.hfc.comcastbusiness.net) Ò¼Óëyocto
+<bluelightning> lyang0_: it could be, or when the package is installed into the image during do_rootfs
+<lyang0_> oh , I will try to understand it, thanks 

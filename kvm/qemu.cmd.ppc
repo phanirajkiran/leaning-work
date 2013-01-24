@@ -1,0 +1,1 @@
+qemu-system-ppc --enable-kvm -smp 2 -kernel /tmp/uImage-e500mc-kvm-guest.bin -nographic -M mpc8544ds -append "console=ttyS0 ip=dhcp root=/dev/nfs rw nfsroot=128.224.165.20:/export/pxeboot/vlm-boards/test/rootfs" -netdev type=user,id=mynet0 -device e1000,netdev=mynet0 -m 512

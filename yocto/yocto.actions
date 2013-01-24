@@ -7,3 +7,16 @@ PROVIDES_${PN} = "jpegff" can't be used but PROVIDES = "jpegff"
 RPROVIDES_${PN} works 
 
 answer: http://www.crashcourse.ca/wiki/index.php/PROVIDES_and_RPROVIDES
+
+
+pkg_postinst_${PN} () {
+        if [ -n "$D" ]; then
+                exit 1
+        fi
+        update-modules || true
+}
+
+pkg_postrm_${PN} () {
+        update-modules || true
+}
+
