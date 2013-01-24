@@ -19,4 +19,5 @@ pkg_postinst_${PN} () {
 pkg_postrm_${PN} () {
         update-modules || true
 }
-
+ 
+where is the sysroots?

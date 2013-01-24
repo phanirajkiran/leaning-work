@@ -1,0 +1,91 @@
+Several scripts in existing recipes will be of the following form:
+if [ x"$D" = "x" ]; then
+...
+fi
+This is testing if the installation directory, D, is defined and if it is no actions are performed. The
+installation directory will not be defined under normal circumstances. The primary use of this test is to
+permit the application to be installed during root filesystem generation. In that situation the scripts
+cannot be run since the root filesystem is generated on the host system and not on the target. Any
+required script actions would need to be performed via an alternative method if the package is to be
+installed in the initial root filesystem (such as including any required users and groups in the default
+passwd and group files for example.)
+
+
+* depmod already gets executed by pkg_postinst_kernel-image.
+
+* If you build a module using module.bbclass,
+  pkg_postinst returns 1 in do_rootfs, causing
+  pkg_postinst to run again on first boot. To
+  improve this situation, I copied pkg_postinst
+  from kernel.bbclass to module.bbclass. This was
+  rejected by Koen, because he doesn't like the
+  code from kernel.bblcass, which uses
+  ${STAGING_DIR_KERNEL}. Richard then suggested
+  that calling depmod during do_rootfs wasn't
+  necessary at all, because it already gets done by
+  kernel-image.
+
+
+pkg_postinst_${PN} () {
+if [ "x$D" != "x" ]; then
+        exit 1
+fi
+update-modules
+}
+
+
+If you reference $D as part of a postinst script, it will run against
+the files of the rootfs, not just the package. There are some problems
+ensuring dependencies are present when this happens though, some
+backends like rpm don't like ensuring that dependencies are present.
+ You could add a rootfs post process command to add in what you
+need which would guarantee all the files are present first
+ROOTFS_POSTPROCESS_COMMAND is probably what you're looking for.
+
+rootfs_rpm_do_rootfs_append
+
+
+BBCLASSEXTEND = "native nativesdk"
+
+lyang001@lyang0-9010:~/kvm_322/bitbake_build$ ssh -Y lyang0@pek-lpgtest9.wrs.com^C
+lyang001@lyang0-9010:~/kvm_322/bitbake_build$ bitbake -e |grep ASSUME_PROVIDED
+lyang001@lyang0-9010:~/kvm_322/bitbake_build$ bitbake -e |grep "^ASSUME_PROVIDED="
+ASSUME_PROVIDED="bzip2-native git-native grep-native diffstat-native patch-native perl-native-runtime python-native-runtime subversion-native tar-native virtual/libintl-native"
+
+lyang001@lyang0-9010:~/kvm_322/bitbake_build$ bitbake -e |grep "^EXTRA_IMAGEDEPENDS"
+EXTRA_IMAGEDEPENDS="e2fsprogs-native agent-proxy-native unfs-server-native syslinux-native qemu-native qemu-helper-native genext2fs-native"
+
+
+# Qemu target will not build in world build for ARM or Mips
+BROKEN_qemuarm = "1"
+BROKEN_qemumips = "1"
+
+
+
+
+COMBINED_FEATURES = "\
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "alsa", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "bluetooth", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "ext2", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "vfat", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "irda", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "pcmcia", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "pci", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "usbgadget", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "usbhost", d)} \
+    ${@base_both_contain("DISTRO_FEATURES", "MACHINE_FEATURES", "wifi", d)}"
+COMBINED_FEATURES[vardeps] += "DISTRO_FEATURES MACHINE_FEATURES"
+
+
+in task_base:http://www.embeddedlinux.org.cn/OEManual/special_task_base.html it says:
+Task-base details exactly which options are either machine or distro settings (or need to be in both). Machine options are meant to reflect capabilities of the machine, distro options list things distribution maintainers might want to add or remove from their distros images.
+
+    ${@base_contains('COMBINED_FEATURES', 'usbhost', 'task-base-usbhost', '',d)} \
+    ${@base_contains('COMBINED_FEATURES', 'bluetooth', 'task-base-bluetooth', '',d)} \
+    ${@base_contains('COMBINED_FEATURES', 'wifi', 'task-base-wifi', '',d)} \
+    ${@base_contains('COMBINED_FEATURES', '3g', 'task-base-3g', '',d)} \
+    ${@base_contains('COMBINED_FEATURES', 'uboot', 'task-base-uboot', '',d)} \
+    ${@base_contains('COMBINED_FEATURES', 'redboot', 'task-base-redboot', '',d)} \
+    ${@base_contains('COMBINED_FEATURES', 'apex', 'task-base-apex', '',d)} \
+
+
