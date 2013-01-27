@@ -1,0 +1,33 @@
+
+FILE
+The path to the .bb file which is currently being processed.
+
+
+FILESPATH
+The default set of directories which are available to use for the file:// URI’s. Each directory is
+searched, in the specified order, in an attempt to find the file specified by each file:// URI:
+FILESPATH = "${FILE_DIRNAME}/${PF}:${FILE_DIRNAME}/${P}:\
+${FILE_DIRNAME}/${PN}:${FILE_DIRNAME}/files:${FILE_DIRNAME}"
+
+FILESDIR
+The default directory to search for file:// URI’s. Only used if the file is not found in FILESPATH.
+This can be used to easily add one additional directory to the search path without having to modify
+the default FILESPATH setting. By default this is just the first directory from FILESPATH.
+FILESDIR = "${@bb.which(bb.data.getVar(’FILESPATH’, d, 1), ’.’)}"
+
+
+So we define a new package and instruct bitbake to include /usr/bin/test in it.
+FILES-${PN}-test = "${bindir}/test"
+PACKAGES += "FILES-${PN}-test"
+
+For variable assignments python code is indicated via the use of ${@...}, as shown in the following
+example:
+TAG = ${@bb.data.getVar(’PV’,d,1).replace(’.’, ’_’)}
+
+RREPLACES
+Used to specify that the current package replaces an older package with a different name. During
+package installing the package that
+
+# Additional flag based on target endiness (see siteinfo.bbclass)
+CFLAG="${CFLAG} ${@base_conditional(’SITEINFO_ENDIANESS’, ’le’, ’-DL_ENDIAN’, ’-DB_E......
+

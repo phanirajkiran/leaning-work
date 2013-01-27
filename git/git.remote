@@ -13,4 +13,5 @@ lyang001@lyang0-9010:~/git/git_testA$ git remote -v
 origin	git@github.com:leiyang/git_testB.git (fetch)
 origin	git@github.com:leiyang/git_testB.git (push)
 
-
+To see the tracking branch 
+git remote show origin 

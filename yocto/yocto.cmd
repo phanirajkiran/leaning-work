@@ -62,3 +62,6 @@ BBCLASSEXTEND = "native"
 inherit autotools useradd
 
 http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta-skeleton/recipes-skeleton/useradd/useradd-example.bb
+
+
+bitbake -e  |grep IMAGE_INSTALL 

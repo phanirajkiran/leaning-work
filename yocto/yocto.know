@@ -8,3 +8,14 @@ where is -native
 bitbake_build/tmp/work/x86_64-linux/
 install to 
 bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/qemu-system-x86_64
+o
+[lyang0@pek-lpgtest4 bitbake_build]$ bitbake -e |grep ^STAGING_DIR
+STAGING_DIR_TCBOOTSTRAP="/buildarea1/lyang0/intel/bitbake_build/tmp/sysroots/intel-xeon-core-tcbootstrap"
+STAGING_DIR_NATIVE="/buildarea1/lyang0/intel/bitbake_build/tmp/sysroots/x86_64-linux"
+STAGING_DIR_HOST="/buildarea1/lyang0/intel/bitbake_build/tmp/sysroots/intel-xeon-core"
+STAGING_DIR="/buildarea1/lyang0/intel/bitbake_build/tmp/sysroots"
+STAGING_DIR_TARGET="/buildarea1/lyang0/intel/bitbake_build/tmp/sysroots/intel-xeon-core"
+[lyang0@pek-lpgtest4 bitbake_build]$ ls /buildarea1/lyang0/intel/bitbake_build/tmp/sysroots
+intel-xeon-core  x86_64-linux
+[lyang0@pek-lpgtest4 bitbake_build]$ bitbake -e | grep ^STAGING_BINDIR_NATIVE=
+STAGING_BINDIR_NATIVE="/buildarea1/lyang0/intel/bitbake_build/tmp/sysroots/x86_64-linux/usr/bin"

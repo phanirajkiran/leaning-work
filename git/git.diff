@@ -1,2 +1,4 @@
 列出两个 tags 的某一文件的不同
 git-diff v2.6.23 v2.6.24-rc1 init/main.c
+
+git diff "@{yesterday}"

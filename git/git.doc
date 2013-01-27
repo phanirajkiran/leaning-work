@@ -9,3 +9,10 @@ http://www.xmarks.com/site/www.github.com/guides/cool-and-unusual-git-techniques
 cool-and-unusual-git-techniques
 
 https://help.github.com/categories/18/articles
+
+
+http://www-cs-students.stanford.edu/~blynn/gitmagic/
+http://www-cs-students.stanford.edu/~blynn/gitmagic/ch07.html
+git clone git@bitbucket.org:blynn/gitmagic.git
+
+http://git-scm.com/book

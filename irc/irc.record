@@ -25,5 +25,6 @@ chat room '#kvm-arm' on IRC network 'freenode' during the last 2 weeks
 =====================================
 git 
 #git channel on the Freenode IRC server (irc.freenode.net).
+/msg NickServ identify fage888
 
 http://www.goodchatting.com/howtoregnick.html

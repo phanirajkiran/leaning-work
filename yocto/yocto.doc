@@ -10,3 +10,7 @@ $ make pdf DOC=poky-ref-manual
 => how to create bitbake doc:
    john@buddha:~/oe/bitbake-1.8/doc/manual$ make html
 => runtime and compile time dependency.
+
+https://github.com/scottellis/oe-deptools
+
+https://pixhawk.ethz.ch/_media/dev/oebb/oe_manual.pdf

@@ -9,3 +9,6 @@ Optionally, it is possible to skip the password prompt by adding it to the confi
 $ git config --global sendemail.smtppass your_password
 
 git config --global sendemail.from yanglei.fage@gmail.com
+
+
+git config --global core.editor "vim"

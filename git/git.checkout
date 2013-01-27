@@ -1,3 +1,9 @@
 if you change a file,then you can use 
 #git checkout file
 to restore it 
+
+
+Checkout: Uncommitted changes cause checkout to fail. To destroy your changes, and checkout a given commit anyway, use the force flag:
+
+$ git checkout -f HEAD^
+

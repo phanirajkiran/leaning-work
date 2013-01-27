@@ -1,0 +1,5 @@
+Similarly, attempting to overwrite a branch via a move fails if data loss would ensue. To force a branch move, type:
+
+$ git branch -M source target  # instead of -m
+
+git branch -a 
