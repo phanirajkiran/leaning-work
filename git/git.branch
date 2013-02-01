@@ -3,3 +3,13 @@ Similarly, attempting to overwrite a branch via a move fails if data loss would 
 $ git branch -M source target  # instead of -m
 
 git branch -a 
+
+lyang001@lyang0-9010:~/git/meta-virtualization$ git branch -M master test
+lyang001@lyang0-9010:~/git/meta-virtualization$ git branch 
+* test
+
+
+You can use the git branch --contains <tag> command to show the branches that contain a particular feature. This command shows the branches that contain the systemtap feature:
+
+$ git branch --contains systemtap
+                    

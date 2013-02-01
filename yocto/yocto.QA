@@ -26,3 +26,14 @@ eg:
      install -m 0755 ${S}/lib/dri/*        ${D}${libdir}/dri/
  
 +    ln -sf libEGL.so.1                    ${D}${libdir}/libEGL.so
+------------------------------------------------
+
+recipes-multimedia/libfslparser/libfslparser_3.0.1.bb:
+python populate_packages_prepend() {
+    # FIXME: All binaries lack GNU_HASH in elf binary but as we don't have
+    # the source we cannot fix it. Disable the insane check for now.
+    # FIXME: gst-fsl-plugin looks for the .so files so we need to deploy those
+    for p in d.getVar('PACKAGES', True).split():
+        d.setVar("INSANE_SKIP_%s" % p, "ldflags dev-so")
+}
+

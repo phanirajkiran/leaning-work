@@ -1,0 +1,2 @@
+qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=e1000 -net tap,script=/etc/qemu-ifup -fda ./vxworks.img -nographic
+@gei(0,0)host:vxWorks h=10.0.2.2 e=10.0.2.3 g=10.0.2.1 u=vxworks pw=vxworkspasswd f=0

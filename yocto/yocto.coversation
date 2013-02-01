@@ -53,3 +53,41 @@ you could use "virtual/bob" or "cricketbats" in its place and it would work, all
 --> JimNH (~jmchale@23-25-235-113-static.hfc.comcastbusiness.net) Ò¼Óëyocto
 <bluelightning> lyang0_: it could be, or when the package is installed into the image during do_rootfs
 <lyang0_> oh , I will try to understand it, thanks 
+
+
+
+------------------
+
+08:56:56 PM) lyang0: openembedded/packages/alsa/alsa-tools_1.0.10.bb  BROKEN = "1", what does it mean 
+(09:23:45 PM) Jin^eLD is now known as Jin|away
+(09:38:28 PM) RP: lyang0: Its a very old way of marking a recipe as not working
+(09:38:35 PM) RP: JaMa: ouch :/
+(09:42:38 PM) mihai [~mihai@188.27.94.45] entered the room.
+(09:57:54 PM) lyang0: RP, not build the recipe? if BROKEN = "1",
+(09:59:07 PM) RP: lyang0: according to the code in bitbake, it just removes it from world builds these days...
+(09:59:22 PM) RP: lyang0: It could well be worth just dropping it
+(10:00:16 PM) lyang0: do you mean it the same as "EXCLUDE_FROM_WORLD = "1"" 
+(10:01:01 PM) RP: lyang0: yes
+(10:02:30 PM) lyang0: RP: another question about update-moduels, I just see it's removed , before I use module_autoload_iwlwifi = "iwlwifi" to load the kernel module in boot time. now , how could I do for this.
+(10:04:43 PM) RP: lyang0: I think something like this still works?
+
+----------------------------------------
+
+(05:43:41 PM) lyang0: just see it's export to $PATH
+(05:44:15 PM) bluelightning: STAGING_DIR
+(05:44:43 PM) bluelightning: you asked about adding the sysroot bin path to PATH the other day
+(05:44:55 PM) bluelightning: note that that may not be a good idea
+(05:45:33 PM) bluelightning: you can extract it from the "pseudodone" file if you need to, or alternatively you can do bitbake -e | grep ^STAGING_BINDIR_NATIVE= in a script
+(05:46:03 PM) bluelightning: however, that's not necessarily going to give you an environment capable of running all tools in the native sysroot
+(05:46:30 PM) bluelightning: depending on what you're trying to do, you may want to use devshell or a proper SDK
+
+
+-------------------------------------------
+
+10:12:25 PM) lyang0: RP :  Is it the same for COMPATIBLE_MACHINE = "(abc)"  vs COMPATIBLE_MACHINE = "(abc.*)"
+(10:13:00 PM) RP: lyang0: I think so, not 100% offhand
+(10:13:33 PM) lyang0: I tied it today, it seems the same
+(10:15:39 PM) jstashluk [~jstashluk@gateway/tor-sasl/jstashluk] entered the room.
+(10:16:53 PM) lyang0:  If I have two machine, one is  abcx, the other is  abc.  I only want it compatible with abc, it seems we can't distinguish it with COMPATIBLE_MACHINE = "(abc)"  
+(10:17:27 PM) michael_e_brown [~michaeleb@143.166.116.80] entered the room.
+(10:21:19 PM) bluelightning: lyang0: it's a regex... so you'd probably need to do "^abc$" or something similar

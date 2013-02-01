@@ -328,3 +328,13 @@ qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio
 ==============================================================================
 usb-image
 qemu-system-x86_64 -nographic -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -drive if=virtio,file=/boot/usb.img -nographic
+
+
+==========================================
+virsh console vm1 
+
+virsh start vm1 --console 
+
+
+/usr/bin/kvm -M pc -m 2048 -smp 4 -monitor pty -drive file=/var/lib/libvirt/images/<vm_name>.img,if=ide,boot=on -net nic,macaddr=00:16:ff:09:28:1e,vlan=0 -net tap,fd=4,script=,vlan=0 -usb -vnc 127.0.0.1:1 
+char device redirected to /dev/pts/1

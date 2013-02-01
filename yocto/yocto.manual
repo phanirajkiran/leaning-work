@@ -31,3 +31,23 @@ package installing the package that
 # Additional flag based on target endiness (see siteinfo.bbclass)
 CFLAG="${CFLAG} ${@base_conditional(’SITEINFO_ENDIANESS’, ’le’, ’-DL_ENDIAN’, ’-DB_E......
 
+
+COMPATIBLE_MACHINE: A list of the machines supported by your new recipe. This variable in the example recipe is set by default to a regular expression that matches only the empty string, "(^$)". This default setting triggers an explicit build failure. You must change it to match a list of the machines that your new recipe supports. For example, to support the qemux86 and qemux86-64 machines, use the following form:
+
+     COMPATIBLE_MACHINE = "qemux86|qemux86-64"
+                            
+RRECOMMENDS vs RDEPENDS
+Because the variable is RRECOMMENDS and not a RDEPENDS variable, the build will not fail if this module is not available to include in the image. 
+
+ As described in the "Generating Configuration Files" section, you can use the following BitBake command to audit your configuration:
+     $ bitbake linux-yocto -c kernel_configcheck -f
+
+
+How do I install/not-install the kernel image on the rootfs?
+The kernel image (e.g. vmlinuz) is provided by the kernel-image package. Image recipes depend on kernel-base. To specify whether or not the kernel image is installed in the generated root filesystem, override RDEPENDS_kernel-base to include or not include "kernel-image".
+See the "Using .bbappend Files" section in the Yocto Project Development Manual for information on how to use an append file to override metadata. 
+            
+
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
+PREFERRED_VERSION_linux-yocto = "3.4%"
+

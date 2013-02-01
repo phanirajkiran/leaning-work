@@ -7,3 +7,4 @@ Checkout: Uncommitted changes cause checkout to fail. To destroy your changes, a
 
 $ git checkout -f HEAD^
 
+ git checkout "@{10 minutes ago}"

@@ -21,3 +21,29 @@ pkg_postrm_${PN} () {
 }
  
 where is the sysroots?
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
+
+ +DEPENDS = "yasm-native" ??/
+DEPENDS = "curl boost expat zlib libebml libmatroska libogg libvorbis bzip2 lzo file ruby-native"  how to get 
+
++
++# Yeah, no makefile
++do_compile() {
++	./drake
++}
++
++do_install() {
++	./drake install DESTDIR=${D}
++}
+-- 
+
+oe] [meta-oe][PATCH 1/7] libebml: add 1.2.2
+
+meta/recipes-kernel/lttng/lttng-modules_2.1.0.bb:export KERNEL_SRC="${STAGING_KERNEL_DIR}"
+meta/classes/module.bbclass:		   KERNEL_SRC=${STAGING_KERNEL_DIR}
+
+COMPATIBLE_MACHINE = "(fsl)"
+
+PR

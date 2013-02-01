@@ -14,3 +14,6 @@ $ make pdf DOC=poky-ref-manual
 https://github.com/scottellis/oe-deptools
 
 https://pixhawk.ethz.ch/_media/dev/oebb/oe_manual.pdf
+
+kernel:
+http://www.yoctoproject.org/docs/1.4/kernel-dev/kernel-dev.html#incorporating-out-of-tree-modules.

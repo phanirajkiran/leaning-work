@@ -1,0 +1,3 @@
+Something like this:
+
+SRC_URI = "git:///home/hchapman/kernel.git;branch=omap-3.5;protocol=file"

@@ -9,7 +9,9 @@ PACKAGECONFIG_imx6qsabrelite := "${@oe_filter_out('glx', '${PACKAGECONFIG}', d)}
 +PACKAGECONFIG[dri] = "--enable-dri --enable-dri2,\
 +                      --disable-dri --disable-dri2,\
 +                      xf86driproto dri2proto"
++PACKAGECONFIG_mx6 = "dri"
 
+----------------------------------------------
 
 -PACKAGE_ARCH_mx6 = "${MACHINE_ARCH}"
 
@@ -19,3 +21,29 @@ EXTRA_OECONF = "--with-clamav=${STAGING_LIBDIR}/.. \
 
 
 EXTRA_OEMAKE = 'CROSS_COMPILE=${TARGET_PREFIX} CC="${TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
+
+
+CFLAGS =+ "-I${S}"
+EXTRA_OEMAKE = "-e 'BUILD_SHARED=y' \
+                'INSTALL_DIR=${D}${base_sbindir}' \
+                'INSTALL_LIB=${D}${libdir}' \
+                'INSTALL_INC=${D}${includedir}' \
+                'INSTALL_MAN=${D}${mandir}'"
+
+
++# ARM does not currently support NUMA
++COMPATIBLE_HOST = "^((?!arm).*)$"
+
+KERNEL_FEATURES_append_mv-armada-xp += "files/mv-armada-xp-kdump.scc"
+
+oe_runmake CC="${KERNEL_CC}" LD="${KERNEL_LD}" AR="${KERNEL_AR}"
+
+
+unset CFLAGS
+PV = "1.0.5+git${SRCPV}"
+
+
+PACKAGECONFIG ??= "${@base_contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)}"
+DEPENDS = "${@base_contains('DISTRO_FEATURES', 'alsa', 'alsa-lib', '', d)}"
+EXTRA_OECONF = "--with-edje-cc=${STAGING_BINDIR_NATIVE}/edje_cc ${@base_contains('DISTRO_FEATURES', 'pam', '', '--disable-pam', d)}"
+RDEPENDS_udev-consolekit += "${@base_contains('DISTRO_FEATURES', 'x11', 'consolekit', '', d)}"
