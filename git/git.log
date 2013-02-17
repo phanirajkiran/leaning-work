@@ -20,3 +20,5 @@ Anas Nashif (3):
       package pam correctly
 
 git log --since=2.weeks
+
+git log --name-status to check file change or delete or add  

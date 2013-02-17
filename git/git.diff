@@ -2,3 +2,7 @@
 git-diff v2.6.23 v2.6.24-rc1 init/main.c
 
 git diff "@{yesterday}"
+
+I want to know which file is changed sine one commit,
+git diff --numstat  1caa9d85d4ba6b81262ff61abb5152fb152187dd..
+
