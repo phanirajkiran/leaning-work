@@ -11,6 +11,15 @@ b2f192faabe412adce79534e22efe9fb69ee40e2:Richard Purdie
 
 git log --pretty=oneline
 git shortlog --no-merges
+lyang001@lyang0-9010:~/wrlinux-x/layers/wr-toolchain$ git shortlog LB28_5.0.1..master
+Andy Ross (1):
+      target-toolchain template: add binutils-symlinks [ Defect: WIND00403878 ]
+
+Jackie Huang (1):
+      wrl-binutils: fix the libiberty installed path
+
+Roy.Li (1):
+
 
 
 lyang001@lyang0-9010:~/ovs/layers/oe-core$ git shortlog --author="Anas Nashif"

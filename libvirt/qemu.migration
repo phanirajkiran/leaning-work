@@ -1,0 +1,44 @@
+http://www.linux-kvm.com/content/qemu-kvm-012-adds-block-migration-feature
+
+qemu-system-x86_64 -name wip -boot c -smp 7 -m 30720 -drive file=/dev/disk/by-path/ip-192.168.251.1:3260-iscsi-iqn.2010-09.de.tu-berlin.cit.wip-lun-0 -net nic,model=e1000,macaddr=02:59:59:59:3:E4 -net tap,ifname=tap249,script=/etc/kvm/kvm-ifup,downscript=/etc/kvm/kvm-ifdown -k de -vnc :30249 -monitor unix:/var/run/kvm/wip/monitor,server,nowait -serial none -parallel none -pidfile /var/run/kvm/wip/pid
+
+-----------------------------------------------
+
+In case of this VM, the migration process directly fails at execution
+time:
+
+-----------------------------------------------
+QEMU 0.15.0 monitor - type 'help' for more information
+(qemu) migrate -d "exec:gzip -c > /var/run/kvm/suspend-vm-249.bin.gz"
+migration failed
+(qemu)
+
+
+Example / HOWTO
+
+A is the source host, B is the destination host:
+TCP example:
+
+1. Start the VM on B with the exact same parameters as the VM on A, in migration-listen mode:
+
+B: <qemu-command-line> -incoming tcp:0:4444 (or other PORT))
+
+2. Start the migration (always on the source host):
+
+A: migrate -d tcp:B:4444 (or other PORT)
+
+3. Check the status (on A only):
+
+A: (qemu) info migrate                   
+
+Offline example:
+
+1. unlimit bandwidth used for migration:
+
+A: migrate_set_speed 1g                
+
+2. stop the guest:
+
+A: stop                                
+
+3. continue with either TCP or exec migration as described above. 

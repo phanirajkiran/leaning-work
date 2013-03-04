@@ -1,0 +1,12 @@
+http://doc.opensuse.org/documentation/html/openSUSE/opensuse-kvm/cha.libvirt.admin.html
+Monitoring with kvm_stat
+
+http://clalance.blogspot.com/2009/01/kvm-performance-tools.html
+git://git.kernel.org/pub/scm/virt/kvm/kvm-userspace.git
+
+
+KSM:
+
+http://doc.opensuse.org/documentation/html/openSUSE/opensuse-kvm/cha.qemu.running.html
+12.7. KSM: Sharing Memory Pages between Guests
+

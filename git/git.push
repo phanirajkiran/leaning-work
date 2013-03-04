@@ -1,0 +1,11 @@
+#删除远程的master分支
+git push origin :master
+#重新创建master分支
+git push origin master
+
+本地分支推送：git push origin branch_local:branch_remote
+eg: git push ssh://ala-git.wrs.com/git/layers/wr-testing WRLINUX_Penguin_Dev:WRLINUX_Penguin_Dev
+
+git branch -d kill-this # remove local
+
+

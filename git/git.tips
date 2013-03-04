@@ -66,21 +66,9 @@ can change your git log title
 
 
 
-本地分支推送：git push origin branch_local:branch_remote
-eg: git push ssh://ala-git.wrs.com/git/layers/wr-testing WRLINUX_Penguin_Dev:WRLINUX_Penguin_Dev
 
 
 
-git push origin :kill-this # remove remote
-git checkout master
-git branch -d kill-this # remove local
-
-
-
-#删除远程的master分支  
-git push origin :master  
-#重新创建master分支  
-git push origin master  
 
 
 To fix the commit which is not the most recent one 

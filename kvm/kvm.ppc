@@ -1,0 +1,12 @@
+(05:54:06 PM) agraf: lyang0: the mpc8544 is a SoC with e500v2 cores
+(05:54:20 PM) agraf: lyang0: there is a reference design for that SoC called the mpc8544ds
+(05:55:05 PM) agraf: lyang0: but if we emulate such a machine with e500mc cores instead, Linux doesn't complain
+(05:55:09 PM) agraf: lyang0: netbsd might :)
+(05:55:41 PM) agraf: lyang0: since you want to be running on e500mc with kvm, you will get e500mc cores inside the guest
+(05:56:54 PM) lyang0: is there a special parameter  for e500mc cores to pass qemu cmd line? 
+(05:57:14 PM) agraf: lyang0: I don't understand the question
+
+================================================================================
+For now, use the mpc8544ds platform, pass "-cpu e500mc", and edit the
+device tree to have a top-level compatible that Linux will accept (such
+as fsl,P4080DS).

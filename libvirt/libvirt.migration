@@ -1,0 +1,24 @@
+http://docs.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/chap-Virtualization-KVM_live_migration.html#sect-Virtualization-KVM_live_migration-Live_migration_requirements
+http://docs.fedoraproject.org/zh-CN/Fedora/12/html/Virtualization_Guide/sect-Virtualization_Guide-Managing_guests_with_the_Virtual_Machine_Manager_virt_manager-The_Virtual_Machine_Manager_details_window_.html
+ihttp://doc.opensuse.org/documentation/html/openSUSE/opensuse-kvm/cha.libvirt.admin.html
+
+Before you begin
+This procedure assumes that SSH keys are already set for password-less authentication. If you do not have SSH keys set for password authentication, do so before continuing with this procedure.
+
+1.Migrate the virtual machine to the destination host:
+#virsh migrate testvm3 qemu+ssh://c7b5/system
+#virsh migrate example-domain qemu+ssh://root@192.168.0.10/system
+
+2.Verify that password-less authentication is working:
+
+virsh -c qemu+ssh://c7b5/system list --all 
+
+ Id Name                 State 
+---------------------------------- 
+  - testvm3              shut off 
+
+net-create:
+http://builder.virt-tools.org/artifacts/libvirt-virshcmdref/html/sect-net-create.html
+
+
+

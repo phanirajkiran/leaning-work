@@ -1,0 +1,46 @@
+ How to manage KVM virtual machines using virsh
+Filed under: Linux, SysAdmin, Virtualization — acidborg @ 13:17
+
+Description: virsh is a program which uses libvirt to manage KVM virtual machines (guests). I’m going to show a summary of its main functions (cheat sheet style):
+
+Show guests’ information:
+
+    Show a list of all the defined guests: virsh list --all
+    Show a guest’s info: virsh dominfo guest's_name
+
+Start and stop guests:
+
+    Start a guest: virsh start guest's_name
+    Shutdown a guest (gently): virsh shutdown guest's_name
+    Shutdown a guest (wild): virsh destroy guest's_name
+    Suspend a guest: virsh suspend guest's_name
+    Resume a suspended guest: virsh resume guest's_name
+    reboot  guest:  virsh reboot <domain>
+
+Create and modify guests:
+
+    Create a new guest
+    Create a guest from its XML definition: virsh create xml_file.xml
+    Dump a guest’s definition in XML: virsh dumpxml guest's_name
+    Modify a guest’s definition: virsh edit guest's_name
+    Remove a guest’s definition (it doesn’t remove the image file): virsh undefine guest's_name
+
+Backup and restore guests:
+
+    Save a guest’s state on a file: virsh save guest's_name guest's_state_file
+    Restore a guest from a state file: virsh restore guest's_state_file
+
+I’m going to explain guests live migration on another post to keep this cheat sheet simple.
+
+crate a domain 
+http://wiki.libvirt.org/page/VM_lifecycle
+# virt-install \
+             --connect qemu:///system \
+             --virt-type kvm \
+             --name MyNewVM \
+             --ram 512 \
+             --disk path=/var/lib/libvirt/images/MyNewVM.img,size=8 \
+             --vnc \
+             --cdrom /var/lib/libvirt/images/Fedora-14-x86_64-Live-KDE.iso \
+             --network network=default,mac=52:54:00:9c:94:3b \
+             --os-variant fedora14

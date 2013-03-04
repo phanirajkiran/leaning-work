@@ -1,0 +1,2 @@
+/buildarea1/lyang0/ppc/preempt-rt/bitbake_build/tmp/sysroots/x86_64-linux/usr/bin/toolchain/ppce500v2-wrswrap-linux-gnuspe-gcc -o testptp testptp.c -lrt
+

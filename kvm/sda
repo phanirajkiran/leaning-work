@@ -1,0 +1,30 @@
+root@wrs-guest:~# lspci -vv -s "00:01.1" 
+00:01.1 IDE interface: Intel Corporation 82371SB PIIX3 IDE [Natoma/Triton II] (prog-if 80 [Master])
+	Subsystem: Red Hat, Inc Qemu virtual machine
+	Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+	Status: Cap- 66MHz- UDF- FastB2B+ ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Latency: 0
+	Region 0: [virtual] Memory at 000001f0 (32-bit, non-prefetchable) [size=8]
+	Region 1: [virtual] Memory at 000003f0 (type 3, non-prefetchable) [size=1]
+	Region 2: [virtual] Memory at 00000170 (32-bit, non-prefetchable) [size=8]
+	Region 3: [virtual] Memory at 00000370 (type 3, non-prefetchable) [size=1]
+	Region 4: I/O ports at c080 [size=16]
+	Kernel driver in use: ata_piix  ----> CONFIG_ATA_PIIX
+
+hda:
+root@wrs-guest:~# lspci -vv -s "00:01.1" 
+00:01.1 IDE interface: Intel Corporation 82371SB PIIX3 IDE [Natoma/Triton II] (prog-if 80 [Master])
+	Subsystem: Red Hat, Inc Qemu virtual machine
+	Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+	Status: Cap- 66MHz- UDF- FastB2B+ ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+	Latency: 0
+	Region 0: [virtual] Memory at 000001f0 (32-bit, non-prefetchable) [size=8]
+	Region 1: [virtual] Memory at 000003f0 (type 3, non-prefetchable) [size=1]
+	Region 2: [virtual] Memory at 00000170 (32-bit, non-prefetchable) [size=8]
+	Region 3: [virtual] Memory at 00000370 (type 3, non-prefetchable) [size=1]
+	Region 4: I/O ports at c020 [size=16]
+	Kernel driver in use: PIIX_IDE  ---> CONFIG_BLK_DEV_PIIX
+
+
+# CONFIG_BLK_DEV_PIIX is not set
+CONFIG_BLK_DEV_PIIX

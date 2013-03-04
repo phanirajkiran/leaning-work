@@ -1,0 +1,21 @@
+Load the suspend vm.out by  # qemu-kvm .... incoming fd</tmp/vm.out,
+and execute monitor cmd to reboot  # system_reset.
+Then re-dump VM to disk by (qemu) migrate -d exec:cat>/tmp/vm.out2
+
+
+savevm/loadvm to an external state file (using pseudo-migration) 
+
+Save VM state into a compressed file
+Save 
+
+stop                                                               
+migrate_set_speed 4095m                                            
+migrate "exec:gzip -c > STATEFILE.gz"                              
+
+Load 
+
+gzip -c -d STATEFILE.gz | <qemu-command-line> -incoming "exec: cat"   or
+<qemu-command-line> -incoming "exec: gzip -c -d STATEFILE.gz"
+
+
+

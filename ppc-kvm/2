@@ -1,0 +1,110 @@
+alex@fitpc:/autotest/ppc> cat /autotest/ppc/configs/control
+import sys, os, logging
+os.environ['LANG'] = 'en_US.UTF-8'
+kvm_test_dir = os.path.join(os.environ['AUTODIR'],'tests', 'kvm')
+sys.path.append(kvm_test_dir)
+from autotest_lib.client.common_lib import cartesian_config
+from autotest_lib.client.virt import virt_utils
+
+kernel_install_params = {
+  'host_kernel_git_branch': 'kvm-ppc-next',
+  'host_kernel_install_type': 'git',
+  'host_kernel_patch_list': '',
+  'host_kernel_config': '/autotest/ppc/config.p1020',
+  'host_kernel_git_commit': '',
+#  'host_kernel_git_repo': 'ssh://agraf@lychee.suse.de/home/agraf/release/kvm',
+  'host_kernel_git_repo': 'git://github.com/agraf/linux-2.6.git',
+
+#  'host_install_profile': 'f14-autotest-kvm',
+#  'name': 'qemu-kvm.qemu-kvm-git.stable.build',
+#  'user_git_repo': 'git://git.kernel.org/pub/scm/virt/kvm/qemu-kvm.git',
+#  'dep': [],
+#  'test_git_repo': 'git://git.kernel.org/pub/scm/virt/kvm/kvm-unit-tests.git',
+#  'monitor_type_qmpmonitor1': 'qmp',
+#  'save_results': 'yes',
+#  'mode': 'git',
+#  'shortname': 'qemu-kvm-git.build',
+#  'type': 'build',
+#  'monitors': ' qmpmonitor1',
+#  'vm_type': 'kvm'
+}
+custom_cfg = ['']
+#custom_cfg = ['only qemu-git..simple']
+#build_server = 'agraf@granola.suse.de';
+#build_server = 'agraf@huckleberry.suse.de';
+#build_server = 'agraf@granola-client1.arch.suse.de';
+#build_server = 'agraf@lemon.arch.suse.de';
+build_server = 'agraf@wolfberry-1.arch.suse.de';
+
+# find out from host name?
+build_label = utils.system_output("hostname")
+
+def step_init():
+    job.next_step([step_test])
+
+    # call a shell script that compiles the kernel for us
+    utils.system("/autotest/ppc/compile.sh %s %s" % (build_server, build_label))
+
+    # boot the new kernel
+    job.start_reboot()
+    job.next_step_prepend(["job.end_reboot", "", "", []])
+    job.reboot()
+
+def test_template(hugepages):
+    if hugepages:
+        utils.system("echo $(( 532 / 4 )) > /proc/sys/vm/nr_hugepages")
+
+    # prepare test images
+    utils.system("rm -rf /tmp/kvm_autotest_root/images")
+    utils.system("mkdir -p /tmp/kvm_autotest_root/images")
+    utils.system("qemu-img create -f qcow2 -b /autotest/ppc/images/e500-etch.qcow2 /tmp/kvm_autotest_root/images/e500-etch.qcow2")
+    utils.system("qemu-img create -f qcow2 -b /autotest/ppc/images/e500-spe.raw /tmp/kvm_autotest_root/images/e500-spe.qcow2")
+    utils.system("qemu-img create -f qcow2 -b /autotest/ppc/images/ppc32-etch.qcow2 /tmp/kvm_autotest_root/images/ppc32-etch.qcow2")
+    utils.system("qemu-img create -f qcow2 -b /autotest/ppc/images/ppc32-squeeze.qcow2 /tmp/kvm_autotest_root/images/ppc32-squeeze.qcow2")
+
+    # make sure we have the latest code
+    utils.system("/autotest/ppc/update_git.sh")
+
+    # prepare local qemu tree for building
+    utils.system("rm -rf /tmp/qemu_src")
+    utils.system("git clone -ls /autotest/ppc/qemu /tmp/qemu_src")
+    utils.system("cd /tmp/qemu_src; git submodule init pixman; git submodule update")
+
+    # prepare kernel headers
+#    utils.system("rm -rf /tmp/kernel_headers; mkdir /tmp/kernel_headers")
+#    utils.system("cd /autotest/ppc/kvm; make headers_install INSTALL_HDR_PATH=/tmp/kernel_headers")
+
+    # make sure KVM is available
+    utils.system("modprobe kvm", ignore_status=True)
+
+    # /tmp is mounted as tmpfs which exceeds our RAM size when we build QEMU in there
+    if build_label == "ppc440":
+        utils.system("mount --bind /tmp2 /tmp");
+
+    # run the tests
+    parser = cartesian_config.Parser()
+    parser.parse_file("/autotest/ppc/configs/%s.cfg" % build_label)
+    for line in custom_cfg:
+        parser.parse_string(line)
+    if hugepages:
+        parser.parse_string("only hugepages")
+    else:
+        parser.parse_string("no hugepages")
+    virt_utils.run_tests(parser, job)
+
+def step_test():
+    #job.end_reboot(subdir, ident, notes)
+    # notify the system that the reboot worked
+    #job.end_reboot(None, "", [])
+
+    if os.path.exists("/proc/sys/vm/nr_hugepages"):
+      job.next_step([step_test_huge])
+
+    test_template(False)
+
+def step_test_huge():
+    test_template(True)
+
+ 
+
+

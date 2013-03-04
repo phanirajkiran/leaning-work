@@ -1,0 +1,310 @@
+diff --git a/apache/conf/django-directives b/apache/conf/django-directives
+index 2c604a1..a317e3e 100644
+--- a/apache/conf/django-directives
++++ b/apache/conf/django-directives
+@@ -1,3 +1,5 @@
++LoadModule python_module /usr/lib/apache2/mod_python.so
++
+ <IfModule !prefork.c>
+     # Django requires the prefork MPM, so just fail with this bogus directive
+     # if it's not loaded. See
+diff --git a/apache/conf/tko-directives b/apache/conf/tko-directives
+index 6964475..8fcc1d3 100644
+--- a/apache/conf/tko-directives
++++ b/apache/conf/tko-directives
+@@ -1,5 +1,6 @@
+ Alias /results "/usr/local/autotest/results/"
+ <Directory /usr/local/autotest/results/>
++    AddHandler cgi-script .cgi
+     Options Indexes FollowSymLinks MultiViews
+     AllowOverride None
+     Order allow,deny
+@@ -11,6 +12,7 @@ Alias /results "/usr/local/autotest/results/"
+ 
+ Alias /tko "/usr/local/autotest/tko/"
+ <Directory /usr/local/autotest/tko/>
++    AddHandler cgi-script .cgi
+     Options ExecCGI Indexes MultiViews +SymLinksIfOwnerMatch
+     DirectoryIndex compose_query.cgi
+     AllowOverride None
+diff --git a/client/bin/kernel.py b/client/bin/kernel.py
+index cb0ef99..c659c50 100644
+--- a/client/bin/kernel.py
++++ b/client/bin/kernel.py
+@@ -202,6 +202,8 @@ class kernel(BootableKernel):
+         elif arch == 'ia64':
+             self.build_target = 'all'
+             self.build_image = 'vmlinux.gz'
++        elif arch == 'ppc64' or arch == 'ppc':
++            self.build_target = 'vmlinux'
+ 
+         if not leave:
+             self.logfile.write('BASE: %s\n' % base_tree)
+@@ -273,6 +275,8 @@ class kernel(BootableKernel):
+         config = kernel_config.kernel_config(self.job, self.build_dir,
+                  self.config_dir, config_file, config_list,
+                  defconfig, self.base_tree_version, make)
++	if kernel_config.config_y(config.build_config, "CONFIG_DEFAULT_UIMAGE"):
++	    self.build_target = 'uImage'
+ 
+ 
+     def get_patches(self, patches):
+@@ -649,7 +653,7 @@ class kernel(BootableKernel):
+         # If no 'target_arch' given assume native compilation
+         if target_arch is None:
+             target_arch = utils.get_current_kernel_arch()
+-            if target_arch == 'ppc64':
++            if target_arch == 'ppc64' or target_arch == 'ppc':
+                 if self.build_target == 'bzImage':
+                     self.build_target = 'vmlinux'
+ 
+diff --git a/client/bin/kernel_config.py b/client/bin/kernel_config.py
+index 4b6473b..b96542e 100644
+--- a/client/bin/kernel_config.py
++++ b/client/bin/kernel_config.py
+@@ -43,8 +43,11 @@ def diff_configs(old, new):
+ 
+ 
+ 
++def config_y(config, item):
++    return (utils.grep('%s=y' % item, config))
++
+ def modules_needed(config):
+-    return (utils.grep('CONFIG_MODULES=y', config) and utils.grep('=m', config))
++    return (config_y(config, "CONFIG_MODULES") and utils.grep('=m', config))
+ 
+ 
+ def config_by_name(name, set):
+diff --git a/client/virt/kvm_installer.py b/client/virt/kvm_installer.py
+index 54829f4..f1b590a 100644
+--- a/client/virt/kvm_installer.py
++++ b/client/virt/kvm_installer.py
+@@ -3,6 +3,8 @@ from autotest_lib.client.bin import utils, os_dep
+ from autotest_lib.client.common_lib import error
+ import virt_utils, virt_installer
+ 
++def get_kvm_qemu(params):
++    return params.get('qemu_bin', 'qemu-system-x86_64')
+ 
+ def kill_qemu_processes():
+     """
+@@ -77,7 +79,7 @@ def _load_kvm_modules(mod_list, module_dir=None, load_stock=False):
+             utils.system("modprobe %s" % module)
+ 
+ 
+-def create_symlinks(test_bindir, prefix=None, bin_list=None, unittest=None):
++def create_symlinks(test_bindir, kvm_qemu, prefix=None, bin_list=None, unittest=None):
+     """
+     Create symbolic links for the appropriate qemu and qemu-img commands on
+     the kvm test bindir.
+@@ -107,7 +109,7 @@ def create_symlinks(test_bindir, prefix=None, bin_list=None, unittest=None):
+                 os.symlink(bin, qemu_img_path)
+ 
+     elif prefix:
+-        kvm_qemu = os.path.join(prefix, "bin", "qemu-system-x86_64")
++        kvm_qemu = os.path.join(prefix, "bin", kvm_qemu)
+         if not os.path.isfile(kvm_qemu):
+             raise error.TestError('Invalid qemu path')
+         kvm_qemu_img = os.path.join(prefix, "bin", "qemu-img")
+@@ -312,6 +314,7 @@ class YumInstaller(BaseInstaller):
+                                              default_pkg_path_list))
+         self.qemu_bin_paths = eval(params.get("qemu_bin_paths",
+                                               default_qemu_bin_paths))
++        self.kvm_qemu = get_kvm_qemu(params)
+ 
+ 
+     def _clean_previous_installs(self):
+@@ -343,6 +346,7 @@ class YumInstaller(BaseInstaller):
+         self._get_packages()
+         self._install_packages()
+         create_symlinks(test_bindir=self.test_bindir,
++                        kvm_qemu=self.kvm_qemu,
+                         bin_list=self.qemu_bin_paths,
+                         unittest=self.unittest_prefix)
+         self.reload_modules_if_needed()
+@@ -371,6 +375,7 @@ class KojiInstaller(YumInstaller):
+         if self.tag is not None:
+             virt_utils.set_default_koji_tag(self.tag)
+         self.koji_pkgs = eval(params.get("koji_pkgs", "[]"))
++        self.kvm_qemu = get_kvm_qemu(params)
+ 
+ 
+     def _get_packages(self):
+@@ -399,6 +404,7 @@ class KojiInstaller(YumInstaller):
+         self._install_packages()
+         self.install_unittests()
+         create_symlinks(test_bindir=self.test_bindir,
++                        kvm_qemu=self.kvm_qemu,
+                         bin_list=self.qemu_bin_paths,
+                         unittest=self.unittest_prefix)
+         self.reload_modules_if_needed()
+@@ -510,9 +516,14 @@ class SourceDirInstaller(BaseInstaller):
+             p = os.path.join(self.srcdir, 'configure')
+             self.configure_options = virt_installer.check_configure_options(p)
+ 
++        self.kvm_qemu = get_kvm_qemu(params)
++
+ 
+     def _build(self):
+-        make_jobs = utils.count_cpus()
++        if os.uname()[1] == "e500":
++            make_jobs = 20
++        else:
++            make_jobs = utils.count_cpus()
+         os.chdir(self.srcdir)
+         # For testing purposes, it's better to build qemu binaries with
+         # debugging symbols, so we can extract more meaningful stack traces.
+@@ -576,6 +587,7 @@ class SourceDirInstaller(BaseInstaller):
+             install_roms(self.path_to_roms, self.prefix)
+         self.install_unittests()
+         create_symlinks(test_bindir=self.test_bindir,
++                        kvm_qemu=self.kvm_qemu,
+                         prefix=self.prefix,
+                         unittest=self.unittest_prefix)
+ 
+@@ -674,9 +686,14 @@ class GitInstaller(SourceDirInstaller):
+         p = os.path.join(self.userspace_srcdir, 'configure')
+         self.configure_options = virt_installer.check_configure_options(p)
+ 
++        self.kvm_qemu = get_kvm_qemu(params)
++
+ 
+     def _build(self):
+-        make_jobs = utils.count_cpus()
++        if os.uname()[1] == "e500":
++            make_jobs = 20
++        else:
++            make_jobs = utils.count_cpus()
+         cfg = './configure'
+         if self.kmod_srcdir:
+             logging.info('Building KVM modules')
+@@ -734,7 +751,9 @@ class GitInstaller(SourceDirInstaller):
+         if self.path_to_roms:
+             install_roms(self.path_to_roms, self.prefix)
+         self.install_unittests()
+-        create_symlinks(test_bindir=self.test_bindir, prefix=self.prefix,
++        create_symlinks(test_bindir=self.test_bindir,
++                        kvm_qemu=self.kvm_qemu,
++                        prefix=self.prefix,
+                         bin_list=None,
+                         unittest=self.unittest_prefix)
+ 
+diff --git a/client/virt/virt_test_setup.py b/client/virt/virt_test_setup.py
+index f915c1b..6f0f77d 100644
+--- a/client/virt/virt_test_setup.py
++++ b/client/virt/virt_test_setup.py
+@@ -43,7 +43,7 @@ class HugePageConfig(object):
+         if self.vms < self.max_vms:
+             self.vms = self.max_vms
+         # memory of all VMs plus qemu overhead of 64MB per guest
+-        vmsm = (self.vms * self.mem) + (self.vms * 64)
++        vmsm = (self.vms * self.mem) # + (self.vms * 64)
+         return int(vmsm * 1024 / self.hugepage_size)
+ 
+ 
+@@ -103,5 +103,6 @@ class HugePageConfig(object):
+             utils.system("umount %s" % self.hugepage_path)
+         except error.CmdError:
+             return
+-        utils.system("echo 0 > %s" % self.kernel_hp_file)
++# XXX can't register enough huge pages after they got freed
++#        utils.system("echo 0 > %s" % self.kernel_hp_file)
+         logging.debug("Hugepage memory successfuly dealocated")
+diff --git a/client/virt/virt_utils.py b/client/virt/virt_utils.py
+index 5510c89..fc77cbb 100644
+--- a/client/virt/virt_utils.py
++++ b/client/virt/virt_utils.py
+@@ -403,12 +403,18 @@ def get_git_branch(repository, branch, srcdir, commit=None, lbranch=None):
+     """
+     logging.info("Fetching git [REP '%s' BRANCH '%s' COMMIT '%s'] -> %s",
+                  repository, branch, commit, srcdir)
++
++    utils.system("mkdir -p /usr/local/autotest/tests/kvm/src/")
++    utils.system("rm -rf /usr/local/autotest/tests/kvm/src/kvm_userspace")
++    utils.system("ln -s /tmp/qemu_src /usr/local/autotest/tests/kvm/src/kvm_userspace")
++
+     if not os.path.exists(srcdir):
+         os.makedirs(srcdir)
+     os.chdir(srcdir)
+ 
+     if os.path.exists(".git"):
+         utils.system("git reset --hard")
++	return srcdir
+     else:
+         utils.system("git init")
+ 
+diff --git a/global_config.ini b/global_config.ini
+index e822a1e..fb3063c 100644
+--- a/global_config.ini
++++ b/global_config.ini
+@@ -3,7 +3,7 @@ host: localhost
+ database: autotest_web
+ db_type: mysql
+ user: autotest
+-password: please_set_this_password
++password: some_password
+ job_timeout_default: 72
+ job_max_runtime_hrs_default: 72
+ parse_failed_repair_default: 0
+@@ -23,7 +23,7 @@ host: localhost
+ database: tko
+ db_type: mysql
+ user: autotest
+-password: please_set_this_password
++password: some_password
+ 
+ [PLANNER]
+ # 3 months
+@@ -61,8 +61,8 @@ smtp_password:
+ [SCHEDULER]
+ die_on_orphans: False
+ enable_scheduler: True
+-notify_email:
+-notify_email_from:
++notify_email: agraf@csgraf.de
++notify_email_from: Alexander Graf <agraf@suse.de>
+ notify_email_statuses: Completed,Failed,Aborted
+ max_processes_per_drone: 1000
+ max_jobs_started_per_cycle: 100
+@@ -105,4 +105,4 @@ use_sshagent_with_paramiko: True
+ 
+ 
+ [PACKAGES]
+-serve_packages_from_autoserv: True
++serve_packages_from_autoserv: False
+diff --git a/server/hosts/abstract_ssh.py b/server/hosts/abstract_ssh.py
+index 3723c46..78b208c 100644
+--- a/server/hosts/abstract_ssh.py
++++ b/server/hosts/abstract_ssh.py
+@@ -377,6 +377,18 @@ class AbstractSSHHost(SiteHost):
+ 
+ 
+     def ssh_ping(self, timeout=60):
++        if os.path.exists('/autotest/reserved/%s' % self.hostname):
++            raise error.AutoservSshPingHostError('Host is reserved')
++
++        try:
++            status = utils.system_output('/autotest/ppc/power.sh %s' % self.hostname)
++            if status.split("\n")[0] == 'Off':
++                # Turn the machine on!
++                utils.system('/autotest/ppc/power.sh %s on' % self.hostname)
++                time.sleep(2)
++                self.wait_up()
++        except:
++                ""
+         try:
+             self.run("true", timeout=timeout, connect_timeout=timeout)
+         except error.AutoservSSHTimeout:
+diff --git a/shadow_config.ini b/shadow_config.ini
+index 12b00a5..d7b00bf 100644
+--- a/shadow_config.ini
++++ b/shadow_config.ini
+@@ -1,3 +1,3 @@
+-#[TKO]
+-#user: autotest
+-#password: mypassword
++[TKO]
++user: autotest
++password: some_password
+
+

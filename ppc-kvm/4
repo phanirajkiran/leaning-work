@@ -1,0 +1,33 @@
+alex@fitpc:/autotest/ppc> cat /autotest/ppc/configs/ppc.cfg
+variants:
+    - build:
+        vm_type = kvm
+        type = build
+        save_results = yes
+        mode = git
+        extra_configure_options += ' --target-list=ppc64-softmmu,ppc-softmmu,ppc64-linux-user,ppc-linux-user'
+        user_git_repo = /autotest/ppc/qemu
+        # need to be set here, can't be test dependent
+        qemu_bin = "qemu-system-ppc"
+#        variants:
+#            - normal-headers:
+#            - git-headers:
+#                extra_configure_options += ' --kerneldir=/tmp/kernel_headers'
+
+    - @tests: build
+        include tests_base.cfg
+        mem = 512
+        nic_mode = user
+        login_timeout = 720
+        drive_cache = unsafe
+
+        image_name(_.*)? ?<= /tmp/kvm_autotest_root/images/
+        cdrom(_.*)? ?<= /tmp/kvm_autotest_root/
+        floppy ?<= /tmp/kvm_autotest_root/
+        virtio_floppy ?<= /tmp/kvm_autotest_root/
+        variants:
+            - qemu-git-tcg:
+            - qemu-git-kvm:
+                extra_params += " -enable-kvm"
+
+
