@@ -4,3 +4,6 @@
 
 
  ./main_test.sh -F -s DMA -u 1111
+
+ ./main_test.sh -F -s gettimeofday_jumpback-test -u 1111
+

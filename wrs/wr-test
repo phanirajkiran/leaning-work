@@ -7,3 +7,17 @@
 
  ./main_test.sh -F -s gettimeofday_jumpback-test -u 1111
 
+./main_test.sh -F -s SATA -u 1111
+
+./main_test.sh -F -s cgroups -u 1111
+
+./main_test.sh -F -s tracing -u 1111
+
+
+/usr/bin/qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio,vlan=0 -net tap,vlan=0,fd=3 3<>/dev/tap23 -net nic,macaddr=de:ef:be:66:a2:b5,model=virtio,vlan=1 -net tap,script=/etc/qemu-ifup.tap,vlan=1 -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp"  -nographic &
+
+
+-net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -net tap,fd=3 3<>/dev/tap10
+
+/usr/bin/qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -net tap,fd=3 3<>/dev/tap17  -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp"  -nographic &
+

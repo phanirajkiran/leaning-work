@@ -1,0 +1,10 @@
+https://www.suse.com/documentation/sles11/singlehtml/lxc_quickstart/lxc_quickstart.html
+https://www.berrange.com/posts/2011/09/27/getting-started-with-lxc-using-libvirt/  mount
+If you want to handle untrusted packages, you'll need LXC or full virtualisation. LXC takes some configuration, but can be handled by libvirt if you want a high level of isolation; you still need to debootstrap it yourself as I recall. For full virtualisation, vmbuilder has a debian version that prepares and configures images. Since you don't need the flexibility of LXC, I recommend pbuilder or vmbuilder + kvm.
+
+http://kaivanov.blogspot.com/2013/01/configuring-lxc-using-libvirt.html
+
+
+http://blog.philippklaus.de/2011/02/create-an-lxc-application-container-using-libvirt/ good 
+
+http://lists.linux-foundation.org/pipermail/containers/2008-September/013237.html

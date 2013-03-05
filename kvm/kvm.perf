@@ -2,3 +2,8 @@ events.linuxfoundation.org/images/stories/pdf/lcjp2012_guangrong.pdf search from
 [PATCH v8 0/3] KVM: perf: kvm events analysis tool
 
 [PATCH V3] perf & kvm: Enhance perf to collect KVM guest os statistics from host side
+
+ As of Linux 3.3 KVM supports perf counters in the guest. You also need a recent enough Qemu (as of April 2012 that means a git snapshot). Aggregate counts are supported, although overflow interrupts don't seem to be.
+
+
+http://www.linux-kvm.org/page/Perf_events  Great
