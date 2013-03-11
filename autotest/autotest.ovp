@@ -1,1 +1,3 @@
 fmt='%(asctime)s %(levelname)5.5s %(filename)5s :{%(pathname)5s +%(lineno)d}3s | %(funcName)s - %(message)s'
+
+sudo ./run -t qemu --nettype bridge --vhost on

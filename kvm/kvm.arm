@@ -1,0 +1,2 @@
+https://lists.cs.columbia.edu/pipermail/kvmarm/2012-October/003594.html
+#qemu-system-arm -enable-kvm -kernel kernel.bin -dtb ca15.dtb -M vexpress-a15 -cpu cortex-a15 -nographic -append "console=ttyAMA0,38400 virtio_mmio.device=1M at 0x4e000000:74:0" -m 512M -device virtio-net,transport=virtio-mmio.0,
