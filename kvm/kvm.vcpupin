@@ -1,0 +1,59 @@
+http://docs.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/ch25s06.html
+http://publib.boulder.ibm.com/infocenter/lnxinfo/v3r0m0/index.jsp?topic=%2Fliaat%2Fliaattunpinproccachetop.htm
+
+
+# virsh vcpupin guest1 0 0,8
+# virsh vcpupin guest1 1 0,8
+# virsh vcpupin guest1 2 1,9
+# virsh vcpupin guest1 3 1,9
+
+In this example, guest1 uses four virtual processors: 0, 1, 2, and 3. The example shows virtual processor 0 and virtual processor 1 each pinned to physical processor 0 and physical processor 8. The example also shows virtual processor 2 and virtual processor 3 each pinned to physical processor 1 and physical processor 9. The example shows the same number of virtual processors pinned to a cache level as the number of physical processors that share that cache level. 
+
+root@intel_5500_server:~# virsh vcpupin vm1 0 0,6
+
+root@intel_5500_server:~# virsh vcpuinfo vm1
+VCPU:           0
+CPU:            6
+State:          running
+CPU time:       35.2s
+CPU Affinity:   y-----y---------
+
+-----------------------------------------------------------------------------------
+root@intel_5500_server:~# virsh vcpupin vm1 1 1,7
+
+root@intel_5500_server:~# virsh vcpuinfo vm1
+VCPU:           0
+CPU:            1
+State:          running
+CPU time:       5.2s
+CPU Affinity:   -y----y---------
+
+VCPU:           1
+CPU:            7
+State:          running
+CPU time:       2.7s
+CPU Affinity:   -y-----y--------
+
+VCPU:           2
+CPU:            15
+State:          running
+CPU time:       3.3s
+CPU Affinity:   yyyyyyyyyyyyyyyy
+
+VCPU:           3
+CPU:            3
+State:          running
+CPU time:       4.4s
+CPU Affinity:   yyyyyyyyyyyyyyyy
+
+----------------------------------------------------------------------------------------------------------
+root@intel_5500_server:~# virsh nodeinfo
+CPU model:           x86_64
+CPU(s):              16
+CPU frequency:       2533 MHz
+CPU socket(s):       2
+Core(s) per socket:  4
+Thread(s) per core:  2
+NUMA cell(s):        1
+Memory size:         24697528 KiB
+

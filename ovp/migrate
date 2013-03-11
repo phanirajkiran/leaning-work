@@ -1,0 +1,115 @@
+migrate:
+qemu-system-x86_64 -smp 2 -m 512 -enable-kvm -net nic,model=e1000 -net tap -hda /mnt/wrlinux.img -kernel /root/bzImage -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp"  -monitor stdio
+qemu-system-x86_64 -smp 2 -m 512 -enable-kvm -net nic,model=e1000 -net tap -hda /mnt/wrlinux.img -kernel /root/bzImage -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp"  -monitor stdio -incoming tcp:0:8899 -serial tcp::4444,server
+
+-incoming tcp:0:8899
+migrate -d -b tcp:128.224.165.126:8899
+migrate -d tcp:128.224.165.126:8899
+-incoming "exec:nc -l -p 81"
+migrate -d "exec:nc 128.224.165.126 81"
+
+-serial tcp::4444,server
+telnet 0.0.0.0 4444
+-serial file:/tmp/aaa
+
+
+target:
+qemu-system-x86_64 -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -hda ./guest_img.raw -kernel ./bzImage -append "root=/dev/sda rw  ip=dhcp" -incoming tcp:0:8899 -nographic
+
+source:
+qemu-system-x86_64  -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -hda ./guest_img.raw -kernel ./bzImage -append "root=/dev/sda rw  ip=dhcp" -nographic -monitor stdio
+migrate -d -b tcp:128.224.165.209:8899
+
+
+
+==============================================================================================================
+
+qemu-system-x86_64  -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -hda ./guest_img.raw -kernel ./bzImage -append "root=/dev/sda rw  ip=dhcp"  -monitor stdio
+migrate "exec:gzip -c > STATEFILE.gz"
+
+gzip -c -d STATEFILE.gz | qemu-system-x86_64  -k en-us -m 1024 -net user,hostname="kvm-guest" -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -hda ./guest_img.raw -kernel ./bzImage -append "root=/dev/sda rw  ip=dhcp" -incoming "exec: cat"
+
+
+===============================================
+
+
+<domain type='kvm'>
+  <name>vm1</name>
+  <memory>1024000</memory>
+  <currentMemory>512000</currentMemory>
+  <vcpu>1</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc-0.11'>hvm</type>
+    <boot dev='hd' />
+    <kernel>/boot/bzImage</kernel>
+    <cmdline>console=ttyS0 root=/dev/sda rw ip=dhcp</cmdline>
+  </os>
+  <devices>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='raw' cache='none'/>
+      <source file='/boot/guest_img.raw' />
+      <target dev='hda' bus='ide' />
+    </disk>
+    <serial type='tcp'>
+      <source mode='bind' host='127.0.0.1' service='2445'/>
+      <protocol type='telnet'/>
+      <target port='1'/>
+    </serial>
+    <console type='tcp'>
+      <source mode='bind' host='127.0.0.1' service='2445'/>
+      <protocol type='telnet'/>
+      <target port='1'/>
+    </console>
+
+  </devices>
+</domain>
+
+
+virsh migrate --live vm1  qemu+ssh://root@128.224.165.205/system --migrateuri tcp://128.224.165.205:9099
+OR:
+virsh migrate --live vm1 qemu+ssh://root@128.224.165.205/system
+
+------------------------------
+
+Verify pass on non-cluster filesystem
+libvirt-0.9.10-3.el6.x86_64
+qemu-kvm-0.12.1.2-2.232.el6.x86_64
+kernel-2.6.32-225.el6.x86_64
+
+Start a guest with cache=writeback
+...
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='raw' cache='writeback'/>
+      <source file='/mnt/kvm-rhel6u2-x86_64-new.img'>
+        <seclabel relabel='no'/>
+      </source>
+      <target dev='hda' bus='ide'/>
+    </disk>
+...
+Then do migration, libvirt will report error
+# virsh migrate --live mig qemu+ssh://{target ip}/system
+error: Unsafe migration: Migration may lead to data corruption if disks use cache != none
+
+Migration succeeds with --unsafe option with cache=writeback
+# virsh migrate --live mig qemu+ssh://{target ip}/system --unsafe
+succeed without error
+
+Migration succeeds with cache=none without --unsafe
+...
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='raw' cache='none'/>
+      <source file='/mnt/kvm-rhel6u2-x86_64-new.img'>
+        <seclabel relabel='no'/>
+      </source>
+      <target dev='hda' bus='ide'/>
+    </disk>
+...
+# virsh migrate --live mig qemu+ssh://{target ip}/system 
+succeed without error
+
+For cluster filesystem, how can I build environment and test?
+
+???
+http://wiki.libvirt.org/page/Migration_fails_with_%22Unable_to_resolve_address%22_error
+error: Unable to resolve address 'intel2' service '49152': Name or service not known
+

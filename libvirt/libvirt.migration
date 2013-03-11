@@ -1,6 +1,8 @@
 http://docs.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/chap-Virtualization-KVM_live_migration.html#sect-Virtualization-KVM_live_migration-Live_migration_requirements
 http://docs.fedoraproject.org/zh-CN/Fedora/12/html/Virtualization_Guide/sect-Virtualization_Guide-Managing_guests_with_the_Virtual_Machine_Manager_virt_manager-The_Virtual_Machine_Manager_details_window_.html
 ihttp://doc.opensuse.org/documentation/html/openSUSE/opensuse-kvm/cha.libvirt.admin.html
+DOC: Live KVM migration with virsh
+http://docs.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/sect-Virtualization-KVM_live_migration-Live_KVM_migration_with_virsh.html
 
 Before you begin
 This procedure assumes that SSH keys are already set for password-less authentication. If you do not have SSH keys set for password authentication, do so before continuing with this procedure.
@@ -20,5 +22,34 @@ virsh -c qemu+ssh://c7b5/system list --all
 net-create:
 http://builder.virt-tools.org/artifacts/libvirt-virshcmdref/html/sect-net-create.html
 
+
+Example: http://docs.fedoraproject.org/en-US/Fedora/13/html/Virtualization_Guide/sect-Virtualization-KVM_live_migration-Live_KVM_migration_with_virsh.html
+
+
+    Verify the guest is running
+    From the source system, test1.example.com, verify RHEL4test is running:
+
+    [root@test1 ~]# virsh list
+    Id Name                 State
+    ----------------------------------
+     10 RHEL4                running
+
+    Migrate the guest
+    Execute the following command to live migrate the guest to the destination, test2.example.com. Append /system to the end of the destination URL to tell libvirt that you need full access.
+
+    # virsh migrate --live RHEL4test qemu+ssh://test2.example.com/system
+
+    Once the command is entered you will be prompted for the root password of the destination system.
+
+    Wait
+    The migration may take some time depending on load and the size of the guest. virsh only reports errors. The guest continues to run on the source host until fully migrated.
+
+    Verify the guest has arrived at the destination host
+    From the destination system, test2.example.com, verify RHEL4test is running:
+
+    [root@test2 ~]# virsh list
+    Id Name                 State
+    ----------------------------------
+     10 RHEL4                running
 
 

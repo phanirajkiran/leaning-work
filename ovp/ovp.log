@@ -1,0 +1,49 @@
+(03:29:16 PM) The topic for #ovp is: Open Vagabond Profile
+(09:00:53 PM) marka [~marka@yow-masselst-d1.wrs.com] entered the room.
+(09:36:15 PM) zedd_gone is now known as zedd
+(10:30:40 PM) element-82: zedd: are you using perf for benchmarking?
+(10:31:58 PM) zedd: depending on what we are benchmarking .. sometimes. but at the moment, it's largely ftrace/latency and custom timing measurements.
+(10:33:38 PM) element-82: ok, just thought there was a benchmarking suite for perf that might be easy to test with.
+(10:36:46 PM) lyang0:  I haven't known perf can be used for benchmark testing 
+(10:37:13 PM) element-82: lyang0: it uses hackbench
+(10:38:11 PM) lyang0: hackbench is contained in perf? 
+(10:38:26 PM) element-82: yes, have a look at perf-bench.txt
+(10:38:31 PM) lyang0: ph 
+(10:38:34 PM) lyang0: oh 
+(10:40:20 PM) element-82: lyang0: it is based on hackbench
+(10:41:24 PM) lyang0: oh yes 
+(10:48:25 PM) zedd: element-82: I'll be finishing the CoS on the CQs this week, including some of the benhmarking ones. The standard suites are part of those requirements, whatever mechanism we use to test and measure is fine (within reason).
+(10:48:49 PM) element-82: cool
+(10:50:45 PM) lyang0: Is this benchmark is mainly for  rt kernel? 
+(11:01:52 PM) zedd: hackbench ?  not really. it's just a scheduler benchmark. 
+(11:07:40 PM) lyang0: I mean the benchmarks suit will be only tested on rt kernel? like WIND00393782 said?  or I misunderstand it 
+(11:17:22 PM) zedd: OVP will only use the -rt kernel.
+(11:32:31 PM) lyang0: To be clear, benchmark part only use -rt kernel, or the whole OVP is for -rt kernel? 
+(11:37:13 PM) zedd: OVP always uses the -rt kernel.
+(11:49:20 PM) agerman [~agerman@128.224.147.217] entered the room.
+(11:53:20 PM) lyang0: oh thanks 
+(12:27:22 AM) ***Michael finally sets up a reasonable target.. ~60-70us latency
+(12:38:04 AM) Michael: zedd, do you use serial consoles for both guest and host?
+(12:39:15 AM) Michael: I wonder if a pass through of a pci serial card  (that I don't yet have) would make sense to reduce vmexits. then again, console is more for debugging
+(12:40:43 AM) zedd: Michael. yah, for our hardcore benchmarking we disable the serial port in some cases, or just don't use it in other. Some configs go so far as to disable CONFIG_VT. Our test loads are triggered via ssh/network.
+(12:41:17 AM) Michael: CONFIG_VT makes sense... I was bitten for a while by vesa fb
+(12:41:36 AM) Michael: that thing seems to easily cause 0.5ms
+(12:41:44 AM) zedd: yep. makes the box a PITA to use, but it helps the latency.
+(12:42:23 AM) Michael: things were much nicer when there was just VGA:)
+(12:42:47 AM) zedd: heh. totally.
+(01:38:59 AM) yshi [~yshi@svl-yshi-l2.corp.ad.wrs.com] entered the room.
+(01:51:16 AM) element-82: zedd: have you got patches for virtio-trace yet?  It looks like there are some upstream.
+(01:53:11 AM) zedd: it's all largely upstream now.
+(01:53:21 AM) zedd: but no, we haven't collected and backported them yet.
+(01:53:37 AM) element-82: just looking through a req to see what we have and need.
+(03:34:22 AM) yshi left the room (quit: Quit: Leaving.).
+(05:19:15 AM) marka is now known as marka_away
+(05:22:16 AM) yshi [~yshi@svl-yshi-l2.corp.ad.wrs.com] entered the room.
+(05:39:06 AM) zedd is now known as zedd_gone
+(05:55:08 AM) agerman is now known as agone
+(05:55:20 AM) agone left the room (quit: Quit: Leaving.).
+(09:33:43 AM) yshi left the room.
+(10:26:47 AM) agerman [~agerman@128.224.21.226] entered the room.
+(10:47:52 AM) agerman left the room (quit: Ping timeout: 180 seconds).
+(02:24:07 PM) The account has disconnected and you are no longer in this chat. You will automatically rejoin the chat when the account reconnects.
+ 
