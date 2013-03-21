@@ -65,7 +65,7 @@ gzip -c -d STATEFILE.gz | qemu-system-x86_64  -k en-us -m 1024 -net user,hostnam
 </domain>
 
 
-virsh migrate --live vm1  qemu+ssh://root@128.224.158/system --migrateuri tcp://128.224.158.249:9099
+virsh migrate --live vm1  qemu+ssh://root@128.224.165.205/system --migrateuri tcp://128.224.165.205:9099
 OR:
 virsh migrate --live vm1 qemu+ssh://root@128.224.165.205/system
 
@@ -108,3 +108,8 @@ Migration succeeds with cache=none without --unsafe
 succeed without error
 
 For cluster filesystem, how can I build environment and test?
+
+???
+http://wiki.libvirt.org/page/Migration_fails_with_%22Unable_to_resolve_address%22_error
+error: Unable to resolve address 'intel2' service '49152': Name or service not known
+

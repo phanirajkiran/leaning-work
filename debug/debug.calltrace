@@ -1,0 +1,172 @@
+http://lkml.indiana.edu/hypermail/linux/kernel/1208.3/00888.html
+
+
+Using GDB to find the location where your kernel panicked or oopsed.
+
+A quick and easy way to find the line of code where your kernel panicked or oopsed is to use GDB list command. You can do this as follows.
+
+Lets assume your panic/oops message says something like:
+
+[  174.507084] Stack:
+[  174.507163]  ce0bd8ac 00000008 00000000 ce4a7e90 c039ce30 ce0bd8ac c0718b04 c07185a0
+[  174.507380]  ce4a7ea0 c0398f22 ce0bd8ac c0718b04 ce4a7eb0 c037deee ce0bd8e0 ce0bd8ac
+[  174.507597]  ce4a7ec0 c037dfe0 c07185a0 ce0bd8ac ce4a7ed4 c037d353 ce0bd8ac ce0bd8ac
+[  174.507888] Call Trace:
+[  174.508125]  [<c039ce30>] ? sd_remove+0x20/0x70
+[  174.508235]  [<c0398f22>] ? scsi_bus_remove+0x32/0x40
+[  174.508326]  [<c037deee>] ? __device_release_driver+0x3e/0x70
+[  174.508421]  [<c037dfe0>] ? device_release_driver+0x20/0x40
+[  174.508514]  [<c037d353>] ? bus_remove_device+0x73/0x90
+[  174.508606]  [<c037bccf>] ? device_del+0xef/0x150
+[  174.508693]  [<c0399207>] ? __scsi_remove_device+0x47/0x80
+[  174.508786]  [<c0399262>] ? scsi_remove_device+0x22/0x40
+[  174.508877]  [<c0399324>] ? __scsi_remove_target+0x94/0xd0
+[  174.508969]  [<c03993c0>] ? __remove_child+0x0/0x20
+[  174.509060]  [<c03993d7>] ? __remove_child+0x17/0x20
+[  174.509148]  [<c037b868>] ? device_for_each_child+0x38/0x60
+[  174.509241]  [<c039938f>] ? scsi_remove_target+0x2f/0x60
+[  174.509393]  [<d0c38907>] ? __iscsi_unbind_session+0x77/0xa0 [scsi_transport_iscsi]
+[  174.509699]  [<c015272e>] ? run_workqueue+0x6e/0x140
+[  174.509801]  [<d0c38890>] ? __iscsi_unbind_session+0x0/0xa0 [scsi_transport_iscsi]
+[  174.509977]  [<c0152888>] ? worker_thread+0x88/0xe0
+[  174.510047]  [<c01566a0>] ? autoremove_wake_function+0x0/0x40
+
+Lets say you want to know what line of code represents sd_remove+0x20/0x70. cd to the ubuntu debian/build/build-generic directory in your kernel tree and run gdb on the ".o" file which has the function sd_remove() in this case in sd.o, and use the gdb "list" command, (gdb) list *(function+0xoffset), in this case function is sd_remove() and offset is 0x20, and gdb should tell you the line number where you hit the panic or oops. This has worked for me very reliably for most cases.
+
+manjo@hungry:~/devel/ubuntu/kernel/ubuntu-karmic-397906/debian/build/build-generic/drivers/scsi$ gdb sd.o
+GNU gdb (GDB) 6.8.50.20090628-cvs-debian
+Copyright (C) 2009 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+(gdb) list *(sd_remove+0x20)
+0x1650 is in sd_remove (/home/manjo/devel/ubuntu/kernel/ubuntu-karmic-397906/drivers/scsi/sd.c:2125).
+2120    static int sd_remove(struct device *dev)
+2121    {
+2122            struct scsi_disk *sdkp;
+2123    
+2124            async_synchronize_full();
+2125            sdkp = dev_get_drvdata(dev);
+2126            blk_queue_prep_rq(sdkp->device->request_queue, scsi_prep_fn);
+2127            device_del(&sdkp->dev);
+2128            del_gendisk(sdkp->disk);
+2129            sd_shutdown(dev);
+(gdb)
+
+
+
+==============================================================================================================
+
+From patchwork Wed Feb 20 20:46:18 2013
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: odd GPF bug on resume from hibernate.
+Date: Wed, 20 Feb 2013 20:46:18 -0000
+From: Thomas Gleixner <tglx@linutronix.de>
+X-Patchwork-Id: 2169371
+Message-Id: <alpine.LFD.2.02.1302202130080.22263@ionos>
+To: Dave Jones <davej@redhat.com>
+Cc: "Rafael J. Wysocki" <rjw@sisk.pl>, x86@kernel.org,
+ Linux Kernel <linux-kernel@vger.kernel.org>,
+ Tang Chen <tangchen@cn.fujitsu.com>, Tony Luck <tony.luck@intel.com>
+
+On Wed, 20 Feb 2013, Dave Jones wrote:
+
+> On Wed, Feb 20, 2013 at 08:42:46PM +0100, Rafael J. Wysocki wrote:
+>  > On Wednesday, February 20, 2013 02:28:26 PM Dave Jones wrote:
+>  > > We had two users report hitting a bug that looks like this..
+>  > > 
+>  > > general protection fault: 8800 [#1] SMP 
+>  > > 
+>  > >    0:	ca 00 55             	lret   $0x5500
+>  > > 
+>  > > At this point I don't know where to begin debugging..
+>  > > 
+>  > > Is that 8800 error code a clue ?
+>  > 
+>  > Does CPU offline/online work on this machine?
+> 
+> I just asked the user to give that a try at https://bugzilla.redhat.com/show_bug.cgi?id=910162
+> 
+> Incidentally, I found that offlining a cpu in Linus' current tree
+> causes a mess..
+> 
+> 
+> numa_remove_cpu cpu 1 node 0: mask now 0,2-3
+> smpboot: CPU 1 is now offline
+> BUG: using smp_processor_id() in preemptible [00000000] code: bash/5976
+> caller is cmci_rediscover+0x6b/0xe0
+> Pid: 5976, comm: bash Not tainted 3.8.0-rc7+ #63
+> Call Trace:
+>  [<ffffffff812fb901>] debug_smp_processor_id+0xe1/0x100
+>  [<ffffffff8101e4bb>] cmci_rediscover+0x6b/0xe0
+>  [<ffffffff8158f55f>] mce_cpu_callback+0x1af/0x1c3
+>  [<ffffffff815a6893>] notifier_call_chain+0x53/0xa0
+>  [<ffffffff8107338e>] __raw_notifier_call_chain+0xe/0x10
+>  [<ffffffff810491e0>] __cpu_notify+0x20/0x40
+>  [<ffffffff81049215>] cpu_notify+0x15/0x20
+>  [<ffffffff8104939e>] cpu_notify_nofail+0xe/0x20
+>  [<ffffffff81588512>] _cpu_down+0x242/0x2b0
+>  [<ffffffff815885b6>] cpu_down+0x36/0x50
+
+That's caused by: commit 85b97637bb40a9f486459dd254598759af9c3d50
+
+       x86/mce: Do not change worker's running cpu in cmci_rediscover().
+
+mce_cpu_callback() does:
+
+        if (action == CPU_POST_DEAD) {
+                /* intentionally ignoring frozen here */
+                cmci_rediscover(cpu);
+        }
+
+This is called from preemptible context.
+
+Now cmci_rediscover() grew the following addon:
+
++   		      if (cpu == smp_processor_id()) {
++		      	      cmci_rediscover_work_func(NULL);
+					continue;
+
+Which causes the above splat. It seems testing with full debugging is
+overrated.
+
+Find the fix below, though it's debatable whether that "optimization"
+of calling the function directly is worth the trouble.
+
+Thanks,
+
+	tglx
+
+---
+To unsubscribe from this list: send the line "unsubscribe linux-kernel" in
+the body of a message to majordomo@vger.kernel.org
+More majordomo info at  http://vger.kernel.org/majordomo-info.html
+Please read the FAQ at  http://www.tux.org/lkml/
+
+Index: linux-2.6/arch/x86/kernel/cpu/mcheck/mce_intel.c
+===================================================================
+--- linux-2.6.orig/arch/x86/kernel/cpu/mcheck/mce_intel.c
++++ linux-2.6/arch/x86/kernel/cpu/mcheck/mce_intel.c
+@@ -311,10 +311,12 @@ void cmci_rediscover(int dying)
+ 		if (cpu == dying)
+ 			continue;
+ 
+-		if (cpu == smp_processor_id()) {
++		if (cpu == get_cpu()) {
+ 			cmci_rediscover_work_func(NULL);
++			put_cpu();
+ 			continue;
+ 		}
++		put_cpu();
+ 
+ 		work_on_cpu(cpu, cmci_rediscover_work_func, NULL);
+ 	}
+
+================================
+[2.6.35-rc1 BUG]: Calling sched_clock causes stack trace with DEBUG_PREEMPT

@@ -1,3 +1,25 @@
 fmt='%(asctime)s %(levelname)5.5s %(filename)5s :{%(pathname)5s +%(lineno)d}3s | %(funcName)s - %(message)s'
 
 sudo ./run -t qemu --nettype bridge --vhost on
+
+./run -t qemu --no-downloads -v -c qemu/cfg/tests.cfg
+
+vim virttest/bootstrap.py  7za 
+
+[lyang0@pek-lpgtest3 git]$ cat shared/cfg/guest-os/Linux/LinuxCustom/README 
+You can drop files in this dir to define custom linux guests.
+As an example, you could create a file called foo.cfg with the contents:
+
+FooLinux:
+    image_name = images/foo-linux
+
+Which would make it possible to specify this custom guest using
+
+./run -t qemu -g LinuxCustom.FooLinux
+
+Provided that you have a file called images/foo-linux.qcow2, if using the
+qcow2 format image. If you wish to provide a raw image file, you must use
+
+./run -t qemu -g LinuxCustom.FooLinux --image-type raw
+
+

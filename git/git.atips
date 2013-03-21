@@ -48,6 +48,7 @@ e8240e91d474912b1191a2c22bf215ad8234bc6a (remotes/origin/LB02A_5.0.1~6)
 Find out which branch contains a change
 
 $ git branch --contains 50f3754
+$ git tags --contains 50f3754
 
 lyang001@lyang0-9010:~/meta-networking$ git branch -r --contains db3277935f4aadff0e99bbf537b75f2fe0290073
   origin/HEAD -> origin/upstream-master
@@ -68,6 +69,8 @@ lyang001@lyang0-9010:~/meta-networking$ git branch -r --contains db3277935f4aadf
   origin/upstream-master
   origin/wr-20121018
   origin/wr-20130104
+
+git log --grep="Do not change worker"
 ------------------------------------------------------------------------------------------------------
 
 See which changes from a branch are already present upstream

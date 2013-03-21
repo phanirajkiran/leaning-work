@@ -6,3 +6,5 @@ git diff "@{yesterday}"
 I want to know which file is changed sine one commit,
 git diff --numstat  1caa9d85d4ba6b81262ff61abb5152fb152187dd..
 
+
+git diff master WRLINUX_5_0_1_HEAD --name-status

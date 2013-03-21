@@ -13,3 +13,6 @@ You can use the git branch --contains <tag> command to show the branches that co
 
 $ git branch --contains systemtap
                     
+
+# Creates a remote tracking branch
+git branch --track <remote> <branch>

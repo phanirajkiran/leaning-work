@@ -31,3 +31,16 @@ Anas Nashif (3):
 git log --since=2.weeks
 
 git log --name-status to check file change or delete or add  
+
+Or if you have a search term that appears in the commit message:
+
+$ git log --grep="Something in the message"
+
+
+$ git log origin/master..new
+# [old]..[new] - everything you haven't pushed yet
+
+git log ^master WRLINUX_5_0_1_HEAD
+git log master..WRLINUX_5_0_1_HEAD
+
+git log --pretty=oneline --abbrev-commit

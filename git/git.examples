@@ -1,0 +1,100 @@
+create a new branch with a dir 
+
+[lyang0@ala-lpggp2 lyang0]$ mkdir init
+[lyang0@ala-lpggp2 lyang0]$ cd init/
+[lyang0@ala-lpggp2 init]$ git init
+Initialized empty Git repository in /ala-lpggp21/lyang0/init/.git/
+[lyang0@ala-lpggp2 init]$ ls
+[lyang0@ala-lpggp2 init]$ cp ../wr-testing/kvm .
+cp: omitting directory `../wr-testing/kvm'
+[lyang0@ala-lpggp2 init]$ cp -a ../wr-testing/kvm .
+[lyang0@ala-lpggp2 init]$ ls
+kvm
+[lyang0@ala-lpggp2 init]$ git add .
+[lyang0@ala-lpggp2 init]$ git commit -m "init virt-test dev branch"
+[master (root-commit) ec17452] init virt-test dev branch
+ 46 files changed, 1573 insertions(+), 0 deletions(-)
+ create mode 100644 kvm/Documentation/README.kvm
+ create mode 100755 kvm/conf/layer.conf
+ create mode 100755 kvm/downloads/vlan.1.9.tar.gz
+ create mode 100644 kvm/recipes-kernel/linux/configs/kvm_usecase.cfg
+ create mode 100644 kvm/recipes-kernel/linux/configs/kvm_usecase.scc
+ create mode 100755 kvm/recipes-kernel/linux/configs/virt_test_guest.cfg
+ create mode 100755 kvm/recipes-kernel/linux/configs/virt_test_guest.scc
+ create mode 100755 kvm/recipes-kernel/linux/linux-windriver_3.4.bbappend
+ create mode 100755 kvm/recipes-kvm-autotest/autotest-client-tests/autotest-client-tests_git.bb
+ create mode 100755 kvm/recipes-kvm-autotest/autotest/autotest_git.bb
+ create mode 100644 kvm/recipes-kvm-autotest/virt-test/virt-test/close-the-fd-when-it-s-not-used.patch
+ create mode 100644 kvm/recipes-kvm-autotest/virt-test/virt-test/disable-bootstrap-test.patch
+ create mode 100644 kvm/recipes-kvm-autotest/virt-test/virt-test/fix-the-hung-between-tests.patch
+ create mode 100755 kvm/recipes-kvm-autotest/virt-test/virt-test/remove_link.sh
+ create mode 100755 kvm/recipes-kvm-autotest/virt-test/virt-test/runtest.sh
+ create mode 100644 kvm/recipes-kvm-autotest/virt-test/virt-test/tests.cfg
+ create mode 100644 kvm/recipes-kvm-autotest/virt-test/virt-test/wrs_guest.xml
+ create mode 100755 kvm/recipes-kvm-autotest/virt-test/virt-test_git.bb
+ create mode 100644 kvm/recipes-support/bind/bind_9.8.1.bbappend
+ create mode 100644 kvm/recipes-support/busybox/busybox_1.19.4.bbappend
+ create mode 100644 kvm/recipes-support/netcat/netcat-openbsd_1.89.bb
+ create mode 100644 kvm/recipes-support/netcat/netcat.inc
+ create mode 100644 kvm/recipes-support/netcat/netcat_0.7.1.bb
+ create mode 100644 kvm/recipes-support/ntp/ntp_4.2.6p5.bbappend
+ create mode 100755 kvm/recipes-support/vlan/files/ip
+ create mode 100755 kvm/recipes-support/vlan/files/vlan-post-down
+ create mode 100755 kvm/recipes-support/vlan/files/vlan-pre-up
+ create mode 100755 kvm/recipes-support/vlan/vlan_1.9.bb
+ create mode 100644 kvm/recipes-usecase/networking/files/LICENSE
+ create mode 100755 kvm/recipes-usecase/networking/files/SRIOV.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/bridge.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/macvtap.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/macvtap_libvirt.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/passthrough.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/passthrough_libvirt.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/qemu-ifdown
+ create mode 100755 kvm/recipes-usecase/networking/files/qemu-ifup.tap
+ create mode 100644 kvm/recipes-usecase/networking/files/template.xml
+ create mode 100755 kvm/recipes-usecase/networking/files/testlib.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/up_tapnet.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/user.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/vhost.sh
+ create mode 100755 kvm/recipes-usecase/networking/files/virtio.sh
+ create mode 100644 kvm/recipes-usecase/networking/kvm-net-usecase_0.1.bb
+ create mode 100644 kvm/templates/default/empty.conf
+ create mode 100644 kvm/templates/default/kvm.inc
+ create mode 100644 kvm/templates/default/template.conf
+[lyang0@ala-lpggp2 init]$ ls
+kvm
+[lyang0@ala-lpggp2 init]$ cd ../wr-testing/
+[lyang0@ala-lpggp2 wr-testing]$ git fetch /buildarea/lyang0/init master:virt-next
+warning: no common commits
+remote: Counting objects: 73, done.
+remote: Compressing objects: 100% (60/60), done.
+remote: Total 73 (delta 5), reused 0 (delta 0)
+Unpacking objects: 100% (73/73), done.
+From /buildarea/lyang0/init
+ * [new branch]      master     -> virt-next
+[lyang0@ala-lpggp2 wr-testing]$ git branch 
+* master
+  virt-next
+[lyang0@ala-lpggp2 wr-testing]$ git checkout virt-next 
+Switched to branch 'virt-next'
+[lyang0@ala-lpggp2 wr-testing]$ ls
+kvm
+[lyang0@ala-lpggp2 wr-testing]$ git remote -v 
+origin	git://ala-git.wrs.com/git/layers/wr-testing (fetch)
+origin	git://ala-git.wrs.com/git/layers/wr-testing (push)
+[lyang0@ala-lpggp2 wr-testing]$ git push ssh://ala-git.wrs.com/git/layers/wr-testing virt-next:virt-next
+lyang0@ala-git.wrs.com's password: 
+
+[lyang0@ala-lpggp2 wr-testing]$ git push ssh://ala-git.wrs.com/git/layers/wr-testing virt-next:virt-next
+lyang0@ala-git.wrs.com's password: 
+Counting objects: 73, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (58/58), done.
+Writing objects: 100% (73/73), 196.03 KiB, done.
+Total 73 (delta 2), reused 66 (delta 2)
+To ssh://ala-git.wrs.com/git/layers/wr-testing
+ * [new branch]      virt-next -> virt-next
+[lyang0@ala-lpggp2 wr-testing]$ ls
+kvm
+[lyang0@ala-lpggp2 wr-testing]$ 
+

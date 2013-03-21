@@ -10,3 +10,6 @@
 For now, use the mpc8544ds platform, pass "-cpu e500mc", and edit the
 device tree to have a top-level compatible that Linux will accept (such
 as fsl,P4080DS).
+
+
+qemu-system-ppc64 -M pseries -nographic -m 2048 -boot menu=on,order=n -net nic -net user,tftp=/tftpboot,bootfile=/ppcgrub/powerpc-ieee1275/core.elf

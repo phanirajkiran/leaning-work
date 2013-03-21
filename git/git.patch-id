@@ -1,0 +1,1 @@
+git patch-id < `git format-patch master..WRLINUX_5_0_1_HEAD`

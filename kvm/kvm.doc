@@ -1,1 +1,6 @@
 http://www.slideshare.net/fasgoncalves/the-kvm-virtualization-way
+
+
+http://blog.vmsplice.net/2011/03/qemu-internals-overall-architecture-and.html
+
+There are two mechanism for executing guest code: Tiny Code Generator (TCG) and KVM. TCG emulates the guest using dynamic binary translation, also known as Just-in-Time (JIT) compilation. KVM takes advantage of hardware virtualization extensions present in modern Intel and AMD CPUs for safely executing guest code directly on the host CPU. For the purposes of this post the actual techniques do not matter but what matters is that both TCG and KVM allow us to jump into guest code and execute it.
