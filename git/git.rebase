@@ -1,0 +1,22 @@
+http://blog.yorkxin.org/2011/07/29/git-rebase
+ down vote accepted
+	
+
+The way I usually do this is using git rebase:
+
+git rebase --onto C A B
+
+This takes the diffs between A and B, and applies those diffs to branch C. As a bonus, the rebase will skip any commits between A and B that perform the same textual change as already exists in branch C.
+
+------------------------
+# Rebase the patchset onto tmp, the old location of integration
+git rebase --onto tmp first_SHA-1_of_working_branch_range~1 integration
+
+That will replay everything between:
+
+    after the parent of first_SHA-1_of_working_branch_range (hence the ~1): the first commit you want to replay
+    up to "integration" (which points to the last commit you want to replay, from the working branch)
+
+
+for BRANCH in `ls .git/refs/heads`; do git rebase master $BRANCH; done
+

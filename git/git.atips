@@ -72,7 +72,7 @@ lyang001@lyang0-9010:~/meta-networking$ git branch -r --contains db3277935f4aadf
 
 git log --grep="Do not change worker"
 ------------------------------------------------------------------------------------------------------
-
+read http://stackoverflow.com/questions/7566416/different-commits-between-two-branches
 See which changes from a branch are already present upstream
 
 # while on "feature" branch:
@@ -81,9 +81,50 @@ lyang001@lyang0-9010:~/kvm_32/layers/oe-core$ git cherry -v origin/upstream-mast
 
 The cherry command is useful to see which commits have been cherry-picked from a development branch to the stable branch, for instance. This command compares changes on the current (“feature”) branch to upstream (“master”) and indicates which are present on both with the “–” sign. Changes still missing from upstream are marked with “+”.
 
+
+
+The little-used command git cherry shows you the changes which haven't yet been cherry-picked. The documentation for git cherry is here, but, in short, you should just be able to do:
+
+git checkout devel
+git cherry next
+
+... and see output a bit like this:
+
++ 492508acab7b454eee8b805f8ba906056eede0ff
+- 5ceb5a9077ddb9e78b1e8f24bfc70e674c627949
++ b4459544c000f4d51d1ec23f279d9cdb19c1d32b
++ b6ce3b78e938644a293b2dd2a15b2fecb1b54cd9
+
+The commits that being with + will be the ones that you haven't yet cherry-picked into next. In this case, I'd only cherry-picked one commit so far. You might want to add the -v parameter to the git cherry command, so that it also outputs the subject line of each commit.
+
+Every commit that doesn’t exist in the <upstream> branch has its id (sha1) reported, prefixed by a symbol. The ones that have equivalent change already in the <upstream> branch are prefixed with a minus (-) sign, and those that only exist in the <head> branch are prefixed with a plus (+) symbol:
+
+           __*__*__*__*__> <upstream>
+          /
+fork-point
+          \__+__+__-__+__+__-__+__> <head>
+
+
 ------------------------------------------------------------------------
 $ git pull-request | pbcopy
 http://mislav.uniqpath.com/2010/07/git-tips/
 
 
 → (URL ready for pasting in a chat room)
+--------------------------------------------------------------------------------
+
+http://net.tutsplus.com/tutorials/tools-and-tips/git-tips-from-the-pros/
+
+Grab a File from Another Branch without Switching Branches
+
+git checkout <BRANCH> -- path/to/file.rb
+
+
+git rev-list --all | xargs git grep -F '<YOUR STRING>'
+
+1)
+lyang001@lyang001-OptiPlex-9010:~/trees/kernel-3.4.x-pro$ git rev-parse ":/x86/mce: Do not change worker"
+74f30e03d9f16fa9ddb51681fe65ae1832ba4228
+lyang001@lyang001-OptiPlex-9010:~/trees/kernel-3.4.x-pro$ git branch -a --contains 74f30e03d9f16fa9ddb51681fe65ae1832ba4228
+  remotes/origin/standard/preempt-rt/intel-xeon-core
+

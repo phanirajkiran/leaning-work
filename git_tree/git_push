@@ -1,0 +1,7 @@
+1. cd/to/wrlinux-x(master)/layers/wr-kernel/git
+2. git clone kernel-3.4.x.git working-tree
+3. git checkout -b new-meta origin/meta
+4. cd meta/cfg/kernel-cache/features/kvm
+5. add qemu-kvm-e500mc.scc/cfg and whatever
+6. git add -f . && git commit ...
+7. git push origin new-meta:meta

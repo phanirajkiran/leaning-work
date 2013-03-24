@@ -1,0 +1,76 @@
+<<<<<<< HEAD
+                                        ARRAY_SIZE(irq_remap_fault_reasons))) {
+=======
+                                        ARRAY_SIZE(intr_remap_fault_reasons))) {
+>>>>>>> iommu: Fix off by one in dmar_get_fault_reason()
+                *fault_type = INTR_REMAP;
+                return irq_remap_fault_reasons[fault_reason - 0x20];
+
+
+master vs v3.7-rc1
+
+HEAD----->===== is new 
+
+
+fefe1ed1398b81e3fadc92d11d91162d343c8836
+
+
+
+1) git cherry-pich <sha1>
+2) git status to show which file affected, modify the confilict
+3)git add --boo.c
+4)git commit -c <sha1>
+
+
+-x
+           When recording the commit, append a line that says "(cherry picked from commit ...)" to the original commit message in order to indicate which commit this change was cherry-picked from.
+           This is done only for cherry picks without conflicts. Do not use this option if you are cherry-picking from your private branch because the information is useless to the recipient. If on
+           the other hand you are cherry-picking between two publicly visible branches (e.g. backporting a fix to a maintenance branch for an older release from a development branch), adding this
+           information can be useful.
+
+
+git cherry-pick -x f81700bd831efcd12eb7f0e66b24b16c2ad00a3
+
+commit 34844572f76d190559d6f009bca35598d4e8cd9f
+Author: Jeff Layton <jlayton@redhat.com>
+Date:   Wed Oct 10 16:43:21 2012 -0400
+
+    procfs: don't need a PATH_MAX allocation to hold a string representation of an int
+    
+    Signed-off-by: Jeff Layton <jlayton@redhat.com>
+    Signed-off-by: Al Viro <viro@zeniv.linux.org.uk>
+    (cherry picked from commit f81700bd831efcd12eb7f0e66b24b16c2ad00a32)
+
+
+=========================================================================================================================================
+=========================================================================================================================================
+1)git rebase v3.7-rc1 (current is v3.7)
+Auto-merging arch/x86/include/asm/efi.h
+CONFLICT (content): Merge conflict in arch/x86/include/asm/efi.h
+Failed to merge in the changes.
+Patch failed at 0719 x86: efi: Turn off efi_enabled after setup on mixed fw/kernel
+
+When you have resolved this problem run "git rebase --continue".
+If you would prefer to skip this patch, instead run "git rebase --skip".
+To check out the original branch and stop rebasing run "git rebase --abort".
+
+
+2)vim arch/x86/include/asm/efi.h
+3) git add arch/x86/include/asm/efi.h
+4) git rebase --continue
+============================================================================================================================
+
+git am 
+1)git am -3 /tmp/mbox
+Applying: remoteproc: allocate vrings on demand, free when not needed
+Applying: remoteproc: maintain a generic child device for each rproc
+error: patch failed: drivers/remoteproc/remoteproc_core.c:662
+error: drivers/remoteproc/remoteproc_core.c: patch does not apply
+Patch failed at 0019 remoteproc: maintain a generic child device for each rproc
+When you have resolved this problem run "git am --resolved".
+If you would prefer to skip this patch, instead run "git am --skip".
+To restore the original branch and stop patching run "git am --abort".
+2)git status 
+3)vim ./drivers/remoteproc/remoteproc_core.c (reference .rej
+4) git add ./drivers/remoteproc/remoteproc_core.c
+git am -3 --resolved 

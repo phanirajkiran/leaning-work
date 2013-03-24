@@ -23,3 +23,5 @@ sudo apt-get install flashplugin-nonfree
 
 sudo apt-get install build-essential autoconf automake1.9
 sudo apt-get install apt-file atsar
+
+sudo apt-get install meld

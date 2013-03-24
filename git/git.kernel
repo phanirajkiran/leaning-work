@@ -1,0 +1,110 @@
+lyang001@lyang001-OptiPlex-9010:~/test-trees/kernel-3.4.x-pro$ git merge-base v3.7 v3.7-rc2
+6f0c0580b70c89094b3422ba81118c7b959c7556
+lyang001@lyang001-OptiPlex-9010:~/test-trees/kernel-3.4.x-pro$ git show 6f0c0580b70c89094b3422ba81118c7b959c7556
+commit 6f0c0580b70c89094b3422ba81118c7b959c7556
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Sat Oct 20 12:11:32 2012 -0700
+
+    Linux 3.7-rc2
+
+diff --git a/Makefile b/Makefile
+index 14b9874..14c93b3 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ VERSION = 3
+ PATCHLEVEL = 7
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc1
++EXTRAVERSION = -rc2
+ NAME = Terrified Chipmunk
+ 
+ # *DOCUMENTATION*
+
+v3.7 is latest than v3.7-rc1
+2)v3.8-r8 and then v3.8
+=====================================================================================================
+
+ 
+
+
+git merge-base v3.4.34 v3.4.31
+is v3.4.31
+
+
+lyang001@lyang001-OptiPlex-9010:~/test-trees/kernel-3.4.x-pro$ git merge-base v3.4 v3.4.1
+76e10d158efb6d4516018846f60c2ab5501900bc
+lyang001@lyang001-OptiPlex-9010:~/test-trees/kernel-3.4.x-pro$ git show 76e10d158efb6d4516018846f60c2ab5501900bc
+commit 76e10d158efb6d4516018846f60c2ab5501900bc
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Sun May 20 15:29:13 2012 -0700
+
+    Linux 3.4
+
+diff --git a/Makefile b/Makefile
+index db2bcf3..a687963 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ VERSION = 3
+ PATCHLEVEL = 4
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc7
++EXTRAVERSION =
+ NAME = Saber-toothed Squirrel
+ 
+-----------------------------------------------------------------------------------------------------------------
+
+
+lyang001@lyang001-OptiPlex-9010:~/test-trees/kernel-3.4.x-pro$ git merge-base v3.5 v3.4.1
+76e10d158efb6d4516018846f60c2ab5501900bc
+lyang001@lyang001-OptiPlex-9010:~/test-trees/kernel-3.4.x-pro$ git show 76e10d158efb6d4516018846f60c2ab5501900bc
+commit 76e10d158efb6d4516018846f60c2ab5501900bc
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Sun May 20 15:29:13 2012 -0700
+
+    Linux 3.4
+
+diff --git a/Makefile b/Makefile
+index db2bcf3..a687963 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ VERSION = 3
+ PATCHLEVEL = 4
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc7
++EXTRAVERSION =
+ NAME = Saber-toothed Squirrel
+ 
+ # *DOCUMENTATION*
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+So:
+
+lyang001@lyang001-OptiPlex-9010:~/test-trees/linux-stable$ git merge-base  v3.8.1 v3.7.6
+29594404d7fe73cd80eaa4ee8c43dcc53970c60e
+lyang001@lyang001-OptiPlex-9010:~/test-trees/linux-stable$ git show 29594404d7fe73cd80eaa4ee8c43dcc53970c60e
+commit 29594404d7fe73cd80eaa4ee8c43dcc53970c60e
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Mon Dec 10 19:30:57 2012 -0800
+
+    Linux 3.7
+
+diff --git a/Makefile b/Makefile
+index 346e28f..540f7b2 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,7 +1,7 @@
+ VERSION = 3
+ PATCHLEVEL = 7
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc8
++EXTRAVERSION =
+ NAME = Terrified Chipmunk
+ 
+ # *DOCUMENTATION*
+
+Summary: the big version with big version is the v3.8.1 v3.7.6 is v3.7 ( v3.7.6 folked from v3.7)

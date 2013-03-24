@@ -1,3 +1,6 @@
 if you have done git add file,you can use 
 # git reset HEAD <file>...,
 to unstage
+
+restore
+git reset --hard origin/master

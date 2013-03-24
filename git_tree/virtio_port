@@ -1,0 +1,4 @@
+ git checkout -b v3434 v3.4.34
+ git log --cherry-pick --oneline --no-merges --right-only v3.4.34...v3.7-rc1 ./drivers/s390/kvm/kvm_virtio.c ./drivers/scsi/virtio_scsi.c ./drivers/rpmsg/virtio_rpmsg_bus.c ./drivers/char/hw_random/virtio-rng.c ./drivers/char/virtio_console.c ./drivers/block/virtio_blk.c ./drivers/net/virtio_net.c ./drivers/remoteproc/remoteproc_core.c ./drivers/remoteproc/remoteproc_virtio.c ./drivers/remoteproc/remoteproc_debugfs.c  ./Documentation/remoteproc.txt ./drivers/remoteproc/remoteproc_internal.h ./include/linux/remoteproc.h ./drivers/virtio ./arch/s390/include/asm/kvm_virtio.h ./include/linux/virtio* ./net/9p/trans_virtio.c  ./tools/virtio |tac > /tmp/x
+
+cat /tmp/x |awk '{print $1}' >/tmp/x2;mv /tmp/x2 /tmp/x;rm -rf z ; mkdir  z ; for i in `cat /tmp/x ` ; do git cextract $i ; echo 0*patch >> z/series ; mv 0*patch z ; done;rm -rf /tmp/mbox ; for i in `cat z/series ` ; do cat z/$i >> /tmp/mbox ; done

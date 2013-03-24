@@ -1,0 +1,24 @@
+ogit rev-list --reverse --topo-order B^..D | while read rev 
+do 
+  git cherry-pick $rev || break 
+done 
+
+
+--allow-empty 
+
+
+delete the duplicated cherry pick list which has applied 
+git log --cherry-pick --oneline --no-merges --left-only master...live
+
+from the log manpage:
+
+    --left-only, --right-only
+
+    List only commits on the respective side of a symmetric range, i.e. only those which would be marked < resp. > by --left-right.
+
+    For example, --cherry-pick --right-only A...B omits those commits from B which are in A or are patch-equivalent to a commit in A. In other words, this lists the + commits from git cherry A B. More precisely, --cherry-pick --right-only --no-merges gives the exact list.
+
+already in the upstream v3.8
+lyang001@lyang001-OptiPlex-9010:~/test-trees/kernel-3.4.x-pro$ git cherry -v v3.8
+- 8cdcbb699c1c891c05c615145053102b985040a3 mm: fix pageblock bitmap allocation
+

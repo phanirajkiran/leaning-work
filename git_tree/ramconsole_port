@@ -1,0 +1,5 @@
+1) Now has sync with the upstream( mainline), and dropped the patch 
+2) need to see how it added,it seems get it only from the file 
+
+
+git format-patch 296736552fb30a183b8c4635a6cd94f2cb74aa82..adc567e8a9c25f08e91eb18b83bdaa5ff9705919

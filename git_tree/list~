@@ -1,0 +1,18 @@
+git clone git://git.lttng.org/linux-2.6-lttng.git
+git://git.lttng.org/lttng-modules.git
+
+
+
+git clone git://git.kernel.org/pub/scm/virt/kvm/qemu-kvm.git
+git clone git://git.qemu.org/qemu.git
+
+git://git.kernel.org/pub/scm/virt/kvm/kvm.git   ?? git clone git://git.kernel.org/pub/scm/linux/kernel/git/avi/kvm.git
+
+
+git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+
+
+commit --amend --author="New Author Name<email@address.com>" 
+
+删除的东西并没有补全

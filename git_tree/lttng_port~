@@ -1,0 +1,63 @@
+
+[lyang0@ala-lpggp2 linux-stablev2]$ git checkout -b v3.4.1 v3.4.1
+[lyang0@ala-lpggp2 yaffs2]$ ./patch-ker.sh c m <your kernel source tree--> standard/base branch>
+
+
+[lyang0@ala-lpggp2 lyang0]$ cd linux-stablev2/
+[lyang0@ala-lpggp2 linux-stablev2]$ git add .
+[lyang0@ala-lpggp2 linux-stablev2]$ git commit
+[v3.4.1]: created 88c642a: "To add the core-yaffs2"
+ 47 files changed, 16609 insertions(+), 0 deletions(-)
+ create mode 100644 fs/Kconfig.pre.yaffs
+ create mode 100644 fs/Makefile.pre.yaffs
+ create mode 100644 fs/yaffs2/Kconfig
+ create mode 100644 fs/yaffs2/Makefile
+ create mode 100644 fs/yaffs2/yaffs_allocator.c
+..................
+..................
+
+[lyang0@ala-lpggp2 linux-stablev2]$ git format-patch 88c642a989af0a568f04895f8861d80e750b189c^..88c642a989af0a568f04895f8861d80e750b189c
+0001-To-add-the-core-yaffs2.patch
+
+
+yaffs2: import core support
+
+1)lttng kernel patches
+[lyang0@ala-lpggp2 linux-2.6-lttng]$ git branch
+* 2.6.38.6-lttng-0.249
+  lttng
+  lttng-dev
+  master
+  v2.6.38.6
+[lyang0@ala-lpggp2 linux-2.6-lttng]$ git merge-base v2.6.38.6 2.6.38.6-lttng-0.249
+warning: refname 'v2.6.38.6' is ambiguous.
+678562e527fd9979f1765ffa1eb34738fc174425
+
+
+[lyang0@ala-lpggp2 linux-2.6-lttng]$ git format-patch -o patches1 678562e527fd9979f1765ffa1eb34738fc174425
+................
+................
+patches1/0213-arm-trace-clock-fix-no-pmu.patch
+patches1/0214-arm-trace-clock-fix-release-pmu.patch
+patches1/0215-arm-omap-trace-clock-notrace.patch
+patches1/0216-lttng-instrumentation-lttng-instrumentation-fs-dup.patch
+
+2) for the lttng-modules patches
+[lyang0@ala-lpggp2 lttng-modules]$ git branch
+  master
+* v0.19-stable
+[lyang0@ala-lpggp2 lttng-modules]$ git log to get the last commit_id (1c8284ebdbd119314b8f01e442e64cf5fd4b9fe6)
+
+[lyang0@ala-lpggp2 lttng-modules]$ git format-patch -o patches2 1c8284ebdbd119314b8f01e442e64cf5fd4b9fe6
+...............
+...............
+patches2/0018-softirq-instrumentation-update-prototypes.patch
+patches2/0019-lttng-modules-v0.19-stable-setup_trace_write-Fix-r.patch
+
+
+
+
+http://davisagli.com/blog/backporting-a-topic-branch-with-git backport
+http://www.kernel.org/pub/software/scm/git/docs/v1.6.6.2/
+since git v1.7.2 you can also provide range of commits to cherry-pick.<br /><br />git cherry-pick bbbbbbb^..aaaaaaaa
+

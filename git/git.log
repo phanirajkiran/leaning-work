@@ -44,3 +44,17 @@ git log ^master WRLINUX_5_0_1_HEAD
 git log master..WRLINUX_5_0_1_HEAD
 
 git log --pretty=oneline --abbrev-commit
+
+------------------------------------------------------
+http://stackoverflow.com/questions/13858276/how-can-i-find-all-commits-that-are-in-one-branch-but-not-in-another-using-git/13958084#13958084
+
+git log --cherry-pick --oneline --no-merges --left-only master...live
+
+from the log manpage:
+
+    --left-only, --right-only
+
+    List only commits on the respective side of a symmetric range, i.e. only those which would be marked < resp. > by --left-right.
+
+    For example, --cherry-pick --right-only A...B omits those commits from B which are in A or are patch-equivalent to a commit in A. In other words, this lists the + commits from git cherry A B. More precisely, --cherry-pick --right-only --no-merges gives the exact list.
+

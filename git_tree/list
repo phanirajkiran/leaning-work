@@ -1,0 +1,42 @@
+git clone git://git.lttng.org/linux-2.6-lttng.git
+git://git.lttng.org/lttng-modules.git
+
+
+
+git clone git://git.kernel.org/pub/scm/virt/kvm/qemu-kvm.git
+git clone git://git.qemu.org/qemu.git
+
+git://git.kernel.org/pub/scm/virt/kvm/kvm.git   ?? git clone git://git.kernel.org/pub/scm/linux/kernel/git/avi/kvm.git
+
+
+git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+
+
+http://git.lttng.org/?p=linux-2.6-lttng.git;a=summary 
+ http://www.lttng.org/files/lttng/patch-2.6.29-rc3-lttng-0.92.tar.bz2
+
+
+
+commit --amend --author="New Author Name<email@address.com>" 
+
+
+
+删除的东西并没有补全
+
+i586-wrlinuxsdk-linux-gcc -march=i586
+
+yocto related:
+meta-intel:Layer containing Intel hardware support metadata
+git://git.yoctoproject.org/meta-intel
+git://git.yoctoproject.org/meta-intel-contrib
+git://git.yoctoproject.org/meta-ti
+git://github.com/Freescale/meta-fsl-arm.git
+
+git://git.yoctoproject.org/meta-ivi
+git://git.yoctoproject.org/meta-systemd
+
+git://git.multitech.net/multitech-oe.git
+
+git://git.openembedded.org/openembedded
+git://git.openembedded.org/openembedded-core

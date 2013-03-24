@@ -1,1 +1,7 @@
 git describe --tags
+
+lyang001@lyang001-OptiPlex-9010:~/trees/kernel-3.4.x-pro$ git describe 
+v3.4.34-1-gd3decd7
+lyang001@lyang001-OptiPlex-9010:~/trees/kernel-3.4.x-pro$ git branch 
+* master
+

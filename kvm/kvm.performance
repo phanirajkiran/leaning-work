@@ -1,0 +1,6 @@
+commit a98755c559e0e944a44174883b74a97019e3a367
+Author: Asias He <asias@redhat.com>
+Date:   Wed Aug 8 16:07:04 2012 +0800
+
+    virtio-blk: Add bio-based IO path for virtio-blk
+
