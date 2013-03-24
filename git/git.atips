@@ -128,3 +128,20 @@ lyang001@lyang001-OptiPlex-9010:~/trees/kernel-3.4.x-pro$ git rev-parse ":/x86/m
 lyang001@lyang001-OptiPlex-9010:~/trees/kernel-3.4.x-pro$ git branch -a --contains 74f30e03d9f16fa9ddb51681fe65ae1832ba4228
   remotes/origin/standard/preempt-rt/intel-xeon-core
 
+--------------------------------------------------------------------------
+list when it' first introduced:
+
+lyang001@lyang001-OptiPlex-9010:~/test-trees/linux-stable$ git name-rev --name-only 62ade86ab6c7e26409229ca45503cae97bf698cf
+tags/v3.4~5
+lyang001@lyang001-OptiPlex-9010:~/test-trees/linux-stable$ git tag --contains 62ade86ab6c7e26409229ca45503cae97bf698cf
+v3.4
+v3.4.1
+v3.4.10
+v3.4.11
+v3.4.12
+v3.4.13
+v3.4.14
+v3.4.15
+v3.4.16
+v3.4.17
+

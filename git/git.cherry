@@ -1,0 +1,6 @@
+1)git cherry -v master
+I also love git cherry -v master, to see the local commits on a branch that haven't been pushed into master yet.
+
+eg:
+lyang001@lyang001-OptiPlex-9010:~/test-trees/linux-stable$ git cherry -v v3.8 |grep dc3ac3816ff4d8cb53884d833b60a4227280f356
++ dc3ac3816ff4d8cb53884d833b60a4227280f356 xfdfdsfs

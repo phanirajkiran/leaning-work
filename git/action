@@ -1,0 +1,7 @@
+http://gitready.com/advanced/2009/07/31/tig-the-ncurses-front-end-to-git.html
+
+git show :/^Merge
+
+
+backport:
+http://stackoverflow.com/questions/12289458/is-cherry-picking-the-right-way-to-backport-and-consolidate-topic-branch-fixes
