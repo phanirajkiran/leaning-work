@@ -145,3 +145,6 @@ v3.4.15
 v3.4.16
 v3.4.17
 
+lyang001@lyang001-OptiPlex-9010:~/test-trees/linux-stable$ git name-rev --name-only ":/rcu: Make RCU_FAST_NO_HZ use"
+tags/v3.5-rc1~164^2^2~7
+
