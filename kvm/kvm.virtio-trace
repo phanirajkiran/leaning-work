@@ -1,3 +1,5 @@
 [PATCH V2 0/6] virtio-trace: Support virtio-trace
 https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/tree/tools/virtio/virtio-trace/README?id=refs/tags/v3.9-rc1
 [PATCH V2 6/6] tools: Add guest trace agent as a user tool
+
+https://lwn.net/Articles/508063/

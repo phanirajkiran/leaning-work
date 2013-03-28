@@ -5,3 +5,6 @@ https://github.com/csete/openembedded/blob/master/contrib/qemu/run-qemu.sh
 How to Create a New and Empty Branch in Git
 1)git checkout --orphan NEWBRANCH
 2)git rm -rf
+
+
+git show --name-status 6407c3a

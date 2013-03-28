@@ -1,0 +1,9 @@
+
+you can use "-machine ?" to get what you want
+
+for example:
+$ qemu-system-x86_64 -machine ? # If your taget is x86_64
+$ qemu-system-arm -machine ? # If your taget is arm
+
+I am not sure what you mean, but "qemu-system-arm -device ?" can give
+you all device module QEMU can emulate, is this you want?

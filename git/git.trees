@@ -1,0 +1,9 @@
+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+git://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git
+
+git://git.kernel.org/pub/scm/virt/kvm/kvm.git
+git://git.qemu.org/qemu.git
+
+git://pek-git.wrs.com/git/kernel-3.4.x-pro
+git://pek-git.wrs.com/git/kernel-3.4.x-ovp

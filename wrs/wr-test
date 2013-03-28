@@ -3,11 +3,14 @@
 ./main_test.sh -U kts.recds -u 1111
 
 
- ./main_test.sh -F -s DMA -u 1111
+ ./main_test.sh -F -s kprobe -u 1111
+
+
+ ./main_test.sh -F -s uprobes -u 1111
 
  ./main_test.sh -F -s gettimeofday_jumpback-test -u 1111
 
-./main_test.sh -F -s SATA -u 1111
+./main_test.sh -F -s printk_trace_console -u 1111
 
 ./main_test.sh -F -s cgroups -u 1111
 
@@ -22,7 +25,43 @@
 /usr/bin/qemu-system-x86_64 --enable-kvm -smp 2 -m 512 -net nic,macaddr=1a:46:0b:ca:bc:7b,model=virtio -net tap,fd=3 3<>/dev/tap17  -hda /boot/guest_img.raw  -kernel /boot/bzImage -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp"  -nographic &
 
 
+From 4523852ce1fddbb376471231ce66902d7e94e65e Mon Sep 17 00:00:00 2001
+From: Dario Faggioli <raistlin@linux.it>
+Date: Tue, 21 Aug 2012 11:28:08 -0700
+Subject: [PATCH 05/15] sched: SCHED_DEADLINE structures & implementation.
+
+Taken from:
+git://github.com/jlelli/sched-deadline.git:sched-dl-V5
+commit 508e67f67767111aed3401bd7a9c799c3bdc7015
 
 
 
+
+
+
+
+
+
+From ca331f3930cad317594248ec79c208eacfc67c98 Mon Sep 17 00:00:00 2001
+From: Dan Williams <dan.j.williams@intel.com>
+Date: Wed, 1 Feb 2012 01:12:23 -0800
+Subject: [PATCH 05/30] libsas: use ->lldd_I_T_nexus_reset for
+ ->eh_bus_reset_handler
+
+e3b81a7c619cc0630db86f4963b70f2c15e90248 of isci.git
+git://git.kernel.org/pub/scm/linux/kernel/git/djbw/isci.git
+
+sas_eh_bus_reset_handler() amounts to sas_phy_reset() without
+notification of the reset to the lldd.  If this is triggered from
+eh-cmnd recovery there may be sas_tasks for the lldd to terminate, so
+->lldd_I_T_nexus_reset is warranted.
+
+Cc: Xiangliang Yu <yuxiangl@marvell.com>
+Cc: Luben Tuikov <ltuikov@yahoo.com>
+Cc: Jack Wang <jack_wang@usish.com>
+Reviewed-by: Jacek Danecki <jacek.danecki@intel.com>
+[jacek: modify pm8001_I_T_nexus_reset to return -ENODEV]
+Signed-off-by: Dan Williams <dan.j.williams@intel.com>
+---
+ drivers/scsi/libsas/sas_scsi_host.c |   19 ++++++++-
 

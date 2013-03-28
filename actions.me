@@ -11,4 +11,11 @@ virtio_console:
 
 
 
+1)
+git log --graph --simplify-by-decoration --decorate --pretty=format:'%cd%Cgreen%d %Cblue%h %Creset%s' --date=short
+
+2)
+git stash
+git pull --rebase
+git stash pop
 

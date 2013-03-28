@@ -1,3 +1,29 @@
 git show  master:recipes-tools/multipath-tools/multipath-tools_git.bb 
 
 git show v3.8:mm/memory.c 
+git show :mm/memory.c
+
+
+lyang001@lyang001-OptiPlex-9010:~/kernel-cache$ git show --name-status 6407c3a
+commit 6407c3afaf8a52c4316cd9d8d9f62d2f848e61de
+Author: Paul Gortmaker <paul.gortmaker@windriver.com>
+Date:   Thu Mar 21 17:28:44 2013 -0400
+
+    kvm-rt: 3.6-rt backports to 3.4-rt for softirq/slub
+    
+    CQID: WIND00393780
+    
+    See details in features/sirq-slub/00-README
+    
+    Only a small delta needed to layer it onto our RT, since
+    we've got LTT in the mix.
+    
+    Signed-off-by: Paul Gortmaker <paul.gortmaker@windriver.com>
+
+A       features/sirq-slub/00-README
+A       features/sirq-slub/FIX-1-2-slub-Do-not-dereference-NULL-pointer-in-node.patch
+A       features/sirq-slub/FIX-2-2-slub-Tid-must-be-retrieved-from-the-percpu-a.patch
+A       features/sirq-slub/mm-Enable-SLUB-for-RT.patch
+A       features/sirq-slub/net-Use-local_bh_disable-in-netif_rx_ni.patch
+A       features/sirq-slub/series
+
