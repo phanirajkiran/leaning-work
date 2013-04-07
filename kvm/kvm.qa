@@ -1,0 +1,4 @@
+        -M pc-1.0 \ ? for -M 
+        -smp 2,sockets=2,cores=1,threads=1 \ what does it mean for sockets, cores, threads 
+
+

@@ -1,0 +1,16 @@
+
+WIND00393777 : 
+        - vxlan (kernel 3.7, backport required)
+        - ethernet (virtual or physical)
+        - shared memory
+        - rpmsg/remoteproc
+
+rpmsg:
+http://www.omappedia.com/wiki/Executing_RPMsg_Samples
+
+modprobe rpmsg_client_sample
+./samples/rpmsg/rpmsg_client_sample.c
+CONFIG_SAMPLE_RPMSG_CLIENT : 
+---------------------------------------------------------
+
+
