@@ -1,0 +1,3 @@
+if you don't use "git rm";you need to use "rm";
+find . -name "*ovp*" -exec rm {} \;
+git commit -a -m "update";

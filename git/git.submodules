@@ -1,4 +1,4 @@
-
+http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/
 http://git-scm.com/book/en/Git-Tools-Submodules
 
 
@@ -26,3 +26,60 @@ git config alias.pullall '!git pull && git submodule update --init --recursive'
 git config fetch.recurseSubmodules true
 
 http://git.op5.org/git/?p=git/git.git;a=commitdiff;h=cabdee2c5ed55aa42784b37c1249829fca9d71b8
+
+
+or: 
+git submodule update --init
+
+or:
+ git clone --recursive git://github.com/autotest/autotest.git
+
+
+[lyang0@ala-lpggp2 autotest]$ git submodule status 
+ 031e035c81847e2faf5be806b323dac5d2a8bdec client/tests (heads/master)
+ d332a0adba10113b20e3f93fc654c46ecaf54261 server/tests (heads/master)
+[lyang0@ala-lpggp2 autotest]$ git submodule sync 
+Synchronizing submodule url for 'client/tests'
+Synchronizing submodule url for 'server/tests'
+
+===========================================================================================================================================
+
+add submodule 
+
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ rm modules/test 
+rm: cannot remove `modules/test': Is a directory
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ rm modules/test -rf 
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git submodule add git@github.com:leiyang/git_testB.git modules/test
+Cloning into 'modules/test'...
+remote: Counting objects: 66, done.
+remote: Compressing objects: 100% (29/29), done.
+remote: Total 66 (delta 27), reused 60 (delta 24)
+Receiving objects: 100% (66/66), 5.65 KiB, done.
+Resolving deltas: 100% (27/27), done.
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git status 
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	modified:   .gitmodules
+#	new file:   modules/test
+#
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git add .
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git commit -m "add submodule"
+[master a651a0d] add submodule
+ 2 files changed, 4 insertions(+)
+ create mode 160000 modules/test
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git push origin master 
+Counting objects: 6, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 440 bytes, done.
+Total 4 (delta 1), reused 0 (delta 0)
+To git@github.com:leiyang/git_testA.git
+   5a6e21f..a651a0d  master -> master
+
+Useful tips:
+1)git submodule status 
+2)git submoule sync 
+
+

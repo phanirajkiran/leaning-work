@@ -1,19 +1,27 @@
+http://stackoverflow.com/questions/161813/how-do-i-fix-merge-conflicts-in-git/3407920#3407920
+http://www.gitguys.com/topics/merging-with-a-conflict-conflicts-and-resolutions/
+
 <<<<<<< HEAD
                                         ARRAY_SIZE(irq_remap_fault_reasons))) {
 =======
                                         ARRAY_SIZE(intr_remap_fault_reasons))) {
 >>>>>>> iommu: Fix off by one in dmar_get_fault_reason()
-                *fault_type = INTR_REMAP;
-                return irq_remap_fault_reasons[fault_reason - 0x20];
 
+Git inserted:
 
-master vs v3.7-rc1
+<<<<<<< HEAD
 
-HEAD----->===== is new 
+to mark the beginning of the conflicting section from the master branch (where the HEAD reference is pointing).
 
+Git also inserted:
 
-fefe1ed1398b81e3fadc92d11d91162d343c8836
+=======
 
+to mark the ending of the conflicting section from the master branch, and inserted:
+
+>>>>>>> test
+
+to mark the end of the conflicting section from the test branch.
 
 
 1) git cherry-pich <sha1>
@@ -74,3 +82,43 @@ To restore the original branch and stop patching run "git am --abort".
 3)vim ./drivers/remoteproc/remoteproc_core.c (reference .rej
 4) git add ./drivers/remoteproc/remoteproc_core.c
 git am -3 --resolved 
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+The best practice:
+
+
+Just find that git merge only show the conflict introduced by this commit 6f44fdd9d030c3e1914890d162747d2113ba743e
+
+To be visualized:
+#git config merge.conflictstyle diff3
+
+
+
+lyang001@lyang001-OptiPlex-9010:~/git-test/linux-stable$ git ls-files -u
+100644 251a3354a4b049b2299233aa90606f400e5ccf2b 1	drivers/net/usb/smsc75xx.c
+100644 00103a8c5e04d69e17408d32f139c9bee93aa03c 2	drivers/net/usb/smsc75xx.c
+100644 937c09dd8e162a16ea4a36526b18a1250c6fe6b2 3	drivers/net/usb/smsc75xx.c
+
+git show :1:drivers/net/usb/smsc75xx.c ----->base 
+git show :2:drivers/net/usb/smsc75xx.c -----> ours
+git show :3:drivers/net/usb/smsc75xx.c -----> theirs 
+
+
+
+to get ours: 
+git checkout --ours drivers/net/usb/smsc75xx.c
+
+to get theirs:
+git checkout --theirs drivers/net/usb/smsc75xx.c
+
+#to get the conflict file 
+git checkout --conflict=diff3 drivers/net/usb/smsc75xx.c
+
+There’s two unmerged files here. According to the git checkout manpage, there’s a --theirs and --ours options on the command. The former will keep the version of the file that you merged in, and the other will keep the original one we had.
+
+useful cmd:
+ git diff --name-only --diff-filter=U
