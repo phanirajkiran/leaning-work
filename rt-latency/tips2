@@ -1,0 +1,128 @@
+With that in mind, the general recommendation from the RT community at
+large is to disable hyperthreading in the BIOS in order to achieve
+better system determinism.
+
+
+   irqaffinity
+   -----------
+Given as a range, and/or as CSV of physical CPU numbers that form the
+default CPU mask for handling interrupts. For example, to have all
+conventional interrupt traffic be handled by the 1st physical core in a
+16 core dual socket system, use: "irqaffinity=0,8" on the host boot
+line.
+
+
+
+ e.g for a two vCPU
+guest instance "isolcpus=1" would leave vCPU zero available for
+housekeeping tasks.
+
+
+Typically
+this range will match the isolcpus= setting in the host, e.g rcu_nocbs=1-4
+The offload is achieved in the context of a thread which other cores can
+schedule and run (rcuoN threads, N= offloaded core).
+
+
+Examples "idle=mwait" and "idle=poll".  These
+are used to avoid the OS putting the CPU into power saving modes when
+there are no tasks to be run.
+
+
+By using "tsc=perfect" it avoids some of the runtime checks
+performed on the TSC reliability
+
+
+ e.g rcu_nocbs=1-4
+The offload is achieved in the context of a thread which other cores can
+schedule and run (rcuoN threads, N= offloaded core).
+
+
+
+   rcu_nocb_poll
+   -------------
+This option, when specified (with no args) makes the above offload
+threads poll for whether they have any work to do.  This can improve the
+offloaded core's RT performance, since it no longer has to explicitly go
+wake those threads when work is pending (at the slight cost of
+introducing some polling overhead).
+
+   clocksource
+   -----------
+Normally the clocksource is detected automatically, and on x86-64 it can
+be the tsc or the hpet.  While qemu can emulate a hpet, In the guest, we
+use clocksource=tsc to avoid emulation overhead.
+
+
+
+   highres
+   -------
+Specifies at runtime, what the state of high resolution timers should
+be (on/off).  Default is on, but if the workload in the guest is driven
+by IRQ events on a passed through hardware device, then disabling the
+highres timer support in the guest boot line can reduce overhead.  Note
+that the common latency benchmark application "cyclictest" relies on
+high resolution timers, so results obtained with that and highres=off
+will be significantly poorer.  This holds true for any application that
+is making use of high resolution timers.
+
+highres=on
+
+
+        -device pci-assign,host=0000:06:00.0,vcpuaffine
+
+The vcpuaffine flag tells the system to try and make the host IRQ
+affinity match that of the underlying core the vCPU IRQ thread in the
+guest runs on.
+
+
+Generally speaking, you should inspect the /proc/interrupts values in
+both the host and guest, looking to keep IRQ traffic off of the isolated
+cores and on the housekeeping core(s).  This includes making sure that
+no automated irqbalance load spreading is taking place
+
+
+Note that the smp_affinity values are read/write and so you can simply
+"cat /proc/irq/<number>/smp_affinity to check its value.  In the cases
+of devices that have been declared to qemu with the "vcpuaffine"
+parameter, the host value should already be matched to the guest, and
+simply verifying that should be sufficient.
+
+
+
+/usr/bin/taskset –c 0,1 /usr/bin/numactl --localalloc .... (other command line options)
+
+HUGTLB
+Typical performance improvements from 2% to 10%
+Using 2MB pages for processes
+
+TLB covers more memory, fewer TLB misses
+Fewer page table levels to walk, each TLB miss faster
+
+
+
+The fix: by default use unfair spinlocks in KVM guests
+● Provide a kernel commandline option to switch
+●
+spinlock=ticket or spinlock=unfair
+
+
+==========================
+Hyperthreading
+●
+Can be used to reduce scheduling latencies, which
+reduces spinlock worst case overhead
+
+
+
+Pause Loop Exiting
+
+Which optimizations you use depends on your need
+
+
+ The hardware has been configured to improve the predictability (for example, the
+Hyper-Threading feature of the CPU has been disabled through the BIOS, because such feature can
+increase the average CPU throughput but introduces unpredictable delays)
+
+
+http://lists.gnu.org/archive/html/qemu-devel/2012-11/msg00450.html

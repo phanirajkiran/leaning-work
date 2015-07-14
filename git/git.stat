@@ -1,0 +1,2 @@
+http://linux.die.net/man/1/gitstats
+git log --date-order --pretty=format:"%ad %H" --since=1/1/2014 |tail -1 |awk '{print $NF}'

@@ -1,0 +1,144 @@
+http://www.drupal001.com/2013/01/use-gluster-filesystem-with-drupal/
+http://glusterhacker.blogspot.com/2013/01/volumes.html
+            vm 
+
+       sda1     sda3  
+      host1    host2
+
+*deploy glusterfs on host1 
+
+host1:
+mkfs.xfs /dev/sda1 
+mount /sda1 /export/brick1
+
+on host2:
+mkfs.xfs /dev/sda3
+mount /dev/sda3 /export/brick1
+
+
+peer prob [other-ip] #添加服务器，剔除则用peer detach [ip]
+on host1:
+#gluster volume create test-vol 128.224.165.205:/export/brick1
+#gluster peer probe 128.224.158.233
+#gluster volume add-brick test-vol 128.224.165.233:/export/brick1
+#gluster volume start test-vol  
+
+#gluster volume info
+
+#mount -t glusterfs 128.224.165.205:/test-vol /mnt
+ 如果本机在节点群里面，那就使用本机的服务，如 127.0.0.1:/test-vol，如果本机不在集群节点里面，就得使用任何一个节点服务器的服务。
+
+		mkdir mydir
+ mount -t glusterfs 127.0.0.1:/test-vol  mydir #mount test-vol卷
+
+
+
+
+
+if 128.224.165.205 is local 
+gluster peer probe 128.224.158.233
+gluster volume create test-vol 128.224.165.205:/export/brick1 128.224.165.233:/export/brick1
+
+<<=======================>>
+gluster peer probe 128.224.158.233
+gluster volume create test-vol 128.224.165.205:/export/brick1
+gluster volume add-brick test-vol 128.224.165.233:/export/brick1
+
+
+
+# gluster volume info cinder
+
+Volume Name: cinder
+Type: Replicate
+Volume ID: 1872c922-87c9-4060-80f3-f414acc0b033
+Status: Started
+Number of Bricks: 1 x 2 = 2
+Transport-type: tcp
+Bricks:
+Brick1: 10.255.128.254:/srv/glusterfs/cinder
+Brick2: 10.255.128.1:/srv/glusterfs/cinder
+Options Reconfigured:
+
+
+
+examples:
+
+root@ovpovp-LH-Pass:~# gluster peer probe 128.224.158.186
+Probe successful
+root@ovpovp-LH-Pass:~# gluster volume create test-vol 128.224.158.186:/home/lyang001/ppc
+Creation of volume test-vol has been successful. Please start the volume to access data.
+root@ovpovp-LH-Pass:~# gluster volume start test-vol
+Starting volume test-vol has been successful
+root@ovpovp-LH-Pass:~# gluster volume info
+
+Volume Name: test-vol
+Type: Distribute
+Status: Started
+Number of Bricks: 1
+Transport-type: tcp
+Bricks:
+Brick1: 128.224.158.186:/home/lyang001/ppc
+root@ovpovp-LH-Pass:~# ls
+root@ovpovp-LH-Pass:~# mkdir del
+root@ovpovp-LH-Pass:~# mount -t glusterfs 127.0.0.1:/test-vol del
+root@ovpovp-LH-Pass:~# ls del/
+
+
+gluster volume info www
+删除brick
+gluster volume remove-brick www server3:/var/export/www server4:/var/export/www
+删除卷
+gluster volume delete test-vol
+
+
+NOTE:
+glusterfsd server 
+lyang001@lyang001-OptiPlex-9010:~/ppc$ sudo service glusterfs-server restart 
+stop: Unknown instance: 
+glusterfs-server start/running, process 17793
+
+
+and then client 
+root@ovpovp-LH-Pass:~# gluster peer probe 128.224.158.186
+Probe successful
+
+lists:
+gluster volume create test-vol 128.224.158.186:/home/lyang001/ppc
+gluster volume delete test-vol
+
+
+gluster volume stop test-vol
+gluster volume start test-vol
+
+
+gluster volume info test-vol
+gluster peer probe 128.224.158.186
+gluster peer detach 128.224.158.186
+
+本地：
+gluster volume create test-vol 128.224.158.186:/home/lyang001/ppc
+
+gluster volume create vol1 128.224.178.67:/buildarea2 128.224.178.67:/buildarea3 128.224.178.67:/buildarea4 128.224.178.67:/buildarea5 128.224.178.67:/buildarea6
+gluster volume start vol1
+mount -t glusterfs 127.0.0.1:/vol1  /mnt
+
+
+root@ovpovp-LH-Pass:/buildarea2/lyang0# sudo apt-get install glusterfs-server
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libproc-processtable-perl libnet-ssleay-perl libnet-ip-perl libproc-daemon-perl liburi-perl libhtml-parser-perl libtext-template-perl libhttp-daemon-perl libfile-which-perl libjson-xs-perl
+  libfont-afm-perl libjson-perl libhttp-negotiate-perl libfile-listing-perl libhtml-form-perl libtimedate-perl libproc-pid-file-perl libhtml-tree-perl libencode-locale-perl libhttp-date-perl
+  libxml-treepp-perl libmailtools-perl liblwp-protocol-https-perl libhttp-cookies-perl libhttp-message-perl libnet-http-perl libhtml-format-perl libuniversal-require-perl libsocket6-perl
+  thunderbird-globalmenu libhtml-tagset-perl libwww-perl libcommon-sense-perl libyaml-libyaml-perl libio-socket-ssl-perl libwww-robotrules-perl liblwp-mediatypes-perl libyaml-perl libio-socket-inet6-perl
+Use 'apt-get autoremove' to remove them.
+The following extra packages will be installed:
+  fuse-utils glusterfs-client glusterfs-common libibverbs1
+Suggested packages:
+  glusterfs-examples
+The following NEW packages will be installed:
+  fuse-utils glusterfs-client glusterfs-common glusterfs-server libibverbs1
+0 upgraded, 5 newly installed, 0 to remove and 137 not upgraded.
+Need to get 9,420 kB of archives.
+

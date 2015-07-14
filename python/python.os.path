@@ -1,0 +1,13 @@
+http://docs.python.org/2/library/os.path.html?highlight=split#os.path.split
+os.getcwd()：获得当前工作目录
+os.curdir:返回但前目录（'.')
+os.chdir(dirname):改变工作目录到dirname
+os.rename
+os.path.splittext
+os.path.split()函数返回一个路径的目录名和文件名。
+print os.path.split(dir_paul)
+os.path.isfile('x.text')
+
+from os.path import expanduser
+home = expanduser("~")
+os.getenv("HOME")

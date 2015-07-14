@@ -1,0 +1,76 @@
+http://docs.python.org/library/threading.html#rlock-objects
+http://stackoverflow.com/questions/10525185/python-threading-how-do-i-lock-a-thread-or-do-i-even-lock-the-thread-or-just
+http://www.oschina.net/code/snippet_1243383_32634
+http://www.oschina.net/code/snippet_932755_27634
+http://www.tutorialspoint.com/python/python_multithreading.htm
+http://www.cnblogs.com/huxi/archive/2010/06/26/1765808.html 条件变量
+http://effbot.org/zone/thread-synchronization.htm
+http://blog.csdn.net/cain/article/details/6602921
+
+http://www.oschina.net/code/snippet_47318_4046  great
+==================================
+
+# encoding: UTF-8
+import threading
+ 
+# 方法1：将要执行的方法作为参数传给Thread的构造方法
+def func():
+    print 'func() passed to Thread'
+ 
+t = threading.Thread(target=func)
+t.start()
+ 
+# 方法2：从Thread继承，并重写run()
+class MyThread(threading.Thread):
+    def run(self):
+        print 'MyThread extended from Thread'
+ 
+t = MyThread()
+t.start()
+
+=============================
+
+
+For clarity, the RLock is used in the with statements, just like in your sample code:
+
+lock = threading.RLock()
+
+def func1():
+    with lock:
+        func2()
+
+def func2():
+    with lock: # this does not block even though the lock is acquired already
+        print 'hello world'
+=======================================================
+import threading
+
+some_rlock = threading.RLock()
+
+with some_rlock:
+    print "some_rlock is locked while this executes"
+
+
+lock = threading.Lock()
+
+def get_first_part():
+    lock.acquire()
+    try:
+        ... fetch data for first part from shared object
+    finally:
+        lock.release()
+    return data
+
+=================================================================
+
+def hello():
+    print "hello, world"
+
+t = Timer(30.0, hello)
+t.start() # after 30 seconds, "hello, world" will be printed
+
+
+
+=============
+http://www.cnblogs.com/yaksea/archive/2011/08/30/2159416.html
+

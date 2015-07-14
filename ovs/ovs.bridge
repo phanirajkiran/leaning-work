@@ -1,0 +1,56 @@
+root@intel_5500_server:/opt/wr-test/testcases/ovp/bridge# cat /etc/qemu-ifup.tap
+#!/bin/sh
+/sbin/ifconfig $1 0.0.0.0
+brctl addif virbr0 $1
+root@intel_5500_server:/opt/wr-test/testcases/ovp/bridge# /usr/bin/qemu-system-x86_64 -enable-kvm -smp 8 -m 1024 -net nic,macaddr=de:ef:be:7f:60:e0 -net tap,script=/etc/qemu-ifup.tap -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=192.168.122.2"  -nographic ^C
+root@intel_5500_server:/opt/wr-test/testcases/ovp/bridge# ifconfig 
+br0       Link encap:Ethernet  HWaddr 00:15:17:bb:5e:88  
+          inet addr:128.224.165.205  Bcast:128.224.165.255  Mask:255.255.255.0
+          inet6 addr: fe80::24c9:4bff:febe:1d8a/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:1237 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:677 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:136128 (132.9 KiB)  TX bytes:157809 (154.1 KiB)
+
+eth0      Link encap:Ethernet  HWaddr 00:15:17:bb:5e:88  
+          inet6 addr: fe80::215:17ff:febb:5e88/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:464049 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:224380 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:695313859 (663.1 MiB)  TX bytes:16279690 (15.5 MiB)
+          Interrupt:32 Memory:b1960000-b1980000 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:140 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:140 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:13016 (12.7 KiB)  TX bytes:13016 (12.7 KiB)
+
+tap0      Link encap:Ethernet  HWaddr ca:16:0f:07:1d:71  
+          inet6 addr: fe80::c816:fff:fe07:1d71/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:97 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:93 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:500 
+          RX bytes:13186 (12.8 KiB)  TX bytes:12444 (12.1 KiB)
+
+virbr0    Link encap:Ethernet  HWaddr ca:16:0f:07:1d:71  
+          inet addr:192.168.122.1  Bcast:192.168.122.255  Mask:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:96 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:56 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:11796 (11.5 KiB)  TX bytes:10376 (10.1 KiB)
+=============================================================================================
+
+or:dhcp
+
+/usr/bin/qemu-system-x86_64 -enable-kvm -smp 2 -m 1024 -net nic,macaddr=de:ef:be:7f:60:e0 -net tap,script=/etc/qemu-ifup -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=dhcp"  -nographic
+
+to get a 192.168.*.* ip
+http://www.krisbuytaert.be/blog/disabling-dhcp-libvirt-setup

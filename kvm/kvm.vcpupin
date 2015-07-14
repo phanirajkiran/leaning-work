@@ -57,3 +57,7 @@ Thread(s) per core:  2
 NUMA cell(s):        1
 Memory size:         24697528 KiB
 
+
+
+https://www.berrange.com/posts/2010/02/12/controlling-guest-cpu-numa-affinity-in-libvirt-with-qemu-kvm-xen/
+

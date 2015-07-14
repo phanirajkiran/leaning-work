@@ -1,0 +1,22 @@
+    <disk type='file' device='cdrom'>
+      <driver name='qemu' cache='none'/>
+      <target dev='hdc' bus='ide'/>
+      <readonly/>
+    </disk>
+    <interface type='bridge'>
+      <mac address='54:52:00:5b:1a:cd'/>
+      <source bridge='br0'/>
+    </interface>
+    <serial type='pty'>
+      <source path='/dev/pts/1'/>
+      <target port='0'/>
+    </serial>
+    <console type='pty' tty='/dev/pts/1'>
+      <source path='/dev/pts/1'/>
+      <target port='0'/>
+    </console>
+  </devices>
+</domain>
+
+
+

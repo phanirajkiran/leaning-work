@@ -1,0 +1,294 @@
+Learning:
+http://www.gentoo.org/proj/en/hardened/selinux/selinux-handbook.xml?part=1&chap=2
+http://www.billauer.co.il/selinux-policy-module-howto.html great
+http://pic.dhe.ibm.com/infocenter/lnxinfo/v3r0m0/index.jsp?topic=%2Fliaat%2Fliaatkvmsecrules.htm
+
+# getsebool -a | grep httpd
+httpd_builtin_scripting --> on
+httpd_can_check_spam --> off
+httpd_can_network_connect --> on
+httpd_can_network_connect_cobbler --> off
+httpd_can_network_connect_db --> off
+httpd_can_network_memcache --> off
+httpd_can_network_relay --> on
+httpd_can_sendmail --> on
+... and so on ...
+
+Toggling booleans is easy with togglesebool:
+
+# togglesebool httpd_can_network_memcache
+httpd_can_network_memcache: active
+
+Now httpd can talk to memcache. You can also use setsebool if you want to be specific about your setting (this is good for scripts):
+
+# setsebool httpd_can_network_memcache on
+
+
+qemu-system-x86_64 -smp 2 -m 512 -net nic,macaddr=00:01:02:03:04:05,model=virtio -drive if=virtio,file=/boot/guest_raw.img  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200"  -nographic
+
+-net nic,macaddr=00:01:02:03:04:05,model=virtio
+
+https://wiki.gentoo.org/wiki/SELinux/Tutorials/How_does_a_process_get_into_a_certain_context
+http://www.gentoo.org/proj/en/hardened/selinux/selinux-handbook.xml?part=2&chap=6  great
+http://wiki.centos.org/HowTos/SELinux
+
+
+
+root@intel_5500_server:~# aureport --avc | tail -10 
+
+AVC Report
+========================================================
+# date time comm subj syscall class permission obj event
+========================================================
+1. 06/07/13 13:36:55 klogd system_u:system_r:kernel_t:s0 2 capability2 syslog system_u:system_r:kernel_t:s0 denied 5
+2. 06/07/13 13:36:59 qemu-system-arm system_u:system_r:kernel_t:s0 9 process execmem system_u:system_r:kernel_t:s0 denied 22
+
+
+===========================================================================================================================
+
+Code Listing 4.2: SELinux users and their associated roles
+root@intel_5500_server:~# semanage user -l
+
+                Labeling   MLS/       MLS/                          
+SELinux User    Prefix     MCS Level  MCS Range                      SELinux Roles
+
+root            user       s0         s0-s0:c0.c1023                 staff_r sysadm_r system_r unconfined_r
+staff_u         user       s0         s0-s0:c0.c1023                 staff_r sysadm_r unconfined_r
+sysadm_u        user       s0         s0-s0:c0.c1023                 sysadm_r
+system_u        user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+unconfined_u    user       s0         s0-s0:c0.c1023                 system_r unconfined_r
+user_u          user       s0         s0                             user_r
+
+
+
+=====================================================================
+
+Code Listing 6.1: Example overview of installed SELinux modules
+
+
+root@intel_5500_server:~# semodule -l
+application	1.2.0	
+authlogin	2.4.0	
+dbus	1.17.0	
+getty	1.9.0	
+init	1.19.0	
+libraries	2.9.0	
+locallogin	1.11.0	
+logging	1.19.0	
+miscfiles	1.10.0	
+modutils	1.13.0	
+mount	1.15.0	
+mta	2.5.0	
+nscd	1.10.0	
+qemu	1.7.0	
+selinuxutil	1.17.0	
+storage	1.11.0	
+sysnetwork	1.14.0	
+unconfined	3.5.0	
+userdomain	4.8.0	
+virt	1.5.0	
+
+
+===============================================
+Code Listing 6.3: Getting the binary policy version
+root@intel_5500_server:~# sestatus
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             wr-targeted-ovp-host-isolation
+Current mode:                   permissive
+Mode from config file:          enforcing
+Policy MLS status:              enabled
+Policy deny_unknown status:     allowed
+Max kernel policy version:      26
+
+
+===============================================================================
+
+Now consider the SELinux security context of the Apache web server process: 'httpd'
+
+$ ps axZ | grep httpd
+system_u:system_r:httpd_t        3234 ?        Ss     0:00 /usr/sbin/httpd
+
+Here we see the from the type field that Apache is running under the httpd_t type domain.
+
+Finally, lets look at the SELinux security context of a file in our home directory:
+
+$ ls -Z /home/username/myfile.txt
+-rw-r--r--  username username user_u:object_r:user_home_t      /home/username/myfile.txt
+
+where we see the type is user_home_t, the default type for files in a user's home directory.
+
+Access is only allowed between similar types, so Apache running as httpd_t can read /var/www/html/index.html of type httpd_sys_content_t. Because Apache runs in the httpd_t domain and does not have the userid:username, it can not access /home/username/myfile.txt even though this file is world readable because /home/username/myfile.txt SELinux security context is not of type httpd_t. If Apache were to be exploited, assuming for the sake of this example that the root account right needed to effect a SELinux re-labeling into another context were not obtained, it would not be able to start any process not in the httpd_t domain (which prevents escalation of privileges) or access any file not in an httpd_t related domain. 
+
+=========================================================================================
+SELinux is preventing pam_console_app (pam_console_t) "getattr"
+to /dev/hda
+(virt_content_t).
+
+--------------------------
+
+Allowing Access:
+
+Sometimes labeling problems can cause SELinux denials. You could try to
+restore
+the default system file context for /dev/hda,
+
+restorecon -v '/dev/hda'
+
+
+5.1 Relabeling Files
+# chcon -v --type=httpd_sys_content_t /html
+context of /html changed to user_u:object_r:httpd_sys_content_t
+
+Equally we could have set both in one go using the -R recursive switch:
+
+# chcon -Rv --type=httpd_sys_content_t /html 
+
+
+5.2. Restore Default Security Contexts
+
+# restorecon -v /var/www/html/index.html 
+
+or to recursively restore the default security contexts for the whole directory:
+
+# restorecon -Rv /var/www/html 
+
+
+5.4. Allowing Access to a Port
+
+We may want a service such as Apache to be allowed to bind and listen for incoming connections on a non-standard port. By default, the SELinux policy will only allow services access to recognized ports associated with those services. If we wanted to allow Apache to listen on tcp port 81, we can add a rule to allow that using the 'semanage' command:
+
+# semanage port -a -t http_port_t -p tcp 81 
+
+A full list of ports that services are permitted access by SELinux can be obtained with:
+
+# semanage port -l 
+
+============================================================================================
+
+root@intel_5500_server:~# getfattr -m security.selinux -d /root
+getfattr: Removing leading '/' from absolute path names
+# file: root
+security.selinux="system_u:object_r:nfs_t:s0"
+
+-------------------------------------------------------
+
+And behold, we can ask SELinux if this rule is enabled on our system, using sesearch.
+root # sesearch --allow --source auditd_t --target auditd_log_t --class file --perm write
+
+Found 1 semantic av rules:
+   allow auditd_t auditd_log_t : file { ioctl read write create getattr setattr lock append unlink link rename open } ; 
+
+As you can see from the output, processes running in the auditd_t domain can do much more than just write to files with the auditd_log_t type assigned to them. They can control I/O, read, write, create such files, get attributes, set attributes, lock the file, append, unlink or link the file, rename the file and open the file. 
+===================================================================================================================
+
+With this vocabulary in mind, a SELinux allow statement is structured as follows:
+
+allow <domain> <type>:<class> { <permissions> };
+
+
+allow auditd_t auditd_log_t:file { write };
+
+Well, this is exactly what SELinux does:
+
+    if the process runs within the auditd_t domain (and thus has a security context with auditd_t in its third position)
+    and if the target has the type auditd_log_t set,
+    and the target is a file
+    then the permission write is granted 
+
+======================================================================================
+
+root@intel_5500_server:~# stat /etc
+  File: `/etc'
+  Size: 4096      	Blocks: 8          IO Block: 4096   directory
+Device: eh/14d	Inode: 5095629     Links: 58
+Access: (0755/drwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+Context: system_u:object_r:nfs_t:s0
+Access: 2013-06-07 08:15:41.000000000 +0000
+Modify: 2013-06-07 08:18:36.000000000 +0000
+Change: 2013-06-07 08:18:36.000000000 +0000
+ Birth: -
+
+===========================================================
+
+root@intel_5500_server:~# sesearch -s ifconfig_t -c file -p execute -Ad
+Found 2 semantic av rules:
+   allow ifconfig_t insmod_exec_t : file { read getattr execute open } ; 
+   allow ifconfig_t ifconfig_exec_t : file { ioctl read getattr lock execute entrypoint open } ;
+
+==========================
+
+Those not running an X server may generate human-readable reports from the command line:
+
+sealert -a /var/log/audit/audit.log > /path/to/mylogfile.txt 
+
+
+=====================================================================
+
+root@intel_5500_server:~# ps -auxZ |grep libvirtd
+Warning: bad ps syntax, perhaps a bogus '-'? See http://procps.sf.net/faq.html
+system_u:system_r:kernel_t:s0   root      2442  0.0  0.0 866032  7060 ?        Sl   15:00   0:01 /usr/sbin/libvirtd --daemon --listen
+
+******************************************************************************************************************************************************
+
+sesearch -A |grep qemu
+
+
+
+[lyang0@pek-lpgtest3 refpolicy]$ ls policy/modules/contrib/virt.
+virt.fc  virt.if  virt.te  
+[lyang0@pek-lpgtest3 refpolicy]$ ls policy/modules/contrib/qemu.
+qemu.fc  qemu.if  qemu.te 
+
+
+policy/modules/contrib/qemu.te:
+########################################
+#
+# Unconfined qemu local policy
+#
+
+optional_policy(`
+	type unconfined_qemu_t;
+	typealias unconfined_qemu_t alias qemu_unconfined_t;
+	application_type(unconfined_qemu_t)
+	unconfined_domain(unconfined_qemu_t)
+
+	allow unconfined_qemu_t self:process { execstack execmem };
+	allow unconfined_qemu_t qemu_exec_t:file execmod;
+')
+
+
+[lyang0@pek-lpgtest3 refpolicy]$ cat policy/modules/contrib/qemu.fc
+/usr/bin/qemu		--	gen_context(system_u:object_r:qemu_exec_t,s0)
+/usr/bin/qemu-system-.*	--	gen_context(system_u:object_r:qemu_exec_t,s0)
+/usr/bin/qemu-kvm	--	gen_context(system_u:object_r:qemu_exec_t,s0)
+/usr/libexec/qemu.*	--	gen_context(system_u:object_r:qemu_exec_t,s0)
+
+
+[lyang0@pek-lpgtest3 contrib]$ grep "libvirt" * -r |grep image
+virt.fc:/var/lib/libvirt/images(/.*)? 	gen_context(system_u:object_r:virt_image_t,s0)
+
+[lyang0@pek-lpgtest3 contrib]$ grep "libvirt" * -r |grep boot
+virt.fc:/var/lib/libvirt/boot(/.*)? 	gen_context(system_u:object_r:virt_content_t,s0)
+
+[lyang0@pek-lpgtest3 contrib]$ grep "libvirtd" * -r 
+virt.fc:/etc/rc\.d/init\.d/libvirtd --	gen_context(system_u:object_r:virtd_initrc_exec_t,s0)
+virt.fc:/usr/sbin/libvirtd	--	gen_context(system_u:object_r:virtd_exec_t,s0)
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/ovirt-node/build/refpolicy-minimum-2.20120725-r11/refpolicy$ cat base.conf |grep "^user"
+user system_u roles { system_r unconfined_r } level s0 range s0 - s0:c0.c1023;
+user user_u roles { user_r } level s0 range s0;
+user staff_u roles { staff_r sysadm_r  unconfined_r } level s0 range s0 - s0:c0.c1023;
+user sysadm_u roles { sysadm_r } level s0 range s0 - s0:c0.c1023;
+user unconfined_u roles { unconfined_r system_r } level s0 range s0 - s0:c0.c1023;
+user root roles { sysadm_r staff_r  unconfined_r system_r } level s0 range s0 - s0:c0.c1023;
+
+
+lyang0@pek-lpgtest1:/buildarea1/lyang0/ovirt-node/build/refpolicy-minimum-2.20120725-r11/refpolicy/policy/modules/contrib$ grep "virt_content_t" * -r  |grep fc
+virt.fc:HOME_DIR/.virtinst(/.*)? 	gen_context(system_u:object_r:virt_content_t,s0)
+virt.fc:HOME_DIR/VirtualMachines/isos(/.*)? gen_context(system_u:object_r:virt_content_t,s0)
+virt.fc:/var/lib/libvirt/boot(/.*)? 	gen_context(system_u:object_r:virt_content_t,s0)
+virt.fc:/var/lib/libvirt/isos(/.*)? 	gen_context(system_u:object_r:virt_content_t,s0)
+
+

@@ -1,0 +1,5 @@
+export LD_DEBUG=libs
+
+First use the -i flag to strace or objdump -d to find the address of the open function or more realistically something in the chain of getting there, such as in the plt.
+#strace -i
+#objdump -d 

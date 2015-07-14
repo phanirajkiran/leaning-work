@@ -1,0 +1,123 @@
+在浏览器输入：http://localhost:28017/，是mongodb系统的一个监控界面。如果你指定了--port端口号，则要用比它大1000的端口号才可以进入mongodb
+
+"REST is not enabled.  use --rest to turn on"
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo killall mongod
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mongod -f /etc/mongodb.conf --rest  &
+
+
+http://www.cnblogs.com/yoolonet/archive/2011/08/27/2155701.html
+http://database.51cto.com/art/201105/263943.htm
+http://www.cnblogs.com/zhy4606/archive/2011/09/14/2176700.html
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongo
+MongoDB shell version: 2.0.4
+connecting to: test
+> show dbs
+connection	(empty)
+foo	(empty)
+info	0.203125GB
+local	(empty)
+lsy	0.203125GB
+sample	0.203125GB
+sms	0.203125GB
+test_database	0.203125GB
+> 
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongoexport -d test_database -c test_collection --csv -f author,num -o t2.csv [必须要指定fields]
+connected to: 127.0.0.1
+exported 3 records
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat t2.csv 
+author,num
+"Marka",20
+"Jim",31
+"Bruce",22
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongoexport -d test_database -c test_collection -o t1.json
+connected to: 127.0.0.1
+exported 3 records
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat t1.json 
+{ "_id" : { "$oid" : "53226c085606eb453e000000" }, "author" : "Marka", "board" : { "intel" : "xeon_core1", "arm" : "a8" }, "date" : { "$date" : 1394764808199 }, "num" : 20, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : { "$oid" : "53226c085606eb453e000002" }, "author" : "Jim", "board" : { "intel" : "xeon_core3", "arm" : "a10" }, "date" : { "$date" : 1394764808199 }, "num" : 31, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : { "$oid" : "53226c085606eb453e000003" }, "author" : "Bruce", "board" : { "intel" : "xeon_core2", "arm" : "a9" }, "date" : { "$date" : 1394764808199 }, "num" : 22, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+
+============
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongo
+MongoDB shell version: 2.0.4
+connecting to: test
+> show dbs
+connection	(empty)
+foo	(empty)
+info	0.203125GB
+local	(empty)
+lsy	0.203125GB
+sample	0.203125GB
+sms	0.203125GB
+test	(empty)
+test_database	0.203125GB
+> use test_database
+switched to db test_database
+> show collections 
+system.indexes
+test_collection
+> db.test_collection.find()
+{ "_id" : ObjectId("53226c085606eb453e000000"), "author" : "Marka", "board" : { "intel" : "xeon_core1", "arm" : "a8" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 20, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : ObjectId("53226c085606eb453e000002"), "author" : "Jim", "board" : { "intel" : "xeon_core3", "arm" : "a10" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 31, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : ObjectId("53226c085606eb453e000003"), "author" : "Bruce", "board" : { "intel" : "xeon_core2", "arm" : "a9" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 22, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+> test_database.test_collection.find()
+Fri Mar 14 10:55:25 ReferenceError: test_database is not defined (shell):1
+> db.test_collection.find()
+{ "_id" : ObjectId("53226c085606eb453e000000"), "author" : "Marka", "board" : { "intel" : "xeon_core1", "arm" : "a8" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 20, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : ObjectId("53226c085606eb453e000002"), "author" : "Jim", "board" : { "intel" : "xeon_core3", "arm" : "a10" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 31, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : ObjectId("53226c085606eb453e000003"), "author" : "Bruce", "board" : { "intel" : "xeon_core2", "arm" : "a9" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 22, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+> 
+
+==================
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongoimport -d test2 -c collection2 /data/t1.json 
+connected to: 127.0.0.1
+file doesn't exist: /data/t1.json
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongoimport -d test2 -c collection2 t1.json 
+connected to: 127.0.0.1
+imported 3 objects
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongo
+MongoDB shell version: 2.0.4
+connecting to: test
+> show db
+Fri Mar 14 10:58:24 uncaught exception: don't know how to show [db]
+> show dbs
+connection	(empty)
+foo	(empty)
+info	0.203125GB
+local	(empty)
+lsy	0.203125GB
+sample	0.203125GB
+sms	0.203125GB
+test	(empty)
+test2	0.203125GB
+test_database	0.203125GB
+> use test2
+switched to db test2
+> show collections
+collection2
+system.indexes
+> db.collection2.find()
+{ "_id" : ObjectId("53226c085606eb453e000000"), "author" : "xdong", "board" : { "intel" : "xeon_core1", "arm" : "a8" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 20, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : ObjectId("53226c085606eb453e000002"), "author" : "wgao", "board" : { "intel" : "xeon_core3", "arm" : "a10" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 31, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+{ "_id" : ObjectId("53226c085606eb453e000003"), "author" : "lyang0", "board" : { "intel" : "xeon_core2", "arm" : "a9" }, "date" : ISODate("2014-03-14T02:40:08.199Z"), "num" : 22, "tags" : [ "mongodb", "python", "pymongo" ], "text" : "lyang1lyang1" }
+> 
+
+
+=====
+multiple collection 
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongoimport -d test2 -c collection2 t1.json 
+connected to: 127.0.0.1
+imported 3 objects
+
+do some changes for t1 
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ mongoimport -d test2 -c collection3 t1.json 
+connected to: 127.0.0.1
+imported 3 objects
+

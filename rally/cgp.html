@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Tree Grid Example</title>
+
+    <meta name="Name" content="App Example: SharePoint Standard Report" />
+    <meta name="Version" content="2011.04" />
+    <meta name="Vendor" content="Wind River" />
+    <script type="text/javascript"
+            src="https://rally1.rallydev.com/apps/2.0/sdk.js?loginKey=cf95259e734886b1672c5712b73553ad6b59f5f9292a08a64060b0e1df9bf446|df62f67e465f81fb24e33639afdaeaf3|7948219f7ceadc8cf9cabd77911141fa27b4454f30e396443585e1a496b15b258bf83833b46da207385bc235440e6600|105,83,131,144,4,71,136,25,72,99,103,20,152,24,82,24">
+    </script>
+
+
+<script type="text/javascript">
+        Rally.onReady(function() {
+            Ext.define('Rally.example.StandardReport', {
+                extend: 'Rally.app.App',
+            
+                launch: function() {
+                    this.add({
+                        xtype: 'rallystandardreport',
+                        project: 'Lx CGP',
+                        projectScopeUp: this.getContext().getProjectScopeUp(),
+                        projectScopeDown: this.getContext().getProjectScopeDown(),
+                        width: 600,
+                        height: 400,
+                        reportConfig: {
+                            report: Rally.ui.report.StandardReport.Reports.Throughput,
+                            work_items: 'G,D',
+                            filter_field: 'ScheduleState'
+                        }
+                    });
+                }
+            });
+            
+
+            Rally.launchApp('Rally.example.StandardReport', {
+              name: 'Standard Report Example'
+            });
+        });
+    </script>
+
+    <style type="text/css">
+        
+    </style>
+</head>
+<body></body>
+</html>

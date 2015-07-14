@@ -1,0 +1,186 @@
+ovs-vsctl add-br ovsbr0
+ovs-vsctl add-br ovsbr1
+
+1)one bridge 
+            vm1   vm2    vm3 
+            tap0  tap1   tap2
+                         /
+                  OVS
+
+vm1:10.0.2.3\
+              vlan 
+vm2:10.0.2.4/
+
+vm3:10.0.2.5
+
+
+ovsbr0: 10.0.2.2
+
+
+root@intel_5500_server:~# cat /etc/openvswitch/ovs-ifup
+#!/bin/sh
+switch="ovsbr0"
+ifconfig $1 0.0.0.0 up
+ovs-vsctl add-port $switch $1
+root@intel_5500_server:~# cat /etc/openvswitch/ovs-ifdown
+#!/bin/sh
+
+switch='ovsbr0'
+/sbin/ifconfig 0.0.0.0 down
+ovs-vsctl del-port ${switch} $1
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E1 -net tap,script=/etc/openvswitch/ovs-ifup,downscript=/etc/openvswitch/ovs-ifdown -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.3"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E2 -net tap,script=/etc/openvswitch/ovs-ifup,downscript=/etc/openvswitch/ovs-ifdown -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.4"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E3 -net tap,script=/etc/openvswitch/ovs-ifup,downscript=/etc/openvswitch/ovs-ifdown -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.5"  -nographic
+
+ifconfig ovsbr0 10.0.2.2 up
+
+vm1 vm2 vm3 can ping eachother 
+
+--------
+then
+
+ovs-vsctl set port tap0 tag=9
+ovs-vsctl set port tap1 tag=9
+ovs-vsctl set port tap2 tag=10
+
+ovs-vsctl set port ovsbr0 tag=10
+
+vm1 vm2 connected 
+vm3 and ovsbr0 connected 
+
+
+NOTE: ovsbr0 can be vlaned 
+
+
+fowarding 
+
+vm1 vm2 ---> vlan9 
+vm3     
+==========================================================================================================================================================================================================
+==========================================================================================================================================================================================================
+==========================================================================================================================================================================================================
+
+2)two bridge
+            vm1   vm2                  vm3     vm4
+            tap0  tap1                 tap2    tap3
+ 
+              ovsbr0                      ovsbr1
+
+
+vm1 <---> vm3
+vm2 <---> vm4
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E1 -net tap,script=/etc/openvswitch/ovs-ifup,downscript=/etc/openvswitch/ovs-ifdown -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.3"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E2 -net tap,script=/etc/openvswitch/ovs-ifup,downscript=/etc/openvswitch/ovs-ifdown -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.4"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E3 -net tap,script=/etc/openvswitch/ovs-ifup1,downscript=/etc/openvswitch/ovs-ifdown1 -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.5"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E4 -net tap,script=/etc/openvswitch/ovs-ifup1,downscript=/etc/openvswitch/ovs-ifdown1 -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.6"  -nographic
+
+
+
+3)two host
+            vm1   vm2                  vm3     vm4
+            tap0  tap1                 tap2    tap3
+
+              ovsbr0 --->    gre  <----   ovsbr0
+
+              host1                       host2 
+
+
+   ovs-vsctl -- add-port ovsbr0 patch0 -- set interface patch0 type=patch options:peer=patch1 
+   ovs-vsctl -- add-port ovsbr1 patch1 -- set interface patch1 type=patch options:peer=patch0
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+======================================================================================================================================================================================
+
+
+http://openvswitch.org/support/config-cookbooks/vlan-configuration-cookbook/
+
+     vm1    vm2       vm3    vm4
+     tap0   tap1      tap0   tap1
+      \      /         \      /
+       ovsbr0            ovsbr0
+         /                  \
+        eth0                eth0
+       HOST1              HOST2
+
+          vm1 <---> vm3  vlan1
+          vm2 <---> vm4  vlan2
+
+vm1 vm2 vm3 vm4 -----> 128.224.165.* 
+
+
+
+on host1:
+ovs-vsctl del-br ovsbr0
+
+tunctl -t tap0 -u root && sudo tunctl -t tap1 -u root && ovs-vsctl add-br ovsbr0
+
+ovs-vsctl add-port ovsbr0 tap0 && ovs-vsctl add-port ovsbr0 tap1 && ovs-vsctl add-port ovsbr0 eth0 && ifconfig ovsbr0 128.224.165.205 up netmask 255.255.255.0 && ifconfig eth0 0 && ifconfig tap0 0 && ifconfig tap1 0 && route add default gw 128.224.165.1 && ovs-vsctl set port tap0 tag=1 && ovs-vsctl set port tap1 tag=2 
+
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E1 -net tap,ifname=tap0,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=128.224.165.206"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E2 -net tap,ifname=tap1,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=128.224.165.207"  -nographic
+
+
+on host2:
+
+ovs-vsctl del-br ovsbr0
+
+tunctl -t tap0 -u root && sudo tunctl -t tap1 -u root && ovs-vsctl add-br ovsbr0
+
+ovs-vsctl add-port ovsbr0 tap0 && ovs-vsctl add-port ovsbr0 tap1 && ovs-vsctl add-port ovsbr0 eth0 && ifconfig ovsbr0 128.224.165.233 up netmask 255.255.255.0 && ifconfig eth0 0 && ifconfig tap0 0 && ifconfig tap1 0 && route add default gw 128.224.165.1 && ovs-vsctl set port tap0 tag=1 && ovs-vsctl set port tap1 tag=2
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E3 -net tap,ifname=tap0,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=128.224.165.208"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E4 -net tap,ifname=tap1,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=128.224.165.210"  -nographic
+
+
+
+
+
+
+
+
+
+
+
+------------------
+
+
+
+on host1:
+ovs-vsctl del-br ovsbr0
+
+tunctl -t tap0 -u root && sudo tunctl -t tap1 -u root && ovs-vsctl add-br ovsbr0
+
+ovs-vsctl add-port ovsbr0 tap0 && ovs-vsctl add-port ovsbr0 tap1 && ovs-vsctl add-port ovsbr0 eth0 && ifconfig ovsbr0 128.224.165.205 up netmask 255.255.255.0 && ifconfig eth0 0 && ifconfig tap0 0 && ifconfig tap1 0 && route add default gw 128.224.165.1 && ovs-vsctl set port tap0 tag=1 && ovs-vsctl set port tap1 tag=2
+
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E1 -net tap,ifname=tap0,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.3"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E2 -net tap,ifname=tap1,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=10.0.2.4"  -nographic
+
+
+on host2:
+
+ovs-vsctl del-br ovsbr0
+
+tunctl -t tap0 -u root && sudo tunctl -t tap1 -u root && ovs-vsctl add-br ovsbr0
+
+ovs-vsctl add-port ovsbr0 tap0 && ovs-vsctl add-port ovsbr0 tap1 && ovs-vsctl add-port ovsbr0 eth0 && ifconfig ovsbr0 128.224.165.233 up netmask 255.255.255.0 && ifconfig eth0 0 && ifconfig tap0 0 && ifconfig tap1 0 && route add default gw 128.224.165.1 && ovs-vsctl set port tap0 tag=1 && ovs-vsctl set port tap1 tag=2
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E3 -net tap,ifname=tap0,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=128.224.165.208"  -nographic
+
+qemu-system-x86_64 -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E4 -net tap,ifname=tap1,script=no -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=128.224.165.210"  -nographic
+

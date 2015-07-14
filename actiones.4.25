@@ -1,0 +1,605 @@
+
+http://www.w3schools.com/jsref/met_doc_getelementsbytagname.asp
+
+http://blog.csdn.net/lixuyuan/article/details/6617490
+
+http://www.w3school.com.cn/jsref/prop_classname.asp
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Working_with_SELinux-SELinux_Contexts_Labeling_Files.html
+
+SELinux by Example: Using Security Enhanced Linux 
+http://www.fosteringlinux.com/?s=understanding
+
+http://docs.oracle.com/cd/E37670_01/E36387/html/ol_selinux_sec.html
+
+ audit2allow
+ audit2why
+ load_policy
+ newrole
+ restorecon
+ semanage
+ semodule
+ sestatus
+ setbool
+ etc...
+
+http://sheltren.com/stop-disabling-selinux
+grep httpd /var/log/audit/audit.log | audit2why
+
+
+root@qemu0:/opt/ltp/wrLinux_ltp# tail -1 /var/log/audit/audit.log |audit2why 
+unable to open /sys/fs/selinux/policy:  Permission denied
+
+
+
+
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Fixing_Problems-Permissive_Domains.html
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Fixing_Problems-Searching_For_and_Viewing_Denials.html
+
+
+As the Linux root user, run the sealert -a /var/log/audit/audit.log -H > audit.html command to create a HTML version of the sealert analysis, as seen with the sealert GUI.
+
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Fixing_Problems-Raw_Audit_Messages.html
+
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Fixing_Problems-sealert_Messages.html
+
+
+http://www.redhat.com/archives/fedora-selinux-list/2007-February/msg00051.html
+
+
+https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=681887
+
+
+root@qemu0:/opt/ltp/wrLinux_ltp# chcon -t bin_t wr-runltp
+
+dd if=/dev/zero of=/opt/ltp/wrLinux_ltp/tmp_mount_file bs=1M count=256 > /dev/null
+
+
+
+
+	
+To be keep the config across reboots use -P flag: setsebool -P httpd_can_network_connect 1
+
+getsebool -a | grep mail
+
+Selinux may cause the issue, to verify run:
+
+getsebool -a | grep mail
+
+If it displays as bellow it is selinux:
+
+allow_postfix_local_write_mail_spool --> off
+
+You may disabled it, but if you want to keep it (and you should as it provides an extra layer of security) you should do something else:
+
+setsebool -P httpd_can_sendmail on
+
+This will allow the httpd to send emails, as when you use php mail().
+
+
+
+http://docs.fedoraproject.org/en-US/Fedora/13/html/Security-Enhanced_Linux/sect-Security-Enhanced_Linux-Working_with_SELinux-SELinux_Contexts_Labeling_Files.html
+http://stackoverflow.com/questions/2054554/passenger-mod-rails-fails-to-initialize-in-fedora-12-when-starting-apache/2429590#2429590
+/usr/sbin/semanage fcontext -a -t samba_share_t /etc/file1
+
+As the Linux root user, run the /usr/sbin/semanage fcontext -d /etc/file1 command to remove the context added for /etc/file1. When the context is removed, running restorecon changes the type to etc_t, rather than samba_share_t. 
+
+You can use the sesearch command to list "dontaudit" rules that are currently built-in policy. For example to list "dontaudit" rules where the httpd_t is the source domain:
+
+sesearch --dontaudit -s httpd_t
+
+==============================================
+
+self.api.vms.get(self.name)
+
+
+        isoParams = params.StorageDomain(name=storage_name,
+                                         data_center=self.dc,
+                                         type_=domain_type,
+                                         host=self.api.hosts.get(hostname),
+                                         storage=params.Storage(type_=storage_type,
+                                                                address=storage_address,
+                                                                path=storage_path))
+
+        try:
+            if self.api.storagedomains.add(isoParams):
+                print 'DATA Domain was created/imported successfully'
+
+            if self.dc.storagedomains.add(self.api.storagedomains.get(storage_name)):
+                print 'DATA Domain was attached successfully'
+            if self.dc.storagedomains.get(storage_name).get_status().get_state() != "active":
+                if self.dc.storagedomains.get(storage_name).activate():
+                    print 'DATA Domain was activated successfully'
+        except Exception as e:
+            print 'Failed to add DATA domain:\n%s' % str(e)
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.2/html/Developer_Guide/Python_SDK_Example_Virtual_Machines.html
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.1/html-single/Developer_Guide/files/ovirtsdk.infrastructure.brokers.html
+ovirtsdk.infrastructure.brokers
+
+
+
+http://libvirt.org/git/?p=libvirt-test-API.git;a=blob;f=repos/sVirt/domain_nfs_start.py;h=5ce9a7a7c11b9c6d9f6748a2ba85e8427d32ce29;hb=HEAD
+http://libvirt.org/git/?p=libvirt-test-API.git;a=blob;f=repos/nodedevice/detach.py;h=ceb0d8e642b4172de99643b1336e559961325df6;hb=HEAD
+http://risingtidesystems.com/git/?p=scsi-testsuite.git;a=blob;f=common.rc;h=94d3692b1041d82f953207976524afac91a4b0d5;hb=HEAD
+https://github.com/peo3/cgroup-utils/blob/master/cgutils/host.py
+https://github.com/peo3/cgroup-utils/blob/master/cgutils/fileops.py
+
+
+https://github.com/yac/virtpwn/blob/master/virtpwn/log.py
+https://github.com/SmartJog/webengine-virtmanager/blob/master/services.py
+https://github.com/ybping/virtulization
+https://github.com/sorki/virt_addr/blob/master/virt_addr
+https://github.com/shelmesky/cloud_monitor/blob/master/common/http_client.py
+
+https://github.com/deftone/kvmmanager great
+https://github.com/koder-ua/vm_ut/blob/master/vm.py
+=======================================================================
+def check_network_status(*args):
+    """Check current network status, it will return True if
+       current network is inactive, otherwise, return False
+    """
+    (networkname, conn, logger) = args
+
+    net_list = conn.listNetworks()
+    logger.debug("current active network list:")
+    logger.debug(net_list)
+    if networkname not in net_list:
+        return True
+    else:
+        return False
+
+
+
+
+================================================================
+
+class PercpuStat(dict):
+    @staticmethod
+    def parse(content):
+        ret = {}
+        line = content.split('\n')[0]
+        stats = line.split(' ')
+        # A line may end with a redundant space
+        stats = [stat for stat in stats if stat != '']
+        i = 0
+        for stat in stats:
+            ret[i] = long(stat)
+            i += 1
+        return ret
+
+def parse_help(output):
+    _options = []
+    p = re.compile("^  (-\w), --\w+")
+    for line in output.split('\n'):
+        m = p.search(line)
+        if m:
+            _options.append(m.group(1))
+    _options = [o for o in _options if o != '-h']
+    return _options
+
+
+ elif cmd == 'tree' and '-a' in opts and subsys != 'cpu':
+
+COMMANDS = cgutils.commands.__all__
+When using from mod import *, only names listed in __all__ will be imported. This is not as important, in my opinion, because importing everything is a really bad idea.
+
+test_all.py:sys.path.insert(0, '.')
+test_all.py:sys.path.insert(0, path)
+，原型是insert(i, x)
+
+i表示位置 x表示数据
+意思是把数据x插入到位置i中
+
+把放这个文件的目录 加入到sys.path中 就行了 最好不要和 系统的模块重名 一般都是  sys.path.insert(0 , 'modepath') 当然你也可以sys.path.append('modepath')
+>>> print sys.path.insert(0,"/home/lyang001")
+None
+>>> print sys.path
+['/home/lyang001', '', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-linux2', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages/PIL', '/usr/lib/python2.7/dist-packages/gst-0.10', '/usr/lib/python2.7/dist-packages/gtk-2.0', '/usr/lib/pymodules/python2.7', '/usr/lib/python2.7/dist-packages/ubuntu-sso-client', '/usr/lib/python2.7/dist-packages/ubuntuone-client', '/usr/lib/python2.7/dist-packages/ubuntuone-control-panel', '/usr/lib/python2.7/dist-packages/ubuntuone-couch', '/usr/lib/python2.7/dist-packages/ubuntuone-installer', '/usr/lib/python2.7/dist-packages/ubuntuone-storage-protocol']
+
+CURRENT_DIR = dirname(abspath(__file__))
+sys.path.insert(0, CURRENT_DIR)
+
+
+base_dir = os.path.dirname(__file__) or '.' #dirname(__file__)表示当前程序文件所在目录
+>>> print glob.__file__
+/usr/lib/python2.7/glob.pyc
+
+
+return list
+path = glob.glob("/home/lyang001/*")
+
+============
+commands = [c for c in commands if c not in ['event', 'mkdir', 'rmdir']]
+
+================
+    @staticmethod
+    def add_subparser(subparsers):
+        raise NotImplementedError
+
+    def run(self):
+        raise NotImplementedError
+======================
+http://stackoverflow.com/questions/4575747/get-selected-subcommand-with-argparse
+
+========================
+
+>>> class test:  
+    count = 0;  
+    def __init__(self, c):  
+        self.count = c;  
+        self.__class__.count = self.__class__.count + 1;  
+(or test.count)
+          
+>>> a = test(3)  
+>>> a.count  
+3  
+>>> test.count  
+1  
+>>> b = test(-1)  
+>>> b.count  
+-1  
+>>> test.count  
+2  
+>>>  
+
+===============
+  def get_res(self):
+        self._get_res()
+        return self.res
+
+    def _get_res(self):
+        cmd='/usr/bin/virt-top -n 2 -d 1 --block-in-bytes --stream'
+        data=os.popen(cmd).read()
+        self.convert_to_dict(data)
+
+==============
+https://github.com/eht16/kvmctl/blob/master/bin/kvmctl
+    def _check_pidfile(self):
+        pidfile = self.get_pidfile()
+        try:
+            pid = self._get_pid()
+            if not pid:
+                return False
+            # check the command line of the process to ensure there is not already another
+            # process using the same pid
+            cmdline = open('/proc/%s/cmdline' % pid, 'r').read().split('\0')
+        except (IOError, OSError), e:
+            self._logger.warn(u'Failed reading process command line: %s', e)
+            return False
+
+        # the cmdline of the process should contain the same pidfile path as we have just checked
+        if not self.kvm_executable in cmdline or not pidfile in cmdline:
+            return False
+
+        return True
+=================
+https://github.com/fmenabe/kvm-tools/blob/master/lib/utils.py
+
+==========
+https://github.com/eandriol/kvm-deploy
+
+https://github.com/halfss/kvm2openstack/blob/master/kvm2openstack.py
+
+==========
+openstack
+https://github.com/VMTrooper/openstack-python/blob/master/openstack_scrap.py
+https://github.com/anthony0859/test-for-openstackAPI/tree/master/test
+https://github.com/liangxiaobi/smartapi
+https://github.com/jeffk/nova_query
+
+ovirt:
+https://github.com/iranzo/rhevm-utils.git
+
+==============
+https://github.com/lornix/ftrace/blob/master/ftrace
+https://github.com/ezequielgarcia/trace_analyze/blob/master/trace_analyze.py
+    def size(self):
+        if self.node_size is None:
+            self.node_size = MemTreeNodeSize(self)
+        return self.node_size
+
+    @classmethod
+    def setUrlPrefix( cls, pfx ):
+        if pfx is not None:
+            Frame._prefix = pfx.rstrip('/')
+        else:
+            Frame._prefix = None
+    
+    @classmethod
+    def setPathPrefixToStrip( cls, pfx ):
+        Frame._strip = pfx
+
+===============
+http://blog.csdn.net/caiknife/article/details/8560412
+https://github.com/NicholasTD07/unittest.git  great 
+https://github.com/sarika12/NewRepo.git great
+https://github.com/ultimagz/python_colored_unittest.git great with clolor 
+https://github.com/tungwaiyip/HTMLTestRunner.git  great greate with html 
+https://github.com/fege/Test.git  make unittest 
+
+
+https://github.com/Jaymon/pyt
+
+
+Method 	Checks that 	New in
+assertEqual(a,b) 	a ==b 	 
+assertNotEqual(a,b) 	a !=b 	 
+assertTrue(x) 	bool(x) is True 	 
+assertFalse(x) 	bool(x) is False 	 
+assertIs(a,b) 	a isb 	2.7
+assertIsNot(a,b) 	a isnotb 	2.7
+assertIsNone(x) 	x isNone 	2.7
+assertIsNotNone(x) 	x isnotNone 	2.7
+assertIn(a,b) 	a inb 	2.7
+assertNotIn(a,b) 	a notinb 	2.7
+assertIsInstance(a,b) 	isinstance(a, b) 	2.7
+assertNotIsInstance(a,b) 	not isinstance(a,b) 	2.7
+
+
+
+===================
+https://github.com/garsue/unittest_pep8/blob/master/runtests.py
+if __name__ == '__main__':
+    # parse command line options
+    parser = argparse.ArgumentParser(description='Run testsuite')
+    parser.add_argument('--report', action='store_true')
+    parser.add_argument('--without-pep8', action='store_false')
+    parser.add_argument('--pattern', type=str, default='test*.py')
+    args = parser.parse_args()
+    suite = make_suite(args.pattern, args.without_pep8)
+    if args.report:
+        xmlrunner.XMLTestRunner(verbose=1, output='test_reports').run(suite)
+    else:
+        unittest.TextTestRunner(verbosity=2).run(suite)
+
+
+
+logging.basicConfig(format='%(asctime)s (%(name)s) [%(levelname)s]: %(message)s',
+datefmt='%m-%d-%Y %H:%M:%S',
+level=logging.INFO)
+logger = logging.getLogger('pyautotest')
+
+
+
+===============
+
+#!/usr/bin/env python
+from ovirtsdk.api import API 
+from ovirtsdk.xml import params
+
+api = API(url="https://ovirt-engine.wrs.com",
+              username="admin@internal",
+              password="123456",
+              insecure=True)
+
+sd = api.storagedomains.get("my_iso")
+print sd
+iso = sd.files.list()
+print iso
+
+for i in iso:
+    print "%s" % i.get_name()
+
+
+#!/usr/bin/env python
+from ovirtsdk.api import API 
+from ovirtsdk.xml import params
+DC_NAME =       'my_datacenter'
+DATA_NAME = 'my_data'
+
+api = API(url="https://ovirt-engine.wrs.com",
+              username="admin@internal",
+              password="123456",
+              insecure=True)
+print api.hosts.get(HOST_NAME).status.state
+
+self.api.vms.get(self.name)
+self.vm_session = pexpect.spawn(self.qemu_cmd)
+ self.vm_session.logfile = sys.stdout
+self.vm_session.expect('Password')
+self.vm_session.sendline('root')
+ 
+=======================
+
+http://community.redhat.com/blog/2013/09/up-and-running-with-ovirt-3-3/
+
+
+engine-iso-uploader -i my_iso upload /x86-64-kvm-guest-ovp-guest-preempt-rt-dist.iso
+
+http://lists.ovirt.org/pipermail/users/2012-November/010316.html
+
+http://www.ovirt.org/REST_API_Using_BASH_Automation
+http://lists.ovirt.org/pipermail/users/2012-November/010293.html
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.2/html/Developer_Guide/Python_SDK_Example_Virtual_Machines.html
+
+http://kermit.fr/lofic/snipper/16/
+rm /var/lib/exports/iso/* -rf && rm /media/sda1/data/* -rf && chown vdsm:kvm /media/sda1/data && chown vdsm:kvm /var/lib/exports/iso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def start(name, **dargs):
+    """
+    True on successful start of (previously defined) inactive domain.
+
+    :param name: VM name
+    :param dargs: standardized virsh function API keywords
+    :return: CmdResult object.
+    """
+    return command("start %s" % name, **dargs)
+
+
+def shutdown(name, **dargs):
+    """
+    True on successful domain shutdown.
+
+    :param name: VM name
+    :param dargs: standardized virsh function API keywords
+    :return: CmdResult object
+    """
+    return command("shutdown %s" % (name), **dargs)
+
+
+
+
+
+
+    if not cpu_thread:
+        return []
+    return list(set([_.strip().split()[0] for _ in cpu_thread.splitlines()]))
+
+  ssl_cmd = os_dep.command("openssl")
+
+if fstype not in ['nfs', 'smbfs', 'glusterfs']:
+
+
+    try:
+        system(mount_cmd, verbose=verbose)
+    except error.CmdError:
+        return False
+
+   return [t.join() for t in threads]
+
+
+
+def safe_kill(pid, signal):
+    """
+    Attempt to send a signal to a given process that may or may not exist.
+
+    :param signal: Signal number.
+    """
+    try:
+        os.kill(pid, signal)
+        return True
+    except Exception:
+        return False
+
+
+def kill_process_tree(pid, sig=signal.SIGKILL):
+    """Signal a process and all of its children.
+
+    If the process does not exist -- return.
+
+    :param pid: The pid of the process to signal.
+    :param sig: The signal to send to the processes.
+    """
+    if not safe_kill(pid, signal.SIGSTOP):
+        return
+    children = commands.getoutput("ps --ppid=%d -o pid=" % pid).split()
+    for child in children:
+        kill_process_tree(int(child), sig)
+    safe_kill(pid, sig)
+    safe_kill(pid, signal.SIGCONT)
+
+
+def cpu_affinity_by_task(pid, vcpu_pid):
+    """
+    This function returns the allowed cpus from the proc entry
+    for each vcpu's through its task id for a pid(of a VM)
+    """
+
+    cmd = "cat /proc/%s/task/%s/status|grep Cpus_allowed:| awk '{print $2}'" % (pid, vcpu_pid)
+    output = system_output(cmd, ignore_status=False)
+    return output
+
+
+
+
+def configure(extra=None, configure='./configure'):
+    """
+    Run configure passing in the correct host, build, and target options.
+
+    :param extra: extra command line arguments to pass to configure
+    :param configure: which configure script to use
+    """
+    args = []
+    if 'CHOST' in os.environ:
+        args.append('--host=' + os.environ['CHOST'])
+    if 'CBUILD' in os.environ:
+        args.append('--build=' + os.environ['CBUILD'])
+    if 'CTARGET' in os.environ:
+        args.append('--target=' + os.environ['CTARGET'])
+    if extra:
+        args.append(extra)
+
+    system('%s %s' % (configure, ' '.join(args)))
+
+
+        base_dir = os.path.dirname(__file__)
+
+
+
+
+
+def signal_pid(pid, sig):
+    """
+    Sends a signal to a process id. Returns True if the process terminated
+    successfully, False otherwise.
+    """
+    try:
+        os.kill(pid, sig)
+    except OSError:
+        # The process may have died before we could kill it.
+        pass
+
+    for i in range(5):
+        if not pid_is_alive(pid):
+            return True
+        time.sleep(1)
+
+    # The process is still alive
+    return False
+
+
+
+def get_ip_local_port_range():
+    match = re.match(r'\s*(\d+)\s*(\d+)\s*$',
+                     read_one_line('/proc/sys/net/ipv4/ip_local_port_range'))
+    return (int(match.group(1)), int(match.group(2)))
+
+
+
+def read_one_line(filename):
+    return open(filename, 'r').readline().rstrip('\n')
+
+
+def read_file(filename):
+    f = open(filename)
+    try:
+        return f.read()
+    finally:
+        f.close()
+
+
+
+
+        for subtest in ['memory', 'cpuset', 'cpu']:
+            logging.info("---< 'test_%s' START >---", subtest)
+            try:
+                if not self.modules.get_pwd(subtest):
+                    raise error.TestFail("module not available/mounted")
+                t_function = getattr(self, "test_%s" % subtest)
+                t_function()
+                logging.info("---< 'test_%s' PASSED >---", subtest)
+
+
+
+
+../autotest-client-tests/linus_stress/linus_stress.py
+

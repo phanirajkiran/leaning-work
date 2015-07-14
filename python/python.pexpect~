@@ -1,0 +1,50 @@
+   child.expect('password:')
+   child.sendline (my_secret_password)
+   # We expect any of these three patterns...
+   i = child.expect (['Permission denied', 'Terminal type', '[#\$] '])
+   if i==0:
+       print 'Permission denied on host. Can't login'
+       child.kill(0)
+   elif i==2:
+       print 'Login OK... need to send terminal type.'
+       child.sendline('vt100')
+       child.expect ('[#\$] ')
+   elif i==3:
+       print 'Login OK.'
+       print 'Shell command prompt', child.after
+
+
+
+
+#!/usr/bin/env python
+import pexpect
+
+ssh_newkey = 'Are you sure you want to continue connecting'
+# my ssh command line
+p=pexpect.spawn('ssh mysurface@192.168.1.105 uname -a')
+
+i=p.expect([ssh_newkey,'password:',pexpect.EOF])
+if i==0:
+    print "I say yes"
+    p.sendline('yes')
+    i=p.expect([ssh_newkey,'password:',pexpect.EOF])
+if i==1:
+    print "I give password",
+    p.sendline("mypassword")
+    p.expect(pexpect.EOF)
+elif i==2:
+    print "I either got key or connection timeout"
+    pass
+print p.before # print out the result
+
+If connection failed, EOF will be captured and you message as below will be print.
+
+ssh: connect to host 192.168.1.105 port 22: No route to host
+
+
+
+    # Run vmstat.
+    child.sendline ('vmstat')
+    child.expect (COMMAND_PROMPT)
+    print child.before
+  

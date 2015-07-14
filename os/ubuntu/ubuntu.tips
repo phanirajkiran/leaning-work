@@ -1,3 +1,5 @@
+https://apps.ubuntu.com/cat/applications/gimp/
+
 sudo apt-get update
 sudo apt-get install evolution
 
@@ -26,3 +28,39 @@ sudo apt-get install apt-file atsar
 
 sudo apt-get install meld
 sudo apt-get install tree
+
+
+perf:
+sudo apt-get install linux-tools-common 
+sudo apt-get install linux-tools
+sudo apt-get install linux-tools-3.5.0-25
+
+lttng
+sudo apt-get install lttng-tools
+
+crontab -e
+07 14 * * * /home/lyang001/update.sh
+14:07 run update.sh
+
+
+gsettings set org.gnome.Vino disable-xdamage true
+
+
+add source
+http://packages.ubuntu.com/uk/trusty/all/python-pbr/download
+apt-get update 
+apt-get install python-pbr
+
+======
+To output this information to a file in your home directory you would use,
+dpkg --get-selections > installed-software
+And if you wanted to use the list to reinstall this software on a fresh ubuntu setup,
+dpkg --set-selections < installed-software
+
+
+https://help.ubuntu.com/community/Skype
+sudo dpkg --add-architecture i386
+sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
+sudo apt-get update && sudo apt-get install skype
+
+sudo aptitude install python-setuptools mongodb python-django python-pymongo

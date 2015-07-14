@@ -37,7 +37,7 @@ umount /rootfs-tmp
 
 mount -t iso9660 -o loop ./CentOS-5.4-i386-bin-DVD.iso /mnt/isocds/
 
-
+make x86_64_defconfig && make bzImage
 make modules
 make modules INSTALL_MOD_PATH=xx
 
@@ -89,3 +89,7 @@ then sort
 pbpaste
 xclip
 clip 
+
+lstopo --no-io -.txt
+
+dd if=/dev/zero bs=100M count=10 of=./1G

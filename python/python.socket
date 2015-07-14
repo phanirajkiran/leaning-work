@@ -1,0 +1,30 @@
+def getNetworkIp():
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('INSERT SOME TARGET WEBSITE.com', 0))
+    return s.getsockname()[0]
+
+
+http://python4kids.wordpress.com/2011/02/04/an-awful-pickle/
+
+
+data1_string = pickle.dumps(data1)
+
+data2 = pickle.loads(data1_string)
+
+
+
+a = ['A dummy question','The correct answer','A wrong answer']
+a
+['A dummy question', 'The correct answer', 'A wrong answer']
+fileName = "testfile"
+fileObject = open(fileName,'w') # open the file for writing
+import pickle
+pickle.dump(a,fileObject)   # this writes the object a to the file named 'testfile'
+fileObject.close()
+fileObject = open(fileName,'r')  #open the file for reading
+b = pickle.load(fileObject)  #load the object from the file into b
+b
+['A dummy question', 'The correct answer', 'A wrong answer']
+a==b
+True
+

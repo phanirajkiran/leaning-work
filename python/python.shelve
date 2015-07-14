@@ -1,0 +1,33 @@
+http://www.oschina.net/code/snippet_16840_1995
+http://blog.csdn.net/flydirk/article/details/8557188
+>>> import shelve
+>>> db=shelve.open('db.dat',c)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'c' is not defined
+>>> db=shelve.open('db.dat','c')
+>>> db['int'] = 1
+>>> db['float'] = 3.14
+>>> print db
+{'int': 1, 'float': 3.14}
+
+>>> db['int']
+1
+>>> x={}
+>>> x['int'] = 1
+>>> x['float'] = 3.14
+>>> print x
+{'int': 1, 'float': 3.14}
+>>> db2 = shelve.open('db.dat22','c')
+>>> db2['lei'] = x
+>>> print db2
+{'lei': {'int': 1, 'float': 3.14}}
+>>> print db2[lei]
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'lei' is not defined
+>>> print db2['lei']
+{'int': 1, 'float': 3.14}
+>>> print db2['lei']['int']
+1
+

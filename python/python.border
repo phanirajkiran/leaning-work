@@ -1,0 +1,19 @@
+format = workbook.add_format()
+
+format.set_pattern(1)  # This is optional when using a solid fill.
+format.set_bg_color('green')
+
+worksheet.write('A1', 'Ray', format)
+
+
+from xlsxwriter.workbook import Workbook
+
+workbook = Workbook('output.xlsx')
+worksheet = workbook.add_worksheet()
+
+format = workbook.add_format()
+format.set_border(style=1)
+
+worksheet.write('A1', "Hello, world!", format=format)
+
+workbook.close()

@@ -1,0 +1,52 @@
+
+http://lwn.net/Articles/322666/
+http://lwn.net/Articles/290277/
+http://www.ibm.com/developerworks/cn/linux/l-cn-ftrace/
+http://loda.hala01.com/2011/05/android%E7%AD%86%E8%A8%98-linux-kernel-ftrace-function-trace%E8%A7%A3%E6%9E%90/
+http://www.slideserve.com/tate/measuring-function-duration-with-ftrace good 
+https://www.kernel.org/doc/Documentation/trace/ftrace.txt  search mask
+
+Output from ftrace can be read from one of several files in the tracing directory:
+    trace - contains human-readable output of the trace
+    latency_trace - output from the same trace, but organized so that system latency issues can be diagnosed, also in human-readable format
+    trace_pipe - contains the same output as trace, but is meant to be piped into a command. Unlike the other two, reading from this file consumes the output. 
+
+
+    # echo function >/debug/tracing/current_tracer
+    # echo 1 >/debug/tracing/tracing_enabled
+    ...some commands or activity to trace...
+    # echo 0 >/debug/tracing/tracing_enabled
+
+
+ # echo irqsoff > current_tracer
+ # echo 0 > tracing_max_latency
+ # echo 1 > tracing_enabled
+ # ls -ltr
+ [...]
+ # echo 0 > tracing_enabled
+ # cat latency_trace
+
+
+
+echo schedule > set_ftrace_filter
+echo 'sched*' > set_ftrace_filter
+echo sys_read > set_graph_function
+
+
+echo 1 > events/sched/sched_wakeup/enable
+echo 1 > events/sched/enable
+
+enable multiple trace 
+echo 1 > events/sched/sched_wakeup/enable
+echo 1 > events/sched/sched_wakeup_new/enable
+echo 1 > events/sched/sched_switch/enable
+cat trace | head -15
+---------------------------------------------------------------------
+
+# echo sched:sched_switch >> /debug/tracing/set_event 
+or I think
+# echo sched_switch >> /debug/tracing/set_event 
+# echo 1 > /debug/tracing/events/sched/sched_switch/enable
+
+available_tracers
+

@@ -109,3 +109,73 @@ lyang0@lyang0-OptiPlex-755:~/del$ grep -F '!@#$%' xx
 
 lyang0@lyang0-OptiPlex-755:~/del$ grep '[[:punct:]]' xx
 !@#$%
+
+the line in file1 but not in file2
+lyang001@lyang001-OptiPlex-9010:~/WORK/leaning-work/practice$ grep -v -f file2 file1
+a
+b
+d
+e
+f
+g
+1
+2
+4
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/leaning-work/grep$ cat 2 |grep -v "aa|bb|ee"
+aa
+bb
+cc
+dd
+ee
+ff
+lyang001@lyang001-OptiPlex-9010:~/WORK/leaning-work/grep$ cat 2 |grep -E -v "aa|bb|ee"
+cc
+dd
+ff
+
+
+http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_04_02.html
+
+Use the "." for a single character match. If you want to get a list of all five-character English dictionary words starting with "c" and ending in "h" (handy for solving crosswords):
+
+cathy ~> grep '\<c...h\>' /usr/share/dict/words
+catch
+clash
+cloth
+
+ 
+For matching multiple characters, use the asterisk. This example selects all words starting with "c" and ending in "h" from the system's dictionary:
+
+cathy ~> grep '\<c.*h\>' /usr/share/dict/words
+caliph
+cash
+catch
+
+ 
+
+http://www.9usb.net/200902/linux-grep.html
+ÏÃ»¹ÓһЩÓÒ˼µÄüÎýep -i pattern files £º²»Ç·ִó´µØÑ÷¬ÈÇ¿öִó´£¬
+grep -l pattern files £ºֻÁ³öäÎ¼þÃ£¬
+grep -L pattern files £ºÁ³ö¥ÅµÄļþÃ£¬
+grep -w pattern files £ºֻƥÅÕ¸����ʣ¬¶ø×·ûһ²¿·ÖÈƥÅ¡¯magic¡¯£¬¶ø¡¯magical¡¯)£¬
+grep -C number pattern files £ºƥÅµÄÏÂķֱð¾[number]Ð£¬
+grep pattern1 | pattern2 files £ºÏʾƥÅ pattern1 »òttern2 µÄУ¬
+grep pattern1 files | grep pattern2 £ºÏʾ¼È¥Å pattern1 ÓƥÅ pattern2 µÄС£
+ÕÀ»¹ÓЩÓÓËËµÄØâºţº
+\< ºÍ\> ·ֱð¢µ¥´ʵĿªʼÓ½á¡£
+ÀÈ£º
+grep man * »áÅ ¡®Batman¡¯¡¢¡¯manic¡¯¡¢¡¯man¡¯µȣ¬
+grep ¡®\<man¡¯ * ƥÅ¡¯manic¡¯º͡¯man¡¯£¬µ«²»Ê¡¯Batman¡¯£¬
+grep ¡®\<man\>¡¯ ֻƥÅ¡¯man¡¯£¬¶ø¡¯Batman¡¯»òanic¡¯µÈäµÄַ�����
+¡®^¡¯£ºָƥÅµÄַûÐÊ£¬
+¡®$¡¯£ºָƥÅµÄַûÐβ£¬
+±¾Î4ԴÓʱ¹âÁƿ http://www.9usb.net , ԭÎµØ·£º http://www.9usb.net/200902/linux-grep.html 
+
+
+grep -w pattern files £ºֻƥÅÕ¸����ʣ¬¶ø×·ûһ²¿·ÖÈƥÅ¡¯magic¡¯£¬¶ø¡¯magical¡¯)£¬
+±¾Î4ԴÓʱ¹âÁƿ http://www.9usb.net , ԭÎµØ·£º http://www.9usb.net/200902/linux-grep.html 
+
+
+service --status-all 2>&1 |grep dbus

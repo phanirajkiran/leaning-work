@@ -20,3 +20,4 @@ awk '/Amt Ccy/ {sum+=$3} END {print sum}' FS="[<>]" file
 
 ===================================================================================
 awk '{ sum+=$1; } END { print sum }'
+http://www.math.utah.edu/docs/info/gawk_4.html

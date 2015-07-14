@@ -3,3 +3,12 @@ http://forums.fedoraforum.org/showthread.php?t=181331
 mv initramfs-xyz-.img initramfs.cpio.gz && gunzip initramfs.cpio.gz && cpio -iv initramfs.cpio
 
 https://access.redhat.com/knowledge/docs/Red_Hat_Enterprise_Linux/
+
+
+source codes:
+ftp://ftp.redhat.com/pub/redhat/linux/enterprise/5Server/en/os/SRPMS/
+
+
+bash --rpm-requires
+
+http://linux.chinaunix.net/techdoc/system/2008/09/03/1030353.shtml  BUILD

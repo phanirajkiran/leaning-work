@@ -1,0 +1,24 @@
+Latency (samples) Latency (@ 44.1kHz) CPU Load (%)
+64 1.5 ms 65%
+128 2.90 ms 3%
+1024 23 ms < 1%
+8192 185 ms < 1%
+
+
+Check that the patch has been correctly applied:
+●
+●
+Running “ps” on the device will show that IRQs are
+threaded
+Use cyclictest to check the scheduling latency under load
+→ The non-RT kernel fails right away under high IRQ
+pressure
+→ Latencies remain bounded with RT
+
+
+Set appropriate priorities for your threads
+● Any SCHED_FIFO thread is higher priority than any
+SCHED_OTHER thread
+http://www.redhat.com/magazine/011sep05/features/gcc/
+
+SCHED_OTHER is the default universal time-sharing scheduler policy used by most processes, SCHED_FIFO and SCHED_RR are intended for special time-critical applications that need precise control over the way in which runnable processes are selected for execution. Processes scheduled with SCHED_OTHER must be assigned the static priority 0, processes scheduled under SCHED_FIFO or SCHED_RR can have a static priority in the range 1 to 99. Only processes with superuser privileges can get a static priority higher than 0 and can therefore be scheduled under SCHED_FIFO or SCHED_RR. The system calls sched_get_priority_min and sched_get_priority_max can be used to find out the valid priority range for a scheduling policy in a portable way on all POSIX.1b conforming systems. 

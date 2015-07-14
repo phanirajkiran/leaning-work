@@ -1,0 +1,48 @@
+make[1]: Entering directory `/usr/src/kernels/linux-2.6.32-358.el6'
+
+  ERROR: Kernel configuration is invalid.
+         include/linux/autoconf.h or include/config/auto.conf are missing.
+         Run 'make oldconfig && make prepare' on kernel src to fix it.
+
+
+/bin/sh: scripts/mod/modpost: No such file or director
+make scripts
+
+  WARNING: Symbol version dump /usr/src/kernels/linux-2.6.32-358.el6/Module.symvers
+           is missing; modules will have no dependencies and modversions.
+
+make 
+
+
+
+quick steps :
+
+cp /boot/coonfig .config && make prepare && make scripts && make 
+if meet error
+https://bugzilla.redhat.com/show_bug.cgi?format=multiple&id=613568
+actuall to get Module.symvers you can copy from /usr/src/kernels/2.6.32-358.14.1.el6.x86_64 (Kernel header) 
+
+kernel module 
+###############################################################################
+
+obj-m += ILatIntDrv.o
+
+ifdef DEBUG
+EXTRA_CFLAGS+=-DDEBUG 
+endif
+KERNEL_DIR=/usr/src/kernels/linux-2.6.32-358.el6
+EXTRA_CFLAGS+=-I$(PWD)/../include
+
+ILatIntDrv.ko:
+	@echo ${MAKE} -C ${KERNEL_DIR} M=$(PWD) modules; \
+	${MAKE} -C ${KERNEL_DIR} M=$(PWD) modules CC="${CC}" ARCH=x86;
+
+all: ILatIntDrv.ko
+	
+clean:
+	rm -rf *ko; \
+	rm -rf *mod*; \
+	rm -rf *.o; \
+	rm -rf modules*; \
+	rm -rf Module*;
+

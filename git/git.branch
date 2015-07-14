@@ -16,3 +16,10 @@ $ git branch --contains systemtap
 
 # Creates a remote tracking branch
 git branch --track <remote> <branch>
+
+
+lyang0@ovp:/buildarea1/lyang0/60/build/linux-windriver/linux$ git rev-parse --abbrev-ref HEAD
+standard/preempt-rt/intel-x86-64 
+
+get current branch:
+git rev-parse --abbrev-ref HEAD

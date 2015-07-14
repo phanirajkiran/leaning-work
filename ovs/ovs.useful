@@ -1,0 +1,46 @@
+First, let’s recap what we know so far. If you know the port to which a particular domain (guest VM) is connected, you can configure that particular port as a VLAN trunk like this:
+
+ovs-vsctl set port <port name> trunks=10,11,12
+
+This configuration would pass the VLAN tags for VLANs 10, 11, and 12 all the way up to the domain, where—assuming the OS installed in the domain has VLAN support—you could configure network connectivity appropriately. (I hope to have a blog post up on this soon.)
+
+
+ 添加名为br0的网桥
+
+ovs-vsctl
+add-br br0
+
+删除名为br0的网桥
+
+ovs-vsctl
+del-br br0
+
+列出所有网桥
+
+ovs-vsctl
+list-br
+
+判断网桥br0是否存在
+
+ovs-vsctl
+br-exists br0
+
+列出挂接到网桥br0上的所有网络接口
+
+ovs-vsctl
+list-ports br0
+
+将网络接口eth0挂接到网桥br0上
+
+ovs-vsctl
+add-port br0 eth0
+
+删除网桥br0上挂接的eth0网络接口
+
+ovs-vsctl
+del-port br0 eth0
+
+列出已挂接eth0网络接口的网桥
+
+ovs-vsctl
+port-to-br eth0 

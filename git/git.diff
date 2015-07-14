@@ -8,3 +8,35 @@ git diff --numstat  1caa9d85d4ba6b81262ff61abb5152fb152187dd..
 
 
 git diff master WRLINUX_5_0_1_HEAD --name-status
+
+==
+
+lyang001@lyang001-OptiPlex-9010:~/wrlinux-x/layers/wr-base$ git diff master uprev2013  | diffstat
+ b/recipes-core/packagegroups/packagegroup-core-tools-profile.bb              |   73 ++++++++
+ b/recipes-kernel/crash/crash-6.1.4/support-GRSecurity-in-x86.patch           |   40 ++--
+ b/recipes-kernel/crash/crash.inc                                             |    2 
+ b/recipes-kernel/crash/crash_6.1.4.bb                                        |   34 +---
+ recipes-devtools/qemu/configure-properly-check-if-lrt-and-lm-is-needed.patch |   82 ----------
+ recipes-sato/sato-icon-theme/sato-icon-theme_0.4.1.bbappend                  |   17 --
+ 6 files changed, 106 insertions(+), 142 deletions(-)
+
+
+       Possible status letters are:
+
+       ·   A: addition of a file
+
+       ·   C: copy of a file into a new one
+
+       ·   D: deletion of a file
+
+       ·   M: modification of the contents or mode of a file
+
+       ·   R: renaming of a file
+
+       ·   T: change in the type of the file
+
+       ·   U: file is unmerged (you must complete the merge before it can be committed)
+
+       ·   X: "unknown" change type (most probably a bug, please report it)
+
+

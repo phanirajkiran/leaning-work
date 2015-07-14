@@ -1,0 +1,134 @@
+http://www.tutorialspoint.com/python/python_exceptions.htm
+     except IOError as ioe:
+     except IOError, ioe
+
+
+
+try:
+   You do your operations here;
+   ......................
+except ExceptionI:
+   If there is ExceptionI, then execute this block.
+except ExceptionII:
+   If there is ExceptionII, then execute this block.
+   ......................
+else:
+   If there is no exception then execute this block. 
+
+
+=============================================================
+
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   fh.write("This is my test file for exception handling!!")
+except IOError:
+   print "Error: can\'t find file or read data"
+else:
+   print "Written content in the file successfully"
+   fh.close()
+
+========================================================
+
+try:
+   You do your operations here;
+   ......................
+except(Exception1[, Exception2[,...ExceptionN]]]):
+   If there is any exception from the given exception list, 
+   then execute this block.
+   ......................
+else:
+   If there is no exception then execute this block.
+
+eg: except (RuntimeError, TypeError, NameError):
+===========================================
+try:
+   fh = open("testfile", "w")
+   try:
+      fh.write("This is my test file for exception handling!!")
+   finally:
+      print "Going to close the file"
+      fh.close()
+except IOError:
+   print "Error: can\'t find file or read data"
+===========================================
+
+#!/usr/bin/python
+
+try:
+   fh = open("testfile", "w")
+   try:
+      fh.write("This is my test file for exception handling!!")
+   finally:
+      print "Going to close the file"
+      fh.close()
+except IOError:
+   print "Error: can\'t find file or read data"
+
+=============================================
+
+try:
+   You do your operations here;
+   ......................
+except ExceptionType, Argument:
+   You can print value of Argument here...
+
+
+=====================================
+
+class Networkerror(RuntimeError):
+   def __init__(self, arg):
+      self.args = arg
+
+So once you defined above class, you can raise your exception as follows:
+
+try:
+   raise Networkerror("Bad hostname")
+except Networkerror,e:
+   print e.args
+
+
+>>> class MyError(Exception):
+...     def __init__(self, value):
+...         self.value = value
+...     def __str__(self):
+...         return repr(self.value)
+...
+>>> try:
+...     raise MyError(2*2)
+... except MyError as e:
+...     print 'My exception occurred, value:', e.value
+
+=====================================
+
+
+def functionName( level ):
+   if level < 1:
+      raise "Invalid level!", level
+      # The code below to this would not be executed
+      # if we raise the exception
+
+
+>>> try:
+...     raise NameError('HiThere')
+... except NameError:
+...     print 'An exception flew by!'
+...     raise
+
+
+
+
+
+
+
+try:
+   fh = open("testfile", "w")
+   try:
+      fh.write("This is my test file for exception handling!!")
+   finally:
+      print "Going to close the file"
+      fh.close()
+except IOError:
+   print "Error: can\'t find file or read data"
+

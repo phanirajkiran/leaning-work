@@ -1,0 +1,87 @@
+Summary: modphp: add libxml2 dependecny
+Tech Review: MarkA
+Gatekeeper: Bruce
+Lockdown Approval (if needed): 
+Branch Tag: WRLINUX_5_0_1_HEAD
+
+IP Statement (form link or license statement, usually automated):
+Crypto URL(s) (if needed): see http://wiki.wrs.com/PBUeng/LinuxProductDivisionExportProcess
+Parent Template (where applicable):
+
+
+-------------------------------------
+Impacted area             Impact y/n
+-------------------       -----------
+docs/tech-pubs                 n
+tests                          n
+build system                   n
+host dependencies              n
+RPM/packaging                  n
+toolchain                      n
+kernel code                    n
+user code                      y
+configuration files            n
+target configuration           n
+Other                          n
+Applicable to Yocto/upstream   n
+
+
+Comments (indicate scope for each "y" above):
+---------------------------------------------
+commit 24a2cbdb03db715d6a9ffd798ed9d0f512576d03
+Author: Lei Yang <lei.yang@windriver.com>
+Date:   Thu Jun 13 21:37:33 2013 +0800
+
+    modphp: add libxml2 dependecny
+    
+    CQID: WIND00421236
+    
+    We have enabled libxml for modphp,but it misses the libxml2 dependency,it is trying
+    to check the xml2-config in usr/bin/xml2-config of sysroot,but libxml2 package
+    puts it in usr/bin/crossscript/xml2-config,so change the path here too
+    
+    Signed-off-by: Lei Yang <lei.yang@windriver.com>
+
+
+Added Files:
+------------
+None.
+
+Removed Files:
+--------------
+None.
+
+Remaining Changes (diffstat):
+-----------------------------
+ base/recipes-extended/php/modphp_5.3.14.bbappend |    2 ++
+
+Testing Applicable to:
+----------------------
+
+
+Testing Commands:
+-----------------
+make -C build modphp
+
+Testing, Expected Results:
+--------------------------
+lyang0@pek-lpgtest1:/buildarea1/lyang0/phornix$ ls export/dist/usr/bin/php
+export/dist/usr/bin/php
+
+
+Conditions of submission:
+-------------------------
+
+
+Arch    built      boot     boardname
+-------------------------------------
+MIPS      n         n
+MIPS64    n         n
+MIPS64n32 n         n
+ARM       n         n
+x86       n         n
+x86_64    y         n
+PPC       n         n
+PPC64     n         n
+SPARC64   n         n
+

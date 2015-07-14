@@ -1,2 +1,29 @@
 lyang001@lyang0-9010:~/git/meta-virtualization$ git reflog
 28067e1 HEAD@{0}: clone: from git://git.yoctoproject.org/meta-virtualization
+
+:example
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git show HEAD
+commit a7727e8af8129c5cd2ea693d163bcc97817e9f03
+Author: Lei Yang <yanglei.fage@gmail.com>
+Date:   Fri May 3 16:59:54 2013 +0800
+
+    update ovp
+
+diff --git a/ovp b/ovp
+new file mode 100644
+index 0000000..e69de29
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git reset --hard HEAD^
+HEAD is now at a651a0d add submodule
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git reflog 
+a651a0d HEAD@{0}: reset: moving to HEAD^
+a7727e8 HEAD@{1}: cherry-pick: update ovp
+a651a0d HEAD@{2}: reset: moving to fde2c89a31e8dac63dc06bd4f674e151d3fe2ded^
+62167e8 HEAD@{3}: cherry-pick: update ovp
+a651a0d HEAD@{4}: reset: moving to fde2c89a31e8dac63dc06bd4f674e151d3fe2ded^
+fde2c89 HEAD@{5}: commit: update ovp
+a651a0d HEAD@{6}: clone: from git@github.com:leiyang/git_testA.git
+lyang001@lyang001-OptiPlex-9010:~/git-test/git_testA$ git cherry-pick fde2c89
+[master 66f9e91] update ovp
+ 0 files changed
+ create mode 100644 ovp
+

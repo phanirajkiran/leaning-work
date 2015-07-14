@@ -1,0 +1,82 @@
+-e filename 	如果 filename存在，则为真 	[ -e /var/log/syslog ]
+-d filename 	如果 filename为目录，则为真 	[ -d /tmp/mydir ]
+-f filename 	如果 filename为常规文件，则为真 	[ -f /usr/bin/grep ]
+-L filename 	如果 filename为符号链接，则为真 	[ -L /usr/bin/grep ]
+-r filename 	如果 filename可读，则为真 	[ -r /var/log/syslog ]
+-w filename 	如果 filename可写，则为真 	[ -w /var/mytmp.txt ]
+-x filename 	如果 filename可执行，则为真 	[ -L /usr/bin/grep ]
+filename1-nt filename2 	如果 filename1比 filename2新，则为真 	[ /tmp/install/etc/services -nt /etc/services ]
+filename1-ot filename2 	如果 filename1比 filename2旧，则为真 	[ /boot/bzImage -ot arch/i386/boot/bzImage ]
+字符串比较运算符 （请注意引号的使用，这是防止空格扰乱代码的好方法）
+-z string 	如果 string长度为零，则为真 	[ -z "$myvar" ]
+-n string 	如果 string长度非零，则为真 	[ -n "$myvar" ]
+string1= string2 	如果 string1与 string2相同，则为真 	[ "$myvar" = "one two three" ]
+string1!= string2 	如果 string1与 string2不同，则为真 	[ "$myvar" != "one two three" ]
+
+整数比较
+-eq 等于,如:if [ "$a" -eq "$b" ]
+-ne 不等于,如:if [ "$a" -ne "$b" ]
+-gt 大于,如:if [ "$a" -gt "$b" ]
+-ge 大于等于,如:if [ "$a" -ge "$b" ]
+-lt 小于,如:if [ "$a" -lt "$b" ]
+-le 小于等于,如:if [ "$a" -le "$b" ]
+ 
+< 小于(需要双括号),如:(("$a" < "$b"))
+<= 小于等于(需要双括号),如:(("$a" <= "$b"))
+> 大于(需要双括号),如:(("$a" > "$b"))
+>= 大于等于(需要双括号),如:(("$a" >= "$b"))
+ 
+字符串比较
+ 
+= 等于,如:if [ "$a" = "$b" ]
+== 等于,如:if [ "$a" == "$b" ],与=等价
+ 
+注意: [[]]和[]中的行为在某些情况下是不同的:
+ 
+[[ $a == z* ]]           # 如果$a 以"z"开头(模式匹配)那么将为true
+[[ $a == "z*" ]]         # 如果$a 等于z*  (字符匹配),那么结果为true
+ 
+[ $a == z* ]             # File globbing 和word splitting 将会发生
+[ "$a" == "z*" ]        # 如果$a 等于z* (字符匹配),那么结果为true
+
+
+
+#Set fonts for Help.
+NORM=`tput sgr0`
+BOLD=`tput bold`
+REV=`tput smso`
+
+#Help function
+help()
+{
+#  echo -e \\n"Help info for ${BOLD}${SCRIPT}.${NORM}"\\n
+#  echo -e "${REV}Basic usage:${NORM} ${BOLD}$SCRIPT nic ${NORM}"\\n
+  echo "Command line switches are optional. The following switches are recognized."
+  echo -e "${REV}-q${NORM}  --with -q,it will not print log on the console."\\n
+  echo -e "${REV}-k${NORM}  --pass the keyword"
+  echo -e "the parameter can be:\n`aplay -l|awk -F"," '/^card/{split($1,a," ");split($2,b," ");print "      "b[3]"_"a[2]"_"b[2]}' |sed 's/://g'`"
+  echo -e "${REV}-h${NORM}  --Displays this help message. No further functions are performed."\\n
+  exit 1
+}
+### Start getopts code ###
+
+get_parameter()
+{
+while getopts :k:qh FLAG; do
+  case $FLAG in
+    k)  #set option "k"
+      keyword=$OPTARG
+      ;;
+    q)  #set option "q"
+      debug=0
+      ;;
+    h)  #show help
+      help
+      ;;
+    \?) #unrecognized option - show help
+      echo -e \\n"Option -${BOLD}$OPTARG${NORM} not allowed."
+      help
+      ;;
+  esac
+done
+

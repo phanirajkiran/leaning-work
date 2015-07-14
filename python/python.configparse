@@ -1,0 +1,19 @@
+http://www.oschina.net/code/snippet_16840_1810
+http://www.pythonclub.org/python-files/ini
+http://stackoverflow.com/questions/12821946/how-can-i-remove-the-white-characters-from-configuration-file
+
+
+
+ 13 down vote accepted
+	
+
+ConfigParser.ConfigParser() is a subclass of ConfigParser.RawConfigParser(), which is documented to behave this way:
+
+    All option names are passed through the optionxform() method. Its default implementation converts option names to lower case.
+
+That's because this module parses Windows INI files which are expected to be parsed case-insensitively.
+
+You can disable this behaviour by replacing the RawConfigParser.optionxform() function:
+
+self.config = ConfigParser.ConfigParser()
+self.config.optionxform = str

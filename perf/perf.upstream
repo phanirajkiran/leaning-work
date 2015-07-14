@@ -1,0 +1,8 @@
+http://lists.linuxtogo.org/pipermail/openembedded-core/2013-February/036421.html
+'perf-trace' is a new perf subcommand available in the 3.8 kernel -
+this patchset enables it.  'perf trace' requires libaudit, which
+is added as a new recipe.
+
+
+http://lwn.net/Articles/528543/
+https://patchwork.kernel.org/patch/1851691/

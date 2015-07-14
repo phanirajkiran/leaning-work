@@ -1,0 +1,45 @@
+http://xlsxwriter.readthedocs.org/en/latest/example_chart_pie.html
+http://xlsxwriter.readthedocs.org/en/latest/example_chart_simple.html
+http://xlsxwriter.readthedocs.org/en/latest/chart_examples.html#chart-examples
+http://xlsxwriter.readthedocs.org/en/latest/working_with_charts.html
+http://xlsxwriter.readthedocs.org/en/latest/working_with_charts.html#working-with-charts ------> location
+http://xlsxwriter.readthedocs.org/en/latest/example_chart_area.html
+http://xlsxwriter.readthedocs.org/en/latest/chart.html#set_legend     --------------> color
+http://bbs.konotes.org/workdoc/python/xlsxwriter/chart.html#set_size
+
+font size
+http://stackoverflow.com/questions/16648134/how-to-change-fontsize-in-excel-using-python
+
+
+
+https://xlsxwriter.readthedocs.org/  search example
+
+
+
+http://xlsxwriter.readthedocs.org/en/latest/format.html
+http://nullege.com/codes/show/src@h@u@hue-HEAD@desktop@core@ext-py@tablib-develop@tablib@packages@xlwt@examples@simple.py/16/xlwt.Workbook.add_sheet
+http://xlsxwriter.readthedocs.org/en/latest/format.html#set_border
+http://xlsxwriter.readthedocs.org/en/latest/working_with_formats.html
+http://stackoverflow.com/questions/17681049/xlsxwriter-cant-set-border-width
+
+
+# These are equivalent.
+worksheet.write(0, 0, 'Hello')
+worksheet.write('A1', 'Hello')
+
+
+cell_format = workbook.add_format({'bold': True, 'italic': True})
+
+worksheet.write(0, 0, 'Hello', cell_format)  # Cell is bold and italic.'
+
+write_formula
+
+https://xlsxwriter.readthedocs.org/worksheet.html#worksheet-write
+
+
+http://xiaorui.cc/2014/12/14/python%E4%BD%BF%E7%94%A8xlsxwriter%E6%89%93%E9%80%A0excel%E5%91%A8%E6%8A%A5%E6%97%A5%E5%91%A8%E7%9A%84%E7%BB%9F%E8%AE%A1%E5%9B%BE%E8%A1%A8/
+
+
+# Widen the first column to make the text clearer.
+worksheet.set_column('A:A', 20)
+

@@ -1,0 +1,6 @@
+http://comments.gmane.org/gmane.comp.emulators.virt-tools/398  
+   <qemu:commandline>
+      <qemu:arg value='-cpu'/>
+      <qemu:arg value='host'/>
+    </qemu:commandline>
+  </domain>

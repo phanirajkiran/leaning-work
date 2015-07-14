@@ -18,3 +18,7 @@ http://wiki.libvirt.org/page/Guest_can_reach_outside_network,_but_can%27t_reach_
     -net tap,fd=3 3<>/dev/tap$(< /sys/class/net/macvtap0/ifindex)
 
 https://access.redhat.com/knowledge/docs/en-US/Red_Hat_Enterprise_Linux/6/html/Virtualization_Host_Configuration_and_Guest_Installation_Guide/App_Macvtap.html
+
+
+bridge dhcp
+http://www.krisbuytaert.be/blog/disabling-dhcp-libvirt-setup

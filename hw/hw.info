@@ -1,0 +1,33 @@
+root@SDP_Gaming_Socketed_GT3-1:/opt/wr-test/testcases/bts/irq_affinity# setserial -g /dev/ttyS[01234]
+/dev/ttyS0, UART: 16550A, Port: 0x03f8, IRQ: 4
+/dev/ttyS1, UART: 16550A, Port: 0x0000, IRQ: 13
+/dev/ttyS2, UART: unknown, Port: 0x03e8, IRQ: 4
+/dev/ttyS3, UART: unknown, Port: 0x02e8, IRQ: 3
+
+
+root@SDP_Gaming_Socketed_GT3-1:/opt/wr-test/testcases/bts/irq_affinity# stty -F /dev/ttyS0 speed
+115200
+
+To change baudrate of port 2 to 115200 : 
+stty -F /dev/ttySMX2 115200
+
+
+ Sending/Receiving data
+
+    It is simple as opening the device as a file and writing data to it: 
+
+# echo "HELLO" > /dev/ttySMX0
+
+    To receive data (ASCII in that case): 
+
+# cat /dev/ttySMX0
+
+TO know which serial you are using 
+root@SDP_Gaming_Socketed_GT3-1:/opt/wr-test/testcases/bts/irq_affinity# cat /proc/tty/driver/serial
+serinfo:1.0 driver revision:
+0: uart:16550A port:000003F8 irq:4 tx:6883 rx:0 RTS|CTS|DTR|DSR|CD
+1: uart:16550A mmio:0xFE10D000 irq:13 tx:0 rx:0 CTS
+2: uart:unknown port:000003E8 irq:4
+3: uart:unknown port:000002E8 irq:3
+
+Check out /proc/tty/driver/serial - you should see an uart like 16550A instead of unknown and rx should be > 0 for existing ports. If you must guess which port will be used, open all available ports. After that, you need to set up the port for your needs (baudrate, parity, bits etc) or try to guess the incoming baudrate etc.

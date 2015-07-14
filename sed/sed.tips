@@ -138,3 +138,24 @@ sed '
 
 contains BOTH "AA" and "BB" better to use awk
 awk '/AA/ && /BB/' file |sed .....
+
+
+delete 2012 and the next line 
+
+ sed '/2012/,/^/d' zz
+
+sed -n '32,39p' filename
+sed -n '/Here/,/String/p'
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ sed -i '/dd/a\"' results_tmp
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat results_tmp
+sfsf
+ddd
+"
+lyang001@lyang001-OptiPlex-9010:/tmp$ sed -i '/dd/i\"' results_tmp
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat results_tmp
+sfsf
+"
+ddd
+"
+

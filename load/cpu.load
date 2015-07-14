@@ -1,0 +1,2 @@
+http://superuser.com/questions/443406/how-can-i-produce-high-cpu-load-on-a-linux-server
+for i in 1 2 3 4; do while : ; do : ; done & ; done

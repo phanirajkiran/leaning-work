@@ -1,0 +1,24 @@
+[lyang0@pek-lpgtest3 lyang0]$ cat ~/xx.sh 
+#!/bin/bash
+rm /tmp/list
+path2=/buildarea1/lyang0/501-host
+path1=/net/pek-lpgtest3/buildarea1/lyang0/ovirt-node
+for file_node in $path1/export/dist/{bin,sbin,usr/bin,usr/sbin}/* 
+do
+	file_node=`basename $file_node`
+	if ! find  $path2/export/dist/{bin,sbin,usr/bin,usr/sbin}/* $file_node |grep -q $file_node > /dev/null ;then
+		echo $file_node >> /tmp/list
+	fi
+done
+cat /tmp/list
+
+root@intel_5500_server:~# cat gg.sh 
+#!/bin/bash
+for file in `cat /root/list`
+do
+	echo "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx $file"
+	$file &
+done
+
+
+ls */{ovp/templates,templates}/feature

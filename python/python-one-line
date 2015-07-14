@@ -1,0 +1,27 @@
+value = if a then b else c
+thing if a
+thing if a then b
+
+
+>> 'true' if True else 'false'
+'true'
+>>> 'true' if False else 'false'
+'false'
+
+
+
+With a filter, you need:
+
+[ EXP for x in seq if COND ]
+
+Without a filter you need:
+
+[ EXP for x in seq ]
+
+a = [51,27,13,56]
+dict(enumerate(a))
+
+will produce
+
+{0: 51, 1: 27, 2: 13, 3: 56}
+

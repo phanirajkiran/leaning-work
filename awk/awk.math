@@ -1,0 +1,50 @@
+1)sum
+$ cat file
+Item1,200
+Item2,500
+Item3,900
+Item2,800
+Item1,600
+
+$ awk -F"," '{x+=$2}END{print x}' file
+3000
+
+$ awk -F, '$1=="Item1"{x+=$2;}END{print x}' file
+800
+
+$ VAR="Item1"
+$ awk -F, -v inp=$VAR '$1==inp{x+=$2;}END{print x}' file
+800
+$ awk -F, '{a[$1]+=$2;}END{for(i in a)print i", "a[i];}' file
+Item1, 800
+Item2, 1300
+Item3, 900
+
+$ awk -F"," '{x+=$2;print}END{print "Total,"x}' file
+Item1,200
+Item2,500
+Item3,900
+Item2,800
+Item1,600
+Total,3000
+
+$ awk -F, '{a[$1]++;}END{for (i in a)print i, a[i];}' file
+Item1 2
+Item2 2
+Item3 1
+
+$ awk -F, '!a[$1]++' file
+Item1,200
+Item2,500
+Item3,900
+
+-----------------> http://www.theunixschool.com/2012/06/awk-10-examples-to-group-data-in-csv-or.html
+
+awk '{ sum += $2; n++ } END { if (n > 0) print sum / n; }'
+awk '{ s += $1 } END { print "sum: ", s, " average: ", s/NR, " samples: ", NR }'
+
+
+每一列的平均数 http://www.fordodone.com/2013/08/02/awk-average-multiple-columns/
+# cat sample.txt | awk '{for (i=1;i<=NF;i++){a[i]+=$i;}} END {for (i=1;i<=NF;i++){printf "%.0f", a[i]/NR; printf "\t"};printf "\n"}
+Print the even-numbered lines in the data file:
+awk 'NR % 2 == 0' data    

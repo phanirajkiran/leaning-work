@@ -1,0 +1,15 @@
+http://www.redhat.com/archives/rhelv5-list/2010-August/msg00052.html
+
+You might be able to force oprofile to use the timer mechanism in the
+virtualized environment. Running a short script like this as root:
+
+#!/bin/sh
+#
+# Short script force timer mode
+opcontrol --deinit
+/sbin/modprobe oprofile timer=1
+opcontrol --init
+
+This script will force oprofile to use the timer fallback mechanism rather than
+attempting to use the hardware performance counters. Then you should be able
+collect time based samples using it. 

@@ -1,0 +1,14 @@
+echo '{"json":"obj"}' | python -m simplejson.tool
+
+http://simplejson.readthedocs.org/en/latest/
+http://pymotw.com/2/json/
+
+http://pymotw.com/2/contents.html
+
+http://www.copterlabs.com/demo/reading-json/
+
+http://www.pythonforbeginners.com/modules-in-python/?page=2 侧边
+
+http://www.jsonexample.com/
+http://api.openstack.org/api-ref-compute.html
+http://blog.csdn.net/shangliuyan/article/details/7658367

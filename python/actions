@@ -1,0 +1,133 @@
+returncode = call(*args, **kwargs) 
+
+is basically the same as calling
+
+returncode = Popen(*args, **kwargs).wait()
+
+call is just a convenience function. It's implementation in CPython is in subprocess.py:
+
+def call(*popenargs, timeout=None, **kwargs):
+    """Run command with arguments.  Wait for command to complete or
+    timeout, then return the returncode attribute.
+
+    The arguments are the same as for the Popen constructor.  Example:
+
+    retcode = call(["ls", "-l"])
+    """
+    with Popen(*popenargs, **kwargs) as p:
+        try:
+            return p.wait(timeout=timeout)
+        except:
+            p.kill()
+            p.wait(
+
+
+from subprocess import call
+
+qsub_call = "qsub -l walltime=72:00:00 %s"
+call(qsub_call % "test_job.sh", shell=True)
+
+
+http://stackoverflow.com/questions/1191374/subprocess-with-timeout
+
+If you're on Unix,
+
+import signal
+  ...
+class Alarm(Exception):
+    pass
+
+def alarm_handler(signum, frame):
+    raise Alarm
+
+signal.signal(signal.SIGALRM, alarm_handler)
+signal.alarm(5*60)  # 5 minutes
+try:
+    stdoutdata, stderrdata = proc.communicate()
+    signal.alarm(0)  # reset the alarm
+except Alarm:
+    print "Oops, taking too long!"
+    # whatever else
+
+def get_exitcode_stdout_stderr(cmd):
+    """
+    Execute the external command and get its exitcode, stdout and stderr.
+    """
+    args = shlex.split(cmd)
+
+    proc = Popen(args, stdout=PIPE, stderr=PIPE)
+    out, err = proc.communicate()
+    exitcode = proc.returncode
+    #
+    return exitcode, out, err
+
+http://www.pythonforbeginners.com/os/subprocess-for-system-administrators
+
+# Set up the echo command and direct the output to a pipe
+p1 = subprocess.Popen(['ping', '-c 2', host], stdout=subprocess.PIPE)
+
+# Run the command
+output = p1.communicate()[0]
+
+print output
+
+target = raw_input("Enter an IP or Host to ping:\n")
+
+host = subprocess.Popen(['host', target], stdout = subprocess.PIPE).communicate()[0]
+
+print host
+
+great
+http://stackoverflow.com/questions/10756383/timeout-on-subprocess-readline-in-python
+
+
+http://stackoverflow.com/questions/1112343/how-do-i-capture-sigint-in-python
+http://www.linuxjournal.com/article/3946?page=0,1
+
+
+#! /usr/local/bin/python
+import signal import sys
+def signal_handler(signal, frame):
+        print 'You pressed Ctrl+C!'
+        sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
+print 'Press Ctrl+C'
+while 1:
+        continue
+
+
+great  think.
+http://www.go4expert.com/articles/signal-handling-python-t28332/
+
+import socket
+
+def handler(s, f):
+    print 'Signal handler called with signal', s
+    raise IOError("Couldn't connect!")
+
+signal.signal(signal.SIGALRM, handler)
+
+## set an alarm to go off after 5 sec, this is our timeout
+signal.alarm(5)
+
+## the operation that may take a long time/or wait indefinitely, than we expect it to
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.connect(("www.some-non-existant-website.com", 80))
+
+# Disable the alarm, in case the previous operation goes through
+signal.alarm(0)
+
+
+https://twistedmatrix.com/documents/12.3.0/web/howto/web-in-60/dynamic-dispatch.html
+http://blog.csdn.net/largetalk/article/details/6905378
+imap(fun, p, q)                    imap(pow, (2,3,10), (5,2,3)) --> 32 9 1000  ???
+
+
+http://xlambda.com/gevent-tutorial/
+
+
+http://blog.apps.chicagotribune.com/2010/12/07/from-spreadsheet-to-html-in-15-minutes-with-python-tablefu-jinja-and-flask/
+
+
+http://stackoverflow.com/questions/10525185/python-threading-how-do-i-lock-a-thread-or-do-i-even-lock-the-thread-or-just
+

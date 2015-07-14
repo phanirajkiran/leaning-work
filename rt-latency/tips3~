@@ -1,0 +1,22 @@
+Latency (samples) Latency (@ 44.1kHz) CPU Load (%)
+64 1.5 ms 65%
+128 2.90 ms 3%
+1024 23 ms < 1%
+8192 185 ms < 1%
+
+
+Check that the patch has been correctly applied:
+●
+●
+Running “ps” on the device will show that IRQs are
+threaded
+Use cyclictest to check the scheduling latency under load
+→ The non-RT kernel fails right away under high IRQ
+pressure
+→ Latencies remain bounded with RT
+
+
+Set appropriate priorities for your threads
+● Any SCHED_FIFO thread is higher priority than any
+SCHED_OTHER thread
+http://www.redhat.com/magazine/011sep05/features/gcc/

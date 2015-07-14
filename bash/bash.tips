@@ -1,3 +1,4 @@
+
 $$ bash 当前进程的pid 
 ctrl+c触发一个信号给进程,信号名为SIGINT
 
@@ -33,3 +34,27 @@ watch "ls -x ; df ."
 
 echo -e "<ESC>\e[A" -----> up key
 echo -e "<ESC>\e[B" -----> down key
+
+1、最简单方法
+:<<BLOCK
+....注释内容
+BLOCK
+
+or
+
+if [ ]; then
+
+    要注释的语句块
+
+    fi
+
+
+if ps -p $PID > /dev/null
+then
+   echo "$PID is running"
+   # Do something knowing the pid exists, i.e. the process with $PID is running
+fi
+
+
+random:
+http://stackoverflow.com/questions/2556190/random-number-from-a-range-in-a-bash-script

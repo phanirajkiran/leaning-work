@@ -1,0 +1,12 @@
+#!/bin/sh
+mknod /dev/`cat /proc/devices | grep vintlost | sed -r 's/(.*) (.*)/\2 c \1/'` 0
+chmod 777 /dev/vintlost
+while true; do ping -l 100000 -q -s 10 -f localhost >/dev/null; done & stress -t 360000 -c 10 --io 2 --vm-bytes 256M > /dev/null & while true; do hackbench 10 > /dev/null; done &
+#!/bin/sh
+mknod /dev/`cat /proc/devices | grep vintlost | sed -r 's/(.*) (.*)/\2 c \1/'` 0
+chmod 777 /dev/vintlost
+while true; do ping -l 100000 -q -s 10 -f localhost >/dev/null; done & stress -t 360000 -c 10 --io 2 --vm-bytes 256M > /dev/null & while true; do hackbench 10 > /dev/null; done &
+#!/bin/sh
+mknod /dev/`cat /proc/devices | grep vintlost | sed -r 's/(.*) (.*)/\2 c \1/'` 0
+chmod 777 /dev/vintlost
+while true; do ping -l 100000 -q -s 10 -f localhost >/dev/null; done & stress -t 360000 -c 10 --io 2 --vm-bytes 256M > /dev/null & while true; do hackbench 10 > /dev/null; done &

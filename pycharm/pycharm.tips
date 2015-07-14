@@ -1,0 +1,99 @@
+http://www.jetbrains.com/pycharm/webhelp/using-suggestion-list.html
+
+ctrl y 删除一行
+ctrl z 撤销
+ctrl + D 复制一行
+ctrl shift enter 下一行
+alt+enter list suggestion
+ctrl F12 You can quickly navigate in the currently edited file with Ctrl+F12 (Navigate | File Structure).
+ctrl +delelte 删除往后的
+ctrl+ backspace 删除往前的
+del decrible(product) 当鼠标在product的时候按alt+enter 
+ctrl F8 add breakpoint or delete breakpoint 
+shift + F6 改名字
+Press Ctrl+A 全选 
+ctrl + r 替换
+双击 高亮
+ctrl shift N go to file 
+ctrl shift + enter to auto-complete 
+eg when I type
+class Apple(Product)
+and then press ctrl shift enter, it auto-complete : 
+
+
+
+You can quickly navigate in the currently edited file with Ctrl+F12 (Navigate | File Structure).
+
+def __init__(self, name, description):
+要写一些东西了才有 好奇怪啊比如写个return true or self.name =name 
+
+
+Ctrl N --> To open any class in the editor quickly, press Ctrl+N (Navigate | Class) and start typing the name of the class. Choose the class from a drop-down list that 
+
+appears.
+
+Ctrl Q from within the lookup list, you can press Ctrl+Q to view the item's documentation.
+
+
+
+ctrl shift F10 运行
+ctrl shift F9 debug mode 
+
+C = Bar
+c.foo() alt
+
+http://forum.jetbrains.com/forum/PyCharm
+
+
+root = sqrt(b**2-4*a*c) alt + Eneer 
+
+
+Ctrl+B 声明
+Ctrl+Shift+Backspace
+
+
+Ctrl+斜杠. You can comment and uncomment lines of code using 
+Pressing Ctrl+Shift+斜杠 for a selected block of source code in a Django template surrounds the block with {% comment %} and {% endcomment %} tags.
+
+
+Use Alt+向上箭头 and Alt+向下箭头,方法间跳 
+
+
+, press Ctrl+向上箭头 and Ctrl+向下箭头 to scroll through the history of commands.
+
+
+ Ctrl+Alt+T When you want to catch exceptions thrown by some code fragment, select it in the editor, press Ctrl+Alt+T (Code | Surround With) and choose try/except. This will automatically generate the except clause.
+
+
+
+
+
+If the cursor is between the parentheses of a method call, pressing Ctrl+P brings up a list of valid parameters.
+
+
+Ctrl+E (View | Recent Files) brings a popup list of the recently visited files. Choose the desired file and press Enter to open it.
+
+
+
+
+Ctrl+Alt+Shift+N  To open any particular method or field in the editor quickly, press Ctrl+Alt+Shift+N (Navigate | Symbol) and start typing its name.
+OR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+return self.name + "" + self.description 
+-------------> 
+  return "%s %s" %(self.name,self.description)

@@ -1,0 +1,8 @@
+http://www.9usb.net/201005/linux-ls.html
+http://unix.stackexchange.com/questions/58918/using-expect-to-send-ctrld-to-a-telnet-connection
+Explanation:
+
+$@ contains the parameter list passed to the script
+$# is the length of $@
+${@:1:$[$#-1]} all parameters except the last one
+${@:$#:1} the last parameter

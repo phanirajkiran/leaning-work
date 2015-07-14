@@ -1,0 +1,22 @@
+https://github.com/washingtonpost/django-mongolier
+https://github.com/Fiedzia/Fang-of-Mongo
+
+https://github.com/mdirolf/DjanMon
+https://github.com/yuqichou/py_mongo
+https://github.com/RyanBalfanz/django-mongo-database-url
+
+
+simple
+http://www.oschina.net/code/snippet_862867_20772`
+
+
+pip install -U mongoengine
+pip install pymongo 
+
+sudo pip install Django
+pip install djangorestframework
+http://www.django-rest-framework.org/
+
+http://blog.csdn.net/daillo/article/details/7030910 全
+http://www.slideshare.net/search/slideshow?lang=**&page=3&q=mongodb+jquery&qid=493eaec2-b6d3-4856-a19b-0f52f2aee0f2&searchfrom=header&sort=relevance  PDF
+

@@ -1,0 +1,5 @@
+1)https://patchwork.kernel.org/project/LKML/list/
+click "project info" and download the ".pwclientrc" and save it into you home dirctory 
+dowload pwclient, download it to /bin/ and chmod 777 /bin/pwclient
+
+2)click "patches" to filters it eg: "trace-cmd" 

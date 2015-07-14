@@ -1,0 +1,338 @@
+for match in re.findall(pattern, text):
+print ’Found "%s"’ % match
+=============================================
+
+import re
+text = ’abbaaabbbbaaaaa’
+pattern = ’ab’
+for match in re.finditer(pattern, text):
+s = match.start()
+e = match.end()
+print ’Found "%s" at %d:%d’ % (text[s:e], s, e)
+This example finds the same two occurrences of ab, and the Match instance shows
+where they are in the original input.
+$ python re_finditer.py
+Found "ab" at 0:2
+Found "ab" at 5:7
+=====================================================
+P18 20
+from re_test_patterns import test_patterns
+test_patterns(
+’abbaabbba’,
+[ (’ab*’,
+(’ab+’,
+(’ab?’,
+(’ab{3}’,
+(’ab{2,3}’,
+])
+’a
+’a
+’a
+’a
+’a
+followed
+followed
+followed
+followed
+followed
+by
+by
+by
+by
+by
+zero or more b’),
+one or more b’),
+zero or one b’),
+three b’),
+two to three b’
+
+========================
+
+text = ’This is some text -- with punctuation.’
+pattern = r’\bT\w+’
+with_case = re.compile(pattern)
+without_case = re.compile(pattern, re.IGNORECASE)
+print ’Text:\n %r’ % text
+print ’Pattern:\n %s’ % pattern
+print ’Case-sensitive:’
+for match in with_case.findall(text):
+print ’ %r’ % match
+print ’Case-insensitive:’
+for match in without_case.findall(text):
+print ’ %r’ % match
+
+===================
+
+d = difflib.Differ()
+diff = d.compare(text1_lines, text2_lines)
+print ’\n’.join(diff)
+
+=========================
+from itertools import *
+for i in chain([1, 2, 3], [’a’, ’b’, ’c’]):
+print i,
+print
+
+===========================
+from itertools import *
+for i in izip([1, 2, 3], [’a’, ’b’, ’c’]):
+print i
+
+os.path.split(path)
+os.path.basename(path)
+os.path.dirname(path)
+os.path.splitext(path)
+os.path.normpath(path))
+os.path.abspath(path))
+__file__
+
+=================
+
+import glob
+for name in glob.glob(’dir/*/*’):
+print ’\t’, name
+
+for name in glob.glob(’dir/file?.txt’):
+print name
+
+
+==================
+
+import os
+import tempfile
+with tempfile.TemporaryFile() as temp:
+temp.write(’Some data’)
+temp.seek(0)
+print temp.read()
+
+
+===================
+
+# Writing to a buffer
+output = StringIO()
+output.write(’This goes into the buffer. ’)
+print >>output, ’And so does this.’
+# Retrieve the value written
+print output.getvalue()
+output.close() # discard buffer memory
+
+=============
+pattern = ’fnmatch_*.py’
+print ’Pattern :’, pattern
+print
+files = os.listdir(’.’)
+for name in files:
+print ’Filename: %-25s %s’ % \
+(name, fnmatch.fnmatch(name, pattern))
+
+================
+try:
+import cPickle as pickle
+except:
+import pickle
+import pprint
+data1 = [ { ’a’:’A’, ’b’:2, ’c’:3.0 } ]
+print ’BEFORE: ’,
+pprint.pprint(data1)
+data1_string = pickle.dumps(data1)
+data2 = pickle.loads(data1_string)
+print ’AFTER : ’,
+pprint.pprint(data2)
+print ’SAME? :’, (data1 is data2)
+print ’EQUAL?:’, (data1 == data2)
+
+=========
+# Simulate a file with StringIO
+out_s = StringIO()
+# Write to the stream
+for o in data:
+print ’WRITING : %s (%s)’ % (o.name, o.name_backwards)
+pickle.dump(o, out_s)
+out_s.flush()
+# Set up a read-able stream
+in_s = StringIO(out_s.getvalue())
+# Read the data
+while True:
+try:
+o = pickle.load(in_s)
+except EOFError:
+break
+else:
+print ’READ
+:
+
+========
+
+with open(filename, ’wb’) as out_s:
+# Write to the stream
+for o in data:
+print ’WRITING: %s (%s)’ % (o.name, o.name_backwards)
+pickle.dump(o, out_s)
+
+with open(filename, ’rb’) as in_s:
+# Read the data
+while True:
+try:
+o = pickle.load(in_s)
+except EOFError:
+break
+else:
+print ’READ: %s (%s)’ % (o.name, o.name_backwards)
+
+
+>>>import cPickle
+
+>>>fp = open(fileName,'w')
+
+>>>cPickle.dump(pythonObject,fp,1)
+
+>>>fp.close()
+
+>>>f = open(fileNmae, 'r')
+
+>>>object = cPickle.load(f)
+
+============
+
+with closing(shelve.open(’test_shelf.db’)) as s:
+s[’key1’] = { ’int’: 10, ’float’:9.5, ’string’:’Sample data’ }
+To access the data again, open the shelf and use it like a dictionary.
+import shelve
+from contextlib import closing
+with closing(shelve.open(’
+
+
+-----------
+
+with closing(shelve.open(’test_shelf.db’, writeback=True)) as s:
+print ’Initial data:’
+pprint.pprint(s[’key1’])
+s[’key1’][’new_value’] = ’this was not here before’
+print ’\nModified:’
+pprint.pprint(s[’key1’])
+with closing(shelve.open(’test_shelf.db’, writeback=True)) as s:
+print ’\nPreserved:’
+pprint.pprint(s[’key1’])
+
+-----------
+def fab(max): 
+    n, a, b = 0, 0, 1 
+    while n < max: 
+        print b 
+        a, b = b, a + b 
+        n = n + 1
+
+------------
+#pydoc -p 5000
+http://localhost:5000/
+
+===========
+http://www.cnblogs.com/hongten/archive/2013/08/23/hongten_python_csv.html
+lyang001@lyang001-OptiPlex-9010:/tmp$ ./lyang0.py 
+打开文件:[lyang0-tingting]
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat ./lyang0.py 
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+print '打开文件:[{}]'.format("lyang0-tingting")
+
+====
+os.walk
+os和os.path模块
+os.listdir(dirname)：列出dirname下的目录和文件
+os.getcwd()：获得当前工作目录
+os.curdir:返回但前目录（'.')
+os.chdir(dirname):改变工作目录到dirname
+
+os.path.isdir(name):判断name是不是一个目录，name不是目录就返回false
+os.path.isfile(name):判断name是不是一个文件，不存在name也返回false
+os.path.exists(name):判断是否存在文件或目录name
+os.path.getsize(name):获得文件大小，如果name是目录返回0L
+os.path.abspath(name):获得绝对路径
+os.path.normpath(path):规范path字符串形式
+os.path.split(name):分割文件名与目录（事实上，如果你完全使用目录，它也会将最后一个目录作为文件名而分离，同时它不会判断文件或目录是否存在）
+os.path.splitext():分离文件名与扩展名
+os.path.join(path,name):连接目录与文件名或目录
+os.path.basename(path):返回文件名
+os.path.dirname(path):返回文件路径
+
+http://blog.chinaunix.net/uid-20794157-id-470583.html
+
+=========
+
+fp = open(os.getcwd()+'/test.cf')
+for line in fp:
+    print line
+
+==============
+[编辑] list和string之间的互相转换
+
+从string 到 list非常 直接
+
+>>>a = "klfddsf'"
+>>>b = list(a)
+>>>print b
+['k', 'l', 'f', 'd', 'd', 's', 'f']
+
+而从 string 到 list 就不那么容易了,要借用 string 模块的功能
+
+>>>import string
+>>>c = ['a', 'd', 'g', 'f', 'i', 'k', 'j', 'l', 'o', 's', 'r', 'u']
+>>>d = string.join(c,'')
+>>>print d
+'adgfikjlosru'
+==============
+http://blog.chinaunix.net/uid-20794157-id-470583.html 分组查询
+
+=======
+
+这说明| 的用法，如果要进行"或"关系的匹配的话，需要添加括号
+>>>a = "http://www.textbooks.com/Cat.php?CSID=Q2C0CDU0QTC0MOUCMDOKOT2DQ&SBC=T7"
+>>>bRe = re.compile("http://www.textbooks.com/.*?(ebook\-sitemap\.php|Cat\.php)")
+>>>m2 = bRe.search(a)
+>>>m2.group()
+'http://www.textbooks.com/Cat.php'
+
+=================
+1.程序中的一场处理代码尽可能简单，不要夹杂复杂的模块和逻辑，防止再次抛出异常；
+   2.尽量准确定义异常处理代码针对的是哪个异常 例如 except AssertionError； 尽量增加一个finally 去捕获所有的情况；
+===========
+3.常用字符串内置函数
+  1)str.count()  //返回该字符串中某个子串出现的次数
+  2)str.find()   //返回某个子串出现在该字符串的起始位置
+  3)str.lower()  //将该字符串全部转化为小写
+  4)str.upper()  //转为大写
+  5)str.split()  //分割字符串，返回字串串列表，默认以空格分割
+  6)len(str)     //返回字符串长度
+ 
+  例如：
+  >>> str = 'Hello, world'
+  >>> str.count('o')
+  >>> 2
+  >>> str.find('lo')
+  >>> 3
+  >>> str.lower()
+  >>> 'hello, world'
+  >>> str.upper()
+  >>> 'HELLO, WORLD'
+  >>> str.split()
+  >>> ['Hello,', 'world']
+  >>> str.split(',')
+  >>> ['Hello', ' world']
+  >>> len(str)
+  >>> 13
+  >>> str
+  >>> 'Hello, world'
+ 
+================
+import re
+data = """
+       r24062 line1
+       hello word !!!!
+       r24729 line2
+       revision:24181
+       """
+
+   r = re.compile("^r([0-9]{5,})", re.M)
+   nums = r.findall(data)
+   print nums
+

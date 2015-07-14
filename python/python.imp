@@ -1,0 +1,67 @@
+
+import imp
+# the path variable is optional, but possibly necessary
+tmp = imp.find_module("module", ["relative/path", "/absolute/path"])
+try:
+# the names of the two constants do not seem to matter
+  module = imp.load_module("name", tmp[0], "path", tmp[2])
+finally:
+  tmp[0].close()
+module.thing
+============================================
+
+import imp
+import sys
+
+def __import__(name, globals=None, locals=None, fromlist=None):
+    # Fast path: see if the module has already been imported.
+    try:
+        return sys.modules[name]
+    except KeyError:
+        pass
+
+    # If any of the following calls raises an exception,
+    # there's a problem we can't handle -- let the caller handle it.
+
+    fp, pathname, description = imp.find_module(name)
+
+    try:
+        return imp.load_module(name, fp, pathname, description)
+    finally:
+        # Since we may exit via an exception, close fp explicitly.
+        if fp:
+            fp.close()
+==================================================================
+
+                    test_modules = {}
+                    for t_type in t_types:
+                        for d in subtest_dirs:
+                            module_path = os.path.join(d, "%s.py" % t_type)
+                            if os.path.isfile(module_path):
+                                subtest_dir = d
+                                break
+                        if subtest_dir is None:
+                            msg = ("Could not find test file %s.py on tests"
+                                   "dirs %s" % (t_type, subtest_dirs))
+                            raise error.TestError(msg)
+                        # Load the test module
+                        f, p, d = imp.find_module(t_type, [subtest_dir])
+                        test_modules[t_type] = imp.load_module(t_type, f, p, d)
+                        f.close()
+
+                    # Preprocess
+                    try:
+                        params = env_process.preprocess(self, params, env)
+                    finally:
+                        env.save()
+
+                    # Run the test function
+                    for t_type, test_module in test_modules.items():
+                        run_func = utils_misc.get_test_entrypoint_func(
+                            t_type, test_module)
+                        try:
+                            run_func(self, params, env)
+                            self.verify_background_errors()
+                        finally:
+                            env.save()
+

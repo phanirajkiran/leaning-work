@@ -1,0 +1,289 @@
+1.0.3~.1.0.5
+commit cfe24c1a1867a223abc7cfe1cd94fc428b1280e0
+Author: Jiri Denemark <jdenemar@redhat.com>
+Date:   Tue Apr 23 16:15:22 2013 +0200
+
+    qemu: Move -enable-kvm and friends earlier in the command line
+ LC_ALL=C PATH=/bin HOME=/home/test USER=test LOGNAME=test /usr/bin/qemu -S -M pc \
+--cpu host,-kv
+mclock -enable-kvm -m 214 -smp 6 \
++-enable-kvm -cpu host,-kvmclock -m 214 -smp 6 \
+
+
+-------------------------------------------------------------------------
+
+commit 642261a866ef43fe0606d995a09cadc2da208f34
+Author: Peter Krempa <pkrempa@redhat.com>
+Date:   Mon Apr 15 11:07:23 2013 +0200
+
+    virsh-domain: Refactor cmdVcpucount and fix output on inactive domains
+    
+    This patch factors out the vCPU count retrieval including fallback means
+    into vshCPUCountCollect() and removes the duplicated code to retrieve
+    individual counts.
+    
+    The --current flag (this flag is assumed by default) now works also with
+    --maximum or --active without the need to explicitly specify the state
+    of the domain that is requested.
+    
+    This patch also fixes the output of "virsh vcpucount domain" on inactive
+    domains:
+    
+    Before:
+    $ virsh vcpucount domain
+    maximum      config         4
+    error: Requested operation is not valid: domain is not running
+    current      config         4
+    error: Requested operation is not valid: domain is not running
+    
+    After:
+    $virsh vcpucount domain
+    maximum      config         4
+    current      config         4
+
+
+
+--------------------------------
+
+commit d14524701ac0d3cf3108595b52f7f41292a22333
+Author: Daniel P. Berrange <berrange@redhat.com>
+Date:   Thu Mar 28 14:36:52 2013 +0000
+
+    Add a test suite for cgroups functionality
+    
+    Some aspects of the cgroups setup / detection code are quite subtle
+    and easy to break. It would greatly benefit from unit testing, but
+    this is difficult because the test suite won't have privileges to
+    play around with cgroups. The solution is to use monkey patching
+    via LD_PRELOAD to override the fopen, open, mkdir, access functions
+    to redirect access of cgroups files to some magic stubs in the
+    test suite.
+    
+    Using this we provide custom content for the /proc/cgroup and
+    /proc/self/mounts files which report a fixed cgroup setup. We
+    then override open/mkdir/access so that access to the cgroups
+    filesystem gets commit c772feb06941f91cf19f564413f9c15156f7ac80
+Author: Stefan Berger <stefanb@linux.vnet.ibm.com>
+Date:   Fri Apr 12 16:55:46 2013 -0400
+
+    Add test case for TPM passthrough
+    
+    Signed-off-by: Stefan Berger <stefanb@linux.vnet.ibm.com>
+    Reviewed-by: Corey Bryant <coreyb@linux.vnet.ibm.com>
+    Tested-by: Corey Bryant <coreyb@linux.vnet.ibm.com>redirected into files in a temporary directory
+    tree in the test suite build dir.
+    commit e52a31d16688139175087bfff11f62a6ce95936d
+Author: Eric Blake <eblake@redhat.com>
+Date:   Wed Apr 3 11:26:41 2013 -0600
+
+    qemu: fix memory leak on -machine usage error
+    
+    Commit f84b92ea introduced a memory leak on error; John Ferlan reported
+    that valgrind caught it during 'make check'.
+    
+    * src/qemu/qemu_command.c (qemuBuildMachineArgStr): Plug leak.
+
+
+--------------------------------------------------
+
+commit ad42b34b1b2544a462f48373199d6b22f4c70f38
+Author: Daniel P. Berrange <berrange@redhat.com>
+Date:   Tue Apr 2 16:52:31 2013 +0100
+
+    Disable static libraries by default
+    
+    Every source file is currently built twice by libtool, once for
+    the shared library and once for the static library. Static libs
+    are not commonly packaged by distros and slow down compilation
+    time by more than 50% compared to a shared-only build time.
+    
+    Time for 'make -j 4':
+    
+          shared only: 2 mins  9 secs
+      shared + static: 3 mins 26 secs
+    
+    Time for non-parallel make
+    
+          shared only: 3 mins 32 secs
+      shared + static: 5 mins 41 secs
+    
+    Those few people who really want them, can pass --enable-static
+    to configure
+    
+    Disabling them by default requires use of LT_INIT, but for
+    compat with RHEL5 we can't rely on that. So we conditionally
+    use LT_INIT, but fallback to AM_PROG_LIBTOOL if not present.
+
+-------------------------\commit f03dcc5df141370c09da93135ad2f921c0af55b9
+Author: Ján Tomko <jtomko@redhat.com>
+Date:   Fri Mar 22 14:52:25 2013 +0100
+
+    qemu: Allow migration over IPv6
+    
+    Allow migration over IPv6 by listening on [::] instead of 0.0.0.0
+    when QEMU supports it (QEMU_CAPS_IPV6_MIGRATION) and there is
+    at least one v6 address configured on the system.
+    
+    Use virURIParse in qemuMigrationPrepareDirect to allow parsing
+    IPv6 addresses, which would cause an 'incorrect :port' error
+    message before.
+    
+    Move setting of migrateFrom from qemuMigrationPrepare{Direct,Tunnel}
+    after domain XML parsing, since we need the QEMU binary path from it
+    to get its capabilities.
+    
+    Bug: https://bugzilla.redhat.com/show_bug.cgi?id=846013
+
+
+s/persitent/persistent/
+
+
+
+------------------------------------------------
+
+    Signed-off-by: Daniel P. Berrange <berrange@redhat.com>
+
+--=-------------------------------------------\
+
+virtio-scsi
+---------------------------------------
+
+
+commit 8893df388edbc661603e0d886b27b39a4a7864d0
+Author: Osier Yang <jyang@redhat.com>
+Date:   Thu Mar 28 19:36:30 2013 +0800
+
+    virsh: Add a helper to parse cpulist
+    
+    The 'virsh vcpupin' and 'virsh emulatorpin' commands use the same
+    code to parse the cpulist. This patch abstracts the same code as
+    a helper. Along with various code style fixes, and error improvement
+    (only error "Physical CPU %d doesn't exist" if the specified CPU
+    exceed the range, no "cpulist: Invalid format", see the following
+    for an example of the error prior to this patch).
+    
+    % virsh vcpupin 4 0 0-8commit c820fbff9fbfe1f2549a5b60967496587f8d8bfc
+Author: Paolo Bonzini <pbonzini@redhat.com>
+Date:   Thu Mar 21 12:53:50 2013 +0100
+
+    qemu: support passthrough for iscsi disks
+    
+    This enables usage of commands like persistent reservations.
+    
+    Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+
+commit 1a308ee015048267cd74ccb12d7ea3b14b6587d0
+Author: Paolo Bonzini <pbonzini@redhat.com>
+Date:   Thu Mar 21 12:53:49 2013 +0100
+
+    qemu: add support for libiscsi
+    
+    libiscsi provides a userspace iSCSI initiator.
+    
+    The main advantage over the kernel initiator is that it is very
+    easy to provide different initiator names for VMs on the same host.
+    Thus libiscsi supports usage of persistent reservations in the VM,
+    which otherwise would only be possible with NPIV.
+    
+    libiscsi uses "iscsi" as the scheme, not "iscsi+tcp".  We can change
+    this in the tests (while remaining backwards-compatible manner, because
+    QEMU uses TCP as the default transport for both Gluster and NBD).
+    
+    Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
+
+-----------------------------------------
+
+commit d450037740c8f320ff145a0459d7887bff7faafd
+Author: Guannan Ren <gren@redhat.com>
+Date:   Fri Mar 22 12:08:20 2013 +0800
+
+    python:remove semicolon in python code
+    
+    This breaked "make syntax-check" testing
+    
+    Pushed under trivial rule
+
+----------------------------------------------
+commit 4dceffadc9080a836468ea3f20a8bb31dcc4895d
+Author: Gao feng <gaofeng@cn.fujitsu.com>
+Date:   Wed Mar 20 11:35:09 2013 +0800
+
+    LXC: add cpuset cgroup support for lxc
+    
+    This patch adds cpuset cgroup support for LXC.
+    commit 0b3509e245226b526aeea00cc3072f7a3fbd002e
+Author: Olivia Yin <hong-hua.yin@freescale.com>
+Date:   Thu Mar 14 12:49:43 2013 +0800
+
+    qemu: add dtb option support
+    
+    The "dtb" option sets the filename for the device tree.
+    If without this option support, "-dtb file" will be converted into
+    <qemu:commandline> in domain XML file.
+    For example, '-dtb /media/ram/test.dtb' will be converted into
+      <qemu:commandline>
+        <qemu:arg value='-dtb'/>
+        <qemu:arg value='/media/ram/test.dtb'/>
+      </qemu:commandline>
+    
+    This is not very friendly.
+    This patchset add special <dtb> tag like <kernel> and <initrd>
+    which is easier for user to write domain XML file.
+      <os>
+        <type arch='ppc' machine='ppce500v2'>hvm</type>
+        <kernel>/media/ram/uImage</kernel>
+        <initrd>/media/ram/ramdisk</initrd>
+        <dtb>/media/ram/test.dtb</dtb>
+        <cmdline>root=/dev/ram rw console=ttyS0,115200</cmdline>
+      </os>
+    
+    Signed-off-by: Eric Blake <eblake@redhat.com>
+
+-----------------------------------------------
+
+commit 52ad612c1e5f469a7a2863fd149ecc434d76ac6e
+Author: Doug Goldstein <cardoe@cardoe.com>
+Date:   Sat Mar 16 20:57:55 2013 -0500
+
+    Fix --without-libvcommit d3092c60f79cda9af713ae5933aac380e09a157e
+Author: Dusty Mabe <dustymabe@gmail.com>
+Date:   Thu Mar 7 11:03:36 2013 -0500
+
+    capabilities: add NUMA memory information
+    
+    'virsh capabilities' will now include a new <memory> element
+    per <cell> of the topology, as in:
+    
+        <topology>
+          <cells num='2'>
+            <cell id='0'>
+              <memory unit='KiB'>12572412</memory>
+              <cpus num='12'>
+              ...
+            </cell>
+    
+    Signed-off-by: Eric Blake <eblake@redhat.com>
+irtd builds
+    
+    When building with --without-libvirtd and udev support is detected we
+    will fail to build with the following error:
+        node_device/node_device_udev.c:1608:37: error: unknown type name
+            'virStateInhibitCallback'
+
+--------------------------------------------
+
+    Signed-off-by: Gao feng <gaofeng@cn.fujitsu.com>
+
+
+------------------------------------
+
+
+    error: Physical CPU 4 doesn't exist.
+    error: cpulist: Invalid format.
+
+
+--------------------------------------------------
+
+
+
+

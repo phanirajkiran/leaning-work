@@ -1,0 +1,21 @@
+get_guest_ip()
+{
+        #sleep 30
+        #sync
+        #GUEST_IP=`awk -F[=,] '/device/ && /addr/ && /mask/{print $4}' $SUB_LOG`
+        rm -rf ip_tmp.log
+        tcpdump -npvi any 'dst port 68'  |tee 2>&1 ip_tmp.log >> /dev/null &
+        sleep 30
+        pkill tcpdump
+        sync
+        #echo  "The Guest MAC is $GUEST_MAC \n"
+        if cat ip_tmp.log |grep $GUEST_MAC;then
+                GUEST_IP=$(grep -B5 "$GUEST_MAC" ip_tmp.log |awk '/Your-IP/{print $2}' |uniq)
+        fi
+        if [ X"$GUEST_IP" = X"" ];then
+                fail_status "can't get the guest ip"
+        fi
+        echo  "GUEST_IP is $GUEST_IP \n"
+        ping -c6 $GUEST_IP
+}
+

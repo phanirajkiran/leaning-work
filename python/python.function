@@ -1,0 +1,35 @@
+def printMax(a, b):
+    if a > b:
+        print a, 'is maximum'
+    else:
+        print b, 'is maximum'
+
+printMax(3, 4) # directly give literal values
+
+===================================================
+
+def say(message, times = 1):
+    print message * times
+
+say('Hello')
+say('World', 5)
+
+======================================================
+def func(a, b=5, c=10):
+    print 'a is', a, 'and b is', b, 'and c is', c
+
+func(3, 7)
+func(25, c=24)
+func(c=50, a=100)
+
+**************************************************************
+
+def maximum(x, y):
+    if x > y:
+        return x
+    else:
+        return y
+
+print maximum(2, 3)
+
+

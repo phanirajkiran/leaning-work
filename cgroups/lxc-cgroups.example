@@ -1,0 +1,3 @@
+http://lxc.sourceforge.net/man/lxc-cgroup.html
+:
+lxc-cgroup -n foo cpuset.cpus "0,3"

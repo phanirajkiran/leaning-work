@@ -1,0 +1,70 @@
+https://docs.djangoproject.com/en/dev/ref/django-admin/#runserver-port-or-address-port
+http://www.oschina.net/question/129540_49376
+http://www.cnblogs.com/holbrook/archive/2012/03/11/2390715.html
+http://dmyz.org/archives/251
+http://www.oschina.net/question/129540_49376
+http://www.cnblogs.com/wang_yb/archive/2011/04/14/2016513.html
+
+https://github.com/mdirolf/DjanMon.git
+http://www.blogjava.net/vagasnail/articles/301137.html  grate
+
+https://docs.djangoproject.com/en/dev/intro/tutorial03/#write-your-first-view
+https://github.com/django-ve/helloworld
+
+http://www.cnblogs.com/holbrook/archive/2012/03/11/2390715.html
+
+
+http://peterhudec.github.io/authomatic/examples/django-simple.html
+great too 
+http://www.cnblogs.com/way_testlife/archive/2011/03/22/1991453.html 要修改
+http://www.it165.net/pro/html/201210/3866.html
+
+http://www.it165.net/pro/html/201210/3866.html 最重要,执行顺序
+http://djangosearch.com/ search engine 
+http://peterhudec.github.io/authomatic/examples/django-simple.html  great great
+http://solutoire.com/2009/02/26/django-series-1-a-custom-login-page/  greate login 
+http://www.djangorocks.com/tutorials/how-to-create-a-basic-blog-in-django/writing-the-templates.html
+
+You can run it for machines in your network by
+
+    ./manage.py runserver 0.0.0.0:8000
+
+And than you will be able to reach you server from any machine in your network. Just type on other machine in browser http://192.168.0.1:8000 where 192.168.0.1 is IP of you server... and it ready to go....
+
+or in you case:
+
+    On machine A in command line ./manage.py runserver 0.0.0.0:8000
+    Than try in machine B in browser type http://A:8000
+    Make a sip of beer.
+
+
+=========================
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp/dig/mysite$ ls 
+hello  __init__.py  __init__.pyc  manage.py  settings.py  settings.pyc  urls.py  urls.pyc
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp/dig/mysite$ cat urls.py
+from django.conf.urls.defaults import *
+from hello.views import home
+urlpatterns = patterns("",url(r'^$', home),)
+
+lyang001@lyang001-OptiPlex-9010:/tmp/dig/mysite$ cat hello/
+__init__.py   __init__.pyc  models.py     tests.py      views.py      views.pyc     
+lyang001@lyang001-OptiPlex-9010:/tmp/dig/mysite$ cat hello/views.py
+# Create your views here.
+from django.http import HttpResponse
+def home(request):
+    return HttpResponse("Hello World")
+
+
+http://dmyz.org/archives/251  great too 
+lyang001@lyang001-OptiPlex-9010:/tmp/dig/mysite$ cat urls.py
+#from django.conf.urls.defaults import *
+from django.conf.urls.defaults import *
+from hello.views import index
+urlpatterns = patterns("",url(r'^$', index),)
+
+
+

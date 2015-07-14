@@ -1,3 +1,4 @@
+http://irc.netsplit.de/channels/?chat=kvm for search 
 http://irc.netsplit.de/channels/details.php?room=%23kvm-arm&net=freenode
 http://freenode.net/irc_servers.shtml#tor
 
@@ -28,3 +29,9 @@ git
 /msg NickServ identify fage888
 
 http://www.goodchatting.com/howtoregnick.html
+
+
+libvirt:
+    server: irc.oftc.net
+    port: 6667 (the usual IRC port)
+    channel: #virt

@@ -1,0 +1,84 @@
+Feb 11
+ElementTree
+http://effbot.org/zone/element-index.htm great
+http://docs.python.org/2/library/xml.etree.elementtree.html
+minidom
+http://stackoverflow.com/questions/192907/xml-parsing-elementtree-vs-sax-and-dom
+http://docs.python.org/2/library/xml.dom.html?highlight=nodevalue
+
+Beautiful Soup
+Beautiful Soup sits on top of popular Python parsers like lxml and html5lib, allowing you to try out different parsing strategies or trade speed for flexibility. 
+http://www.crummy.com/software/BeautifulSoup/bs4/doc/
+http://rsj217.diandian.com/post/2012-11-01/40041235132
+http://isilic.iteye.com/blog/1741918
+
+
+
+http://www.open-open.com/doc/view/c82a8976598a420da57f1c2afa36dce4
+http://www.open-open.com/doc/view/4cd64dd6ef1d49d0a451096a0e19908d
+
+
+ConfigParser
+
+
+
+
+
+fcntl
+imp
+tempfile
+http://blog.sina.com.cn/s/blog_7447ff3701013jaz.html TemporaryFile()创建的文件没有文件名 关掉就是删除
+
+xml_utils
+funcatexit
+commands
+struct
+
+
+xml.parse
+http://code.activestate.com/recipes/65248-parsing-an-xml-file-with-xmlparsersexpat/
+http://hi.baidu.com/dongyuejiang/item/43a0f1d28d112c16d90e4481
+http://www.iteye.com/topic/1097805
+
+lxml
+http://www.ibm.com/developerworks/cn/xml/x-hiperfparse/
+
+HTMLParser
+http://docs.python.org/2/library/htmlparser.html
+
+抓：requests
+采：beautifulsoup
+存：sqlite 或其他，ORM 亦可，NoSQL 类亦可，甚至 csv、json 亦可
+
+Feb 13
+http://www.oschina.net/code/snippet_137631_27745 明天练习
+http://www.oschina.net/code/snippet_1253232_26481
+
+数据库：
+http://www.oschina.net/code/snippet_217347_24221
+http://www.oschina.net/code/snippet_1051914_21924
+
+http://www.oschina.net/code/snippet_110138_22634
+
+mongodb
+http://www.oschina.net/code/snippet_209440_20495
+
+http://www.oschina.net/code/snippet_222150_18567
+
+http://www.oschina.net/code/snippet_177666_17693
+ isvip = 'VIP' if li.find('font', class_='isvip') else 'PUB'
+
+http://www.oschina.net/code/snippet_938257_17463 ?
+http://www.oschina.net/code/snippet_181505_6282 ?
+
+
+http://www.oschina.net/code/snippet_16840_1811  mysql
+http://www.oschina.net/code/snippet_16840_1995 shevel 
+
+fnmatch
+http://houwenhui.gotoip2.com/archives/1124
+
+
+json:
+http://stackoverflow.com/questions/2835559/parsing-values-from-a-json-file-in-python
+http://blog.chinaunix.net/uid-9525959-id-3074355.html

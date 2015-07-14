@@ -1,0 +1,6 @@
+-virtfs local,path=/tmp/shared,security_model=none,mount_tag=test_mount
+
+on guest:
+mount -t 9p -o trans=virtio test_mount /tmp/shared/ -oversion=9p2000.u
+
+on host:

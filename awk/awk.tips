@@ -166,3 +166,138 @@ awk -F "['/]" '{ print $(NF-1)}'
 
 
 echo "foo-bar-something-1.0-r1.src.rpm" |awk -F'-[0-9]' '{print $1}'
+
+格式化输出
+find /sys/devices/ -name sdc |awk -v var=$bus_num -F'usb' '{$1 = sprintf("%s%s%s", $1, "usb"var"/","idProduct");print $1}'
+
+使用变量来分割
+a=usb2
+find . -name sdb |awk -F"$a" '{print $1}'
+
+
+
+http://blog.51yip.com/shell/1151.html great
+
+
+
+echo "4.7" | awk '{printf("%.f\n",$1)}'
+
+
+awk '!x[$0]++' remove 重复的line 不sort
+
+
+echo "a b c d" |awk '{$3="m";print $0}'
+
+
+if else
+cat aaaa |awk '{if ($1 =="a") {$3="m";print $0}}'  a 要用双引号
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk 'NR==3 {$2="JB"}1'
+Jones 2143 78 84 77
+Gondrol 2321 56 58 45
+RinRao JB 38 37
+Edwin 2537 78 67 45
+Dayan 2415 30 47
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file 
+Jones 2143 78 84 77
+Gondrol 2321 56 58 45
+RinRao 2122 38 37
+Edwin 2537 78 67 45
+Dayan 2415 30 47
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '{ if ( NR==3) {$2="JB"}}{print }'
+Jones 2143 78 84 77
+Gondrol 2321 56 58 45
+RinRao JB 38 37
+Edwin 2537 78 67 45
+Dayan 2415 30 47
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '{if (NR==3){$2="JB";print $0}}'
+RinRao JB 38 37
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '{ if ( NR==3) {$2="JB";print $0} else {print "xxxx"}}'
+xxxx
+xxxx
+RinRao JB 38 37
+xxxx
+xxxx
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '$1=="RinRao"{print NR}'
+3
+6
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file 
+Jones 2143 78 84 77
+Gondrol 2321 56 58 45
+RinRao 2122 38 37
+Edwin 2537 78 67 45
+Dayan 2415 30 47
+RinRao 2122 38 37
+
+
+Awk ORS is an Output equivalent of RS. Each record in the output will be printed with this delimiter. Following is an awk ORS example:
+
+
+awk 'BEGIN{ORS="=";} {print;}' student-marks
+
+
+lyang001@lyang001-OptiPlex-9010:~/records$ cat aaaa |awk '{print NR}'
+1
+2
+3
+4
+lyang001@lyang001-OptiPlex-9010:~/records$ cat aaaa |awk 'END {print NR}'
+4
+
+
+
+#cat file
+Gondrol 2321 56 58 45
+RinRao 2122 38 37
+Edwin 2537 78 67 45
+Dayan 2415 30 47
+RinRao 2122 38 37
+
+到了Gondrol 这之后的打印
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '/Gondrol/{x=NR+2}(NR<=x){print}'
+Gondrol 2321 56 58 45
+RinRao 2122 38 37
+Edwin 2537 78 67 45
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '/Gondrol/{x=NR+2;next}(NR<=x){print}'
+RinRao 2122 38 37
+Edwin 2537 78 67 45
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '/Gondrol/{print NR+2}'
+4
+
+
+$ x=`awk '/Linux/{print NR}' file`
+$ y=`awk '/Linux/{print NR+2}' file`
+$ sed -n "$x,$y p" file
+
+OR
+
+$ x=`awk '/Linux/{print NR+2}' file`
+$ sed -n "/Linux/,$x p" file
+
+
+$ awk '/Linux/{print;getline;print;}' file
+Linux
+Solaris
+
+    Once the line containing the pattern Linux is found, it is printed. getline command reads the next line into $0. Hence, the second print statement prints the next line in the file.
+:http://www.theunixschool.com/2012/05/different-ways-to-print-next-few-lines.html
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat file |awk '/Edwin/{p=1;next}{if(p){print}}'
+Dayan 2415 30 47
+RinRao 2122 38 37
+
+if or 
+awk '{if ($2=="abc" || $2="def") print "blah" }'
+awk '$2~/^(abc|def)$/ {print "blah"}'
+
+awk '$2=="abc" || $2=="def" {print "blah"}'
+
+

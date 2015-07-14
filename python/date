@@ -1,0 +1,13 @@
+from datetime import datetime, date, time
+>>> dt = datetime.strptime("2013/10/31", "%Y/%m/%d")
+>>> dt
+datetime.datetime(2013, 10, 31, 0, 0)
+
+>>> dt.strftime("%Y")
+'2013'
+>>> dt.strftime("%m")
+'10'
+>>> dt.strftime("%W")
+'43'
+
+>>dt.strftime("%Y-%W")

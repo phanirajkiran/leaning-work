@@ -1,0 +1,7 @@
+http://blog.csdn.net/komi007/article/details/8191594 
+http://doc.opensuse.org/documentation/html/openSUSE/opensuse-tuning/cha.tuning.cgroups.html
+http://docs.fedoraproject.org/en-US/Fedora/15/html/Resource_Management_Guide/sec-cpuacct.html
+great
+
+
+mount -t tmpfs -o size=512M tmpfs /tmp/ram/

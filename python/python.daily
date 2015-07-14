@@ -1,2 +1,36 @@
 http://www.tutorialspoint.com/python/python_lists.htm
 http://docs.python.org/2/library/re.html?highlight=group#re.MatchObject.groups
+http://pymotw.com/2/contents.html great
+
+http://www.pythonforbeginners.com/modules-in-python/?page=2  侧边
+http://pymotw.com/2/contents.html
+http://www.python-course.eu/loops.php
+
+
+/proc/ipmi/
+ipmitool mc info 
+ipmitool sensor
+ipmitool sdr
+ipmitool fru
+ipmitool mc selftest
+ipmitool mc watchdog off 
+ipmitool mc watchdog reset
+ipmitool mc watchdog get
+
+
+    bootcheck_pcimatch
+    kmod_test
+    malloc_loop
+    mdelay_test
+
+
+#    for rt, dirs, files in os.walk("%s" %ini_dir):
+                for file in files:
+                        if file != "common_env.ini":
+                            board_name,extension = os.path.splitext(file)
+                            testcase_lists_for_board = get_board_testinfo(board_name)
+                            for x in range(0, len(testcase_lists_for_board)):
+                                testcase_lists.append(testcase_lists_for_board[x])
+    return list(set(testcase_lists))
+
+

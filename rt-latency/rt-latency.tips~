@@ -1,0 +1,86 @@
+RCU
+=> accelerates read path
+
+Utilizing virtualization technology to combine real-time
+operating system (RTOS) and off-the-shelf time-sharing general purpose operating
+system (GPOS) is attracting much more interest recently. Such combination has the
+potential to provide a large application base, and to guarantee timely deterministic
+response to real-time applications
+
+
+While the RTOS is responsible for managing time-critical tasks of
+the radio communication, the GPOS provides the typical set of mobile phone
+applications like games 
+
+
+a QEMU process has two kinds of thread: main I/O thread and
+VCPU thread. While I/O thread is used to manage emulated devices, VCPU
+thread is used to run guest code. Furthermore, an AIO thread is dynamically
+created to handle every AIO request and signal the completion to the I/O
+thread.
+
+interrupt response time (IRT)
+
+We first define IRT as the time between physical devices raising an interrupt
+and the first instruction of the corresponding interrupt service routine (ISR)
+starting execution. In this analysis, however, we are not so interested in the
+guest’s IRT itself, instead we care more about the latencies that are introduced
+by KVM.
+
+
+It generally creates a number of CPU loads or
+interrupt loads that may lead to additional latencies. For example, at the
+”Host Scheduling” stage, some GPOS’s CPU load is likely to preempt the
+guest RTOS process. We therefore view this kind of CPU load as harmful
+workload
+
+
+Suppose a physical interrupt is raised while the guest GPOS , rather than the
+guest RTOS, is running. It is likely that the workload is in a long interrupt-off
+or preemption-off region, thus leading to large latencies. This kind of scenario
+can be eased by dedicating one CPU to the guest RTOS process.
+
+
+As pre-mentioned earlier, it is possible that the GPOS’s CPU loads are prefer-
+able to the guest RTOS process at the ”Host Scheduling” stage, causing ad-
+ditional latencies to the guest’s overall IRT. This situation can be eased by
+10 giving the guest RTOS process the highest real-time priority.
+
+In another case, however, the GPOS’s interrupt loads may cause physical
+interrupts at any time. Moreover, in the standard Linux kernel, physical in-
+terrupts can even preempt processes of the highest priority. This situation can
+be addressed by applying the RT patch [28] to the standard kernel, because
+RT patch implements threaded interrupt handlers.
+
+CPU Shielding
+Suppose a physical interrupt is raised while the guest GPOS , rather than the
+guest RTOS, is running. It is likely that the workload is in a long interrupt-off
+or preemption-off region, thus leading to large latencies. This kind of scenario
+can be eased by dedicating one CPU to the guest RTOS process.
+
+
+
+we disabled CONFIG_ACPI_PROCESSOR to prevent
+response time from being interfered by processor power management service
+
+
+we defined two
+load applications running on the guest Linux: simple endless loop representing
+computational load and bonnie 1.4 [30] representing I/O load. These two loads
+were important to observe worst-case performance.
+
+
+SMIs are harmful to real-time system. They can last for hundreds of microsec-
+onds [33] or even more than 1 millisecond in our test, which is unacceptable
+for many real-time applications. Furthermore, SMIs are the highest priority
+in the system and you cannot interrupt them because they dont have a vec-
+tor in the CPU
+
+we find out that the USB legacy devices are the main
+factor that causes SMIs. Its a good idea to disable the USB legacy option in
+BIOS and CONFIG_ACPI_PROCESSOR, and use PS/2 mouse and keyboard
+instead of USB.
+
+
+
+

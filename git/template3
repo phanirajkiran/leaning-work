@@ -1,0 +1,102 @@
+Summary:hwloc:add recepies  
+Tech Review: Bruce
+Gatekeeper: Bruce
+Lockdown Approval (if needed): 
+Branch Tag: WRLINUX_5_0_1_HEAD
+
+IP Statement (form link or license statement, usually automated):
+Crypto URL(s) (if needed): see http://wiki.wrs.com/PBUeng/LinuxProductDivisionExportProcess
+Parent Template (where applicable):
+	ovp
+	ovp-dl
+
+-------------------------------------
+Impacted area             Impact y/n
+-------------------       -----------
+docs/tech-pubs                 n
+tests                          n
+build system                   n
+host dependencies              n
+RPM/packaging                  n
+toolchain                      n
+kernel code                    n
+user code                      y
+configuration files            n
+target configuration           n
+Other                          n
+Applicable to Yocto/upstream   n
+
+
+Comments (indicate scope for each "y" above):
+---------------------------------------------
+Changes Since v1:
+Split the package config with PACKAGECONFIG instead 
+
+commit 6abbc9d1f19a4aa6dce98b9aa1e6d39fad8c838d
+Author: Lei Yang <lei.yang@windriver.com>
+Date:   Thu Jun 13 22:21:30 2013 +0800
+
+    hwloc:add hwloc recepies
+    
+    CQID: WIND00421412
+    
+    Add hwloc Portable Hardware Locality for both host and guest
+    
+    Signed-off-by: Lei Yang <lei.yang@windriver.com>
+
+commit 2900537bb5d5572d6636fe510a296827e9307e46
+Author: Lei Yang <lei.yang@windriver.com>
+Date:   Fri Jun 14 09:47:09 2013 +0800
+
+    ovp-dl: add hwloc tarball
+    
+    CQID: WIND00421412
+    
+    Download from URL:
+    www.open-mpi.org/software/hwloc/v1.7/downloads/hwloc-1.7.1.tar.gz
+    
+    Signed-off-by: Lei Yang <lei.yang@windriver.com>
+
+
+Added Files:
+------------
+ base/recipes-extended/hwloc/hwloc_1.7.1.bb |   25 +++++++++++++++++++++++++
+ hwloc-1.7.1.tar.gz |  Bin 0 -> 3501481 bytes
+Removed Files:
+--------------
+None.
+
+Remaining Changes (diffstat):
+-----------------------------
+ .../recipes-base/images/wrlinux-image-ovp-guest.bb |    1 +
+ base/recipes-base/images/wrlinux-image-ovp-kvm.bb  |    1 +
+
+Testing Applicable to:
+----------------------
+make fs for host and guest check the related command is there 
+
+Testing Commands:
+-----------------
+lyang0@pek-lpgtest1:/buildarea1/lyang0/host3$ ls export/dist/usr/bin/lstopo
+lstopo              lstopo-no-graphics
+
+Testing, Expected Results:
+--------------------------
+
+
+Conditions of submission:
+-------------------------
+
+
+Arch    built      boot     boardname
+-------------------------------------
+MIPS      n         n
+MIPS64    n         n
+MIPS64n32 n         n
+ARM       n         n
+x86       n         n
+x86_64    y         n
+PPC       n         n
+PPC64     n         n
+SPARC64   n         n
+

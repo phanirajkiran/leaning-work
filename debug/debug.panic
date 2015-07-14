@@ -1,0 +1,69 @@
+http://magazine.redhat.com/2007/08/15/a-quick-overview-of-linux-kernel-crash-dump-analysis/
+http://www.dedoimedo.com/computers/crash-analyze.html
+https://wiki.ubuntu.com/Kernel/KernelDebuggingTricks  great
+https://help.ubuntu.com/12.04/serverguide/kernel-crash-dump.html
+http://www.dedoimedo.com/computers/kdump.html
+https://wiki.ubuntu.com/Kernel/KernelDebuggingTricks
+
+
+RIP is the instruction pointer. It points to a memory address, indicating the progress of program execution in memory
+Note: On 32-bit architecture, the instruction pointer is called EIP. 
+
+
+http://www-01.ibm.com/support/docview.wss?uid=isg3T1002966
+
+manjo@hungry:~/devel/ubuntu/kernel/ubuntu-karmic-397906/debian/build/build-generic/drivers/scsi$ gdb sd.o
+GNU gdb (GDB) 6.8.50.20090628-cvs-debian
+Copyright (C) 2009 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+(gdb) list *(sd_remove+0x20)
+
+
+#useful cmd 
+list *(sd_remove+0x20)
+
+===========================================================================================================================================================
+http://elinux.org/Addr2line_for_kernel_debugging
+
+examples:
+lyang001@lyang001-OptiPlex-9010:~/ovp-build/build/linux-windriver-3.4-r0/linux-intel-xeon-core-preempt-rt-build$ addr2line -f -e vmlinux ffffffff8101b950
+do_machine_check
+/home/lyang001/ovp-build/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/linux/arch/x86/kernel/cpu/mcheck/mce.c:1092
+lyang001@lyang001-OptiPlex-9010:~/ovp-build/build/linux-windriver-3.4-r0/linux-intel-xeon-core-preempt-rt-build$ gdb vm
+vmbuilder       vmlinux         vmmouse_detect  vmstat          vmwarectrl      
+lyang001@lyang001-OptiPlex-9010:~/ovp-build/build/linux-windriver-3.4-r0/linux-intel-xeon-core-preempt-rt-build$ gdb vmlinux 
+GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
+Copyright (C) 2012 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+For bug reporting instructions, please see:
+<http://bugs.launchpad.net/gdb-linaro/>...
+Reading symbols from /home/lyang001/ovp-build/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/linux-intel-xeon-core-preempt-rt-build/vmlinux...ldone.
+(gdb) info line 0xffffffff8101b950
+Function "0xffffffff8101b950" not defined.
+(gdb) info line *0xffffffff8101b950
+Line 1092 of "/home/lyang001/ovp-build/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/linux/arch/x86/kernel/cpu/mcheck/mce.c"
+   starts at address 0xffffffff8101b94b <do_machine_check+795> and ends at 0xffffffff8101b953 <do_machine_check+803>.
+(gdb) l *0xffffffff8101b950
+0xffffffff8101b950 is in do_machine_check (/home/lyang001/ovp-build/bitbake_build/tmp/work/intel_xeon_core-wrs-linux/linux-windriver-3.4-r0/linux/arch/x86/kernel/cpu/mcheck/mce.c:1092).
+1087			 * unless we're panicing.
+1088			 */
+1089			if (severity == MCE_KEEP_SEVERITY && !no_way_out)
+1090				continue;
+1091			__set_bit(i, toclear);
+1092			if (severity == MCE_NO_SEVERITY) {
+1093				/*
+1094				 * Machine check event was not enabled. Clear, but
+1095				 * ignore.
+1096				 */
+(gdb) 
+===============================================================================================================================================================================================

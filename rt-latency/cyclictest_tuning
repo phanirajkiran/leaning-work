@@ -1,0 +1,133 @@
+
+
+
+
+kernel tftp://128.224.167.20/vlm-boards/19790/kernel rw ip=dhcp console=ttyS0,115200 root=/dev/nfs nfsroot=128.224.167.20:/export/pxeboot/vlm-boards/19790/rootfs rcu_nocbs=1-3 rcu_nocb_poll
+isolcpus=1-3 kvm.allow_unsafe_assigned_interrupts=1 irqaffinity=0 idle=poll tsc=perfect selinux=0 enforcing=0
+
+on host:
+=======
+for i in `pgrep rcuo` ; do taskset -c -p 0,4-15 $i ; done
+for i in `pgrep rcu_` ; do taskset -c -p 0,4-15 $i ; done
+
+/opt/wr-test/testcases/ovp/kvm_rt/src/host/disable_smi
+
+
+echo 30 > /proc/sys/vm/stat_interval ;echo -1 > /proc/sys/kernel/sched_rt_runtime_us
+
+
+taskset -c 3 /usr/bin/qemu-system-x86_64 -cpu qemu64,+x2apic \
+   --enable-kvm \
+   -m 2048 \
+   -smp 2 \
+   -name rt,process=rt-kvm \
+   -no-reboot \
+   -no-hpet \
+   -nographic \
+   -kernel /boot/guest.kernel \
+   -append "root=/dev/vda rw isolcpus=1 irqaffinity=0 clocksource=tsc tsc=perfect console=ttyS0 idle=poll " \
+   -drive file=/boot/guest_raw.img,if=virtio \
+   -vcpu 0,affinity=0x2,prio=0 -vcpu 1,affinity=0x4,prio=80 \
+   -mlock
+
+
+
+taskset -c 3 /usr/bin/qemu-system-x86_64 \
+   --enable-kvm \
+   -m 2048 \
+   -smp 2 \
+   -name rt,process=rt-kvm \
+   -no-reboot \
+   -no-hpet \
+   -nographic \
+   -kernel /boot/kernel.ovp \
+   -append "root=/dev/vda rw isolcpus=1 irqaffinity=0 clocksource=tsc tsc=perfect console=ttyS0 " \
+   -drive file=/boot/guest_raw.img.ovp,if=virtio \
+   -vcpu 0,affinity=0x2,prio=0 \
+   -vcpu 1,affinity=0x4,prio=80 \
+   -mlock
+
+
+
+taskset -c 3 /usr/bin/qemu-system-x86_64 -cpu qemu64,+x2apic \
+   --enable-kvm \
+   -m 2048 \
+   -smp 2 \
+   -name rt,process=rt-kvm \
+   -no-reboot \
+   -no-hpet \
+   -nographic \
+   -kernel /boot/kernel.ovp \
+   -append "root=/dev/vda rw isolcpus=1 irqaffinity=0 clocksource=tsc tsc=perfect console=ttyS0 idle=poll " \
+   -drive file=/boot/guest_raw.img.ovp,if=virtio \
+   -mlock
+
+
+
+
+
+acpi=off
+-cpu qemu64,+x2apic
+cyclictest -S -m -p 80
+
+
+on guest:
+
+!/bin/sh
+while true; do ping -l 100000 -q -s 10 -f localhost >>/dev/null; done &
+stress -t 3600 -c 10 --io 2 --vm-bytes 256M &
+while true; do hackbench 10 >>/dev/null; done &
+cyclictest -n -m -t1 -p 80  -l 100000
+
+
+
+#!/bin/bash
+# for all interrupting devices; move them to core zero; assumes that
+# FPGA module is going to use vCPU1 in two core guest.
+
+for i in `cat /proc/interrupts | grep -v FPGA | grep '^ *[0-9]*[0-9]:' |awk {'print $1}'|sed 's/:$//' `; do 
+	# Timer
+	if [ "$i" = "0" ]; then
+		continue
+	fi
+	# cascade
+	if [ "$i" = "2" ]; then
+		continue
+	fi
+	echo setting $i to affine for core zero
+	echo 1 > /proc/irq/$i/smp_affinity
+done
+
+
+ovp 
+
+root@localhost:~# cyclictest -S -m -p 80 -l 100000    
+# /dev/cpu_dma_latency set to 0us
+policy: fifo: loadavg: 0.84 0.57 0.52 1/80 736          
+
+T: 0 (  735) P:80 I:1000 C:   7585 Min:      2 Act:   22 Avg:  234 Max:    1386
+T: 1 (  736) P:80 I:1500 C:   5058 Min:      9 Act:   17 Avg:   15 Max:      22
+
+
+
+1)ht disable
+2)x2apic eanbled so disable un_assing.... 
+3)and host disable acpi
+4)disable_smi 
+
+
+
+# chrt -f -p $PRIO $PID_OF_THE_KTHREAD 
+# chrt -p $PID_OF_THE_KTHREAD 
+
+
+x2lapci https://lists.gnu.org/archive/html/qemu-devel/2012-10/msg02339.html
+
+root@localhost:~# zcat /proc/config.gz |grep CONFIG_X86_X2APIC
+CONFIG_X86_X2APIC=y
+root@localhost:~# zcat /proc/config.gz |grep CONFIG_IRQ_REMA  
+CONFIG_IRQ_REMAP=y
+
+
+rcu_nocbs=1 rcu_nocb_poll isolcpus=1
+

@@ -1,0 +1,4 @@
+http://www.softpanorama.org/Tools/awk.shtml
+Easy, isn't it? This simple task does not need complex programming in C. One line of AWK does it. Once we have learned the lesson on how to extract a column we can do things such as renaming files (append .new to "files_list"):
+
+ls files_list | awk '{print "mv "$1" "$1".new"}' | sh

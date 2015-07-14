@@ -1,0 +1,10 @@
+   <disk type='network' device='disk'>
+      <driver name='qemu' type='raw'/>
+      <source protocol='gluster' name='volume/image'>
+        <host name='example.org' port='6000' transport='socket'/>
+      </source>
+    </disk>
+
+
+
+

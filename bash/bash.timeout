@@ -1,0 +1,8 @@
+#!/bin/sh
+secs=$1
+start=`date +%s`
+end=$((start+$secs))
+while : ; do
+if [ `date +%s` -eq $end ]; then
+break
+fi

@@ -1,0 +1,141 @@
+http://www.theunixschool.com/2012/06/sed-25-examples-to-delete-line-or.html
+1)
+$ sed '1d' file
+Unix
+Linux
+Solaris
+AIX
+
+2)
+$ sed '3d' file
+Cygwin
+Unix
+Solaris
+AIX
+
+3)
+Delete the last line or the trailer line of the file:
+
+$ sed '$d' file
+Cygwin
+Unix
+Linux
+Solaris
+
+4)
+Delete a range of lines, from 2nd line till 4th line:
+
+$ sed '2,4d' file
+Cygwin
+AIX
+
+5)
+Delete a range of lines, from 2nd line till 4th line:
+
+$ sed '2,4d' file
+Cygwin
+AIX
+
+6)
+ Delete the first line AND the last line of a file, i.e, the header and trailer line of a file.
+
+$ sed '1d;$d' file
+Unix
+Linux
+Solaris
+
+7)
+Delete all lines beginning with a particular character, 'L' in this case:
+
+$ sed '/^L/d' file
+Cygwin
+Unix
+Solaris
+AIX
+
+8)
+Delete all lines ending with a particular character, 'x' in this case:
+
+$ sed '/x$/d' file
+Cygwin
+Solaris
+AIX
+
+
+9)
+Delete all lines ending with either x or X,  i.e case-insensitive delete:
+
+$ sed '/[xX]$/d' file
+Cygwin
+Solaris
+
+10)
+Delete all blank lines in the file
+
+$ sed '/^$/d' file
+Cygwin
+Unix
+Linux
+Solaris
+AIX
+
+11)
+Delete all lines which are entirely in capital letters:
+
+$ sed '/^[A-Z]*$/d' file
+Cygwin
+Unix
+Linux
+Solaris
+
+12)
+Delete the lines containing the pattern 'Unix' OR 'Linux':
+
+$ sed '/Unix\|Linux/d' file
+Cygwin
+Solaris
+AIX
+
+13)
+Delete the lines starting from the 1st line till encountering the pattern 'Linux':
+
+$ sed '1,/Linux/d' file
+Solaris
+AIX
+
+14)
+. Delete the last line ONLY if it contains the pattern 'AIX':
+
+$ sed '${/AIX/d;}' file
+Cygwin
+Unix
+Linux
+Solaris
+
+15)
+Delete the last line ONLY if it contains either the pattern 'AIX' or 'HPUX':
+
+$ sed '${/AIX\|HPUX/d;}' file
+Cygwin
+Unix
+Linux
+Solaris
+
+
+16)
+ Delete the lines containing the pattern 'Solaris' only if it is present in the lines from 1 to 4.
+
+$ sed '1,4{/Solaris/d;}' file
+Cygwin
+Unix
+Linux
+AIX
+
+17)
+Delete the line containing the pattern 'Unix' and also the next line:
+
+$ sed '/Unix/{N;d;}' file
+Cygwin
+Solaris
+AIX
+

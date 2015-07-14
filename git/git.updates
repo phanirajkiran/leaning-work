@@ -1,0 +1,6 @@
+sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+git clone git://git.kernel.org/pub/scm/git/git.git
+cd git
+git checkout v1.7.5
+make prefix=/usr/local all
+sudo make prefix=/usr/local install

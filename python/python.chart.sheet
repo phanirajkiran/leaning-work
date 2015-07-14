@@ -1,0 +1,130 @@
+#!/usr/bin/env python
+#######################################################################
+#
+# An example of a simple Excel chart with Python and XlsxWriter.
+#
+# Copyright 2013-2014, John McNamara, jmcnamara@cpan.org
+#
+import xlsxwriter
+import xlwt
+
+d = {'rt': 2, 'dma': 1, 'stress': 4, 'perf': 9, 'rtc': 4, 'ramspeed': 0, 'ttylcd': 2, 'boot': 1, 'flash': 15}
+workbook = xlsxwriter.Workbook('chart.xlsx')
+worksheet = workbook.add_worksheet()
+
+# Create a new Chart object.
+chart = workbook.add_chart({'type': 'column'})
+
+# Write some data to add to plot on the chart.
+
+data = [
+    [ '%s' %i for i in d.keys() ],
+    [ int('%s' %j) for j in d.values() ],
+]
+
+print data
+
+worksheet.write_column('A1', data[0])
+worksheet.write_column('B1', data[1])
+
+# Configure the charts. In simplest case we just add some data series.
+#chart.add_series({'values': '=Sheet1!$A$1:$A$5'})
+
+chart.set_plotarea({
+    'layout': {
+        'x':      0.03,
+        'y':      0.16,
+        'width':  0.88,
+        'height': 0.57,
+    },
+    'border': {'color': 'red', 'width': 1, 'dash_type': 'dash'},
+    'fill':   {'color': '#FFFFC2'}
+
+})
+
+
+#chart.set_legend({
+#    'layout': {
+#        'x':      0.80,
+#        'y':      0.37,
+#        'width':  0.12,
+#        'height': 0.25,
+#    }
+#})
+
+
+
+
+
+chart.add_series({
+    'categories': '=Sheet1!$A$1:$A$21',
+    'values':      '=Sheet1!$B$1:$B$21',
+    'data_labels': {'value': True},
+     'fill':   {'color': 'green'},
+     'border': {'color': 'black'},
+    #'points': [
+    #    {'fill': {'color': 'red'}},
+    #	{'fill': {'color': 'green'}},
+    #],
+})
+
+# Insert the chart into the worksheet.
+worksheet.insert_chart('D21',chart)
+
+chart.set_title({'name': 'Test coverage'})
+chart.set_x_axis({'name': 'Testcase number'})
+
+chart.set_y_axis({
+    'name': 'testcase number',
+    'name_font':  {
+	'rotation': 90,
+	'bold': False,
+     },
+})
+
+
+chart1 = workbook.add_chart({'type': 'pie'})
+
+#data = [
+#    [ '%s' %i for i in d.keys() ],
+#    [ int('%s' %j) for j in d.values() ],
+#]
+
+#print data
+#worksheet.write_column('A1', data[0])
+#worksheet.write_column('B1', data[1])
+
+chart1.add_series({
+    'categories': '=Sheet1!$A$1:$A$21',
+    'values':     '=Sheet1!$B$1:$B$21',
+    'points': [
+        {'fill': {'color': 'green'}},
+        {'fill': {'color': 'red'}},
+    ],
+})
+
+
+
+chart.set_x_axis({
+    'date_axis':       True,
+    'major_unit':      0,
+})
+
+
+chart.set_chartarea({
+    'border': {'none': True},
+    'fill':   {'color': 'red'}
+})
+
+chart.set_size({'width': 1280, 'height': 300})
+
+worksheet.insert_chart('F4', chart1)
+
+format = workbook.add_format()
+format.set_font_size(30)
+format.set_font_color('red')
+worksheet.write(0, 0, 'wheelbarrow', format)
+
+workbook.close()
+
+

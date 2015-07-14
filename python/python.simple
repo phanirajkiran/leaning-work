@@ -1,0 +1,29 @@
+#!/usr/bin/env python 
+import xlsxwriter
+
+workbook = xlsxwriter.Workbook('chart.xlsx')
+worksheet = workbook.add_worksheet()
+
+# Create a new Chart object.
+chart = workbook.add_chart({'type': 'column'})
+
+# Write some data to add to plot on the chart.
+data = [
+    [1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5,1, 2, 3, 4, 5],
+]
+
+worksheet.write_column('A1', data[0])
+
+# Configure the charts. In simplest case we just add some data series.
+chart.add_series({'values': '=Sheet1!$A$1:$A$100'})
+
+# Insert the chart into the worksheet.
+worksheet.insert_chart('L10', chart)
+
+
+chart.set_x_axis({
+    'date_axis':       True,
+})
+
+chart.set_size({'width': 720, 'height': 576})
+workbook.close()

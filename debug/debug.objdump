@@ -1,0 +1,5 @@
+objdump -Sl --no-show-raw-insn hello
+
+OR
+
+objdump -SdCg debian/build/build-generic/fs/dcache.o

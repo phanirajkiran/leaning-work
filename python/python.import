@@ -1,0 +1,33 @@
+ #!/usr/bin/python
+# Filename: using_name.py
+
+if __name__ == '__main__':
+    print 'This program is being run by itself'
+else:
+    print 'I am being imported from another module' 
+
+
+$ python using_name.py
+This program is being run by itself
+
+$ python
+>>> import using_name
+I am being imported from another module
+>>> 
+
+=====================================================================
+import mymodule
+
+mymodule.sayhi()
+print 'Version', mymodule.version
+
+=====================================================================
+ #!/usr/bin/python
+# Filename: mymodule_demo2.py
+
+from mymodule import sayhi, version
+# Alternative:
+# from mymodule import *
+
+sayhi()
+print 'Version', version 

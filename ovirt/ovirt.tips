@@ -1,0 +1,70 @@
+
+On boards:
+=========
+steps:
+#engine-cleanup
+#engine-setup
+
+#vim /etc/hosts
+root@Remley-EP-Ivy-Refresh-2:~# cat /etc/hosts 
+127.0.0.1	localhost.localdomain		localhost
+128.224.178.6   lyang0ovirt.wrs.com	lyang0ovirt 
+
+and setup the hosts to it 
+#hostname lyang0ovirt
+
+on the local PC:(This is to avoid you can't open the web)
+===============
+lyang001@lyang001-OptiPlex-9010:~/migration-flathead$ sudo vim /etc/hosts
+[sudo] password for lyang001: 
+lyang001@lyang001-OptiPlex-9010:~/migration-flathead$ cat /etc/hosts
+127.0.0.1	localhost
+127.0.1.1	lyang001-OptiPlex-9010
+128.224.178.6 lyang0ovirt.wrs.com
+
+
+
+add data center
+configure cluster 
+configure hosts 
+
+
+configure data domain (vdisk)
+configure iso domain (iso) type: 
+vim /etc/exports 
+add /var/lib/exports/iso	*(rw,sync,no_subtree_check,all_squash,anonuid=36,anongid=36)
+
+exportfs -a 
+
+chown vdsm:kvm /var/lib/exports/iso
+
+if host is down to up it, you need to click "mantainence" and then remove it and add it again 
+if the iso not up, you need to click the datacenter/active it 
+
+engine-iso-uploader -i iso upload /x86-64-kvm-guest-ovp-guest-preempt-rt-dist.iso
+
+> > I'm currently testing ovirt on nested virtualized hosts and i was
+> > wondering how to updload iso images in order to create my firts VM.
+> > 
+> > I added an ISO domain and it's attached to my Datacenter.
+> > Should i have buttons in the images tab as shown in attached files ?
+> > 
+> > I've read the RHEV Admin Guide but it doesn't helped. It's mentionned
+> > "iso-uploader" but i don't know how to use it in Fedora.
+> Step 0: You must create an ISO domain in oVirt
+> Step 1: From the system upon with the oVirt manager/engine is
+> installed run the ovirt-iso-uploader
+> Step 2: You should first have the ovirt-iso-uploader *list* the
+> available ISO domains as this will confirm that it can actually
+> connect to the ovirt manager/engine via the REST API and will present
+> you with a handy picklist of available ISO domains.
+> [root at ovirt ~]# ovirt-iso-uploader list
+> Please provide the REST API password for oVirt Engine (CTRL+D to
+> abort): 
+> ISO Storage Domain Name   | Datacenter                | ISO Domain
+> Status
+> iso1                      | Default                   | active
+> iso1                      | iSCSI                     | inactive
+> iso1                      | NFS                       | active
+> 
+

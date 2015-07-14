@@ -1,0 +1,2 @@
+printf "%30s %s\n" "$title" "$author"
+printf "%-30s %s\n" "$title" "$author"

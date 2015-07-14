@@ -1,0 +1,252 @@
+This procedure creates a data center in your virtualization environment. The data center requires a
+functioning cluster, host, and storage domain to operate
+Setting up storage is a prerequisite for a new data center because a data center cannot be initialized
+unless storage domains are attached and activated.
+
+
+The storage type. Choose one of
+NFS
+iSCSI
+Fibre Channel
+Local on Host
+POSIX compliant FS
+The type of data domain dictates the type of the data center and cannot be changed after creation without significant disruption. All storage in a data center must be of one type only For example, if iSCSI is selected as the type, only iSCSI data domains can be attached to the data center
+
+
+
+
+A data center can contain multiple clusters and a cluster can hold multiple hosts. All hosts in a cluster must run the same CPU type (Intel or AMD).It is recommended that you create your hosts before you
+create your cluster to ensure CPU type optimization;
+
+
+
+A data center is a logical entity that defines the set of physical and logical resources used in a managed virtual environment. Think of it as a container which houses clusters of hosts, virtual machines, storage and networks. 
+
+
+
+
+NOTE:
+. Note that the data center can only work with one type of storage
+. Virtualization hosts
+that are members of the same cluster must have the same type of CPU; this
+is a very important condition when we have to perform VMs live migration
+within a cluster
+
+
+
+Clusters are groups of physical servers that use a shared storage and have one type
+of CPU. VMs in a cluster may move from one physical host to another. In this case,
+the VM does not stop. This process is called Live Migration. There is one limitation,
+the virtual machines cannot migrate between clusters. Any virtualization host is
+a member of the cluster. Any cluster in the oVirt environment necessarily belongs
+to data centers. Using this hierarchy along with the cluster policies, we will have
+the ability to dynamically allocate the available resources and to determine which
+of the hosts will run the VM. 
+
+
+A cluster is a set of physical hosts that are treated as a resource pool for a set of virtual machines. Hosts in a cluster share the same network infrastructure, the same storage and the same type of CPU. They constitute a migration domain within which virtual machines can be moved from host to host. 
+
+
+
+
+All hosts in a cluster must run the same CPU type
+(Intel or AMD); this cannot be changed after
+creation without significant disruption. The CPU
+type should be set for the least powerful host. For
+example: an Intel SandyBridge host can
+attach to an Intel Penryn cluster; an Intel
+Conroe host cannot. Hosts with different CPU
+models wil
+
+
+
+Memory page sharing allows virtual machines to use up to 200% of their allocated memory by utilizing
+unused memory in other virtual machines. T his process is based on the assumption that the virtual
+machines in your Red Hat Enterprise Virtualization environment will not all be running at full capacity at
+the same time, allowing unused memory to be temporarily allocated to a particular virtual machine.
+
+Data Domain: A data domain holds the virtual hard disks and OVF files of all the virtual machines
+and templates in a data center. In addition, snapshots of the virtual machines are also stored in the
+data domain.The data domain cannot be shared across data centers, and the data domain must be of the same
+type as the data center. For example, a data center of a iSCSI type, must have an iSCSI data domain.
+You must attach a data domain to a data center before you can attach domains of other types to it.
+
+
+ISO Domain: ISO domains store ISO files (or logical CDs) used to install and boot operating
+systems and applications for the virtual machines. An ISO domain removes the data center's need for
+physical media. An ISO domain can be shared across different data centers. ISO storage domains
+use NFS storage.
+
+
+Export Domain: Export domains are temporary storage repositories that are used to copy and
+move images between data centers and Red Hat Enterprise Virtualization environments. Export
+domains can be used to backup virtual machines. An export domain can be moved between data
+centers, however, it can only be active in one data center at a time.
+
+
+
+
+
+Virtual machines that share the same storage domain can be migrated between hosts that belong to the
+same cluster.
+
+Ensure that the directory has permissions allowing read/write access to the vdsm user (UID 36)
+and kvm group (GID 36).
+# chown 36:36 /data /data/images
+# chmod 0755 /data /data/images
+
+1. Create a separate partition that will have enough space to contain all VM
+images. Make a directory that will serve as the local store.
+2. Directory must have permissions to read and write for the user's VSDM
+and group for KVM.
+As an example, we may use the directory /srv/vmdata. This is done as shown in
+the following commands:
+# chown vdsm:kvm /srv/vmdata
+# chmod 0755 /srv/vmdata
+
+
+rhevm-iso-uploader --iso-domain=ISODomain upload RHEL6.iso
+
+
+
+
+
+
+
+
+
+========================================================================================
+Dynamically move virtual machines
+between hosts
+● No service interruption
+● Applications continue to run
+• Migrate even I/O intensive workloads
+such as databases
+• Perform hardware maintenance
+without application downtime
+• Dynamically balance workloads
+between host systems
+
+Dynamically balance
+workloads in the data center.
+• Automatically live migrate
+virtual machines based on
+resources
+• Define custom policies for
+distribution of virtual machines
+
+=========================================================================================
+
+
+Sample commands
+● ● engine-config -all
+● 
+72
+engine-config --get <key_name>
+● 
+●
+engine-config --list
+engine-config --set <key_name>=<value>
+
+
+======================================================================================
+
+The guest agent provides additional information to
+oVirt Engine, such as guest memory usage, guest ip
+address, installed applications and sso.
+
+Communication is done over virtio-serial
+
+VDSM manages a Storage Pool, comprised of Storage Domains
+
+
+
+What makes up a hypervisor ?
+● ● Device drivers
+● I/O Stack
+● Resource Management
+● Scheduling
+● Access Control
+● Power Management
+● Memory Manager
+● Device Model (emulation)
+● 
+9
+Hardware management
+Virtual Machine Monitor
+
+
+
+Either ISO, data or export domain. While ISO domains can be shared across data centers, data domains cannot be shared. An export domain can only be attached to only one data center at a time.
+Status
+	
+
+========================================
+
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.0/html/Quick_Start_Guide/Quick_Start_Guide-Connect_RHEVM.html#login_to_rhevm
+
+ For this guide you will use two types of storage domains. The first is an NFS share for ISO images of installation media. You have already created this ISO domain during the Red Hat Enterprise Virtualization Manager installation.
+The second storage domain will be used to hold virtual machine disk images.
+
+
+
+
+3.1. Configure Data Centers
+3.2. Configure Cluster
+3.3. Configure Networking
+3.4. Configure Hosts
+
+    3.4.1. Approve Red Hat Enterprise Virtualization Hypervisor Host
+    3.4.2. Attach Red Hat Enterprise Linux Host
+
+3.5. Configure Storage
+
+    3.5.1. Create an NFS Data Domain
+    3.5.2. Create an iSCSI Data Domain
+    3.5.3. Create an FCP Data Domain
+    3.5.4. Attach and Populate ISO domain
+ 	   -- upload the iso to iso domain 
+               # rhevm-iso-uploader list
+	       # rhevm-iso-uploader upload -i local-iso-share [file1] [file2] .... [fileN]
+
+    Create Virtual Machines
+	  -- configure networking
+	  -- configure disk 
+          -- To install the Red Hat Enterprise Linux guest operating system
+	      Run Once "Run Red Hat Enterprise Linux Virtual Machine"
+
+
+
+Easy to install, configure and upgrade
+●
+16
+Customized 'spin' of Fedora +
+KVM
+PXE boot, USB boot, CD or Hard
+drive
+
+
+======================================================
+HOST Agent ---> VDSM
+Covers all functionality required by oVirt Engine
+Configures host, networking and shared storage
+Uses libvirt for VM life cycle operations
+======================================================
+    Engine (ovirt-engine) - manages the oVirt hosts, and allows system administrators to create and deploy new VMs
+    Admin Portal - web based UI application on top of the engine, that sysadmins use to perform advanced actions.
+    User Portal - a simplified web based UI application for simpler management use-cases.
+    REST API - an API which allows applications to perform virtualization actions, which is used by the command line tools and the python SDK
+    CLI/SDK - The command line interface and SDK provide a way to communicate with engine via script actions.
+    Database - Postgres database is used by the engine to provide persistency for the configuration of the ovirt deployment.
+    Host agent (VDSM) - the oVirt engine communicates with VSDM to request VM related actions on the nodes
+    Guest Agent - The guest agent runs inside the VM, and provides information on resource usage to the oVirt engine. Communication is done over a virtualised serial connection.
+    AD/IPA - directory services. Engine uses them to receive information on users and groups to be used with ovirt's permissions mechanism.
+    DWH (Data Warehouse) - The data warehouse component performs ETL on data extracted from the db using Talend , and inserts it to history DB.
+    Reports Engine - generates reports based on data in history DB, on system resource usage, using Jasper Reports
+    SPICE client - utility which allows users to access the VMs. 
+
+
+http://www.ovirt.org/Architecture
+http://linux.web.cern.ch/linux/scientific6/docs/rhel/Virtualization_Administration_Guide/
+https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.0/html-single/Administration_Guide/index.html#Administration_Guide-Managing_Data_Centers
+http://www.redhat.com/resourcelibrary/articles/rhev-desktops-spice

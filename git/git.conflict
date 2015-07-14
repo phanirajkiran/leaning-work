@@ -122,3 +122,129 @@ There’s two unmerged files here. According to the git checkout manpage, there�
 
 useful cmd:
  git diff --name-only --diff-filter=U
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+修改patch 本身
+
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0006-Add-new-python-testscenarios-bb.patch --check
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0006-Add-new-python-testscenarios-bb.patch 
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0007-Add-new-python-mox3-bb.patch --check
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0007-Add-new-python-mox3-bb.patch 
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0008-heatclient-add-heatclient-tests-bb.patch --check
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0008-heatclient-add-heatclient-tests-bb.patch 
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0009-README.setup-update-compute-launch-command.patch --check
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply 0009-README.setup-update-compute-launch-command.patch 
+
+
+修改文件
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git am 0003-heat-change-config-file-for-autoscaling.patch 
+Applying: heat change config file for autoscaling
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git am 0004-heat-add-example-hot-templates.patch 
+Applying: heat: add example hot templates
+error: patch failed: meta-openstack/recipes-devtools/python/python-heat_git.bb:10
+error: meta-openstack/recipes-devtools/python/python-heat_git.bb: patch does not apply
+Patch failed at 0001 heat: add example hot templates
+When you have resolved this problem run "git am --resolved".
+If you would prefer to skip this patch, instead run "git am --skip".
+To restore the original branch and stop patching run "git am --abort".
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ ls
+0001-cinder-ensure-log-dir-is-set-correctly.patch                0006-Add-new-python-testscenarios-bb.patch             meta-openstack                    meta-openstack-swift-deploy
+0002-ceilometer-need-to-filter-meter-id-when-doing-sql-qu.patch  0007-Add-new-python-mox3-bb.patch                      meta-openstack-aio-deploy         README
+0003-heat-change-config-file-for-autoscaling.patch               0008-heatclient-add-heatclient-tests-bb.patch          meta-openstack-compute-deploy     recipes-support
+0004-heat-add-example-hot-templates.patch                        0009-README.setup-update-compute-launch-command.patch  meta-openstack-controller-deploy
+0005-heat-tests-change-project_dir-path.patch                    conf                                                   meta-openstack-qemu
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git apply --reject 0004-heat-add-example-hot-templates.patch
+Checking patch meta-openstack/recipes-devtools/python/python-heat/autoscaling_example.template...
+Checking patch meta-openstack/recipes-devtools/python/python-heat/one_vm_example.template...
+Checking patch meta-openstack/recipes-devtools/python/python-heat/two_vms_example.template...
+Checking patch meta-openstack/recipes-devtools/python/python-heat_git.bb...
+error: while searching for:
+SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+           file://heat.conf \
+           file://heat.init \
+"
+
+SRCREV="ff6901141fbbc0a13604491aaba01a60487d6f6d"
+
+error: patch failed: meta-openstack/recipes-devtools/python/python-heat_git.bb:10
+Applied patch meta-openstack/recipes-devtools/python/python-heat/autoscaling_example.template cleanly.
+Applied patch meta-openstack/recipes-devtools/python/python-heat/one_vm_example.template cleanly.
+Applied patch meta-openstack/recipes-devtools/python/python-heat/two_vms_example.template cleanly.
+Applying patch meta-openstack/recipes-devtools/python/python-heat_git.bb with 1 rejects...
+Rejected hunk #1.
+Hunk #2 applied cleanly.
+Hunk #3 applied cleanly.
+Hunk #4 applied cleanly.
+Hunk #5 applied cleanly.
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git status 
+# On branch wr-20140313
+# Your branch and 'origin/wr-20140313' have diverged,
+# and have 3 and 10 different commit(s) each, respectively.
+#
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   meta-openstack/recipes-devtools/python/python-heat_git.bb
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	0001-cinder-ensure-log-dir-is-set-correctly.patch
+#	0002-ceilometer-need-to-filter-meter-id-when-doing-sql-qu.patch
+#	0003-heat-change-config-file-for-autoscaling.patch
+#	0004-heat-add-example-hot-templates.patch
+#	0005-heat-tests-change-project_dir-path.patch
+#	0006-Add-new-python-testscenarios-bb.patch
+#	0007-Add-new-python-mox3-bb.patch
+#	0008-heatclient-add-heatclient-tests-bb.patch
+#	0009-README.setup-update-compute-launch-command.patch
+#	meta-openstack/recipes-devtools/python/python-heat/autoscaling_example.template
+#	meta-openstack/recipes-devtools/python/python-heat/one_vm_example.template
+#	meta-openstack/recipes-devtools/python/python-heat/two_vms_example.template
+#	meta-openstack/recipes-devtools/python/python-heat_git.bb.rej
+no changes added to commit (use "git add" and/or "git commit -a")
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ cat meta-openstack/recipes-devtools/python/python-heat_git.bb.rej
+diff a/meta-openstack/recipes-devtools/python/python-heat_git.bb b/meta-openstack/recipes-devtools/python/python-heat_git.bb	(rejected hunks)
+@@ -10,6 +10,9 @@ SRCNAME = "heat"
+ SRC_URI = "git://github.com/openstack/${SRCNAME}.git;branch=stable/havana \
+            file://heat.conf \
+            file://heat.init \
++           file://autoscaling_example.template \
++           file://one_vm_example.template \
++           file://two_vms_example.template \
+ "
+ 
+ SRCREV="ff6901141fbbc0a13604491aaba01a60487d6f6d"
+
+
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ vim meta-openstack/recipes-devtools/python/python-heat_git.bb (参照.rej来修改,把冲突的地方都修改好,因为git add是要修改后的,冲突的那一段不会再打patch)
+要把那个+++的都加进去,并且要注意最后一行的SRCREV,修改成哪个版本的,注意:冲突就是没找到这一行才发生的.
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git add meta-openstack/recipes-devtools/python/python-heat_git.bb
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git add meta-openstack/recipes-devtools/python/python-heat/autoscaling_example.template meta-openstack/recipes-devtools/python/python-heat/one_vm_example.template meta-openstack/recipes-devtools/python/python-heat/two_vms_example.template
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git am --resolved
+Applying: heat: add example hot templates
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git show HEAD
+
+啥都不修改
+OR directly (Noting to change)
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git am -3 0004-heat-add-example-hot-templates.patch 
+Applying: heat: add example hot templates
+Using index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+Auto-merging meta-openstack/recipes-devtools/python/python-heat_git.bb
+[wr-taf@pek-ovp-redhat meta-cloud-services]$ git status 
+# On branch wr-20140313
+

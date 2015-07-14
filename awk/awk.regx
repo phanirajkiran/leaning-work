@@ -1,0 +1,9 @@
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat xx 
+123;;;202;;;;203
+124;;;213;;;;;;;;203
+125;;;222;;;;;203
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat xx |awk -F';'+ '{print $2,$3}'
+202 203
+213 203
+222 203
+cat gg |awk -F'[;]+' '{print $2,$3}'

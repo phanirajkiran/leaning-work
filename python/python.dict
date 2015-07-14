@@ -24,6 +24,16 @@ Adds dictionary dict2's key-values pairs to dict
 9 dict.values()
 Returns list of dictionary dict2's values 
 
+10. empty
+def is_empty(any_structure):
+    if any_structure:
+        print('Structure is not empty.')
+        return False
+    else:
+        print('Structure is empty.')
+        return True
+http://www.pythoncentral.io/how-to-check-if-a-list-tuple-or-dictionary-is-empty-in-python/
+
 
 mydict = { "a" : "Alpha", "b" : "Beta", "c" : "Charlie" }
 for key, value in mydict.iteritems():
@@ -68,3 +78,8 @@ mydict = {'key1':1, 'key2':2, 'key3':3}
 key_name, value = name_the_key(mydict, 'key2')
 print 'KEY NAME: %s' % key_name
 print 'KEY VALUE: %s' % value
+
+
+    #import pprint
+    #pprint.pprint(testcases_dict)
+

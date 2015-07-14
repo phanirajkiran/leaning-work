@@ -1,0 +1,1 @@
+To enable VT-d one must add intel_iommu=on to the kernel commandline

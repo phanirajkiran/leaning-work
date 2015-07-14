@@ -1,0 +1,239 @@
+RCU
+=> accelerates read path
+Read-Copy-Update (RCU) 
+
+Utilizing virtualization technology to combine real-time
+operating system (RTOS) and off-the-shelf time-sharing general purpose operating
+system (GPOS) is attracting much more interest recently. Such combination has the
+potential to provide a large application base, and to guarantee timely deterministic
+response to real-time applications
+
+
+While the RTOS is responsible for managing time-critical tasks of
+the radio communication, the GPOS provides the typical set of mobile phone
+applications like games 
+
+
+a QEMU process has two kinds of thread: main I/O thread and
+VCPU thread. While I/O thread is used to manage emulated devices, VCPU
+thread is used to run guest code. Furthermore, an AIO thread is dynamically
+created to handle every AIO request and signal the completion to the I/O
+thread.
+
+interrupt response time (IRT)
+
+We first define IRT as the time between physical devices raising an interrupt
+and the first instruction of the corresponding interrupt service routine (ISR)
+starting execution. In this analysis, however, we are not so interested in the
+guest’s IRT itself, instead we care more about the latencies that are introduced
+by KVM.
+
+
+It generally creates a number of CPU loads or
+interrupt loads that may lead to additional latencies. For example, at the
+”Host Scheduling” stage, some GPOS’s CPU load is likely to preempt the
+guest RTOS process. We therefore view this kind of CPU load as harmful
+workload
+
+
+Suppose a physical interrupt is raised while the guest GPOS , rather than the
+guest RTOS, is running. It is likely that the workload is in a long interrupt-off
+or preemption-off region, thus leading to large latencies. This kind of scenario
+can be eased by dedicating one CPU to the guest RTOS process.
+
+
+As pre-mentioned earlier, it is possible that the GPOS’s CPU loads are prefer-
+able to the guest RTOS process at the ”Host Scheduling” stage, causing ad-
+ditional latencies to the guest’s overall IRT. This situation can be eased by
+10 giving the guest RTOS process the highest real-time priority.
+
+In another case, however, the GPOS’s interrupt loads may cause physical
+interrupts at any time. Moreover, in the standard Linux kernel, physical in-
+terrupts can even preempt processes of the highest priority. This situation can
+be addressed by applying the RT patch [28] to the standard kernel, because
+RT patch implements threaded interrupt handlers.
+
+CPU Shielding
+Suppose a physical interrupt is raised while the guest GPOS , rather than the
+guest RTOS, is running. It is likely that the workload is in a long interrupt-off
+or preemption-off region, thus leading to large latencies. This kind of scenario
+can be eased by dedicating one CPU to the guest RTOS process.
+
+
+
+we disabled CONFIG_ACPI_PROCESSOR to prevent
+response time from being interfered by processor power management service
+
+
+we defined two
+load applications running on the guest Linux: simple endless loop representing
+computational load and bonnie 1.4 [30] representing I/O load. These two loads
+were important to observe worst-case performance.
+
+
+SMIs are harmful to real-time system. They can last for hundreds of microsec-
+onds [33] or even more than 1 millisecond in our test, which is unacceptable
+for many real-time applications. Furthermore, SMIs are the highest priority
+in the system and you cannot interrupt them because they dont have a vec-
+tor in the CPU
+
+we find out that the USB legacy devices are the main
+factor that causes SMIs. Its a good idea to disable the USB legacy option in
+BIOS and CONFIG_ACPI_PROCESSOR, and use PS/2 mouse and keyboard
+instead of USB.
+
+================================================================
+Kernel Virtual Machine (KVM) Tuning KVM for performance
+
+You can set the swappiness value to zero for a KVM host.
+echo 0 > /proc/sys/vm/swappiness
+The default swappiness value is 60. The system accepts values between zero and 100. When you set the
+swappiness value to zero on Intel Nehalem systems, in most cases the virtual memory manager removes
+page cache and buffer cache rather than swapping out program memory. In KVM environments, program
+memory likely consists of a large amount of memory that the guest operating system uses.
+
+
+You can disable zone reclaim for a KVM host.
+echo 0 > /proc/sys/vm/zone_reclaim_mode
+
+List the processor cores that are on the same socket by typing the following command:
+# cat /sys/devices/system/cpu/cpu#/topology/core_siblings_list
+where # is the number of the processor that runs on the cores on the socket. For example, cpu3. The
+output might look similar to the following output:
+0-3,8-11
+In this example, processor cores 0, 1, 2, 3, 8, 9, 10, and 11 are on the same socket.
+
+Pin the virtual processor of the guest operating system to the processor cores (that are on the same
+socket)
+# virsh vcpupin guest1 4 0,1,2,3,8,9,10,11
+In this example, guest1 uses virtual processor 4. The example shows virtual processor 4 pinned to
+processor cores 0, 1, 2, 3, 8, 9, 10, and 11.
+
+
+Pin the virtual processor of the guest operating system to the processor threads (that are on the same
+core) by typing the following command:
+
+1. List the processor threads that are on the same core of a physical processor by typing the following
+command:
+# cat /sys/devices/system/cpu/cpu#/topology/thread_siblings_list
+where # is the number of the processor that runs on the core that contains the threads. For example,
+cpu3. The output might look similar to the following output:
+3,11
+In this example, processor threads 3 and 11 are on the same core.
+
+
+Kvm-forum-2011-performance-improvements-optimizations-D
+For example:
+# virsh vcpupin guest1 4 3,11
+In this example, guest1 uses virtual processor 4. The example shows virtual processor 4 pinned to
+processor threads 3 and 11.
+
+
+
+ Cache=none
+– I/O from the guest in not cached
+
+root@intel_5500_server:~# numactl --hardware
+available: 2 nodes (0-1)
+node 0 cpus: 0 2 4 6 8 10 12 14
+node 0 size: 12226 MB
+node 0 free: 11887 MB
+node 1 cpus: 1 3 5 7 9 11 13 15
+node 1 size: 9920 MB
+node 1 free: 9192 MB
+node distances:
+node   0   1 
+  0:  10  21 
+  1:  21  10 
+
+
+Minimized CPU overhead
+● RCU kernel “locking” improves large SMP performance
+● User space notifiers
+● X2apic, a virtual interrupt controller
+
+
+
+Real-Time Performance Analysis in Linux-Based Robotic Systems
+
+
+while true; do
+while true; do
+while true; do
+ping -l 100000
+while true; do
+dd if=/dev/zero of=bigfile bs=1024000 count=1024; done &
+killall hackbench; sleep 5; done &
+$HACK_BENCH 20; done &
+-s 10 -f localhost &
+du -s / > /dev/null 2>&1 ; done &
+
+Performance Tuning
+Red Hat Enterprise Linux 6
+========
+aware of the latency vs throughput balancing
+echo "performance" > \ 
+/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+ Examples:
+• hugepages=4096 on kernel cmdline
+• echo “vm.nr_hugepages=4096” >> /etc/sysctl.conf
+• echo 4096 > /proc/sys/vm/nr_hugepages
+
+
+cyclictest measures the delta from when it's scheduled to
+wake up from when it actually does wake up.
+
+
+
+What changed in the RT Kernel?
+
+Preemption
+● Most locks converted to rt_mutex
+● priority inheritance for mutexes
+● threaded interrupt handlers (both hard and soft)
+● Spinlocks can sleep
+● Interrupts not turned off for almost all operations
+high-resolution timers
+Completely Fair Scheduler (CFS) *
+Read-Copy-Update (RCU) *
+Ftrace tracing logic
+
+
+● isolate processor cores
+● adjust thread priorities
+● change interrupt affinity
+
+
+Bounded by what?
+● dependent on the hardware you're running
+● Given the same load, a 3 GHz processor will respond to
+an event faster than a 700 Mhz processor
+● Better to say that we're trying to make the response time
+more consistent (i.e. reduce latency standard deviation)
+
+
+
+Set appropriate priorities for your threads
+● Any SCHED_FIFO thread is higher priority than any
+SCHED_OTHER thread
+● ensure that you high priority threads don't hog the
+processor
+
+
+To verify the effect of real-time tunings to the Motion
+Controller, we tested with all the combinations of the
+following options.
+• Highest Priority
+• CPU Shielding
+• Memory Locking
+
+
+Jitter
+Interrupt Latency
+Variation in the timing of a signal, especially a clock; variability in worst-case latency.
+Time from assertion of hardware interrupt though start of ISR execution. (See
+accompanying figure.)
+Preemption Latency Time from interrupt through (re)start of execution of pending user thread, a.k.a. task
+response latency or scheduling latency. (See accompanying figure.)
+

@@ -1,0 +1,88 @@
+http://blog.csdn.net/gudujianjsk/article/details/8253634
+http://www.mail-archive.com/kvm@vger.kernel.org/msg39516.html KVM picture
+
+https://www.ibm.com/developerworks/mydeveloperworks/blogs/fe313521-2e95-46f2-817d-44a4f27eba32/entry/howto_tracing_with_lttng?lang=en great introduction
+http://lwn.net/Articles/492296/
+http://lttng.org/files/papers/presentations/lttng20tracingforeveryone.pdf
+https://bugs.lttng.org/projects/lttng-tools/wiki
+https://github.com/giraldeau/workload-kit/tree/master/utils  great python 
+
+
+
+make -C build lttng-tools.addpkg && make -C build babeltrace.addpkg && make -C build lttng-control.addpkg && make -C build lttng-viewer.addpkg && make -C build lttng-ust.addpkg && make fs 
+
+lttng create demo_session
+lttng start 
+firefox &
+lttng stop
+lttng destroy demo_session
+
+
+list [-k] [-u]   List available events of kernel (-k) and user-space (-u)
+enable-event     Add events to the session. The  [options] filter which events should be traced. For example, “-a -k --syscall” is used to add syscall events. 
+disable-event    Remove events to the session. The  [options] filter which events should be removed.
+add-context -t   Add information context to an event. As of this post is written, [type] may be pid, procname, prio, nice, vpid, tid, pthread_id, vtid, ppid, vppid as well as available PMU events. 
+
+
+0)List available kernel events:
+# lttng list -k
+
+1) Create a tracing session. The .lttng directory will be created with .lttngrc
+file in $HOME containing the session name (here 'mysession') you are working
+on.
+# lttng create mysession
+
+If you have multiple sessions, you can change the current session by using
+# lttng set-session myothersession
+
+
+2) Enable all tracepoints and all system call events.
+# lttng enable-event -a -k
+
+
+3) Enable tracepoint event(s). Here for example, we want only
+'sched_switch' and 'sched_wakeup' events for the kernel (-k/--kernel).
+# lttng enable-event sched_switch,sched_wakeup -k
+
+
+or enable ALL tracepoint events:
+# lttng enable-event -a -k --tracepoint
+
+
+4) Enable all system call event(s).
+# lttng enable-event -a -k --syscall
+
+
+7) Enable perf counter for an event:
+Again, a new powerful feature is the possibility to add perf counter data
+(using the perf API by Ingo Molnar and Thomas Gleixner) to the trace on a per
+event basis. Let say we want to get the CPU cycles at each event:
+
+# lttng add-context -k -e sched_switch -t perf:cpu-cycles
+
+
+examples:
+
+for file in `find /lib -name "lttng*"`;do insomd $file;done 
+lttng list -k |grep kvm 
+lttng create mysession
+#lttng set-session myothersession
+modprobe lttng-tracer
+modprobe lttng-probe-kvm
+lttng enable-event kvm* -k
+lttng start
+qemu-system-x86_64 -smp 2 -m 512 -name rt,process=rt-kvm -enable-kvm -net nic,macaddr=00:01:02:03:04:05,model=virtio -net tap,script=/etc/qemu-ifup -hda /boot/intel-xeon-core-glibc-std-standard-dist.ext3  -kernel /boot/bzImage -append "root=/dev/sda rw ip=dhcp" & 
+lttng stop 
+babeltrace  /root/lttng-traces/auto-20130412-151053
+
+OR
+modprobe lttng-tracer && modprobe lttng-probe-kvm
+lttng create
+lttng enable-event -u -a
+lttng start
+my_foobar_traced_application 1 2 3
+lttng stop
+babeltrace  /root/lttng-traces/auto-20130412-151053
+lttng destroy
+
+

@@ -1,0 +1,84 @@
+Summary:phoronix:modify the wrong installation
+Tech Review: MarkA
+Gatekeeper: Bruce
+Lockdown Approval (if needed): 
+Branch Tag: WRLINUX_5_0_1_HEAD
+
+IP Statement (form link or license statement, usually automated):
+Crypto URL(s) (if needed): see http://wiki.wrs.com/PBUeng/LinuxProductDivisionExportProcess
+Parent Template (where applicable):
+
+
+-------------------------------------
+Impacted area             Impact y/n
+-------------------       -----------
+docs/tech-pubs                 n
+tests                          n
+build system                   n
+host dependencies              n
+RPM/packaging                  n
+toolchain                      n
+kernel code                    n
+user code                      y
+configuration files            n
+target configuration           n
+Other                          n
+Applicable to Yocto/upstream   n
+
+
+Comments (indicate scope for each "y" above):
+---------------------------------------------
+commit 223ae6fa6ea446248112e64731606afbf1d57af4
+Author: Lei Yang <lei.yang@windriver.com>
+Date:   Thu Jun 13 21:42:18 2013 +0800
+
+    phoronix:modify the wrong installation
+    
+    CQID:WIND00416657
+    
+    phoronix use "install-sh" to install
+    reference: http://www.phoronix-test-suite.com/?k=documentation
+    
+    Signed-off-by: Lei Yang <lei.yang@windriver.com>
+
+
+Added Files:
+------------
+None.
+
+Removed Files:
+--------------
+None.
+
+Remaining Changes (diffstat):
+-----------------------------
+ .../phoronix-test-suite_4.4.1.bb                   |    3 ++-
+
+Testing Applicable to:
+----------------------
+
+
+Testing Commands:
+-----------------
+build with feature/ovp-benchmark and make fs, check build is ok
+
+Testing, Expected Results:
+--------------------------
+lyang0@pek-lpgtest1:/buildarea1/lyang0/phornix$ ls build/phoronix-test-suite-4.4.1-r0/image/usr/bin/phoronix-test-suite
+build/phoronix-test-suite-4.4.1-r0/image/usr/bin/phoronix-test-suite
+
+Conditions of submission:
+-------------------------
+
+
+Arch    built      boot     boardname
+-------------------------------------
+MIPS      n         n
+MIPS64    n         n
+MIPS64n32 n         n
+ARM       n         n
+x86       n         n
+x86_64    y         n
+PPC       n         n
+PPC64     n         n
+SPARC64   n         n

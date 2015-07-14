@@ -1,0 +1,298 @@
+for .deb packages, dpkg -I file.deb
+apt-cache depends <package_name>
+
+dpkg -l
+dpkg --get-selections
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ dpkg -L zip
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/zip
+/usr/share/doc/zip/copyright
+/usr/share/doc/zip/TODO
+/usr/share/doc/zip/changelog.Debian.gz
+/usr/share/doc/zip/WHATSNEW
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/zipsplit.1.gz
+/usr/share/man/man1/zipcloak.1.gz
+/usr/share/man/man1/zip.1.gz
+/usr/share/man/man1/zipnote.1.gz
+/usr/bin
+/usr/bin/zipsplit
+/usr/bin/zipcloak
+/usr/bin/zip
+/usr/bin/zipnote
+/usr/share/doc/zip/changelog.gz
+
+#cat /var/log/dpkg.log
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ sudo apt-cache depends vlan
+[sudo] password for lyang001: 
+vlan
+  Depends: libc6
+  Depends: iproute
+    iproute:i386
+  Conflicts: vlan:i386
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ apt-cache rdepends vlan
+vlan
+Reverse Depends:
+  nova-network
+  nova-compute
+  vlan:i386
+  zentyal-network
+  util-vserver
+  ifupdown-scripts-zg2
+  nova-network
+  nova-compute
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ apt-rdepends vlan
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+vlan
+  Depends: iproute
+  Depends: libc6 (>= 2.4)
+iproute
+  Depends: libc6 (>= 2.14)
+  Depends: libdb5.1
+libc6
+  Depends: libc-bin (= 2.15-0ubuntu10)
+  Depends: libgcc1
+  Depends: tzdata
+libc-bin
+libgcc1
+  Depends: gcc-4.6-base (= 4.6.3-1ubuntu5)
+  Depends: libc6 (>= 2.14)
+  PreDepends: multiarch-support
+gcc-4.6-base
+multiarch-support
+  Depends: libc6 (>= 2.3.6-2)
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ apt-rdepends --reverse lxc
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+lxc
+  Reverse Depends: arkose (1.5.1-0ubuntu1)
+  Reverse Depends: lxc-dbg (= 0.7.5-3ubuntu52)
+  Reverse Depends: lxc-dev (= 0.7.5-3ubuntu52)
+  Reverse Depends: lxctl (0.3.1+debian-1)
+arkose
+  Reverse Depends: arkose-gui (1.5.1-0ubuntu1)
+arkose-gui
+  Reverse Depends: arkose-nautilus (1.5.1-0ubuntu1)
+arkose-nautilus
+lxc-dbg
+lxc-dev
+  Reverse Depends: lxc-dbg (= 0.7.5-3ubuntu52)
+lxctl
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ sudo apt-cache show vlan
+Package: vlan
+Priority: extra
+Section: misc
+Installed-Size: 159
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Ard van Breemen <ard@kwaak.net>
+Architecture: amd64
+Version: 1.9-3ubuntu6
+Depends: libc6 (>= 2.4), iproute
+Filename: pool/main/v/vlan/vlan_1.9-3ubuntu6_amd64.deb
+Size: 35204
+MD5sum: f24cde3b4754d7facb594561707f9c90
+SHA1: 54799866bb927f03753550b1e34d746f8d0424b1
+SHA256: 5459a80f9f1fa0cad21e78cbdea5c67c8444bc502a2a928206002f8030d32060
+Description-en: user mode programs to enable VLANs on your ethernet devices
+ This package contains the user mode programs you need to add and remove
+ VLAN devices from your ethernet devices.
+ .
+ A typical application for a VLAN enabled box is a single wire firewall,
+ router or load balancer.
+ .
+ You need a VLAN Linux kernel for this.  Linux kernel versions >= 2.4.14
+ have VLAN support.
+Description-md5: da2d3e81af12341c15fb4a7267d2457d
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Supported: 5y
+
+
+
+
+
+
+> $ sudo dpkg -i texlive-base_2007.dfsg.1-2_all.deb (Reading database ... 138033 files and directories currently installed.)
+> Preparing to replace texlive-base 2007.dfsg.1-2 (using texlive-base_2007.dfsg.1-2_all.deb) ...
+> Unpacking replacement texlive-base ...
+> dpkg: dependency problems prevent configuration of texlive-base:
+> texlive-base depends on texlive-doc-base (>= 2007); however:
+> Package texlive-doc-base is not installed.
+> texlive-base depends on texlive-base-bin (>= 2007-13); however:
+> Package texlive-base-bin is not installed.
+> texlive-base depends on texlive-common (>= 2007); however:
+> Package texlive-common is not installed.
+> dpkg: error processing texlive-base (--install):
+> dependency problems - leaving unconfigured
+> Errors were encountered while processing:
+> texlive-base
+
+
+http://www.cyberciti.biz/howto/question/linux/dpkg-cheat-sheet.php
+
+==================================================================================================
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ dpkg -S `which glusterfs`
+glusterfs-client: /usr/sbin/glusterfs
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ sudo apt-cache depends glusterfs-client 
+glusterfs-client
+  Depends: python
+  Depends: fuse-utils
+  Depends: glusterfs-common
+  Suggests: glusterfs-examples
+  Conflicts: glusterfs-client:i386
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ apt-rdepends --reverse glusterfs-client
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+glusterfs-client
+  Reverse Depends: glusterfs-dbg (= 3.2.5-1ubuntu1)
+  Reverse Depends: glusterfs-server (>= 3.2.5-1ubuntu1)
+glusterfs-dbg
+glusterfs-server
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ sudo apt-cache rdepends glusterfs-client
+glusterfs-client
+Reverse Depends:
+  glusterfs-client:i386
+  glusterfs-server
+  glusterfs-dbg
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ apt-cache depends glusterfs-client
+glusterfs-client
+  Depends: python
+  Depends: fuse-utils
+  Depends: glusterfs-common
+  Suggests: glusterfs-examples
+  Conflicts: glusterfs-client:i386
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ apt-cache rdepends glusterfs-client
+glusterfs-client
+Reverse Depends:
+  glusterfs-client:i386
+  glusterfs-server
+  glusterfs-dbg
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ dpkg -L glusterfs-client 
+/.
+/var
+/var/log
+/var/log/glusterfs
+/sbin
+/sbin/mount.glusterfs
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/glusterfs-client
+/usr/share/doc/glusterfs-client/copyright
+/usr/share/doc/glusterfs-client/README.Debian
+/usr/share/man
+/usr/share/man/man8
+/usr/share/man/man8/glusterfs.8.gz
+/usr/share/man/man8/mount.glusterfs.8.gz
+/usr/sbin
+/usr/share/doc/glusterfs-client/THANKS
+/usr/share/doc/glusterfs-client/README
+/usr/share/doc/glusterfs-client/changelog.Debian.gz
+/usr/sbin/glusterfs
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ dpkg -L glusterfs-server
+/.
+/etc
+/etc/init
+/etc/init/glusterfs-server.conf
+/etc/init/mounting-glusterfs.conf
+/etc/init.d
+/etc/glusterfs
+/etc/glusterfs/glusterd.vol
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/glusterfs-server
+/usr/share/doc/glusterfs-server/copyright
+/usr/share/doc/glusterfs-server/README.Debian
+/usr/share/man
+/usr/share/man/man8
+/usr/share/man/man8/glusterd.8.gz
+/usr/share/man/man8/gluster.8.gz
+/usr/sbin
+/usr/sbin/gluster
+/etc/init.d/glusterfs-server
+/etc/init.d/mounting-glusterfs
+/usr/share/doc/glusterfs-server/THANKS
+/usr/share/doc/glusterfs-server/README
+/usr/share/doc/glusterfs-server/changelog.Debian.gz
+/usr/sbin/glusterd
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ dpkg -S /usr/share/doc/glusterfs-client
+glusterfs-client: /usr/share/doc/glusterfs-client
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/ovp$ apt-rdepends libvirt-bin
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+libvirt-bin
+  Depends: adduser
+  Depends: bridge-utils
+  Depends: cgroup-bin
+  Depends: cgroup-lite
+  Depends: dbus
+  Depends: dnsmasq-base (>= 2.46-1)
+  Depends: gettext-base
+  Depends: iptables (>= 1.4.10)
+  Depends: libblkid1 (>= 2.17.2)
+  Depends: libc6 (>= 2.15)
+  Depends: libcap-ng0
+  Depends: libdevmapper1.02.1 (>= 2:1.02.20)
+  Depends: libgnutls26 (>= 2.12.6.1-0)
+  Depends: libnl-3-200 (>= 3.2.3)
+  Depends: libnuma1 (>= 2.0.8~rc3)
+  Depends: libparted0debian1 (>= 2.2-1)
+  Depends: libpcap0.8 (>= 0.9.8)
+  Depends: libpciaccess0
+  Depends: libreadline6 (>= 6.0)
+  Depends: libudev0 (>= 147)
+  Depends: libvirt0 (= 0.9.8-2ubuntu17)
+  Depends: libxml2 (>= 2.7.4)
+  Depends: libyajl1 (>= 1.0.5)
+  Depends: logrotate
+  Depends: netcat-openbsd
+  Depends: upstart-job
+adduser
+  Depends: debconf
+  Depends: debconf-2.0
+  Depends: passwd (>= 1:4.0.12)
+  Depends: perl-base (>= 5.6.0)
+debconf
+  PreDepends: perl-base (>= 5.6.1-4)
+perl-base
+
+
+
+
+
+
+finally check spec and search the spec commit 
+

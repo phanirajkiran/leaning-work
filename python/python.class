@@ -1,0 +1,28 @@
+
+class Foo(object):
+    x = 10
+    y = 20
+    def get_x(self):
+        return self.x
+    def get_y(self):
+        return self.y
+
+
+class Foo(object):
+ 
+    def __init__(self):
+        self.name = None
+ 
+    def set_name(self, name):
+        self.name = name
+ 
+    def get_name(self):
+        return self.name
+
+
+class Bar(Foo):
+ 
+    def __init__(self):
+        self.set_name("World")
+o = Bar()
+assert o.get_name() == "World"

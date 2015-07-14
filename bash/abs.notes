@@ -136,10 +136,10 @@ let "a += 1"
 let "index = $index + 1"
 
 ((a += 1))             # let "a+=1"
-a=$(($a+1))
+i=$(($i+1))
 
 z=$(($z+3))
-z=$((z+3))                                  #  Also correct
+i=$((i+3))                                  #  Also correct
   (( n += 1 ))                              # Increment.
 a=`expr 5 % 3`
 
@@ -568,3 +568,14 @@ plus a tip, the <condition>?<statement>:<statement> contruction is called the te
 
 alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
 alias scp='scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+
+root@Remley-EP_C0-2:~# List="abcd 1234 jvm something"
+root@Remley-EP_C0-2:~# arr=($List)
+root@Remley-EP_C0-2:~# echo ${arr[1]}
+1234
+root@Remley-EP_C0-2:~# echo ${arr[0]}
+abcd
+root@Remley-EP_C0-2:~# echo ${arr[2]}
+jvm
+root@Remley-EP_C0-2:~# echo ${arr[3]}
+

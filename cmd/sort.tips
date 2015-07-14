@@ -1,0 +1,14 @@
+This is the problem: if you want to sort a file that is tab-delimited (and some of the filelds contain spaces), then you must explicitly tell sort to use TABS as the field separator, otherwise it will use any whitespace character. For functions such as cut and paste, this can be done like so:
+
+cut -f 1 -d '\t' file
+where -f specifies the field number and -d specifies the field seperator.
+The sort command uses the -t flag instead. So one would think that this would work:
+
+#INCORRECT
+sort -k 2 -t '\t' file
+where -k specifies the field number and -t specifies the field separator
+Unfortunately this does not work, because sort won¡¯t accept ¡®\t¡¯, since it treats it as a multi-byte character. The solution is to place a $ before it, like so:
+
+#CORRECT
+sort -k 2 -t $'\t' file
+

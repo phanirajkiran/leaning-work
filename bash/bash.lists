@@ -1,0 +1,18 @@
+set -x
+pid=()
+return=()
+
+
+for i in 1 2
+do
+ echo start $i
+ ssh mysql "/root/test$i.sh" &
+ pid[$i]=$!
+done
+
+for i in ${#pid[@]}
+do
+echo ${pid[$i]}
+wait ${pid[$i]}
+return[$i]=$?
+

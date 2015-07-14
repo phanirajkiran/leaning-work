@@ -1,0 +1,12 @@
+
+lyang001@lyang001-OptiPlex-9010:/tmp/blongo/blog$ python
+Python 2.7.3 (default, Aug  1 2012, 05:14:39) 
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> a=(1,2,3)
+>>> c,d,e=a
+
+
+for key, value in dict.iteritems():
+    temp = [key,value]
+    dictlist.append(temp)

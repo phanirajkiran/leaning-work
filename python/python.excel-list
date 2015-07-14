@@ -1,0 +1,5 @@
+# Some sample data.
+data = ('Foo', 'Bar', 'Baz')
+
+# Write the data to a sequence of cells.
+worksheet.write_row('A1', data)

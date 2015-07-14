@@ -1,0 +1,123 @@
+http://www.postgresql.org/message-id/4EDED63E.2040002@2ndQuadrant.com
+root@Remley-EP_C0-2:~# cat /sys/devices/system/clocksource/clocksource0/available_clocksource
+tsc hpet acpi_pm 
+root@Remley-EP_C0-2:~# cat /sys/devices/system/clocksource/clocksource0/current_clocksource
+tsc
+
+You change the time source by adding a stanza like this to the kernel 
+boot options:
+clocksource=acpi_pm
+===============================================================================================
+http://doc.opensuse.org/documentation/html/openSUSE/opensuse-tuning/cha.tuning.taskscheduler.html
+
+root@Remley-EP_C0-2:~# chrt -m
+SCHED_OTHER min/max priority	: 0/0
+SCHED_FIFO min/max priority	: 1/99
+SCHED_RR min/max priority	: 1/99
+SCHED_BATCH min/max priority	: 0/0
+SCHED_IDLE min/max priority	: 0/0
+
+In the above example, SCHED_OTHER, SCHED_BATCH, SCHED_IDLE polices only allow for priority 0, while that of SCHED_FIFO and SCHED_RR can range from 1 to 99.
+
+To set SCHED_BATCH scheduling policy:
+
+saturn.example.com:~ # chrt -b -p 0 16244
+saturn.example.com:~ # chrt -p 16244
+pid 16244's current scheduling policy: SCHED_BATCH
+pid 16244's current scheduling priority: 0
+=======================================================
+http://linux.web.cern.ch/linux/mrg/2/Realtime_Tuning_Guide/
+
+===========================================================
+http://elinux.org/Realtime_Testing_Best_Practices
+
+=========================================================
+      idle=           [X86]
+                        Format: idle=poll, idle=halt, idle=nomwait
+                        Poll forces a polling idle loop that can slightly
+                        improve the performance of waking up a idle CPU, but
+                        will use a lot of power and make the system run hot.
+                        Not recommended.
+                        idle=halt: Halt is forced to be used for CPU idle.
+                        In such case C2/C3 won't be used again.
+                        idle=nomwait: Disable mwait for CPU C-states
+
+
+#all the task to cpu0
+for pid in `ps -e -o pid`; do taskset -p -c 0 $pid; done 
+
+#all the irq to the cpu1
+for i in $(find /proc/irq -name "smp_affinity"); do echo 1 > $i; done  
+
+---------------------------------------------------------------------------
+Local timer interrupts
+
+The local timer interrupt makes the cpu1 to wake up and hence exiting from the idle state. The following measurements shows how many interruptions the cpu1 received in one second interval without activity on the system.
+
+Command line:
+
+for i in $(seq 1 100); do
+    before=$(cat /proc/interrupts | grep LOC | awk '{ print $3 }')
+    sleep 1
+    after=$(cat /proc/interrupts | grep LOC | awk '{ print $3 }');
+    echo $((after-before));
+done
+
+
+Local timer interrupts
+
+The local timer interrupt makes the cpu1 to wake up and hence exiting from the idle state. The following measurements shows how many interruptions the cpu1 received in one second interval without activity on the system.
+
+Command line:
+
+
+s a "isolcpus=" kernel boot time parameter. This
+parameter isolates CPUs from scheduler load balancing, minimizing the
+impact of scheduler latencies on realtime tasks running on those CPUs.
+
+
+ lstopo --no-io -.txt
+lstopo-no-graphics -.txt
+
+
+
+root@localhost:~# dmidecode --type 4
+# dmidecode 2.11
+SMBIOS 2.4 present.
+
+Handle 0x0401, DMI type 4, 32 bytes
+Processor Information
+	Socket Designation: CPU 1
+	Type: Central Processor
+	Family: Other
+	Manufacturer: Bochs
+	ID: 23 06 00 00 FD FB 8B 07
+	Version: Not Specified
+	Voltage: Unknown
+	External Clock: Unknown
+	Max Speed: 2000 MHz
+	Current Speed: 2000 MHz
+	Status: Populated, Enabled
+	Upgrade: Other
+	L1 Cache Handle: Not Provided
+	L2 Cache Handle: Not Provided
+	L3 Cache Handle: Not Provided
+
+Handle 0x0402, DMI type 4, 32 bytes
+Processor Information
+	Socket Designation: CPU 2
+	Type: Central Processor
+	Family: Other
+	Manufacturer: Bochs
+	ID: 23 06 00 00 FD FB 8B 07
+	Version: Not Specified
+	Voltage: Unknown
+	External Clock: Unknown
+	Max Speed: 2000 MHz
+	Current Speed: 2000 MHz
+	Status: Populated, Enabled
+	Upgrade: Other
+	L1 Cache Handle: Not Provided
+	L2 Cache Handle: Not Provided
+	L3 Cache Handle: Not Provided
+

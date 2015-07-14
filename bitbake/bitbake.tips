@@ -1,0 +1,116 @@
+
+1)show pacakges in which recepies 
+
+[lyang0@pek-lpgtest3 bitbake_build]$ bitbake-layers show-recipes >xx
+
+2)show appends 
+[lyang0@pek-lpgtest3 bitbake_build]$ bitbake-layers show-appends
+
+
+[lyang0@pek-lpgtest3 bitbake_build]$ bitbake-layers show-layers
+Setting up host-cross and links
+Setting up packages link
+Creating export directory
+Creating project properties
+layer                 path                                      priority
+==========================================================================
+wrlinux               /buildarea1/lyang0/host/layers/wrlinux    5
+wrlcompat             /buildarea1/lyang0/host/layers/wrlcompat  5
+wr-toolchain          /buildarea1/lyang0/host/layers/wr-toolchain  6
+meta                  /buildarea1/lyang0/host/layers/oe-core/meta  5
+oe-core-dl            /buildarea1/lyang0/host/layers/oe-core-dl  0
+meta-downloads        /buildarea1/lyang0/host/layers/meta-downloads  0
+wr-kernel             /buildarea1/lyang0/host/layers/wr-kernel  6
+intel-xeon-core       /buildarea1/lyang0/host/layers/wr-bsps/intel-xeon-core  7
+wr-base               /buildarea1/lyang0/host/layers/wr-base    6
+wr-features           /buildarea1/lyang0/host/layers/wr-features  7
+wr-tools-profile      /buildarea1/lyang0/host/layers/wr-tools-profile  7
+wr-tools-debug        /buildarea1/lyang0/host/layers/wr-tools-debug  7
+meta-networking       /buildarea1/lyang0/host/layers/meta-networking  5
+meta-webserver        /buildarea1/lyang0/host/layers/meta-webserver  6
+wr-prebuilts          /buildarea1/lyang0/host/layers/wr-prebuilts  0
+meta-virtualization   /buildarea1/lyang0/host/layers/meta-virtualization  7
+ovp                   /buildarea1/lyang0/host/layers/wr-ovp/ovp  7
+wr-security           /buildarea1/lyang0/host/layers/wr-ovp/wr-security  7
+meta-selinux          /buildarea1/lyang0/host/layers/meta-selinux  5
+meta-java             /buildarea1/lyang0/host/layers/meta-java  10
+ovp-test              /buildarea1/lyang0/rr/wr-testing/ovp-test  7
+local                 /buildarea1/lyang0/host/layers/local      1000
+
+
+
+bitbake -g $DEFAULT_IMAGE
+
+[lyang0@pek-lpgtest3 bitbake_build]$ bitbake-layers show-overlayed
+lib32-xserver-xf86-config:
+  intel-xeon-core      0.1
+  meta                 0.1
+lib32-xserver-xorg:
+  intel-xeon-core      2:1.14.0
+  meta                 2:1.11.2
+lib32-zeroconf:
+  meta                 0.9
+  meta-networking      0.9
+python-nose:
+  ovp                  1.3.0
+  ovp-test             1.3.0
+  ovp-test             1.3.0
+u-boot:
+  wr-kernel            2010.03 (skipped)
+  meta                 2011.03 (skipped)
+  meta                 2011.06 (skipped)
+  meta                 2011.06 (skipped)
+  meta                 2011.03 (skipped)
+=== Overlayed classes ===
+qmake_base.bbclass:
+  wr-base
+  meta
+wrlinux-image.bbclass:
+  wr-base
+  wrlinux
+useradd.bbclass:
+  wr-base
+  meta
+
+
+
+
+
+========================
+find all the recipes location 
+
+[lyang0@pek-lpgtest3 bitbake_build]$ bitbake -g world
+NOTE: Runtime target 'weston-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['weston-dev']
+NOTE: Preparing runqueue
+NOTE: PN build list saved to 'pn-buildlist'
+NOTE: PN dependencies saved to 'pn-depends.dot'
+NOTE: Package dependencies saved to 'package-depends.dot'
+NOTE: Task dependencies saved to 'task-depends.dot'
+
+Summary: There was 1 WARNING message shown.
+Summary: There were 59 ERROR messages shown, returning a non-zero exit code.
+
+
+[lyang0@pek-lpgtest3 bitbake_build]$ cat pn-depends.dot |grep meta-vir |grep -v lib32
+"xen-rt" [label="xen-rt :4.0.1-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/xen/xen-rt_4.0.1.bb"]
+"openvswitch" [label="openvswitch :1.9.0-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-networking/openvswitch/openvswitch_1.9.0.bb"]
+"irqbalance" [label="irqbalance :1.0.5-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/irqbalance/irqbalance_1.0.5.bb"]
+"protobuf-c" [label="protobuf-c :0.15-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-containers/criu/protobuf-c_0.15.bb"]
+"protobuf" [label="protobuf :2.4.1-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-containers/criu/protobuf_2.4.1.bb"]
+"iasl" [label="iasl :20120215-r1\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/iasl/iasl_20120215.bb"]
+"dev86" [label="dev86 :0.16.19-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/dev86/dev86_0.16.19.bb"]
+"criu" [label="criu :0.2+gitAUTOINC+d81c9a4618db2f618bdb8e207b7f0fec631c7142-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-containers/criu/criu_git.bb"]
+"iasl-native" [label="iasl-native :20120215-r1\nvirtual:native:/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/iasl/iasl_20120215.bb"]
+"multipath-tools" [label="multipath-tools :0.4.9+gitrAUTOINC+d3683ab18b386e9b3b54b59a122c689e9ebdf5cf-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/multipath-tools/multipath-tools_git.bb"]
+"netcf" [label="netcf :0.2.2+gitAUTOINC+2b0d9ca226c13d7150382367f62b256bdb2db5ef-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-networking/netcf/netcf_git.bb"]
+"dev86-native" [label="dev86-native :0.16.19-r0\nvirtual:native:/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/dev86/dev86_0.16.19.bb"]
+"xen-hg" [label="xen-hg :1.0-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/xen/xen-hg.bb"]
+"lxc" [label="lxc :0.9.0-r2\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-containers/lxc/lxc_0.9.0.bb"]
+"protobuf-c-native" [label="protobuf-c-native :0.15-r0\nvirtual:native:/buildarea1/lyang0/host/layers/meta-virtualization/recipes-containers/criu/protobuf-c_0.15.bb"]
+"openflow" [label="openflow :1.0+gitAUTOINC+5ccca75a69f99791659bcfbcf35353ab1921320a-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-networking/openflow/openflow_1.0.bb"]
+"protobuf-native" [label="protobuf-native :2.4.1-r0\nvirtual:native:/buildarea1/lyang0/host/layers/meta-virtualization/recipes-containers/criu/protobuf_2.4.1.bb"]
+"libvirt" [label="libvirt :1.0.3-r7\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/libvirt/libvirt_1.0.3.bb"]
+"xen" [label="xen :4.1.2-r1\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/xen/xen_4.1.2.bb"]
+"dmidecode" [label="dmidecode :2.11-r0\n/buildarea1/lyang0/host/layers/meta-virtualization/recipes-extended/dmidecode/dmidecode_2.11.bb"]
+

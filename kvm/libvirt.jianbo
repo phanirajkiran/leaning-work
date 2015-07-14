@@ -1,0 +1,43 @@
+<domain type='kvm'>
+  <name>vm2</name>
+  <memory>1024000</memory>
+  <currentMemory>512000</currentMemory>
+  <vcpu>2</vcpu>
+  <cpu>
+      <arch>x86_64</arch>
+      <model>Nehalem</model>
+      <vendor>Intel</vendor>
+  </cpu>
+  <os>
+    <type>hvm</type>
+    <boot dev='hd' />
+    <kernel>/boot/guest.kernel</kernel>
+    <cmdline>console=ttyS0 root=/dev/vda rw ip=dhcp</cmdline>
+  </os>
+  <devices>
+    <disk type='file' device='disk'>
+      <source file='/boot/guest_raw.test' />
+      <target dev='vda' bus='virtio'/>
+    </disk>
+    <serial type='pty'>
+      <target port='0'/>
+    </serial>
+    <console type='pty'>
+      <target type='serial' port='0'/>
+    </console>
+
+    <interface type='direct'>
+        <mac address='de:ef:be:86:85:ea' />
+        <source dev='eth0' mode='bridge' />
+        <model type='virtio' />
+      </interface>
+    <interface type='network'>
+      <mac address='de:ef:be:e1:10:9d'/>
+      <source network='default' />
+      <model type='virtio' />
+    </interface> 
+  </devices>
+</domain>
+
+
+ifconfig virbr0 10.0.2.3

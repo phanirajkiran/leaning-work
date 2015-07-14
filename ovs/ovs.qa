@@ -1,0 +1,7 @@
+
+09:38:23 PM) Apsu`: lyang0: ovs-vsctl delete port tap1 tag
+(09:38:37 PM) lyang0: thans 
+(09:39:23 PM) Apsu`: Wait, it's remove, not delete
+
+(10:01:48 PM) lyang0: Apsu` what's the exat command to clear the tag 
+(10:02:29 PM) Apsu`: ovs-vsctl clear port tap1 tag.

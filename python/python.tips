@@ -1,1 +1,22 @@
 http://alexmarandon.com/articles/python_collections_tips/
+ a=open('file.txt','rb')
+    lines = a.readlines()
+    first_line = lines[:1]
+    last_line = lines[-1]
+list = [str(line.rstrip()) for line in p.stdout]
+
+
+os.path.isfile('test.txt') #如果不存在就返回False
+os.path.exists(directory) #如果目录不存在就返回False
+
+3.写文件写文本文件output = open('data', 'w')
+写二进制文件output = open('data', 'wb')
+追加写文件output = open('data', 'w+')  or 'a'
+写数据file_object = open('thefile.txt', 'w')
+
+
+
+        return bottle.template("login",
+                               dict(username=cgi.escape(username), password="",
+                                    login_error="Invalid Login"))
+在括号里可以不用换行符

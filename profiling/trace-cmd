@@ -1,0 +1,49 @@
+https://lwn.net/Articles/341902/
+
+You can also trace a single trace point with one of two methods:
+
+ # ./trace-cmd record -e sched:sched_wakeup ls /bin
+
+Or simply:
+
+ # ./trace-cmd record -e sched_wakeup ls /bin
+
+------------------------------------------------------------------------------------
+To list the available trace events:
+
+ # ./trace-cmd list -e
+skb:kfree_skb
+block:block_rq_abort
+block:block_rq_insert
+block:block_rq_issue
+block:block_rq_requeue
+
+You can also trace a single trace point with one of two methods:
+
+ # ./trace-cmd record -e sched:sched_wakeup ls /bin
+
+Or simply:
+
+ # ./trace-cmd record -e sched_wakeup ls /bin
+
+
+-----------------------------------------------------------------------------------------
+This tool also works with tracers (plugins) as well as events
+
+ # ./trace-cmd list -p
+  # ./trace-cmd record -p sched_switch ls /bin
+ # ./trace-cmd report
+
+----------------------------------------------------------------------------------------
+ftrace latency:
+
+
+========================================================================================
+other tips:
+
+trace-cmd report --cpu 0
+
+# trace-cmd reset
+disable all kernel tracing and clear the trace buffers
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/leaning-work$ trace-cmd report --help

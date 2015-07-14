@@ -1,0 +1,30 @@
+ down vote
+	
+
+I've ran into something similar, for me the problem was this line:
+
+from pymongo.objectid import ObjectId
+
+The call seems to work in versions of PyMongo < 2.2
+
+In pymongo 2.2 the call to import objectid is:
+
+from bson.objectid import ObjectId
+
+https://github.com/srackham/bottle-mongodb-example  great
+https://github.com/bottlepy/bottle-mongo great
+
+http://stackoverflow.com/questions/16164604/rest-ajax-request-to-mongodb  jquery + mongodb
+
+could not connect to localhost:27017: [Errno 111] Connection refused
+
+
+Removing mongod.lock from
+
+/var/lib/mongodb
+
+And then restarting the service should do it. For example, in my ubuntu restarting the server is something like:
+
+sudo service mongodb start
+
+

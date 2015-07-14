@@ -1,0 +1,13 @@
+http://stackoverflow.com/questions/2725852/writing-to-existing-workbook-using-xlwt
+
+
+The code example is exactly this:
+
+from xlutils.copy import copy
+from xlrd import *
+w = copy(open_workbook('book1.xls'))
+w.get_sheet(0).write(0,0,"foo")
+w.save('book2.xls')
+
+You'll need to create book1.xls to test, but you get the idea.
+

@@ -1,0 +1,9 @@
+
+http://raobharata.wordpress.com/tag/qemu/  really great
+http://glusterfs.iteye.com/blog/1838482    great
+http://www.youtube.com/watch?v=JG3kF_djclg
+
+
+FUSE mount 	                                qemu-system-x86_64 –enable-kvm –nographic -smp 4 -m 2048 -drive file=/mnt/F17,if=virtio,cache=none => /mnt is GlusterFS FUSE mount point
+GlusterFS block driver in QEMU (FUSE bypass) 	qemu-system-x86_64 –enable-kvm –nographic -smp 4 -m 2048 -drive file=gluster://bharata/test/F17,if=virtio,cache=none
+Base (VM image accessed directly from brick) 	qemu-system-x86_64 –enable-kvm –nographic -smp 4 -m 2048 -drive file=/test/F17,if=virtio,cache=none => /test is brick directory

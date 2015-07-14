@@ -1,0 +1,48 @@
+
+1)
+
+ Print lines which contain the character 'u' or 'x' :
+
+$ sed -n '/[ux]/p' file
+Unix
+Linux
+
+2)
+ Print lines which end with 'x' or 'X' :
+
+$ sed -n '/[xX]$/p' file
+AIX
+Unix
+Linux
+HPUX
+
+3)
+
+Print lines beginning with either 'A' or 'L':
+
+$ sed -n '/^A\|^L/p' file
+AIX
+Linux
+
+4)
+Print every alternate line:
+
+$ sed  'n;d' file
+AIX
+Unix
+HPUX
+
+n command prints the current line, and immediately reads the next line into pattern space. d command deletes the line present in pattern space. In this way, alternate lines get printed.
+
+5)
+9. Print lines ending with 'X' within a range of lines:
+
+$ sed -n '/Unix/,${/X$/p;}' file
+HPUX
+
+6)
+Print range of lines excluding the starting and ending line of the range:
+
+$ sed -n '/Solaris/,/HPUX/{//!p;}' file
+Unix
+Linux

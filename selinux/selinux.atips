@@ -1,0 +1,24 @@
+https://bugzilla.redhat.com/show_bug.cgi?id=835936
+We need to add
+
+fs_rw_inherited_noxattr_fs_files(virt_domain)
+
+This can be fixed by the following local policy 
+
+# cat myvirt.te
+policy_module(myvirt.te)
+
+require{
+ attribute noxattrfs;
+ attribute virt_domain;
+}
+
+allow virt_domain noxattrfs:file rw_inherited_file_perms;
+
+
+
+
+and executing
+
+# make -f /usr/share/selinux/devel/Makefile myvirt.pp
+# semodule -i myvirt.pp

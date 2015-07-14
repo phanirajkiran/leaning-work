@@ -1,0 +1,9 @@
+http://stackoverflow.com/questions/4435169/good-way-to-append-to-a-string
+>>> l = []
+>>> l.append('foo')
+>>> l.append('bar')
+>>> s = ''.join(l)
+>>> print s
+foobar
+>>> 
+

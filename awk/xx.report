@@ -1,0 +1,4 @@
+downtime: 2 milliseconds
+downtime: 3 milliseconds
+downtime: 3 milliseconds
+min: 2 milliseconds avg: 2.66667 milliseconds max: 3 milliseconds

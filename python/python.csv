@@ -1,0 +1,24 @@
+
+QUOTE_ALL
+    不管是什么类型, 任何内容都加上引号
+QUOTE_MINIMAL
+    这是默认的, 使用指定的字符引用各个域(如果解析器被配置为相同的dialect和选项时, 可能会让解析器在解析时产生混淆)
+QUOTE_NONNUMERIC
+    引用那些不是整数或浮点数的域. 当使用读取对象时, 如果输入的域是没有引号, 那么它们会被转换成浮点数.
+QUOTE_NONE
+    对所有的输出内容都不加引用, 当使用读取对象时, 引用字符看作是包含在每个域的值里(但在正常情况下, 他们被当成定界符而被去掉)
+
+http://desert3.iteye.com/blog/772246
+http://www.cnblogs.com/hongten/archive/2013/08/23/hongten_python_csv.html
+http://www.cnblogs.com/sislcb/archive/2008/12/15/1355481.html
+
+
+http://www.pythonclub.org/python-files/csv great
+http://www.pythonforbeginners.com/systems-programming/using-the-csv-module-in-python/
+
+update csv
+http://stackoverflow.com/questions/1898305/python-csv-into-dictionary
+列表生成csv
+http://stackoverflow.com/questions/2084069/create-a-csv-file-with-values-from-a-python-list great
+字典
+http://courses.cs.washington.edu/courses/cse140/13wi/csv-parsing.html

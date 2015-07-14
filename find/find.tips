@@ -42,3 +42,10 @@ hello
 
 find bin root src -type f ! -wholename bin/bigfile | xargs  cp --parent -t /mnt
 http://www.unix.com/shell-programming-scripting/198237-how-copy-direcotry-but-not-copy-certain-file.html
+
+find symbo link
+find -L /var/www/ -type l
+
+find -L to find the file in the symbo link too
+
+find . -name something -print -quit Terminates find after the first match after printing it.

@@ -1,0 +1,5 @@
+
+git send-email -1 --compose --subject '[OVP][RR WIND00421236] modphp: add libxml2 dependency ' --subject-prefix=OVP][PATCH -to lei.yang@windriver.com -cc lpd-eng-rr@windriver.com --to  bashfiel@windriver.com  -to Mark.Asselstine@windriver.com 
+
+
+git send-email -1 --compose --subject '[OVP][RR WIND00416657] phoronix:modify the wrong installation ' --subject-prefix=OVP][PATCH -to lei.yang@windriver.com -cc lpd-eng-rr@windriver.com --to  bashfiel@windriver.com -to Mark.Asselstine@windriver.com 

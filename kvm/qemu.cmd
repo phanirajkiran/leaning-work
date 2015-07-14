@@ -341,3 +341,11 @@ char device redirected to /dev/pts/1
 
 from fupan:
 qemu-system-ppc --enable-kvm -smp 2 -kernel /root/uImage.new -nographic -M mpc8544ds -drive if=virtio,file=/root/hd.disk -append "console=ttyS0 ip=dhcp root=/dev/vda" -netdev type=user,id=mynet0 -device e1000,netdev=mynet0 -m 512
+
+tap:
+
+/usr/bin/qemu-system-x86_64 -enable-kvm -smp 8 -m 1024 -net nic,macaddr=de:ef:be:ad:c6:f3,model=virtio -net tap,ifname=tap1,script=/etc/qemu-ifup.tap -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 "  -nographic
+
+
+cpu flags:
+qemu-system-x86_64 -cpu qemu64,+x2apic -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E1,model=virtio -net tap,script=/etc/ovs-br-ifup,downscript=/etc/ovs-br-ifdown -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=192.168.2.2"  -nographic

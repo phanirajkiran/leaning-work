@@ -1,0 +1,5 @@
+./wr-ovp/layers/ovp/templates/feature/rt-latency/template.conf
+KERNEL_FEATURES_append := "${@bb.utils.contains('DEFAULT_IMAGE', 'wrlinux-image-ovp-kvm', \
+                                                ' features/ovp/rt-latency-host.scc', ' features/ovp/rt-latency-guest.scc', d)}"
+
+So far Apr11, has NOT seen patches is here, maybe some other place

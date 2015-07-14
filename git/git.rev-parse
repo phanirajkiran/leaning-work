@@ -2,3 +2,5 @@ git rev-pase ":/something"
 lyang001@lyang001-OptiPlex-9010:~/trees/kernel-3.4.x-pro$ git rev-parse ":/x86/mce: Do not change worker"
 74f30e03d9f16fa9ddb51681fe65ae1832ba4228
 
+git rev-parse --is-inside-work-tree
+prints true if it is in the work tree, false if it's in the '.git' tree, and fatal error if it's neither. Both 'true' and 'false' are printed on stdout with an exit status of 0, the fatal error is printed on stderr with an exit status of 128.

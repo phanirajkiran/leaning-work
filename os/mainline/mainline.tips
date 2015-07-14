@@ -1,0 +1,4 @@
+make x86_64_defconfig && make bzImage
+make modules
+make modules INSTALL_MOD_PATH=xx
+

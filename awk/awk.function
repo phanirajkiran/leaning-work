@@ -1,0 +1,33 @@
+1)sub
+awk '/Speed/ {sub("Mb/s","",$2);print $2}'
+lyang0@lyang0-OptiPlex-755:~$ echo "fdsfs35" |awk '{sub(/[a-z]+/,"");print}'
+35
+lyang0@lyang0-OptiPlex-755:~$ echo "fdsfs35" |awk '{sub(/[a-z]+/,"&|");print}'
+fdsfs|35
+lyang0@lyang0-OptiPlex-755:~$ echo "fdsfs35" |awk '{sub(/[a-z]+/,"& ");print}'
+fdsfs 35
+
+#handle the field
+lyang0@lyang0-OptiPlex-755:~/delmeme$ awk -F/ '{T=$4;sub(/[a-z]+/,"",T);print T}' 3
+
+
+2)substr
+#substr
+cut for the field
+echo "/dev/sda3" |awk -F/ '{print substr($3,4)}'
+substr(string, start, length)
+substr($3,12,8)
+
+
+3)split
+ID_090-1 2
+ID_3787-1 4
+ID_0098-1 1
+ID_12-1 4
+
+lyang0@lyang0-OptiPlex-755:~/del$ awk '{split($1,a,"-"); print a[1],$2}' 2
+ID_090 2
+ID_3787 4
+ID_0098 1
+ID_12 4
+

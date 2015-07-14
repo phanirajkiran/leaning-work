@@ -1,0 +1,6 @@
+qemu:
+https://github.com/qemu/qemu/tree/master/tests/qemu-iotests
+http://risingtidesystems.com/git/?p=scsi-testsuite.git;a=blob;f=common.rc;h=94d3692b1041d82f953207976524afac91a4b0d5;hb=HEAD
+https://github.com/peo3/cgroup-utils
+https://github.com/archanabs/libvirt-basics
+    M src/tests/lxc-test-autostart

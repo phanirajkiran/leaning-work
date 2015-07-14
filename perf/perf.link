@@ -1,0 +1,12 @@
+http://web.eece.maine.edu/~vweaver/projects/perf_events/faq.html
+http://www.brendangregg.com/perf.html  perf examples 
+http://blog.vmsplice.net/2011/03/how-to-use-perf-probe.html perf function 
+https://github.com/deater/perf_event_tests
+
+root@SDP_Wildcat_Pass-3-C1:~# perf stat -e L1-dcache-loads,L1-dcache-load-misses,L1-dcache-stores,LLC-loads,LLC-load-misses,LLC-stores,LLC-prefetches sleep 10
+Error:
+The sys_perf_event_open() syscall returned with 16 (Device or resource busy) for event (L1-dcache-loads).  
+/bin/dmesg may provide additional information.
+No CONFIG_PERF_EVENTS=y kernel support configured?
+
+

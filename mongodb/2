@@ -1,0 +1,30 @@
+u = dict(name = "user1", age = 23)
+https://github.com/yjfox/pymongo
+https://github.com/mdirolf/DjanMon
+
+
+https://github.com/hakanu/pymongo-hello/blob/master/PyMongoHello.py
+
+https://github.com/netmarkjp/flaskpymongo_example
+https://github.com/dogrizz/koala/blob/master/koala/collection_proxy.py
+https://github.com/skyl/djongobj/blob/master/djongobj/data.py
+https://github.com/skyl/djongobj/blob/master/djongobj/models.py
+
+important 
+https://github.com/patrys/pymongo-pubsub/blob/master/pymongo_pubsub/__init__.py
+https://github.com/ntkrnl/pymongotest/blob/master/test.py
+
+
+
+https://github.com/lionsheart56/PymongoUse/blob/master/ConnectDB.py
+
+
+https://github.com/sixu05202004/flask-pymongo-cn/blob/master/_sources/index.txt
+
+import pymongo
+from pymongo import Connection
+
+class TestInsert(object):
+    def setUp(self):
+    self.connection = Connection('localhost', 27017)
+        self.db = self.connection['sample']

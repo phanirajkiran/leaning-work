@@ -1,0 +1,17 @@
+migrate()
+{
+        /usr/bin/expect<<EOF
+set timeout  50
+set user root
+set password root
+#lei
+spawn ls 
+#must sleep,else it will be reset by peer lei
+expect "*lyang0*"
+exec /bin/sleep 10 &
+
+EOF
+}
+migrate |tee 2>&1 xxxxx
+#kill -9 `pidof sleep`
+ifconfig 

@@ -1,0 +1,58 @@
+<domain type='kvm'>
+  <name>vm1</name>
+  <memory>1024000</memory>
+  <currentMemory>512000</currentMemory>
+  <vcpu>2</vcpu>
+  <cpu>
+      <arch>x86_64</arch>
+      <model>Nehalem</model>
+      <vendor>Intel</vendor>
+  </cpu>
+  <os>
+    <type>hvm</type>
+    <boot dev='hd' />
+    <kernel>/boot/guest.kernel</kernel>
+    <cmdline>console=ttyS0 root=/dev/vda rw ip=10.0.2.3</cmdline>
+  </os>
+  <devices>
+    <disk type='file' device='disk'>
+      <source file='/boot/guest_raw.test' />
+      <target dev='vda' bus='virtio'/>
+    </disk>
+
+    <serial type='tcp'>
+      <source mode='bind' host='127.0.0.1' service='2446'/>
+      <protocol type='telnet'/>
+      <target port='1'/>
+    </serial>
+    <console type='tcp'>
+      <source mode='bind' host='127.0.0.1' service='2446'/>
+      <protocol type='telnet'/>
+      <target port='1'/>
+    </console>
+   <interface type='bridge'>
+    <mac address='52:54:00:71:b1:b6'/>
+    <source bridge='ovsbr0'/>
+    <target dev='tap0'/>          
+    <virtualport type='openvswitch'/>
+    <script name='/etc/openvswitch/ovs-ifup'/>
+    </interface>
+
+  </devices>
+</domain>
+
+
+#!/bin/sh
+switch="ovsbr0"
+ifconfig $1 0.0.0.0 up
+ovs-vsctl add-port $switch $1
+
+chmod +x /etc/openvswitch/ovs-ifup
+ovs-vsctl add-br ovsbr0
+ovs-vsctl add-port ovsbr0 eth0
+
+
+
+
+vlan 
+http://blog.scottlowe.org/2012/11/07/using-vlans-with-ovs-and-libvirt/

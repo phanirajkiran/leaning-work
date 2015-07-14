@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+import xlwt
+workbook = xlwt.Workbook(encoding = 'ascii')
+worksheet = workbook.add_sheet('My Worksheet')
+font = xlwt.Font() # Create the Font
+font.name = 'Times New Roman'
+font.height = 640
+style = xlwt.XFStyle() # Create the Style
+style.font = font # Apply the Font to the Style
+worksheet.write(0, 0, label = 'Unformatted value')
+worksheet.write(1, 0, label = 'Formatted value',style = style) # Apply the Style to the Cell
+worksheet.row(1).height_mismatch = True
+worksheet.row(1).height = 256*5
+worksheet.col(0).width = 256*50
+
+workbook.save('fontxl.xls')
+

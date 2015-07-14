@@ -1,0 +1,161 @@
+http://mathslinux.org/?p=280:
+ 
+模拟一个具有 2 个物理 CPU, 四个逻辑 CPU 的系统, 启用超线程技术, 每个核心两个 线程. 不难算出, 此时每个 CPU 都是单核的(4 = 2*2*1).
+
+$ qemu -enable-kvm -m 1024 ArchLinux.img -smp 4,sockets=2,threads=2
+
+$ cat /proc/cpuinfo
+processor   : 0
+physical id : 0
+siblings    : 2
+core id     : 0
+cpu cores   : 1
+ 
+processor   : 1
+physical id : 0
+siblings    : 2
+core id     : 0
+cpu cores   : 1
+ 
+processor   : 2
+physical id : 1
+siblings    : 2
+core id     : 0
+cpu cores   : 1
+ 
+processor   : 3
+physical id : 1
+siblings    : 2
+core id     : 0
+cpu cores   : 1
+
+
+（1）socket就是主板上插cpu的槽的数目，也即管理员说的”路“
+
+（2）core就是我们平时说的”核“，即双核，4核等
+
+（3）thread就是每个core的硬件线程数，即超线程
+
+具体例子，某个服务器是：2路4核超线程（一般默认为2个线程），那么，通过cat /proc/cpuinfo看到的是2*4*2=16个processor，很多人也习惯成为16核了！
+
+
+examples:(barcode 17906)
+root@intel_5500_server:~# cat /proc/cpuinfo |grep "physical id"
+physical id	: 0
+physical id	: 1
+physical id	: 0
+physical id	: 1
+physical id	: 0
+physical id	: 1
+physical id	: 0
+physical id	: 1
+physical id	: 0
+physical id	: 1
+physical id	: 0
+physical id	: 1
+physical id	: 0
+physical id	: 1
+physical id	: 0
+physical id	: 1
+root@intel_5500_server:~# cat /proc/cpuinfo |grep "core id"
+core id		: 0
+core id		: 0
+core id		: 1
+core id		: 1
+core id		: 2
+core id		: 2
+core id		: 3
+core id		: 3
+core id		: 0
+core id		: 0
+core id		: 1
+core id		: 1
+core id		: 2
+core id		: 2
+core id		: 3
+core id		: 3
+
+
+physical id ---> 0 and 1 -----> 2 socket
+core -id  ---> 0 1 2 3 ----> 4 core
+thread ---> core id 0:4 1:4 2:4 3:4 ----> 4 thread
+
+2*4*4=16
+2 sockets, one socket 4 core, one core 4 thread.
+==================================================================================================
+root@intel_5500_server:~# virsh capabilities
+    <topology>
+      <cells num='2'>
+        <cell id='0'>
+          <cpus num='8'>
+            <cpu id='0' socket_id='0' core_id='0' siblings='0,8'/>
+            <cpu id='2' socket_id='0' core_id='1' siblings='2,10'/>
+            <cpu id='4' socket_id='0' core_id='2' siblings='4,12'/>
+            <cpu id='6' socket_id='0' core_id='3' siblings='6,14'/>
+            <cpu id='8' socket_id='0' core_id='0' siblings='0,8'/>
+            <cpu id='10' socket_id='0' core_id='1' siblings='2,10'/>
+            <cpu id='12' socket_id='0' core_id='2' siblings='4,12'/>
+            <cpu id='14' socket_id='0' core_id='3' siblings='6,14'/>
+          </cpus>
+        </cell>
+        <cell id='1'>
+          <cpus num='8'>
+            <cpu id='1' socket_id='1' core_id='0' siblings='1,9'/>
+            <cpu id='3' socket_id='1' core_id='1' siblings='3,11'/>
+            <cpu id='5' socket_id='1' core_id='2' siblings='5,13'/>
+            <cpu id='7' socket_id='1' core_id='3' siblings='7,15'/>
+            <cpu id='9' socket_id='1' core_id='0' siblings='1,9'/>
+            <cpu id='11' socket_id='1' core_id='1' siblings='3,11'/>
+            <cpu id='13' socket_id='1' core_id='2' siblings='5,13'/>
+            <cpu id='15' socket_id='1' core_id='3' siblings='7,15'/>
+          </cpus>
+        </cell>
+      </cells>
+    </topology>
+
+
+===================================================================================================
+
+root@intel_5500_server:~# virsh nodeinfo
+CPU model:           x86_64
+CPU(s):              16
+CPU frequency:       2528 MHz
+CPU socket(s):       1
+Core(s) per socket:  4
+Thread(s) per core:  2
+NUMA cell(s):        2
+Memory size:         22347896 KiB
+
+
+root@intel_5500_server:~# numactl --hardware
+available: 2 nodes (0-1)
+node 0 cpus: 0 2 4 6 8 10 12 14
+node 0 size: 12226 MB
+node 0 free: 11640 MB
+node 1 cpus: 1 3 5 7 9 11 13 15
+node 1 size: 9920 MB
+node 1 free: 9439 MB
+node distances:
+node   0   1 
+  0:  10  21 
+  1:  21  10 
+
+
+
+=========================================
+https://www.berrange.com/posts/2010/02/12/controlling-guest-cpu-numa-affinity-in-libvirt-with-qemu-kvm-xen/
+
+root@intel_5500_server:~# virsh freecell 0
+0: 11919380 KiB
+
+root@intel_5500_server:~# virsh freecell 1
+1: 9666452 KiB
+
+
+# virsh vcpupin rhel5xen 0 4
+
+# virsh vcpupin rhel5xen 1 5
+
+# virsh vcpupin rhel5xen 2 6
+
+# virsh vcpupin rhel5xen 3 7

@@ -1,0 +1,12 @@
+>>> b = 'pywugw@163.com'
+>>> b.split(@)
+  File "<stdin>", line 1
+    b.split(@)
+            ^
+SyntaxError: invalid syntax
+>>> b.split("@")
+['pywugw', '163.com']
+>>> b.split("@")[0]
+'pywugw'
+>>> b.split("@")[1]
+'163.com

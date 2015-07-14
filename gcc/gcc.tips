@@ -23,3 +23,11 @@ file or directory
 echo "mpatrolmt unwind bfd iberty pthread" |sed -n 's/([a-z]+)/&xx/gp'
 
 gcc -pg -g2 -o gp-test{,.c}
+
+========================================================
+
+-D__i386__
+
+$ echo | gcc -E -dM - | grep x86_64
+#define __x86_64 1
+#define __x86_64__ 1

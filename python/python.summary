@@ -1,0 +1,93 @@
+https://github.com/brunofarina/BottlePY-LoginExample.git
+
+@bottle.route('/')   --------> 地址
+def app_index():    ------->动作
+
+    cookie = bottle.request.get_cookie("session")
+    username = sessions.get_username(cookie)
+    # todo: this is not yet implemented at this point in the course
+    return bottle.template('blog_template', dict(username=username))   -----> 一个网页
+
+
+
+
+# displays the initial blog login form
+@bottle.get('/login')   ---------------------------------------------> 地址, get 得到
+def present_login():
+    return bottle.template("login",
+                           dict(username="", password="",    ---------> 一个网页模板 
+                                login_error=""))
+
+# handles a login request
+@bottle.post('/login')       ---------> 地址, post 写入
+def process_login():
+
+    username = bottle.request.forms.get("username")
+    password = bottle.request.forms.get("password")
+
+    print ("user submitted ", username, "pass ", password)
+
+    user_record = users.validate_login(username, password)
+    if user_record:
+        # username is stored in the user collection in the _id key
+        session_id = sessions.start_session(user_record['_id'])
+
+        if session_id is None:
+            bottle.redirect("/internal_error")
+
+        cookie = session_id
+
+        # Warning, if you are running into a problem whereby the cookie being set here is
+        # not getting set on the redirect, you are probably using the experimental version of bottle (.12).
+        # revert to .11 to solve the problem.
+        bottle.response.set_cookie("session", cookie)
+
+        bottle.redirect("/welcome")
+
+    else:
+        return bottle.template("login",
+                               dict(username=cgi.escape(username), password="",
+                                    login_error="Invalid Login"))
+
+
+
+
+@bottle.post('/signup')                   
+def process_signup():
+
+    email    = bottle.request.forms.get("email") -------> get 网页的数据
+    username = bottle.request.forms.get("username")
+    password = bottle.request.forms.get("password")
+    verify   = bottle.request.forms.get("verify")
+
+    # set these up in case we have an error case
+    errors = {'username': cgi.escape(username), 'email': cgi.escape(email)}
+    if validate_signup(username, password, verify, email, errors):
+
+        if not users.add_user(username, password, email):       -------------> 操作数据库
+            # this was a duplicate
+            errors['username_error'] = "Username already in use. Please choose another"
+            return bottle.template("signup", errors)
+
+        session_id = sessions.start_session(username)
+        print (session_id)
+        bottle.response.set_cookie("session", session_id)
+        bottle.redirect("/welcome")
+    else:
+        print ("user did not validate")
+        return bottle.template("signup", errors)
+
+
+这里才是初始化数据库
+connection_string = "mongodb://localhost"
+connection = pymongo.MongoClient(connection_string)
+database = connection.blog
+
+users = userDAO.UserDAO(database)
+sessions = sessionDAO.SessionDAO(database)
+
+
+bottle.debug(True)
+bottle.run(host='localhost', port=8082)  # Start the webserver running and wait for requests
+
+

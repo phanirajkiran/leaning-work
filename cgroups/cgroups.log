@@ -1,0 +1,19 @@
+http://linuxaria.com/article/introduction-to-cgroups-the-linux-conrol-group?lang=en
+:
+Unless you have a server release of some years ago (red hat and centos 5.X for example), you should have a kernel able to use Cgroups, in general check if your kernel is >= of 2.6.24 with the command uname -a this is the requisite to use cgroups.
+
+Than you need the tools in user-space, i’m doing the tests on my Ubuntu, on this idistribution the files to be installed are cgroup-bin and libcgroup1 :
+
+sudo aptitude install cgroup-bin libcgroup1
+
+Once installed you’ll have a new filesystem mounted:
+
+# ls /sys/fs/cgroup
+cpu  cpuacct  devices  memory
+
+On other Linux distributions you could need to mount it manually with a command like :
+
+#sudo mount -t cgroup none /mnt
+
+we need:
+http://libcg.sourceforge.net/

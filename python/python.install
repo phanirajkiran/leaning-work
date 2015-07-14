@@ -1,0 +1,13 @@
+apt-get install python-bs4
+sudo apt-get install python-tk
+
+ 2013  wget https://pypi.python.org/packages/source/x/xlrd/xlrd-0.9.3.tar.gz
+ 2014  ls
+ 2015  tra xzvf xlrd-0.9.3.tar.gz
+ 2016  tar xzvf xlrd-0.9.3.tar.gz
+ 2017  ls
+ 2018  cd xlrd-0.9.3/
+ 2019  ls
+ 2020  python setup.py build
+ 2021  python setup.py install
+
