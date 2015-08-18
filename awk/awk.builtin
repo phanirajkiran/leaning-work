@@ -64,4 +64,22 @@ Unix,10,A
 Linux,30,B
 Solaris,40,C
 Fedora,20,D
+
+
+5)FS AND OFS 
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk '{sub('/[0-9].*/',"",$1)}1' < x 
+BS
+BS
+G ,B
+G ,B
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk 'BEGIN{FS=OFS=","}{sub('/[0-9].*/',"",$1)}1' < x 
+BS,A
+BS,A
+G,B 
+G,B
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat x
+BS11,A
+BS11,A
+G34 ,B 
+G4  ,B
 Ubuntu,50,E

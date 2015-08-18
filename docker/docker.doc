@@ -1,0 +1,328 @@
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo apt-get update
+[sudo] password for lyang001: 
+Ign http://cn.archive.ubuntu.com trusty InRelease
+Ign http://cn.archive.ubuntu.com trusty-updates InRelease
+Ign http://cn.archive.ubuntu.com trusty-backports InRelease
+Hit http://cn.archive.ubuntu.com trusty Release.gpg
+Hit http://cn.archive.ubuntu.com trusty-updates Release.gpg          
+Hit http://cn.archive.ubuntu.com trusty-backports Release.gpg        
+Hit http://cn.archive.ubuntu.com trusty Release
+Hit http://cn.archive.ubuntu.com trusty-updates Release                        
+Hit http://cn.archive.ubuntu.com trusty-backports Release                      
+Hit http://cn.archive.ubuntu.com trusty/main Sources                           
+Hit http://cn.archive.ubuntu.com trusty/restricted Sources                     
+Hit http://cn.archive.ubuntu.com trusty/universe Sources                       
+Hit http://cn.archive.ubuntu.com trusty/multiverse Sources                     
+Hit http://cn.archive.ubuntu.com trusty/main amd64 Packages                    
+Hit http://cn.archive.ubuntu.com trusty/restricted amd64 Packages              
+Hit http://cn.archive.ubuntu.com trusty/universe amd64 Packages   
+Hit http://cn.archive.ubuntu.com trusty/multiverse amd64 Packages 
+Hit http://cn.archive.ubuntu.com trusty/main i386 Packages        
+Hit http://cn.archive.ubuntu.com trusty/restricted i386 Packages  
+Ign http://extras.ubuntu.com trusty InRelease                     
+Ign http://security.ubuntu.com trusty-security InRelease          
+Hit http://cn.archive.ubuntu.com trusty/universe i386 Packages    
+Hit http://cn.archive.ubuntu.com trusty/multiverse i386 Packages  
+Hit http://cn.archive.ubuntu.com trusty/main Translation-en       
+Hit http://cn.archive.ubuntu.com trusty/multiverse Translation-en 
+Hit http://cn.archive.ubuntu.com trusty/restricted Translation-en              
+Hit http://extras.ubuntu.com trusty Release.gpg                                
+Hit http://security.ubuntu.com trusty-security Release.gpg                     
+Hit http://extras.ubuntu.com trusty Release                                    
+Hit http://security.ubuntu.com trusty-security Release                         
+Hit http://extras.ubuntu.com trusty/main Sources                               
+Hit http://security.ubuntu.com trusty-security/main Sources                    
+Hit http://extras.ubuntu.com trusty/main amd64 Packages            
+Hit http://security.ubuntu.com trusty-security/restricted Sources  
+Hit http://extras.ubuntu.com trusty/main i386 Packages                         
+Hit http://security.ubuntu.com trusty-security/universe Sources                
+Hit http://security.ubuntu.com trusty-security/multiverse Sources              
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages             
+Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages       
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages         
+Hit http://cn.archive.ubuntu.com trusty/universe Translation-en                
+Hit http://cn.archive.ubuntu.com trusty-updates/main Sources                   
+Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages       
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted Sources       
+Hit http://cn.archive.ubuntu.com trusty-updates/universe Sources         
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse Sources       
+Hit http://cn.archive.ubuntu.com trusty-updates/main amd64 Packages      
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted amd64 Packages      
+Hit http://cn.archive.ubuntu.com trusty-updates/universe amd64 Packages        
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse amd64 Packages      
+Hit http://cn.archive.ubuntu.com trusty-updates/main i386 Packages             
+Hit http://security.ubuntu.com trusty-security/main i386 Packages              
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted i386 Packages       
+Hit http://cn.archive.ubuntu.com trusty-updates/universe i386 Packages         
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse i386 Packages       
+Hit http://cn.archive.ubuntu.com trusty-updates/main Translation-en            
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse Translation-en      
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted Translation-en      
+Hit http://cn.archive.ubuntu.com trusty-updates/universe Translation-en        
+Hit http://cn.archive.ubuntu.com trusty-backports/main Sources                 
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted Sources           
+Hit http://cn.archive.ubuntu.com trusty-backports/universe Sources             
+Hit http://security.ubuntu.com trusty-security/restricted i386 Packages        
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse Sources           
+Hit http://cn.archive.ubuntu.com trusty-backports/main amd64 Packages          
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted amd64 Packages    
+Hit http://cn.archive.ubuntu.com trusty-backports/universe amd64 Packages      
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse amd64 Packages    
+Hit http://cn.archive.ubuntu.com trusty-backports/main i386 Packages           
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted i386 Packages     
+Hit http://cn.archive.ubuntu.com trusty-backports/universe i386 Packages       
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse i386 Packages     
+Hit http://cn.archive.ubuntu.com trusty-backports/main Translation-en          
+Hit http://security.ubuntu.com trusty-security/universe i386 Packages          
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse Translation-en    
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted Translation-en    
+Hit http://cn.archive.ubuntu.com trusty-backports/universe Translation-en      
+Ign http://extras.ubuntu.com trusty/main Translation-en_US                     
+Hit http://security.ubuntu.com trusty-security/multiverse i386 Packages
+Ign http://extras.ubuntu.com trusty/main Translation-en                        
+Ign http://cn.archive.ubuntu.com trusty/main Translation-en_US        
+Ign http://cn.archive.ubuntu.com trusty/multiverse Translation-en_US
+Ign http://cn.archive.ubuntu.com trusty/restricted Translation-en_US
+Ign http://cn.archive.ubuntu.com trusty/universe Translation-en_US
+Hit http://security.ubuntu.com trusty-security/main Translation-en
+Hit http://security.ubuntu.com trusty-security/multiverse Translation-en
+Hit http://security.ubuntu.com trusty-security/restricted Translation-en
+Hit http://security.ubuntu.com trusty-security/universe Translation-en
+Reading package lists... Done                                                  
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo apt-get install -y docker.io
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  aufs-tools cgroup-lite
+Suggested packages:
+  btrfs-tools debootstrap lxc rinse
+The following NEW packages will be installed:
+  aufs-tools cgroup-lite docker.io
+0 upgraded, 3 newly installed, 0 to remove and 346 not upgraded.
+Need to get 4,207 kB of archives.
+After this operation, 25.0 MB of additional disk space will be used.
+Get:1 http://cn.archive.ubuntu.com/ubuntu/ trusty/universe aufs-tools amd64 1:3.2+20130722-1.1 [92.3 kB]
+Get:2 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/universe docker.io amd64 1.0.1~dfsg1-0ubuntu1~ubuntu0.14.04.1 [4,111 kB]
+Get:3 http://cn.archive.ubuntu.com/ubuntu/ trusty/main cgroup-lite all 1.9 [3,918 B]
+Fetched 4,207 kB in 2s (1,624 kB/s)
+Selecting previously unselected package aufs-tools.
+(Reading database ... 167481 files and directories currently installed.)
+Preparing to unpack .../aufs-tools_1%3a3.2+20130722-1.1_amd64.deb ...
+Unpacking aufs-tools (1:3.2+20130722-1.1) ...
+Selecting previously unselected package docker.io.
+Preparing to unpack .../docker.io_1.0.1~dfsg1-0ubuntu1~ubuntu0.14.04.1_amd64.deb ...
+Unpacking docker.io (1.0.1~dfsg1-0ubuntu1~ubuntu0.14.04.1) ...
+Selecting previously unselected package cgroup-lite.
+Preparing to unpack .../cgroup-lite_1.9_all.deb ...
+Unpacking cgroup-lite (1.9) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+ureadahead will be reprofiled on next reboot
+Setting up aufs-tools (1:3.2+20130722-1.1) ...
+Setting up docker.io (1.0.1~dfsg1-0ubuntu1~ubuntu0.14.04.1) ...
+Adding group `docker' (GID 125) ...
+Done.
+docker.io start/running, process 14177
+Setting up cgroup-lite (1.9) ...
+cgroup-lite start/running
+Processing triggers for libc-bin (2.19-0ubuntu6.5) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo apt-get install apt-transport-https
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages will be upgraded:
+  apt-transport-https
+1 upgraded, 0 newly installed, 0 to remove and 345 not upgraded.
+Need to get 25.1 kB of archives.
+After this operation, 1,024 B of additional disk space will be used.
+Get:1 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main apt-transport-https amd64 1.0.1ubuntu2.10 [25.1 kB]
+Fetched 25.1 kB in 0s (178 kB/s)             
+(Reading database ... 167595 files and directories currently installed.)
+Preparing to unpack .../apt-transport-https_1.0.1ubuntu2.10_amd64.deb ...
+Unpacking apt-transport-https (1.0.1ubuntu2.10) over (1.0.1ubuntu2.6) ...
+Setting up apt-transport-https (1.0.1ubuntu2.10) ...
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+Executing: gpg --ignore-time-conflict --no-options --no-default-keyring --homedir /tmp/tmp.dStUZEYgy4 --no-auto-check-trustdb --trust-model always --keyring /etc/apt/trusted.gpg --primary-keyring /etc/apt/trusted.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9
+gpg: requesting key A88D21E9 from hkp server keyserver.ubuntu.com
+gpg: key A88D21E9: public key "Docker Release Tool (releasedocker) <docker@dotcloud.com>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo bash -c "echo deb https://get.docker.io/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo apt-get update
+Ign http://cn.archive.ubuntu.com trusty InRelease
+Ign http://cn.archive.ubuntu.com trusty-updates InRelease
+Ign http://cn.archive.ubuntu.com trusty-backports InRelease
+Hit http://cn.archive.ubuntu.com trusty Release.gpg
+Hit http://cn.archive.ubuntu.com trusty-updates Release.gpg
+Hit http://cn.archive.ubuntu.com trusty-backports Release.gpg
+Hit http://cn.archive.ubuntu.com trusty Release                      
+Hit http://cn.archive.ubuntu.com trusty-updates Release                        
+Hit http://cn.archive.ubuntu.com trusty-backports Release                      
+Hit http://cn.archive.ubuntu.com trusty/main Sources                           
+Hit http://cn.archive.ubuntu.com trusty/restricted Sources                     
+Hit http://cn.archive.ubuntu.com trusty/universe Sources                       
+Hit http://cn.archive.ubuntu.com trusty/multiverse Sources                     
+Hit http://cn.archive.ubuntu.com trusty/main amd64 Packages                    
+Hit http://cn.archive.ubuntu.com trusty/restricted amd64 Packages 
+Hit http://cn.archive.ubuntu.com trusty/universe amd64 Packages   
+Hit http://cn.archive.ubuntu.com trusty/multiverse amd64 Packages 
+Hit http://cn.archive.ubuntu.com trusty/main i386 Packages        
+Hit http://cn.archive.ubuntu.com trusty/restricted i386 Packages  
+Ign http://extras.ubuntu.com trusty InRelease                     
+Hit http://cn.archive.ubuntu.com trusty/universe i386 Packages    
+Hit http://cn.archive.ubuntu.com trusty/multiverse i386 Packages  
+Hit http://cn.archive.ubuntu.com trusty/main Translation-en       
+Hit http://cn.archive.ubuntu.com trusty/multiverse Translation-en              
+Hit http://cn.archive.ubuntu.com trusty/restricted Translation-en              
+Hit http://cn.archive.ubuntu.com trusty/universe Translation-en                
+Hit http://extras.ubuntu.com trusty Release.gpg                                
+Hit http://cn.archive.ubuntu.com trusty-updates/main Sources       
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted Sources 
+Hit http://cn.archive.ubuntu.com trusty-updates/universe Sources   
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse Sources 
+Hit http://cn.archive.ubuntu.com trusty-updates/main amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-updates/universe amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-updates/main i386 Packages 
+Hit http://extras.ubuntu.com trusty Release                        
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted i386 Packages       
+Hit http://cn.archive.ubuntu.com trusty-updates/universe i386 Packages
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse i386 Packages
+Hit http://cn.archive.ubuntu.com trusty-updates/main Translation-en            
+Hit http://cn.archive.ubuntu.com trusty-updates/multiverse Translation-en      
+Hit http://cn.archive.ubuntu.com trusty-updates/restricted Translation-en      
+Hit http://cn.archive.ubuntu.com trusty-updates/universe Translation-en
+Hit http://cn.archive.ubuntu.com trusty-backports/main Sources                 
+Ign http://security.ubuntu.com trusty-security InRelease                       
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted Sources
+Hit http://cn.archive.ubuntu.com trusty-backports/universe Sources 
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse Sources
+Hit http://extras.ubuntu.com trusty/main Sources                   
+Hit http://cn.archive.ubuntu.com trusty-backports/main amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-backports/universe amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+Hit http://cn.archive.ubuntu.com trusty-backports/main i386 Packages
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted i386 Packages
+Hit http://security.ubuntu.com trusty-security Release.gpg         
+Hit http://cn.archive.ubuntu.com trusty-backports/universe i386 Packages
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse i386 Packages
+Hit http://cn.archive.ubuntu.com trusty-backports/main Translation-en
+Hit http://cn.archive.ubuntu.com trusty-backports/multiverse Translation-en
+Hit http://extras.ubuntu.com trusty/main amd64 Packages            
+Hit http://cn.archive.ubuntu.com trusty-backports/restricted Translation-en    
+Hit http://cn.archive.ubuntu.com trusty-backports/universe Translation-en      
+Hit http://extras.ubuntu.com trusty/main i386 Packages                         
+Ign http://cn.archive.ubuntu.com trusty/main Translation-en_US                 
+Ign http://cn.archive.ubuntu.com trusty/multiverse Translation-en_US           
+Hit http://security.ubuntu.com trusty-security Release                         
+Get:1 https://get.docker.io docker InRelease                           
+Hit http://security.ubuntu.com trusty-security/main Sources                    
+Ign https://get.docker.io docker InRelease                                     
+Hit http://security.ubuntu.com trusty-security/restricted Sources              
+Hit http://security.ubuntu.com trusty-security/universe Sources                
+Hit http://security.ubuntu.com trusty-security/multiverse Sources              
+Ign http://extras.ubuntu.com trusty/main Translation-en_US                     
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages    
+Ign http://extras.ubuntu.com trusty/main Translation-en                        
+Ign http://cn.archive.ubuntu.com trusty/restricted Translation-en_US  
+Ign http://cn.archive.ubuntu.com trusty/universe Translation-en_US
+Get:2 https://get.docker.io docker Release                                     
+Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages       
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages         
+Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages       
+Get:3 https://get.docker.io docker/main amd64 Packages                         
+Hit http://security.ubuntu.com trusty-security/main i386 Packages              
+Hit http://security.ubuntu.com trusty-security/restricted i386 Packages        
+Hit http://security.ubuntu.com trusty-security/universe i386 Packages          
+Get:4 https://get.docker.io docker/main i386 Packages                          
+Get:5 https://get.docker.io docker/main Translation-en_US                      
+Hit http://security.ubuntu.com trusty-security/multiverse i386 Packages        
+Hit http://security.ubuntu.com trusty-security/main Translation-en             
+Hit http://security.ubuntu.com trusty-security/multiverse Translation-en       
+Hit http://security.ubuntu.com trusty-security/restricted Translation-en       
+Hit http://security.ubuntu.com trusty-security/universe Translation-en         
+Ign https://get.docker.io docker/main Translation-en_US                        
+Ign https://get.docker.io docker/main Translation-en
+Fetched 8,258 B in 38s (213 B/s)
+Reading package lists... Done
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo apt-get install lxc-docker
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  lxc-docker-1.7.1
+The following packages will be REMOVED:
+  docker.io
+The following NEW packages will be installed:
+  lxc-docker lxc-docker-1.7.1
+0 upgraded, 2 newly installed, 1 to remove and 345 not upgraded.
+Need to get 4,977 kB of archives.
+After this operation, 8,246 kB disk space will be freed.
+Do you want to continue? [Y/n] y
+Get:1 https://get.docker.io/ubuntu/ docker/main lxc-docker-1.7.1 amd64 1.7.1 [4,975 kB]
+Get:2 https://get.docker.io/ubuntu/ docker/main lxc-docker amd64 1.7.1 [2,098 B]
+Fetched 4,977 kB in 54s (92.1 kB/s)                                            
+(Reading database ... 167594 files and directories currently installed.)
+Removing docker.io (1.0.1~dfsg1-0ubuntu1~ubuntu0.14.04.1) ...
+docker.io stop/waiting
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Selecting previously unselected package lxc-docker-1.7.1.
+(Reading database ... 167547 files and directories currently installed.)
+Preparing to unpack .../lxc-docker-1.7.1_1.7.1_amd64.deb ...
+Unpacking lxc-docker-1.7.1 (1.7.1) ...
+Selecting previously unselected package lxc-docker.
+Preparing to unpack .../lxc-docker_1.7.1_amd64.deb ...
+Unpacking lxc-docker (1.7.1) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+Setting up lxc-docker-1.7.1 (1.7.1) ...
+docker start/running, process 15505
+Processing triggers for ureadahead (0.100.0-16) ...
+Setting up lxc-docker (1.7.1) ...
+
+
+=======================================================================================================================
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ docker run -i -t ubuntu /bin/bash
+Post http:///var/run/docker.sock/v1.19/containers/create: dial unix /var/run/docker.sock: permission denied. Are you trying to connect to a TLS-enabled daemon without TLS?
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo service docker start
+start: Job is already running: docker
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker run -i -t ubuntu /bin/bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from ubuntu
+6071b4945dcf: Pull complete 
+5bff21ba5409: Pull complete 
+e5855facec0b: Pull complete 
+8251da35e7a7: Pull complete 
+Digest: sha256:1572e29178048ad9ab72e78edd4decc91a3d8a8dea0ca39817efc7cf2d86c6d7
+Status: Downloaded newer image for ubuntu:latest
+
+
+
+===============
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker run -i -t fedora /bin/bash
+[root@289ce469e535 /]# cat /etc/issue
+Fedora release 22 (Twenty Two)
+Kernel \r on an \m (\l)
+
+[root@289ce469e535 /]# uname -a 
+Linux 289ce469e535 3.16.0-30-generic #40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+[root@289ce469e535 /]# exit 
+exit
+
+=====================
+
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker run -i -t centos /bin/bash
+[root@8431c3b3fe36 /]# cat /etc/issue
+\S
+Kernel \r on an \m
+
+[root@8431c3b3fe36 /]# uname -a 
+Linux 8431c3b3fe36 3.16.0-30-generic #40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+[root@8431c3b3fe36 /]# exit 
+

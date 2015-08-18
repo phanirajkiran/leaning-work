@@ -1,0 +1,23 @@
+    Dockerfile:  FROM ubuntu  (or fedora, centos, ...)   -OR-
+
+    docker run -i -t ubuntu  (or fedora, centos, ...)
+
+
+Dockerfiles allow you to start from a base image (which is a good thing).  However, those base images are often very large:
+
+    ubuntu: 193 MB
+    centos: 236 MB
+    fedora: 374 MB
+    phusion/baseimage: 437 MB
+
+
+
+try to run the container with an image version:
+
+sudo docker run -i -t ubuntu:14.04 /bin/bash
+
+or
+
+sudo docker run -i -t ubuntu:latest /bin/bash
+
+

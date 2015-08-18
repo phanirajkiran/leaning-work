@@ -1,0 +1,15 @@
+http://dockerpool.com/static/books/docker_practice/install/ubuntu.html
+
+2.docker pull ubuntu
+or
+3.
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker run -i -t ubuntu /bin/bash
+Unable to find image 'ubuntu:latest' locally
+
+
+================================================================
+http://www.infoq.com/cn/articles/docker-containers
+
+http://xmodulo.com/docker-containers-centos-fedora.html
+
+http://www.infoq.com/cn/articles/docker-containers

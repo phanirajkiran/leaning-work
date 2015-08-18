@@ -7,3 +7,11 @@ lyang001@lyang001-OptiPlex-9010:/tmp$ cat xx |awk -F';'+ '{print $2,$3}'
 213 203
 222 203
 cat gg |awk -F'[;]+' '{print $2,$3}'
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ echo "field1 ||| field2 ||| field3" |awk -F" [|]+" '{print $2}'
+ field2
+lyang001@lyang001-OptiPlex-9010:/tmp$ echo "field1 ||| field2 ||| field3" |awk -F" [|]+| " '{print $2}'
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ echo "field1 ||| field2 ||| field3" |awk -F" [|]+| " '{print $3}'
+field2
+

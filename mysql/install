@@ -1,0 +1,16 @@
+http://codeinthehole.com/writing/how-to-set-up-mysql-for-python-on-ubuntu/
+
+apt-get install python-pip
+pip install -U pip
+
+Next, install the required development packages:
+
+apt-get install python-dev libmysqlclient-dev
+
+then
+
+pip install MySQL-python
+
+----------------------------------
+sudo apt-get install mysql-server
+$ sudo apt-get install python-mysqldb

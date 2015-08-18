@@ -1,0 +1,69 @@
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker run -t centos  /bin/bash
+Unable to find image 'centos:latest' locally
+Pulling repository centos
+7322fbe74aa5: Error pulling image (latest) from centos, Server error: Status 0 while fetching image layer (f1b10cd842498c23d206ee0cbeaa9de8d2ae09ff3c7af2723a9e337a6965d639) 
+7a6965d639) : Error pulling dependent layers 
+Error pulling image (latest) from centos, Server error: Status 0 while fetching image layer (f1b10cd842498c23d206ee0cbeaa9de8d2ae09ff3c7af2723a9e337a6965d639)
+
+
+Fixed by:
+docker pull centos:latest
+
+
+increase size
+https://forums.docker.com/t/increase-container-volume-disk-size/1652/4
+http://stackoverflow.com/questions/24391660/limit-disk-size-and-bandwidth-of-a-docker-container
+---> https://github.com/snitm/docker/blob/master/daemon/graphdriver/devmapper/README.md
+
+
+mount host directory to the contaniner 
+sudo docker run -v /boot2dockerfolder:/root/containerfolder -i -t thewtex/cross-compiler-windows-x64
+
+
+docker run --rm -it -v ~/.bash_history:/.bash_history ubuntu /bin/bash
+
+
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker run  -i -t --name windows-64-1 thewtex/cross-compiler-windows-x64
+root@445956acfd38:/usr/src# exit
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker restart windows-64-1
+windows-64-1
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker kill windows-64-1
+windows-64-1
+
+
+-d, --detach=false          Run container in background and print container ID
+
+lyang001@lyang001-OptiPlex-9010:/mnt/lyang001/trees/linux-stable$ sudo docker start -a -i windows-64-1
+root@445956acfd38:/usr/src# 
+
+
+=================
+
+~/leaning-work/docker$ curl https://registry.hub.docker.com//v1/repositories/ubuntu/tags | python -mjson.tool
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2840    0  2840    0     0   2130      0 --:--:--  0:00:01 --:--:--  2132
+[
+    {
+        "layer": "8251da35",
+        "name": "latest"
+    },
+    {
+        "layer": "3db9c44f",
+        "name": "10.04"
+    },
+    {
+        "layer": "d0e008c6",
+        "name": "12.04"
+    },
+    {
+        "layer": "d0e008c6",
+        "name": "12.04.5"
+    },
+    {
+        "layer": "c5881f11",
+        "name": "12.10"
+    },
+    {
+        "layer": "463ff6be",
+

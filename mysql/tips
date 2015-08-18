@@ -1,0 +1,31 @@
+Index:
+
+you can use this syntax to add index and control the kind of index (HASH or BTREE)
+
+create index your_index_name on your_table_name(your_column_name) using HASH;
+or
+create index your_index_name on your_table_name(your_column_name) using BTREE;
+
+You can learn about differences between BTREE and HASH indexes here: http://dev.mysql.com/doc/refman/5.5/en/index-btree-hash.html
+
+http://dev.mysql.com/doc/innodb/1.1/en/innodb-create-index-examples.html
+
+http://www.w3schools.com/sql/sql_create_index.asp
+CREATE INDEX PIndex ON Persons (LastName, FirstName)
+
+sql = "CREATE DATABASE IF NOT EXISTS test1"
+http://www.tutorialspoint.com/python/python_database_access.htm
+
+http://palewi.re/posts/2008/04/26/python-recipe-connect-to-mysql-database-execute-a-query-print-the-results/
+
+http://moderndata.plot.ly/graph-data-from-mysql-database-in-python/
+http://www.decalage.info/python/html
+
+https://github.com/bradleyayers/django-tables2
+http://www.tizag.com/mysqlTutorial/mysql-index.php
+
+http://alvinalexander.com/blog/post/mysql/how-to-create-mysql-database-table-index
+CREATE INDEX idx_ftp_files_command_and_dir
+ON ftp_files(ftp_command, ftp_root_dir);
+
+http://openenergymonitor.org/emon/node/107

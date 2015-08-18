@@ -2,3 +2,52 @@ http://www.softpanorama.org/Tools/awk.shtml
 Easy, isn't it? This simple task does not need complex programming in C. One line of AWK does it. Once we have learned the lesson on how to extract a column we can do things such as renaming files (append .new to "files_list"):
 
 ls files_list | awk '{print "mv "$1" "$1".new"}' | sh
+
+2) awk in the function
+awkmath()
+{
+  echo "$1 $3" | awk '{ print $1 '"$2"' $2 }'
+}
+$ awkmath '2' '*' '3'
+6
+
+3)分号,跟最后一列不显示
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk '/AM|PM/ && NF--; /a =/ {print "a = "$(NF-6),"b = "$(NF-3),"c = "$NF};' <g
+Oct 07, 2014 7:39:10 AM
+a = 0 b = 0 c = 0
+lyang001@lyang001-OptiPlex-9010:/tmp$ vim f
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk '/AM|PM/ && NF--' <g
+Oct 07, 2014 7:39:10 AM
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk '/AM|PM/ && NF-1' <g
+Oct 07, 2014 7:39:10 AM x.y.z
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk '/AM|PM/ && NF=(NF-1)' <g
+Oct 07, 2014 7:39:10 AM
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk '/AM|PM/ && NF=(NF-2)' <g
+Oct 07, 2014 7:39:10
+lyang001@lyang001-OptiPlex-9010:/tmp$ awk '/AM|PM/ && NF=(NF-3)' <g
+Oct 07, 2014
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat g
+Oct 07, 2014 7:39:10 AM x.y.z
+
+SEVERE: adding the post (STORY)  abcd = 495274900579805_10204277254604731 : a = 0 b = 0 c = 0
+
+4)
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat q |awk 'NR==1{field=$1}$1==field'
+123 test1
+123 test2
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat q
+123 test1
+123 test2
+321 test3
+321 test4
+451 test5
+
+5)
+$ awk 'NF==4' file
+a    b    c    1
+c    d    e    6
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat f |awk '$4!=""'
+a    b    c    1
+c    d    e    6
+
+awk '!($4 == "")' yourfile
