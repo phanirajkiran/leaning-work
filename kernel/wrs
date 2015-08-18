@@ -1,0 +1,14 @@
+8.0
+
+	
+Run build and boot test with standard kernel (preempt-rt and tiny kernel will be covered by other stories) on all qemu BSPs:
+- qemux86-64
+- qemux86
+- qemuarm
+- qemuarma9
+- qemuarm64
+- qemuppc
+- qemumips
+- qemumips64
+
+We need support multiple image types for some BSPs, i.e. qemuarma9 needs support both zImage (for qemu) and uImage (for Simics).
