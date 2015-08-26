@@ -159,3 +159,5 @@ sfsf
 ddd
 "
 
+next line match 处理匹配行的下一行的
+sed '/Unix/{n;s/.*/hi/}' file

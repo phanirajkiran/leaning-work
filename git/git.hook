@@ -1,0 +1,20 @@
+http://stackoverflow.com/questions/3462955/putting-git-hooks-into-repository
+
+lyang001@lyang001-OptiPlex-9010:~/English$ touch xx
+lyang001@lyang001-OptiPlex-9010:~/English$ ln -s xx .git/hooks/pre-commit.dd
+lyang001@lyang001-OptiPlex-9010:~/English$ git add xx
+lyang001@lyang001-OptiPlex-9010:~/English$ git commit -m "update"
+[master bce90a7] update
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 xx
+lyang001@lyang001-OptiPlex-9010:~/English$ git remote -v 
+origin	git@github.com:leiyang/English.git (fetch)
+origin	git@github.com:leiyang/English.git (push)
+lyang001@lyang001-OptiPlex-9010:~/English$ git push git@github.com:leiyang/English.git
+Counting objects: 4, done.
+
+
+cd .git/hooks
+ls 
+
+man githooks
