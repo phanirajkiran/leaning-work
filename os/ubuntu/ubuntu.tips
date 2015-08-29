@@ -41,7 +41,17 @@ sudo apt-get install lttng-tools
 crontab -e
 07 14 * * * /home/lyang001/update.sh
 14:07 run update.sh
+比如
+10 3 * * 0,6 hello
+就是每周六、周日的3点10分执行hello程序。
+15 4 * * 4-6 hello
+就是从周四到周六的4点15点执行hello程序。
+然后用
+contab contabs.tmp
 
+eg:
+13 16 * * 1-6 cd /home/lyang001/WORK/updates/;./gen_status.py
+from Mon to Sat 16:13 run 
 
 gsettings set org.gnome.Vino disable-xdamage true
 

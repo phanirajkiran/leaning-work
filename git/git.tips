@@ -1,3 +1,5 @@
+http://hugogiraudel.com/2014/03/17/git-tips-and-tricks-part-2/
+http://blog.adamspiers.org/2013/09/19/easier-upstreaming-with-git/
 how to man 
 lyang001@lyang0-9010:~/git/git_testA$ man git | grep pull | grep request
        git-request-pull(1)
@@ -95,4 +97,33 @@ If the commit you want to fix isn’t the most recent one:
 
 git rev-parse --show-toplevel
 
+
+git log --name-status --no-merges
+git diff --name-only --since="10 weeks ago"
+
+git log --name-status --oneline --no-merges --since="100 days ago"
+
+But for seeing the files changed between your branch and its common with another branch (say origin/master):
+
+git diff --name-only `git merge-base origin/master HEAD`
+
+git diff --word-diff SHA1 SHA2
+
+git diff --stat 5c98bcc f648f80
+
+git log --no-merges --stat --oneline
+
+git log --numstat --no-merges
+
+git log --no-merges --stat --pretty="format:"  --since="2 week ago"
+
+git log --no-merges --stat --pretty="format:"  --since="2 week ago" |grep -v file |sed '/^$/d'
+
+
+git log v4.1.. --pretty=oneline --name-status |grep ^A
+
+
+git log -n 10000 --pretty=oneline --name-status |grep ^A
+
+git log v3.14..v4.1 --pretty=oneline --name-status |grep ^A > changelogs
 

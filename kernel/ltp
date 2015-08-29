@@ -1,0 +1,3 @@
+./runltp -p -q -d /tmp -l results.txt -c 6 -i 6 
+
+/var/volatile/tmp/ltp-XXXXtXjpQQ/alltests list all the default one 

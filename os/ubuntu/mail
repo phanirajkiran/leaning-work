@@ -1,0 +1,2 @@
+sudo apt-get install sendmail
+mail -s 'Uptime Report' you@cyberciti.biz < /tmp/output.txt

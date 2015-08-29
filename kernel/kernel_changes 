@@ -1,0 +1,180 @@
+Documentation/arm64/arm-acpi.txt
+Documentation/arm64/acpi_object_usage.txt
+tools/perf/Documentation/perf-data.txt
+Documentation/gdb-kernel-debugging.txt
+Documentation/filesystems/dax.txt
+Documentation/kasan.txt
+
+Documentation/cma/debugfs.txt
+Documentation/i2c/slave-interface
+Documentation/filesystems/nfs/pnfs-block-server.txt
+Documentation/arm/Atmel/README
+Documentation/kselftest.txt
+Documentation/timers/timekeeping.txt
+Documentation/powerpc/cpu_families.txt
+Documentation/cgroups/unified-hierarchy.txt
+
+mm/memtest.c
+arch/x86/kernel/cpu/perf_event_intel_bts.c
+arch/x86/kernel/cpu/intel_pt.h
+
+
+
+A       arch/arm/kernel/reboot.c
+A       arch/arm/kernel/reboot.h
+
+
+A       arch/arm64/include/asm/acpi.h
+A       arch/arm64/kernel/acpi.c
+
+drivers/cpuidle/cpuidle-arm.c
+
+
+A       arch/x86/include/asm/pm-trace.h
+A       include/linux/pm-trace.h
+
+A       Documentation/gdb-kernel-debugging.txt
+A       scripts/gdb/linux/cpus.py
+A       scripts/gdb/linux/tasks.py
+A       scripts/gdb/linux/dmesg.py
+A       scripts/gdb/linux/symbols.py
+A       scripts/gdb/linux/modules.py
+A       scripts/gdb/linux/utils.py
+A       scripts/gdb/Makefile
+A       scripts/gdb/linux/Makefile
+A       scripts/gdb/vmlinux-gdb.py
+
+
+
+
+
+A       fs/tracefs/Makefile
+
+
+A       Documentation/devicetree/bindings/arm/fw-cfg.txt
+A       arch/arm/include/asm/insn.h
+A       arch/arm/probes/kprobes/opt-arm.c
+A       arch/arm/probes/kprobes/checkers-arm.c
+A       arch/arm/probes/kprobes/checkers-common.c
+A       arch/arm/probes/kprobes/checkers-thumb.c
+A       arch/arm/probes/kprobes/checkers.h
+A       arch/arm/boot/dts/atlas7-evb.dts
+A       arch/arm/boot/dts/atlas7.dtsi
+
+
+
+A       arch/arm/include/asm/patch.h
+A       arch/arm/probes/Makefile
+A       arch/arm/probes/decode-arm.c
+A       arch/arm/probes/decode-arm.h
+A       arch/arm/probes/decode-thumb.c
+A       arch/arm/probes/decode-thumb.h
+A       arch/arm/probes/decode.c
+A       arch/arm/probes/decode.h
+A       arch/arm/probes/kprobes/Makefile
+A       arch/arm/probes/kprobes/actions-arm.c
+A       arch/arm/probes/kprobes/actions-common.c
+A       arch/arm/probes/kprobes/actions-thumb.c
+A       arch/arm/probes/kprobes/core.c
+A       arch/arm/probes/kprobes/core.h
+A       arch/arm/probes/kprobes/test-arm.c
+A       arch/arm/probes/kprobes/test-core.c
+A       arch/arm/probes/kprobes/test-core.h
+A       arch/arm/probes/kprobes/test-thumb.c
+A       arch/arm/probes/uprobes/Makefile
+A       arch/arm/probes/uprobes/actions-arm.c
+A       arch/arm/probes/uprobes/core.c
+A       arch/arm/probes/uprobes/core.h
+A       fs/xfs/libxfs/xfs_types.h
+A       fs/xfs/libxfs/xfs_fs.h
+
+
+A       sound/firewire/dice/dice-midi.c
+A       drivers/virtio/virtio_pci_common.c
+A       drivers/virtio/virtio_pci_common.h
+A       drivers/virtio/virtio_pci.h
+A       drivers/virtio/virtio_pci_legacy.c
+
+
+
+A       kernel/time/test_udelay.c
+
+A       fs/lockd/procfs.c
+A       fs/lockd/procfs.h
+
+A       fs/nfs/nfs3_fs.h
+
+
+A       drivers/usb/dwc3/debug.c
+A       drivers/usb/dwc3/trace.c
+A       drivers/usb/dwc3/trace.h
+
+
+
+
+A       arch/powerpc/boot/dts/t2080rdb.dts
+A       arch/powerpc/boot/dts/t208xrdb.dtsi
+
+
+
+
+A       tools/time/udelay_test.sh
+A       kernel/time/udelay_test.c
+
+
+A       arch/s390/include/uapi/asm/kvm_perf.h
+A       tools/perf/arch/s390/util/kvm-stat.c
+A       tools/perf/arch/x86/util/kvm-stat.c
+A       tools/perf/util/kvm-stat.h
+
+
+A       fs/xfs/xfs_sysfs.c
+A       fs/xfs/xfs_sysfs.h
+
+
+A       drivers/thunderbolt/Kconfig
+A       drivers/thunderbolt/Makefile
+A       drivers/thunderbolt/nhi.c
+A       drivers/thunderbolt/nhi.h
+A       drivers/thunderbolt/nhi_regs.h
+
+
+A       Documentation/mtd/spi-nor.txt
+A       drivers/mtd/spi-nor/Kconfig
+A       drivers/mtd/spi-nor/Makefile
+A       drivers/mtd/spi-nor/spi-nor.c
+A       include/linux/mtd/spi-nor.h
+
+
+
+A       drivers/clk/clk-moxart.c
+A       arch/arm/include/asm/uprobes.h
+A       arch/arm/kernel/uprobes-arm.c
+A       arch/arm/kernel/uprobes.c
+A       arch/arm/kernel/uprobes.h
+A       arch/arm/kernel/probes-thumb.c
+A       arch/arm/kernel/probes-thumb.h
+A       arch/arm/kernel/probes-arm.c
+A       arch/arm/kernel/probes-arm.h
+A       arch/arm/kernel/probes.c
+A       arch/arm/kernel/probes.h
+A       arch/arm/include/asm/probes.h
+
+
+A       arch/arm64/include/asm/kgdb.h
+A       arch/arm64/kernel/kgdb.c
+
+
+A       include/linux/torture.h
+A       kernel/rcu/rcutorture.c
+A       kernel/torture.c
+
+
+A       tools/perf/util/unwind-libunwind.c
+A       tools/perf/arch/x86/tests/dwarf-unwind.c
+A       tools/perf/tests/dwarf-unwind.c
+
+./kernel/test_kprobes.c
+
+
+https://patches.linaro.org/44756/

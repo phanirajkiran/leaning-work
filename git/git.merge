@@ -1,1 +1,4 @@
 git merge --no-ff
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable$ git describe $( git merge-base v4.1.2 v3.14)
+v3.14
+
