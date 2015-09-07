@@ -1,0 +1,24 @@
+http://www.yoctoproject.org/docs/1.9/yocto-project-qs/yocto-project-qs.html
+1)
+Ubuntu and Debian
+
+     $ sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+     build-essential chrpath socat libsdl1.2-dev xterm
+
+Steps to Reproduce: 
+(1) Get the latest poky
+$ git clone git://git.yoctoproject.org/poky
+$ source poky/oe-init-build-env
+
+(2) Add the following lines in the local.conf
+MACHINE = "qemuarm"
+PREFERRED_PROVIDER_virtual/kernel = "linux-yocto-rt"
+PREFERRED_VERSION_virtual/kernel = "4.1"     
+BB_NUMBER_THREADS ?= "36"
+PARALLEL_MAKE ?= "-j 36"
+
+(3) Build the image
+$ bitbake core-image-minimal
+$ runqemu qemuarm64 nographic qemuparams="-serial telnet:localhost:2345,server -serial tcp:localhost:2346,server,nowait"                      
+
+telnet localhost 2345

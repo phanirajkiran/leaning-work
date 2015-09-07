@@ -73,4 +73,7 @@ sudo dpkg --add-architecture i386
 sudo add-apt-repository "deb http://archive.canonical.com/ $(lsb_release -sc) partner"
 sudo apt-get update && sudo apt-get install skype
 
+
 sudo aptitude install python-setuptools mongodb python-django python-pymongo
+
+usermod -a -G sudo lyang0

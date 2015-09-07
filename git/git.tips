@@ -127,3 +127,4 @@ git log -n 10000 --pretty=oneline --name-status |grep ^A
 
 git log v3.14..v4.1 --pretty=oneline --name-status |grep ^A > changelogs
 
+find . -name Kconfig |git log v4.1..v4.2 -p |grep  -A1 "+config " |sed 's/+//g' |sed '/--/d' > new_Kconfig

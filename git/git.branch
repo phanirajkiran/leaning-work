@@ -23,3 +23,20 @@ standard/preempt-rt/intel-x86-64
 
 get current branch:
 git rev-parse --abbrev-ref HEAD
+
+
+new empty branch 
+$ git checkout --orphan NEWBRANCH
+
+--orphan creates a new branch, but it starts without any commit. After running the above command you are on a new branch "NEWBRANCH", and the first commit you create from this state will start a new history without any ancestry.
+
+The --orphan command keeps the index and the working tree files intact in order to make it convenient for creating a new history whose trees resemble the ones from the original branch.
+
+Since you want to create a new empty branch that has nothing to do with the original branch, you can delete all files in the new working directory:
+
+$ git rm -rf .
+$ touch readme
+$ git add . 
+$ git commit -m "empty branch"
+
+in this way, "empty branch" is the first commit 

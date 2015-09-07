@@ -178,23 +178,3 @@ A       tools/perf/tests/dwarf-unwind.c
 
 
 https://patches.linaro.org/44756/
-
-
-commit b10d79f76085b577673395daf92d6208ae09196f
-Author: Al Stone <al.stone@linaro.org>
-Date:   Tue Mar 24 14:02:41 2015 +0000
-
-    ARM64 / ACPI: Introduce early_param "acpi=" to enable/disable ACPI
-    
-    This implements the following policy to decide whether ACPI should
-    be used to boot the system:
-    - acpi=off: ACPI will not be used to boot the system, even if there is
-      no alternative available (e.g., device tree is empty)
-    - acpi=force: only ACPI will be used to boot the system; if that fails,
-      there will be no fallback to alternative methods (such as device tree)
-    - otherwise, ACPI will be used as a fallback if the device tree turns out
-      to lack a platform description; the heuristic to decide this is whether
-      /chosen is the only node present at depth 1
-
-Bruce Ashfield 13 days ago linux-yocto/4.1: fix qemuarm preempt-rt configuration
-M	meta/recipes-kernel/linux/linux-yocto_4.1.bb

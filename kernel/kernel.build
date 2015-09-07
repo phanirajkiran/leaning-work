@@ -1,0 +1,48 @@
+ubuntu
+sudo apt-get install libncurses5-dev
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build$ make M=samples
+  CC [M]  samples/hw_breakpoint/data_breakpoint.o
+  CC [M]  samples/kfifo/bytestream-example.o
+  CC [M]  samples/kfifo/dma-example.o
+  CC [M]  samples/kfifo/inttype-example.o
+  CC [M]  samples/kfifo/record-example.o
+  CC [M]  samples/kobject/kobject-example.o
+  CC [M]  samples/kobject/kset-example.o
+  CC [M]  samples/kprobes/kprobe_example.o
+  CC [M]  samples/kprobes/jprobe_example.o
+  CC [M]  samples/kprobes/kretprobe_example.o
+  LD      samples/livepatch/built-in.o
+  CC [M]  samples/trace_events/trace-events-sample.o
+  LD      samples/built-in.o
+  Building modules, stage 2.
+  MODPOST 12 modules
+  CC      samples/hw_breakpoint/data_breakpoint.mod.o
+  LD [M]  samples/hw_breakpoint/data_breakpoint.ko
+  CC      samples/kfifo/bytestream-example.mod.o
+  LD [M]  samples/kfifo/bytestream-example.ko
+  CC      samples/kfifo/dma-example.mod.o
+  LD [M]  samples/kfifo/dma-example.ko
+  CC      samples/kfifo/inttype-example.mod.o
+  LD [M]  samples/kfifo/inttype-example.ko
+  CC      samples/kfifo/record-example.mod.o
+  LD [M]  samples/kfifo/record-example.ko
+  CC      samples/kobject/kobject-example.mod.o
+  LD [M]  samples/kobject/kobject-example.ko
+  CC      samples/kobject/kset-example.mod.o
+  LD [M]  samples/kobject/kset-example.ko
+  CC      samples/kprobes/jprobe_example.mod.o
+  LD [M]  samples/kprobes/jprobe_example.ko
+  CC      samples/kprobes/kprobe_example.mod.o
+  LD [M]  samples/kprobes/kprobe_example.ko
+  CC      samples/kprobes/kretprobe_example.mod.o
+  LD [M]  samples/kprobes/kretprobe_example.ko
+  CC      samples/livepatch/livepatch-sample.mod.o
+  LD [M]  samples/livepatch/livepatch-sample.ko
+  CC      samples/trace_events/trace-events-sample.mod.o
+  LD [M]  samples/trace_events/trace-events-sample.ko
+
+
+or 
+
+make samples/livepatch/livepatch-sample.ko
