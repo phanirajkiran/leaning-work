@@ -87,8 +87,45 @@ eBPF ---> kernel/bpf/
 
 
 
-Tracefs 
+Tracefs (introduced from 4.1)
 =======
+commit 3f3c73de77b5598e9f87812ac4da9445090c3b4a
+Merge: 9497d738 eae4735
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Tue Apr 14 10:22:29 2015 -0700
+
+    Merge tag 'trace-4.1-tracefs' of git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace
+    
+    Pull tracefs from Steven Rostedt:
+     "This adds the new tracefs file system.
+    
+      This has been in linux-next for more than one release, as I had it
+      ready for the 4.0 merge window, but a last minute thing that needed to
+      go into Linux first had to be done.  That was that perf hard coded the
+      file system number when reading /sys/kernel/debugfs/tracing directory
+      making sure that the path had the debugfs mount # before it would
+      parse the tracing file.  This broke other use cases of perf, and the
+      check is removed.
+    
+      Now when mounting /sys/kernel/debug, tracefs is automatically mounted
+      in /sys/kernel/debug/tracing such that old tools will still see that
+      path as expected.  But now system admins can mount tracefs directly
+      and not need to mount debugfs, which can expose security issues.  A
+      new directory is created when tracefs is configured such that system
+      admins can now mount it separately (/sys/kernel/tracing)"
+    
+    * tag 'trace-4.1-tracefs' of git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace:
+      tracing: Have mkdir and rmdir be part of tracefs
+      tracefs: Add directory /sys/kernel/tracing
+      tracing: Automatically mount tracefs on debugfs/tracing
+      tracing: Convert the tracing facility over to use tracefs
+      tracefs: Add new tracefs file system
+      tracing: Create cmdline tracer options on tracing fs init
+      tracing: Only create tracer options files if directory exists
+      debugfs: Provide a file creation function that also takes an initial size
+
+
+
 New tracefs File System
 • Added in 4.1, by Steve Rostedt
 • Used by ftrace
@@ -283,7 +320,76 @@ or
        date
    done
 
+=================================================================================================
+$cat test.sh
+   #!/bin/sh
+   while :; do
+       sleep 1
+       date
+   done
 
+#old kernel 3.14.50
+root@SDP_Wildcat_Pass-3-C1:~# uname -a 
+Linux SDP_Wildcat_Pass-3-C1 3.14.50-WR7.0.0.0_standard #1 SMP PREEMPT Mon Sep 7 14:15:35 CST 2015 x86_64 x86_64 x86_64 GNU/Linux
+
+root@SDP_Wildcat_Pass-3-C1:~# ./test.sh  < /dev/null &> test.log &
+[1] 1783
+root@SDP_Wildcat_Pass-3-C1:~# tail -f test.log 
+Mon Sep  7 10:31:40 UTC 2015
+Mon Sep  7 10:31:41 UTC 2015
+Mon Sep  7 10:31:42 UTC 2015
+Mon Sep  7 10:31:43 UTC 2015
+Mon Sep  7 10:31:44 UTC 2015
+Mon Sep  7 10:31:45 UTC 2015
+Mon Sep  7 10:31:58 UTC 2015
+Mon Sep  7 10:31:59 UTC 2015
+Mon Sep  7 10:32:00 UTC 2015
+Mon Sep  7 10:32:01 UTC 2015
+Mon Sep  7 10:32:02 UTC 2015
+Mon Sep  7 10:32:03 UTC 2015
+Mon Sep  7 10:32:04 UTC 2015
+^C
+root@SDP_Wildcat_Pass-3-C1:~# criu dump -v4 -o dump.log -D checkpoint/ -t 1783 --shell-job
+[1]+  Killed                  ./test.sh < /dev/null &> test.log
+#load the 3.18.21 kernel 
+root@SDP_Wildcat_Pass-3-C1:~# kexec -l /bzImage --append="`cat kexec_args`"
+my_load:669: do
+
+#restart kernel 
+root@SDP_Wildcat_Pass-3-C1:~# kexec -e 
+
+
+
+root@SDP_Wildcat_Pass-3-C1:~# criu restore -d -D checkpoint/ -vvvv -o restore.log --shell-job
+root@SDP_Wildcat_Pass-3-C1:~# tail -f test.log 
+Mon Sep  7 10:43:02 UTC 2015
+Mon Sep  7 10:43:03 UTC 2015
+Mon Sep  7 10:43:04 UTC 2015
+Mon Sep  7 10:46:12 UTC 2015
+Mon Sep  7 10:46:13 UTC 2015
+Mon Sep  7 10:46:14 UTC 2015
+Mon Sep  7 10:46:15 UTC 2015
+Mon Sep  7 10:46:17 UTC 2015
+Mon Sep  7 10:46:18 UTC 2015
+Mon Sep  7 10:46:19 UTC 2015
+Mon Sep  7 10:46:20 UTC 2015
+Mon Sep  7 10:46:21 UTC 2015
+Mon Sep  7 10:46:22 UTC 2015
+Mon Sep  7 10:46:23 UTC 2015
+Mon Sep  7 10:46:24 UTC 2015
+Mon Sep  7 10:46:25 UTC 2015
+Mon Sep  7 10:46:26 UTC 2015
+Mon Sep  7 10:46:27 UTC 2015
+Mon Sep  7 10:46:28 UTC 2015
+Mon Sep  7 10:46:29 UTC 2015
+^C
+#tells it restore in 3.18.21 kernel 
+root@SDP_Wildcat_Pass-3-C1:~# uname -a 
+Linux SDP_Wildcat_Pass-3-C1 3.18.21-WR7.0.0.0_standard #1 SMP PREEMPT Mon Sep 7 14:17:08 CST 2015 x86_64 x86_64 x86_64 GNU/Linux
+
+
+
+===============================================================================================================================================
 注意：这里的脚本缩进一定要对齐，我用粘贴到终端的方式 不好
 http://www.mailbrowse.com/linux-kernel/1501690.html
 http://lwn.net/Articles/557046/

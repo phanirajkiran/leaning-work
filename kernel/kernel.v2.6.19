@@ -1,0 +1,201 @@
+ecryptfs
+-------
+https://opensourcehacker.com/2011/04/15/encrypted-folders-on-ubuntu-linux-using-ecryptfs-on-an-external-hard-drive/
+CONFIG_ECRYPT_FS = y
+ Symbol: ECRYPT_FS [=n]                                                                                                                                                                               │  
+  │ Type  : tristate                                                                                                                                                                                     │  
+  │ Prompt: eCrypt filesystem layer support                                                                                                                                                              │  
+  │   Location:                                                                                                                                                                                          │  
+  │     -> File systems                                                                                                                                                                                  │  
+  │ (1)   -> Miscellaneous filesystems (MISC_FILESYSTEMS [=y])                                                                                                                                           │  
+  │   Defined at fs/ecryptfs/Kconfig:1                                                                                                                                                                   │  
+  │   Depends on: MISC_FILESYSTEMS [=y] && KEYS [=y] && CRYPTO [=y] && (ENCRYPTED_KEYS [=y] || ENCRYPTED_KEYS [=y]=n)                                                                                    │  
+  │   Selects: CRYPTO_ECB [=y] && CRYPTO_CBC [=y] && CRYPTO_MD5 [=y] 
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mount -t ecryptfs crypted/ crypted/
+mount: wrong fs type, bad option, bad superblock on /tmp/crypted,
+       missing codepage or helper program, or other error
+       In some cases useful info is found in syslog - try
+       dmesg | tail  or so
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ mkdir crypted
+lyang001@lyang001-OptiPlex-9010:/tmp$ chmod 700 crypted/
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mount -t ecryptfs crypted/ crypted/
+[sudo] password for lyang001: 
+mount: wrong fs type, bad option, bad superblock on /tmp/crypted,
+       missing codepage or helper program, or other error
+       In some cases useful info is found in syslog - try
+       dmesg | tail  or so
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ modporbe e
+e2fsprogs/     e2fsprogs-git/ evince-23374/  evince-4135/   ext4-crypt/    
+lyang001@lyang001-OptiPlex-9010:/tmp$ modporbe ecryptfs
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo apt-get install ecryptfs-utils
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  cryptsetup cryptsetup-bin libcryptsetup4 libecryptfs0 libnss3 libnss3-1d
+  libnss3-nssdb
+Suggested packages:
+  opencryptoki zescrow-client
+The following NEW packages will be installed:
+  cryptsetup cryptsetup-bin ecryptfs-utils libcryptsetup4 libecryptfs0
+  libnss3-1d
+The following packages will be upgraded:
+  libnss3 libnss3-nssdb
+2 upgraded, 6 newly installed, 0 to remove and 339 not upgraded.
+Need to get 1,547 kB of archives.
+After this operation, 1,715 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main libnss3-nssdb all 2:3.19.2-0ubuntu0.14.04.1 [10.6 kB]
+Get:2 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main libnss3 amd64 2:3.19.2-0ubuntu0.14.04.1 [1,103 kB]
+Get:3 http://cn.archive.ubuntu.com/ubuntu/ trusty/main libcryptsetup4 amd64 2:1.6.1-1ubuntu1 [77.0 kB]
+Get:4 http://cn.archive.ubuntu.com/ubuntu/ trusty/main cryptsetup-bin amd64 2:1.6.1-1ubuntu1 [80.4 kB]
+Get:5 http://cn.archive.ubuntu.com/ubuntu/ trusty/main cryptsetup amd64 2:1.6.1-1ubuntu1 [115 kB]
+Get:6 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main libnss3-1d amd64 2:3.19.2-0ubuntu0.14.04.1 [9,316 B]
+Get:7 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main libecryptfs0 amd64 104-0ubuntu1.14.04.3 [48.1 kB]
+Get:8 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main ecryptfs-utils amd64 104-0ubuntu1.14.04.3 [103 kB]
+Fetched 1,547 kB in 1s (1,291 kB/s) 
+Preconfiguring packages ...
+(Reading database ... 184000 files and directories currently installed.)
+Preparing to unpack .../libnss3-nssdb_2%3a3.19.2-0ubuntu0.14.04.1_all.deb ...
+Unpacking libnss3-nssdb (2:3.19.2-0ubuntu0.14.04.1) over (2:3.17.1-0ubuntu0.14.04.2) ...
+Preparing to unpack .../libnss3_2%3a3.19.2-0ubuntu0.14.04.1_amd64.deb ...
+Unpacking libnss3:amd64 (2:3.19.2-0ubuntu0.14.04.1) over (2:3.17.1-0ubuntu0.14.04.2) ...
+Selecting previously unselected package libcryptsetup4.
+Preparing to unpack .../libcryptsetup4_2%3a1.6.1-1ubuntu1_amd64.deb ...
+Unpacking libcryptsetup4 (2:1.6.1-1ubuntu1) ...
+Selecting previously unselected package cryptsetup-bin.
+Preparing to unpack .../cryptsetup-bin_2%3a1.6.1-1ubuntu1_amd64.deb ...
+Unpacking cryptsetup-bin (2:1.6.1-1ubuntu1) ...
+Selecting previously unselected package cryptsetup.
+Preparing to unpack .../cryptsetup_2%3a1.6.1-1ubuntu1_amd64.deb ...
+Unpacking cryptsetup (2:1.6.1-1ubuntu1) ...
+Selecting previously unselected package libnss3-1d:amd64.
+Preparing to unpack .../libnss3-1d_2%3a3.19.2-0ubuntu0.14.04.1_amd64.deb ...
+Unpacking libnss3-1d:amd64 (2:3.19.2-0ubuntu0.14.04.1) ...
+Selecting previously unselected package libecryptfs0.
+Preparing to unpack .../libecryptfs0_104-0ubuntu1.14.04.3_amd64.deb ...
+Unpacking libecryptfs0 (104-0ubuntu1.14.04.3) ...
+Selecting previously unselected package ecryptfs-utils.
+Preparing to unpack .../ecryptfs-utils_104-0ubuntu1.14.04.3_amd64.deb ...
+Unpacking ecryptfs-utils (104-0ubuntu1.14.04.3) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+Setting up libcryptsetup4 (2:1.6.1-1ubuntu1) ...
+Setting up cryptsetup-bin (2:1.6.1-1ubuntu1) ...
+Setting up cryptsetup (2:1.6.1-1ubuntu1) ...
+update-initramfs: deferring update (trigger activated)
+Setting up libnss3-nssdb (2:3.19.2-0ubuntu0.14.04.1) ...
+Setting up libnss3:amd64 (2:3.19.2-0ubuntu0.14.04.1) ...
+Setting up libnss3-1d:amd64 (2:3.19.2-0ubuntu0.14.04.1) ...
+Setting up libecryptfs0 (104-0ubuntu1.14.04.3) ...
+Setting up ecryptfs-utils (104-0ubuntu1.14.04.3) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.5) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+Processing triggers for initramfs-tools (0.103ubuntu4.2) ...
+update-initramfs: Generating /boot/initrd.img-3.16.0-30-generic
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mount -t ecryptfs crypted/ crypted/
+Passphrase: 
+Select cipher: 
+ 1) aes: blocksize = 16; min keysize = 16; max keysize = 32
+ 2) blowfish: blocksize = 8; min keysize = 16; max keysize = 56
+ 3) des3_ede: blocksize = 8; min keysize = 24; max keysize = 24
+ 4) twofish: blocksize = 16; min keysize = 16; max keysize = 32
+ 5) cast6: blocksize = 16; min keysize = 16; max keysize = 32
+ 6) cast5: blocksize = 8; min keysize = 5; max keysize = 16
+Selection [aes]: 
+Select key bytes: 
+ 1) 16
+ 2) 32
+ 3) 24
+Selection [16]: 
+Enable plaintext passthrough (y/n) [n]: 
+Enable filename encryption (y/n) [n]: 
+Attempting to mount with the following options:
+  ecryptfs_unlink_sigs
+  ecryptfs_key_bytes=16
+  ecryptfs_cipher=aes
+  ecryptfs_sig=03d60a289f26995d
+WARNING: Based on the contents of [/root/.ecryptfs/sig-cache.txt],
+it looks like you have never mounted with this key 
+before. This could mean that you have typed your 
+passphrase wrong.
+
+Would you like to proceed with the mount (yes/no)? : 
+Would you like to proceed with the mount (yes/no)? : y
+Would you like to proceed with the mount (yes/no)? : yes
+Would you like to append sig [03d60a289f26995d] to
+[/root/.ecryptfs/sig-cache.txt] 
+in order to avoid this warning in the future (yes/no)? : yes
+Successfully appended new sig to user sig cache file
+Mounted eCryptfs
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cp /sbin/ifconfig crypted/
+lyang001@lyang001-OptiPlex-9010:/tmp$ ls crypted/
+ifconfig
+lyang001@lyang001-OptiPlex-9010:/tmp$ vim crypted/txt
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat crypted/txt
+12345 lyang0
+lyang001@lyang001-OptiPlex-9010:/tmp$ umount crypted/
+umount: /tmp/crypted is not in the fstab (and you are not root)
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo umount crypted/
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat crypted/
+ifconfig  txt       
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat crypted/txt
+乱码
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mount -t ecryptfs crypted/ crypted/
+Passphrase: 
+Select cipher: 
+ 1) aes: blocksize = 16; min keysize = 16; max keysize = 32
+ 2) blowfish: blocksize = 8; min keysize = 16; max keysize = 56
+ 3) des3_ede: blocksize = 8; min keysize = 24; max keysize = 24
+ 4) twofish: blocksize = 16; min keysize = 16; max keysize = 32
+ 5) cast6: blocksize = 16; min keysize = 16; max keysize = 32
+ 6) cast5: blocksize = 8; min keysize = 5; max keysize = 16
+Selection [aes]: 
+Select key bytes: 
+ 1) 16
+ 2) 32
+ 3) 24
+Selection [16]: 
+Enable plaintext passthrough (y/n) [n]: 
+Enable filename encryption (y/n) [n]: 
+Attempting to mount with the following options:
+  ecryptfs_unlink_sigs
+  ecryptfs_key_bytes=16
+  ecryptfs_cipher=aes
+  ecryptfs_sig=03d60a289f26995d
+Mounted eCryptfs
+lyang001@lyang001-OptiPlex-9010:/tmp$ ls crypted/
+ifconfig  txt
+lyang001@lyang001-OptiPlex-9010:/tmp$ cat crypted/txt 
+12345 lyang0
+
+QA:
+before install 
+lyang001@lyang001-OptiPlex-9010:/tmp$ mount.
+mount.aufs        mount.fuse        mount.lowntfs-3g  mount.nfs         mount.nfs4        mount.ntfs        mount.ntfs-3g 
+
+after install
+lyang001@lyang001-OptiPlex-9010:/tmp$ mount.
+mount.aufs              mount.ecryptfs_private  mount.lowntfs-3g        mount.nfs4              mount.ntfs-3g           
+mount.ecryptfs          mount.fuse              mount.nfs               mount.ntfs  
+
+details:
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mount -t ecryptfs crypted/ crypted/
+mount: wrong fs type, bad option, bad superblock on /tmp/crypted,
+       missing codepage or helper program, or other error
+       In some cases useful info is found in syslog - try
+       dmesg | tail  or so
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ cp /sbin/mount.ecryptfs.bak /sbin/mount.ecryptfs
+cp: cannot create regular file ‘/sbin/mount.ecryptfs’: Permission denied
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo cp /sbin/mount.ecryptfs.bak /sbin/mount.ecryptfs
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mount -t ecryptfs crypted/ crypted/
+Passphrase: 

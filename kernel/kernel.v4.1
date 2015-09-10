@@ -1,0 +1,215 @@
+Tracefs (introduced from 4.1)
+=======
+commit 3f3c73de77b5598e9f87812ac4da9445090c3b4a
+Merge: 9497d738 eae4735
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Tue Apr 14 10:22:29 2015 -0700
+
+    Merge tag 'trace-4.1-tracefs' of git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace
+    
+    Pull tracefs from Steven Rostedt:
+     "This adds the new tracefs file system.
+    
+      This has been in linux-next for more than one release, as I had it
+      ready for the 4.0 merge window, but a last minute thing that needed to
+      go into Linux first had to be done.  That was that perf hard coded the
+      file system number when reading /sys/kernel/debugfs/tracing directory
+      making sure that the path had the debugfs mount # before it would
+      parse the tracing file.  This broke other use cases of perf, and the
+      check is removed.
+    
+      Now when mounting /sys/kernel/debug, tracefs is automatically mounted
+      in /sys/kernel/debug/tracing such that old tools will still see that
+      path as expected.  But now system admins can mount tracefs directly
+      and not need to mount debugfs, which can expose security issues.  A
+      new directory is created when tracefs is configured such that system
+      admins can now mount it separately (/sys/kernel/tracing)"
+    
+    * tag 'trace-4.1-tracefs' of git://git.kernel.org/pub/scm/linux/kernel/git/rostedt/linux-trace:
+      tracing: Have mkdir and rmdir be part of tracefs
+      tracefs: Add directory /sys/kernel/tracing
+      tracing: Automatically mount tracefs on debugfs/tracing
+      tracing: Convert the tracing facility over to use tracefs
+      tracefs: Add new tracefs file system
+      tracing: Create cmdline tracer options on tracing fs init
+      tracing: Only create tracer options files if directory exists
+      debugfs: Provide a file creation function that also takes an initial size
+
+
+
+New tracefs File System
+• Added in 4.1, by Steve Rostedt
+• Used by ftrace
+• Instead of debugfs (usually /sys/kernel/debug/tracing), tracing has now its own file system, under /sys/kernel/tracing
+To be compatible with old systems, it is also mounted under
+debugfs
+New include file /include/linux/tracefs.h
+Ftrace and perf use it
+No changes in functionality
+See articles:
+• https://lwn.net/Articles/632519/ (perf support)
+• https://lwn.net/Articles/630526/ (kernel patch)
+
+Now when mounting /sys/kernel/debug, tracefs is automatically mounted
+in /sys/kernel/debug/tracing such that old tools will still see that
+path as expected. But now system admins can mount tracefs directly
+and not need to mount debugfs, which can expose security issues.
+A new directory is created when tracefs is configured such that
+system admins can now mount it separately (/sys/kernel/tracing).
+
+
+1)CONFIG_TRACING=y
+2)
+root@ISG_WalnutCanyonII-2:~# mount -t tracefs none /sys/kernel/tracing/
+root@ISG_WalnutCanyonII-2:~# ls /sys/kernel/tracing/
+README		      free_buffer     saved_cmdlines	   trace_pipe
+available_events      instances       saved_cmdlines_size  tracing_cpumask
+available_tracers     kprobe_events   set_event		   tracing_on
+buffer_size_kb	      kprobe_profile  trace		   tracing_thresh
+buffer_total_size_kb  options	      trace_clock
+current_tracer	      per_cpu	      trace_marker
+events		      printk_formats  trace_options
+
+==============================================================================================================================
+EXT4 ENCRYPTION
+--------------
+DROP: http://blog.quarkslab.com/a-glimpse-of-ext4-filesystem-level-encryption.html
+DROP: https://github.com/gdelugre/ext4-crypt
+CONFIG_EXT4_ENCRYPTION = y                                                                                                                                                                      │  
+To use ext4 encryption, one first needs to have a Linux 4.1+ kernel compiled with CONFIG_EXT4_ENCRYPTION.
+
+The process of encrypting a directory is quite simple and does not require any particular privilege other than owning the directory:
+
+    First ensure the directory is empty.
+    Open the directory and send an ioctl to assign it an encryption policy.
+    Insert the master key into the user session keyring. The key must be of logon type.
+
+steps:
+lyang001@lyang001-OptiPlex-9010:/tmp/ext4-crypt$ cmake CMakeLists.txt 
+-- The C compiler identification is GNU 4.8.4
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/ext4-crypt
+lyang001@lyang001-OptiPlex-9010:/tmp/ext4-crypt$ make 
+Scanning dependencies of target ext4-crypt
+[ 33%] Building C object CMakeFiles/ext4-crypt.dir/src/keys.c.o
+/tmp/ext4-crypt/src/keys.c:9:22: fatal error: keyutils.h: No such file or directory
+
+sudo apt-get install libkeyutils-dev
+/tmp/ext4-crypt/src/keys.c:10:23: fatal error: libscrypt.h: No such file or directory
+sudo apt-get install libscrypt-dev
+
+
+
+lyang001@lyang001-OptiPlex-9010:/tmp/ext4-crypt$ scp /lib/x86_64-linux-gnu/libkeyutils.so.1 root@128.224.166.165:/lib64/
+Warning: Permanently added '128.224.166.165' (ECDSA) to the list of known hosts.
+Password: 
+libkeyutils.so.1
+
+ptiPlex-9010:/tmp/e2fsprogs$ git remote -v 
+origin	git://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git (fetch)
+origin	git://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git (push)
+lyang001@lyang001-OptiPlex-9010:/tmp/e2fsprogs$ git diff 
+diff --git a/misc/e4crypt.c b/misc/e4crypt.c
+index ad95bd2..a9070b1 100644
+--- a/misc/e4crypt.c
++++ b/misc/e4crypt.c
+@@ -726,8 +726,8 @@ static void do_set_policy(int argc, char **argv, const struct cmd_desc *cmd)
+                exit(1);
+        }
+ 
+-       printf("arg %s\n", argv[optind]);
+-       exit(0);
++//     printf("arg %s\n", argv[optind]);
++//     exit(0);
+ 
+        strcpy(saltbuf.key_ref_str, argv[optind]);
+        if ((strlen(argv[optind]) != (EXT4_KEY_DESCRIPTOR_SIZE * 2)) ||
+
+scp e4crypt to the target 
+
+encrypt:
+1)it must be on ext4 partition
+  a.root@SDP_Wildcat_Pass-3-C1:/# mkfs.ext4 /dev/sdc1
+2)crate the dirctory you want to encrypt,note it must be an empty one 
+root@SDP_Wildcat_Pass-3-C1:/# mount /dev/sdc1 /mnt 
+root@SDP_Wildcat_Pass-3-C1:/# mkdir -p /mnt/crypto-dir 
+3)preduce a keyring 
+root@SDP_Wildcat_Pass-3-C1:/# head -c 16 /dev/random | xxd -p
+4220afa9edf95dd04f1d511a7d43190b
+4)
+root@SDP_Wildcat_Pass-3-C1:/# e4crypt add_key -S 0x4220afa9edf95dd04f1d511a7d43190b
+Enter passphrase (echo disabled): 
+Added key with descriptor [01c06bbc6beba07f]
+
+5)
+root@SDP_Wildcat_Pass-3-C1:/# keyctl show
+Session Keyring
+ 341638366 --alswrv      0     0  keyring: _ses
+ 277967896 --alsw-v      0     0   \_ logon: ext4:01c06bbc6beba07f
+
+
+
+root@SDP_Wildcat_Pass-3-C1:/# mkdir -p /mnt/crypto-dir
+root@SDP_Wildcat_Pass-3-C1:/# e4crypt set_policy 01c06bbc6beba07f /mnt/crypto-dir
+Key with descriptor [01c06bbc6beba07f] applied to /mnt/crypto-dir.
+root@SDP_Wildcat_Pass-3-C1:/# cp /sbin/ifconfig /mnt/crypto-dir
+root@SDP_Wildcat_Pass-3-C1:/# ls /mnt/crypto-dir/
+ifconfig
+root@SDP_Wildcat_Pass-3-C1:/# keyctl clear 341638366    ------------------> clear the first one 
+root@SDP_Wildcat_Pass-3-C1:/# ls /mnt/crypto-dir/
+ifconfig
+root@SDP_Wildcat_Pass-3-C1:/# echo 3 > /proc/sys/vm/drop_caches (or remount, mount)
+root@SDP_Wildcat_Pass-3-C1:/# ls /mnt/crypto-dir/
+KElcHjvOXvUEe,I1F5fIHC
+
+decrypt:
+root@SDP_Wildcat_Pass-3-C1:/# e4crypt add_key -S 0x4220afa9edf95dd04f1d511a7d43190b
+Enter passphrase (echo disabled): 
+Added key with descriptor [01c06bbc6beba07f]
+root@SDP_Wildcat_Pass-3-C1:/# ls /mnt/crypto-dir/
+ifconfig
+
+
+NOTE:
+must remember key and passphrase 
+
+
+
+
+
+
+
+https://wiki.archlinux.org/index.php/Ext4
+https://opensourcehacker.com/2011/04/15/encrypted-folders-on-ubuntu-linux-using-ecryptfs-on-an-external-hard-drive/
+
+First, use official tool e4crypt
+(http://man7.org/linux/man-pages/man8/e4crypt.8.html), since the only
+tool that is written by authors and is guaranteed to work correctly.
+
+Second, once you compiled kernel with crypto enabled, you need to
+create an empty dir.
+
+Third, on that empty dir set a policy (e4crypt -s).
+
+Fourth, make sure that the key associated with the policy is in the
+keyring (e4crypt takes care of that too, there are commands for that).
+
+Once you done all that, any file or directory, created in that folder
+are going to be encrypted.
+
+Note, one important thing. This is first release, and it is somewhat
+limited. There is still lots of perks that did not get into the kernel
+as of now. For instance, there is no check on whether encryption key
+provided for the ext4 is the correct one, i.e., the original key.
+
+
+======================
+zram
+https://wiki.archlinux.org/index.php/Maximizing_performance
+https://www.kernel.org/doc/Documentation/blockdev/zram.txt
+http://askubuntu.com/questions/471912/zram-vs-zswap-vs-zcache-ultimate-guide-when-to-use-which-one

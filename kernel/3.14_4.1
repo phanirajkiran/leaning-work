@@ -1,0 +1,172 @@
+ 225 config BPF_EVENTS
+ 226         depends on BPF_SYSCALL
+ 273 config SCHED_HRTICK
+ 274         def_bool HIGH_RES_TIMERS
+
+
+ 305 config VDSO
+ 306         bool "Enable VDSO for acceleration of some system calls"
+
+
+ 341 config CRYPTO_SHA1_OCTEON
+ 342         tristate "SHA1 digest algorithm (OCTEON)"
+ 343 config CRYPTO_SHA256_OCTEON
+ 344         tristate "SHA224 and SHA256 digest algorithm (OCTEON)"
+ 345 config CRYPTO_SHA512_OCTEON
+ 346         tristate "SHA384 and SHA512 digest algorithms (OCTEON)"
+
+
+ 452         tristate "PMULL-accelerated GHASH using ARMv8 Crypto Extensions"
+ 453 config CRYPTO_AES_ARM_CE
+ 454         tristate "Accelerated AES using ARMv8 Crypto Extensions"
+ 455 config CRYPTO_SHA2_ARM_CE
+ 456         tristate "SHA-224/256 digest algorithm (ARM v8 Crypto Extensions)"
+ 457 config CRYPTO_SHA1_ARM_CE
+ 458         tristate "SHA1 digest algorithm (ARM v8 Crypto Extensions)"
+ 459 config CRYPTO_SHA1_ARM
+ 460         tristate "SHA1 digest algorithm (ARM-asm)"
+ 461 config CRYPTO_SHA1_ARM_NEON
+ 462         tristate "SHA1 digest algorithm (ARM NEON)"
+ 463 config CRYPTO_SHA512_ARM_NEON
+ 464         tristate "SHA384 and SHA512 digest algorithm (ARM NEON)"
+ 465 config CRYPTO_AES_ARM
+ 466         tristate "AES cipher algorithms (ARM-asm)"
+ 467 config CRYPTO_AES_ARM_BS
+ 468         tristate "Bit sliced AES using NEON instructions"
+
+
+
+
+
+
+ 495 config CRYPTO_SHA1_OCTEON
+ 496         tristate "SHA1 digest algorithm (OCTEON)"
+ 497 config CRYPTO_SHA256_OCTEON
+ 498         tristate "SHA224 and SHA256 digest algorithm (OCTEON)"
+ 499 config CRYPTO_SHA512_OCTEON
+ 500         tristate "SHA384 and SHA512 digest algorithms (OCTEON)"
+
+
+
+ 537 config X86_DIRECT_GBPAGES
+ 538         def_bool y
+ 539 config ENABLE_DIRECT_GBPAGES
+ 540         def_bool y
+
+
+
+ 551 config CRYPTO_MD5_PPC
+ 552         tristate "MD5 digest algorithm (PPC)"
+
+ 561 config I40E_CONFIGFS_FS
+ 562         bool "Config File System Support (configfs)"
+
+
+
+ 569 config CRYPTO_SHA1_PPC_SPE
+ 570         tristate "SHA1 digest algorithm (PPC SPE)"
+ 571 config COMEDI_8254
+ 572         tristate
+ 573 config CRYPTO_AES_PPC_SPE
+ 574         tristate "AES cipher algorithms (PPC SPE)"
+
+
+ 579 config CRYPTO_DEV_VMX
+ 580         bool "Support for VMX cryptographic acceleration instructions"
+ 581 config CRYPTO_DEV_VMX_ENCRYPT
+ 582         tristate "Encryption acceleration support on P8 CPU"
+ 583 config CRYPTO_SHA256_PPC_SPE
+ 584         tristate "SHA224 and SHA256 digest algorithm (PPC SPE)"
+
+
+ 657 config BLK_DEV_RAM_DAX
+ 658         bool "Support Direct Access (DAX) to RAM block devices"
+
+
+ 671 config BT_DEBUGFS
+ 672         bool "Export Bluetooth internals in debugfs"
+
+ 691 config TEST_KASAN
+ 692         tristate "Module for testing kasan for bug detection"
+
+
+
+ 713 config EARLY_PRINTK
+ 714         bool "Activate early kernel debugging"
+
+
+ 729 config IXGBE_VXLAN
+ 730         bool "Virtual eXtensible Local Area Network Support"
+
+
+
+
+ 735 config ACPI_HOTPLUG_IOAPIC
+ 736         bool
+
+
+
+ 741 config LIVEPATCH
+ 742         bool "Kernel Live Patching"
+ 743 config SAMPLE_LIVEPATCH
+
+
+
+1066 config F2FS_IO_TRACE
+1067         bool "F2FS IO tracer"
+
+1096 config BT_SELFTEST_SMP
+1097         bool "SMP test cases"
+1098 config BT_SELFTEST_ECDH
+1099         bool "ECDH test cases"
+1100 config BT_SELFTEST
+1101         bool "Bluetooth self testing support"
+
+
+
+1114 config CRYPTO_MD5_OCTEON
+1115         tristate "MD5 digest algorithm (OCTEON)"
+
+
+
+1139 config LIVE_PATCHING
+1140         boolean "Kernel Live Patching"
+
+
+
+1201 config NR_CPUS
+1202         int
+
+1215 config FPU
+1216         def_bool n
+
+1233 config CMDLINE_FORCE
+1234         bool "Force default kernel command string"
+
+
+
+3139 config CRYPTO_AES_ARM64_CE_BLK
+3140         tristate "AES in ECB/CBC/CTR/XTS modes using ARMv8 Crypto Extensions"
+3141 config CRYPTO_AES_ARM64_NEON_BLK
+3142         tristate "AES in ECB/CBC/CTR/XTS modes using NEON instructions"
+3143 config CRYPTO_AES_ARM64_CE_CCM
+3144         tristate "AES in CCM mode using ARMv8 Crypto Extensions"
+3145 config CRYPTO_AES_ARM64_CE
+3146         tristate "AES core cipher using ARMv8 Crypto Extensions"
+3147 config CRYPTO_GHASH_ARM64_CE
+3148         tristate "GHASH (for GCM chaining mode) using ARMv8 Crypto Extensions"
+3149 config CRYPTO_SHA2_ARM64_CE
+3150         tristate "SHA-224/SHA-256 digest algorithm (ARMv8 Crypto Extensions)"
+3151 config CRYPTO_SHA1_ARM64_CE
+3152         tristate "SHA-1 digest algorithm (ARMv8 Crypto Extensions)"
+
+
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du gg -sh 
+58M	gg
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du zz -sh 
+178M	zz
+
+
+

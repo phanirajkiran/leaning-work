@@ -1,0 +1,56 @@
+pstore
+======
+v2.6.39
+ca01d6dd2d7a2652000307520777538740efc286
+
+commit f9bb48825a6b5d02f4cabcc78967c75db903dcdc
+Author: Eric W. Biederman <ebiederm@xmission.com>
+Date:   Wed May 13 17:35:41 2015 -0500
+
+    sysfs: Create mountpoints with sysfs_create_mount_point
+    
+    This allows for better documentation in the code and
+    it allows for a simpler and fully correct version of
+    fs_fully_visible to be written.
+    
+    The mount points converted and their filesystems are:
+    /sys/hypervisor/s390/       s390_hypfs
+    /sys/kernel/config/         configfs
+    /sys/kernel/debug/          debugfs
+    /sys/firmware/efi/efivars/  efivarfs
+    /sys/fs/fuse/connections/   fusectl
+    /sys/fs/pstore/             pstore
+    /sys/kernel/tracing/        tracefs
+    /sys/fs/cgroup/             cgroup
+    /sys/kernel/security/       securityfs
+    /sys/fs/selinux/            selinuxfs
+    /sys/fs/smackfs/            smackfs
+    
+    Cc: stable@vger.kernel.org
+    Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+    Signed-off-by: "Eric W. Biederman" <ebiederm@xmission.com>
+
+
+commit 42222c2a5d5da7fe4839491d5c44034f40761071
+Author: Wang Long <long.wanglong@huawei.com>
+Date:   Thu May 21 09:34:22 2015 -0700
+
+    fs/pstore: update the backend parameter in pstore module
+    
+    This patch update the module parameter backend, so it is visible
+    through /sys/module/pstore/parameters/backend.
+    
+    For example:
+    if pstore backend is ramoops, with this patch:
+        # cat /sys/module/pstore/parameters/backend
+        ramoops
+    and without this patch:
+        # cat /sys/module/pstore/parameters/backend
+        (null)
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable$ cat fs/Makefile |grep pstore
+obj-$(CONFIG_PSTORE)		+= pstore/
+
+
+ACTION: ramoops.txt

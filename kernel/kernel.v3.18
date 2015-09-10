@@ -1,0 +1,252 @@
+overlayfs
+---------
+https://wiki.archlinux.org/index.php/Overlay_filesystem
+use case:
+http://askubuntu.com/questions/109413/how-do-i-use-overlayfs
+http://jasonwryan.com/blog/2015/01/19/overlayfs/
+CONFIG_OVERLAY_FS = y 
+mount -t overlayfs overlayfs -olowerdir=/lower,upperdir=/upper/upper,workdir=/upper/work /overlay
+
+
+on ubuntu:
+lyang001@lyang001-OptiPlex-9010:/tmp$ uname -a 
+Linux lyang001-OptiPlex-9010 3.16.0-30-generic #40~14.04.1-Ubuntu SMP Thu Jan 15 17:43:14 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+
+lyang001@lyang001-OptiPlex-9010:/tmp$ sudo mount -t overlayfs -o lowerdir=lower,upperdir=upper overlayfs workdir
+lyang001@lyang001-OptiPlex-9010:/tmp$ touch upper/1 
+lyang001@lyang001-OptiPlex-9010:/tmp$ ls lower/
+lyang001@lyang001-OptiPlex-9010:/tmp$ ls upper/
+1
+lyang001@lyang001-OptiPlex-9010:/tmp$ ls workdir/
+1
+lyang001@lyang001-OptiPlex-9010:/tmp$ touch lower/2 
+lyang001@lyang001-OptiPlex-9010:/tmp$ ls workdir/
+1  2
+
+on wrlinux(4.2) 
+root@SDP_Wildcat_Pass-3-C1:~# mount -t overlay -o lowerdir=lower,upperdir=upper overlay workdir
+mount: wrong fs type, bad option, bad superblock on overlay,
+       missing codepage or helper program, or other error
+
+       In some cases useful info is found in syslog - try
+       dmesg | tail or so.
+
+root@SDP_Wildcat_Pass-3-C1:~# mount -t overlay -o rw,lowerdir=/mnt/1,upperdir=/mnt/2,workdir=/mnt/4 overlay /mnt/3
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/4/4  
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/3
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/1/1
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/3
+1
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/2/2
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/3
+1  2
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/4/4
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/3
+1  2
+
+An overlay filesystem combines two filesystems - an 'upper' filesystem
+and a 'lower' filesystem.  When a name exists in both filesystems, the
+object in the 'upper' filesystem is visible while the object in the
+'lower' filesystem is either hidden or, in the case of directories,
+merged with the 'upper' object.
+
+eg:
+root@SDP_Wildcat_Pass-3-C1:~# mkdir /mnt/1/share 
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/1/share/1
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/3/
+1  2  share
+root@SDP_Wildcat_Pass-3-C1:~# mkdir /mnt/2/share
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/2/share/2
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/3/share/
+1  2
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/1/share/same
+root@SDP_Wildcat_Pass-3-C1:~# echo "1" > /mnt/1/share/same
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/2/share/same
+root@SDP_Wildcat_Pass-3-C1:~# echo "2" > /mnt/2/share/same
+root@SDP_Wildcat_Pass-3-C1:~# cat /mnt/3/share/same 
+2
+
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/3/all
+touch: cannot touch '/mnt/3/all': Read-only file system
+
+
+TEST:
+There's testsuite developed by David Howells at:
+
+  git://git.infradead.org/users/dhowells/unionmount-testsuite.git
+
+Run as root:
+
+  # cd unionmount-testsuite
+  # ./run --ov
+
+QA:
+ask https://groups.google.com/forum/#!topic/kiwi-images/SwQ5bNTNZyQ for help 
+
+use case 1:
+mount -t overlayfs -o lowerdir=ubuntu-base,upperdir=kubuntu overlayfs kubuntu
+
+eg:
+root@SDP_Wildcat_Pass-3-C1:~# mount -t overlay -o rw,lowerdir=/mnt/1,upperdir=/mnt/2,workdir=/mnt/4 overlay /mnt/2
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/2/
+1  2  share
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/2/
+1  2  share
+root@SDP_Wildcat_Pass-3-C1:~# touch /mnt/1/from1
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/2/
+1  2  from1  share
+
+root@SDP_Wildcat_Pass-3-C1:~# umount /mnt/2/
+root@SDP_Wildcat_Pass-3-C1:~# ls /mnt/2/
+2  share
+
+
+
+if it has no overlayfs 
+I have to create base+ubuntu, base+kbuntu, base+xbuntu
+after overlayfs 
+I just use one copy of ubunto-base, other part comes from upperdir to change the distubution 
+
+
+use case 2:
+I have a mp3 dir, I listen it, someday I want to add the new mp3 into playlist, but don't want to break mp3 dir 
+I can use mp3 as lower, new mp3 as uper,  play mp3 as merged  
+============================================================================================================
+reference: https://wiki.archlinux.org/index.php/Ext4
+
+config MODULE_COMPRESS
+       bool "Compress modules on installation"
+       depends on MODULES
+       help
+         This option compresses the kernel modules when 'make
+         modules_install' is run.
+
+         The modules will be compressed either using gzip or xz depend on the
+         choice made in "Compression algorithm".
+
+         module-init-tools has support for gzip format while kmod handle gzip
+         and xz compressed modules.
+
+         When a kernel module is installed from outside of the main kernel
+         source and uses the Kbuild system for installing modules then that
+         kernel module will also be compressed when it is installed.
+
+         This option provides little benefit when the modules are to be used inside
+         an initrd or initramfs, it generally is more efficient to compress the whole
+         initrd or initramfs instead.
+
+         This is fully compatible with signed modules while the signed module is
+         compressed. module-init-tools or kmod handles decompression and provide to
+         other layer the uncompressed but signed payload.
+
+
+gzip: need kmod with '--with-zip' 
+CONFIG_MODULE_COMPRESS=y
+CONFIG_MODULE_COMPRESS_GZIP=y
+CONFIG_DECOMPRESS_GZIP=y (slect by above)
+
+xz: need --with-xz
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=772628
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du -sh xz
+39M	
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du -sh gzip
+60M	
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du normal -sh 
+178M	
+
+
+/lib/modules/4.2.0-WR8.0.0.0_standard/kernel/net/sctp/sctp.ko ---> 9.1M
+/lib/modules/4.2.0-WR8.0.0.0_standard.gzip/kernel/net/sctp/sctp.ko.gz ---> 2.9M
+/lib/modules/4.2.0-WR8.0.0.0_standard.xz/kernel/net/sctp/sctp.ko.xz ---1.5M
+
+root@ISG_WalnutCanyonII-2:~# lsmod 
+Module                  Size  Used by
+
+root@ISG_WalnutCanyonII-2:~# uname -a 
+Linux ISG_WalnutCanyonII-2 4.2.0-WR8.0.0.0_standard #9 SMP PREEMPT Thu Sep 10 11:00:23 CST 2015 x86_64 x86_64 x86_64 GNU/Linux
+root@ISG_WalnutCanyonII-2:~# depmod -a  --------------------------------------------------------------------------------------------------> MUST
+root@ISG_WalnutCanyonII-2:~# mo
+modinfo              modprobe             more                 mount                mount.nfs4           mountpoint           
+modinfo.kmod         modprobe.kmod        more.util-linux      mount.nfs            mount.util-linux     mountpoint.sysvinit  
+root@ISG_WalnutCanyonII-2:~# reboot 
+
+The system is going down for reboot NOW!nyonII-2 (pts/0) (Thu Sep 10 03:06:48
+root@ISG_WalnutCanyonII-2:~# Connection to 128.224.165.127 closed by remote host.
+Connection to 128.224.165.127 closed.
+lyang0@pek-lpgtest14:export$ 
+lyang0@pek-lpgtest14:export$ 
+lyang0@pek-lpgtest14:export$ ssh root@128.224.165.127
+
+lyang0@pek-lpgtest14:export$ ssh root@128.224.165.127
+Warning: Permanently added '128.224.165.127' (ECDSA) to the list of known hosts.
+Password: 
+root@ISG_WalnutCanyonII-2:~# lsmod 
+Module                  Size  Used by
+x86_pkg_temp_thermal     5595  0 
+coretemp                6780  0 
+crct10dif_pclmul        5436  0 
+crct10dif_common        1790  1 crct10dif_pclmul
+snd_hda_codec_realtek    68759  1 
+aesni_intel           160070  0 
+snd_hda_codec_hdmi     38390  1 
+snd_hda_codec_generic    57114  1 snd_hda_codec_realtek
+aes_x86_64              7929  1 aesni_intel
+glue_helper             5003  1 aesni_intel
+input_leds              3310  0 
+lrw                     4184  1 aesni_intel
+led_class               5952  1 input_leds
+battery                13464  0 
+ablk_helper             2836  1 aesni_intel
+thermal                10140  0 
+iTCO_wdt                6737  0 
+cryptd                 10178  2 aesni_intel,ablk_helper
+snd_hda_intel          24660  0 
+iTCO_vendor_support     2867  1 iTCO_wdt
+snd_hda_codec          99284  4 snd_hda_codec_realtek,snd_hda_codec_hdmi,snd_hda_codec_generic,snd_hda_intel
+ata_generic             4163  0 
+snd_hda_core           48012  5 snd_hda_codec_realtek,snd_hda_codec_hdmi,snd_hda_codec_generic,snd_hda_codec,snd_hda_intel
+fan                     4279  0 
+ac                      5184  0 
+acpi_pad               10626  0 
+i2c_i801               10815  0 
+lpc_ich                14565  0 
+root@ISG_WalnutCanyonII-2:~# modprobe sctp
+root@ISG_WalnutCanyonII-2:~# lsmod 
+Module                  Size  Used by
+sctp                  273912  2 
+libcrc32c               1411  1 sctp
+
+root@ISG_WalnutCanyonII-2:~# zcat /proc/config.gz |grep COMPR
+CONFIG_MODULE_COMPRESS=y
+CONFIG_MODULE_COMPRESS_GZIP=y
+# CONFIG_MODULE_COMPRESS_XZ is not set
+CONFIG_SLIP_COMPRESSED=y
+CONFIG_LZO_COMPRESS=y
+CONFIG_LZO_DECOMPRESS=y
+CONFIG_DECOMPRESS_GZIP=y
+
+root@ISG_WalnutCanyonII-2:~# modinfo sctp
+filename:       /lib/modules/4.2.0-WR8.0.0.0_standard/kernel/net/sctp/sctp.ko.gz
+license:        GPL
+description:    Support for the SCTP protocol (RFC2960)
+author:         Linux Kernel SCTP developers <linux-sctp@vger.kernel.org>
+alias:          net-pf-10-proto-132
+alias:          net-pf-2-proto-132
+depends:        libcrc32c
+intree:         Y
+vermagic:       4.2.0-WR8.0.0.0_standard SMP preempt mod_unload 
+parm:           no_checksums:Disable checksums computing and verification (bool)
+
+root@ISG_WalnutCanyonII-2:~# modinfo sctp
+filename:       /lib/modules/4.2.0-WR8.0.0.0_standard/kernel/net/sctp/sctp.ko.xz
+license:        GPL
+description:    Support for the SCTP protocol (RFC2960)
+author:         Linux Kernel SCTP developers <linux-sctp@vger.kernel.org>
+alias:          net-pf-10-proto-132
+alias:          net-pf-2-proto-132
+depends:        libcrc32c
+intree:         Y
+vermagic:       4.2.0-WR8.0.0.0_standard SMP preempt mod_unload 
+parm:           no_checksums:Disable checksums computing and verification (bool)
+
