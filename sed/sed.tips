@@ -161,3 +161,10 @@ ddd
 
 next line match 处理匹配行的下一行的
 sed '/Unix/{n;s/.*/hi/}' file
+
+
+lyang001@lyang001-OptiPlex-9010:~/WORK/updates$ echo $a |sed "s/\(.*\)\(week[0-9]\)\(.*\)/\2/"
+week3
+lyang001@lyang001-OptiPlex-9010:~/WORK/updates$ echo $a 
+/lpg-build/cdc/WASSP_LINUX_80/testmatrices/wrlinux/wrlinux-8.0/S6/week3/userspace/qemux86-64/qemux86-64_standard_glibc-std_WR_systemd.xls
+

@@ -1,0 +1,157 @@
+blkio
+=====
+
+Proportional Weight division of bandwidth
+------------------------------------------
+- Enable Block IO controller
+        CONFIG_BLK_CGROUP=y
+
+- Enable group scheduling in CFQ
+        CONFIG_CFQ_GROUP_IOSCHED=y
+Note: this is nessary,if not, you won't see below items 
+
+blkio.io_merged
+blkio.io_merged_recursive
+blkio.io_queued
+blkio.io_queued_recursive
+blkio.io_service_bytes
+blkio.io_service_bytes_recursive
+blkio.io_service_time
+blkio.io_service_time_recursive
+blkio.io_serviced
+blkio.io_serviced_recursive
+blkio.io_wait_time
+blkio.io_wait_time_recursive
+blkio.leaf_weight
+blkio.leaf_weight_device
+blkio.reset_stats
+blkio.sectors
+blkio.sectors_recursive
+blkio.time
+blkio.time_recursive
+blkio.weight
+blkio.weight_device
+
+
+steps:
+root@ISG_WalnutCanyonII-2:~#  mount -t tmpfs cgroup_root /sys/fs/cgroup
+root@ISG_WalnutCanyonII-2:~# mkdir /sys/fs/cgroup/blkio
+root@ISG_WalnutCanyonII-2:~# mount -t cgroup -o blkio none /sys/fs/cgroup/blkio
+root@ISG_WalnutCanyonII-2:~# ls /sys/fs/cgroup/blkio
+blkio.io_merged		   blkio.io_service_bytes	     blkio.io_serviced		   blkio.leaf_weight	     blkio.sectors_recursive  blkio.weight_device    notify_on_release
+blkio.io_merged_recursive  blkio.io_service_bytes_recursive  blkio.io_serviced_recursive   blkio.leaf_weight_device  blkio.time		      cgroup.clone_children  release_agent
+blkio.io_queued		   blkio.io_service_time	     blkio.io_wait_time		   blkio.reset_stats	     blkio.time_recursive     cgroup.procs	     tasks
+blkio.io_queued_recursive  blkio.io_service_time_recursive   blkio.io_wait_time_recursive  blkio.sectors	     blkio.weight	      cgroup.sane_behavior
+root@ISG_WalnutCanyonII-2:~# mkdir -p /sys/fs/cgroup/blkio/test1/ /sys/fs/cgroup/blkio/test2
+root@ISG_WalnutCanyonII-2:~# ls /sys/fs/cgroup/blkio/test1/
+blkio.io_merged		   blkio.io_service_bytes	     blkio.io_serviced		   blkio.leaf_weight	     blkio.sectors_recursive  blkio.weight_device    tasks
+blkio.io_merged_recursive  blkio.io_service_bytes_recursive  blkio.io_serviced_recursive   blkio.leaf_weight_device  blkio.time		      cgroup.clone_children
+blkio.io_queued		   blkio.io_service_time	     blkio.io_wait_time		   blkio.reset_stats	     blkio.time_recursive     cgroup.procs
+blkio.io_queued_recursive  blkio.io_service_time_recursive   blkio.io_wait_time_recursive  blkio.sectors	     blkio.weight	      notify_on_release
+root@ISG_WalnutCanyonII-2:~# ls /sys/fs/cgroup/blkio/test1/ |grep blk
+blkio.io_merged
+blkio.io_merged_recursive
+blkio.io_queued
+blkio.io_queued_recursive
+blkio.io_service_bytes
+blkio.io_service_bytes_recursive
+blkio.io_service_time
+blkio.io_service_time_recursive
+blkio.io_serviced
+blkio.io_serviced_recursive
+blkio.io_wait_time
+blkio.io_wait_time_recursive
+blkio.leaf_weight
+blkio.leaf_weight_device
+blkio.reset_stats
+blkio.sectors
+blkio.sectors_recursive
+blkio.time
+blkio.time_recursive
+blkio.weight
+blkio.weight_device
+root@ISG_WalnutCanyonII-2:~# echo 1000 > /sys/fs/cgroup/blkio/test1/blkio.weight
+root@ISG_WalnutCanyonII-2:~# echo 500 > /sys/fs/cgroup/blkio/test2/blkio.weight
+root@ISG_WalnutCanyonII-2:~# echo 3 > /proc/sys/vm/drop_caches
+
+root@ISG_WalnutCanyonII-2:~# mkfs.ext4 /dev/sda1 
+root@ISG_WalnutCanyonII-2:~# mount /dev/sda1 /mnt 
+root@ISG_WalnutCanyonII-2:~# dd of=/mnt/zerofile1 if=/dev/zero count=1024 bs=500k
+1024+0 records in
+1024+0 records out
+524288000 bytes (524 MB) copied, 0.359434 s, 1.5 GB/s
+root@ISG_WalnutCanyonII-2:~# dd of=/mnt/zerofile1 if=/dev/zero count=1024 bs=5000k
+1024+0 records in
+1024+0 records out
+5242880000 bytes (5.2 GB) copied, 41.6934 s, 126 MB/s
+root@ISG_WalnutCanyonII-2:~# dd of=/mnt/zerofile2 if=/dev/zero count=1024 bs=5000k
+1024+0 records in
+1024+0 records out
+5242880000 bytes (5.2 GB) copied, 46.2068 s, 113 MB/s
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile1 of=/dev/null &
+[1] 890
+root@ISG_WalnutCanyonII-2:~# echo $! > /sys/fs/cgroup/blkio/test1/tasks
+root@ISG_WalnutCanyonII-2:~# cat /sys/fs/cgroup/blkio/test1/tasks
+890
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null &
+[2] 893
+root@ISG_WalnutCanyonII-2:~# echo $! > /sys/fs/cgroup/blkio/test2/tasks
+root@ISG_WalnutCanyonII-2:~# cat /sys/fs/cgroup/blkio/test1/tasks
+890
+root@ISG_WalnutCanyonII-2:~# cat /sys/fs/cgroup/blkio/test2/tasks
+893
+root@ISG_WalnutCanyonII-2:~# 10240000+0 records in
+10240000+0 records out
+5242880000 bytes (5.2 GB) copied, 54.093 s, 96.9 MB/s
+10240000+0 records in
+10240000+0 records out
+5242880000 bytes (5.2 GB) copied, 58.3378 s, 89.9 MB/s
+
+[1]-  Done                    dd if=/mnt/zerofile1 of=/dev/null
+[2]+  Done                    dd if=/mnt/zerofile2 of=/dev/null
+root@ISG_WalnutCanyonII-2:~# cat /sys/fs/cgroup/blkio/test1/blkio.time
+8:0 36089
+root@ISG_WalnutCanyonII-2:~# cat /sys/fs/cgroup/blkio/test2/blkio.time
+8:0 35719
+
+
+
+Throttling/Upper Limit policy
+-----------------------------
+最好用组管理 一个组管理一个
+
+root@ISG_WalnutCanyonII-2:~# mount -t tmpfs cgroup_root /sys/fs/cgroup
+root@ISG_WalnutCanyonII-2:~# mkdir /sys/fs/cgroup/blkio
+root@ISG_WalnutCanyonII-2:~# mount -t cgroup -o blkio none /sys/fs/cgroup/blkio
+root@ISG_WalnutCanyonII-2:~# mkdir -p /sys/fs/cgroup/blkio/test1/ /sys/fs/cgroup/blkio/test2
+root@ISG_WalnutCanyonII-2:~# echo "8:0  1048576" > /sys/fs/cgroup/blkio/test1/blkio.throttle.read_bps_device -----------------> 放在组内不行
+root@ISG_WalnutCanyonII-2:~# mount /dev/sda1 /mnt 
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 iflag=direct
+1024+0 records in
+1024+0 records out
+4194304 bytes (4.2 MB) copied, 0.193868 s, 21.6 MB/s
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 iflag=direct
+1024+0 records in
+1024+0 records out
+4194304 bytes (4.2 MB) copied, 0.168637 s, 24.9 MB/s
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 iflag=direct
+1024+0 records in
+1024+0 records out
+4194304 bytes (4.2 MB) copied, 0.187042 s, 22.4 MB/s
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 iflag=direct
+1024+0 records in
+1024+0 records out
+4194304 bytes (4.2 MB) copied, 0.166697 s, 25.2 MB/s
+root@ISG_WalnutCanyonII-2:~# echo "8:0  1048576" > /sys/fs/cgroup/blkio/blkio.throttle.read_bps_device
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 iflag=direct
+1024+0 records in
+1024+0 records out
+4194304 bytes (4.2 MB) copied, 4.00109 s, 1.0 MB/s
+
+
+
+Note: 
+only add the whole disk into the controller 
+root@ISG_WalnutCanyonII-2:~# echo "8:1  1048576" > /sys/fs/cgroup/blkio/test1/blkio.throttle.read_bps_device
+-sh: echo: write error: Invalid argument
+

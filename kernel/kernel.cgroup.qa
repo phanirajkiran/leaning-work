@@ -1,0 +1,22 @@
+how to know subsystem
+ │                                                              --- Control Group support                                                                                                           │ │  
+  │ │                                                              [*]   Example debug cgroup subsystem                                                                                                │ │  
+  │ │                                                              [*]   Freezer cgroup subsystem                                                                                                      │ │  
+  │ │                                                              [*]   Device controller for cgroups                                                                                                 │ │  
+  │ │                                                              [*]   Cpuset support                                                                                                                │ │  
+  │ │                                                              [*]     Include legacy /proc/<pid>/cpuset file                                                                                      │ │  
+  │ │                                                              [*]   Simple CPU accounting cgroup subsystem                                                                                        │ │  
+  │ │                                                              [*]   Memory Resource Controller for Control Groups                                                                                 │ │  
+  │ │                                                              [*]     Memory Resource Controller Swap Extension                                                                                   │ │  
+  │ │                                                              [ ]       Memory Resource Controller Swap Extension enabled by default                                                              │ │  
+  │ │                                                              [*]     Memory Resource Controller Kernel Memory accounting                                                                         │ │  
+  │ │                                                              [*]   HugeTLB Resource Controller for Control Groups                                                                                │ │  
+  │ │                                                              [*]   Enable perf_event per-cpu per-container group (cgroup) monitoring                                                             │ │  
+  │ │                                                              [*]   Group CPU scheduler  --->                                                                                                     │ │  
+  │ │                                                              [*]   Block IO controller 
+
+
+
+root@ISG_WalnutCanyonII-2:~# echo "8:1  1048576" > /sys/fs/cgroup/blkio/blkio.throttle.read_bps_device
+-sh: echo: write error: Invalid argument
+

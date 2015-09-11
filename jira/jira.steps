@@ -1,0 +1,76 @@
+https://github.com/toabctl/jiracli
+
+lyang001@lyang001-OptiPlex-9010:~$ git clone https://github.com/toabctl/jiracli.git
+Cloning into 'jiracli'...
+remote: Counting objects: 252, done.
+remote: Total 252 (delta 0), reused 0 (delta 0), pack-reused 251
+Receiving objects: 100% (252/252), 65.87 KiB | 98.00 KiB/s, done.
+Resolving deltas: 100% (118/118), done.
+Checking connectivity... done.
+lyang001@lyang001-OptiPlex-9010:~$ cd jiracli/
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ ls
+HACKING.rst  jiracli  LICENSE  README.rst  requirements.txt  setup.cfg  setup.py
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ python setup.py install
+Traceback (most recent call last):
+  File "setup.py", line 19, in <module>
+    import setuptools
+ImportError: No module named setuptools
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ sudo apt-get install python-setuptools
+[sudo] password for lyang001: 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following extra packages will be installed:
+  python-pkg-resources
+Suggested packages:
+  python-distribute python-distribute-doc
+The following NEW packages will be installed:
+  python-setuptools
+The following packages will be upgraded:
+  python-pkg-resources
+1 upgraded, 1 newly installed, 0 to remove and 341 not upgraded.
+Need to get 292 kB of archives.
+After this operation, 830 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main python-pkg-resources all 3.3-1ubuntu2 [61.9 kB]
+Get:2 http://cn.archive.ubuntu.com/ubuntu/ trusty-updates/main python-setuptools all 3.3-1ubuntu2 [230 kB]
+Fetched 292 kB in 0s (1,087 kB/s)      
+
+
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ sudo apt-get install python-pip
+
+
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ sudo pip install tabulate
+Downloading/unpacking tabulate
+  Downloading tabulate-0.7.5.tar.gz
+  Running setup.py (path:/tmp/pip_build_root/tabulate/setup.py) egg_info for package tabulate
+    
+Installing collected packages: tabulate
+  Running setup.py install for tabulate
+    
+    Installing tabulate script to /usr/local/bin
+Successfully installed tabulate
+Cleaning up...
+
+
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ sudo pip install termcolor
+Downloading/unpacking termcolor
+  Downloading termcolor-1.1.0.tar.gz
+  Running setup.py (path:/tmp/pip_build_root/termcolor/setup.py) egg_info for package termcolor
+    
+Installing collected packages: termcolor
+  Running setup.py install for termcolor
+    
+Successfully installed termcolor
+Cleaning up...
+
+ImportError: No module named jira
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ sudo pip install jira
+
+
+
+lyang001@lyang001-OptiPlex-9010:~/jiracli$ cat ~/.jiracli.ini 
+[defaults]
+user = lyang0
+password = !windwind001
+url = https://jira.wrs.com:8443

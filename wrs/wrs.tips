@@ -1,0 +1,6 @@
+IMAGE_ENABLE_CONTAINER = 1 to remove the kernel module 
+
+kernel MODULE_COMPRESS enable than no ko come in 
+lyang0@pek-test98:/buildarea1/lyang0/arm64$ ls ../qemu/export/dist/lib/modules/
+4.1.6-WR8.0.0.0_standard
+
