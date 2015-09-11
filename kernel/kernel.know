@@ -54,3 +54,7 @@ obj-$(CONFIG_PSTORE)		+= pstore/
 
 
 ACTION: ramoops.txt
+
+
+CONFIG_GENERIC_CPU_AUTOPROBE
+https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=67bad2fdb754dbef14596c0b5d28b3a12c8dfe84

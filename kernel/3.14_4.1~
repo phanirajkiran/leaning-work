@@ -163,3 +163,10 @@
 
 
 
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du gg -sh 
+58M	gg
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du zz -sh 
+178M	zz
+
+
+

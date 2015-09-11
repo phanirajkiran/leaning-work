@@ -124,7 +124,7 @@ root@ISG_WalnutCanyonII-2:~# mount -t tmpfs cgroup_root /sys/fs/cgroup
 root@ISG_WalnutCanyonII-2:~# mkdir /sys/fs/cgroup/blkio
 root@ISG_WalnutCanyonII-2:~# mount -t cgroup -o blkio none /sys/fs/cgroup/blkio
 root@ISG_WalnutCanyonII-2:~# mkdir -p /sys/fs/cgroup/blkio/test1/ /sys/fs/cgroup/blkio/test2
-root@ISG_WalnutCanyonII-2:~# echo "8:0  1048576" > /sys/fs/cgroup/blkio/test1/blkio.throttle.read_bps_device -----------------> 放在组内不行
+root@ISG_WalnutCanyonII-2:~# echo "8:0  1048576" > /sys/fs/cgroup/blkio/blkio.throttle.read_bps_device -----------------> 放在组内不行
 root@ISG_WalnutCanyonII-2:~# mount /dev/sda1 /mnt 
 root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 iflag=direct
 1024+0 records in
@@ -148,10 +148,39 @@ root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 
 1024+0 records out
 4194304 bytes (4.2 MB) copied, 4.00109 s, 1.0 MB/s
 
+root@ISG_WalnutCanyonII-2:~# hdparm --direct -t /dev/sda
+/dev/sda:
+ Timing O_DIRECT disk reads:   4 MB in  4.00 seconds = 1023.37 kB/sec
+
+remove the throttling 
+root@ISG_WalnutCanyonII-2:~# echo "8:0  0" > /sys/fs/cgroup/blkio/blkio.throttle.read_bps_device
+root@ISG_WalnutCanyonII-2:~# dd if=/mnt/zerofile2 of=/dev/null bs=4K count=1024 iflag=direct
+1024+0 records in
+1024+0 records out
+4194304 bytes (4.2 MB) copied, 0.184383 s, 22.7 MB/s
+
+OR
 
 
 Note: 
-only add the whole disk into the controller 
+1)only add the whole disk into the controller 
 root@ISG_WalnutCanyonII-2:~# echo "8:1  1048576" > /sys/fs/cgroup/blkio/test1/blkio.throttle.read_bps_device
 -sh: echo: write error: Invalid argument
 
+2)
+however,throttling's hierarchy support is enabled iff "sane_behavior" is
+enabled from cgroup side, which currently is a development option and
+not publicly available.
+
+
+Tips
+When weights are not enough, fixed limits come into play. You can either limit by bytes-per-second or by IOPS (IO Operations Per Second). The configuration options are aptly named:
+
+    blkio.throttle.read_bps_device for read limits in BPS
+    blkio.throttle.read_iops_device for read limits in IOPS.
+    blkio.throttle.write_bps_device for write limits in BPS.
+    blkio.throttle.write_iops_device for write limites in IOPS.
+
+To adjust them you need to figure out the minor and major number of the device you wish to put a limit on. Easily done though, just use ls -la /dev and look at the line with your device, the numbers in just before the date will be the two numbers you are looking for. To place a limit run the following with your major, minor and byte limits replaced:
+
+echo "252:2 10485760">blkio.throttle.write_bps_device

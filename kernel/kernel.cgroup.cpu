@@ -1,0 +1,3 @@
+root@ISG_WalnutCanyonII-2:/sys/fs/cgroup# mount -t cgroup -ocpu none /sys/fs/cgroup/cpu
+root@ISG_WalnutCanyonII-2:/sys/fs/cgroup# ls /sys/fs/cgroup/cpu
+

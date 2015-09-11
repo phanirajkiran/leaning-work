@@ -161,12 +161,131 @@
 3152         tristate "SHA-1 digest algorithm (ARMv8 Crypto Extensions)"
 
 
+IMAGE_ENABLE_CONTAINER
 
 
-lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du gg -sh 
-58M	gg
-lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable-build-4.2$ du zz -sh 
-178M	zz
+root@SDP_Wildcat_Pass-3-C1:/lib/modules/4.2.0-WR8.0.0.0_standard# insmod ./kernel/net/ipv6/ip6_tunnel.ko.gz
+insmod: ERROR: could not insert module ./kernel/net/ipv6/ip6_tunnel.ko.gz: Unknown symbol in module
+
+
+
+
+
+commit f3ac3fc287818a63072618b091074267bfa5184d
+Author: Mika Westerberg <mika.westerberg@linux.intel.com>
+Date:   Wed Feb 4 15:03:48 2015 +0200
+
+    serial: 8250_dw: Add missing MODULE_ALIAS() for module autoloading support
+    
+    Without this the module does not load automatically whenever suitable
+    platform device appears.
+    
+    Reported-by: Jerome Blin <jerome.blin@intel.com>
+    Signed-off-by: Mika Westerberg <mika.westerberg@linux.intel.com>
+    Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+    Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+
+
+commit 3e14dcf7cb80b34a1f38b55bc96f02d23fdaaaaf
+Author: Mathias Krause <minipli@googlemail.com>
+Date:   Sun Jan 11 18:17:42 2015 +0100
+
+    crypto: add missing crypto module aliases
+    
+    Commit 5d26a105b5a7 ("crypto: prefix module autoloading with "crypto-"")
+    changed the automatic module loading when requesting crypto algorithms
+    to prefix all module requests with "crypto-". This requires all crypto
+    modules to have a crypto specific module alias even if their file name
+    would otherwise match the requested crypto algorithm.
+    
+    Even though commit 5d26a105b5a7 added those aliases for a vast amount of
+    modules, it was missing a few. Add the required MODULE_ALIAS_CRYPTO
+    annotations to those files to make them get loaded automatically, again.
+    This fixes, e.g., requesting 'ecb(blowfish-generic)', which used to work
+    with kernels v3.18 and below.
+    
+    Also change MODULE_ALIAS() lines to MODULE_ALIAS_CRYPTO(). The former
+    won't work for crypto modules any more.
+    
+    Fixes: 5d26a105b5a7 ("crypto: prefix module autoloading with "crypto-"")
+    Cc: Kees Cook <keescook@chromium.org>
+    Signed-off-by: Mathias Krause <minipli@googlemail.com>
+    Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
+
+
+
+commit 5d26a105b5a73e5635eae0629b42fa0a90e07b7b
+Author: Kees Cook <keescook@chromium.org>
+Date:   Thu Nov 20 17:05:53 2014 -0800
+
+    crypto: prefix module autoloading with "crypto-"
+    
+    This prefixes all crypto module loading with "crypto-" so we never run
+    the risk of exposing module auto-loading to userspace via a crypto API,
+    as demonstrated by Mathias Krause:
+    
+    https://lkml.org/lkml/2013/3/4/70
+    
+    Signed-off-by: Kees Cook <keescook@chromium.org>
+    Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
+
+commit f98f89a0104454f35a62d681683c844f6dbf4043
+Author: Tom Gundersen <teg@jklm.no>
+Date:   Thu May 15 23:21:30 2014 +0200
+
+    net: tunnels - enable module autoloading
+    
+    Enable the module alias hookup to allow tunnel modules to be autoloaded on demand.
+    
+    This is in line with how most other netdev kinds work, and will allow userspace
+    to create tunnels without having CAP_SYS_MODULE.
+    
+    Signed-off-by: Tom Gundersen <teg@jklm.no>
+    Signed-off-by: David S. Miller <davem@davemloft.net>
+
+commit 6eb2451f7c43c4a7f84ae7b613ea975317b951f1
+Author: Zhang Rui <rui.zhang@intel.com>
+Date:   Tue Jan 14 16:46:36 2014 +0800
+
+    ACPI: add module autoloading support for ACPI enumerated devices
+    
+
+
+commit 5c057e5570f18b9d0f4eea99e0a0d55ad5f30e36
+Author: Johan Hovold <jhovold@gmail.com>
+Date:   Tue Nov 12 15:09:40 2013 -0800
+
+    backlight: atmel-pwm-bl: fix module autoload
+    
+    Add missing module alias which is needed for module autoloading.
+    
+    Signed-off-by: Johan Hovold <jhovold@gmail.com>
+    Acked-by: Jingoo Han <jg1.han@samsung.com>
+    Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+    Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+
+
+commit 340991e30ccef7b983cf2814ecea610504f5d059
+Author: Jussi Kivilinna <jussi.kivilinna@iki.fi>
+Date:   Tue May 21 17:10:44 2013 +0300
+
+    crypto: sha512_ssse3 - add sha384 support
+    
+    Add sha384 implementation to sha512_ssse3 module.
+    
+    This also fixes sha512_ssse3 module autoloading issue when 'sha384' is used
+    before 'sha512'. Previously in such case, just sha512_generic was loaded and
+    not sha512_ssse3 (since it did not provide sha384). Now if 'sha512' was used
+    after 'sha384' usage, sha512_ssse3 would remain unloaded. For example, this
+    happens with tcrypt testing module since it tests 'sha384' before 'sha512'.
+    
+    Cc: Tim Chen <tim.c.chen@linux.intel.com>
+    Signed-off-by: Jussi Kivilinna <jussi.kivilinna@iki.fi>
+    Signed-off-by: Herbert Xu <herbert@gondor.apana.org.au>
+
+
+
 
 
 

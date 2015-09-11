@@ -1,0 +1,37 @@
+http://upstart.ubuntu.com/wiki/Cgroup
+
+Currently the valid values are (but won't be hardcoded into upstart):
+
+    blkio
+    cpu
+    cpuacct
+    cpuset
+    devices
+    freezer
+    hugetlb
+    memory
+    perf_event 
+
+if you want to mount all the cgroup controllers 
+
+root@ISG_WalnutCanyonII-2:~# mkdir cgroups
+root@ISG_WalnutCanyonII-2:~# mount -t cgroup none cgroups
+root@ISG_WalnutCanyonII-2:~# ls cgroups
+blkio.io_merged			  blkio.throttle.io_service_bytes   cpu.rt_runtime_us		    cpuset.mems			     hugetlb.2MB.limit_in_bytes		 memory.memsw.limit_in_bytes
+blkio.io_merged_recursive	  blkio.throttle.io_serviced	    cpu.shares			    cpuset.sched_load_balance	     hugetlb.2MB.max_usage_in_bytes	 memory.memsw.max_usage_in_bytes
+blkio.io_queued			  blkio.throttle.read_bps_device    cpu.stat			    cpuset.sched_relax_domain_level  hugetlb.2MB.usage_in_bytes		 memory.memsw.usage_in_bytes
+blkio.io_queued_recursive	  blkio.throttle.read_iops_device   cpuacct.stat		    debug.cgroup_css_links	     memory.failcnt			 memory.move_charge_at_immigrate
+blkio.io_service_bytes		  blkio.throttle.write_bps_device   cpuacct.usage		    debug.current_css_set	     memory.force_empty			 memory.numa_stat
+blkio.io_service_bytes_recursive  blkio.throttle.write_iops_device  cpuacct.usage_percpu	    debug.current_css_set_cg_links   memory.kmem.failcnt		 memory.oom_control
+blkio.io_service_time		  blkio.time			    cpuset.cpu_exclusive	    debug.current_css_set_refcount   memory.kmem.limit_in_bytes		 memory.pressure_level
+blkio.io_service_time_recursive   blkio.time_recursive		    cpuset.cpus			    debug.releasable		     memory.kmem.max_usage_in_bytes	 memory.soft_limit_in_bytes
+blkio.io_serviced		  blkio.weight			    cpuset.effective_cpus	    debug.taskcount		     memory.kmem.slabinfo		 memory.stat
+blkio.io_serviced_recursive	  blkio.weight_device		    cpuset.effective_mems	    devices.allow		     memory.kmem.tcp.failcnt		 memory.swappiness
+blkio.io_wait_time		  cgroup.clone_children		    cpuset.mem_exclusive	    devices.deny		     memory.kmem.tcp.limit_in_bytes	 memory.usage_in_bytes
+blkio.io_wait_time_recursive	  cgroup.event_control		    cpuset.mem_hardwall		    devices.list		     memory.kmem.tcp.max_usage_in_bytes  memory.use_hierarchy
+blkio.leaf_weight		  cgroup.procs			    cpuset.memory_migrate	    hugetlb.1GB.failcnt		     memory.kmem.tcp.usage_in_bytes	 net_cls.classid
+blkio.leaf_weight_device	  cgroup.sane_behavior		    cpuset.memory_pressure	    hugetlb.1GB.limit_in_bytes	     memory.kmem.usage_in_bytes		 notify_on_release
+blkio.reset_stats		  cpu.cfs_period_us		    cpuset.memory_pressure_enabled  hugetlb.1GB.max_usage_in_bytes   memory.limit_in_bytes		 release_agent
+blkio.sectors			  cpu.cfs_quota_us		    cpuset.memory_spread_page	    hugetlb.1GB.usage_in_bytes	     memory.max_usage_in_bytes		 tasks
+blkio.sectors_recursive		  cpu.rt_period_us		    cpuset.memory_spread_slab	    hugetlb.2MB.failcnt		     memory.memsw.failcnt
+
