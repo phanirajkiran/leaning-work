@@ -92,4 +92,19 @@ clip
 
 lstopo --no-io -.txt
 
+
+
 dd if=/dev/zero bs=100M count=10 of=./1G
+
+root@ISG_WalnutCanyonII-2:~# findmnt --raw
+TARGET SOURCE FSTYPE OPTIONS
+/ 128.224.165.20:/export/pxeboot/vlm-boards/22574/rootfs nfs rw,relatime,vers=2,rsize=4096,wsize=4096,namlen=255,hard,nolock,proto=udp,timeo=11,retrans=3,sec=sys,mountaddr=128.224.165.20,mountvers=1,mountproto=udp,local_lock=all,addr=128.224.165.20
+/dev devtmpfs devtmpfs rw,relatime,size=1709320k,nr_inodes=427330,mode=755
+/proc proc proc rw,relatime
+/sys sysfs sysfs rw,relatime
+/sys/kernel/debug debugfs debugfs rw,relatime
+/run tmpfs tmpfs rw,nosuid,nodev,mode=755
+/var/volatile tmpfs tmpfs rw,relatime
+/dev/pts devpts devpts rw,relatime,gid=5,mode=620
+
+http://www.binarytides.com/linux-findmnt-command/

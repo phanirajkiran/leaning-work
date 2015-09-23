@@ -1,0 +1,4 @@
+32-bit x86 CPUs (since the Pentuim Pro) support up to 64 GiB RAM (using PAE). (The "CONFIG_HIGHMEM64G" kernel option needs to be set to actually use it). Each application can only see 4 GiB at a time (and some of that 4GiB must be used for other things, the exact amount depending on the "Memory split" kernel setting)
+
+First, we should note that 32-bit kernels generally recognize 4GB of RAM, not 3GB. But they often expose <4GB of user address space to each process. For example, a 32-bit Linux kernel supports 4GB of RAM but each process can only see 3GB. So let's restate the question: Why do 32-bit kernels expose <4GB of user address space to each process?
+

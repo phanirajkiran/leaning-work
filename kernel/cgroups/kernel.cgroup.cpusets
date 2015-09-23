@@ -1,5 +1,6 @@
 
 
+root@ISG_WalnutCanyonII-2:~#  mount -t tmpfs cgroup_root /sys/fs/cgroup
 
 root@ISG_WalnutCanyonII-2:~# mkdir /sys/fs/cgroup/cpuset
 root@ISG_WalnutCanyonII-2:~# mount -t cgroup -ocpuset cpuset /sys/fs/cgroup/cpuset
@@ -52,8 +53,49 @@ To remove all the CPUs:
 
 # /bin/echo "" > cpuset.cpus            -> clear cpus list
 
-root@ISG_WalnutCanyonII-2:~# echo 3 > /sys/fs/cgroup/cpuset/cpuset.cpus
+root@ISG_WalnutCanyonII-2:~# echo 3 > /sys/fs/cgroup/cpuset/cpuset.cpus ---------> 只能在组内
 -sh: echo: write error: Permission denied
+
+3) cpuset.cpu_exclusive 本组只占这几个  
+cpuset.cpu_exclusive   ---------------->可以在组内外
+    contains a flag (0 or 1) that specifies whether cpusets other than this one and its parents and children can share the CPUs specified for this cpuset. By default (0), CPUs are not allocated exclusively to one cpuset. 
+
+
+root@ISG_WalnutCanyonII-2:~# echo 1-6 > /sys/fs/cgroup/cpus/test1/cpuset.cpus
+root@ISG_WalnutCanyonII-2:~# echo 1 > /sys/fs/cgroup/cpus/test1/cpuset.cpu_exclusive
+root@ISG_WalnutCanyonII-2:~# echo $$ > /sys/fs/cgroup/cpus/test1/tasks  
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[1] 906
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[2] 909
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[3] 910
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[4] 911
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[5] 912
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[6] 913
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[7] 914
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[8] 915
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[9] 916
+root@ISG_WalnutCanyonII-2:~# cpu_load &
+[10] 918
+
+root@ISG_WalnutCanyonII-2:~# echo 0 > /sys/fs/cgroup/cpus/test1/cpuset.sched_load_balance  ------> 不要吧 
+
+
+Cpu0  :  0.0%us,  0.0%sy,  0.0%ni,100.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu1  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu2  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu3  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu4  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu5  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu6  :100.0%us,  0.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
+Cpu7  :  0.0%us,100.0%sy,  0.0%ni,  0.0%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st
 
 
 QA:
@@ -82,3 +124,28 @@ Tips:
 cpuset.cpus (mandatory)
 specifies the CPUs that tasks in this cgroup are permitted to access. This is a comma-separated list, with dashes ("-") to represent ranges. For example,
 0-2,16
+
+2)echo 1 > /sys/fs/cgroup/cpus/test1/cpuset.cpu_exclusive 这个组独占这个CPU，那么只能是独占一个
+root@ISG_WalnutCanyonII-2:~# echo '0-6' > /sys/fs/cgroup/cpus/test1/cpuset.cpus 
+root@ISG_WalnutCanyonII-2:~# killall cpu_load
+[1]-  Terminated              cpu_load
+[2]+  Terminated              cpu_load
+root@ISG_WalnutCanyonII-2:~# echo '1' > /sys/fs/cgroup/cpus/test1/cpuset.cpu_exclusive
+-sh: echo: write error: Invalid argument
+root@ISG_WalnutCanyonII-2:~# echo ' > /sys/fs/cgroup/cpus/test1/cpuset.cpu_exclusive
+> ^C
+root@ISG_WalnutCanyonII-2:~# echo 1 > /sys/fs/cgroup/cpus/test1/cpuset.cpu_exclusive
+-sh: echo: write error: Invalid argument
+root@ISG_WalnutCanyonII-2:~# echo '6' > /sys/fs/cgroup/cpus/test1/cpuset.cpus 
+root@ISG_WalnutCanyonII-2:~# echo 1 > /sys/fs/cgroup/cpus/test1/cpuset.cpu_exclusive
+
+
+3)
+Note that it is PID, not PIDs. You can only attach ONE task at a time.
+If you have several tasks to attach, you have to do it one after another:
+
+# /bin/echo PID1 > tasks
+# /bin/echo PID2 > tasks
+	...
+# /bin/echo PIDn > tasks
+

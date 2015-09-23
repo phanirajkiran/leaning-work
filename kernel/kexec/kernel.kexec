@@ -1,0 +1,33 @@
+Testing Applicable to:
+----------------------
+fsl-e500mc
+
+Testing Commands:
+-----------------
+1. configure a project.
+   wrlinux/configure   --enable-board=fsl-e500mc --enable-kernel=standard \
+                       --enable-rootfs=glibc_core --enable-bootimage=hdd,tar.bz2 \
+                       --with-bootimage-space=1024 --with-template=feature/kexec,feature/kdump
+
+2. build
+   make fs
+
+3. start target
+  Notice: add the command line crashkernel=256M@64M
+
+4. copy rootfs to the target
+
+5. copy vmlinux(build/linux-windriver/linux-fsl-e500mc-standard-build/) to target
+
+6. boot the second kernel
+  kexec -p vmlinux --append="root=/dev/sda4 3 maxcpus=1 noirqdistrib reset_devices" (assume rootfs is on sda4, you can also use nfs.)
+
+7. kernel panic and wait the second start
+  echo c > /proc/sysrq-trigger
+
+8. copy vmcore
+  cp /proc/vmcore ./vmcore
+
+9. makedumpfile --dump-dmesg /proc/vmcore dmesgfile
+
+

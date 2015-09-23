@@ -66,6 +66,17 @@ http://www.kernel.org/pub/software/scm/git/docs/git-archive.html
 git commit --amend
 can change your git log title
 
+lyang0@pek-test98:/buildarea1/lyang0/ppc/layers/oe-core/meta/conf/distro/include$ git show --summary 224d8f14ce4bbc0353b2de5efded94f71f03a749
+commit 224d8f14ce4bbc0353b2de5efded94f71f03a749
+Author: Yang Shi <yang.shi@windriver.com>
+Date:   Wed Sep 2 09:22:26 2015 -0700
+
+    Revert "Revert "linux-yocto: split meta data from kernel repository""
+    
+    Restore the oe-core change to make 4.1 kernel built.
+    
+    This reverts commit caf65e7c564f04c18a8fd2c45c990779e0613ae6.
+
 
 
 

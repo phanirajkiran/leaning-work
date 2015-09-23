@@ -1,0 +1,10 @@
+root@ISG_WalnutCanyonII-2:~#  mount -t tmpfs cgroup_root /sys/fs/cgroup
+root@ISG_WalnutCanyonII-2:~# mkdir /sys/fs/cgroup/devices 
+root@ISG_WalnutCanyonII-2:~# mount -t cgroup -odevices devices /sys/fs/cgroup/devices/
+root@ISG_WalnutCanyonII-2:~# ls /sys/fs/cgroup/devices/
+cgroup.clone_children  cgroup.procs  cgroup.sane_behavior  devices.allow  devices.deny	devices.list  notify_on_release  release_agent	tasks
+
+root@ISG_WalnutCanyonII-2:~# echo 'b 8:0 mrw' > /sys/fs/cgroup/devices/test1/devices.deny 
+root@ISG_WalnutCanyonII-2:~# echo $$ > /sys/fs/cgroup/devices/test1/tasks       
+root@ISG_WalnutCanyonII-2:~# dd if=/dev/sda bs=512 count=1
+dd: failed to open '/dev/sda': Operation not permitted

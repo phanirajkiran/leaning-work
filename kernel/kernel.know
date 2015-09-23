@@ -1,3 +1,4 @@
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/xfsmounting.html
 pstore
 ======
 v2.6.39
@@ -58,3 +59,175 @@ ACTION: ramoops.txt
 
 CONFIG_GENERIC_CPU_AUTOPROBE
 https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=67bad2fdb754dbef14596c0b5d28b3a12c8dfe84
+
+
+unionfs
+CONFIG_UFS_FS
+http://unionfs.filesystems.org/docs/sipek-ols2006/index.html
+http://www.linuxjournal.com/article/7714?page=0,0
+squeshfs 
+http://tldp.org/HOWTO/SquashFS-HOWTO/creatingandusing.html
+
+aufs
+http://www.thegeekstuff.com/2013/05/linux-aufs/
+
+systemtap
+https://jira.wrs.com:8443/browse/LIN6-10306
+
+BFS 
+
+ramconsole
+RAM Console is a handy way to keep a copy of the kernel log across a reboot. It's really useful to catch unexpected reboots and kernel panics
+Ram console 类似于普通的串口console, printk()的内部实现都是向已注册和打开的console输出信息的，console可以基于串口实现，
+当然也可以基于内存实现，区别是数据流的流向。ram console的实现中会生成proc/last_kmsg 的文件，该文件一般用于调试目的，如
+出现系统出现panic重启后(内存只要不掉电，其保存的信息就不会丢失)，该文件可以保留现场。
+
+BFQ
+
+o namespaces
+   - profile/yocto/standard
+   o namespaces/net
+   o namespaces/pid
+   o namespaces/ipc
+   o namespaces/user
+   o namespaces/mnt
+
+o vfio
+   - compat/none
+o oprofile
+   - profile/standard
+   - compat/board: [ full support requires a pmu driver ]
+
+
+o latency top
+   - profile/yocto/standard
+   - incompat/technical: [ mips/* ]
+   - incompat/technical: [ arch/arm/* + SMP ]
+o power top
+   - profile/yocto/standard
+   - incompat/transient: [ mips/*, arm/* ]
+   - incompat/technical: [ kvm/guest ]
+o msa
+   - compat/none: [ not supported in 7.0 ]
+
+o ramoops/mtdoops
+   - profile/yocto/standard
+   - compat/board
+   - compat/driver
+
+o msa
+   - compat/none: [ not supported in 7.0 ]
+
+
+ o numa
+    - profile/yocto/standard
+    - compat: [ mips/*, x86/64, x86/32 + highmem, powerpc/64 ]
+    - compat/board
+
+ o device tree
+    - profile/standard
+    - compat: [ powerpc, arm, mips ]
+
+
+commit 86b4ce3156c0dc140907ad03639564000cde694f
+Author: Masami Hiramatsu <masami.hiramatsu.pt@hitachi.com>
+Date:   Mon Mar 5 22:32:09 2012 +0900
+
+    x86/kprobes: Fix instruction recovery on optimized path
+
+
+commit 177ef2a6315ea7bf173653182324e1dcd08ffeaa
+Author: xiaofeng.yan <xiaofeng.yan@huawei.com>
+Date:   Tue Aug 26 03:15:41 2014 +0000
+
+    sched/deadline: Fix a precision problem in the microseconds range
+    
+    An overrun could happen in function start_hrtick_dl()
+    when a task with SCHED_DEADLINE runs in the microseconds
+    range.
+    
+    For example, if a task with SCHED_DEADLINE has the following parameters:
+    
+      Task  runtime  deadline  period
+       P1   200us     500us    500us
+    
+    The deadline and period from task P1 are less than 1ms.
+    
+    In order to achieve microsecond precision, we need to enable HRTICK feature
+    by the next command:
+    
+      PC#echo "HRTICK" > /sys/kernel/debug/sched_features
+      PC#trace-cmd record -e sched_switch &
+      PC#./schedtool -E -t 200000:500000:500000 -e ./test
+    
+    The binary test is in an endless while(1) loop here.
+    Some pieces of trace.dat are as follows:
+    
+      <idle>-0   157.603157: sched_switch: :R ==> 2481:4294967295: test
+      test-2481  157.603203: sched_switch:  2481:R ==> 0:120: swapper/2
+      <idle>-0   157.605657: sched_switch:  :R ==> 2481:4294967295: test
+      test-2481  157.608183: sched_switch:  2481:R ==> 2483:120: trace-cmd
+      trace-cmd-2483 157.609656: sched_switch:2483:R==>2481:4294967295: test
+
+
+
+commit 8d99fe92fed019e203f458370129fb28b3fb5740
+Author: Brian Foster <bfoster@redhat.com>
+Date:   Wed Aug 19 09:51:16 2015 +1000
+
+    xfs: fix efi/efd error handling to avoid fs shutdown hangs
+    
+    Freeing an extent in XFS involves logging an EFI (extent free
+    intention), freeing the actual extent, and logging an EFD (extent
+    free done). The EFI object is created with a reference count of 2:
+    one for the current transaction and one for the subsequently created
+    EFD. Under normal circumstances, the first reference is dropped when
+    the EFI is unpinned and the second reference is dropped when the EFD
+    is committed to the on-disk log.
+    
+    In event of errors or filesystem shutdown, there are various
+    potential cleanup scenarios depending on the state of the EFI/EFD.
+    The cleanup scenarios are confusing and racy, as demonstrated by the
+    following test sequence:
+    
+        # mount $dev $mnt
+        # fsstress -d $mnt -n 99999 -p 16 -z -f fallocate=1 \
+                -f punch=1 -f creat=1 -f unlink=1 &
+        # sleep 5
+        # killall -9 fsstress; wait
+        # godown -f $mnt
+        # umount
+
+
+
+commit 7f884dc198c641c95f5c4325f0d782b1efd298b4
+Author: Brian Foster <bfoster@redhat.com>
+Date:   Mon Jun 1 07:15:37 2015 +1000
+
+    xfs: fix quota block reservation leak when tp allocates and frees blocks
+    
+    Al Viro reports that generic/231 fails frequently on XFS and bisected
+    the problem to the following commit:
+    
+        5d11fb4b xfs: rework zero range to prevent invalid i_size updates
+    
+    ... which is just the first commit that happens to cause fsx to
+    reproduce the problem. fsx reproduces via zero range calls. The
+    aforementioned commit overhauls zero range to use hole punch and
+    fallocate. As it turns out, the problem is reproducible on demand using
+    basic hole punch as follows:
+    
+    $ mkfs.xfs -f -m crc=1,finobt=1 <dev>
+    $ mount <dev> /mnt -o uquota
+    $ xfs_io -f -c "falloc 0 50m" /mnt/file
+    $ for i in $(seq 1 20); do xfs_io -c "fpunch ${i}m 32k" /mnt/file; done
+    $ rm -f /mnt/file
+    $ repquota -us /mnt
+    ...
+    User            used    soft    hard  grace    used  soft  hard  grace
+    ----------------------------------------------------------------------
+    root      --     32K      0K      0K              3     0     0
+    
+
+
+

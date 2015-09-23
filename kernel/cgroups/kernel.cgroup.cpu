@@ -1,3 +1,10 @@
+
+只能在分组里使用
+root@ISG_WalnutCanyonII-2:~#  mount -t tmpfs cgroup_root /sys/fs/cgroup
+root@ISG_WalnutCanyonII-2:/sys/fs/cgroup# mkdir /sys/fs/cgroup/cpu
 root@ISG_WalnutCanyonII-2:/sys/fs/cgroup# mount -t cgroup -ocpu none /sys/fs/cgroup/cpu
 root@ISG_WalnutCanyonII-2:/sys/fs/cgroup# ls /sys/fs/cgroup/cpu
 
+
+Documentation/scheduler/sched-bwc.txt
+https://www.kernel.org/doc/Documentation/scheduler/sched-design-CFS.txt

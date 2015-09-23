@@ -1,0 +1,8 @@
++What:	cgroup option updates via remount, and "name=" mount option
++When:	March 2013
++Why:	Remount currently allows changing bound subsystems and
++	release_agent.  Rebinding is hardly useful as it only works
++	when the hierarchy is empty and release_agent itself should be
++	replaced with conventional fsnotify.  "name=" option allows
++	mounting existing hierarchy by its name, which isn't useful
++	and has been broken for years without anyone noticing.

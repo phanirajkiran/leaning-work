@@ -1,0 +1,9 @@
+http://landley.net/aboriginal/architectures.html
+Although ARM hardware has many different processor designs with varying clock speeds, cache sizes, and integrated peripherals, from a software perspective what matters is ARM architectures, which are the different instruction sets a compiler can produce. The architecture names have a "v" in them and the processor designs don't, so "ARM922T" is a hardware processor design which implements the "ARMv4T" software instruction set.
+
+The basic architectures are numbered: ARMv3, ARMv4, ARMv5, ARMv6, and ARMv7. An ARMv5 capable processor can run ARMv4 binaries, ARMv6 can run ARMv5, and so on. Each new architecture is a superset of the old ones, and the main reason to compile for newer platforms is efficiency: faster speed and better battery life. (I.E. they work about like i386, i486, i586, and i686 do in the x86 world. Recompiling ARMv4 code to ARMv5 code provides about a 25% speedup on the same hardware.)
+
+
+The "Thumb" extension (ARMv4T) adds a smaller instruction set capable of fitting more code in a given amount of memory. Unfortunately thumb instructions often run more slowly, and the instruction set isn't complete enough to implement a kernel, so they supplement rather than replace the conventional ARM instruction set. Note that all ARMv5 and later processors include Thumb support by default, only ARMv4T offers it as an extension. The newer "Thumb2" version fixes most of the deficiencies of the original Thumb instruction set (you _can_ do a kernel in that), and is part of the ARMv7 architecture. The ARMv7M (Mangled? Mutant?) chip supports nothing _but_ Thumb2, abandoning backwards compatability with any other ARM binaries.
+
+

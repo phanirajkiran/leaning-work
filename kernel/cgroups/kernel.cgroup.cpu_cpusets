@@ -1,0 +1,32 @@
+
+cpu.shares 用来指定占用cpu时间的比率
+当两个程序同时访问一个CPU的时候cpu.shares的作用就显现出来了
+
+https://access.redhat.com/documentation/zh-CN/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/sec-cpu.html
+
+root@ISG_WalnutCanyonII-2:~# mount -t tmpfs cgroup_root /sys/fs/cgroup
+root@ISG_WalnutCanyonII-2:~# mkdir /sys/fs/cgroup/cpus  
+root@ISG_WalnutCanyonII-2:~# mount -t cgroup -o cpuset,cpu cpuset /sys/fs/cgroup/cpus 
+root@ISG_WalnutCanyonII-2:~# mkdir /sys/fs/cgroup/cpus/test1 /sys/fs/cgroup/cpus/test2 
+root@ISG_WalnutCanyonII-2:~# echo "1" > /sys/fs/cgroup/cpus/test1/cpuset.cpus   ----------> or use taskset -c 1 ???
+root@ISG_WalnutCanyonII-2:~# echo "1" > /sys/fs/cgroup/cpus/test2/cpuset.cpus
+root@ISG_WalnutCanyonII-2:~# cpu_load & 
+[1] 843
+root@ISG_WalnutCanyonII-2:~# cpu_load & 
+[2] 844
+root@ISG_WalnutCanyonII-2:~# echo 843 > /sys/fs/cgroup/cpus/test1/tasks      
+-sh: echo: write error: No space left on device
+
+
+root@ISG_WalnutCanyonII-2:~# echo 0 > /sys/fs/cgroup/cpus/test1/cpuset.mems 
+root@ISG_WalnutCanyonII-2:~# echo 0 > /sys/fs/cgroup/cpus/test2/cpuset.mems 
+root@ISG_WalnutCanyonII-2:~# echo 843 > /sys/fs/cgroup/cpus/test1/tasks 
+root@ISG_WalnutCanyonII-2:~# echo 844 > /sys/fs/cgroup/cpus/test2/tasks 
+
+root@ISG_WalnutCanyonII-2:~# echo 100 > /sys/fs/cgroup/cpus/test1/cpu.shares  
+root@ISG_WalnutCanyonII-2:~# echo 400 > /sys/fs/cgroup/cpus/test2/cpu.shares 
+root@ISG_WalnutCanyonII-2:~# top
+
+
+  844 root      20   0  4048  644  584 R   80  0.0   1:56.95 cpu_load                                                                                                                                        
+  843 root      20   0  4048  648  584 R   20  0.0   1:43.96 cpu_load
