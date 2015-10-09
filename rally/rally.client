@@ -1,0 +1,15 @@
+https://github.com/oesmith/ralio/blob/master/README.md
+sudo npm install -g ralio
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/python$ sudo ln -s /usr/bin/nodejs /usr/bin/node
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/python$ ralio configure
+Type your Rally's username: lei.yang@windriver.com
+Type your Rally's password: ***********
+Type your Rally's project: Lx BSPs
+Type your Rally's team: linux testing 
+All set! :)
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/python$ ralio sprint 
+  1 US66397 5 ▸ [CF] Freescale T2080 - Basic BSP Quanyang Wang, Quanyang Wang, Liang Chi, Liang Chi 
+  2 US66395 5 ▸ [CF] Freescale LS2085 (ARM64) - Basic BSP  
+  3 US66411 8 ▸ Create generic intel-x86 bsp in 8.0  
+  4 US66523 8 ▸ intel-braswell - basic bsp support  
+  5 US66524 8 ▸ HP ProLiant Gen9 (intel_x86) - Basic BSP Chunguang Yang 

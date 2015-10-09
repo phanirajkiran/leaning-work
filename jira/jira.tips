@@ -3,3 +3,7 @@ https://jira.atlassian.com/browse/JRA-38635
 https://developer.atlassian.com/jiradev/jira-platform/other/tutorial-adding-menu-items-to-jira
 
 https://docs.eazybi.com/display/EAZYBIJIRA/Embedded+iframe+visible+to+non-JIRA+users
+
+jiracli --issue-label-add LIN8-1001 US66411
+
+http://jiradev.blogspot.com/2011/08/adding-components-to-jira-automatically.html great

@@ -1,0 +1,100 @@
+In [33]: print issue.fields.labels
+[u'US66411']
+
+In [34]: print issue.fields.su
+issue.fields.subtasks  issue.fields.summary   
+
+In [34]: print issue.fields.summary
+intel-x86-64: 3.10 bbapend should be removed 
+
+
+
+In [38]: print issue.fields.priority
+P3
+
+In [40]: print issue.fields.components
+[<JIRA Component: name=u'BSP', id=u'20606'>]
+
+
+In [41]: print issue.fields.summary
+intel-x86-64: 3.10 bbapend should be removed 
+
+
+
+
+In [42]: print issue.fields.description
+|########################################################################################################################################################################| ETA:  00:00:00
+Loaded 4971 entries from dependency cache.
+Parsing recipes: 100% |######################################################################################################################################################################| Time: 00:00:01
+Parsing of 2191 .bb files complete (2188 cached, 3 parsed). 4973 targets, 2384 skipped, 10 masked, 0 errors.
+WARNING: No recipes available for:
+  /buildarea1/lyang0/intel-x86-64/layers/wr-kernel/recipes-support/drbd/drbd_8.4.4.bbappend
+  /buildarea1/lyang0/intel-x86-64/layers/wr-base/recipes-core/systemd/systemd_219.bbappend
+  /buildarea1/lyang0/intel-x86-64/layers/wr-bsps/intel-x86/recipes-kernel/linux/linux-windriver_3.10.bbappend
+  /buildarea1/lyang0/intel-x86-64/layers/wr-fixes/recipes-extended/net-tools/net-tools_1.60-25.bbappend
+  /buildarea1/lyang0/intel-x86-64/layers/wr-fixes/recipes-extended/mdadm/mdadm_3.3.2.bbappend
+
+
+In [43]: print issue.fields.issuetype
+Bug
+
+In [44]: print issue.fields.project
+LIN8
+
+In [49]: print issue.fields.creator
+Yang, Lei
+
+In [64]: print issue.fields.customfield_10605
+Standard
+
+In [78]: print issue.fields.customfield_11000
+[<JIRA Version: name=u'8.0', id=u'23583'>]
+
+In [79]: print issue.fields.customfield_11001
+/buildarea1/lyang0/wrlinux-8/wrlinux/configure --enable-board=intel-x86-64 --enable-kernel=standard --enable-rootfs=glibc-std --enable-reconfig=yes --enable-jobs=36 --enable-parallel-pkgbuilds=36 --with-layer=/buildarea1/lyang0/wrlinux-newnew/wr-testing/bts-dev --with-template=feature/bts && make fs
+
+
+In [82]: print issue.fields.customfield_11201
+US66411
+
+
+
+In [83]: print issue.fields.customfield_11202
+https://rally1.rallydev.com/slm/#/detail/task/43907828433
+
+In [85]: print issue.fields.customfield_11302
+TA113031
+
+
+In [96]: print issue.fields.customfield_11908
+http://epm.wrs.com/rally/US66411
+
+
+In [103]: print issue.fields.status
+Open
+
+
+
+In [22]: issue.fields.customfield_10605
+Out[22]: <JIRA CustomFieldOption: value=u'Standard', id=u'10439'>   -----> 
+
+In [23]: issue.fields.com
+issue.fields.comment     issue.fields.components  
+
+In [23]: issue.fields.comment
+issue.fields.comment
+
+In [23]: issue.fields.comment
+Out[23]: jira.resources.PropertyHolder
+
+In [24]: issue.fields.comment
+issue.fields.comment
+
+In [24]: issue.fields.comment
+issue.fields.comment
+
+In [24]: issue.fields.components
+Out[24]: [<JIRA Component: name=u'Userspace', id=u'20617'>] -------> 是个数组: 
+
+adress "customfield_11000":"data was not an array" 
+check https://answers.atlassian.com/questions/9379363/how-to-add-component-while-creating-an-issue-via-jira-rest-api

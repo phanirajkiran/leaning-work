@@ -74,3 +74,47 @@ lyang001@lyang001-OptiPlex-9010:~/jiracli$ cat ~/.jiracli.ini
 user = lyang0
 password = !windwind001
 url = https://jira.wrs.com:8443
+
+
+Install jira api
+https://bitbucket.org/bspeakmon/jira-python
+
+http://pythonhosted.org/jira/
+
+#pip install jira
+
+#if using the jira-shell 
+  File "/usr/local/lib/python2.7/dist-packages/jira/jirashell.py", line 250, in main
+    from IPython.frontend.terminal.embed import InteractiveShellEmbed
+ImportError: No module named IPython.frontend.terminal.embed
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/jira$ sudo apt-get install ipython
+
+
+
+
+
+
+==================================
+
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/jira$ jirashell -s https://jira.wrs.com:8443
+
+
+In [8]: jira = JIRA(server='https://jira.wrs.com:8443',basic_auth=('lyang0', '!windwind001'))
+/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
+  InsecurePlatformWarning
+
+In [9]: issue = jira.issue('LIN8-1001')
+/usr/local/lib/python2.7/dist-packages/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.
+  InsecurePlatformWarning
+
+
+In [17]: print issue.fields.assignee.
+issue.fields.assignee.active        issue.fields.assignee.delete        issue.fields.assignee.emailAddress  issue.fields.assignee.name          issue.fields.assignee.self
+issue.fields.assignee.avatarUrls    issue.fields.assignee.displayName   issue.fields.assignee.find          issue.fields.assignee.raw           issue.fields.assignee.update
+
+In [17]: print issue.fields.assignee.name
+PMa1
+
+
+To address above warning (http://stackoverflow.com/questions/29134512/insecureplatformwarning-a-true-sslcontext-object-is-not-available-this-prevent)
+sudo pip install pyopenssl ndg-httpsclient pyasn1
