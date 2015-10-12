@@ -1,0 +1,9 @@
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/rally$ cat rally.cfg 
+SERVER = rally1.rallydev.com ---> or http
+USER   = lei.yang@windriver.com
+PASSWORD = windwind001
+WORKSPACE = Wind River   ----> give a wrong first, then it will remind you 
+PROJECT = Lx BSPs
+
+Rally python REST: Query all tasks from chosen iteration
+http://stackoverflow.com/questions/27419362/rally-python-rest-query-all-tasks-from-chosen-iteration/27427722#27427722
