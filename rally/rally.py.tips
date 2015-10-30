@@ -7,3 +7,5 @@ PROJECT = Lx BSPs
 
 Rally python REST: Query all tasks from chosen iteration
 http://stackoverflow.com/questions/27419362/rally-python-rest-query-all-tasks-from-chosen-iteration/27427722#27427722
+http://pyral.readthedocs.org/en/latest/interface.html
+http://stackoverflow.com/questions/14675004/rally-pyral-sdk-error-with-a-query-with-more-than-two-terms-error-parsing-expr

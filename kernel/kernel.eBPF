@@ -1,0 +1,348 @@
+
+Testing Commands:
+-----------------
+samples/bpf is not enabled in samples/Makefile by default. Even if enabled it
+manually it would encounter many build failures about toolchain.
+
+CONFIG_TEST_BPF should be enough.
+
+CONFIG_BPF=y
+CONFIG_BPF_SYSCALL=y
+CONFIG_BPF_JIT=y
+CONFIG_HAVE_BPF_JIT=y
+CONFIG_BPF_EVENTS=y
+CONFIG_TEST_BPF=m
+
+---- intel-x86-64 ----
+root@super_micro-2:~# uname -a
+Linux super_micro-2 4.1.10-WR8.0.0.0_standard #12 SMP PREEMPT Mon Oct 26 05:13:53 EDT 2015 x86_64 GNU/Linux
+root@super_micro-2:~# insmod /lib/modules/4.1.10-WR8.0.0.0_standard/kernel/test_
+bpf.ko
+test_bpf: #0 TAX 63 63 63 PASS
+test_bpf: #1 TXA 20 19 20 PASS
+test_bpf: #2 ADD_SUB_MUL_K 26 PASS
+test_bpf: #3 DIV_MOD_KX 75 PASS
+test_bpf: #4 AND_OR_LSH_K 21 21 PASS
+test_bpf: #5 LD_IMM_0 11 PASS
+test_bpf: #6 LD_IND 15 15 15 PASS
+test_bpf: #7 LD_ABS 13 13 13 PASS
+test_bpf: #8 LD_ABS_LL 20 23 PASS
+test_bpf: #9 LD_IND_LL 23 23 23 PASS
+test_bpf: #10 LD_ABS_NET 19 23 PASS
+test_bpf: #11 LD_IND_NET 20 23 23 PASS
+test_bpf: #12 LD_PKTTYPE 52 52 PASS
+test_bpf: #13 LD_MARK 11 11 PASS
+test_bpf: #14 LD_RXHASH 10 10 PASS
+test_bpf: #15 LD_QUEUE 10 10 PASS
+test_bpf: #16 LD_PROTOCOL 32 32 PASS
+test_bpf: #17 LD_VLAN_TAG 13 13 PASS
+test_bpf: #18 LD_VLAN_TAG_PRESENT 14 14 PASS
+test_bpf: #19 LD_IFINDEX 17 17 PASS
+test_bpf: #20 LD_HATYPE 17 17 PASS
+test_bpf: #21 LD_CPU 31 31 PASS
+test_bpf: #22 LD_NLATTR 22 31 PASS
+test_bpf: #23 LD_NLATTR_NEST 111 198 PASS
+test_bpf: #24 LD_PAYLOAD_OFF 187 242 PASS
+test_bpf: #25 LD_ANC_XOR 13 13 PASS
+test_bpf: #26 SPILL_FILL 36 36 36 PASS
+test_bpf: #27 JEQ 14 16 15 PASS
+test_bpf: #28 JGT 15 16 16 PASS
+test_bpf: #29 JGE 19 28 26 PASS
+test_bpf: #30 JSET 29 35 50 PASS
+test_bpf: #31 tcpdump port 22 13 48 55 PASS
+test_bpf: #32 tcpdump complex 13 47 110 PASS
+test_bpf: #33 RET_A 10 10 PASS
+test_bpf: #34 INT: ADD trivial 18 PASS
+test_bpf: #35 INT: MUL_X 15 PASS
+test_bpf: #36 INT: MUL_X2 18 PASS
+test_bpf: #37 INT: MUL32_X 18 PASS
+test_bpf: #38 INT: ADD 64-bit 615 PASS
+test_bpf: #39 INT: ADD 32-bit 578 PASS
+test_bpf: #40 INT: SUB 501 PASS
+test_bpf: #41 INT: XOR 158 PASS
+test_bpf: #42 INT: MUL 274 PASS
+test_bpf: #43 INT: ALU MIX 37 PASS
+test_bpf: #44 INT: shifts by register 55 PASS
+test_bpf: #45 INT: DIV + ABS 32 36 PASS
+test_bpf: #46 INT: DIV by zero 13 11 PASS
+test_bpf: #47 check: missing ret PASS
+test_bpf: #48 check: div_k_0 PASS
+test_bpf: #49 check: unknown insn PASS
+test_bpf: #50 check: out of range spill/fill PASS
+test_bpf: #51 JUMPS + HOLES 36 PASS
+test_bpf: #52 check: RET X PASS
+test_bpf: #53 check: LDX + RET X PASS
+test_bpf: #54 M[]: alt STX + LDX 184 PASS
+test_bpf: #55 M[]: full STX + full LDX 178 PASS
+test_bpf: #56 check: SKF_AD_MAX PASS
+test_bpf: #57 LD [SKF_AD_OFF-1] 11 PASS
+test_bpf: #58 load 64-bit immediate 23 PASS
+test_bpf: #59 nmap reduced 93 PASS
+test_bpf: Summary: 60 PASSED, 0 FAILED
+root@super_micro-2:~#
+
+---- qemux86-64 ----
+root@qemu5:~# insmod /lib/modules/4.1.10-WR8.0.0.0_standard/kernel/test_bpf.ko
+test_bpf: #0 TAX 2580 2130 3140 PASS
+test_bpf: #1 TXA 2098 1562 796 PASS
+test_bpf: #2 ADD_SUB_MUL_K 1127 PASS
+test_bpf: #3 DIV_MOD_KX 3276 PASS
+test_bpf: #4 AND_OR_LSH_K 2521 2263 PASS
+test_bpf: #5 LD_IMM_0 1575 PASS
+test_bpf: #6 LD_IND 1948 1264 1460 PASS
+test_bpf: #7 LD_ABS 1186 690 1015 PASS
+test_bpf: #8 LD_ABS_LL 1155 830 PASS
+test_bpf: #9 LD_IND_LL 907 752 725 PASS
+test_bpf: #10 LD_ABS_NET 1326 888 PASS
+test_bpf: #11 LD_IND_NET 1378 733 752 PASS
+test_bpf: #12 LD_PKTTYPE 1219 1009 PASS
+test_bpf: #13 LD_MARK 1045 314 PASS
+test_bpf: #14 LD_RXHASH 258 218 PASS
+test_bpf: #15 LD_QUEUE 746 246 PASS
+test_bpf: #16 LD_PROTOCOL 624 600 PASS
+test_bpf: #17 LD_VLAN_TAG 263 243 PASS
+test_bpf: #18 LD_VLAN_TAG_PRESENT 340 297 PASS
+test_bpf: #19 LD_IFINDEX 768 290 PASS
+test_bpf: #20 LD_HATYPE 949 339 PASS
+test_bpf: #21 LD_CPU 776 706 PASS
+test_bpf: #22 LD_NLATTR 569 648 PASS
+test_bpf: #23 LD_NLATTR_NEST 2748 3029 PASS
+test_bpf: #24 LD_PAYLOAD_OFF 3212 3306 PASS
+test_bpf: #25 LD_ANC_XOR 811 358 PASS
+test_bpf: #26 SPILL_FILL 774 726 713 PASS
+test_bpf: #27 JEQ 782 322 328 PASS
+test_bpf: #28 JGT 782 337 355 PASS
+test_bpf: #29 JGE 887 491 537 PASS
+test_bpf: #30 JSET 1061 713 1043 PASS
+test_bpf: #31 tcpdump port 22 733 1075 1163 PASS
+test_bpf: #32 tcpdump complex 730 944 2489 PASS
+test_bpf: #33 RET_A 228 209 PASS
+test_bpf: #34 INT: ADD trivial 834 PASS
+test_bpf: #35 INT: MUL_X 840 PASS
+test_bpf: #36 INT: MUL_X2 898 PASS
+test_bpf: #37 INT: MUL32_X 893 PASS
+test_bpf: #38 INT: ADD 64-bit 5009 PASS
+test_bpf: #39 INT: ADD 32-bit 4300 PASS
+test_bpf: #40 INT: SUB 3987 PASS
+test_bpf: #41 INT: XOR 1907 PASS
+test_bpf: #42 INT: MUL 2092 PASS
+test_bpf: #43 INT: ALU MIX 383 PASS
+test_bpf: #44 INT: shifts by register 1231 PASS
+test_bpf: #45 INT: DIV + ABS 715 445 PASS
+test_bpf: #46 INT: DIV by zero 577 197 PASS
+test_bpf: #47 check: missing ret PASS
+test_bpf: #48 check: div_k_0 PASS
+test_bpf: #49 check: unknown insn PASS
+test_bpf: #50 check: out of range spill/fill PASS
+test_bpf: #51 JUMPS + HOLES 1359 PASS
+test_bpf: #52 check: RET X PASS
+test_bpf: #53 check: LDX + RET X PASS
+test_bpf: #54 M[]: alt STX + LDX 3360 PASS
+test_bpf: #55 M[]: full STX + full LDX 2342 PASS
+test_bpf: #56 check: SKF_AD_MAX PASS
+test_bpf: #57 LD [SKF_AD_OFF-1] 170 PASS
+test_bpf: #58 load 64-bit immediate 764 PASS
+test_bpf: #59 nmap reduced 1577 PASS
+test_bpf: Summary: 60 PASSED, 0 FAILED
+
+
+---- qemuarm ----
+root@qemu2:~# uname -a
+Linux qemu2 4.1.10-WR8.0.0.0_standard #3 PREEMPT Mon Oct 26 17:19:17 CST 2015 armv5tejl GNU/Linux
+root@qemu2:~# insmod /lib/modules/4.1.10-WR8.0.0.0_standard/kernel/test_bpf.ko
+test_bpf: #0 TAX 1311 2068 2235 PASS
+test_bpf: #1 TXA 562 2842 583 PASS
+test_bpf: #2 ADD_SUB_MUL_K 703 PASS
+test_bpf: #3 DIV_MOD_KX 2768 PASS
+test_bpf: #4 AND_OR_LSH_K 1219 758 PASS
+test_bpf: #5 LD_IMM_0 436 PASS
+test_bpf: #6 LD_IND 983 786 442 PASS
+test_bpf: #7 LD_ABS 323 320 816 PASS
+test_bpf: #8 LD_ABS_LL 1014 814 PASS
+test_bpf: #9 LD_IND_LL 1258 816 815 PASS
+test_bpf: #10 LD_ABS_NET 1002 789 PASS
+test_bpf: #11 LD_IND_NET 1097 812 814 PASS
+test_bpf: #12 LD_PKTTYPE 1327 902 PASS
+test_bpf: #13 LD_MARK 403 856 PASS
+test_bpf: #14 LD_RXHASH 838 420 PASS
+test_bpf: #15 LD_QUEUE 384 372 PASS
+test_bpf: #16 LD_PROTOCOL 1784 954 PASS
+test_bpf: #17 LD_VLAN_TAG 874 448 PASS
+test_bpf: #18 LD_VLAN_TAG_PRESENT 485 952 PASS
+test_bpf: #19 LD_IFINDEX 1054 634 PASS
+test_bpf: #20 LD_HATYPE 573 1044 PASS
+test_bpf: #21 LD_CPU 1186 1153 PASS
+test_bpf: #22 LD_NLATTR 1376 1005 PASS
+test_bpf: #23 LD_NLATTR_NEST 4544 4926 PASS
+test_bpf: #24 LD_PAYLOAD_OFF 4750 5555 PASS
+test_bpf: #25 LD_ANC_XOR 509 986 PASS
+test_bpf: #26 SPILL_FILL 1763 1337 1336 PASS
+test_bpf: #27 JEQ 473 1017 577 PASS
+test_bpf: #28 JGT 467 1029 644 PASS
+test_bpf: #29 JGE 1128 799 801 PASS
+test_bpf: #30 JSET 1372 1200 1570 PASS
+test_bpf: #31 tcpdump port 22 843 1564 1779 PASS
+test_bpf: #32 tcpdump complex 853 1507 3521 PASS
+test_bpf: #33 RET_A 865 392 PASS
+test_bpf: #34 INT: ADD trivial 581 PASS
+test_bpf: #35 INT: MUL_X 1121 PASS
+test_bpf: #36 INT: MUL_X2 1167 PASS
+test_bpf: #37 INT: MUL32_X 1270 PASS
+test_bpf: #38 INT: ADD 64-bit 7487 PASS
+test_bpf: #39 INT: ADD 32-bit 6318 PASS
+test_bpf: #40 INT: SUB 6439 PASS
+test_bpf: #41 INT: XOR 3664 PASS
+test_bpf: #42 INT: MUL 4661 PASS
+test_bpf: #43 INT: ALU MIX 1729 PASS
+test_bpf: #44 INT: shifts by register 2575 PASS
+test_bpf: #45 INT: DIV + ABS 780 1351 PASS
+test_bpf: #46 INT: DIV by zero 444 860 PASS
+test_bpf: #47 check: missing ret PASS
+test_bpf: #48 check: div_k_0 PASS
+test_bpf: #49 check: unknown insn PASS
+test_bpf: #50 check: out of range spill/fill PASS
+test_bpf: #51 JUMPS + HOLES 1953 PASS
+test_bpf: #52 check: RET X PASS
+test_bpf: #53 check: LDX + RET X PASS
+test_bpf: #54 M[]: alt STX + LDX 7452 PASS
+test_bpf: #55 M[]: full STX + full LDX 5338 PASS
+test_bpf: #56 check: SKF_AD_MAX PASS
+test_bpf: #57 LD [SKF_AD_OFF-1] 863 PASS
+test_bpf: #58 load 64-bit immediate 1658 PASS
+test_bpf: #59 nmap reduced 3025 PASS
+test_bpf: Summary: 60 PASSED, 0 FAILED
+
+
+---- qemumips ----
+root@qemu3:~# uname -a
+Linux qemu3 4.1.10-WR8.0.0.0_standard #3 PREEMPT Mon Oct 26 17:20:28 CST 2015 mips GNU/Linux
+root@qemu3:~# insmod /lib/modules/4.1.10-WR8.0.0.0_standard/kernel/test_bpf.ko
+test_bpf: #0 TAX 2486 960 2053 PASS
+test_bpf: #1 TXA 2394 368 2502 PASS
+test_bpf: #2 ADD_SUB_MUL_K 418 PASS
+test_bpf: #3 DIV_MOD_KX 805 PASS
+test_bpf: #4 AND_OR_LSH_K 455 456 PASS
+test_bpf: #5 LD_IMM_0 278 PASS
+test_bpf: #6 LD_IND 422 338 1363 PASS
+test_bpf: #7 LD_ABS 259 257 256 PASS
+test_bpf: #8 LD_ABS_LL 552 567 PASS
+test_bpf: #9 LD_IND_LL 509 1541 511 PASS
+test_bpf: #10 LD_ABS_NET 487 1118 PASS
+test_bpf: #11 LD_IND_NET 1190 500 517 PASS
+test_bpf: #12 LD_PKTTYPE 735 1278 PASS
+test_bpf: #13 LD_MARK 257 254 PASS
+test_bpf: #14 LD_RXHASH 889 256 PASS
+test_bpf: #15 LD_QUEUE 256 254 PASS
+test_bpf: #16 LD_PROTOCOL 1620 662 PASS
+test_bpf: #17 LD_VLAN_TAG 293 293 PASS
+test_bpf: #18 LD_VLAN_TAG_PRESENT 943 708 PASS
+test_bpf: #19 LD_IFINDEX 908 398 PASS
+test_bpf: #20 LD_HATYPE 908 424 PASS
+test_bpf: #21 LD_CPU 646 1179 PASS
+test_bpf: #22 LD_NLATTR 525 1118 PASS
+test_bpf: #23 LD_NLATTR_NEST 2809 3076 PASS
+test_bpf: #24 LD_PAYLOAD_OFF 3361 3429 PASS
+test_bpf: #25 LD_ANC_XOR 292 803 PASS
+test_bpf: #26 SPILL_FILL 1289 760 778 PASS
+test_bpf: #27 JEQ 864 381 408 PASS
+test_bpf: #28 JGT 353 901 439 PASS
+test_bpf: #29 JGE 433 1062 575 PASS
+test_bpf: #30 JSET 576 1374 1041 PASS
+test_bpf: #31 tcpdump port 22 295 1633 1246 PASS
+test_bpf: #32 tcpdump complex 295 1540 2603 PASS
+test_bpf: #33 RET_A 225 226 PASS
+test_bpf: #34 INT: ADD trivial 423 PASS
+test_bpf: #35 INT: MUL_X 1432 PASS
+test_bpf: #36 INT: MUL_X2 434 PASS
+test_bpf: #37 INT: MUL32_X 391 PASS
+test_bpf: #38 INT: ADD 64-bit 6340 PASS
+test_bpf: #39 INT: ADD 32-bit 4979 PASS
+test_bpf: #40 INT: SUB 5332 PASS
+test_bpf: #41 INT: XOR 2935 PASS
+test_bpf: #42 INT: MUL 2605 PASS
+test_bpf: #43 INT: ALU MIX 1174 PASS
+test_bpf: #44 INT: shifts by register 1566 PASS
+test_bpf: #45 INT: DIV + ABS 1135 531 PASS
+test_bpf: #46 INT: DIV by zero 342 287 PASS
+test_bpf: #47 check: missing ret PASS
+test_bpf: #48 check: div_k_0 PASS
+test_bpf: #49 check: unknown insn PASS
+test_bpf: #50 check: out of range spill/fill PASS
+test_bpf: #51 JUMPS + HOLES 1939 PASS
+test_bpf: #52 check: RET X PASS
+test_bpf: #53 check: LDX + RET X PASS
+test_bpf: #54 M[]: alt STX + LDX 6326 PASS
+test_bpf: #55 M[]: full STX + full LDX 3491 PASS
+test_bpf: #56 check: SKF_AD_MAX PASS
+test_bpf: #57 LD [SKF_AD_OFF-1] 220 PASS
+test_bpf: #58 load 64-bit immediate 1553 PASS
+test_bpf: #59 nmap reduced 2622 PASS
+test_bpf: Summary: 60 PASSED, 0 FAILED
+
+
+---- qemux86 ----
+Linux qemu4 4.1.10-WR8.0.0.0_standard #3 SMP PREEMPT Mon Oct 26 17:22:05 CST 2015 i686 GNU/Linux
+root@qemu4:~# insmod /lib/modules/4.1.10-WR8.0.0.0_standard/kernel/test_bpf.ko
+test_bpf: #0 TAX 1249 1748 2112 PASS
+test_bpf: #1 TXA 1856 648 746 PASS
+test_bpf: #2 ADD_SUB_MUL_K 1288 PASS
+test_bpf: #3 DIV_MOD_KX 1964 PASS
+test_bpf: #4 AND_OR_LSH_K 876 508 PASS
+test_bpf: #5 LD_IMM_0 664 PASS
+test_bpf: #6 LD_IND 713 344 345 PASS
+test_bpf: #7 LD_ABS 643 276 275 PASS
+test_bpf: #8 LD_ABS_LL 939 662 PASS
+test_bpf: #9 LD_IND_LL 909 550 531 PASS
+test_bpf: #10 LD_ABS_NET 997 654 PASS
+test_bpf: #11 LD_IND_NET 853 548 539 PASS
+test_bpf: #12 LD_PKTTYPE 991 620 PASS
+test_bpf: #13 LD_MARK 267 258 PASS
+test_bpf: #14 LD_RXHASH 608 265 PASS
+test_bpf: #15 LD_QUEUE 615 275 PASS
+test_bpf: #16 LD_PROTOCOL 1051 676 PASS
+test_bpf: #17 LD_VLAN_TAG 650 300 PASS
+test_bpf: #18 LD_VLAN_TAG_PRESENT 696 351 PASS
+test_bpf: #19 LD_IFINDEX 707 363 PASS
+test_bpf: #20 LD_HATYPE 704 356 PASS
+test_bpf: #21 LD_CPU 1081 722 PASS
+test_bpf: #22 LD_NLATTR 608 695 PASS
+test_bpf: #23 LD_NLATTR_NEST 2978 3486 PASS
+test_bpf: #24 LD_PAYLOAD_OFF 2834 3597 PASS
+test_bpf: #25 LD_ANC_XOR 711 324 PASS
+test_bpf: #26 SPILL_FILL 1098 730 747 PASS
+test_bpf: #27 JEQ 707 404 386 PASS
+test_bpf: #28 JGT 363 406 442 PASS
+test_bpf: #29 JGE 844 600 590 PASS
+test_bpf: #30 JSET 595 731 954 PASS
+test_bpf: #31 tcpdump port 22 315 1161 1288 PASS
+test_bpf: #32 tcpdump complex 672 1136 2587 PASS
+test_bpf: #33 RET_A 266 248 PASS
+test_bpf: #34 INT: ADD trivial 796 PASS
+test_bpf: #35 INT: MUL_X 730 PASS
+test_bpf: #36 INT: MUL_X2 809 PASS
+test_bpf: #37 INT: MUL32_X 844 PASS
+test_bpf: #38 INT: ADD 64-bit 5763 PASS
+test_bpf: #39 INT: ADD 32-bit 4789 PASS
+test_bpf: #40 INT: SUB 5222 PASS
+test_bpf: #41 INT: XOR 2553 PASS
+test_bpf: #42 INT: MUL 2732 PASS
+test_bpf: #43 INT: ALU MIX 793 PASS
+test_bpf: #44 INT: shifts by register 1568 PASS
+test_bpf: #45 INT: DIV + ABS 581 605 PASS
+test_bpf: #46 INT: DIV by zero 731 296 PASS
+test_bpf: #47 check: missing ret PASS
+test_bpf: #48 check: div_k_0 PASS
+test_bpf: #49 check: unknown insn PASS
+test_bpf: #50 check: out of range spill/fill PASS
+test_bpf: #51 JUMPS + HOLES 2161 PASS
+test_bpf: #52 check: RET X PASS
+test_bpf: #53 check: LDX + RET X PASS
+test_bpf: #54 M[]: alt STX + LDX 4530 PASS
+test_bpf: #55 M[]: full STX + full LDX 3207 PASS
+test_bpf: #56 check: SKF_AD_MAX PASS
+test_bpf: #57 LD [SKF_AD_OFF-1] 592 PASS
+test_bpf: #58 load 64-bit immediate 909 PASS
+test_bpf: #59 nmap reduced 1973 PASS
+test_bpf: Summary: 60 PASSED, 0 FAILED
+
+Conditions of submission:

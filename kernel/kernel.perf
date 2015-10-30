@@ -1,0 +1,143 @@
+0d68bc92c48167130b61b449f08be27dc862dba2
+
+
+5e78c69b72276853ac64070a010e6df64723dba9
+root@128:/# perf record ls
+bin   home					      mnt	     root  tmp
+boot  intel-x86-64-glibc-std-preempt-rt-dist.tar.bz2  opt	     run   usr
+c     lib					      perf.data      sbin  var
+dev   lib64					      perf.data.old  srv   x
+etc   media					      proc	     sys
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.007 MB perf.data (14 samples) ]
+root@128:/# perf buildid-list --with-hits
+7ed85634331ebe4dcda892bc8e5a1fe97b4cb04d /proc/kcore
+85837a83b8853f34a38d5cabc28cef5126a1006c /bin/ls.coreutils
+
+
+
+root@128:/# perf record -e cycles:I -vv sleep 
+------------------------------------------------------------
+perf_event_attr:
+  size                             112
+  { sample_period, sample_freq }   4000
+  sample_type                      IP|TID|TIME|PERIOD
+  disabled                         1
+  inherit                          1
+  exclude_idle                     1
+  mmap                             1
+  comm                             1
+  freq                             1
+  enable_on_exec                   1
+  task                             1
+  sample_id_all                    1
+  mmap2                            1
+  comm_exec                        1
+------------------------------------------------------------
+sys_perf_event_open: pid 1837  cpu 0  group_fd -1  flags 0x8
+sys_perf_event_open: pid 1837  cpu 1  group_fd -1  flags 0x8
+sys_perf_event_open: pid 1837  cpu 2  group_fd -1  flags 0x8
+sys_perf_event_open: pid 1837  cpu 3  group_fd -1  flags 0x8
+mmap size 528384B
+perf event ring buffer mmapped per cpu
+sleep: missing operand
+Try 'sleep --help' for more information.
+[ perf record: Woken up 1 times to write data ]
+Looking at the vmlinux_path (7 entries long)
+Using /boot/vmlinux-4.1.10-rt8-WR8.0.0.0_preempt-rt for symbols
+[ perf record: Captured and wrote 0.007 MB perf.data (8 samples) ]
+
+
+2c5e8c52c6354f77c4019357be8231bcc34456f8
+
+f0dd330fdf07d295ac468660cf60341796d5d501
+root@128:/# perf sched replay -f
+run measurement overhead: 88 nsecs
+sleep measurement overhead: 52550 nsecs
+the run test took 1000016 nsecs
+the sleep test took 1059370 nsecs
+No trace sample to read. Did you call 'perf record -R'?
+nr_run_events:        0
+nr_sleep_events:      0
+nr_wakeup_events:     0
+------------------------------------------------------------
+#1  : 0.038, ravg: 0.04, cpu: 0.00 / 0.00
+#2  : 0.001, ravg: 0.03, cpu: 0.00 / 0.00
+#3  : 0.001, ravg: 0.03, cpu: 0.00 / 0.00
+#4  : 0.001, ravg: 0.03, cpu: 0.00 / 0.00
+#5  : 0.001, ravg: 0.03, cpu: 0.00 / 0.00
+#6  : 0.001, ravg: 0.02, cpu: 0.00 / 0.00
+#7  : 0.001, ravg: 0.02, cpu: 0.00 / 0.00
+#8  : 0.001, ravg: 0.02, cpu: 0.00 / 0.00
+#9  : 0.001, ravg: 0.02, cpu: 0.00 / 0.00
+#10 : 0.001, ravg: 0.02, cpu: 0.00 / 0.00
+
+
+
+bd05954bfa17f03a7bd4454178ba09786b35e383 -----> bug 
+
+e366a6d8949f3cfab01906b42c591098d59f3f35
+root@128:/# perf trace -i perf.data -f
+perf: 'trace' is not a perf-command. See 'perf --help'.
+
+
+
+44f7e432e3dc8a13f5661e8b722f53645df083d1
+     # perf timechart
+     File perf.data not owned by current user or root (use -f to override)
+     # perf timechart -f
+     Written 0.0 seconds of trace to output.svg.
+     # cat output.svg
+     <?xml version="1.0" standalone="no"?>
+     <!DOCTYPE svg SYSTEM "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+     <svg width="1000" height="10110" version="1.1" xmlns="http://www.w3.org/2000/svg">
+     <defs>
+
+
+06af0f2c919d7c8f05efebe0d96a6f22297aafd4
+
+
+
+
+62a1a63a77451dee8fd318a5106ca108d6a8ebcb
+root@128:/# perf mem -D report
+# PID, TID, IP, ADDR, LOCAL WEIGHT, DSRC, SYMBOL
+ 1878  1878 0xffffffff81435078 0x016ffff88009109bc88     7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:debug_smp_processor_id
+1878 1878 0xffffffff81434f49 0xffff88014e485e58 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:check_preemption_disabled
+1878 1878 0xffffffff8107ead5 0xffff88014e48aa18 9 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:___might_sleep
+1878 1878 0xffffffff81122020 0xffff88009ae938e9 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:perf_event_comm_output
+1878 1878 0xffffffff8107e9d7 0xffff88009109b900 8 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:preempt_count_sub
+1878 1878 0xffffffff8112f968 0xffff88009109ba60 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:pagecache_get_page
+1878 1878 0xffffffff8109ea8c 0xffff88009109ba50 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:in_lock_functions
+1878 1878 0x0 0x0 0 0x68080882 ???:???
+1878 1878 0xffffffff810085a0 0xffff88014e4c5ed0 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:do_nmi
+1878 1878 0xffffffff81ae32b7 0xffff88014e4c5fb8 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:native_irq_return_iret
+1878 1878 0xffffffff8107eafd 0xffff88009109b930 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:___might_sleep
+1878 1878 0xffffffff81007988 0xffff88009109ba28 14 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:print_context_stack
+1878 1878 0xffffffff810dec5b 0xffff88009109b1e0 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:is_module_text_address
+1878 1878 0xffffffff810dec59 0xffff88009109b1a0 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:is_module_text_address
+1878 1878 0xffffffff81191dec 0xffff88009ae952b8 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:mem_cgroup_event_ratelimit.isra.6
+root@128:/# perf mem -D -f report
+# PID, TID, IP, ADDR, LOCAL WEIGHT, DSRC, SYMBOL
+ 1878  1878 0xffffffff81435078 0x016ffff88009109bc88     7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:debug_smp_processor_id
+1878 1878 0xffffffff81434f49 0xffff88014e485e58 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:check_preemption_disabled
+1878 1878 0xffffffff8107ead5 0xffff88014e48aa18 9 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:___might_sleep
+1878 1878 0xffffffff81122020 0xffff88009ae938e9 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:perf_event_comm_output
+1878 1878 0xffffffff8107e9d7 0xffff88009109b900 8 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:preempt_count_sub
+1878 1878 0xffffffff8112f968 0xffff88009109ba60 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:pagecache_get_page
+1878 1878 0xffffffff8109ea8c 0xffff88009109ba50 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:in_lock_functions
+1878 1878 0x0 0x0 0 0x68080882 ???:???
+1878 1878 0xffffffff810085a0 0xffff88014e4c5ed0 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:do_nmi
+1878 1878 0xffffffff81ae32b7 0xffff88014e4c5fb8 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:native_irq_return_iret
+1878 1878 0xffffffff8107eafd 0xffff88009109b930 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:___might_sleep
+1878 1878 0xffffffff81007988 0xffff88009109ba28 14 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:print_context_stack
+1878 1878 0xffffffff810dec5b 0xffff88009109b1e0 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:is_module_text_address
+1878 1878 0xffffffff810dec59 0xffff88009109b1a0 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:is_module_text_address
+1878 1878 0xffffffff81191dec 0xffff88009ae952b8 7 0x68100142 /root/.debug/.build-id/7e/d85634331ebe4dcda892bc8e5a1fe97b4cb04d:mem_cgroup_event_ratelimit.isra.6
+root@128:/# 
+
+
+c4ac732a0377d1544a8385393a9877b693ff0652
+
+
+

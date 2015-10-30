@@ -1,0 +1,22 @@
+root@128:/# perf probe -x /lib*/libc.so.6 malloc
+uprobe_events file does not exist - please rebuild kernel with CONFIG_UPROBE_EVENTS.
+  Error: Failed to add events.
+
+
+    
+    For example, run the below commands on 32 bit powerpc:
+    
+    perf probe -x /lib/libc.so.6 malloc
+    perf record -e probe_libc:malloc -a ls
+    perf.data
+    [ perf record: Woken up 1 times to write data ]
+    [ perf record: Captured and wrote 0.036 MB perf.data (13829241621624967218 samples) ]
+    
+    Actually, "perf script" just shows 21 samples. The number of samples is also
+    absurd since samples is long type, but it is printed as PRIu64.
+    
+    Build test is run on x86-64, x86, aarch64, arm, mips, ppc and ppc64.
+    
+
+
+

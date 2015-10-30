@@ -1,0 +1,3 @@
+root@128:/# perf probe -a sys_write
+kprobe_events file does not exist - please rebuild kernel with CONFIG_KPROBE_EVENTS.
+  Error: Failed to add events.
