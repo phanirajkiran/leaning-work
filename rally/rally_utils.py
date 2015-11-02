@@ -10,6 +10,8 @@
 import sys
 from optparse import OptionParser
 from pyral import Rally, rallyWorkset
+import pprint
+import time
 
 #################################################################################################
 
@@ -54,7 +56,7 @@ def create_task(userstory,task_name,task_owner):
              "WorkProduct" : target_story.ref,
               'Owner'      : task_owner.ref,
              "Name"        : '[TEST] %s' %task_name,
-             "State"       : "Defined",
+             "State"       : "In-Progress",
              "TaskIndex"   : create_task.counter,
              #"Description" : "Fly to Chile next week to investigate the home of potatoes.  Find the absolute gigantoidist spuds and bring home the eyes to Idaho.  Plant, water, wonder, harvest, wash, slice, plunge in and out of hot oil, drain and enjoy! Repeat as needed.",
              "Estimate"    : 2.0,
@@ -76,16 +78,30 @@ def list_userstory(rally):
 
 def list_my_userstory(rally):
     response = rally.get('UserStory', query=iteration_criterion)
-    my_task_list=[]
+    #my_task_list=[]
+    n = 0
+    task_dict = {}
     for story in response:
+        z = 0 
+	#task_dict['%s: %s' %(story.FormattedID,story.Name)] = []
         for task in story.Tasks:
-            if owner in task.Owner.Name:
-                my_task_list.append('    %s: %s' %(story.FormattedID,story.Name))
-                #print '    %s: %s' %(story.FormattedID,story.Name)
-    for us in list(set(my_task_list)):
-        print us
-
-
+   	    #print story.Name,owner,task.Owner.Name
+            if task.Owner and owner == task.Owner.Name:
+		z = z+1
+		if z == 1:
+	            n = n+1
+	            print "%s.%s %s" %(n,story.FormattedID,story.Name)
+                #task_dict['%s: %s' %(story.FormattedID,story.Name)].append('    %s: %s' %(task.FormattedID,task.Name))
+                print '    %s: %s(%s)' %(task.FormattedID,task.Name,task.State)
+'''
+    n = 0
+    for k,v in task_dict.iteritems():
+	if v:
+	    n = n + 1 
+	    print "%s.%s" %(n,k)
+	    for z in v:
+                print z     
+'''
 def list_tasks(rally,userstory):
     response   = rally.get('UserStory', query='FormattedID = %s' % userstory)
    # story1 = response.next()
@@ -96,7 +112,7 @@ def list_tasks(rally,userstory):
         for task in story.Tasks:
 #            print task.oid, task.Name
   #           print task.Owner.Name
-             print '         %s:%s' %(task.FormattedID,task.Name)
+             print '         %s:%s(%s)' %(task.FormattedID,task.Name,task.State)
  
 
 
@@ -152,18 +168,27 @@ def update_task(userstory,task_name,task_owner):
         sys.stderr.write('ERROR: %s \n' % details)
         sys.exit(2)
 
+def con_rally(server, user, password, workspace, project):
+    rally= None
+    try:
+        rally = Rally(server, user, password, workspace=workspace, project=project)
+    except:
+	time.sleep(1)
+	rally=con_rally(server, user, password, workspace=workspace, project=project)
+    finally:
+        return rally
 
 
 def main(args):
     usage = '''
-      #create all the testing task for US69113
+      #create all the testing task for US69113 based on dev task
       %s -u US69113 -o "Lei Yang" -a 
       #list all the US in current sprint 
       %s -l 
       #list the task of US69113
       %s -u US69113
       #list the userstory that 'Lei Yang' working on 
-      %s -o 'Lei Yang' -m
+      %s -o 'Lei Yang'
     ''' %(__file__,__file__,__file__,__file__)
     parser = OptionParser(usage=usage)
     parser.add_option("-u", "--userstory",  \
@@ -174,23 +199,26 @@ def main(args):
                      action="store", type="string", dest="task_name",help="task name")
     parser.add_option("-l", action="store_true", dest="listall",help="list all userstory")
     parser.add_option("-a", action="store_true", dest="auto",help="auto create userstory")
-    parser.add_option("-m", action="store_true", dest="mine",help="list the my userstory")
+ #   parser.add_option("-m", action="store_true", dest="mine",help="list the my userstory")
     (options, args) = parser.parse_args()
     userstory = options.userstory
     owner = options.owner
     listall = options.listall
     auto = options.auto
-    mine = options.mine
+#    mine = options.mine
     task_name = options.task_name
 
     options = [opt for opt in args if opt.startswith('--')]
 #    print options
     args    = [arg for arg in args if arg not in options]
     #server, user, password, apikey, workspace, project = rallyWorkset(options)
+    #server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Linux Core Project"
     server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Lx BSPs"
 #    print server, user, password, apikey, workspace, project
+    #help(Rally)
     #print " ".join(["|%s|" % item for item in [server, user, password, workspace, project]])
-    rally = Rally(server, user, password, workspace=workspace, project=project)
+    #rally = Rally(server, user, password, workspace=workspace, project=project)
+    rally=con_rally(server, user, password, workspace=workspace, project=project)
     rally.enableLogging('fire.log')
     specified_workspace = workspace
 
@@ -201,10 +229,10 @@ def main(args):
     #target_story   = rally.get('UserStory', query='FormattedID = %s' % storyID, instance=True)
     #print "Project  : %s " % project.Name
     #return target_project,target_story
-    return rally,userstory,owner,listall,auto,task_name,mine
+    return rally,userstory,owner,listall,auto,task_name
 
 if __name__ == '__main__':
-    rally,userstory,owner,listall,auto,task_name,mine=main(sys.argv[1:])
+    rally,userstory,owner,listall,auto,task_name=main(sys.argv[1:])
     iteration_criterion = 'iteration.Name = \"Lx8 S9 15-11-16\"'
     create_task.counter = 100
     if userstory and owner and auto:
@@ -216,5 +244,6 @@ if __name__ == '__main__':
             list_tasks(rally,userstory)
     if userstory and task_name and owner:
         create_task(userstory,task_name,owner)
-    if mine and owner:
-        list_my_userstory(rally)
+    if (not userstory) and (not auto):
+        if owner:
+            list_my_userstory(rally)
