@@ -1,0 +1,10 @@
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/rally$ ./rally_utils.py -u US69054 -o "Lei Yang" -a
+Created  Task: TA118489 [TEST] Intel RAPL(update to the newest)
+Created  Task: TA118490 [TEST] Intel i915 graphic
+Created  Task: TA118491 [TEST] CPU Idle (update to the newest)
+Created  Task: TA118492 [TEST] CPU freq(update to the newest)
+Created  Task: TA118493 [TEST] PowerClamp(update to the newest)
+Created  Task: TA118494 [TEST] Suspend/Resume
+Created  Task: TA118495 [TEST] drm backport
+7 the testing tasks for Lei Yang are created
+

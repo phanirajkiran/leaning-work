@@ -12,8 +12,6 @@ from optparse import OptionParser
 from pyral import Rally, rallyWorkset
 import pprint
 import time
-from datetime import datetime
-
 
 #################################################################################################
 
@@ -83,8 +81,6 @@ def list_my_userstory(rally):
     #my_task_list=[]
     n = 0
     task_dict = {}
-    sum_todo = 0 
-    string = ""
     for story in response:
         z = 0 
 	#task_dict['%s: %s' %(story.FormattedID,story.Name)] = []
@@ -94,15 +90,10 @@ def list_my_userstory(rally):
 		z = z+1
 		if z == 1:
 	            n = n+1
-	            #print "%s.%s %s" %(n,story.FormattedID,story.Name)
-	            string += "%s.%s %s\n" %(n,story.FormattedID,story.Name)
+	            print "%s.%s %s" %(n,story.FormattedID,story.Name)
                 #task_dict['%s: %s' %(story.FormattedID,story.Name)].append('    %s: %s' %(task.FormattedID,task.Name))
                 #print '    %s: %s(%s) todo:%s' %(task.FormattedID,task.Name,task.State,task.ToDo)
-		sum_todo = task.ToDo + sum_todo
-		#print("    %-6s:%-39s(%-5s) Todo:%-5s" % (task.FormattedID,task.Name,task.State,task.ToDo))
-		string += "    %-6s:%-39s(%-5s) Todo:%-5s\n" % (task.FormattedID,task.Name,task.State,task.ToDo)
-    print string 
-    return int(sum_todo)
+		print("    %-6s:%-30s(%-5s) Todo:%-10s" % (task.FormattedID,task.Name,task.State,task.ToDo))
 '''
     n = 0
     for k,v in task_dict.iteritems():
@@ -123,8 +114,7 @@ def list_tasks(rally,userstory):
 #            print task.oid, task.Name
   #           print task.Owner.Name
     #         print '         %s:%s(%s)' %(task.FormattedID,task.Name,task.State)
-	    if task.Owner:
-	        print("    %-6s:%-49s(%-5s) Todo:%-8s %-50s" % (task.FormattedID,task.Name,task.State,task.ToDo,task.Owner.Name))
+	    print("    %-6s:%-30s(%-5s) Todo:%-10s" % (task.FormattedID,task.Name,task.State,task.ToDo))
  
 
 
@@ -193,27 +183,16 @@ def con_rally(server, user, password, workspace, project):
 
 def main(args):
     usage = '''
-      # create all the testing task for US69113 based on dev task
-        %s -u US69113 -o "Lei Yang" -a 
-      # list all the US in current sprint 
-        %s -l -c "Lx BSPs"
-      # list the task of US69113
-        %s -u US69113
-      # list the userstory that 'Lei Yang' working on 
-        %s -o 'Lei Yang' -c "Lx BSPs"
-      # the component can be:
-            "Linux Core Project"
-            "Lx Test"
-            "Lx BSPs" (default 
-            "Lx Kernel"
-            "Lx Userspace"
-            "Lx Build System"
-            "Lx Tools"
-	   
+      #create all the testing task for US69113 based on dev task
+      %s -u US69113 -o "Lei Yang" -a 
+      #list all the US in current sprint 
+      %s -l 
+      #list the task of US69113
+      %s -u US69113
+      #list the userstory that 'Lei Yang' working on 
+      %s -o 'Lei Yang'
     ''' %(__file__,__file__,__file__,__file__)
     parser = OptionParser(usage=usage)
-    parser.add_option("-c", "--component",  \
-                     action="store", type="string", dest="component",help="component")
     parser.add_option("-u", "--userstory",  \
                      action="store", type="string", dest="userstory",help="userstory")
     parser.add_option("-o", "--owener",  \
@@ -230,18 +209,13 @@ def main(args):
     auto = options.auto
 #    mine = options.mine
     task_name = options.task_name
-    component = options.component
-    if not component:
-        component = "Lx BSPs"
-    
 
     options = [opt for opt in args if opt.startswith('--')]
 #    print options
     args    = [arg for arg in args if arg not in options]
     #server, user, password, apikey, workspace, project = rallyWorkset(options)
-    server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "%s" %component
-    #server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Lx Test"
-    #server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Lx BSPs"
+   # server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Linux Core Project"
+    server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Lx BSPs"
   #  print server, user, password, apikey, workspace, project
     #help(Rally)
     #print " ".join(["|%s|" % item for item in [server, user, password, workspace, project]])
@@ -261,21 +235,7 @@ def main(args):
 
 if __name__ == '__main__':
     rally,userstory,owner,listall,auto,task_name=main(sys.argv[1:])
-    present = datetime.now()
-    if present <= datetime(2015, 9, 14) and present >= datetime(2015, 8, 24):
-        sprint="Lx8 S6 15-09-14"
-    elif present <= datetime(2015, 10, 05) and present >= datetime(2015, 9, 14):
-        sprint="Lx8 S7 15-10-05"
-    elif present <= datetime(2015, 10, 26) and present >= datetime(2015, 10, 05):
-        sprint="Lx8 S8 15-10-26"
-    elif present <= datetime(2015, 11, 16) and present >= datetime(2015, 10, 26):
-        sprint="Lx8 S9 15-11-16"
-    elif present <= datetime(2015, 12, 07) and present >= datetime(2015, 11, 16):
-        sprint="Lx8 S10 15-12-07"
-    else:
-        sprint = ""
-
-    iteration_criterion = 'iteration.Name = \"%s\"' %sprint
+    iteration_criterion = 'iteration.Name = \"Lx8 S9 15-11-16\"'
     create_task.counter = 100
     if userstory and owner and auto:
         auto_create_all_task(rally,userstory,owner)
@@ -288,5 +248,4 @@ if __name__ == '__main__':
         create_task(userstory,task_name,owner)
     if (not userstory) and (not auto):
         if owner:
-            ret=list_my_userstory(rally)
-	    sys.exit(ret)
+            list_my_userstory(rally)
