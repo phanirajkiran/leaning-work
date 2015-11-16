@@ -1,0 +1,191 @@
+2015-11-13 17:48:18.933 Following entries record Rally REST API interaction via https://rally1.rallydev.com/slm/webservice/v2.0 for user: interface_rally@windriver.com
+2015-11-13 17:48:18.934 GET Iteration?fetch=false&query=((StartDate <= today) AND (EndDate >= today))&workspace=workspace/118972737&project=project/11470176273&pagesize=100&start=1
+2015-11-13 17:48:29.385 200 Iteration?fetch=false&query=((StartDate%20%3C%3D%20today)%20AND%20(EndDate%20>=%20today))&workspace=workspace/118972737&project=project TotalResultCount 8
+2015-11-13 17:48:30.706 GET Iteration?fetch=false&query=((StartDate <= today) AND (EndDate >= today))&workspace=workspace/118972737&project=project/11470176273&pagesize=100&start=1
+2015-11-13 17:48:31.059 200 Iteration?fetch=false&query=((StartDate%20%3C%3D%20today)%20AND%20(EndDate%20>=%20today))&workspace=workspace/118972737&project=project TotalResultCount 8
+2015-11-13 17:48:32.390 GET Task?fetch=Owner,Project,Name&query=(iteration.Name = "Lx8 S9 15-11-16")&workspace=workspace/118972737&project=project/11470176273&pagesize=100&start=1
+2015-11-13 17:48:33.147 200 Task?fetch=Owner,Project,Name&query=(iteration.Name%20%3D%20%22Lx8%20S9%2015-11-16%22)&workspace=workspace/118972737&project=project TotalResultCount 537
+2015-11-13 17:48:36.469 GET HierarchicalRequirement?fetch=Name,FormattedID,Tasks,JiraLink,Blocked,Project,ObjectID&query=(iteration.Name = "Lx8 S9 15-11-16")&workspace=workspace/118972737&project=project/11470176273&pagesize=100&start=1
+2015-11-13 17:48:37.208 200 HierarchicalRequirement?fetch=Name,FormattedID,Tasks,JiraLink,Blocked,Project,ObjectID&query=(iteration.Name%20%3D%20%22Lx8%20S9%2015-11-16%22)&workspace=workspace/118972737&project=project TotalResultCount 94
+2015-11-13 17:48:37.208 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/18408457297/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:37.703 200 HierarchicalRequirement/18408457297/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:37.704 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/20497639329/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:38.133 200 HierarchicalRequirement/20497639329/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:48:38.134 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/37949350654/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:38.602 200 HierarchicalRequirement/37949350654/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:38.603 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/38169112017/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:39.653 200 HierarchicalRequirement/38169112017/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 7
+2015-11-13 17:48:39.656 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/39495693347/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:40.118 200 HierarchicalRequirement/39495693347/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:48:40.120 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/39495694661/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:40.531 200 HierarchicalRequirement/39495694661/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:48:40.532 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/39495983854/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:40.960 200 HierarchicalRequirement/39495983854/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:40.961 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/39496229140/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:41.409 200 HierarchicalRequirement/39496229140/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:41.411 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/39498558213/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:41.848 200 HierarchicalRequirement/39498558213/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:41.849 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/39850298473/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:42.190 200 HierarchicalRequirement/39850298473/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:42.192 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/40956067410/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:42.523 200 HierarchicalRequirement/40956067410/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:42.524 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/41044472170/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:42.875 200 HierarchicalRequirement/41044472170/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:48:42.877 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/41883902266/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:43.223 200 HierarchicalRequirement/41883902266/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:43.224 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/41883903123/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:43.576 200 HierarchicalRequirement/41883903123/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:43.577 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/41884149408/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:44.040 200 HierarchicalRequirement/41884149408/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:48:44.042 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/41884152834/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:44.486 200 HierarchicalRequirement/41884152834/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:44.488 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/42245156687/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:44.925 200 HierarchicalRequirement/42245156687/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:44.926 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/42463390149/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:45.374 200 HierarchicalRequirement/42463390149/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:45.375 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/42463531207/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:45.819 200 HierarchicalRequirement/42463531207/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:45.820 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/42936560994/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:46.283 200 HierarchicalRequirement/42936560994/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:46.284 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/42936983570/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:46.700 200 HierarchicalRequirement/42936983570/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:46.701 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/42939754514/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:47.129 200 HierarchicalRequirement/42939754514/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:47.130 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/42944996220/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:48.232 200 HierarchicalRequirement/42944996220/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 42
+2015-11-13 17:48:48.246 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43053805281/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:48.674 200 HierarchicalRequirement/43053805281/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:48:48.674 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43065934067/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:49.109 200 HierarchicalRequirement/43065934067/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:49.110 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43109142174/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:49.563 200 HierarchicalRequirement/43109142174/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:49.565 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43161010898/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:49.996 200 HierarchicalRequirement/43161010898/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:49.998 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43165559142/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:50.447 200 HierarchicalRequirement/43165559142/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 7
+2015-11-13 17:48:50.450 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43193842415/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:51.056 200 HierarchicalRequirement/43193842415/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 6
+2015-11-13 17:48:51.058 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43347326903/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:51.623 200 HierarchicalRequirement/43347326903/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:51.624 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43347810805/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:52.220 200 HierarchicalRequirement/43347810805/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 15
+2015-11-13 17:48:52.225 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43362305537/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:52.951 200 HierarchicalRequirement/43362305537/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:52.952 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43479346350/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:53.419 200 HierarchicalRequirement/43479346350/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:53.420 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43807073860/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:53.768 200 HierarchicalRequirement/43807073860/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 6
+2015-11-13 17:48:53.771 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/43842686912/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:54.237 200 HierarchicalRequirement/43842686912/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 15
+2015-11-13 17:48:54.242 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44021507476/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:54.571 200 HierarchicalRequirement/44021507476/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:48:54.571 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44026191842/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:54.906 200 HierarchicalRequirement/44026191842/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:48:54.906 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44318383166/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:55.434 200 HierarchicalRequirement/44318383166/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:48:55.435 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44408930626/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:56.215 200 HierarchicalRequirement/44408930626/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 28
+2015-11-13 17:48:56.225 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44412381926/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:56.636 200 HierarchicalRequirement/44412381926/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:48:56.638 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44429170210/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:57.037 200 HierarchicalRequirement/44429170210/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:48:57.038 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44487983217/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:57.591 200 HierarchicalRequirement/44487983217/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 11
+2015-11-13 17:48:57.595 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44500530983/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:57.986 200 HierarchicalRequirement/44500530983/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 15
+2015-11-13 17:48:57.991 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44501171852/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:58.419 200 HierarchicalRequirement/44501171852/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:58.420 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44648504522/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:58.932 200 HierarchicalRequirement/44648504522/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 7
+2015-11-13 17:48:58.935 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44792424266/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:59.431 200 HierarchicalRequirement/44792424266/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:48:59.432 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44792985988/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:48:59.908 200 HierarchicalRequirement/44792985988/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:48:59.909 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44847474108/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:00.408 200 HierarchicalRequirement/44847474108/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:49:00.410 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44913908024/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:00.826 200 HierarchicalRequirement/44913908024/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:00.827 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44914072804/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:01.234 200 HierarchicalRequirement/44914072804/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:01.235 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/44914076471/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:01.639 200 HierarchicalRequirement/44914076471/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:01.639 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45124661246/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:02.067 200 HierarchicalRequirement/45124661246/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:49:02.068 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45170160943/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:02.433 200 HierarchicalRequirement/45170160943/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 9
+2015-11-13 17:49:02.436 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45244636806/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:02.907 200 HierarchicalRequirement/45244636806/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:49:02.909 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45274954606/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:03.361 200 HierarchicalRequirement/45274954606/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:49:03.363 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45274955461/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:03.745 200 HierarchicalRequirement/45274955461/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:49:03.747 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45275815137/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:04.152 200 HierarchicalRequirement/45275815137/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 10
+2015-11-13 17:49:04.156 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45298185529/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:04.600 200 HierarchicalRequirement/45298185529/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:04.601 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45338080659/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:05.036 200 HierarchicalRequirement/45338080659/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:05.037 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45348842920/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:05.515 200 HierarchicalRequirement/45348842920/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:49:05.516 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45349052648/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:05.983 200 HierarchicalRequirement/45349052648/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:49:05.986 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45361279727/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:06.402 200 HierarchicalRequirement/45361279727/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:06.402 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45361279813/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:06.801 200 HierarchicalRequirement/45361279813/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:06.801 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45362616185/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:07.359 200 HierarchicalRequirement/45362616185/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 21
+2015-11-13 17:49:07.367 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45362634839/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:07.889 200 HierarchicalRequirement/45362634839/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 14
+2015-11-13 17:49:07.897 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45517160467/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:08.707 200 HierarchicalRequirement/45517160467/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 37
+2015-11-13 17:49:08.721 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45521690913/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:09.105 200 HierarchicalRequirement/45521690913/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:49:09.106 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45539566538/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:09.484 200 HierarchicalRequirement/45539566538/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:49:09.485 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45576273168/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:09.898 200 HierarchicalRequirement/45576273168/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 11
+2015-11-13 17:49:09.902 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45576597410/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:10.459 200 HierarchicalRequirement/45576597410/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 16
+2015-11-13 17:49:10.465 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45618786522/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:10.890 200 HierarchicalRequirement/45618786522/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:10.890 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45623042594/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:11.385 200 HierarchicalRequirement/45623042594/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 10
+2015-11-13 17:49:11.388 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45625780799/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:12.134 200 HierarchicalRequirement/45625780799/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 9
+2015-11-13 17:49:12.137 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45627592933/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:12.635 200 HierarchicalRequirement/45627592933/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:49:12.637 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45628589174/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:13.095 200 HierarchicalRequirement/45628589174/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:49:13.097 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45629437593/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:13.469 200 HierarchicalRequirement/45629437593/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 9
+2015-11-13 17:49:13.472 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45630939325/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:13.866 200 HierarchicalRequirement/45630939325/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 12
+2015-11-13 17:49:13.870 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45652248724/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:14.611 200 HierarchicalRequirement/45652248724/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 19
+2015-11-13 17:49:14.618 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45718489245/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:15.089 200 HierarchicalRequirement/45718489245/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 5
+2015-11-13 17:49:15.091 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45771599235/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:15.547 200 HierarchicalRequirement/45771599235/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:49:15.548 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45805699285/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:16.006 200 HierarchicalRequirement/45805699285/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 7
+2015-11-13 17:49:16.008 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45940677223/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:16.358 200 HierarchicalRequirement/45940677223/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:49:16.359 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45940810819/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:16.766 200 HierarchicalRequirement/45940810819/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:49:16.767 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45940818882/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:17.158 200 HierarchicalRequirement/45940818882/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 4
+2015-11-13 17:49:17.160 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45952183646/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:17.515 200 HierarchicalRequirement/45952183646/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 6
+2015-11-13 17:49:17.517 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45963594990/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:17.852 200 HierarchicalRequirement/45963594990/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:49:17.853 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45963801417/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:18.184 200 HierarchicalRequirement/45963801417/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:49:18.185 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/45980663125/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:18.513 200 HierarchicalRequirement/45980663125/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 1
+2015-11-13 17:49:18.513 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/46585076445/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:18.840 200 HierarchicalRequirement/46585076445/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2
+2015-11-13 17:49:18.841 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/46586021204/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:20.195 200 HierarchicalRequirement/46586021204/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 3
+2015-11-13 17:49:20.196 GET https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/46690192293/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project/11470176273
+2015-11-13 17:49:20.613 200 HierarchicalRequirement/46690192293/Tasks?pagesize=200&start=1&workspace=workspace/118972737&project=project TotalResultCount 2

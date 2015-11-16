@@ -1,0 +1,3 @@
+[filter1]
+summary=Userspace open defect in 8.0
+filter=project = LIN8 AND summary !~ "Security" AND component = Userspace AND issuetype = Bug AND resolution = Unresolved ORDER BY priority DESC

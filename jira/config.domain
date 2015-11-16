@@ -1,0 +1,12 @@
+[filter1]
+summary=BSP open defect in 8.0
+filter=project = LIN8 AND summary !~ "Security" AND component = BSP AND issuetype = Bug AND resolution = Unresolved ORDER BY priority DESC
+[filter2]
+summary=Kernel open defect in 8.0
+filter=project = LIN8 AND summary !~ "Security" AND component = Kernel AND issuetype = Bug AND resolution = Unresolved ORDER BY priority DESC
+[filter3]
+summary=Userspace open defect in 8.0
+filter=project = LIN8 AND summary !~ "Security" AND component = Userspace AND issuetype = Bug AND resolution = Unresolved ORDER BY priority DESC
+[filter4]
+summary=Build & Config open defect in 8.0
+filter=project = LIN8 AND summary !~ "Security" AND component = "Build & Config" AND issuetype = Bug AND resolution = Unresolved ORDER BY priority DESC

@@ -1,0 +1,120 @@
+issue:
+['__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', u'aggregateprogress', u'aggregatetimeestimate', u'aggregatetimeoriginalestimate', u'aggregatetimespent', u'assignee', u'attachment', u'comment', u'components', u'created', u'creator', u'customfield_10004', u'customfield_10005', u'customfield_10006', u'customfield_10007', u'customfield_10008', u'customfield_10010', u'customfield_10011', u'customfield_10012', u'customfield_10015', u'customfield_10103', u'customfield_10200', u'customfield_10201', u'customfield_10501', u'customfield_10508', u'customfield_10512', u'customfield_10517', u'customfield_10518', u'customfield_10519', u'customfield_10520', u'customfield_10600', u'customfield_10601', u'customfield_10602', u'customfield_10603', u'customfield_10604', u'customfield_10605', u'customfield_10606', u'customfield_10607', u'customfield_10608', u'customfield_10700', u'customfield_10701', u'customfield_10702', u'customfield_10707', u'customfield_10800', u'customfield_10801', u'customfield_10802', u'customfield_10900', u'customfield_10901', u'customfield_11000', u'customfield_11001', u'customfield_11002', u'customfield_11100', u'customfield_11201', u'customfield_11202', u'customfield_11301', u'customfield_11302', u'customfield_11404', u'customfield_11500', u'customfield_11700', u'customfield_11900', u'customfield_11901', u'customfield_11902', u'customfield_11904', u'customfield_11905', u'customfield_11906', u'customfield_11908', u'customfield_12100', u'customfield_12200', u'customfield_12400', u'customfield_12407', u'customfield_12500', u'description', u'duedate', u'environment', u'issuelinks', u'issuetype', u'labels', u'lastViewed', u'priority', u'progress', u'project', u'reporter', u'resolution', u'resolutiondate', u'status', u'subtasks', u'summary', u'timeestimate', u'timeoriginalestimate', u'timespent', u'timetracking', u'updated', u'votes', u'watches', u'worklog', u'workratio']
+
+filter:
+['_READABLE_IDS', '__class__', '__delattr__', '__dict__', '__doc__', '__format__', '__getattr__', '__getattribute__', '__hash__', '__init__', '__module__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', '_default_headers', '_load', '_options', '_parse_raw', '_resource', '_session', 'delete', 'description', 'favourite', 'find', 'id', 'jql', 'name', 'owner', 'raw', 'searchUrl', 'self', 'sharePermissions', 'sharedUsers', 'subscriptions', 'update', 'viewUrl']
+
+__doc__ None
+__format__ <method '__format__' of 'object' objects>
+__getattribute__ <slot wrapper '__getattribute__' of 'object' objects>
+__hash__ <slot wrapper '__hash__' of 'object' objects>
+__init__ <slot wrapper '__init__' of 'object' objects>
+__module__ jira.resources
+__new__ <built-in method __new__ of type object at 0x911420>
+__reduce__ <method '__reduce__' of 'object' objects>
+__reduce_ex__ <method '__reduce_ex__' of 'object' objects>
+__repr__ <slot wrapper '__repr__' of 'object' objects>
+__setattr__ <slot wrapper '__setattr__' of 'object' objects>
+__sizeof__ <method '__sizeof__' of 'object' objects>
+__str__ <slot wrapper '__str__' of 'object' objects>
+__subclasshook__ <built-in method __subclasshook__ of type object at 0x2ba25c0>
+__weakref__ <attribute '__weakref__' of 'PropertyHolder' objects>
+aggregateprogress <class 'jira.resources.PropertyHolder'>
+aggregatetimeestimate None
+aggregatetimeoriginalestimate None
+aggregatetimespent None
+assignee Zhou, Li
+attachment []
+comment <class 'jira.resources.PropertyHolder'>
+components [<JIRA Component: name=u'Kernel', id=u'20708'>]
+created 2015-09-14T22:55:40.000-0700
+creator Tao, Yue
+customfield_10004 None
+customfield_10005 None
+customfield_10006 None
+customfield_10007 None
+customfield_10008 None
+customfield_10010 Reviewed - Publish
+customfield_10011 None
+customfield_10012 Chen, Hong
+customfield_10015 None
+customfield_10103 None
+customfield_10200 None
+customfield_10201 None
+customfield_10501 None
+customfield_10508 None
+customfield_10512 None
+customfield_10517 None
+customfield_10518 None
+customfield_10519 None
+customfield_10520 None
+customfield_10600 None
+customfield_10601 None
+customfield_10602 None
+customfield_10603 None
+customfield_10604 None
+customfield_10605 Standard
+customfield_10606 None
+customfield_10607 Confirmed
+customfield_10608 None
+customfield_10700 7.0.0.10
+customfield_10701 None
+customfield_10702 None
+customfield_10707 None
+customfield_10800 None
+customfield_10801 None
+customfield_10802 None
+customfield_10900 None
+customfield_10901 None
+customfield_11000 [<JIRA Version: name=u'7.0.0.9', id=u'23740'>]
+customfield_11001 None
+customfield_11002 7.0.0.10
+customfield_11100 None
+customfield_11201 None
+customfield_11202 None
+customfield_11301 None
+customfield_11302 None
+customfield_11404 None
+customfield_11500 None
+customfield_11700 None
+customfield_11900 None
+customfield_11901 None
+customfield_11902 None
+customfield_11904 No
+customfield_11905 No
+customfield_11906 No
+customfield_11908 None
+customfield_12100 None
+customfield_12200 None
+customfield_12400 2015-10-18T23:06:30.000-0700
+customfield_12407 2015-10-04T15:53:52.000-0700
+customfield_12500 None
+description Use-after-free vulnerability in the path_openat function in fs/namei.c in the Linux kernel 3.x and 4.x before 4.0.4 allows local users to cause a denial of service or possibly have unspecified other impact via O_TMPFILE filesystem operations that leverage a duplicate cleanup operation.<a href=http://cwe.mitre.org/data/definitions/416.html>CWE-416: Use After Free</a>
+
+http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-5706
+duedate None
+environment None
+issuelinks []
+issuetype Bug
+labels [u'package_linux', u'security-linux']
+lastViewed None
+priority P3
+progress <class 'jira.resources.PropertyHolder'>
+project SCP7
+reporter Tao, Yue
+resolution Fixed
+resolutiondate 2015-09-28T19:40:25.000-0700
+status Closed
+subtasks []
+summary Security Advisory - linux - CVE-2015-5706
+timeestimate None
+timeoriginalestimate None
+timespent None
+timetracking <JIRA TimeTracking at 0x7fd2ed6b5a10>
+updated 2015-10-18T23:06:30.000-0700
+votes 0
+watches <JIRA Watchers at 0x7fd2ed6ca0d0>
+worklog <class 'jira.resources.PropertyHolder'>
+workratio -1
+[]
+

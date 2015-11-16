@@ -1,0 +1,3 @@
+[filter1]
+summary=NEW BSP defects opened today in LIN8 
+filter=project = LIN8  AND component = BSP AND created >= -16h ORDER BY assignee ASC,priority DESC

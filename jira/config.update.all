@@ -1,0 +1,3 @@
+[filter1]
+summary=NEW  defects opened today in LIN8 
+filter=project = LIN8  AND created >= -16h ORDER BY priority DESC
