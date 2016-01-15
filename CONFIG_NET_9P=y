@@ -1,3 +1,0 @@
-[2013-05-20 13:29:37.464148] I [glusterfsd.c:1493:main] 0-glusterfs: Started running glusterfs version 3.2.5
-[2013-05-20 13:29:37.464617] E [glusterfsd.c:361:get_volfp] 0-glusterfsd: /etc/glusterfs/glusterfs.vol: No such file or directory
-[2013-05-20 13:29:37.464728] E [glusterfsd.c:1447:glusterfs_volumes_init] 0-glusterfsd: Cannot reach volume specification file
