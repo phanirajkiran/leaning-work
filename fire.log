@@ -1,0 +1,7 @@
+2016-03-01 16:57:11.969 Following entries record Rally REST API interaction via https://rally1.rallydev.com/slm/webservice/v2.0 for user: interface_rally@windriver.com
+2016-03-01 16:57:11.970 GET Iteration?fetch=false&query=((StartDate <= today) AND (EndDate >= today))&workspace=workspace/118972737&project=project/48709883996&pagesize=100&start=1
+2016-03-01 16:57:12.319 200 Iteration?fetch=false&query=((StartDate%20%3C%3D%20today)%20AND%20(EndDate%20>=%20today))&workspace=workspace/118972737&project=project TotalResultCount 1
+2016-03-01 16:57:12.628 GET Iteration?fetch=false&query=((StartDate <= today) AND (EndDate >= today))&workspace=workspace/118972737&project=project/48709883996&pagesize=100&start=1
+2016-03-01 16:57:12.906 200 Iteration?fetch=false&query=((StartDate%20%3C%3D%20today)%20AND%20(EndDate%20>=%20today))&workspace=workspace/118972737&project=project TotalResultCount 1
+2016-03-01 16:57:13.560 GET HierarchicalRequirement?fetch=Name,FormattedID,Notes,Owner,Project,ObjectID&query=(iteration.Name = "2016-Q1")&workspace=workspace/118972737&project=project/48709883996&pagesize=100&start=1
+2016-03-01 16:57:13.932 200 HierarchicalRequirement?fetch=Name,FormattedID,Notes,Owner,Project,ObjectID&query=(iteration.Name%20%3D%20%222016-Q1%22)&workspace=workspace/118972737&project=project TotalResultCount 13

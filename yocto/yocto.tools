@@ -6,3 +6,8 @@ DISTRO_FEATURES="alsa argp bluetooth ext2 irda largefile pcmcia usbgadget usbhos
 
 http://gumstix.8.n6.nabble.com/iputils-issue-still-after-the-ubuntu-11-04-patchs-td666831.html
  ./oey.py 
+
+https://knowledge.windriver.com/en-us/000_Products/000/010/000/060/000_Wind_River_Linux_Platform_Developer%27s_Guide%2C_7.0/060/010
+
+3)bitbake-layers --help
+http://www.crashcourse.ca/wiki/index.php/BitBake_Layers

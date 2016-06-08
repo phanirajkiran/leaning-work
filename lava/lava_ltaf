@@ -1,0 +1,19 @@
+./bin/submit_test_collection.py -u lyang0 -b 20150506 -t 3pprjnzwf8aepbwy8mnizyeok02t8cxkxx1dwfa7ui861xzucpgjlm5jdrkbi17n98lueq2ci634wqybei0kgoa8fj1to0wsugoh0xqiasm7y7wdf0y51h0zbbyq7038 /folk/lyang0/lava-ovp-test-definitions/collections/ovp/weekday-sanity > ~/jobids.txt
+
+
+./bin/submit_test_collection.py -u lyang0 -b 20150506 -t 3pprjnzwf8aepbwy8mnizyeok02t8cxkxx1dwfa7ui861xzucpgjlm5jdrkbi17n98lueq2ci634wqybei0kgoa8fj1to0wsugoh0xqiasm7y7wdf0y51h0zbbyq7038 /folk/lyang0/lava-ovp-test-definitions/collections/ovp/weekday-benchmarking >> ~/jobids.txt
+
+
+./bin/submit_test_collection.py -u lyang0 -b 20150506 -t 3pprjnzwf8aepbwy8mnizyeok02t8cxkxx1dwfa7ui861xzucpgjlm5jdrkbi17n98lueq2ci634wqybei0kgoa8fj1to0wsugoh0xqiasm7y7wdf0y51h0zbbyq7038 /folk/lyang0/lava-ovp-test-definitions/collections/ovp/weekend-benchmarking >> ~/jobids.txt
+
+
+
+
+scp ~/jobids.txt 128.224.179.80:/folk/lyang0/
+
+
+./lava_r.py -j ~/jobids.txt  --action gen_testcase_conf --exclude_file ./templates/excludeCase.txt 
+
+./lava_r.py -j 10548 --ltaf_config templates/ltaf_config_ovp80_template.ini --exclude_file templates/excludeCase.txt --full_testcase_dir /buildarea1/lyang0/wrlinux-ovp/ovp-conf
+or upload.sh 
+

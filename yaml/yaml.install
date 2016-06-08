@@ -1,0 +1,2 @@
+sudo apt-get install libyaml-dev
+pip install --user PyYAML

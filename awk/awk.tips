@@ -300,4 +300,6 @@ awk '$2~/^(abc|def)$/ {print "blah"}'
 
 awk '$2=="abc" || $2=="def" {print "blah"}'
 
+will print all but very first column:
 
+awk '{$1=""; print $0}' somefile

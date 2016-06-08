@@ -176,5 +176,5 @@ LAYERDEPENDS_wr-userspace-extended = "normal wrlinux wr-userspace-base"
 
 
 
-
+COMPATIBLE_HOST = "^(?!mips64).*"
 

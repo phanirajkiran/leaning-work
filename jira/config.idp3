@@ -1,0 +1,3 @@
+[filter1]
+summary=All open defects in IDP3
+filter=project = IDP3 AND summary !~ "Security" AND issuetype = Bug AND resolution = Unresolved ORDER BY assignee ASC,priority DESC

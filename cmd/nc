@@ -1,0 +1,23 @@
+
+
+root@Remley-EP-Ivy-Refresh-5:~#  nc -l 2389 >xx
+
+client 
+lyang001@lyang001-OptiPlex-9010:~/WORK$ ls > aa
+lyang001@lyang001-OptiPlex-9010:~/WORK$ nc 128.224.178.7 2389 <aa
+
+
+server:
+root@Remley-EP-Ivy-Refresh-5:~# cat xx
+8.0
+aa
+del
+docs
+intel-x86-64
+issue
+man
+oe-core-x
+test
+trees
+updates
+updates-play

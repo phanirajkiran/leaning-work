@@ -10,3 +10,15 @@ SyntaxError: invalid syntax
 'pywugw'
 >>> b.split("@")[1]
 '163.com
+
+
+>>> a="Kishore Parwani/Jeff Honig"
+>>> a.split("/")
+['Kishore Parwani', 'Jeff Honig']
+>>> a=['Kishore Parwani', 'Jeff Honig']
+>>> c = [ '.'.join(j.split()) for j in a]
+>>> c
+['Kishore.Parwani', 'Jeff.Honig']
+>>> c = [ '.'.join(j.split())+"@windriver.com" for j in a]
+>>> c
+['Kishore.Parwani@windriver.com', 'Jeff.Honig@windriver.com']

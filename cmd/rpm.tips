@@ -143,3 +143,27 @@ libpciaccess0-0.12.902-r0.x86_64
 
 great:
 http://pkgs.org/ubuntu-13.04/ubuntu-universe-i386/111/
+
+
+root@Remley-EP-Ivy-Refresh-5:~# rpm -ql ceph-test        
+/usr
+/usr/bin
+/usr/bin/ceph-coverage
+
+root@Remley-EP-Ivy-Refresh-5:~# rpm -qi ceph
+Name        : ceph                         Relocations: (not relocatable)
+Version     : 0.89                              Vendor: (none)
+Release     : r0.0                          Build Date: Tue Mar 29 03:39:21 2016
+Install Date: Tue Mar 29 03:49:54 2016      Build Host: pek-lpgtest16.wrs.com
+Group       : base                          Source RPM: ceph-0.89-r0.0.src.rpm
+Size        : 40505171                         License: BSD-3-Clause GPL-2.0 GPL-2.0-with-autoconf-exception            LGPL-2.1 MIT PD CC-BY-SA-1.0
+Signature   : DSA/SHA1, Tue Mar 29 03:39:21 2016, Key ID 6a3461ff240ec329
+Packager    : Wind River <info@windriver.com>
+Summary     : An unified, distributed storage system
+Architecture: core2_64
+Description :
+Ceph uniquely provides object, block, and file storage in one unified
+system. Ceph's features include RADOS Block Device (RBD), RADOS Gateway and
+POSIX-compliant network file system
+
+

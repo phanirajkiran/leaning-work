@@ -1,0 +1,36 @@
+{
+    "actions": [
+        {
+            "command": "deploy_linaro_kernel",
+            "parameters": {
+                "kernel": "/net/yow-lpdfs01/pool/ovp/lava/common/lava-master-images/bzImage.health-check",
+                "login_prompt": "login:",
+                "rootfs": "/net/yow-lpdfs01/pool/ovp/lava/common/lava-master-images/health-check-rootfs.tar.bz2",
+                "username": "root"
+        }
+    },
+    {
+        "command": "lava_test_shell",
+        "parameters": {
+            "testdef_repos": [
+                {
+                    "git-repo": "git://git.wrs.com/git/users/masselst/test-definitions.git",
+                    "testdef": "ovp/smoke-tests-basic.yaml"
+                }
+            ],
+            "timeout": 900
+        }
+    },
+    {
+        "command": "submit_results",
+        "parameters": {
+            "server": "http://localhost/RPC2/",
+            "stream": "/anonymous/lab-health/"
+        }
+    }
+    ],
+    "health_check": true,
+    "job_name": "lab-health-vlm-pxe",
+    "logging_level": "DEBUG",
+    "timeout": 900
+}

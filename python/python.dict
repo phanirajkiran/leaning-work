@@ -83,3 +83,16 @@ print 'KEY VALUE: %s' % value
     #import pprint
     #pprint.pprint(testcases_dict)
 
+
+>>> d={'a':2,'b':2}
+>>> d={'c':1,'d':2}
+>>> d.items()
+[('c', 1), ('d', 2)]
+>>> d1={'a':2,'b':2}
+>>> d2={'c':1,'d':2}
+>>> d1.items()+d2.items()
+[('a', 2), ('b', 2), ('c', 1), ('d', 2)]
+>>> c=d1.items()+d2.items()
+>>> dict(c)
+{'a': 2, 'c': 1, 'b': 2, 'd': 2}
+

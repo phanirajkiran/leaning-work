@@ -4,3 +4,9 @@ kernel MODULE_COMPRESS enable than no ko come in
 lyang0@pek-test98:/buildarea1/lyang0/arm64$ ls ../qemu/export/dist/lib/modules/
 4.1.6-WR8.0.0.0_standard
 
+python do_pam_sanity () {
+    if not bb.utils.contains('DISTRO_FEATURES', 'pam', True, False, d):
+        bb.warn("Building libpam but 'pam' isn't in DISTRO_FEATURES, PAM won't work correctly")
+}
+addtask pam_sanity before do_configure
+

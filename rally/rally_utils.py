@@ -2,17 +2,28 @@
 
 #################################################################################################
 #
-#  rallyfire - Exemplar script to test the basic connectivity to a Rally server
+#  rallly_utils.py - A script to connect to a Rally server
 #              and obtain basic workspace and project information
 #
 #################################################################################################
 
 import sys
+sys.path.append("/folk/lyang0/rally/lib")
 from optparse import OptionParser
 from pyral import Rally, rallyWorkset
 import pprint
 import time
 from datetime import datetime
+import smtplib
+from smtplib import SMTPException
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+import commands
+import os
+from datetime import datetime
+import getpass
+import requests
+
 
 
 #################################################################################################
@@ -26,7 +37,7 @@ def auto_create_all_task(rally,userstory,owner):
     #criterion=['FormattedID = %s' % userstory, 'User.ref.DisplayName = "Chunguang Yang"']
     criterion='FormattedID = %s' % userstory
 #    criterion='FormattedID = TA113895'
-    response   = rally.get('UserStory', query=criterion)
+    response   = rally.get('UserStory', query=criterion,fetch="Name,FormattedID,Tasks")
    # response   = rally.get('Task', query=criterion)
     #story1 = response.next()
 #    print story1.details()
@@ -40,7 +51,7 @@ def auto_create_all_task(rally,userstory,owner):
 #            print task.Name
             if ('LIN8' not in task.Name) and ('[TEST]' not in task.Name):
                 task_list.append(task.Name)
-   		count = count + 1 
+                count = count + 1 
 #    print task_list
     for task in task_list:
         create_task(userstory,task,owner)
@@ -72,48 +83,105 @@ def create_task(userstory,task_name,task_owner):
     print "Created Task: %s [TEST] %s" % (task.FormattedID,task_name)
 
 def list_userstory(rally):
-    response = rally.get('UserStory', query=iteration_criterion)
+    response = rally.get('UserStory', query=iteration_criterion,fetch="Name,FormattedID")
     for story in response:
         print '    %s: %s' %(story.FormattedID,story.Name)
-#    print dir(story)
- #   print story.FormattedID
+    sys.exit(0)
 
-def list_my_userstory(rally):
-    response = rally.get('UserStory', query=iteration_criterion)
-    #my_task_list=[]
-    n = 0
-    task_dict = {}
-    sum_todo = 0 
-    string = ""
+def get_task_info(rally):
+    response = rally.get('UserStory', query=iteration_criterion,fetch="Name,FormattedID,Tasks,JiraLink,Blocked")
+    #response = rally.get('UserStory', query=iteration_criterion)
+    task_dict={}
+    block_defect={}
     for story in response:
-        z = 0 
-	#task_dict['%s: %s' %(story.FormattedID,story.Name)] = []
+        task_dict[story.FormattedID]={}
+        block_defect['%s %s' %(story.FormattedID,story.Name)]=[]
         for task in story.Tasks:
-   	    #print story.Name,owner,task.Owner.Name
-            if task.Owner and owner == task.Owner.Name:
-		z = z+1
-		if z == 1:
-	            n = n+1
-	            #print "%s.%s %s" %(n,story.FormattedID,story.Name)
-	            string += "%s.%s %s\n" %(n,story.FormattedID,story.Name)
+            if task.Owner and task.Owner.Name:
+                task_dict[story.FormattedID][task.FormattedID]=[]
+        for task in story.Tasks:
+            if task.Owner and task.Owner.Name:
+                task_dict[story.FormattedID][task.FormattedID].append(story.Name)
+                task_dict[story.FormattedID][task.FormattedID].append(task.Owner.Name)
+                task_dict[story.FormattedID][task.FormattedID].append(task.Name)
+                task_dict[story.FormattedID][task.FormattedID].append(task.State)
+                task_dict[story.FormattedID][task.FormattedID].append(task.Blocked)
+                task_dict[story.FormattedID][task.FormattedID].append(task.BlockedReason)
+                task_dict[story.FormattedID][task.FormattedID].append(task.ToDo)
+            if task.Blocked and task.BlockedReason:
+                block_defect['%s %s' %(story.FormattedID,story.Name)].append(task.BlockedReason)
+            if task.Blocked and task.JiraID:
+                block_defect['%s %s' %(story.FormattedID,story.Name)].append(task.JiraID)
+            if story.Blocked and story.JiraLink:
+                block_defect['%s %s' %(story.FormattedID,story.Name)].append(story.JiraLink)
+    return task_dict,block_defect
+
+def list_my_userstory(rally,owner,task_dict):
+    n = 0
+    sum_todo = 0
+    string = ""
+    for a,b in task_dict.items():
+        task_flag = False
+        z = 0
+        userstory_todo = 0
+        #task_dict['%s: %s' %(story.FormattedID,story.Name)] = []
+        #print story.Blocked,story.JiraLink
+        for c,d in b.items():
+            #print story.Name,owner,task.Owner.Name
+            #if task.Owner and owner == task.Owner.Name:
+            if owner == d[1]:
+                #print task.Owner.Name
+                task_flag = True
+                z = z+1
+                if z == 1:
+                    n = n+1
+                    #print "%s.%s %s" %(n,story.FormattedID,story.Name)
+                    #if not story.Blocked:
+                    #string += "%s.%s %s\n" %(n,story.FormattedID,story.Name)
+                    string += "<p class='y'>&nbsp&nbsp&nbsp&nbsp%s.%s %s</p>" %(n,a,d[0])
+		    string += '''<table style="width:65%">'''
                 #task_dict['%s: %s' %(story.FormattedID,story.Name)].append('    %s: %s' %(task.FormattedID,task.Name))
                 #print '    %s: %s(%s) todo:%s' %(task.FormattedID,task.Name,task.State,task.ToDo)
-		sum_todo = task.ToDo + sum_todo
-		#print("    %-6s:%-39s(%-5s) Todo:%-5s" % (task.FormattedID,task.Name,task.State,task.ToDo))
-		string += "    %-6s:%-39s(%-5s) Todo:%-5s\n" % (task.FormattedID,task.Name,task.State,task.ToDo)
-    print string 
-    return int(sum_todo)
+                #if not task.ToDo:
+                if not d[6]:
+                    #task.ToDo=0.0
+                    d[6]=0.0
+                sum_todo = d[6] + sum_todo
+                userstory_todo = d[6] + userstory_todo
+                #print("    %-6s:%-39s(%-5s) Todo:%-5s" % (task.FormattedID,task.Name,task.State,task.ToDo))
+                if d[6] != 0:
+                    #if not task.Blocked:
+                    if not d[4]:
+                        #string += "    %-6s:%-39s(%-5s) Todo:%-5s\n" % (task.FormattedID,task.Name,task.State,task.ToDo)
+                        #string += "<p class='y'>&nbsp&nbsp&nbsp&nbsp%-6s:%-39s(%-5s) Todo:%-5s<br></p>" % (c,d[2],d[3],d[6])
+        	        string += '''
+  <tr>
+    <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&#10004&nbsp%s:%s</td>
+    <td>%s</td>          
+    <td>%s</td>
+  </tr>
+'''% (c,d[2],d[3],d[6])
+                    else:
+                        #string += "    %-6s:%-39s(%-5s) Todo:%-5s *Blocked By* https://jira.wrs.com:8443/browse/%-50s \n" % (task.FormattedID,task.Name,task.State,task.ToDo,task.BlockedReason)
+                        #string += "<p class='y'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp%-6s:%-39s(%-5s) Todo:%-5s *Blocked By* https://jira.wrs.com:8443/browse/%-50s</p>" % (c,d[2],d[3],d[6],d[5])
+                        string += '''<p class='y'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&#10004&nbsp%-6s:%-39s(%-5s) Todo:%-5s <strong>Blocked By</strong> <a href="https://jira.wrs.com:8443/browse/%s">%s</a></p>''' % (c,d[2],d[3],d[6],d[5],d[5])
+        #print userstory_todo,task_flag,story.Name,owner,"xxx"
+	string += '''</table>'''
+        if (userstory_todo == 0 or userstory_todo == 0.0) and (task_flag):
+            #string += "    *All the task for %s in %s complete*\n" %(owner,story.FormattedID)
+            string += "<p class='y'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i><strong><font color='green'>All the task for %s in %s complete</font></strong></i></p>" %(owner,a)
+    return int(sum_todo),string
 '''
     n = 0
     for k,v in task_dict.iteritems():
-	if v:
-	    n = n + 1 
-	    print "%s.%s" %(n,k)
-	    for z in v:
+        if v:
+            n = n + 1 
+            print "%s.%s" %(n,k)
+            for z in v:
                 print z     
 '''
 def list_tasks(rally,userstory):
-    response   = rally.get('UserStory', query='FormattedID = %s' % userstory)
+    response   = rally.get('UserStory', query='FormattedID = %s' % userstory,fetch="Name,FormattedID,Tasks")
    # story1 = response.next()
    # print story1.details()
     task_list=[]
@@ -123,8 +191,9 @@ def list_tasks(rally,userstory):
 #            print task.oid, task.Name
   #           print task.Owner.Name
     #         print '         %s:%s(%s)' %(task.FormattedID,task.Name,task.State)
-	    if task.Owner:
-	        print("    %-6s:%-49s(%-5s) Todo:%-8s %-50s" % (task.FormattedID,task.Name,task.State,task.ToDo,task.Owner.Name))
+            if task.Owner:
+                print("    %-6s:%-49s(%-5s) Todo:%-8s %-50s" % (task.FormattedID,task.Name,task.State,task.ToDo,task.Owner.Name))
+    sys.exit(0)
  
 
 
@@ -151,6 +220,7 @@ def update_task(userstory,task_name,task_owner):
 
     release      = rally.get('Release',   query='Name = %s' % release_target,   instance=True)
     iteration    = rally.get('Iteration', query='Name = %s' % iteration_target, instance=True)
+    print dir(iteration)
     target_story = rally.get('UserStory', query='FormattedID = %s' % storyID,   instance=True)
 
     info = {
@@ -185,97 +255,268 @@ def con_rally(server, user, password, workspace, project):
     try:
         rally = Rally(server, user, password, workspace=workspace, project=project)
     except:
-	time.sleep(1)
-	rally=con_rally(server, user, password, workspace=workspace, project=project)
+        time.sleep(1)
+        rally=con_rally(server, user, password, workspace=workspace, project=project)
     finally:
         return rally
+
+def current_iteration(rally):
+    today = datetime.now().strftime('%Y-%m-%d')
+    #query = ['StartDate <= "{}"'.format(today),
+    #         'EndDate >= "{}"'.format(today)]
+    query = ['StartDate <= today',
+             'EndDate >= today']
+    iterations = rally.get('Iteration', query=query,fetch="Name")
+    return next(iterations).Name
+
+def get_each_status(domain,rally,names):
+    #text_mail='/tmp/xxx_%s' %domain
+    #if os.path.exists(text_mail):
+    #    os.remove(text_mail)
+    #txt=open(text_mail, "a")
+    mail = ""
+    #print iteration_criterion
+    response1 = rally.get('Task', query=iteration_criterion,fetch="Owner,Project,Name")
+    #response1 = rally.get('Task', query=iteration_criterion)
+    #print response1.next().details()
+    owners = []
+    for j in response1:
+        if j.Owner and j.Name: 
+            owners.append(j.Owner.Name)
+    owners=list(set(owners))
+    #print owners
+    if not names:
+        name=owners
+        #name=['Lei Yang','Liang Chi','Xiangyu Dong','Wei Gao','Zumeng Chen','Lu Jiang','Quanyang Wang','Yanjiang Jin','Pengyu Ma','Chunguang Yang','Liwei Song']
+        #name=['Lei Yang','Liang Chi','Xiangyu Dong','Wei Gao','Ting Wang','Hongjun Yang','Boyang Xue','Chi Xu','Hong Chen','Le Liu','Jian Kang','Peng Yan','Tingting Wen','Wanling Wu','Yongmin Cheng']
+        #name=['Lei Yang','Liang Chi','Xiangyu Dong','Wei Gao','Ting Wang','Hongjun Yang','Boyang Xue','Chi Xu','Hong Chen','Le Liu','Jian Kang','Peng Yan','Tingting Wen','Wanling Wu','Yongmin Cheng','Zumeng Chen','Lu Jiang','Quanyang Wang','Yanjiang Jin','Pengyu Ma','Chunguang Yang','Liwei Song']
+    else:
+        name = [x for x in names.split(",")]
+    #print owners
+    task_dict,blocked_defect=get_task_info(rally)
+    owner_todo=[]
+    for x in name:
+    #    ret,results = commands.getstatusoutput("/home/lyang001/leaning-work/rally/rally_utils.py -o '%s'" %x)
+        if x in owners:
+            owner=x
+            ret,results=list_my_userstory(rally,owner,task_dict)
+            owner_todo.append((x,ret))
+        #txt.write("*%s* 's Task (*Total todo* = %s hours)\n" %(x,ret >> 8))
+            if ret != 0:
+                title = "<p class='x'><u><strong>%s</strong> 's Task (Total todo = <strong>%s hours</strong>)</u></p>" %(x,ret)
+                #title = "<u><strong>%s</strong> 's Task (Total todo = <strong>%s hours</strong>)</u>" %(x,ret)
+                #lines = '''<hr noshade size=4 width="25%" align=left>'''
+                mail += title
+                #mail += lines 
+                mail += results 
+            #txtt='<font color="red"><b>' + "BLA BLA BLA" + "</b></font>"
+            #txt.write(txtt)
+    #if not send:
+    #    print mail 
+    L = '''
+<!DOCTYPE html>
+<style>
+p.x {
+font-family: sans-serif;
+font-size: 14px;
+}
+p.y {
+font-family: sans-serif;
+font-size: 12px;
+}
+table {
+font-family: sans-serif;
+font-size: 12px;
+}
+</style>
+<html>
+<body>
+'''
+    L += "<p class='x'><u><strong>Scrum Master</strong> : %s</u></p>" %scrum_master
+    #L += '''<hr noshade size=4 width="20%" align=left>'''
+    L +="<br>"
+    keyword_flag=0
+    s=0
+    for x,y in blocked_defect.items():
+        if x and y:
+            keyword_flag = keyword_flag+1
+            if keyword_flag == 1:
+                L += "<p class='x'><u><strong>Blocker defects</strong> in %s</u></p>" %domain
+                #L += '''<hr noshade size=4 width="20%" align=left>'''
+            s = s+1
+            L += "<p class='x'>&nbsp&nbsp&nbsp&nbsp&#10047&nbsp%s <strong><font color='red'>some task blocked by</font></strong> <br></p>" %(x)
+            #L += "    *blocked by* :\n"
+            c = 0
+            for z in list(set(y)):
+                c = c+1
+                #L += "<p class='y'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp%s.https://jira.wrs.com:8443/browse/%s<br></p>" %(c,z)
+                L += '''<p class='y'> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&#10060&nbsp<a href="https://jira.wrs.com:8443/browse/%s">%s</a></p>''' %(z,z)
+    else:
+        if keyword_flag == 0:
+            L += "<p class='x'><u><strong>NO blocker defect found</strong> in %s</u></p>" %domain
+            #L += '''<hr noshade size=4 width="20%" align=left>'''
+    #L +="<br>"
+    L += "<p class='x'><u><strong>Task to-do hours left</strong> (sorted):</u></p>"
+    #L += '''<hr noshade size=4 width="20%" align=left>'''
+    owner_todo=sorted(owner_todo, key=lambda x:x[1],reverse=True)
+    L += '''<table style="width:15%">'''
+    for i in xrange(len(owner_todo)):
+	L += '''
+  <tr>
+    <td>&nbsp&nbsp&nbsp&nbsp%s</td>
+    <td>:</td>		
+    <td>%s</td>
+  </tr>
+'''%(owner_todo[i][0],owner_todo[i][1])
+        #L += "&nbsp&nbsp&nbsp&nbsp%-16s : %-5s<br>" %(owner_todo[i][0],owner_todo[i][1])
+    L +="</table>"
+    L += "<br>"
+    mail = L + mail
+    mail = mail + "</font></p></body></html>"
+    return mail 
+
+
+def send_email(names,domain,send):
+    sender = "%s@windriver.com" %getpass.getuser() 
+    #sender = "lei.yang@windriver.com"
+    if owner or (not send):
+        #receiver = ["CDC-ENG-Linux-core-test@windriver.com"]
+        #receiver = ["%s@windriver.com" %getpass.getuser()]
+        receiver = [ "%s@windriver.com" %getpass.getuser() ]
+    if send:
+        #receiver = ["%s@windriver.com" %getpass.getuser()]
+        #receiver = ["lpd-eng-bsp@windriver.com","wei.gao@windriver.com","xiangyu.dong@windriver.com","liang.chi@windriver.com","bo.liu@windriver.com","Zhenfeng.Zhao@windriver.com","CDC-ENG-Linux-core-test@windriver.com"]
+        #receiver = ["CDC-ENG-Linux-core-test@windriver.com"]
+        receiver = [x+'@windriver.com' for x in send.split(" ")]
+        receiver = list(set(receiver))
+        #receiver = ["lei.yang@windriver.com"]
+    cc= ["lei.yang@windriver.com"]
+    if not owner:
+        subject = "[Send By Utils] %s : Rally Task Status in %s" %(domain,sprint)
+    else:
+        subject = "[Send By Utils] %s : %s Rally Task Status in %s" %(domain,owner,sprint)
+    msg = MIMEMultipart()
+    msg['From'] = sender
+    msg['To'] = ", ".join(receiver)
+    msg['Cc'] = ", ".join(cc)
+    msg['Subject'] = subject
+    mail=get_each_status(domain,rally,names)    
+    #file = open(text_mail, 'r')
+    #body = "%s" %(file.read())
+    #file.close()
+    #txtt='<font color="red"><b>' + "BLA BLA BLA" + "</b></font>"
+    msg.attach(MIMEText(mail, 'html'))
+    #msg.attach(MIMEText(txtt, 'html'))
+    text = msg.as_string()
+    mail_addr=" "
+    for z in receiver:
+        mail_addr += "%s " %z
+    try:
+       smtpObj = smtplib.SMTP('147.11.189.50','25')
+       smtpObj.sendmail(sender,receiver, text)
+       print "Successfully sent email to%s" %mail_addr
+    except SMTPException:
+       print "Error: unable to send email"
+    sys.exit(0)
 
 
 def main(args):
     usage = '''
-      # create all the testing task for US69113 based on dev task
-        %s -u US69113 -o "Lei Yang" -a 
-      # list all the US in current sprint 
-        %s -l -c "Lx BSPs"
-      # list the task of US69113
-        %s -u US69113
-      # list the userstory that 'Lei Yang' working on 
-        %s -o 'Lei Yang' -c "Lx BSPs"
-      # the component can be:
+      #send "Lx BSPs" status to you to mail list "lpd-eng-bsp and  lei.yang" 
+        %s -d "Lx BSPs" -t "lpd-eng-bsp lei.yang"
+      #send 'Lei Yang' and 'Wei Gao's status in "Lx BSPs" to mail list "lpd-eng-bsp and  CDC-ENG-Linux-core-test" 
+        %s -d "Lx BSPs" -n "Lei Yang,Wei Gao" -t "lpd-eng-bsp CDC-ENG-Linux-core-test"
+      # create all the testing task for US69113 based on current dev task automatically 
+        %s -u US69113 -d "Lx BSPs" -o "Lei Yang" -a 
+      # create task "xxxx" for US69113 in "Lx BSPs"
+        %s -u US69113 -d "Lx BSPs" -o "Lei Yang" -c "xxxx" 
+      # list all the US in current sprint for "Lx Userspace" 
+        %s -d "Lx Userspace" -l 
+      # list the task of US69113 in "Lx BSPs"
+        %s -d "Lx BSPs" -u US69113
+      # For component can be(it can be used in any product):
             "Linux Core Project"
             "Lx Test"
-            "Lx BSPs" (default 
+            "Lx BSPs" (default)
             "Lx Kernel"
             "Lx Userspace"
             "Lx Build System"
             "Lx Tools"
-	   
-    ''' %(__file__,__file__,__file__,__file__)
+            "Vx-7 Test"
+            "Vx-7 Project"
+            "Vx-7 Cert Test"
+            ..............
+            ..............
+            ..............
+           
+    ''' %(__file__,__file__,__file__,__file__,__file__,__file__)
     parser = OptionParser(usage=usage)
-    parser.add_option("-c", "--component",  \
-                     action="store", type="string", dest="component",help="component")
+    parser.add_option("-d", "--domain",  \
+                     action="store", type="string", dest="domain",help="domain")
     parser.add_option("-u", "--userstory",  \
                      action="store", type="string", dest="userstory",help="userstory")
     parser.add_option("-o", "--owener",  \
                      action="store", type="string", dest="owner",help="task owner")
-    parser.add_option("-t", "--task",  \
+    parser.add_option("-c", "--ctask",  \
                      action="store", type="string", dest="task_name",help="task name")
     parser.add_option("-l", action="store_true", dest="listall",help="list all userstory")
     parser.add_option("-a", action="store_true", dest="auto",help="auto create userstory")
+    parser.add_option("-t", "--team",  \
+                     action="store", type="string", dest="send",help="send to whom")
+    parser.add_option("-n", "--names",  \
+                     action="store", type="string", dest="names",help="whose status you want to get")
  #   parser.add_option("-m", action="store_true", dest="mine",help="list the my userstory")
     (options, args) = parser.parse_args()
     userstory = options.userstory
     owner = options.owner
+    if not owner:
+        owner = None 
     listall = options.listall
     auto = options.auto
 #    mine = options.mine
     task_name = options.task_name
-    component = options.component
-    if not component:
-        component = "Lx BSPs"
+    domain = options.domain
+    send = options.send
+    names = options.names
+    if not domain:
+        domain = "Lx BSPs"
     
 
     options = [opt for opt in args if opt.startswith('--')]
 #    print options
     args    = [arg for arg in args if arg not in options]
     #server, user, password, apikey, workspace, project = rallyWorkset(options)
-    server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "%s" %component
-    #server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Lx Test"
-    #server, user, password, apikey, workspace, project = "rally1.rallydev.com", "lei.yang@windriver.com", "windwind001", "","Wind River", "Lx BSPs"
-  #  print server, user, password, apikey, workspace, project
+    server, user, password, apikey, workspace, project = "rally1.rallydev.com", "interface_rally@windriver.com", "interface_rally", "","Wind River", "%s" %domain
     #help(Rally)
     #print " ".join(["|%s|" % item for item in [server, user, password, workspace, project]])
     #rally = Rally(server, user, password, workspace=workspace, project=project)
     rally=con_rally(server, user, password, workspace=workspace, project=project)
+    #help(rally)
     rally.enableLogging('fire.log')
     specified_workspace = workspace
 
     workspace = rally.getWorkspace()
+    #print dir(a)
     #print "Workspace: %s " % workspace.Name
 
     target_project = rally.getProject()
     #target_story   = rally.get('UserStory', query='FormattedID = %s' % storyID, instance=True)
     #print "Project  : %s " % project.Name
     #return target_project,target_story
-    return rally,userstory,owner,listall,auto,task_name
+    return rally,userstory,owner,listall,auto,task_name,send,domain,names
 
 if __name__ == '__main__':
-    rally,userstory,owner,listall,auto,task_name=main(sys.argv[1:])
-    present = datetime.now()
-    if present <= datetime(2015, 9, 14) and present >= datetime(2015, 8, 24):
-        sprint="Lx8 S6 15-09-14"
-    elif present <= datetime(2015, 10, 05) and present >= datetime(2015, 9, 14):
-        sprint="Lx8 S7 15-10-05"
-    elif present <= datetime(2015, 10, 26) and present >= datetime(2015, 10, 05):
-        sprint="Lx8 S8 15-10-26"
-    elif present <= datetime(2015, 11, 16) and present >= datetime(2015, 10, 26):
-        sprint="Lx8 S9 15-11-16"
-    elif present <= datetime(2015, 12, 07) and present >= datetime(2015, 11, 16):
-        sprint="Lx8 S10 15-12-07"
-    else:
-        sprint = ""
-
+    requests.packages.urllib3.disable_warnings()
+    rally,userstory,owner,listall,auto,task_name,send,domain,names=main(sys.argv[1:])
+    sprint=current_iteration(rally)
     iteration_criterion = 'iteration.Name = \"%s\"' %sprint
+    a=rally.getProject(name="%s" %domain)
+    current_iteration(rally)
+    if a.ScrumMaster:
+        scrum_master=a.ScrumMaster
+    else:
+        scrum_master="Not defined"
+    #get_task_info(rally,domain)
     create_task.counter = 100
     if userstory and owner and auto:
         auto_create_all_task(rally,userstory,owner)
@@ -286,7 +527,9 @@ if __name__ == '__main__':
             list_tasks(rally,userstory)
     if userstory and task_name and owner:
         create_task(userstory,task_name,owner)
-    if (not userstory) and (not auto):
-        if owner:
-            ret=list_my_userstory(rally)
-	    sys.exit(ret)
+    if (not userstory) and (not auto) and (not send):
+        #get_task_info(rally,get_task_info)
+        send_email(names,domain,send)
+    if send:
+        send_email(names,domain,send)
+

@@ -1,0 +1,2 @@
+__collection_ref_for_Tasks  : https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/36684410298/Tasks
+to add into queary="Tasks"

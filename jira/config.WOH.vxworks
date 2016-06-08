@@ -1,0 +1,3 @@
+[filter1]
+summary=Vxworks7 WOH
+filter=(category = "VxWorks 7" OR project = WB4) AND issuetype = Bug AND reporter in (slv, membersOf(CDC-Test-VxWorks-NwkCert), membersOf(Eng-Chengdu-Test), membersOf(CDC-COSTA), membersOf(CDC-Test-VxWorks-SysPPC)) AND status = Integrated  AND labels not in (NoSpin) ORDER BY "Integrated Date" ASC,component ASC

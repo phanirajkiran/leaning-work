@@ -65,3 +65,34 @@ http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta-skeleton/recipes-skelet
 
 
 bitbake -e  |grep IMAGE_INSTALL 
+
+bitbake -s : show version 
+mime-construct                                       :1.11-r0                          
+mingetty                                             :1.08-r3                          
+mini-x-session                                        :0.1-r4                          
+minicom                                               :2.7-r0 
+
+lyang0@pek-test98:/buildarea1/lyang0/x86-clean/bitbake_build$ bitbake-layers show-layers
+layer                 path                                      priority
+==========================================================================
+wrlinux               /buildarea1/lyang0/x86-clean/layers/wrlinux  5
+wrlcompat             /buildarea1/lyang0/x86-clean/layers/wrlcompat  5
+wr-sdk-toolchain      /buildarea1/lyang0/x86-clean/layers/wr-sdk-toolchain  100
+wr-tcwrappers         /buildarea1/lyang0/x86-clean/layers/wr-tcwrappers  6
+meta                  /buildarea1/lyang0/x86-clean/layers/oe-core/meta  5
+wr-kernel             /buildarea1/lyang0/x86-clean/layers/wr-kernel  6
+intel-x86             /buildarea1/lyang0/x86-clean/layers/wr-bsps/intel-x86  7
+wr-base               /buildarea1/lyang0/x86-clean/layers/wr-base  6
+wr-fixes              /buildarea1/lyang0/x86-clean/layers/wr-fixes  7
+wr-tools-profile      /buildarea1/lyang0/x86-clean/layers/wr-tools-profile  7
+wr-tools-debug        /buildarea1/lyang0/x86-clean/layers/wr-tools-debug  7
+meta-filesystems      /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-filesystems  6
+meta-initramfs        /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-initramfs  8
+meta-gnome            /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-gnome  7
+meta-multimedia       /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-multimedia  6
+meta-networking       /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-networking  5
+meta-oe               /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-oe  6
+meta-python           /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-python  7
+meta-perl             /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-perl  6
+meta-webserver        /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-webserver  6
+meta-xfce             /buildarea1/lyang0/x86-clean/layers/meta-openembedded/meta-xfce  7

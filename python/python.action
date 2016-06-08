@@ -7,3 +7,9 @@ http://libvirt.org/git/?p=libvirt-test-API.git;a=blob;f=src/exception.py;h=70d01
 http://libvirt.org/git/?p=libvirt-test-API.git;a=blob;f=utils/utils.py;h=147c1ef7014f331b1e664f3c8f407853555a74b9;hb=HEAD
 
 http://libvirt.org/git/?p=libvirt-test-API.git;a=blob;f=utils/log.py;h=4111fd9de00ab0341ed49aeb2d6481c620471cba;hb=HEAD
+
+1)class method
+2)static method
+3)property
+http://python.jobbole.com/80955/
+http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386820062641f3bcc60a4b164f8d91df476445697b9e000

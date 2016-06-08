@@ -1,0 +1,12 @@
+>>> pwd.getpwuid(os.getuid())[4]
+'lei yang '
+>>> '@'.join(pwd.getpwuid(os.getuid())[4])
+'l@e@i@ @y@a@n@g@ '
+>>> '@'.join(pwd.getpwuid(os.getuid())[4].split())
+'lei@yang'
+
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> "ai a".replace(" ","@")
+'ai@a'
+

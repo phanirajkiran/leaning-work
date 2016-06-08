@@ -1,0 +1,4 @@
+UnicodeEncodeError: 'ascii' codec can't encode character u'\u201c' in position 8291: ordinal not in range(128)
+
+http://stackoverflow.com/questions/9942594/unicodeencodeerror-ascii-codec-cant-encode-character-u-xa0-in-position-20
+print a.encode('utf-8')

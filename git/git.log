@@ -87,4 +87,10 @@ lyang0@pek-lpgtest99:/buildarea2/lyang0/wrlinux-new/wr-testing$ git shortlog -s 
    327  Zhou GuoJian
    283  Xiangyu Dong
 
+
 git shortlog -sn --no-merges
+
+ %cd: committer date 旧是哪天到 tree的
+git log --date-order --pretty=format:"%ad %H"
+VS
+git log --date-order --pretty=format:"%cd %H"

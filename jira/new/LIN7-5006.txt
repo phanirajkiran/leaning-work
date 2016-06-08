@@ -1,0 +1,967 @@
+{
+    "key": "LIN7-5006", 
+    "fields": {
+        "customfield_10701": null, 
+        "customfield_10700": "7.0.0.16", 
+        "customfield_10702": null, 
+        "customfield_10707": null, 
+        "labels": [], 
+        "assignee": {
+            "displayName": "Tao, Yue", 
+            "name": "ytao", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=ytao", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Yue.Tao@windriver.com", 
+            "active": true
+        }, 
+        "lastViewed": null, 
+        "customfield_10015": null, 
+        "customfield_11302": null, 
+        "customfield_10010": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/10018", 
+            "id": "10018", 
+            "value": "Reviewed - Publish"
+        }, 
+        "customfield_11301": null, 
+        "votes": {
+            "hasVoted": false, 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/LIN7-5006/votes", 
+            "votes": 0
+        }, 
+        "customfield_11001": "root@m8203:/var/log# df -h .\r\nFilesystem Size Used Avail Use% Mounted on\r\ntmpfs 32G 516K 32G 1% /var/volatile ", 
+        "customfield_11000": [
+            {
+                "archived": false, 
+                "name": "7.0", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/version/19504", 
+                "releaseDate": "2014-12-01", 
+                "released": true, 
+                "id": "19504", 
+                "description": "Wind River Linux 7.0"
+            }
+        ], 
+        "customfield_11002": {
+            "released": false, 
+            "self": "https://jira.wrs.com:8443/rest/api/2/version/25201", 
+            "archived": false, 
+            "id": "25201", 
+            "name": "7.0.0.16"
+        }, 
+        "customfield_12400": null, 
+        "timespent": null, 
+        "customfield_12407": "2016-05-08T12:19:00.000-0700", 
+        "duedate": null, 
+        "updated": "2016-05-16T22:18:59.000-0700", 
+        "worklog": {
+            "worklogs": [], 
+            "total": 0, 
+            "startAt": 0, 
+            "maxResults": 20
+        }, 
+        "customfield_10800": null, 
+        "customfield_10801": null, 
+        "customfield_10008": null, 
+        "customfield_10006": null, 
+        "customfield_10007": null, 
+        "customfield_11700": null, 
+        "customfield_10005": null, 
+        "aggregatetimeoriginalestimate": null, 
+        "customfield_12800": null, 
+        "customfield_12100": null, 
+        "summary": "CLONE - wrl6 :  log files are logged volatile", 
+        "timetracking": {}, 
+        "issuetype": {
+            "name": "Bug", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/issuetypes/bug.png", 
+            "subtask": false, 
+            "id": "1", 
+            "description": "A problem which impairs or prevents the functions of the product."
+        }, 
+        "timeestimate": null, 
+        "creator": {
+            "displayName": "Tao, Yue", 
+            "name": "ytao", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=ytao", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Yue.Tao@windriver.com", 
+            "active": true
+        }, 
+        "customfield_10520": null, 
+        "customfield_12801": null, 
+        "customfield_11202": null, 
+        "customfield_11201": null, 
+        "customfield_11404": null, 
+        "customfield_12500": null, 
+        "progress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_10012": {
+            "displayName": "Yang, Hongjun", 
+            "name": "HYang2", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=HYang2", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Hongjun.Yang@windriver.com", 
+            "active": true
+        }, 
+        "aggregateprogress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_12200": "5001600000oDeddAAC", 
+        "reporter": {
+            "displayName": "Dietsch, Alexandre", 
+            "name": "adietsch", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=adietsch", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Alexandre.Dietsch@windriver.com", 
+            "active": true
+        }, 
+        "customfield_10103": null, 
+        "environment": null, 
+        "created": "2015-10-25T23:37:37.000-0700", 
+        "aggregatetimespent": null, 
+        "customfield_10901": null, 
+        "customfield_10900": null, 
+        "comment": {
+            "total": 14, 
+            "startAt": 0, 
+            "comments": [
+                {
+                    "body": "I see that the WRL6 defect from which this one was cloned is now fixed. Is there any plan to include a WRL7 fix in an upcoming RCPL?\r\n\r\nThanks,\r\nDon\r\n", 
+                    "updateAuthor": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-03-28T16:00:53.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/323840", 
+                    "author": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-03-28T16:00:53.000-0700", 
+                    "id": "323840"
+                }, 
+                {
+                    "body": "From: Gochenour, Don \r\nSent: Friday, April 01, 2016 11:23 AM\r\nTo: Zhu, Yanjun\r\nCc: Tao, Yue (Yue.Tao@windriver.com)\r\nSubject: status of LIN7-5006\r\n\r\nHello Yanjun,\r\n\r\nAn end customer of Intel\u2019s is running IDP XT 3.1, which runs on top of WR Linux 7. As you know, the logging in WRL7 is done in a volatile file system: /var/log/ is symlinked to /var/volatile/log, and the volatile mount point is not persistent. In this customer\u2019s case (and probably others), the desire is to have the logs *not* be volatile, that way they can be inspected after reboot or a crash. In fact, for this customer it\u2019s a blocking issue.\r\n\r\nI see that we changed/fixed this in WRL6 (LIN6-9259) and that defect was cloned into the LIN7 project as LIN7-5006:\r\nhttps://jira.wrs.com:8443/browse/LIN7-5006\r\n\r\nWhile the LIN6 defect is fixed, there doesn\u2019t seem to be any activity on the LIN7 defect since it was opened last October. I have just raised it from a P3 to a P1 based on the fact that this Intel project is blocked. Do you think that this is something that could be rolled out in the next available RCPL?\r\n\r\nThanks a lot for your help, I really appreciate it.\r\nDon\r\n\r\nDon Gochenour \r\nSMTS, Linux Solutions Support, Wind River\r\nmobile 510.205.5532\r\ndon.gochenour@windriver.com\r\n\r\nITAR Note: If you plan on sharing any ITAR information at any point during this discussion please make this known prior to sending. Thank you.\r\n", 
+                    "updateAuthor": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-04-01T08:23:15.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/325822", 
+                    "author": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-04-01T08:23:15.000-0700", 
+                    "id": "325822"
+                }, 
+                {
+                    "body": "Hi, Don\r\n\r\nDo you expect to backport the patches to wrlinux7? If so, I will do this job.\r\n\r\nBest Regards!\r\nZhu Yanjun", 
+                    "updateAuthor": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "created": "2016-04-05T02:08:55.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/326552", 
+                    "author": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "updated": "2016-04-05T02:08:55.000-0700", 
+                    "id": "326552"
+                }, 
+                {
+                    "body": "Yes, I'm looking for something that an IDP 3.1 / WRL7 customer could use. \r\n\r\nThank you!\r\nDon\r\n", 
+                    "updateAuthor": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-04-05T07:17:53.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/326639", 
+                    "author": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-04-05T07:17:53.000-0700", 
+                    "id": "326639"
+                }, 
+                {
+                    "body": "Hi, Don\r\n\r\nOK. Tomorrow I will send you the patches for tests. If these patches can work, I will merge these patches in wrlinux7.\r\n\r\nBest Regards!\r\nZhu Yanjun", 
+                    "updateAuthor": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "created": "2016-04-06T02:42:08.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/327078", 
+                    "author": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "updated": "2016-04-06T02:42:08.000-0700", 
+                    "id": "327078"
+                }, 
+                {
+                    "body": "Hi, Don\r\n\r\nThanks for your patience.\r\nNow I attached all the patches files. I made a simple test. These patches should work. Please send them to the customer for tests. If these patches can meet the customer's demand, please let me know. I will merge these patches into wrlinux7.\r\n\r\nIf any problem, please let me know.\r\n\r\nThanks a lot.\r\nZhu Yanjun", 
+                    "updateAuthor": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "created": "2016-04-07T01:12:35.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/327632", 
+                    "author": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "updated": "2016-04-07T01:13:27.000-0700", 
+                    "id": "327632"
+                }, 
+                {
+                    "body": "Wait for the feedback from the customer. If the customer is satisfied with these patches, I will merge these patches into wrlinux7.\r\n\r\nZhu Yanjun", 
+                    "updateAuthor": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "created": "2016-04-07T01:14:30.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/327633", 
+                    "author": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "updated": "2016-04-07T01:14:30.000-0700", 
+                    "id": "327633"
+                }, 
+                {
+                    "body": "Thank you! Could you please confirm where the patches should be applied? In the first patch for example, the diff shows \r\n\r\n--- a/meta/conf/bitbake.conf\r\n+++ b/meta/conf/bitbake.conf\r\n\r\nSo I wanted to confirm. Is it in oe-core, or somewhere else?\r\n", 
+                    "updateAuthor": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-04-07T05:28:57.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/327720", 
+                    "author": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-04-07T05:28:57.000-0700", 
+                    "id": "327720"
+                }, 
+                {
+                    "body": "Hi, Don\r\n\r\nSorry. The steps is as below:\r\n\r\n1. ./configure --enable-board=... --enable-rootfs=...\r\n2. cd layers/oe-core\r\n3. git am these-4-patches\r\n4. make fs\r\n\r\nIf any problem, please let me know.\r\n\r\nZhu Yanjun\r\n\r\n", 
+                    "updateAuthor": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "created": "2016-04-07T19:45:20.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/328008", 
+                    "author": {
+                        "displayName": "Zhu, Yanjun", 
+                        "name": "YZhu1", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "yanjun.zhu@windriver.com", 
+                        "active": false
+                    }, 
+                    "updated": "2016-04-07T19:45:20.000-0700", 
+                    "id": "328008"
+                }, 
+                {
+                    "body": "The patch looks good, thank you! In what RCPL should the customer expect to see this?\r\n", 
+                    "updateAuthor": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-04-28T08:08:16.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/335926", 
+                    "author": {
+                        "displayName": "Gochenour, Don", 
+                        "name": "dgocheno", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=dgocheno", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Don.Gochenour@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-04-28T08:08:16.000-0700", 
+                    "id": "335926"
+                }, 
+                {
+                    "body": "Commit: [5a6c1f9300590c0e31d06c1ee1b529ae4ed54ba1|http://ala-git.wrs.com/cgit/oe-core/commit/?h=wr-7.0-20141118&id=5a6c1f9300590c0e31d06c1ee1b529ae4ed54ba1]", 
+                    "updateAuthor": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-05-06T02:33:43.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/338578", 
+                    "author": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-05-06T02:33:43.000-0700", 
+                    "id": "338578"
+                }, 
+                {
+                    "body": "Commit: [b571b341407bbf53e7fd0e3e1276f4f49b128d5e|http://ala-git.wrs.com/cgit/oe-core/commit/?h=wr-7.0-20141118&id=b571b341407bbf53e7fd0e3e1276f4f49b128d5e]", 
+                    "updateAuthor": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-05-06T02:33:44.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/338579", 
+                    "author": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-05-06T02:33:44.000-0700", 
+                    "id": "338579"
+                }, 
+                {
+                    "body": "Commit: [9b481a83f793cb90ba1cd24c136ffe34e63b849c|http://ala-git.wrs.com/cgit/oe-core/commit/?h=wr-7.0-20141118&id=9b481a83f793cb90ba1cd24c136ffe34e63b849c]", 
+                    "updateAuthor": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-05-06T02:33:45.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/338580", 
+                    "author": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-05-06T02:33:45.000-0700", 
+                    "id": "338580"
+                }, 
+                {
+                    "body": "Commit: [f4a048d16dc19e90be4553f775d99f147e055128|http://ala-git.wrs.com/cgit/oe-core/commit/?h=wr-7.0-20141118&id=f4a048d16dc19e90be4553f775d99f147e055128]", 
+                    "updateAuthor": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "created": "2016-05-06T02:33:46.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146/comment/338581", 
+                    "author": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "active": true
+                    }, 
+                    "updated": "2016-05-06T02:33:46.000-0700", 
+                    "id": "338581"
+                }
+            ], 
+            "maxResults": 14
+        }, 
+        "aggregatetimeestimate": null, 
+        "customfield_10501": null, 
+        "customfield_10508": null, 
+        "customfield_11904": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11902", 
+            "id": "11902", 
+            "value": "No"
+        }, 
+        "customfield_10004": null, 
+        "priority": {
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/blocker.png", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/priority/1", 
+            "name": "P1", 
+            "id": "1"
+        }, 
+        "customfield_11905": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11904", 
+            "id": "11904", 
+            "value": "No"
+        }, 
+        "customfield_11906": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11906", 
+            "id": "11906", 
+            "value": "No"
+        }, 
+        "customfield_11900": null, 
+        "customfield_11901": null, 
+        "customfield_11902": null, 
+        "customfield_11908": null, 
+        "customfield_11500": "base-files", 
+        "customfield_10517": null, 
+        "watches": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/LIN7-5006/watchers", 
+            "watchCount": 3, 
+            "isWatching": false
+        }, 
+        "customfield_10512": null, 
+        "customfield_10518": null, 
+        "customfield_10519": null, 
+        "resolutiondate": "2016-05-06T02:34:06.000-0700", 
+        "project": {
+            "name": "Linux 7", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/project/12901", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/projectavatar?size=small&pid=12901&avatarId=10011", 
+                "32x32": "https://jira.wrs.com:8443/secure/projectavatar?size=medium&pid=12901&avatarId=10011", 
+                "48x48": "https://jira.wrs.com:8443/secure/projectavatar?pid=12901&avatarId=10011", 
+                "16x16": "https://jira.wrs.com:8443/secure/projectavatar?size=xsmall&pid=12901&avatarId=10011"
+            }, 
+            "projectCategory": {
+                "self": "https://jira.wrs.com:8443/rest/api/2/projectCategory/11200", 
+                "id": "11200", 
+                "name": "Linux", 
+                "description": ""
+            }, 
+            "key": "LIN7", 
+            "id": "12901"
+        }, 
+        "customfield_10804": null, 
+        "workratio": -1, 
+        "customfield_10608": null, 
+        "issuelinks": [
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/issueLink/404770", 
+                "outwardIssue": {
+                    "fields": {
+                        "status": {
+                            "statusCategory": {
+                                "name": "In Progress", 
+                                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/4", 
+                                "id": 4, 
+                                "key": "indeterminate", 
+                                "colorName": "yellow"
+                            }, 
+                            "description": "Integrating an issue indicates that the build team is satisfied that the issue is finished.", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/status/10012", 
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/generic.png", 
+                            "id": "10012", 
+                            "name": "Integrated"
+                        }, 
+                        "priority": {
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/major.png", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/priority/3", 
+                            "name": "P3", 
+                            "id": "3"
+                        }, 
+                        "issuetype": {
+                            "name": "Bug", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/issuetypes/bug.png", 
+                            "subtask": false, 
+                            "id": "1", 
+                            "description": "A problem which impairs or prevents the functions of the product."
+                        }, 
+                        "summary": "wrl6 :  log files are logged volatile"
+                    }, 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/644545", 
+                    "id": "644545", 
+                    "key": "LIN6-9259"
+                }, 
+                "type": {
+                    "outward": "clones", 
+                    "inward": "is cloned by", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issueLinkType/10001", 
+                    "id": "10001", 
+                    "name": "Cloners"
+                }, 
+                "id": "404770"
+            }, 
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/issueLink/409866", 
+                "inwardIssue": {
+                    "fields": {
+                        "status": {
+                            "statusCategory": {
+                                "name": "New", 
+                                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/2", 
+                                "id": 2, 
+                                "key": "new", 
+                                "colorName": "blue-gray"
+                            }, 
+                            "description": "", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/status/1", 
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/up.png", 
+                            "id": "1", 
+                            "name": "Open"
+                        }, 
+                        "priority": {
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/blocker.png", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/priority/1", 
+                            "name": "P1", 
+                            "id": "1"
+                        }, 
+                        "issuetype": {
+                            "name": "Bug", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/issuetypes/bug.png", 
+                            "subtask": false, 
+                            "id": "1", 
+                            "description": "A problem which impairs or prevents the functions of the product."
+                        }, 
+                        "summary": "CLONE - wrl6 :  log files are logged volatile"
+                    }, 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/697039", 
+                    "id": "697039", 
+                    "key": "LIN7-6079"
+                }, 
+                "type": {
+                    "outward": "clones", 
+                    "inward": "is cloned by", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issueLinkType/10001", 
+                    "id": "10001", 
+                    "name": "Cloners"
+                }, 
+                "id": "409866"
+            }, 
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/issueLink/410046", 
+                "inwardIssue": {
+                    "fields": {
+                        "status": {
+                            "statusCategory": {
+                                "name": "New", 
+                                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/2", 
+                                "id": 2, 
+                                "key": "new", 
+                                "colorName": "blue-gray"
+                            }, 
+                            "description": "", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/status/1", 
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/up.png", 
+                            "id": "1", 
+                            "name": "Open"
+                        }, 
+                        "priority": {
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/blocker.png", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/priority/1", 
+                            "name": "P1", 
+                            "id": "1"
+                        }, 
+                        "issuetype": {
+                            "name": "Bug", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/issuetypes/bug.png", 
+                            "subtask": false, 
+                            "id": "1", 
+                            "description": "A problem which impairs or prevents the functions of the product."
+                        }, 
+                        "summary": "CLONE - CLONE - wrl6 :  log files are logged volatile"
+                    }, 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/697928", 
+                    "id": "697928", 
+                    "key": "LIN8-3499"
+                }, 
+                "type": {
+                    "outward": "clones", 
+                    "inward": "is cloned by", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issueLinkType/10001", 
+                    "id": "10001", 
+                    "name": "Cloners"
+                }, 
+                "id": "410046"
+            }
+        ], 
+        "customfield_10600": null, 
+        "customfield_10601": null, 
+        "customfield_10602": null, 
+        "customfield_10603": null, 
+        "customfield_10604": null, 
+        "customfield_10605": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/10439", 
+            "id": "10439", 
+            "value": "Standard"
+        }, 
+        "customfield_10606": null, 
+        "customfield_10607": null, 
+        "subtasks": [], 
+        "customfield_11100": null, 
+        "customfield_10802": null, 
+        "attachment": [
+            {
+                "mimeType": "text/x-diff", 
+                "author": {
+                    "displayName": "Zhu, Yanjun", 
+                    "name": "YZhu1", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                    "avatarUrls": {
+                        "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                        "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                        "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                        "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                    }, 
+                    "emailAddress": "yanjun.zhu@windriver.com", 
+                    "active": false
+                }, 
+                "self": "https://jira.wrs.com:8443/rest/api/2/attachment/189115", 
+                "created": "2016-04-07T01:12:35.000-0700", 
+                "filename": "0001-bitbake.conf-add-VOLATILE_LOG_DIR-variable-wrl7.patch", 
+                "content": "https://jira.wrs.com:8443/secure/attachment/189115/0001-bitbake.conf-add-VOLATILE_LOG_DIR-variable-wrl7.patch", 
+                "id": "189115", 
+                "size": 1202
+            }, 
+            {
+                "mimeType": "text/x-diff", 
+                "author": {
+                    "displayName": "Zhu, Yanjun", 
+                    "name": "YZhu1", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                    "avatarUrls": {
+                        "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                        "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                        "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                        "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                    }, 
+                    "emailAddress": "yanjun.zhu@windriver.com", 
+                    "active": false
+                }, 
+                "self": "https://jira.wrs.com:8443/rest/api/2/attachment/189114", 
+                "created": "2016-04-07T01:12:35.000-0700", 
+                "filename": "0002-base-files-respect-VOLATILE_LOG_DIR-wrl7.patch", 
+                "content": "https://jira.wrs.com:8443/secure/attachment/189114/0002-base-files-respect-VOLATILE_LOG_DIR-wrl7.patch", 
+                "id": "189114", 
+                "size": 1721
+            }, 
+            {
+                "mimeType": "text/x-diff", 
+                "author": {
+                    "displayName": "Zhu, Yanjun", 
+                    "name": "YZhu1", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                    "avatarUrls": {
+                        "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                        "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                        "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                        "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                    }, 
+                    "emailAddress": "yanjun.zhu@windriver.com", 
+                    "active": false
+                }, 
+                "self": "https://jira.wrs.com:8443/rest/api/2/attachment/189113", 
+                "created": "2016-04-07T01:12:35.000-0700", 
+                "filename": "0003-initscripts-support-persistent-var-log-wrl7.patch", 
+                "content": "https://jira.wrs.com:8443/secure/attachment/189113/0003-initscripts-support-persistent-var-log-wrl7.patch", 
+                "id": "189113", 
+                "size": 2111
+            }, 
+            {
+                "mimeType": "text/x-diff", 
+                "author": {
+                    "displayName": "Zhu, Yanjun", 
+                    "name": "YZhu1", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/user?username=YZhu1", 
+                    "avatarUrls": {
+                        "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                        "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                        "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                        "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                    }, 
+                    "emailAddress": "yanjun.zhu@windriver.com", 
+                    "active": false
+                }, 
+                "self": "https://jira.wrs.com:8443/rest/api/2/attachment/189112", 
+                "created": "2016-04-07T01:12:35.000-0700", 
+                "filename": "0004-package.bbclass-support-persistent-var-log-wrl7.patch", 
+                "content": "https://jira.wrs.com:8443/secure/attachment/189112/0004-package.bbclass-support-persistent-var-log-wrl7.patch", 
+                "id": "189112", 
+                "size": 3729
+            }
+        ], 
+        "customfield_12703": null, 
+        "customfield_12702": null, 
+        "customfield_12706": "676146", 
+        "customfield_12705": "676146", 
+        "customfield_12704": null, 
+        "status": {
+            "statusCategory": {
+                "name": "In Progress", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/4", 
+                "id": 4, 
+                "key": "indeterminate", 
+                "colorName": "yellow"
+            }, 
+            "description": "Integrating an issue indicates that the build team is satisfied that the issue is finished.", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/status/10012", 
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/generic.png", 
+            "id": "10012", 
+            "name": "Integrated"
+        }, 
+        "description": "The log files are logged volatile\r\n\r\nroot@m8203:/var/log# df -h .\r\nFilesystem Size Used Avail Use% Mounted on\r\ntmpfs 32G 516K 32G 1% /var/volatile\r\n\r\nLog files should be stored non-volatile (this was how it was in wrl 4.x) ", 
+        "customfield_10011": null, 
+        "timeoriginalestimate": null, 
+        "customfield_10200": null, 
+        "customfield_10201": "The recipe that manages volatile dirs is ./oe-core/meta/recipes-core/base-files/base-files_3.0.14.bb\r\nAdding a change like (base-files_3.0.14.bbappend):\r\nvolatiles = \"tmp\"\r\nshould fix the problem.", 
+        "components": [
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/component/17910", 
+                "id": "17910", 
+                "name": "Userspace"
+            }
+        ], 
+        "resolution": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/resolution/1", 
+            "id": "1", 
+            "name": "Fixed", 
+            "description": "A fix for this issue is checked into the tree and tested."
+        }
+    }, 
+    "self": "https://jira.wrs.com:8443/rest/api/2/issue/676146", 
+    "id": "676146", 
+    "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog"
+}
+

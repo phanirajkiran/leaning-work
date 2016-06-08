@@ -1,0 +1,3 @@
+[filter1]
+summary=Fix verification for BSP testers in LIN8
+filter=project = LIN8 AND tester in (WGao,LChi1,xdong,LYang0) AND summary !~ "Security" AND status in (Integrated) AND issuetype = Bug  ORDER BY tester ASC,priority DESC

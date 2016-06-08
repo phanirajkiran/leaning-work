@@ -83,3 +83,9 @@ parser.add_option("-p", "--path",  \
 (options, args) = parser.parse_args()
 path = options.path
 
+color
+https://www.snip2code.com/Snippet/721/Send-Email-in-python
+
+cc
+s.sendmail(FROMADDR, TOADDR+CCADDR, msg.as_string())
+http://stackoverflow.com/questions/9974972/mails-not-being-sent-to-people-in-cc

@@ -1,0 +1,3 @@
+[filter1]
+summary=All defects opened by testing team in 8.0
+filter=reporter in (WGao,LChi1,xdong,LYang0,PYan,CXu,HYang2,YCheng,twang0,TWen,LLiu2,HChen1,ZZhao1,JKang) AND project = LIN8 AND summary !~ Security AND issuetype = Bug AND component != Test ORDER BY created DESC, priority DESC

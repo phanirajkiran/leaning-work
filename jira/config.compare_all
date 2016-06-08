@@ -1,0 +1,9 @@
+[filter1]
+summary=All valid defects in 8.0
+filter=reporter in (WGao,LChi1,xdong,LYang0,PYan,CXu,HYang2,YCheng,BXue,twang0,TWen,LLiu2,HChen1,ZZhao1,JKang) AND project = LIN8 AND summary !~ Security AND issuetype = Bug AND component != Test ORDER BY created DESC, priority DESC
+[filter2]
+summary=All valid defects in 7.0
+filter=reporter in (WGao,LChi1,xdong,LYang0,PYan,CXu,HYang2,YCheng,BXue,twang0,TWen,LLiu2,HChen1,ZZhao1,JKang) AND project = LIN7 AND summary !~ Security AND issuetype = Bug AND component != Test ORDER BY created DESC, priority DESC
+[filter3]
+summary=All valid defects in 6.0
+filter=reporter in (WGao,LChi1,xdong,LYang0,PYan,CXu,HYang2,YCheng,BXue,twang0,TWen,LLiu2,HChen1,ZZhao1,JKang) AND project = LIN6 AND summary !~ Security AND issuetype = Bug AND component != Test ORDER BY created DESC, priority DESC

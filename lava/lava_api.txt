@@ -1,0 +1,4 @@
+>>> server.scheduler.job_status(13920)
+{'job_status': 'Complete', 'bundle_sha1': 'c5ccc941c1c83576bf1b168b78ffb83a419400e2'}
+print yaml
+print server.scheduler.job_details('15193.0') 

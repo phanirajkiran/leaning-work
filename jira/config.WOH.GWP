@@ -1,0 +1,3 @@
+[filter1]
+summary=WOH for GWP8,IDP3
+filter=project in ("GWP8","IDP3") AND status = Integrated AND resolution not in ("Not Applicable") ORDER BY "Integrated Date" ASC,component ASC

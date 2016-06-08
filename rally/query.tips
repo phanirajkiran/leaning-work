@@ -1,0 +1,12 @@
+
+http://stackoverflow.com/questions/28357779/how-to-get-user-story-points-using-pyral
+If you are ANDing multiple terms it's easiest to create a list of terms like so:
+query=['Release.Name = %s' % (rel), '%s = %s' % (state, state_value)]
+Also, whitespace matters. You were missing a space before the first =.
+
+   #response = rally.get(feature,query='FormattedID = %s' % userstory)
+    #response = rally.get(feature,query='FormattedID = "F4561"')
+    #query=['Release.Name = %s' % (release)]
+    query=['FormattedID = %s' % (userstory)]
+    response = rally.get(feature,query=query)
+

@@ -1,0 +1,3 @@
+[filter1]
+summary=Fix verification in LIN8
+filter=project in ("Linux 8") AND status = Integrated AND resolution not in ("Not Applicable") ORDER BY tester DESC,component ASC

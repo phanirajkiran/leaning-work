@@ -1,0 +1,3 @@
+[filter1]
+summary=NEW  defects opened today in OVP8 
+filter= reporter = lyang0 AND project = OVP8 AND summary !~ "Security" AND issuetype = Bug AND created >= -21h ORDER BY priority DESC

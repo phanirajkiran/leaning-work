@@ -1,0 +1,77 @@
+{
+  "health_check": false, 
+  "timeout": 5000, 
+  "device_type": "vlm-pxe-master", 
+  "job_name": "i40e-driver", 
+  "actions": [
+    {
+      "command": "deploy_linaro_kernel", 
+      "parameters": {
+        "login_prompt": "login:", 
+        "kernel": "/net/yow-lpdfs01/pool/ovp/lava/common/latest/ovp_kvm-WRLINUX_6_0_HEAD/intel-x86-64-bzImage-WR6.0.0.0_preempt-rt", 
+        "username": "root", 
+        "rootfs": "/net/yow-lpdfs01/pool/ovp/lava/common/latest/ovp_kvm-WRLINUX_6_0_HEAD/intel-x86-64-ovp-kvm-preempt-rt-dist.tar.bz2"
+      }
+    }, 
+    {
+      "command": "boot_linaro_image", 
+      "parameters": {
+        "boot_cmds": [
+          "intel_iommu=on root=/dev/sda1 rw ip=dhcp selinux=0 enforcing=0 kvm.allow_unsafe_assigned_interrupts=1"
+        ]
+      }
+    }, 
+    {
+      "command": "lava_test_shell", 
+      "parameters": {
+        "testdef_repos": [
+          {
+            "git-repo": "git://ala-git/lava-gos-test-definitions", 
+            "testdef": "ovp/net/net_sanity.yaml", 
+            "revision": "WRLINUX_6_0_HEAD"
+          }, 
+          {
+            "parameters": {
+              "BASEURL": "http://yow-ovp-lava1.wrs.com:8080/common/latest/ovp_kvm_testing-WRLINUX_6_0_HEAD"
+            }, 
+            "git-repo": "git://ala-git/lava-gos-test-definitions", 
+            "testdef": "ovp/smart/add-lava-channel.yaml", 
+            "revision": "WRLINUX_6_0_HEAD"
+          }, 
+          {
+            "git-repo": "git://ala-git/lava-gos-test-definitions", 
+            "testdef": "ovp/i40e_driver/load_git.yaml", 
+            "revision": "WRLINUX_6_0_HEAD"
+          }, 
+          {
+            "parameters": {
+              "GUEST_KERNEL": "http://yow-ovp-lava1.wrs.com:8080/common/latest/ovp_guest-WRLINUX_6_0_HEAD/x86-64-kvm-guest-bzImage-WR6.0.0.0_preempt-rt", 
+              "GUEST_ROOTFS": "http://yow-ovp-lava1.wrs.com:8080/common/latest/ovp_guest-WRLINUX_6_0_HEAD/x86-64-kvm-guest-ovp-guest-preempt-rt-dist.ext3.bz2"
+            }, 
+            "git-repo": "git://ala-git/lava-gos-test-definitions", 
+            "testdef": "ovp/guest/setup_guest.yaml", 
+            "revision": "WRLINUX_6_0_HEAD"
+          }, 
+          {
+            "parameters": {
+              "GUEST_KERNEL": "/exports/guest1/x86-64-kvm-guest-bzImage-WR6.0.0.0_preempt-rt", 
+              "GUEST_ROOTFS": "/exports/guest1/x86-64-kvm-guest-ovp-guest-preempt-rt-dist.ext3"
+            }, 
+            "git-repo": "git://ala-git/lava-gos-test-definitions", 
+            "testdef": "ovp/i40e_driver/test.yaml", 
+            "revision": "WRLINUX_6_0_HEAD"
+          }
+        ], 
+        "timeout": 4000
+      }
+    }, 
+    {
+      "command": "submit_results", 
+      "parameters": {
+        "stream": "/anonymous/sanity/", 
+        "server": "http://localhost/RPC2/"
+      }
+    }
+  ], 
+  "target": "intel-canoe-pass-3"
+}

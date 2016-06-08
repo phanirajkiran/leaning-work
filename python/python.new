@@ -1,0 +1,12 @@
+>>> cmd_args = dict([arg.split('=') for arg in cmd if '=' in arg])
+>>> cmd=['/home/wrlbuild/wr-buildscripts/ovp_lava_build.sh', '--name=ovp_kvm-WRLINUX_6_0_HEAD', '--type=full']
+>>> cmd_args = dict([arg.split('=') for arg in cmd if '=' in arg])
+>>> print cmd_args
+{'--name': 'ovp_kvm-WRLINUX_6_0_HEAD', '--type': 'full'}
+>>> branch = cmd_args['--name'].split('-')[-1]
+>>> print branch
+>>> cmd=['a=b','c','d=2']
+>>> cmd_args = dict([arg.split('=') for arg in cmd if '=' in arg])
+>>> print cmd_args 
+{'a': 'b', 'd': '2'}
+WRLINUX_6_0_HEAD

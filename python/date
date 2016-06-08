@@ -11,3 +11,19 @@ datetime.datetime(2013, 10, 31, 0, 0)
 '43'
 
 >>dt.strftime("%Y-%W")
+
+
+http://stackoverflow.com/questions/214777/how-do-you-convert-yyyy-mm-ddthhmmss-000z-time-format-to-mm-dd-yyyy-time-forma
+
+delta days 
+http://stackoverflow.com/questions/151199/how-do-i-calculate-number-of-days-betwen-two-dates-using-python
+from datetime import date
+
+d0 = date(2008, 8, 18)
+d1 = date(2008, 9, 26)
+delta = d0 - d1
+print delta.days
+
+>>> a = datetime.now() + timedelta(hours=12)
+>>> a.strftime("%Y-%m-%d")
+'2016-05-20'

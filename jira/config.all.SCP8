@@ -1,0 +1,3 @@
+[filter1]
+summary=All P1,P2 open defects 
+filter=project = SCP8 AND summary !~ "Security" AND issuetype = Bug AND priority in (P1, P2) AND resolution = Unresolved ORDER BY priority DESC,assignee ASC

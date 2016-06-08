@@ -1,0 +1,1 @@
+reporter = xxx and createdDate >= startOfYear() and project not in ("Linux TAF 7",LABOPS) and component != Test ORDER BY createdDate DESC

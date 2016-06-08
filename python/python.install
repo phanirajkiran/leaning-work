@@ -11,3 +11,7 @@ sudo apt-get install python-tk
  2020  python setup.py build
  2021  python setup.py install
 
+>>> import site; site.getsitepackages()
+['/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages']
+
+python setup.py build --build-base=/path/to/pybuild/foo-1.0

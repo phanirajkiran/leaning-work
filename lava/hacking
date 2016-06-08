@@ -1,0 +1,6 @@
+    - git-repo: "git://ala-git/lava-ovp-test-definitions"
+      testdef: "ovp/hacking-session.yaml"
+
+./bin/submit_test_collection.py -u lyang0 -t 3pprjnzwf8aepbwy8mnizyeok02t8cxkxx1dwfa7ui861xzucpgjlm5jdrkbi17n98lueq2ci634wqybei0kgoa8fj1to0wsugoh0xqiasm7y7wdf0y51h0zbbyq7038 /folk/lyang0/docker_bench
+t=$(mktemp); ~/yaml2json.py ovp/job-def-samples/add-lava-channel.yaml > $t; lava-tool submit-job http://lyang0:3pprjnzwf8aepbwy8mnizyeok02t8cxkxx1dwfa7ui861xzucpgjlm5jdrkbi17n98lueq2ci634wqybei0kgoa8fj1to0wsugoh0xqiasm7y7wdf0y51h0zbbyq7038@yow-lpd-lava1.wrs.com/RPC2/ $t; rm $t
+

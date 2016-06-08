@@ -26,3 +26,10 @@ class Bar(Foo):
         self.set_name("World")
 o = Bar()
 assert o.get_name() == "World"
+
+--------------------------------------------------------------------------------
+class Person:
+  def __init__(self,name,age):
+    self.name,self.age = name,age
+    def __str__(self):
+      return 'This guy is {self.name},is {self.age} old'.format(self=self) 

@@ -1,0 +1,151 @@
+1)defects in lin8
+2)simics
+3)homepage
+4)readme
+5)testcase.conf
+6)defect-utils
+7)jira-utils
+9)rally-utils
+10)total test rung
+3)create excel for wassp
+4)create test plan for LTAF
+upload and create ltaf test plan 
+userguide
+pass rate for ovp 
+case number
+workaround
+
+defects in the past years,BSP tester is top one 
+in 8.0 mine is the top one 
+
+guide testers to open a bouch of bugs 
+when product changes always show this information to team 
+
+for async bsp but has been used in sync, at least 3 month in advance 
+
+test runing about 6000
+tese from 65 to 400
+bug number 8.0 ----> 100
+automation rate to 98%
+bench mark 
+
+ovp 5, ovp 6, openstack 
+benchmark improvement 
+test statistics is not providing an accurate view of QA 
+I appreciate your professionalism through this transition time.  I fully recognize how difficult it is to stay motivated while transitioning to a different area but thanks for your effort and leadership to the rest of the team. 
+
+July---> start bsp 
+
+
+we'd better use 60_head not " 60_async" as name, it confuses people a lot
+
+  origin/WRLINUX_5_0_HEAD
+  origin/WRLINUX_6_0_HEAD
+
+moon island 
+
+7/14
+customer foucs, ram testing 
+how many opensource tools 
+4ppt and 1 summary ppt 
+
+bts for 5.0 6.0 7.0 
+
+ Collecting "Customer Use Cases" to improve quality of testing
+
+readme
+test log 
+test_case.conf
+
+./get_case_status.py
+The common tools for wind river linux testing to statistics each domain's testcase and RCA test status in certain time line
+Tools: Get the bsp board info and supported combos info to help WB team or your planing in WASSP
+Simics in wrlinux testing: Brief summary II
+
+ Linux 7 BSP Testing Introduction by Yang, Lei  to IDP 
+Help on IDP System Stability Testing ---IDP 
+
+simics bugs 
+
+simics target in vlm
+drive the simics failure analysis (userspace kernel, bsp) 
+Tools: he tool to statistics the Overview of BSP testing suite
+
+experimental WRL70 RCPL nighlty testing on fsl-t2080rdb Simics instances --- RE: Simics testing to be done this week
+A tool to create the html-style readme for external user is in the developing
+https://jive.windriver.com/docs/DOC-36207 
+
+
+Re: KTS Improvement Progress
+
+now it changes to
+build/linux-windriver/linux-intel_x86_64-preempt-rt-build/source
+
+share usb testing to intel 
+
+
+complete to add the "print test env" part to common part
+
+simics server capacity test ---> start 8 simics to execute the kernel testing overnight
+
+WASSP use too much resource cause simics execute very slow
+
+
+About the OOBE for BTS ---> used by external team without traning 
+
+
+Wrlinux Runtime testing unification items in 2015
+
+try to play 4.1.x kernel..
+
+Linux News: ext3 filesystem driver has been removed from mainline(4.3+) last week
+Linux news: Microsoft develops its own version of Linux-based operating system
+Linux news: Preempt RT may die
+LINUX NEWS:The Real-Time Linux Collaborative Project ===> RT kernel get supports from many company now
+Linux news: Kernel Self Protection Project
+Rally tools to help you know the team status and create task
+
+core tool update: create LTAF test plan automatically from the board.ini
+offer useful advice for KTS improvement 
+start new round KTS improvement 
+offer fix to develper 
+https://jira.wrs.com:8443/browse/LIN6-9180 
+
+other company ask me for the preempt-rt realtime feature in wrlinux, I help him to contact linux fileds team 
+standardlize the test log for BSP 
+standardlize README
+standarlize test_case.conf 
+Tools: Get the bsp board info and supported combos info to help WB team or your planing in WASSP
+The common tools for wind river linux testing to statistics each domain's testcase and RCA test status in certain time line
+The general way to create test matrix from txt file
+[improvement example ]help developer to find the root cause to unblock your work ----> one of your 2015 improvement
+tools: to help you fill or correct the TEST_CASE_LIST
+A tool to help track the new test case update progress and status
+core tool update: create LTAF test plan automatically from the board.ini
+core tools: upload test log to LTAF with command line if WASSP can't used
+core tools : send bug review and open bug from command line if the log is unified one.
+
+imics in wrlinux testing: Brief summary II
+
+
+Linux 7 BSP Testing Introduction by Yang, Lei
+Help on IDP System Stability Testing
+
+4 simcs target has been in VLM
+Tools: the tool to statistics the Overview of BSP testing suite
+
+experimental WRL70 RCPL nighlty testing on fsl-t2080rdb Simics instances 
+simics server capacity test 
+
+Wrlinux Runtime testing unification items in 2015
+Test attribute file 
+Test case README 
+)Test env and test log style, This need use to re-write test case with unified function in testing lib. 
+
+
+Run time traning 
+LTP POSIX split issues
+
+qemumips-64 had renamed to qemumips64
+
+

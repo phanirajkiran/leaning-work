@@ -1,0 +1,8 @@
+lyang001@lyang001-OptiPlex-9010:~/WORK/updates/kernel-4.1.x$ grep "segfault at" * -r 
+arch/sparc/mm/fault_32.c:	printk("%s%s[%d]: segfault at %lx ip %p (rpc %p) sp %p error %x",
+arch/sparc/mm/fault_64.c:	printk("%s%s[%d]: segfault at %lx ip %p (rpc %p) sp %p error %x",
+arch/um/kernel/trap.c:	printk("%s%s[%d]: segfault at %lx ip %p sp %p error %x",
+arch/avr32/mm/fault.c:			printk("%s%s[%d]: segfault at %08lx pc %08lx "
+arch/metag/mm/fault.c:			pr_info("%s%s[%d]: segfault at %lx pc %08x sp %08x write %d trap %#x (%s)",
+arch/x86/mm/fault.c:	printk("%s%s[%d]: segfault at %lx ip %p sp %p error %lx",
+

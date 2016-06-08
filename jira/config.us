@@ -1,0 +1,3 @@
+[filter1]
+summary=All valid defects in 8.0
+filter=reporter in (WGao,LChi1,xdong,LYang0) AND project = LIN8 AND summary !~ Security AND issuetype = Bug AND component != Test ORDER BY created DESC, priority DESC

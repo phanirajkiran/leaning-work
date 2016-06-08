@@ -1,0 +1,4 @@
+mkdir /tmp/install_dir
+./kselftest_install.sh /tmp/install_dir
+
+./gen_kselftest_tar.sh tarbz2

@@ -1,0 +1,18 @@
+http://stackoverflow.com/questions/1535672/how-to-interpret-status-code-in-python-commands-getstatusoutput
+from commands import *
+
+def run_command(cmd):
+    print 'Running: "%s"' % cmd
+    status, text = getstatusoutput(cmd)
+    exit_code = status >> 8 ------------------> here
+    signal_num = status % 256
+    print 'Signal: %d' % signal_num
+    print 'Exit  : %d' % exit_code
+    print 'Core? : %s' % bool(exit_code / 256)
+    print 'Output:'
+    print text
+    print
+
+run_command('ls -l *.py')
+run_command('ls -l *.notthere')
+run_command('echo "WAITING TO BE KILLED"; read input')

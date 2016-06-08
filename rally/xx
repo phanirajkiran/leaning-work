@@ -1,0 +1,6 @@
+<html>
+<body>
+<h1> My Pie Chart </h1>
+<img src="https://chart.googleapis.com/chart?chs=600x300&amp;chd=t:43.2,10.9,21.8,14.4,9.6&amp;cht=p3&amp;chdl=a|b|c|d|e&amp;chl=43.2%|10.9%|21.8%|14.4%|9.6%" />
+</body>
+</html>

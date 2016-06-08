@@ -1,0 +1,287 @@
+Feature:
+PortfolioItem
+    oid                       : 35200804947
+    ref                       : feature/35200804947
+    ObjectID                  : 35200804947
+    _ref                      : https://rally1.rallydev.com/slm/webservice/v2.0/portfolioitem/feature/35200804947
+    _CreatedAt                : May 6, 2015
+    _hydrated                 : True
+    Name                      : OVP Automated Testing
+    Subscription              : Subscription.ref       (OID  9491874631  Name: Wind River Systems, Inc (COT))
+    Workspace                 : Workspace.ref          (OID  118972737  Name: Wind River)
+    FormattedID               : F4561
+
+    AcceptedLeafStoryCount    : 5
+    AcceptedLeafStoryPlanEstimateTotal  : 25.0
+    ActualEndDate             : 2015-07-17T12:46:08.096Z
+    ActualStartDate           : 2015-02-10T19:14:08.751Z
+    Archived                  : False
+    Attachments               : []
+    Changesets                : []
+    CreationDate              : 2015-05-06T17:12:58.509Z
+    Description               : This Feature exists to track the creation of automated tests in OVP 7 for regression and sanity.<br />The scope involves:<br />- selection and prioritization of legacy tests and purging of the remainder of legacy tests<br />- automation of selected legacy manual tests<br />- inclusion of new feature automated tests<br /><br />The initial plan for legacy test selection is as follows:<br />1) start with producing a superset of legacy test cases from the following sources:&nbsp; [STATUS - DONE]<br />RTH - http://ala-git.wrs.com/cgit/layers/wr-testing/tree/ovp-test/recipes-testcases/ovp-test/ovp-test/testcases/<br />WASSP - <br />Benchmark - http://ala-git.wrs.com/cgit/layers/wr-testing/tree/ovp-benchmark/recipes-testcases/<br />2) Prune the list with manual review based on continuing applicability, redundancy, implicitly tested by Use Cases, etc. &nbsp; [STATUS - DONE]<br />3) prioritize and allocate to Sprints. the following is the result<br /><br />### The following are currently viable and exist or will exist for S5 ###<br />ovirt_PRT<br />openvswitch_func<br />openvswitch_vm2vm<br />isolation<br />docker_container<br />passthrough<br />qemu_user_net_test<br />irq_latency_scheduled<br />libvirt_test_migration2host_b<br />inter_node_migration<br />irq_latency_affined<br />openvswitch_mirror<br />openvswitch_qos<br />openvswitch_vlan<br />passthrough_libvirt<br />phoronix_*<br /><br />### The following will be allocated for automation in S6 ###<br />lxc_container_guest<br />irq_affine<br />ftrace_guest<br />cgroups_guest<br />netmap_e1000e_igb<br />apicv_enable_test<br /><br />### The following are implicit and will also remain in the backlog but at lowest priority since they are implicitly tested ###<br />virtio_sda1<br />bridge<br />openvswitch_vm2host<br />openvswitch_vm2server<br />virtio<br />vlan_guest<br /><br />### The following will be placed in a backlog Feature and picked up as we have time in future sprints. ###<br />netmap_igb_igb<br />netmap_ixgbe_ixgbe<br />apicv_disable_test<br />apicv_perf<br />aufs_stress<br />context_switch<br />diod<br />face_test<br />fuse<br />guest_agent<br />hrtimer_affined<br />hrtimer_latency<br />hrtimer_native<br />hrtimer_scheduled<br />intra_node_migration<br />irq_latency_native<br />irqbalance_guest<br />iscsi<br />ksm<br />libvmi<br />lttng2_guest<br />macvtap<br />macvtap_libvirt<br />perf_guest<br />remote_lttng2<br />sanlock<br />spice_vm<br />system_reporting<br />trace_cmd<br />trace_cmd_guest<br />user_net<br />vdsm_getVdsxx<br />vdsm_gluster<br />vdsm_storage_glusterfs<br />vdsm_storage_local<br />vdsm_storage_nfs<br />vdsm_unit_tests<br />vdsm_vm<br />vhost<br />virq_latency<br />virq_lost<br />virt_test<br />virtio_lttng2<br />virtio-balloon-decrease<br />virtio-balloon-increase<br />vxlan
+    DirectChildrenCount       : 5
+    Discussion                : []
+    DisplayColor              : #848689
+    DragAndDropRank           : P!%&,O~e^A:&a~9|&s8O~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Expedite                  : False
+    InvestmentCategory        : Cost Savings
+    JobSize                   : 1
+    LastUpdateDate            : 2015-07-17T12:46:08.252Z
+    LateChildCount            : 3
+    LatestDiscussionAgeInMinutes  : None
+    LeafStoryCount            : 5
+    LeafStoryPlanEstimateTotal  : 25.0
+    Milestones                : []
+    Notes                     : 
+    ObjectUUID                : 356297a4-6467-464c-a363-8b068bd8fc57
+    Owner                     : User.ref  (OID  10781173112  UserName arnold.german@windriver.com  DisplayName Arnold German)
+    Parent                    : None
+    PercentDoneByStoryCount   : 1.0
+    PercentDoneByStoryPlanEstimate  : 1.0
+    PlannedEndDate            : 2015-08-28T06:59:59.000Z
+    PlannedStartDate          : 2015-02-02T08:00:00.000Z
+    PortfolioItemType         : TypeDefinition.ref          (OID  4628571959  Name Feature)
+    PortfolioItemTypeName     : Feature
+    Predecessors              : []
+    PreliminaryEstimate       : PreliminaryEstimate.ref     (OID  4484676912  Name XL)
+    PreliminaryEstimateValue  : 0
+    Project                   : Project.ref                 (OID  10957142069  Name Linux OVP)
+    RROEValue                 : 1
+    Ready                     : False
+    Recycled                  : False
+    RefinedEstimate           : 0
+    Release                   : Release.ref                 (OID  25516962604  Name Linux OVP 7)
+    RiskScore                 : 1
+    State                     : State.ref                   (OID  15490627264  Name Defined)
+    StateChangedDate          : 2015-05-06T17:12:58.516Z
+    Successors                : []
+    Tags                      : []
+    TimeCriticality           : 1
+    UnEstimatedLeafStoryCount  : 0
+    UserBusinessValue         : 1
+    ValueScore                : 3
+    VersionId                 : 17
+    WSJFScore                 : 0.0
+    __collection_ref_for_Collaborators  : https://rally1.rallydev.com/slm/webservice/v2.0/PortfolioItem/Feature/35200804947/Collaborators
+    __collection_ref_for_RevisionHistory  : https://rally1.rallydev.com/slm/webservice/v2.0/revisionhistory/35200804948
+    __collection_ref_for_UserStories  : https://rally1.rallydev.com/slm/webservice/v2.0/PortfolioItem/Feature/35200804947/UserStories
+    _refObjectUUID            : 356297a4-6467-464c-a363-8b068bd8fc57
+    ConfidenceLevel           : None
+    ConfidenceofSchedule      : None
+    CorporateRoadmap          : None
+    EPMRelease                : None
+    EnhancementRequest        : None
+    FeatureOwner              : None
+    IntelWorkspaceLink        : <pyral.entity.CustomField object at 0x7fc5164fe650>
+    LevelofConfidence         : None
+    OnCorporateRoadmap        : None
+    PAExternalRef             : None
+    PAOwner                   : None
+    PATracking                : None
+    PlannedBacklog            : None
+    ProgramState              : None
+    RequestStatus             : None
+    RequestedReleaseQtr       : None
+    RequestedReleaseQuarter   : None
+    StrategicInvestment       : None
+    StrategicInvestmentCategory  : None
+    TFO                       : None
+    TechnicalFeatureOwner     : None
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/rally$ vim rally_utils2.port.py 
+lyang001@lyang001-OptiPlex-9010:~/leaning-work/rally$ ./rally_utils2.port.py -d "Linux OVP"
+PortfolioItem
+    oid                       : 35200804947
+    ref                       : feature/35200804947
+    ObjectID                  : 35200804947
+    _ref                      : https://rally1.rallydev.com/slm/webservice/v2.0/portfolioitem/feature/35200804947
+    _CreatedAt                : May 6, 2015
+    _hydrated                 : True
+    Name                      : OVP Automated Testing
+    Subscription              : Subscription.ref       (OID  9491874631  Name: Wind River Systems, Inc (COT))
+    Workspace                 : Workspace.ref          (OID  118972737  Name: Wind River)
+    FormattedID               : F4561
+
+    AcceptedLeafStoryCount    : 5
+    AcceptedLeafStoryPlanEstimateTotal  : 25.0
+    ActualEndDate             : 2015-07-17T12:46:08.096Z
+    ActualStartDate           : 2015-02-10T19:14:08.751Z
+    Archived                  : False
+    Attachments               : []
+    Changesets                : []
+    CreationDate              : 2015-05-06T17:12:58.509Z
+    Description               : This Feature exists to track the creation of automated tests in OVP 7 for regression and sanity.<br />The scope involves:<br />- selection and prioritization of legacy tests and purging of the remainder of legacy tests<br />- automation of selected legacy manual tests<br />- inclusion of new feature automated tests<br /><br />The initial plan for legacy test selection is as follows:<br />1) start with producing a superset of legacy test cases from the following sources:&nbsp; [STATUS - DONE]<br />RTH - http://ala-git.wrs.com/cgit/layers/wr-testing/tree/ovp-test/recipes-testcases/ovp-test/ovp-test/testcases/<br />WASSP - <br />Benchmark - http://ala-git.wrs.com/cgit/layers/wr-testing/tree/ovp-benchmark/recipes-testcases/<br />2) Prune the list with manual review based on continuing applicability, redundancy, implicitly tested by Use Cases, etc. &nbsp; [STATUS - DONE]<br />3) prioritize and allocate to Sprints. the following is the result<br /><br />### The following are currently viable and exist or will exist for S5 ###<br />ovirt_PRT<br />openvswitch_func<br />openvswitch_vm2vm<br />isolation<br />docker_container<br />passthrough<br />qemu_user_net_test<br />irq_latency_scheduled<br />libvirt_test_migration2host_b<br />inter_node_migration<br />irq_latency_affined<br />openvswitch_mirror<br />openvswitch_qos<br />openvswitch_vlan<br />passthrough_libvirt<br />phoronix_*<br /><br />### The following will be allocated for automation in S6 ###<br />lxc_container_guest<br />irq_affine<br />ftrace_guest<br />cgroups_guest<br />netmap_e1000e_igb<br />apicv_enable_test<br /><br />### The following are implicit and will also remain in the backlog but at lowest priority since they are implicitly tested ###<br />virtio_sda1<br />bridge<br />openvswitch_vm2host<br />openvswitch_vm2server<br />virtio<br />vlan_guest<br /><br />### The following will be placed in a backlog Feature and picked up as we have time in future sprints. ###<br />netmap_igb_igb<br />netmap_ixgbe_ixgbe<br />apicv_disable_test<br />apicv_perf<br />aufs_stress<br />context_switch<br />diod<br />face_test<br />fuse<br />guest_agent<br />hrtimer_affined<br />hrtimer_latency<br />hrtimer_native<br />hrtimer_scheduled<br />intra_node_migration<br />irq_latency_native<br />irqbalance_guest<br />iscsi<br />ksm<br />libvmi<br />lttng2_guest<br />macvtap<br />macvtap_libvirt<br />perf_guest<br />remote_lttng2<br />sanlock<br />spice_vm<br />system_reporting<br />trace_cmd<br />trace_cmd_guest<br />user_net<br />vdsm_getVdsxx<br />vdsm_gluster<br />vdsm_storage_glusterfs<br />vdsm_storage_local<br />vdsm_storage_nfs<br />vdsm_unit_tests<br />vdsm_vm<br />vhost<br />virq_latency<br />virq_lost<br />virt_test<br />virtio_lttng2<br />virtio-balloon-decrease<br />virtio-balloon-increase<br />vxlan
+    DirectChildrenCount       : 5
+    Discussion                : []
+    DisplayColor              : #848689
+    DragAndDropRank           : P!%&,O~e^A:&a~9|&s8O~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Expedite                  : False
+    InvestmentCategory        : Cost Savings
+    JobSize                   : 1
+    LastUpdateDate            : 2015-07-17T12:46:08.252Z
+    LateChildCount            : 3
+    LatestDiscussionAgeInMinutes  : None
+    LeafStoryCount            : 5
+    LeafStoryPlanEstimateTotal  : 25.0
+    Milestones                : []
+    Notes                     : 
+    ObjectUUID                : 356297a4-6467-464c-a363-8b068bd8fc57
+    Owner                     : User.ref  (OID  10781173112  UserName arnold.german@windriver.com  DisplayName Arnold German)
+    Parent                    : None
+    PercentDoneByStoryCount   : 1.0
+    PercentDoneByStoryPlanEstimate  : 1.0
+    PlannedEndDate            : 2015-08-28T06:59:59.000Z
+    PlannedStartDate          : 2015-02-02T08:00:00.000Z
+    PortfolioItemType         : TypeDefinition.ref          (OID  4628571959  Name Feature)
+    PortfolioItemTypeName     : Feature
+    Predecessors              : []
+    PreliminaryEstimate       : PreliminaryEstimate.ref     (OID  4484676912  Name XL)
+    PreliminaryEstimateValue  : 0
+    Project                   : Project.ref                 (OID  10957142069  Name Linux OVP)
+    RROEValue                 : 1
+    Ready                     : False
+    Recycled                  : False
+    RefinedEstimate           : 0
+    Release                   : Release.ref                 (OID  25516962604  Name Linux OVP 7)
+    RiskScore                 : 1
+    State                     : State.ref                   (OID  15490627264  Name Defined)
+    StateChangedDate          : 2015-05-06T17:12:58.516Z
+    Successors                : []
+    Tags                      : []
+    TimeCriticality           : 1
+    UnEstimatedLeafStoryCount  : 0
+    UserBusinessValue         : 1
+    ValueScore                : 3
+    VersionId                 : 17
+    WSJFScore                 : 0.0
+    __collection_ref_for_Collaborators  : https://rally1.rallydev.com/slm/webservice/v2.0/PortfolioItem/Feature/35200804947/Collaborators
+    __collection_ref_for_RevisionHistory  : https://rally1.rallydev.com/slm/webservice/v2.0/revisionhistory/35200804948
+    __collection_ref_for_UserStories  : https://rally1.rallydev.com/slm/webservice/v2.0/PortfolioItem/Feature/35200804947/UserStories
+    _refObjectUUID            : 356297a4-6467-464c-a363-8b068bd8fc57
+    ConfidenceLevel           : None
+    ConfidenceofSchedule      : None
+    CorporateRoadmap          : None
+    EPMRelease                : None
+    EnhancementRequest        : None
+    FeatureOwner              : None
+    IntelWorkspaceLink        : <pyral.entity.CustomField object at 0x7fb8c9b06a10>
+    LevelofConfidence         : None
+    OnCorporateRoadmap        : None
+    PAExternalRef             : None
+    PAOwner                   : None
+    PATracking                : None
+    PlannedBacklog            : None
+    ProgramState              : None
+    RequestStatus             : None
+    RequestedReleaseQtr       : None
+    RequestedReleaseQuarter   : None
+    StrategicInvestment       : None
+    StrategicInvestmentCategory  : None
+    TFO                       : None
+    TechnicalFeatureOwner     : None
+
+
+Userstory:
+HierarchicalRequirement
+    oid                       : 36684410298
+    ref                       : hierarchicalrequirement/36684410298
+    ObjectID                  : 36684410298
+    _ref                      : https://rally1.rallydev.com/slm/webservice/v2.0/hierarchicalrequirement/36684410298
+    _CreatedAt                : Jun 1, 2015
+    _hydrated                 : True
+    Name                      : Regression Test Automation
+    Subscription              : Subscription.ref       (OID  9491874631  Name: Wind River Systems, Inc (COT))
+    Workspace                 : Workspace.ref          (OID  118972737  Name: Wind River)
+    FormattedID               : US60061
+
+    AcceptedDate              : 2015-07-17T12:46:08.096Z
+    Attachments               : []
+    Blocked                   : False
+    BlockedReason             : None
+    Blocker                   : None
+    Changesets                : []
+    Children                  : []
+    CreationDate              : 2015-06-01T13:25:04.967Z
+    DefectStatus              : NONE
+    Defects                   : []
+    Description               : - continuous regression<div>- automation of priority regression and sanity</div><div>- setup and recurring automatic execution of "regression test collections"</div><div><br /></div><div>NOTE: additional tasks need to be created according to the test case priorities. &nbsp;Everyone on the team should ideally have a test case to automated in addition to their feature User Stories</div><div><br /></div><div>AC</div><div>- tests selected from prioritized list are automated, integrated into lava, and executed in lava</div><div>- added to collections defined in Lava and executed automatically per schedule and available as part of automatic reporting</div><div><br /></div><div><br /></div><div><br /></div>
+    DirectChildrenCount       : 0
+    Discussion                : []
+    DisplayColor              : #21a2e0
+    DragAndDropRank           : O~zdYEcNN[V7h|&s8O~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    Expedite                  : False
+    Feature                   : PortfolioItem.ref           (OID  35200804947  FomattedID  F4561)
+    HasParent                 : False
+    InProgressDate            : 2015-06-01T13:25:06.607Z
+    Iteration                 : Iteration.ref               (OID  29618673848  Name WRL OVP 7 S7 15-07-15)
+    LastBuild                 : None
+    LastRun                   : None
+    LastUpdateDate            : 2015-07-17T12:46:08.124Z
+    LatestDiscussionAgeInMinutes  : None
+    Notes                     : AG to identify and assign TC to team members to spread the test case integration load
+    ObjectUUID                : 3f57ffaa-d71a-4b50-a6ed-b331eca84957
+    Owner                     : User.ref  (OID  11670027051  UserName michel.thebeau@windriver.com  DisplayName Michel Thebeau)
+    Package                   : None
+    Parent                    : None
+    PassingTestCaseCount      : 0
+    PlanEstimate              : 5.0
+    PortfolioItem             : PortfolioItem.ref           (OID  35200804947  FomattedID  F4561)
+    Predecessors              : []
+    Project                   : Project.ref                 (OID  10957142069  Name Linux OVP)
+    Ready                     : False
+    Recycled                  : False
+    Release                   : Release.ref                 (OID  36027199156  Name Linux OVP 2015)
+    ScheduleState             : Accepted
+    ScheduleStatePrefix       : A
+    Successors                : []
+    Tags                      : []
+    TaskActualTotal           : 144.0
+    TaskEstimateTotal         : 104.0
+    TaskRemainingTotal        : 0.0
+    TaskStatus                : COMPLETED
+    TestCaseCount             : 0
+    TestCaseStatus            : NONE
+    TestCases                 : []
+    VersionId                 : 69
+    __collection_ref_for_Milestones  : https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/36684410298/Milestones
+    __collection_ref_for_RevisionHistory  : https://rally1.rallydev.com/slm/webservice/v2.0/revisionhistory/36684410299
+    __collection_ref_for_Tasks  : https://rally1.rallydev.com/slm/webservice/v2.0/HierarchicalRequirement/36684410298/Tasks
+    _refObjectUUID            : 3f57ffaa-d71a-4b50-a6ed-b331eca84957
+    Approver                  : None
+    Backlog                   : False
+    CertificationKanbanState  : None
+    ClearQuestID              : None
+    Component                 : None
+    DefinitionofDone          : None
+    Demonstrable              : None
+    EducationsKanban          : None
+    EngineeringCostEstimate   : None
+    EnhancementRequest        : None
+    EstimatedFeatureComplete  : None
+    EstimatedOLSReleaseDate   : None
+    ExistingIPReusePercentage  : None
+    ExternalID                : None
+    FieldRequest              : False
+    IPType                    : None
+    InDevelopment             : None
+    InVerification            : None
+    JiraID                    : None
+    JiraLink                  : None
+    KanbanState               : None
+    MarketPotential           : None
+    MarketRank                : None
+    NewIPType                 : None
+    Obsolete                  : False
+    PAExternalRef             : None
+    PAHLD                     : False
+    PAOwner                   : None
+    PATracking                : None
+    Platform                  : None
+    ProgramState              : None
+    ProgramStatus             : None
+    RequestedRelease          : None
+    RequirementAnalysisDocument  : None
+    Test                      : None
+    TestingRequired           : None
+    WillthisbeNewIPforReuse   : None
+

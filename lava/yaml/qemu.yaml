@@ -1,0 +1,26 @@
+{
+    "actions": [
+        {
+            "command": "deploy_linaro_kernel",
+            "parameters": {
+                "kernel": "file:///home/ubuntu/Image-qemuarm64.bin",
+                "login_prompt": "qemu-aarch64-001 login:",
+                "password": "root",
+                "password_prompt": "#",
+                "rootfs": "file:///home/ubuntu/core-image-minimal-qemuarm64-20160314051239.rootfs.ext4",
+                "username": "root"
+            }
+        },
+        {
+            "command": "boot_linaro_image",
+            "parameters": {
+                "test_image_prompt": "root@localhost:~#"
+            }
+        }
+    ],
+    "job_name": "qemu-aarch64-kernel-boot",
+    "logging_level": "DEBUG",
+    "target": "qemu-aarch64-001",
+    "timeout": 180
+}
+

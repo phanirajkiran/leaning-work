@@ -58,3 +58,12 @@ fi
 
 random:
 http://stackoverflow.com/questions/2556190/random-number-from-a-range-in-a-bash-script
+
+
+L=""
+while read -r line
+do
+   L+="$line,"
+done < <(cat $testdir/test_case.conf |sed -n '/FEATURE_CFG/,/ \"/{/ \"/b;p}' | grep CONFIG)
+
+echo $L
