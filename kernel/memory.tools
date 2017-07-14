@@ -1,0 +1,48 @@
+
+首先，比较常见的内存问题有下面几种：
+• memory overrun：写内存越界
+• double free：同一块内存释放两次
+• use after free：内存释放后使用
+• wild free：释放内存的参数为非法值
+• access uninitialized memory：访问未初始化内存
+• read invalid memory：读取非法内存，本质上也属于内存越界
+• memory leak：内存泄露
+• use after return：caller访问一个指针，该指针指向callee的栈内内存
+• stack overflow：栈溢出
+
+
+mcheck
+mtrace
+mtrace的原理是记录每一对malloc-free的执行，若每一个malloc都有相应的free，则代表没有内存泄露，对于任何非malloc/free情況下所发生的内存泄露问题，mtrace并不能找出来
+memwatch 
+设置最简单的算是memwatch，和dmalloc一样，它能检测未释放的内存、同一段内存被释放多次、位址存取错误及不当使用未分配之内存区域，溢出和下溢等错误
+
+Memwatch是一个轻量级的内存问题检测工具。主要用于检测内存分配释放相关问题及内存越界访问问题。通过C preprocessor，Memwatch替换所有 ANSI C的内存分配 函数，从而记录分配行为。注意它不保证是线程安全的。
+
+splint 
+
+
+valgrind 
+==8786== Rerun with --leak-check=full to see details of leaked memory
+==8786== 
+==8786== For counts of detected and suppressed errors, rerun with: -v
+==8786== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+
+
+Address sanitizer (ASan) 
+
+早先是LLVM中的特性，后被加入GCC 4.8。在GCC 4.9后加入对ARM平台的支持。因此用时不需要第三方库，通过在编译时指定flag即可打开开关。它是 Mudflap的替代品（Mudflap从GCC 4.9开始不再支持，指定了也不做事）。ASan在编译时在访存操作中插入额外指令，同时通过Shadow memory来记录和检测内存的有效性。slowdown官方称为2x左右。
+
+使用时只要在CFLAGS中加上如下flag。注意如果链接so，只有可执行文件需要加flag。
+$ g++ -Wall -g problem.cpp -o bug -fsanitize=address -fno-omit-frame-pointer
+直接运行，检测出错误时会报出类似以下错误：
+
+Dmalloc 
+比较经典的内存检测工具，虽然N年没更新了。dmalloc通过在分配区域增加padding magic number的做法来检测非法访问，因此它能够检测到问题但不能检测出哪条指令出的错。Dmalloc只能检测越界写，但不能检测越界读。另外，Dmalloc只检测堆上用malloc系函数（而不是sbrk()或mmap()）分配的内存，而无法对栈内存和静态内存进行检测。
+
+
+memtester
+最近要测试一台机器的整体性能情况，就在google搜索一番，发现这个一个小工具，说是可以进行内存的压力测试，Memtester主要是捕获内存错误和一直处于很高或者很低的坏位, 其测试的主要项目有随机值,异或比较,减法,乘法,除法,与或运算等等. 通过给定测试内存的大小和次数, 可以对系统现有的内存进行上面项目的测试
+主要想对内存进行压力测试，以上只是试用，可以申请大内存，放入后台无限测试
+
+

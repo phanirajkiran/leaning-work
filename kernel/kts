@@ -1,0 +1,18 @@
+python do_check_kts_cfgs () {
+    KTS_CONF_FILES_DIR=d.getVar("KTS_CONF_FILES_DIR",True)
+    KBUILD_OUTPUT=d.getVar("KBUILD_OUTPUT",True)
+    missing_configs=[]
+    with open("%s/.config" %KBUILD_OUTPUT) as f1:
+        kernel_configs=f1.read()
+    if os.path.exists("%s/kts.cfg" %KTS_CONF_FILES_DIR):
+        with open("%s/kts.cfg" %KTS_CONF_FILES_DIR) as f2:
+            for line in f2.readlines():
+                line=line.strip()
+                if "CONFIG" in line and line not in kernel_configs:
+                    missing_configs.append(line)
+    if missing_configs:
+        warnings='\n'.join(missing_configs)
+        bb.warn("[KTS_CFG_CHECK]:Some required kernel configs are not enabled as expected:\n%s" %warnings)
+}
+addtask do_prepare_cfg before do_fetch
+addtask do_check_kts_cfgs before do_compile after do_kernel_configcheck

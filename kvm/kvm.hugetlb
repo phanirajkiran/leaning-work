@@ -1,2 +1,15 @@
 http://www.linux-kvm.com/content/get-performance-boost-backing-your-kvm-guest-hugetlbfs
 http://www.liangsuilong.info/?tag=kvm
+
+
+4.使用Hugepages的内存页是不会被交换出去到磁盘的，永远常驻在内存中，所以也减少了内存页交换的额外开销。使用hurgepage的内存不能被其他的进程使用，所以，一定要合理设置这个值，避免造成浪费。使用超过8G物理内存的系统，有人推荐使用HugePage。
+5.HugePage的好处：
+  大大提高了CPU cache中存放的page table所覆盖的内存大小，从而提高了TLB命中率。进程的虚拟内存地址段先连接到page tables然后再连接到物理内存。所以在访问内存时需要先访问page tables得到虚拟内存和物理内存的映射关系，然后再访问物理内存。CPU cache中有一部分TLB（Translation Lookaside Buffer）用来存放部分page table以提高这种装换的速度。因为page size变大了，所以同样大小的TLB，所覆盖的内存大小也变大了。提高了TBL命中率，也就是提高了地址转换的速度。
+  系统进程是通过虚拟地址访问内存，但是CPU必须把它转换程物理内存地址才能真正访问内存。为了提高这个转换效率，CPU会缓存最近的虚拟内存地址和物理内存地址的映射关系，并保存在一个由CPU维护的映射表中。为了尽量提高内存的访问速度，需要在映射表中保存尽量多的映射关系。
+
+https://fedoraproject.org/wiki/Features/KVM_Huge_Page_Backed_Memory
+In order to use huge pages with KVM, one must do the following:
+
+    Mount hugetlbfs to /dev/hugepages - mount -t hugetlbfs hugetlbfs /dev/hugepages
+    Reserve some memory for huge pages - sysctl vm.nr_hugepages=516
+    Pass the hugetlbfs path to qemu-kvm - qemu-kvm -mem-path /dev/hugepages 

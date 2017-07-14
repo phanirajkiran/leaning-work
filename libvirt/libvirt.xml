@@ -18,5 +18,30 @@
   </devices>
 </domain>
 
+-------------------------------------------------------------------------------------------------------------------------
 
+<domain type='kvm'>
+  <name>WindRiver-HVM</name>
+  <memory>1024000</memory>
+  <currentMemory>512000</currentMemory>
+  <vcpu>1</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc'>hvm</type>
+    <boot dev='hd' />
+    <kernel>/guest/bzImage</kernel>
+    <cmdline>console=ttyS0 root=/dev/hda rw</cmdline>
+  </os>
+  <devices>
+    <disk type='file' device='disk'>
+      <source file='/guest/rootfs.ext3' />
+      <target dev='hda' bus='ide' />
+    </disk>
+    <serial type='pty'>
+      <target port='0'/>
+    </serial>
+    <console type='pty'>
+      <target type='serial' port='0'/>
+    </console>
+  </devices>
+</domain>
 

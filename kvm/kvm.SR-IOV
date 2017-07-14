@@ -1,0 +1,70 @@
+2.2 SR-IOV
+----------
+SR-IOV enables a Single Root Function (for example, a single Ethernet port), to
+appear as multiple, separate, physical devices. A physical device with SR-IOV
+capabilities can be configured to appear in the PCI configuration space as
+multiple functions.
+
+Each Virtual Function can only be mapped to a single guest at a time, as Virtual
+Functions require real hardware resources. A virtualized guest can have multiple
+Virtual Functions. A Virtual Function appears as a network card in the same way
+as a normal network card would appear to an operating system.
+
+Make sure CONFIG_PCI_IOV and CONFIG_PCI_MMCONFIG are eanbled on host kernel,
+CONFIG_IGBVF is enabled on guest kernel.
+
+They are selected in feature/kvm template and guest x86 BSPs kernel configs
+by default respectively.
+
+a. Verify if the PCI device with SR-IOV capabilities are detected.
+
+   Run "lspci -vv" to check if the PCI ethernet device has SR-IOV capability
+
+b. Load IGB driver kernel module
+
+   modprobe igb max_vfs=<number>
+
+   Here "number" is the number of virtual functions, the valid range is 0 to 7.
+
+c. Identify the ID and other slot information that is associated with the PCI
+   device by typing the following command:
+
+   lspci -nn
+
+   Your output might include a line like the following line, which identifies the
+   network adapter:
+
+   09:00.0 Ethernet controller [0200]: Intel Corporation I350 Gigabit Network Connection [8086:1521] (rev 01)
+   09:00.1 Ethernet controller [0200]: Intel Corporation I350 Gigabit Network Connection [8086:1521] (rev 01)
+   09:00.2 Ethernet controller [0200]: Intel Corporation I350 Gigabit Network Connection [8086:1521] (rev 01)
+   09:00.3 Ethernet controller [0200]: Intel Corporation I350 Gigabit Network Connection [8086:1521] (rev 01)
+
+d. Unbind the device from the host by using the virsh command. For example:
+
+   ~# virsh nodedev-list|grep 09
+   pci_0000_09_00_0
+   pci_0000_09_00_1
+   pci_0000_09_00_2
+   pci_0000_09_00_3
+   ~#
+
+   ~# virsh nodedev-detach pci_0000_09_00_2
+   igb 0000:09:00.2: removed PHC on eth3
+   pci-stub 0000:09:00.2: claimed by stub
+   Device pci_0000_09_00_2 detached
+
+   ~#
+
+e. Add below section into libvirt xml config file <devices> section:
+
+   <hostdev mode='subsystem' type='pci' managed='yes'>
+      <source>
+        <address bus='0x09' slot='0x00' function='0x01'/>
+      </source>
+   </hostdev>
+
+Notes:
+
+   - Here the function number is virtual function assigned to the guest.
+
+f. Start the guest.

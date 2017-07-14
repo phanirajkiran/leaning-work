@@ -1,3 +1,3 @@
 [filter1]
-summary=WOH for LIN7,CGP7,SCP7,LIN8,CGP8,LINPUL8,SCP8,OVP8,GWP8,IDP3
-filter=project in ("Linux 7","Linux 8","Carrier Grade Profile 7","Carrier Grade Profile 8","Secure Linux 7","LINPUL8","OVP8","SCP8","GWP8","IDP3") AND status = Integrated AND resolution not in ("Not Applicable") ORDER BY "Integrated Date" ASC,component ASC
+summary=WOH for Valid Defects of LIN8,CGP8,LINPUL8,SCP8,OVP8,IDP3,LIN9,CGP9
+filter=project in ("Linux 8","Carrier Grade Profile 8","LINPUL8","OVP8","SCP8","IDP3","LIN9","CGP9") AND status = Resolved AND resolution in (Fixed)  ORDER BY "resolutiondate" ASC,component ASC

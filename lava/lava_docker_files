@@ -1,0 +1,53 @@
+1) https://github.com/guillon/docker-lava-server.git 
+a) to git it work
+lyang001@pek-lyang0-d1:~/lava-dockers/docker-lava-server$ git remote -v 
+origin	https://github.com/guillon/docker-lava-server.git (fetch)
+origin	https://github.com/guillon/docker-lava-server.git (push)
+
+lyang001@pek-lyang0-d1:~/lava-dockers/docker-lava-server$ git diff 
+diff --git a/Dockerfile b/Dockerfile
+index e79fa03..9180314 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -57,6 +57,9 @@ RUN wget -q http://images.validation.linaro.org/production-repo/production-repo.
+ # Install lava tools
+ RUN export DEBIAN_FRONTEND=noninteractive && \
+     apt-get update && \
++    #apt-get purge python-pyudev && \
++    apt-get install -y python-pyudev="0.21.0-1~bpo8+1" && \
++    apt-get install -y python-voluptuous="0.8.8-1~bpo8+1" && \
+     apt-get install -y lava-tool lava-dispatcher lava-coordinator
+ 
+ # Install lava server which needs the postgresql service running
+
+b) ???
+
+
+
+2)https://github.com/akbennett/lava-docker.git
+
+a) get it work
+
+lyang001@pek-lyang0-d1:~/lava-dockers/lava-docker-older$ git remote -v 
+origin	https://github.com/akbennett/lava-docker.git (fetch)
+origin	https://github.com/akbennett/lava-docker.git (push)
+lyang001@pek-lyang0-d1:~/lava-dockers/lava-docker-older$ git diff 
+diff --git a/Dockerfile b/Dockerfile
+index a2897ba..2f34821 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -34,6 +34,7 @@ RUN echo 'lava-server   lava-server/instance-name string lava-docker-instance' |
+  python-sphinx \
+  qemu-system-arm \
+  qemu-system-x86 \
++ debootstrap="1.0.89~bpo8+1" \
+  && a2enmod proxy proxy_http \
+  && a2dissite 000-default \
+  && a2ensite lava-server \
+
+
+3)https://github.com/kernelci/lava-docker.git "Nothing changed"
+lyang001@pek-lyang0-d1:~/lava-dockers/lava-docker$ git remote -v 
+origin	https://github.com/kernelci/lava-docker.git (fetch)
+origin	https://github.com/kernelci/lava-docker.git (push)
+

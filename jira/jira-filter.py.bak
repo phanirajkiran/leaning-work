@@ -167,16 +167,30 @@ def jira_test(jira,summary,jql):
     import time
     issue_dict = defaultdict(list)
     ids=[]
-    total = 0 
+    #total = 0 
+    global total
     prioritys=[]
     developers=[]
     componets=[]
     reporters=[]
+    today=datetime.now().strftime('%Y-%m-%d')
     for i in jira.search_issues(jql,maxResults=100000):
         #print i.key
         issue = jira.issue(i.key)
         create_time = time.strptime(issue.fields.created[:19], "%Y-%m-%dT%H:%M:%S")
         create_time = time.strftime("%Y/%m/%d", create_time)
+	d0=date(int(today.split('-')[0]),int(today.split('-')[1]),int(today.split('-')[2]))
+	#integrate_time=getattr(issue.fields,'customfield_12407',None)
+	integrate_time=getattr(issue.fields,'resolutiondate',None)
+	if integrate_time:
+            integrate_time = time.strptime(integrate_time[:19], "%Y-%m-%dT%H:%M:%S")
+            integrate_time = time.strftime("%Y/%m/%d", integrate_time)
+	    integrate_time = datetime.strptime(integrate_time, "%Y/%m/%d")
+	    d1=date(int(integrate_time.strftime("%Y")),int(integrate_time.strftime("%m")),int(integrate_time.strftime("%d")))
+	    woh=(d0-d1).days	
+	else:
+	    woh=None
+	
         ids.append(i.key)
         issue_dict[i.key].append(i.key)
         issue_dict[i.key].append(i.key)
@@ -199,6 +213,7 @@ def jira_test(jira,summary,jql):
         issue_dict[i.key].append(create_time)
         issue_dict[i.key].append(getattr(issue.fields,'labels',None))
         issue_dict[i.key].append(getattr(issue.fields,'customfield_11002',None)) #11
+        issue_dict[i.key].append(woh) #12
         prioritys.append(issue.fields.priority.name)
         developers.append(name)
         componets.append(componet)
@@ -247,18 +262,23 @@ u {
         #print issue_dict[i][3]
         if "New_Incomplete" == "%s" %issue_dict[i][3]:
             new_incomplete.append(i)
-    L=draw_table0(L,"Blocking defects : %s" %len(blocker),blocker,issue_dict,"labels",10)
-    L=draw_table0(L,"New_Incomplete defects : %s" %len(new_incomplete),new_incomplete,issue_dict,"Status",3)
+    if "1" not in not_show:
+        L=draw_table0(L,"Blocking defects : %s" %len(blocker),blocker,issue_dict,"labels",10)
+    if "2" not in not_show:
+        L=draw_table0(L,"New_Incomplete defects : %s" %len(new_incomplete),new_incomplete,issue_dict,"Status",3)
     if len(comps) !=1:
         L=draw_table1(L,"By Components(sorted)",comps,True) 
     L=draw_table1(L,"By Priority(sorted)",pris,False) 
-    L=draw_table1(L,"By Developer(sorted)",devs,True) 
-    L=draw_table1(L,"By Reporters (sorted)",reps,True) 
+    if "3" not in not_show:
+        L=draw_table1(L,"By Developer(sorted)",devs,True) 
+    if "4" not in not_show:
+        L=draw_table1(L,"By Reporters (sorted)",reps,True) 
     L += '''</table>'''
-    L += "<p class='y'><strong>Details(sorted)</strong></p>"
-    L += '''<table style="width:75%">'''
-    #for i in jira.search_issues('filter=%s' %filter.id):
-    L +='''
+    if "5" not in not_show:
+        L += "<p class='y'><strong>Details(sorted)</strong></p>"
+        L += '''<table style="width:75%">'''
+        #for i in jira.search_issues('filter=%s' %filter.id):
+        L +='''
   <tr>
     <td width="7%%"><strong>ID</strong></td>
     <td width="5%%"><strong>Priority</strong></td>          
@@ -270,12 +290,16 @@ u {
     <td width="10%%"><strong>Tester</strong></td>
     <td width="8%%"><strong>Create date</strong></td>
     <td width="8%%"><strong>Fix version</strong></td>
-  </tr>
 '''
-    for j in ids:
-        d=issue_dict[j]
-    #for k,d in issue_dict.items():
-        L += '''
+        if "WOH" in summary:
+             L +='''
+     <td width="8%%"><strong>WOH</strong></td>
+'''
+	L +="</tr>"
+        for j in ids:
+            d=issue_dict[j]
+        #for k,d in issue_dict.items():
+            L += '''
   <tr>
     <td width="7%%"><a href='https://jira.wrs.com:8443/browse/%s'>%s</a></td>
     <td width="5%%">%s</td>          
@@ -284,16 +308,28 @@ u {
     <td width="6%%">%s</td>
     <td width="10%%">%s</td>
     <td width="10%%">%s</td>
-    <td width="10%%">%s</td>
+''' %(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7])
+	    if "WOH" in summary:
+                if d[12] >= 7:
+                    L+='''    <td width="8%%"><font color="red"><b>%s</b></font></td>''' %d[8]
+                else: 
+                    L+='''    <td width="8%%">%s</td>''' %d[8]
+	    else:
+                L+='''    <td width="8%%">%s</td>''' %d[8]
+	    L +='''
     <td width="8%%">%s</td>
     <td width="8%%">%s</td>
-  </tr>
-'''%(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7],d[8],d[9],d[11])
+'''%(d[9],d[11])
+            if d[12] >= 7 and "WOH" in summary:
+                L+='''    <td width="8%%"><font color="red"><b>%s</b></font></td>''' %d[12]
+            elif "WOH" in summary: 
+                L+='''    <td width="8%%">%s</td>''' %d[12]
+            L+="   </tr>"
 #'''% (i.key,i.key,issue.fields.priority,issue.fields.components[0],issue.fields.summary,issue.fields.assignee,issue.fields.customfield_10012,create_time)
 
         #for j in dir(issue.fields):
         #print issue.fields.labels
-    L += '''</table>'''
+        L+= '''</table>'''
     #filter.delete()
     #issue = jira.issue('SCP7-214')
    # for j in dir(issue.fields):
@@ -307,14 +343,18 @@ parser = OptionParser()
 parser.add_option("-t", action="store",type="string", dest="to",help="email whom")
 parser.add_option("-c", action="store",type="string", dest="configfile",help="config file")
 parser.add_option("-s", action="store",type="string", dest="subject",help="email subject")
-parser.add_option("-n", action="store",type="string", dest="not_show",help="not show some items -n 1: not show blocking,-n 2 not show developer, -n 3 not show tester")
+parser.add_option("-n", action="store",type="string", dest="not_show",help="-n 1,not show developer,testers,blocking, -n 2,not show details, -n 12,not show both")
 (options, args) = parser.parse_args()
 to = options.to
 configfile = options.configfile
 subject = options.subject
+not_show = options.not_show
+if not_show is None:
+   not_show= "0"
 receiver = [x+'@windriver.com' for x in to.split(" ")]
     
 L = ""
+total=0
 jira=con_jira()
 n=0
 config_dic,sections=get_details(configfile)
@@ -329,5 +369,5 @@ for k in sections:
        jira_test(jira,"%s" %(config_dic[k]['summary']),config_dic[k]['filter'])
    else:
        jira_test(jira,"%s. %s" %(n,config_dic[k]['summary']),config_dic[k]['filter'])
-send_email(L.encode('utf-8'),receiver)
-
+if total > 0:
+    send_email(L.encode('utf-8'),receiver)

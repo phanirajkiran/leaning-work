@@ -1,0 +1,3 @@
+There can be multiple Docker containers in a single
+machine and containers are completely isolated from one another as well as from
+the host machine.

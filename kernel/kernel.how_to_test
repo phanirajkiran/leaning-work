@@ -1,0 +1,17 @@
+1)Ingo Molnar is running the following workload: 1. build new kernel with random set of config options 2. boot into it 3. goto 1
+2) Run with make kselftest. Must be running built kernel already. See also: Documentation/kselftest.txt , https://kselftest.wiki.kernel.org/
+3)
+
+
+There also are:
+
+MMTests which is collection of benchmarks and scripts to analyze the results
+
+https://github.com/gormanm/mmtests
+
+Trinity which is Linux system call fuzz tester
+
+http://codemonkey.org.uk/projects/trinity/
+
+Also the LTP pages at the sourceforge are quite outdated and the project has moved to GitHub https://github.com/linux-test-project/ltp
+

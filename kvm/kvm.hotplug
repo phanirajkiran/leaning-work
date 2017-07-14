@@ -1,0 +1,277 @@
+
+http://www.linux-kvm.org/page/Hotadd_pci_devices
+
+You can now issue commands. For example, let's add a new device
+
+(QEMU) device_add driver=e1000 id=net1
+
+Use QEMU monitor to hot add device
+
+(qemu) drive_add 0 file=/storage/10G.img,format=qcow2,id=drive-virtio-disk1,if=none 
+(qemu) device_add virtio-blk-pci,scsi=on,drive=drive-virtio-disk1
+
+    check attached PCI devices
+
+(qemu) info pci
+
+
+http://wiki.qemu.org/Features/CPUHotplug
+
+
+. Add CPUs issuing cpu-add command in qmp-shell command prompt
+
+cpu-add id=1
+
+4. Optionally online newly added CPU inside guest
+
+Linux kernel doesn't online hot-added CPUs automatically. Once CPU is hot-added it should be onlined using an appropriate udev script or manually by issuing a following command:
+
+echo 1 > /sys/devices/system/cpu/cpu1/online
+
+
+https://wiki.ubuntu.com/QemuDiskHotplug
+
+Hotplug USB Disk
+
+Ensure you start QEMU with a usb controller, for example, the usb-ehci controller.
+
+% qemu-system-x86_64 -S -nographic -monitor stdio -device usb-ehci 
+QEMU 1.5.0 monitor - type 'help' for more information
+(qemu) info pci
+  Bus  0, device   0, function 0:
+    Host bridge: PCI device 8086:1237
+      id ""
+  Bus  0, device   1, function 0:
+    ISA bridge: PCI device 8086:7000
+      id ""
+  Bus  0, device   1, function 1:
+    IDE controller: PCI device 8086:7010
+      BAR4: I/O at 0xffffffffffffffff [0x000e].
+      id ""
+  Bus  0, device   1, function 3:
+    Bridge: PCI device 8086:7113
+      IRQ 0.
+      id ""
+  Bus  0, device   2, function 0:
+    VGA controller: PCI device 1013:00b8
+      BAR0: 32 bit prefetchable memory at 0xffffffffffffffff [0x01fffffe].
+      BAR1: 32 bit memory at 0xffffffffffffffff [0x00000ffe].
+      BAR6: 32 bit memory at 0xffffffffffffffff [0x0000fffe].
+      id ""
+  Bus  0, device   3, function 0:
+    Ethernet controller: PCI device 8086:100e
+      IRQ 0.
+      BAR0: 32 bit memory at 0xffffffffffffffff [0x0001fffe].
+      BAR1: I/O at 0xffffffffffffffff [0x003e].
+      BAR6: 32 bit memory at 0xffffffffffffffff [0x0001fffe].
+      id ""
+  Bus  0, device   4, function 0:
+    USB controller: PCI device 8086:24cd
+      IRQ 0.
+      BAR0: 32 bit memory at 0xffffffffffffffff [0x00000ffe].
+      id ""
+
+Now, add the drive and device.
+
+(qemu) drive_add 0 if=none,id=usbdisk1,file=/tmp/test.img 
+OK
+
+(qemu) device_add usb-storage,id=usbdisk1,drive=usbdisk1 
+(qemu) info usb
+  Device 0.0, Port 1, Speed 480 Mb/s, Product QEMU USB MSD
+
+others 
+http://blog.csdn.net/halcyonbaby/article/details/18562405
+
+
+from windriver
+====================================================
+Contents
+========
+	Description
+	Guest Kernel Requirements
+	Usage
+	Example Qemu Script
+	CPU Hotplug Example
+	Profiling	
+		Test 1: Bring a vCPU down (with a task running on it)
+		Test 2: Bring a vCPU up
+
+Description
+===========
+CPUs can be hotplugged into a running qemu session to increase the
+compute power of the session.  Hotplugged CPUs are virtual CPUs or
+vCPUs.  From the host's perspective, every hotplugged CPU will
+correspond to a thread/process ID.  All threads can be affined to
+a particular CPU or CPU mask with taskset, as described below.
+
+Host CPUs can be reserved at boot time so that a range of CPUs will
+not be "tasked" by the kernel scheduler, e.g. on a 16 core machine,
+cores 1-10 are reserved with the boot parameter:
+
+	 isolcpus=1-10
+
+If isolcpus is used, any hotplugged CPU will be affined to
+the remaining core mask, e.g. 0xf01 or cores 0,11-15.
+
+Although vCPUs can be hotplugged in, there is currently no way to
+hotplug out a CPU.  But, the CPU can be put into "offline" state by
+the guest.
+
+Guest Kernel Requirements
+=========================
+1. qemu version > 1.7 with at least the following patch, which provides
+the "cpu-add" feature:
+	commit abf233294bc8a4d2c7d5f428f1408d7bdd0c02e0
+	Author: Jason J. Herne <jjherne@us.ibm.com>
+	Date:   Wed Dec 11 13:24:14 2013 -0500
+
+	    qemu-monitor: HMP cpu-add wrapper
+
+	    Add HMP cpu-add wrapper to allow cpu hot plugging via monitor.
+
+This can be easily verified by checking for the command "cpu-add" in the
+qemu console.
+
+2. Guest kernel must support CPU hotplug:
+	CONFIG_HOTPLUG=y
+	CONFIG_HOTPLUG_CPU=y
+	CONFIG_ACPI_HOTPLUG_CPU=y
+
+Note: these kconfigs are on by default in WRL5/6.
+
+Usage
+=====
+There are two ways to hotplug a CPU:
+1. From the qemu console:
+	-CTRL-A
+	(qemu) cpu-add <id>
+
+2. Via Qemu Machine Protocol (QMP)
+This document does not cover QMP.
+
+
+Example Qemu Script
+===================
+$QEMU -nographic -k en-us -m 4096\
+        -enable-kvm \
+        -kernel $KERNEL \
+        -append 'root=/dev/vda ro console=ttyS0 selinux=0 enforcing=0' \
+        -drive file=${ROOTFS},if=virtio \
+        -smp 2[,maxcpus=4]
+
+CPU Hotplug Example
+===================
+CPUs should be added with consecutive IDs, e.g. 0..max CPUS. Qemu does
+not check for this. It is possible to add CPUs in any order, but that
+will likely cause problems for migration.
+
+For example, if qemu is booted with "-smp 2", then cores 0 and 1 will
+be present on the guest.  If maxcpus=4 is specified, then the maximum
+CPU ID allowed will be "3".  In the guest, verify that CPUs 0 and 1
+are present:
+	$ ls  /sys/devices/system/cpu/
+	cpu0  cpufreq  kernel_max  offline  possible  present  release
+	cpu1  cpuidle  modalias    online   power     probe    uevent
+
+Get into the qemu console, e.g. CTRL-A C.  Note the prompt change
+"(qemu)".  Add CPU id "2":
+	(qemu) cpu-add 2
+	(qemu) CPU 2 got hotplugged
+Exit the qemu console, CTRL-A C.
+
+Note: the CPU was added above, but the CPU is offline.  Enable the
+new CPU in the guest:
+	$ echo 1 >  /sys/devices/system/cpu/cpu2/online
+
+Now, get the thread IDs for all the vCPUs in the guest from the qemu
+console: CTRL-A C
+	(qemu) info cpus
+	* CPU #0: pc=0xffffffff81009de3 (halted) thread_id=2783
+	  CPU #1: pc=0xffffffff81009de3 (halted) thread_id=2786
+	  CPU #2: pc=0xffffffff81009de3 (halted) thread_id=2801
+
+There is a thread for every vCPU.  On the host, the above thread_ids
+are visible and can be affined to a particular CPU.  In this example,
+cores 1-10 were reserved at boot time via isolcpus.  So, on the host,
+set the affinity for vCPUS 0-2 to host cores 1-3:
+
+CPU #0
+	Query the affinity:
+	# taskset -c -p 2781
+	pid 2781's current affinity list: 0,11-15
+
+	Set the affinity:
+	# taskset -p -c 1 2781
+
+	Verify the affinity:
+	# taskset -c -p 2781
+	pid 2781's current affinity list: 1
+
+CPU #1
+	# taskset -c -p 2 2786
+
+CPU #2
+	# taskset -c -p 3 2801
+
+Profiling
+=========
+Calculate how much time it takes to:
+	1.  Bring a vCPU down (with a task running on it)
+	2.  Bring a vCPU up
+	3.  Migrate a task from the vCPU going down
+
+Edit the kernel code to add "trace_printk" lines around the following
+functions:
+	 _cpu_up
+	_cpu_down
+	migrate_me
+Tracing data is measured in micro seconds (us).  For an example of the
+trace_printk, see the kernel source tree:
+	<build path>/build/linux-windriver/linux/tools/testing/trace_printk_test
+
+All testing is done on the guest.
+
+Test 1: Bring a vCPU down (with a task running on it)
+====================================================
+Run cyclictest on core 1 and affine it to core 1:
+	$ taskset -c 1 cyclictest -t 10 -q  > /dev/null &
+
+Run the following:
+	echo 1 > /sys/kernel/debug/tracing/tracing_on
+	echo 0 > /sys/devices/system/cpu/cpu1/online
+	sleep 1
+	echo 0 > /sys/kernel/debug/tracing/tracing_on
+	
+Get the data:
+	$ cat  /sys/kernel/debug/tracing/trace
+		.......
+              sh-1667  [001] .......   278.262344: _cpu_down: _cpu_down start
+   sync_unplug/1-1668  [001] .......   278.263263: migrate_me:  migrate_me start
+   sync_unplug/1-1668  [000] .......   278.263279: migrate_me:  migrate_me stop (full)
+              sh-1667  [000] .......   278.283613: _cpu_down:  _cpu_down end
+		.......
+
+16 us to migrate thread to other cpu
+21,269 us to take a loaded cpu offline
+
+Test 2: Bring a vCPU up
+=======================
+Empty the trace buffer:
+	$ echo > /sys/kernel/debug/tracing/trace
+
+Run the following:
+	echo 1 > /sys/kernel/debug/tracing/tracing_on
+	echo 1 > /sys/devices/system/cpu/cpu1/online
+	sleep 1
+	echo 0 > /sys/kernel/debug/tracing/tracing_on
+	
+Get the data:
+	$ cat  /sys/kernel/debug/tracing/trace
+
+		..........
+              sh-1028  [000] .......   276.755237: _cpu_up: <6>PB: _cpu_up start
+              sh-1028  [000] .......   276.805245: _cpu_up: <6>PB: _cpu_up end
+		..........
+
+50,008us to bring a cpu online.

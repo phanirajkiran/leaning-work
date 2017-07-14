@@ -1,0 +1,2 @@
+http://www.linux-kvm.org/page/Tuning_KVM
+ qemu -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+x2apic

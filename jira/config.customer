@@ -1,0 +1,3 @@
+[filter1]
+summary=NEW  Customer Defects over the past 24 hours  
+filter=project in ("Linux 6","Linux 7","Linux 8","Carrier Grade Profile 7","Carrier Grade Profile 8","Secure Linux 7","LINPUL8","OVP8","SCP8","GWP8","IDP3") AND reporter not in (membersOf(CDC-ENG-Linux-core-test), membersOf(IDP-ENG-Test)) AND summary !~ Security AND summary !~ CLONE AND "Salesforce Case Reference" != "" AND created >= -24h ORDER BY created DESC

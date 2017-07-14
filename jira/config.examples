@@ -1,0 +1,3 @@
+[filter1]
+summary=NEW  customer defect  
+filter=reporter = xdong AND createdDate >= -50h ORDER BY createdDate  DESC

@@ -1,0 +1,545 @@
+{
+    "key": "IDP3-1681", 
+    "fields": {
+        "customfield_10701": null, 
+        "customfield_10700": null, 
+        "customfield_10702": null, 
+        "customfield_10707": null, 
+        "labels": [], 
+        "assignee": {
+            "displayName": "Tao, Yue", 
+            "name": "ytao", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=ytao", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Yue.Tao@windriver.com", 
+            "key": "ytao", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "lastViewed": null, 
+        "customfield_10015": null, 
+        "customfield_11302": null, 
+        "customfield_10010": null, 
+        "customfield_11301": null, 
+        "votes": {
+            "hasVoted": false, 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/IDP3-1681/votes", 
+            "votes": 0
+        }, 
+        "customfield_11001": null, 
+        "customfield_11000": [
+            {
+                "archived": false, 
+                "name": "Xt 3.1.0.15", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/version/25195", 
+                "releaseDate": "2016-05-19", 
+                "released": true, 
+                "id": "25195", 
+                "description": "RCPL"
+            }
+        ], 
+        "customfield_11002": {
+            "archived": false, 
+            "name": "XT 3.1.0.19", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/version/26013", 
+            "releaseDate": "2016-09-19", 
+            "released": true, 
+            "id": "26013", 
+            "description": "RCPL"
+        }, 
+        "customfield_12400": null, 
+        "timespent": null, 
+        "customfield_12407": "2016-10-20T00:48:25.000-0700", 
+        "duedate": null, 
+        "updated": "2016-10-29T20:14:41.000-0700", 
+        "worklog": {
+            "worklogs": [], 
+            "total": 0, 
+            "startAt": 0, 
+            "maxResults": 20
+        }, 
+        "customfield_10800": null, 
+        "customfield_10801": null, 
+        "customfield_10008": null, 
+        "customfield_10006": null, 
+        "customfield_10007": null, 
+        "customfield_11700": null, 
+        "customfield_10005": null, 
+        "aggregatetimeoriginalestimate": null, 
+        "customfield_12800": null, 
+        "customfield_12100": null, 
+        "summary": "Install stopping in \"can't git wr-hdc-example\"", 
+        "timetracking": {}, 
+        "issuetype": {
+            "name": "Bug", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+            "iconUrl": "https://jira.wrs.com:8443/secure/viewavatar?size=xsmall&avatarId=14303&avatarType=issuetype", 
+            "subtask": false, 
+            "avatarId": 14303, 
+            "id": "1", 
+            "description": "A problem which impairs or prevents the functions of the product."
+        }, 
+        "timeestimate": null, 
+        "creator": {
+            "displayName": "Chen, Jacky", 
+            "name": "jchen3", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jchen3", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Jacky.Chen@windriver.com", 
+            "key": "jchen3", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "customfield_10520": null, 
+        "customfield_12801": null, 
+        "customfield_11202": null, 
+        "customfield_11201": null, 
+        "customfield_11404": null, 
+        "customfield_12500": null, 
+        "progress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_10012": null, 
+        "aggregateprogress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_12200": null, 
+        "reporter": {
+            "displayName": "Chen, Jacky", 
+            "name": "jchen3", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jchen3", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Jacky.Chen@windriver.com", 
+            "key": "jchen3", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "customfield_10103": null, 
+        "environment": null, 
+        "created": "2016-09-16T05:47:46.000-0700", 
+        "aggregatetimespent": null, 
+        "customfield_10901": null, 
+        "customfield_10900": null, 
+        "comment": {
+            "total": 4, 
+            "startAt": 0, 
+            "comments": [
+                {
+                    "body": "We need more information. Did you register for IDP XT under development or the latest released version? If under development, there was some RCPL content missing from the last hand-off Yue Tao did (assigning to him)", 
+                    "updateAuthor": {
+                        "displayName": "Ghorbani, Ariyan", 
+                        "name": "aghorban", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=aghorban", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ariyan.Ghorbani@windriver.com", 
+                        "key": "aghorban", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "created": "2016-09-16T12:34:21.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/712565/comment/393284", 
+                    "author": {
+                        "displayName": "Ghorbani, Ariyan", 
+                        "name": "aghorban", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=aghorban", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ariyan.Ghorbani@windriver.com", 
+                        "key": "aghorban", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "updated": "2016-09-16T12:34:21.000-0700", 
+                    "id": "393284"
+                }, 
+                {
+                    "body": "I registered for latest released version.", 
+                    "updateAuthor": {
+                        "displayName": "Chen, Jacky", 
+                        "name": "jchen3", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jchen3", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Jacky.Chen@windriver.com", 
+                        "key": "jchen3", 
+                        "active": true, 
+                        "timeZone": "Asia/Shanghai"
+                    }, 
+                    "created": "2016-09-16T16:37:04.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/712565/comment/393352", 
+                    "author": {
+                        "displayName": "Chen, Jacky", 
+                        "name": "jchen3", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jchen3", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Jacky.Chen@windriver.com", 
+                        "key": "jchen3", 
+                        "active": true, 
+                        "timeZone": "Asia/Shanghai"
+                    }, 
+                    "updated": "2016-09-16T16:37:04.000-0700", 
+                    "id": "393352"
+                }, 
+                {
+                    "body": "I can't see the IDP add-on in the RCPL19.\r\nIs it released?\r\n", 
+                    "updateAuthor": {
+                        "displayName": "Chen, Jacky", 
+                        "name": "jchen3", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jchen3", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Jacky.Chen@windriver.com", 
+                        "key": "jchen3", 
+                        "active": true, 
+                        "timeZone": "Asia/Shanghai"
+                    }, 
+                    "created": "2016-09-18T05:25:53.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/712565/comment/394163", 
+                    "author": {
+                        "displayName": "Chen, Jacky", 
+                        "name": "jchen3", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=jchen3", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Jacky.Chen@windriver.com", 
+                        "key": "jchen3", 
+                        "active": true, 
+                        "timeZone": "Asia/Shanghai"
+                    }, 
+                    "updated": "2016-09-18T05:25:53.000-0700", 
+                    "id": "394163"
+                }, 
+                {
+                    "body": "It will be release in 2 days.", 
+                    "updateAuthor": {
+                        "displayName": "Tao, Yue", 
+                        "name": "ytao", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=ytao", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Yue.Tao@windriver.com", 
+                        "key": "ytao", 
+                        "active": true, 
+                        "timeZone": "Asia/Shanghai"
+                    }, 
+                    "created": "2016-09-18T17:37:15.000-0700", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/712565/comment/394167", 
+                    "author": {
+                        "displayName": "Tao, Yue", 
+                        "name": "ytao", 
+                        "self": "https://jira.wrs.com:8443/rest/api/2/user?username=ytao", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Yue.Tao@windriver.com", 
+                        "key": "ytao", 
+                        "active": true, 
+                        "timeZone": "Asia/Shanghai"
+                    }, 
+                    "updated": "2016-09-18T17:37:15.000-0700", 
+                    "id": "394167"
+                }
+            ], 
+            "maxResults": 4
+        }, 
+        "aggregatetimeestimate": null, 
+        "customfield_10501": [
+            {
+                "displayName": "Easter, Mario", 
+                "name": "MEaster", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/user?username=MEaster", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                    "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                    "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                    "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                }, 
+                "emailAddress": "Mario.Easter@windriver.com", 
+                "key": "measter", 
+                "active": true, 
+                "timeZone": "America/Los_Angeles"
+            }, 
+            {
+                "displayName": "Ghorbani, Ariyan", 
+                "name": "aghorban", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/user?username=aghorban", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                    "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                    "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                    "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                }, 
+                "emailAddress": "Ariyan.Ghorbani@windriver.com", 
+                "key": "aghorban", 
+                "active": true, 
+                "timeZone": "America/Los_Angeles"
+            }, 
+            {
+                "displayName": "Gratz, Rupert", 
+                "name": "rgratz", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/user?username=rgratz", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                    "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                    "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                    "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+                }, 
+                "emailAddress": "Rupert.Gratz@windriver.com", 
+                "key": "rgratz", 
+                "active": true, 
+                "timeZone": "America/Los_Angeles"
+            }, 
+            {
+                "displayName": "Krueger, Michael", 
+                "name": "michaelk", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/user?username=michaelk", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&ownerId=michaelk&avatarId=15207", 
+                    "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&ownerId=michaelk&avatarId=15207", 
+                    "48x48": "https://jira.wrs.com:8443/secure/useravatar?ownerId=michaelk&avatarId=15207", 
+                    "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&ownerId=michaelk&avatarId=15207"
+                }, 
+                "emailAddress": "michael.krueger@windriver.com", 
+                "key": "michaelk", 
+                "active": true, 
+                "timeZone": "America/Los_Angeles"
+            }, 
+            {
+                "displayName": "Patel, Rupesh", 
+                "name": "rpatel", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/user?username=rpatel", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&ownerId=rpatel&avatarId=12700", 
+                    "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&ownerId=rpatel&avatarId=12700", 
+                    "48x48": "https://jira.wrs.com:8443/secure/useravatar?ownerId=rpatel&avatarId=12700", 
+                    "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&ownerId=rpatel&avatarId=12700"
+                }, 
+                "emailAddress": "rupesh.patel@windriver.com", 
+                "key": "rpatel", 
+                "active": true, 
+                "timeZone": "America/Los_Angeles"
+            }
+        ], 
+        "customfield_10508": null, 
+        "customfield_11904": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11902", 
+            "id": "11902", 
+            "value": "No"
+        }, 
+        "customfield_10004": null, 
+        "priority": {
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/critical.svg", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/priority/2", 
+            "name": "P2", 
+            "id": "2"
+        }, 
+        "customfield_11905": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11904", 
+            "id": "11904", 
+            "value": "No"
+        }, 
+        "customfield_11906": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11906", 
+            "id": "11906", 
+            "value": "No"
+        }, 
+        "customfield_11900": null, 
+        "customfield_11901": null, 
+        "customfield_11902": null, 
+        "customfield_11908": null, 
+        "customfield_11500": null, 
+        "customfield_10517": null, 
+        "watches": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/IDP3-1681/watchers", 
+            "watchCount": 3, 
+            "isWatching": false
+        }, 
+        "customfield_10512": null, 
+        "customfield_10518": null, 
+        "customfield_10519": null, 
+        "resolutiondate": "2016-09-18T00:14:14.000-0700", 
+        "project": {
+            "name": "IDP 3.x", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/project/14701", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/projectavatar?size=small&pid=14701&avatarId=13900", 
+                "32x32": "https://jira.wrs.com:8443/secure/projectavatar?size=medium&pid=14701&avatarId=13900", 
+                "48x48": "https://jira.wrs.com:8443/secure/projectavatar?pid=14701&avatarId=13900", 
+                "16x16": "https://jira.wrs.com:8443/secure/projectavatar?size=xsmall&pid=14701&avatarId=13900"
+            }, 
+            "projectCategory": {
+                "self": "https://jira.wrs.com:8443/rest/api/2/projectCategory/10300", 
+                "id": "10300", 
+                "name": "IDP", 
+                "description": "Intelligent Device Platform"
+            }, 
+            "key": "IDP3", 
+            "id": "14701"
+        }, 
+        "customfield_10804": null, 
+        "customfield_13002": null, 
+        "customfield_13001": null, 
+        "customfield_13000": "0|i26em7:", 
+        "workratio": -1, 
+        "customfield_10608": null, 
+        "issuelinks": [
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/issueLink/413762", 
+                "inwardIssue": {
+                    "fields": {
+                        "status": {
+                            "statusCategory": {
+                                "name": "Done", 
+                                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/3", 
+                                "id": 3, 
+                                "key": "done", 
+                                "colorName": "green"
+                            }, 
+                            "description": "Issue has been solved", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/status/5", 
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/resolved.png", 
+                            "id": "5", 
+                            "name": "Resolved"
+                        }, 
+                        "priority": {
+                            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/critical.svg", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/priority/2", 
+                            "name": "P2", 
+                            "id": "2"
+                        }, 
+                        "issuetype": {
+                            "name": "Bug", 
+                            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+                            "iconUrl": "https://jira.wrs.com:8443/secure/viewavatar?size=xsmall&avatarId=14303&avatarType=issuetype", 
+                            "subtask": false, 
+                            "avatarId": 14303, 
+                            "id": "1", 
+                            "description": "A problem which impairs or prevents the functions of the product."
+                        }, 
+                        "summary": "Installl stopping can't git idigi-connector layer"
+                    }, 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issue/712557", 
+                    "id": "712557", 
+                    "key": "IDP3-1680"
+                }, 
+                "type": {
+                    "outward": "relates to", 
+                    "inward": "relates to", 
+                    "self": "https://jira.wrs.com:8443/rest/api/2/issueLinkType/10003", 
+                    "id": "10003", 
+                    "name": "Relates"
+                }, 
+                "id": "413762"
+            }
+        ], 
+        "customfield_10600": null, 
+        "customfield_10601": null, 
+        "customfield_10602": null, 
+        "customfield_10603": null, 
+        "customfield_10604": null, 
+        "customfield_10605": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/10438", 
+            "id": "10438", 
+            "value": "Severe"
+        }, 
+        "customfield_10606": null, 
+        "customfield_10607": null, 
+        "subtasks": [], 
+        "customfield_11100": null, 
+        "customfield_10802": null, 
+        "attachment": [], 
+        "customfield_12703": null, 
+        "customfield_12702": null, 
+        "status": {
+            "statusCategory": {
+                "name": "Done", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/3", 
+                "id": 3, 
+                "key": "done", 
+                "colorName": "green"
+            }, 
+            "description": "Issue has been solved", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/status/5", 
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/resolved.png", 
+            "id": "5", 
+            "name": "Resolved"
+        }, 
+        "description": "When choose RCPL 15 for IDP XT addon - flex and pro.\r\nThe installation will stop in can't git wr-hdc-example layer.\r\n\r\n", 
+        "customfield_10011": null, 
+        "timeoriginalestimate": null, 
+        "customfield_10200": null, 
+        "customfield_10201": "Sep 16 14:25:23: + cd /home/jacky/WindRiver.idpxt3.1/wrlinux-7/addons/wr-idp/layers/wr-hdc-examples/objects/pack\r\nSep 16 14:25:23: + ls\r\nSep 16 14:25:23: + grep idx$\r\nSep 16 14:25:23: Reinitialized existing Git repository in /home/jacky/WindRiver.idpxt3.1/wrlinux-7/addons/wr-idp/layers/wr-hdc-examples/\r\nSep 16 14:25:24: fatal: Couldn't find remote ref refs/heads/LB21_7.0_RCPL0015\r\nSep 16 14:25:24: Unexpected end of command stream\r\nSep 16 14:25:24: ERROR: Failed with clone from https://windshare.windriver.com/ondemand/remote.php/gitsmart/WRLinux-7-Addons-Intelligent-Device-Platform-XT//addon.wr-idp.wr-hdc-examples\r\nSep 16 14:25:24: ###WRInstaller# ERROR : other : Failed with clone from https://windshare.windriver.com/ondemand/remote.php/gitsmart/WRLinux-7-Addons-Intelligent-Device-Platform-XT//addon.wr-idp.wr-hdc-examples #WRInstaller###\r\n", 
+        "customfield_13300": null, 
+        "customfield_13301": null, 
+        "customfield_13302": null, 
+        "customfield_13303": null, 
+        "customfield_13304": null, 
+        "customfield_13305": null, 
+        "components": [
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/component/21410", 
+                "id": "21410", 
+                "name": "Release & Delivery"
+            }
+        ], 
+        "resolution": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/resolution/1", 
+            "id": "1", 
+            "name": "Fixed", 
+            "description": "A fix for this issue is checked into the tree and tested."
+        }
+    }, 
+    "self": "https://jira.wrs.com:8443/rest/api/2/issue/712565", 
+    "id": "712565", 
+    "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog,versionedRepresentations"
+}

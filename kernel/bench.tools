@@ -1,0 +1,54 @@
+IO:
+IOPS (Input/Output Operations Per Second)，即每秒进行读写（I/O）操作的次数
+blktrace
+
+
+1)
+fio :  http://blog.csdn.net/youngstonep/article/details/52315192
+http://blog.csdn.net/wyzxg/article/details/7454072
+同步和异步。 同步的IO一次只能发出一个IO请求，等待内核完成才返回，这样对于单个线程iodepth总是小于1，但是可以通过多个线程并发执行来解决，通常我们会用16-32个线程同时工作把iodepth塞满。 异步的话就是用类似libaio这样的Linux native aio一次提交一批，然后等待一批的完成，减少交互的次数，会更有效率。
+
+   fio，又称为Flexible IO Tester
+----sync,mmap, libaio, posixaio, SG v3, splice, null, network, syslet,guasi, solarisaio
+
+随机写：
+
+fio -filename=/dev/sdb1 -direct=1 -iodepth1 -thread -rw=randwrite -ioengine=psync -bs=16k -size=200G -numjobs=30-runtime=1000 -group_reporting -name=mytest
+
+ 
+
+顺序写：
+
+fio -filename=/dev/sdb1 -direct=1 -iodepth1 -thread -rw=write -ioengine=psync -bs=16k -size=200G -numjobs=30-runtime=1000 -group_reporting -name=mytest
+
+ 
+
+混合随机读写：
+
+fio -filename=/dev/sdb1 -direct=1 -iodepth1 -thread -rw=randrw -rwmixread=70 -ioengine=psync -bs=16k -size=200G-numjobs=30 -runtime=100 -group_reporting -name=mytest -ioscheduler=noop
+
+2)
+iozone 
+
+3)hdparm
+  1.测试IO读
+     hdparm -t --direct /dev/sda3
+
+
+
+
+
+4)IOZONE
+http://cwind.blog.51cto.com/62582/809284/
+ 
+测一下64G文件8k随机读写
+# ./iozone -Rab iozone.wks -s64G -i 2 -y 8k -q 8k
+
+5 boninee++
+http://blog.csdn.net/kamus/article/details/186714
+顺序写: 按字符是52391KB/s，CPU占用率84%；按块是35222KB/s，CPU占用率7%
+顺序读: 按字符是56362KB/s, CPU占用率88%；按块是131568KB/s，CPU占用率10%
+随机读写: 176.7次/s，CPU占用率0%
+后两项全是++ (没结果?)
+
+Bonnie++在一个已知文件大小的文件上执行一系列的测试操作。如果不指定文件大小，Bonnie++默认使用100MB。这个默认大小对于大型服务器来说可能不够大，因此文件的大小最好比可用RAM的大小大一点，一般会要求大两倍。

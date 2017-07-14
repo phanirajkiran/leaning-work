@@ -1,0 +1,6 @@
+[filter1]
+summary=SCP8 fix verification 
+filter=project in (SCP8) AND status = Integrated  ORDER BY priority DESC
+[filter2]
+summary=OV8 fix verification 
+filter=project in (OVP8) AND status = Integrated  ORDER BY priority DESC

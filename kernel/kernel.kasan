@@ -1,0 +1,731 @@
+x86_64 and arm64 
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable/arch/arm64$ git tag --contains f1b9032f6
+v4.4
+v4.4-rc3
+v4.4-rc4
+v4.4-rc5
+v4.4-rc6
+v4.4-rc7
+v4.4-rc8
+v4.4.1
+v4.4.10
+
+root@dhcp0:~# modprobe test-kasan
+kasan test: kmalloc_oob_right out-of-bounds to right
+==================================================================
+BUG: KASan: out of bounds access in kmalloc_oob_right+0x65/0x75 [test_kasan] at addr ffff88000b8e1efb
+Write of size 1 by task modprobe/656
+=============================================================================
+BUG kmalloc-128 (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea00002e3840 objects=32 used=32 fp=0x          (null) flags=0x4000000000000080
+INFO: Object 0xffff88000b8e1e80 @offset=3712 fp=0xffff88000b8e1a80
+
+Bytes b4 ffff88000b8e1e70: 00 00 00 00 40 00 38 00 06 00 40 00 16 00 15 00  ....@.8...@.....
+Object ffff88000b8e1e80: 80 1a 8e 0b 00 88 ff ff 30 18 2c 81 ff ff ff ff  ........0.,.....
+Object ffff88000b8e1e90: 80 11 8d 0b 00 88 ff ff 98 1e 8e 0b 00 88 ff ff  ................
+Object ffff88000b8e1ea0: 98 1e 8e 0b 00 88 ff ff ff ff ff ff ff ff ff ff  ................
+Object ffff88000b8e1eb0: 00 89 86 0b 00 88 ff ff 07 00 00 00 01 00 00 00  ................
+Object ffff88000b8e1ec0: c0 1e 8e 0b 00 88 ff ff c0 1e 8e 0b 00 88 ff ff  ................
+Object ffff88000b8e1ed0: 00 66 a6 0b 00 88 ff ff d8 89 86 0b 00 88 ff ff  .f..............
+Object ffff88000b8e1ee0: 00 02 20 00 00 00 ad de 00 00 00 00 00 00 00 00  .. .............
+Object ffff88000b8e1ef0: 19 00 00 00 30 04 d5 36 0c 56 00 00 16 00 15 00  ....0..6.V......
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea00002e3840 ffff8800081ef8a8 ffffffff81d9e51e ffff88000cc01900
+ ffff88000b8e1e80 ffff8800081ef8d8 ffffffff812402dd ffff88000cc01900
+ ffffea00002e3840 ffff88000b8e1e80 ffffffffa01007f9 ffff8800081ef908
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa01001b9>] ? kmalloc_oob_right+0x65/0x75 [test_kasan]
+ [<ffffffff81246ad4>] __asan_store1+0x54/0x90
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01001b9>] kmalloc_oob_right+0x65/0x75 [test_kasan]
+ [<ffffffffa0100802>] kmalloc_tests_init+0x9/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff88000b8e1d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 fc fc fc
+ ffff88000b8e1e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 fc fc fc
+>ffff88000b8e1e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 03
+                                                                ^
+ ffff88000b8e1f00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff88000b8e1f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+kasan test: kmalloc_oob_left out-of-bounds to left
+kasan test: kmalloc_node_oob_right kmalloc_node(): out-of-bounds to right
+kasan test: kmalloc_large_oob_rigth kmalloc large allocation: out-of-bounds to right
+==================================================================
+BUG: KASan: out of bounds access in kmalloc_large_oob_rigth+0x5a/0x6d [test_kasan] at addr ffff8800081fe00a
+Write of size 1 by task modprobe/656
+page:ffffea0000207f00 count:1 mapcount:0 mapping:          (null) index:0x0
+flags: 0x4000000000004000(head)
+page dumped because: kasan: bad access detected
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffffffa01007f9 ffff8800081ef908 ffffffff81d9e51e ffff8800081ef9a0
+ ffff8800081fe00a ffff8800081ef988 ffffffff8124762c ffffffff811e9ef0
+ ffff880008164580 0000000000000296 ffff8800081efad8 ffff8800081ef958
+Call Trace:
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff8124762c>] kasan_report_error+0x3bc/0x3f0
+ [<ffffffff811e9ef0>] ? alloc_pages_exact+0x40/0x40
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa010050a>] ? kmalloc_large_oob_rigth+0x5a/0x6d [test_kasan]
+ [<ffffffff81246ad4>] __asan_store1+0x54/0x90
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa010050a>] kmalloc_large_oob_rigth+0x5a/0x6d [test_kasan]
+ [<ffffffffa0100811>] kmalloc_tests_init+0x18/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff8800081fdf00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff8800081fdf80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>ffff8800081fe000: 00 02 fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+                      ^
+ ffff8800081fe080: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+ ffff8800081fe100: fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe fe
+==================================================================
+
+Message from syslogd@dhcp0 at Jun 22 02:00:47 ...
+ kernel:page:ffffea0000207f00 count:1 mapcount:0 mapping:          (null) index:0x0
+
+Message from syslogd@dhcp0 at Jun 22 02:00:47 ...
+kasan test: kmalloc_oob_krealloc_more out-of-bounds after krealloc more
+==================================================================
+BUG: KASan: out of bounds access in kmalloc_oob_krealloc_more+0x88/0x99 [test_kasan] at addr ffff8800081645b3
+Write of size 1 by task modprobe/656
+=============================================================================
+BUG kmalloc-32 (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea0000205900 objects=128 used=128 fp=0x          (null) flags=0x4000000000000080
+INFO: Object 0xffff8800081645a0 @offset=1440 fp=0xffff8800081645c0
+
+Bytes b4 ffff880008164590: d0 7d b3 0b 00 88 ff ff 90 7a 13 08 00 88 ff ff  .}.......z......
+Object ffff8800081645a0: c0 45 16 08 00 88 ff ff 50 09 29 81 ff ff ff ff  .E......P.).....
+Object ffff8800081645b0: 20 09 29 81 ff ff ff ff 70 9a 2f 81 ff ff ff ff   .).....p./.....
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea0000205900 ffff8800081ef8a8 ffffffff81d9e51e ffff88000cc01c00
+ ffff8800081645a0 ffff8800081ef8d8 ffffffff812402dd ffff88000cc01c00
+ ffffea0000205900 ffff8800081645a0 ffffffffa01007f9 ffff8800081ef908
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa01005a5>] ? kmalloc_oob_krealloc_more+0x88/0x99 [test_kasan]
+ [<ffffffff81246ad4>] __asan_store1+0x54/0x90
+ [<ffffffff8120fb7f>] ? krealloc+0x3f/0xe0
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01005a5>] kmalloc_oob_krealloc_more+0x88/0x99 [test_kasan]
+ [<ffffffffa0100816>] kmalloc_tests_init+0x1d/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff880008164480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff880008164500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 fc
+>ffff880008164580: 00 00 00 00 00 00 03 fc fc fc fc fc fc fc fc fc
+                                     ^
+ ffff880008164600: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff880008164680: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+==================================================================
+ kernel:flags: 0x4000000000004000(head)
+kasan test: kmalloc_oob_krealloc_less out-of-bounds after krealloc less
+==================================================================
+BUG: KASan: out of bounds access in kmalloc_oob_krealloc_less+0x88/0x99 [test_kasan] at addr ffff8800081645b1
+Write of size 1 by task modprobe/656
+=============================================================================
+BUG kmalloc-32 (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea0000205900 objects=128 used=128 fp=0x          (null) flags=0x4000000000000080
+INFO: Object 0xffff8800081645a0 @offset=1440 fp=0xffff880008164580
+
+Bytes b4 ffff880008164590: 00 01 10 00 00 00 ad de 00 02 20 00 00 00 ad de  .......... .....
+Object ffff8800081645a0: 80 45 16 08 00 88 ff ff 50 09 29 81 ff ff ff ff  .E......P.).....
+Object ffff8800081645b0: 20 09 29 78 ff ff ff ff 70 9a 2f 81 ff ff ff ff   .)x....p./.....
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea0000205900 ffff8800081ef8a8 ffffffff81d9e51e ffff88000cc01c00
+ ffff8800081645a0 ffff8800081ef8d8 ffffffff812402dd ffff88000cc01c00
+ ffffea0000205900 ffff8800081645a0 ffffffffa01007f9 ffff8800081ef908
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa010063e>] ? kmalloc_oob_krealloc_less+0x88/0x99 [test_kasan]
+ [<ffffffff81246ad4>] __asan_store1+0x54/0x90
+ [<ffffffff8120fb7f>] ? krealloc+0x3f/0xe0
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa010063e>] kmalloc_oob_krealloc_less+0x88/0x99 [test_kasan]
+ [<ffffffffa010081b>] kmalloc_tests_init+0x22/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff880008164480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff880008164500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 fc
+>ffff880008164580: fb fb fb fb 00 07 fc fc fc fc fc fc fc fc fc fc
+                                     ^
+ ffff880008164600: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff880008164680: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+==================================================================
+kasan test: kmalloc_oob_16 kmalloc out-of-bounds for 16-bytes access
+==================================================================
+BUG: KASan: out of bounds access in kmalloc_oob_16+0x9f/0xcc [test_kasan] at addr ffff88000b819f30
+Write of size 16 by task modprobe/656
+=============================================================================
+BUG kmalloc-16 (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea00002e0640 objects=256 used=256 fp=0x          (null) flags=0x4000000000000080
+INFO: Object 0xffff88000b819f30 @offset=3888 fp=0xffff88000b819f40
+
+Bytes b4 ffff88000b819f20: 2e 72 6f 64 61 74 61 2e 73 74 72 31 2e 31 00 00  .rodata.str1.1..
+Object ffff88000b819f30: 40 9f 81 0b 00 88 ff ff 00 00 00 00 00 00 00 00  @...............
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea00002e0640 ffff8800081ef8a8 ffffffff81d9e51e ffff88000cc01d00
+ ffff88000b819f30 ffff8800081ef8d8 ffffffff812402dd ffff88000cc01d00
+ ffffea00002e0640 ffff88000b819f30 ffffffffa01007f9 ffff8800081ef908
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa0100365>] ? kmalloc_oob_16+0x9f/0xcc [test_kasan]
+ [<ffffffff81246625>] __asan_store16+0x75/0xb0
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa0100365>] kmalloc_oob_16+0x9f/0xcc [test_kasan]
+ [<ffffffffa0100820>] kmalloc_tests_init+0x27/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff88000b819e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff88000b819e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>ffff88000b819f00: 00 00 00 00 00 00 00 05 00 00 fc fc fc fc fc fc
+                                        ^
+ ffff88000b819f80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff88000b81a000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+kasan test: kmalloc_oob_in_memset out-of-bounds in memset
+==================================================================
+BUG: KASan: out of bounds access in memset+0x1e/0x40 at addr ffff88000b94e000
+Write of size 671 by task modprobe/656
+=============================================================================
+BUG kmalloc-1024 (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea00002e5380 objects=8 used=8 fp=0x          (null) flags=0x4000000000004080
+INFO: Object 0xffff88000b94e000 @offset=0 fp=0x          (null)
+
+Object ffff88000b94e000: 00 00 00 00 00 00 00 00 3d 3d 3d 3d 3d 3d 3d 3d  ........========
+Object ffff88000b94e010: 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  ================
+Object ffff88000b94e020: 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  ================
+Object ffff88000b94e030: 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d 3d  ================
+Object ffff88000b94e040: 3d 3d 3d 3d 3d 0a 38 0a 2e 30 2e 30 5f 73 74 61  =====.8..0.0_sta
+Object ffff88000b94e050: 6e 64 61 72 64 20 23 32 0a 2e 2e 2e 2e 0a 2e 0a  ndard #2........
+Object ffff88000b94e060: 30 30 38 30 0a 0a 30 30 30 38 31 36 34 35 62 31  0080..00081645b1
+Object ffff88000b94e070: 0a 00 00 00 04 00 00 00 f9 00 00 00 00 00 00 00  ................
+Object ffff88000b94e080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e090: 40 5e 14 81 ff ff ff ff 00 00 00 00 00 00 00 00  @^..............
+Object ffff88000b94e0a0: a0 e0 94 0b 00 88 ff ff a0 e0 94 0b 00 88 ff ff  ................
+Object ffff88000b94e0b0: f0 a9 14 81 ff ff ff ff 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e0c0: ff ff ff ff 00 00 00 00 d0 b2 ba 0b 00 88 ff ff  ................
+Object ffff88000b94e0d0: 00 00 00 00 00 00 00 00 20 00 00 00 20 00 00 00  ........ ... ...
+Object ffff88000b94e0e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e0f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e110: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e120: 00 00 00 00 00 00 00 00 00 40 f0 0b 00 88 ff ff  .........@......
+Object ffff88000b94e130: 30 e1 94 0b 00 88 ff ff 30 e1 94 0b 00 88 ff ff  0.......0.......
+Object ffff88000b94e140: 40 e1 94 0b 00 88 ff ff 40 e1 94 0b 00 88 ff ff  @.......@.......
+Object ffff88000b94e150: 50 e1 94 0b 00 88 ff ff 50 e1 94 0b 00 88 ff ff  P.......P.......
+Object ffff88000b94e160: 60 e1 94 0b 00 88 ff ff 60 e1 94 0b 00 88 ff ff  `.......`.......
+Object ffff88000b94e170: 70 e1 94 0b 00 88 ff ff 70 e1 94 0b 00 88 ff ff  p.......p.......
+Object ffff88000b94e180: 80 e1 94 0b 00 88 ff ff 80 e1 94 0b 00 88 ff ff  ................
+Object ffff88000b94e190: 90 e1 94 0b 00 88 ff ff 90 e1 94 0b 00 88 ff ff  ................
+Object ffff88000b94e1a0: a0 e1 94 0b 00 88 ff ff a0 e1 94 0b 00 88 ff ff  ................
+Object ffff88000b94e1b0: b0 e1 94 0b 00 88 ff ff b0 e1 94 0b 00 88 ff ff  ................
+Object ffff88000b94e1c0: c0 e1 94 0b 00 88 ff ff c0 e1 94 0b 00 88 ff ff  ................
+Object ffff88000b94e1d0: d0 e1 94 0b 00 88 ff ff d0 e1 94 0b 00 88 ff ff  ................
+Object ffff88000b94e1e0: 01 00 00 00 00 00 00 00 e8 e1 94 0b 00 88 ff ff  ................
+Object ffff88000b94e1f0: e8 e1 94 0b 00 88 ff ff 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e200: 00 00 00 00 00 00 00 00 01 01 00 00 00 00 00 00  ................
+Object ffff88000b94e210: 10 e2 94 0b 00 88 ff ff 10 e2 94 0b 00 88 ff ff  ................
+Object ffff88000b94e220: e0 ff ff ff 0f 00 00 00 28 e2 94 0b 00 88 ff ff  ........(.......
+Object ffff88000b94e230: 28 e2 94 0b 00 88 ff ff 40 6e 14 81 ff ff ff ff  (.......@n......
+Object ffff88000b94e240: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e250: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e260: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e270: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e290: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e2a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e2b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e2c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e2d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e2e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e2f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e310: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e320: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e330: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e340: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e350: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e360: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e370: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e390: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e3a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e3b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e3c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e3d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e3e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000b94e3f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea00002e5380 ffff8800081ef888 ffffffff81d9e51e ffff88000cc01500
+ ffff88000b94e000 ffff8800081ef8b8 ffffffff812402dd ffff88000cc01500
+ ffffea00002e5380 ffff88000b94e000 ffffffffa01007f9 ffff8800081ef8e8
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffff81246c8e>] ? memset+0x1e/0x40
+ [<ffffffff812469f4>] __asan_storeN+0x1c4/0x1d0
+ [<ffffffff81243728>] ? kmem_cache_alloc_trace+0xd8/0x280
+ [<ffffffffa010068a>] ? kmalloc_oob_in_memset+0x3b/0x70 [test_kasan]
+ [<ffffffff81246c8e>] memset+0x1e/0x40
+ [<ffffffffa01006b5>] kmalloc_oob_in_memset+0x66/0x70 [test_kasan]
+ [<ffffffffa0100825>] kmalloc_tests_init+0x2c/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff88000b94e180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff88000b94e200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>ffff88000b94e280: 00 00 00 02 fc fc fc fc fc fc fc fc fc fc fc fc
+                            ^
+ ffff88000b94e300: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff88000b94e380: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+==================================================================
+kasan test: kmalloc_uaf use-after-free
+==================================================================
+BUG: KASan: use after free in kmalloc_uaf+0x6d/0x75 [test_kasan] at addr ffff88000b819f48
+Write of size 1 by task modprobe/656
+=============================================================================
+BUG kmalloc-16 (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea00002e0640 objects=256 used=256 fp=0x          (null) flags=0x4000000000000080
+INFO: Object 0xffff88000b819f40 @offset=3904 fp=0xffff88000b819f30
+
+Bytes b4 ffff88000b819f30: 50 9f 81 0b 00 88 ff ff 00 00 00 00 00 00 00 00  P...............
+Object ffff88000b819f40: 30 9f 81 0b 00 88 ff ff 00 00 00 00 00 00 00 00  0...............
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea00002e0640 ffff8800081ef8a8 ffffffff81d9e51e ffff88000cc01d00
+ ffff88000b819f40 ffff8800081ef8d8 ffffffff812402dd ffff88000cc01d00
+ ffffea00002e0640 ffff88000b819f40 ffffffffa01007f9 ffff8800081ef908
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa01003ff>] ? kmalloc_uaf+0x6d/0x75 [test_kasan]
+ [<ffffffff81246ad4>] __asan_store1+0x54/0x90
+ [<ffffffff8124448e>] ? kfree+0x8e/0x1b0
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01003ff>] kmalloc_uaf+0x6d/0x75 [test_kasan]
+ [<ffffffffa010082a>] kmalloc_tests_init+0x31/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff88000b819e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff88000b819e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>ffff88000b819f00: 00 00 00 00 00 00 fb fb fb fb fc fc fc fc fc fc
+                                              ^
+ ffff88000b819f80: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff88000b81a000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+kasan test: kmalloc_uaf_memset use-after-free in memset
+==================================================================
+BUG: KASan: use after free in memset+0x1e/0x40 at addr ffff880008206240
+Write of size 33 by task modprobe/656
+=============================================================================
+BUG kmalloc-64 (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea0000208180 objects=64 used=64 fp=0x          (null) flags=0x4000000000000080
+INFO: Object 0xffff880008206240 @offset=576 fp=0xffff880008206ec0
+
+Bytes b4 ffff880008206230: 00 00 00 00 00 00 00 00 1b bd a4 59 05 00 00 00  ...........Y....
+Object ffff880008206240: c0 6e 20 08 00 88 ff ff 20 d3 13 00 00 88 ff ff  .n ..... .......
+Object ffff880008206250: 00 01 10 00 00 00 ad de 00 02 20 00 00 00 ad de  .......... .....
+Object ffff880008206260: 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff880008206270: 20 94 fe 0b 00 88 ff ff f5 95 dc f1 07 00 00 00   ...............
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea0000208180 ffff8800081ef878 ffffffff81d9e51e ffff88000cc01b00
+ ffff880008206240 ffff8800081ef8a8 ffffffff812402dd ffff88000cc01b00
+ ffffea0000208180 ffff880008206240 ffffffffa01007f9 ffff8800081ef8d8
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffff81246c8e>] ? memset+0x1e/0x40
+ [<ffffffff812469f4>] __asan_storeN+0x1c4/0x1d0
+ [<ffffffff81243728>] ? kmem_cache_alloc_trace+0xd8/0x280
+ [<ffffffff81246f14>] ? kasan_slab_free+0x44/0x50
+ [<ffffffff81246c8e>] memset+0x1e/0x40
+ [<ffffffffa0100732>] kmalloc_uaf_memset+0x73/0x77 [test_kasan]
+ [<ffffffffa010082f>] kmalloc_tests_init+0x36/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff880008206100: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff880008206180: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+>ffff880008206200: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+                                           ^
+ ffff880008206280: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+ ffff880008206300: fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb fb
+==================================================================
+kasan test: kmalloc_uaf2 use-after-free after another kmalloc
+kasan test: kmem_cache_oob out-of-bounds in kmem_cache_alloc
+==================================================================
+BUG: KASan: out of bounds access in kmem_cache_oob+0x96/0xc3 [test_kasan] at addr ffff88000824e0c8
+Read of size 1 by task modprobe/656
+=============================================================================
+BUG test_cache (Tainted: G    B          ): kasan: bad access detected
+-----------------------------------------------------------------------------
+
+INFO: Slab 0xffffea0000209380 objects=20 used=20 fp=0x          (null) flags=0x4000000000000080
+INFO: Object 0xffff88000824e0c8 @offset=200 fp=0xffff88000824e190
+
+Bytes b4 ffff88000824e0b8: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e0c8: 90 e1 24 08 00 88 ff ff 00 00 00 00 00 00 00 00  ..$.............
+Object ffff88000824e0d8: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e0e8: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e0f8: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e108: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e118: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e128: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e138: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e148: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e158: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e168: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e178: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+Object ffff88000824e188: 00 00 00 00 00 00 00 00                          ........
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffea0000209380 ffff8800081ef898 ffffffff81d9e51e ffff88000bd16f00
+ ffff88000824e0c8 ffff8800081ef8c8 ffffffff812402dd ffff88000bd16f00
+ ffffea0000209380 ffff88000824e0c8 ffffffffa01007f9 ffff8800081ef8f8
+Call Trace:
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff812402dd>] print_trailer+0xfd/0x170
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff8124536a>] object_err+0x3a/0x50
+ [<ffffffff81247457>] kasan_report_error+0x1e7/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa01007cc>] ? kmem_cache_oob+0x96/0xc3 [test_kasan]
+ [<ffffffff81246a51>] __asan_load1+0x51/0x80
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01007cc>] kmem_cache_oob+0x96/0xc3 [test_kasan]
+ [<ffffffffa0100839>] kmalloc_tests_init+0x40/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff88000824df80: fb fb fb fb fb fb fb fb fb fb fc fc fc fc fc fc
+ ffff88000824e000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>ffff88000824e080: 00 00 00 00 00 00 00 00 00 fc fc fc fc fc fc fc
+                                              ^
+ ffff88000824e100: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+ ffff88000824e180: fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc fc
+==================================================================
+kasan test: kasan_stack_oob out-of-bounds on stack
+==================================================================
+BUG: KASan: out of bounds access in kasan_stack_oob+0x9d/0xba [test_kasan] at addr ffff8800081ef9e2
+Read of size 1 by task modprobe/656
+page:ffffea0000207bc0 count:0 mapcount:0 mapping:          (null) index:0x0
+flags: 0x4000000000000000()
+page dumped because: kasan: bad access detected
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffffffa01007f9 ffff8800081ef868 ffffffff81d9e51e ffff8800081ef900
+ ffff8800081ef9e2 ffff8800081ef8e8 ffffffff8124762c ffff8800081ef8e8
+ ffff880008164580 0000000000000296 ffff8800081efad8 ffff8800081ef8b8
+Call Trace:
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff8124762c>] kasan_report_error+0x3bc/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa010009d>] ? kasan_stack_oob+0x9d/0xba [test_kasan]
+ [<ffffffff81246a51>] __asan_load1+0x51/0x80
+ [<ffffffffa010009d>] kasan_stack_oob+0x9d/0xba [test_kasan]
+ [<ffffffffa0100000>] ? 0xffffffffa0100000
+ [<ffffffff8120fdbc>] ? kmem_cache_destroy+0xcc/0x100
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01007f1>] ? kmem_cache_oob+0xbb/0xc3 [test_kasan]
+ [<ffffffffa010083e>] kmalloc_tests_init+0x45/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffff8800081ef880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffff8800081ef900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 f1
+>ffff8800081ef980: f1 f1 f1 04 f4 f4 f4 f2 f2 f2 f2 00 02 f4 f4 f3
+                                                       ^
+ ffff8800081efa00: f3 f3 f3 00 00 00 00 00 00 00 00 f1 f1 f1 f1 00
+ ffff8800081efa80: 00 00 00 00 00 00 00 f3 f3 f3 f3 00 00 00 00 00
+==================================================================
+
+Message from syslogd@dhcp0 at Jun 22 02:00:46 ...
+ kernel:page:ffffea0000207bc0 count:0 mapcount:0 mapping:          (null) index:0x0
+
+Message from syslogd@dhcp0 at Jun 22 02:00:46 ...
+ kernel:flags: 0x4000000000000000()
+kasan test: kasan_global_oob out-of-bounds global variable
+==================================================================
+BUG: KASan: out of bounds access in kasan_global_oob+0x7b/0x9a [test_kasan] at addr ffffffffa00f962d
+Read of size 1 by task modprobe/656
+Address belongs to variable global_array+0xd/0xffffffffffffea17 [test_kasan]
+CPU: 0 PID: 656 Comm: modprobe Tainted: G    B           4.1.21-WR8.0.0.0_standard #2
+Hardware name: Bochs Bochs, BIOS Bochs 01/01/2007
+ ffffffffa01007f9 ffff8800081ef898 ffffffff81d9e51e ffff8800081ef930
+ ffffffffa00f962d ffff8800081ef918 ffffffff8124762c ffff8800081ef918
+ ffff880008164580 0000000000000292 ffff8800081efad8 ffff8800081ef8e8
+Call Trace:
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81d9e51e>] dump_stack+0x4f/0x65
+ [<ffffffff8124762c>] kasan_report_error+0x3bc/0x3f0
+ [<ffffffff810f8bce>] ? vprintk_default+0x3e/0x60
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffff81247b10>] kasan_report+0x40/0x50
+ [<ffffffffa0100135>] ? kasan_global_oob+0x7b/0x9a [test_kasan]
+ [<ffffffff81246a51>] __asan_load1+0x51/0x80
+ [<ffffffffa0100000>] ? 0xffffffffa0100000
+ [<ffffffffa0100135>] kasan_global_oob+0x7b/0x9a [test_kasan]
+ [<ffffffffa01000ba>] ? kasan_stack_oob+0xba/0xba [test_kasan]
+ [<ffffffffa01007f9>] ? kmem_cache_oob+0xc3/0xc3 [test_kasan]
+ [<ffffffffa01007f1>] ? kmem_cache_oob+0xbb/0xc3 [test_kasan]
+ [<ffffffffa0100843>] kmalloc_tests_init+0x4a/0x51 [test_kasan]
+ [<ffffffff8100042c>] do_one_initcall+0xfc/0x250
+ [<ffffffff81000330>] ? try_to_run_init_process+0x40/0x40
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246b46>] ? kasan_unpoison_shadow+0x36/0x50
+ [<ffffffff81246c5b>] ? __asan_register_globals+0x8b/0xa0
+ [<ffffffff81d9bedd>] do_init_module+0xf4/0x2ee
+ [<ffffffff8113d410>] load_module+0x3140/0x3d70
+ [<ffffffff81137d30>] ? store_uevent+0xb0/0xb0
+ [<ffffffff8113a2d0>] ? module_frob_arch_sections+0x20/0x20
+ [<ffffffff81262c40>] ? open_exec+0x50/0x50
+ [<ffffffff811397c1>] ? copy_module_from_fd.isra.33+0x251/0x270
+ [<ffffffff8108f0b3>] ? ns_capable+0x53/0x80
+ [<ffffffff8113e2e6>] SyS_finit_module+0x106/0x110
+ [<ffffffff8113e1e0>] ? SyS_init_module+0x1a0/0x1a0
+ [<ffffffff81226b61>] ? SyS_mmap_pgoff+0xb1/0xd0
+ [<ffffffff81da8f1b>] system_call_fastpath+0x16/0x6e
+Memory state around the buggy address:
+ ffffffffa00f9500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffffa00f9580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+>ffffffffa00f9600: 00 00 00 00 00 02 fa fa fa fa fa fa 00 00 00 00
+                                  ^
+ ffffffffa00f9680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+ ffffffffa00f9700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+==================================================================
+modprobe: ERROR: could not insert 'test_kasan': Resource temporarily unavailable

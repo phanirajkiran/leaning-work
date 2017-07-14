@@ -1,0 +1,10 @@
+sudo docker run -it -v $(pwd)/tftpboot:/var/lib/tftpboot:ro -p 128.224.162.232:69:69/udp 33487df2d51e
+lyang001@pek-lyang0-d1:~/leaning-work$ tftp 128.224.162.232
+tftp> get 1
+tftp> quit 
+
+sudo docker run -it -v $(pwd)/tftpboot:/var/lib/tftpboot:ro -p 69:69/udp 33487df2d51e
+lyang001@pek-lyang0-d1:~/leaning-work$ tftp 172.17.0.33
+tftp> get 1
+tftp> quit
+

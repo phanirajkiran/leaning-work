@@ -1,0 +1,42 @@
+http://royluo.org/2014/08/22/vhost/
+可以看到在通常的应用中一般使用QEMU用户态程序来模拟I/O访问，而Guest中的数据要通过Guest到Host Userspace的第一次拷贝，再经过Host userspace的第二次拷贝，这种多次的数据拷贝和CPU特权级的切换对性能有相当大的影响。为加速virtio设备的I/O性能，VHOST通过driver的形式在Host Kernel中直接实现了virtio设备的模拟。通过在Host Kernel中对virtios设备的模拟运行允许Guest与Host Kernel直接进行数据交换，从而避免了用户空间的system call与数据拷贝的性能消耗
+
+kernel requirements
+
+On the host you need a kernel with CONFIG_VHOST_NET=y and in the guest you need a kernel with CONFIG_PCI_MSI=y
+example command line
+
+To start a guest with vhost:
+
+    kvm -netdev type=tap,id=guest0,script=kvm-ifup,vhost=on -device virtio-net-pci,netdev=guest0,mac=ma:c:a:dd:re:ss ..other options..
+
+
+examples: http://smilejay.com/2012/11/kvm-virtio-network/
+
+
+archtect :
+http://royluo.org/2014/08/05/virtio-device/
+
+http://blog.csdn.net/jincm13/article/details/50885882
+vhost
+
+vhost技术对virtio-net进行了优化，在内核中加入了vhost-net.ko模块，使得对网络数据可以再内核态得到处理。
+
+virtio_vhostnet
+
+    virtio的io路径
+
+    guest设置好tx;
+    kick host;
+    guest陷出到kvm；
+    kvm从内核切换到用户态的qemu进程；
+    qemu将tx数据投递到tap设备；。
+
+    vhost的io路径
+
+    guest设置好tx;
+    kick host;
+    guest陷出到kvm；
+    vhost-net将tx数据投递到tap设备;
+
+vhost将部分virio驱动的操作从用户态移到内核态，减少了用户态/内核态切换时间和包的拷贝次数，从而更进一步的提升了性能, 下面的网络延时测试可以看出vhost的优势：

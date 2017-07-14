@@ -1,0 +1,16 @@
+https://fedoraproject.org/wiki/Features/Virt_Guest_Suspend_Hibernate
+From inside the guest, initiating suspend and hibernate should succeed. For a Fedora guest, this will be the command line utils
+
+ pm-suspend
+ pm-hibernate
+
+The guest should then appear as running (or shutoff? I need to confirm). XXX: how to we wake up the guest
+
+To initiate a suspend from the host on a VM, you can do:
+
+ virsh dompmsuspend --target mem
+
+For hibernate, do
+
+ virsh dompmsuspend --target disk
+

@@ -1,3 +1,3 @@
 [filter1]
-summary=NEW  defects opened by NA developers/testers overnight in LIN8 
-filter=project = LIN8  AND issuetype = Bug AND created >= -13h ORDER BY priority DESC
+summary=NEW  defects in CGP9 for the past 24 hours 
+filter=project = CGP9  AND issuetype = Bug AND created >= -24h ORDER BY priority DESC

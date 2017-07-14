@@ -1,1 +1,52 @@
 http://www.advicehow.com/managing-guest-isolation-in-vmware-workstation-8/  passthrough serial
+
+2.1 PCI Pass-through (Without SR-IOV)
+-------------------------------------
+To set up PCI pass-through, complete the following steps:
+
+a. Run "modprobe pci-stub" to load pci-stub kernel module
+
+b. Identify the ID and other slot information that is associated with the PCI
+   device by typing the following command:
+
+   lspci -nn
+
+   Your output might include a line like the following line, which identifies the
+   network adapter:
+
+   00:15.0 Ethernet controller [0200]: Intel Corporation 82599EB 10-Gigabit Network \
+   Connection [8086:10fb] (rev 01)
+
+c. Unbind the device from the host by using the echo command. For example:
+
+   echo "8086 10fb" > /sys/bus/pci/drivers/pci-stub/new_id
+   echo "0000:00:15.0" > /sys/bus/pci/devices/0000:00:15.0/driver/unbind
+   echo "0000:00:15.0" > /sys/bus/pci/drivers/pci-stub/bind
+
+d. Load kvm and kvm-intel modules.
+   modprobe kvm allow_unsafe_assigned_interrupts=1
+   modprobe kvm-intel
+
+e. Assign the device to the guest operating system by using the -device qemu-kvm
+   option. For example:
+
+   -device pci-assign,host=00:15.0
+   
+f. Start the guest.
+
+g. PCI pass-through can be setup via libvirt as well.
+
+   For how to setup libvirt xml config file, please refer to Documentation/kernel/libvirt.txt
+   
+   Add below section into libvirt xml config file <devices> section:
+   
+   <devices>
+     ...
+     <hostdev mode='subsystem' type='pci' managed='yes'>
+       <source>
+         <address domain='0x0000' bus='0x00' slot='0x0f' function='0x0'/>
+       </source>
+     </hostdev>
+   </devices>
+   
+   Running with this config, libvirt will setup the host networking.

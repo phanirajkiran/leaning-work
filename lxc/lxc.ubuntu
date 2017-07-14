@@ -1,0 +1,76 @@
+lyang001@lyang001-OptiPlex-9010:~$ sudo ls /var/cache/lxc/download/ubuntu/xenial/amd64/default
+build_id  config  config-user  create-message  excludes-user  expiry  rootfs.tar.xz  templates
+
+
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-create -t download -n u1 -- --dist ubuntu --release xenial --arch amd64
+lxc-create: u1: lxccontainer.c: lxc_container_new: 4144 Error: u1 creation was not completed
+Setting up the GPG keyring
+
+
+ERROR: Unable to fetch GPG key from keyserver.
+Downloading the image index
+Downloading the rootfs
+Downloading the metadata
+The image cache is now ready
+Unpacking the rootfs
+
+---
+You just created an Ubuntu container (release=xenial, arch=amd64, variant=default)
+
+To enable sshd, run: apt-get install openssh-server
+
+For security reason, container images ship without user accounts
+and without a root password.
+
+Use lxc-attach or chroot directly into the rootfs to set a root password
+or create user accounts.
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-start -n u1
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-attach -n u1
+root@u1:/# 
+root@u1:/# 
+root@u1:/# 
+root@u1:/# ls
+bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
+root@u1:/# ifconfig 
+eth0      Link encap:Ethernet  HWaddr 00:16:3e:5e:31:60  
+          inet addr:10.0.3.157  Bcast:10.0.3.255  Mask:255.255.255.0
+          inet6 addr: fe80::216:3eff:fe5e:3160/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:27 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:10 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:6596 (6.5 KB)  TX bytes:1332 (1.3 KB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+root@u1:/# pwd
+/
+root@u1:/# ls
+bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  run  sbin  srv  sys  tmp  usr  var
+root@u1:/# exit 
+exit
+lyang001@lyang001-OptiPlex-9010:~$ 
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-start -n u1 /bin/sleep 1000
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-attach -n u1
+root@u1:/# ps -aux 
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   4380   656 ?        Ss   02:13   0:00 /bin/sleep 1000
+root       186  0.0  0.0  21196  3776 ?        Ss   02:14   0:00 /bin/bash
+root       189  0.0  0.0  37336  3004 ?        R+   02:14   0:00 ps -aux
+root@u1:/# 
+
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-start -n u1 /bin/sleep 10
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-attach -n u1
+root@u1:/# lyang001@lyang001-OptiPlex-9010:~$ 

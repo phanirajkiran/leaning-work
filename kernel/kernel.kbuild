@@ -1,0 +1,68 @@
+1)
+config DEBUG_INFO
+        bool "Compile the kernel with debug info"
+        depends on DEBUG_KERNEL && !COMPILE_TEST
+
+KCONFIG_ALLCONFIG=/folk/lyang0/testconfig2 make O=/buildarea1/lyang0/pure/bitbake_build/tmp/work/axxiaarm-wrs-linux-gnueabi/linux-windriver/4.1-r0/linux-axxiaarm-preempt-rt-build allyesconfig
+when my testconfig2 contains DEBUG_INFO, but I end up finding out that the final .config doesn't contains it, I guess, it select all other to yes, and then enable DEBUG_INFO, but it already enabled COMIPLE_TEST, so DEBUG_INFO can't be selected
+
+something like: http://stackoverflow.com/questions/19846776/setting-build-options-for-kernel
+
+env KCONFIG_ALLCONFIG=/folk/lyang0/testconfig2 make O=/buildarea1/lyang0/pure/bitbake_build/tmp/work/axxiaarm-wrs-linux-gnueabi/linux-windriver/4.1-r0/linux-axxiaarm-preempt-rt-build allyesconfig
+
+https://lists.yoctoproject.org/pipermail/poky/2014-January/009483.html
+
+2)
+ When you provide a .config file that has been generated with another (usually older) kernel version, you will have to update it. You can do so with make oldconfig, it will interactively ask you the questions corresponding to the new configuration options. If you want to use the default answer to all those questions you can use make olddefconfig. With make oldnoconfig, it will assume a negative answer to all questions. 
+
+3)kernel config different between do_kernel_configme and do_compile 
+
+
+4)https://lwn.net/Articles/608427/ merge_config.sh
+meta/recipes-core/uclibc/uclibc.inc:        merge_config.sh -r -n -m .config ${@" ".join(find_cfgs(d))} 
+
+5)
+#ifdef CONFIG_USB_CI13612_HCD
+#include "ehci-ci13612.c"
+#define PLATFORM_DRIVER        ci13612_ehci_driver
+#endif
+
+6)Kbuild http://lukeluo.blogspot.com/2014_02_01_archive.html
+lyang0@pek-lpgtest20:/buildarea1/lyang0/pure/build/linux-windriver/linux-axxiaarm64-preempt-rt-build/source$ cp config_bak .config
+lyang0@pek-lpgtest20:/buildarea1/lyang0/pure/build/linux-windriver/linux-axxiaarm64-preempt-rt-build/source$ make ARCH=arm64 O=. savedefconfig
+make[1]: Entering directory '/buildarea1/lyang0/pure/bitbake_build/tmp/work-shared/axxiaarm64/kernel-source'
+  HOSTCC  scripts/basic/fixdep
+  HOSTCC  scripts/kconfig/conf.o
+  HOSTCC  scripts/kconfig/zconf.tab.o
+  HOSTLD  scripts/kconfig/conf
+scripts/kconfig/conf  --savedefconfig=defconfig Kconfig
+make[1]: Leaving directory '/buildarea1/lyang0/pure/bitbake_build/tmp/work-shared/axxiaarm64/kernel-source'
+lyang0@pek-lpgtest20:/buildarea1/lyang0/pure/build/linux-windriver/linux-axxiaarm64-preempt-rt-build/source$ make ARCH=arm64 KCONFIG_ALLCONFIG=./defconfig O=/folk/lyang0/newconfigs alldefconfig
+make[1]: Entering directory '/folk/lyang0/newconfigs'
+  HOSTCC  scripts/basic/fixdep
+  GEN     /folk/lyang0/newconfigs/Makefile
+  HOSTCC  scripts/kconfig/conf.o
+  HOSTCC  scripts/kconfig/zconf.tab.o
+  HOSTLD  scripts/kconfig/conf
+scripts/kconfig/conf  --alldefconfig Kconfig
+#
+# configuration written to .config
+#
+make[1]: Leaving directory '/folk/lyang0/newconfigs'
+lyang0@pek-lpgtest20:/buildarea1/lyang0/pure/build/linux-windriver/linux-axxiaarm64-preempt-rt-build/source$ ~/di /folk/lyang0/newconfigs/.config 
+diffconfig  dist/       
+lyang0@pek-lpgtest20:/buildarea1/lyang0/pure/build/linux-windriver/linux-axxiaarm64-preempt-rt-build/source$ ~/diffconfig /folk/lyang0/newconfigs/.config config_bak 
+lyang0@pek-lpgtest20:/buildarea1/lyang0/pure/build/linux-windriver/linux-axxiaarm64-preempt-rt-build/source$ 
+
+
+7)
+config EDAC_SUPPORT
+        bool
+this can be only selected by 
+config ARM
+        bool
+        default y
+        select CPU_PM if (SUSPEND || CPU_IDLE)
+        select DCACHE_WORD_ACCESS if HAVE_EFFICIENT_UNALIGNED_ACCESS
+        select EDAC_SUPPORT
+

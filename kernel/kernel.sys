@@ -1,0 +1,28 @@
+DEBUG_FS
+Ftrace uses the debugfs file system to hold the control files as
+well as the files to display output.
+
+When debugfs is configured into the kernel (which selecting any ftrace
+option will do) the directory /sys/kernel/debug will be created. To mount
+this directory, you can add to your /etc/fstab file:
+
+ debugfs       /sys/kernel/debug          debugfs defaults        0       0
+
+Or you can mount it at run time with:
+
+ mount -t debugfs nodev /sys/kernel/debug
+
+For quicker access to that directory you may want to make a soft link to
+it:
+
+ ln -s /sys/kernel/debug /debug
+
+Any selected ftrace option will also create a directory called tracing
+within the debugfs. The rest of the document will assume that you are in
+the ftrace directory (cd /sys/kernel/debug/tracing) and will only concentrate
+on the files within that directory and not distract from the content with
+the extended "/sys/kernel/debug/tracing" path name.
+
+mount -t debugfs none /sys/kernel/debug/
+ln -s /sys/kernel/debug /debug
+sysfs_create_mount_point

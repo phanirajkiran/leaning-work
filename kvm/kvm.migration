@@ -1,0 +1,63 @@
+Example work flow: 
+Start guest A:
+	$ qemu-system-x86_64 -nographic  -k en-us -m 1024  \
+		-net nic,macaddr=1a:46:0b:ca:bc:7a,model=virtio \
+		-net tap -enable-kvm\
+		-kernel kernel-guestA \
+		-append 'root=/dev/vda ro console=ttyS0' \
+		-drive file=wr-guestA.ext3,cache=none,if=virtio
+
+Then, start guest B:
+ 	$ qemu-system-x86_64 -nographic  -k en-us -m 1024  \
+		-net nic,macaddr=1a:46:0b:ca:bc:7a,model=virtio \
+		-net tap -enable-kvm\
+		-kernel kernel-guestA \
+		-incoming tcp:192.168.122.1:4444 \
+		-append 'root=/dev/vda ro console=ttyS0' \
+		-drive file=wr-guestA.ext3,cache=none,if=virtio
+
+On guest A, login, verify the network and drop into the qemu shell
+(CTRL-A C):
+	1. (qemu) migrate -d tcp:192.168.122.1:4444
+	(-d means add debugging info)
+	2. info migrate (to see the status of the migration)
+
+On guest B, the guest should be running in the same state as guest A
+before the migration.  Verify the network parameters.  The should be the same as
+guest A.
+
+
+Migration Snapshots: Save/Restore
+=================================
+The current state of a guest can be saved and restored at a later time.
+The guest does not need to be stopped at the time the state is saved,
+but it can be for greater control.
+
+Save and restore are handled by the qemu command line.  The idea is
+that you save the current state or snapshot of a guest and write it to
+a file.  Then, during boot up of another guest, load the state file.
+
+Save:
+1. Use the "guest A" qemu command line from "Migration: Virtual Networking
+(virtio)", but add "snapshot=on":
+
+	-drive file=wr-guestA.ext3,cache=none,if=virtio,snapshot=on
+
+2. Boot the guest.
+3. CTRL-A C to get to the qemu prompt.
+4. (qemu) savevm
+5. (qemu) stop  (optional)
+6. (qemu) migrate_set_speed 4095m  (optional)
+7. (qemu) migrate "exec:gzip -c > STATEFILE.gz"
+This will create a file "STATEFILE.gz" in the CWD.
+8.  (qemu) q (to exit the guest and stop it)
+
+Restore:
+Boot the guest again with the STATEFILE.gz.
+
+Add the following flag to your qemu command line:
+	-incoming "exec: gzip -c -d STATEFILE.gz"
+	
+The guest should start immediately and in the state that it was when
+"savevm" was called.
+

@@ -1,0 +1,20 @@
+https://fedoraproject.org/wiki/Features/Virt_Live_Snapshots
+Live snapshots allow a user to take a snapshot of a virtual machine while the guest is running, thus preserving the state and data of a VM at a specific point in time. 
+
+
+How To Test
+Live backup
+
+You can backup the storage of a VM from the host machine with no VM downtime.
+
+Snapshot the VM:
+
+ virsh snapshot-create-as myvm snapshot1 "snapshot1 description" --disk-only --atomic
+
+Backup the original storage using your regular backup method.
+
+Merge the disk changes that accumulated in the snapshot back with the original disk. --path is the disk device (such as vda) or path to the current disk image, just created by the snapshot command (in this example, /var/lib/libvirt/images/myvm.snapshot1).
+
+ virsh blockpull --domain myvm --path /var/lib/libvirt/images/myvm.snapshot1
+
+'blockpull' needs to be done for every disk image that was snapshotted. You can optionally supply a --base argument to blockpull, if it is desired to keep a common backing file while still collapsing the rest of a longer backing chain. 

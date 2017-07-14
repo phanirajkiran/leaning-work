@@ -2,4 +2,14 @@ http://serverascode.com/2012/11/11/ksm-kvm.html script
 http://doc.opensuse.org/documentation/html/openSUSE/opensuse-kvm/cha.qemu.running.html
 http://www.linux-kvm.com/content/using-ksm-kernel-samepage-merging-kvm
 
+ksm can allow virtual machines (actually any application, not just virtualization) to share memory pages--
+it finds all duplicated memory pages and merges them, thereby saving memory in some situations.
 
+
+The effectiveness of KSM and MADV_MERGEABLE is shown in /sys/kernel/mm/ksm/:
+
+pages_shared     - how many shared pages are being used
+pages_sharing    - how many more sites are sharing them i.e. how much saved
+pages_unshared   - how many pages unique but repeatedly checked for merging
+pages_volatile   - how many pages changing too fast to be placed in a tree
+full_scans       - how many times all mergeable areas have been scanned

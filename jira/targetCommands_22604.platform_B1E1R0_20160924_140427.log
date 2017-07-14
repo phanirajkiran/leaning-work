@@ -1,0 +1,4 @@
+
+uname -a
+cat /proc/cmdline
+/opt/wr-test/main_test.py -s bfq_enable

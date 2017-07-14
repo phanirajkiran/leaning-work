@@ -3,6 +3,8 @@ http://www.oschina.net/code/snippet_209440_19482
 http://www.oschina.net/code/snippet_1250095_26434
 
 sudo pip install Django
+or 
+sudo apt-get install python-django
 
 lyang001@lyang001-OptiPlex-9010:/tmp/dig$ django-admin startproject blongo
 lyang001@lyang001-OptiPlex-9010:/tmp/dig$ ls

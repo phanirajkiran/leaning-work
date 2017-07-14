@@ -1,0 +1,248 @@
+Contents
+========
+	Description
+	Requirements
+	Bind PCI Device To Stub Driver
+	Add Tracepoints To Guest Kernel
+	Bring Up A VM
+	Setup Tracing
+	Hotplug The PCI Device
+	Dump The Trace
+
+Description
+===========
+PCI devices can be hotplugged in/out of a VM on the fly.
+In the example below, an Intel 82599ES 10G PCI network card is
+hotplugged into a VM and the VM's kernel is profiled to show the cost
+for hotplugging this device.
+
+Requirements
+============
+Before any PCI device can be hotplugged into a VM, the host machine
+must meet the following requirements:
+
+	1) The bios must have VT-d enabled or pci devices cannot be passed
+	through to the VM.
+
+	2) The host must boot with intel_iommu=on [optional but
+	recommended: iommu=pt]
+
+	3) The host kernel must have support for the following
+	drivers:
+		CONFIG_HOTPLUG_PCI_ACPI=m
+		CONFIG_HOTPLUG_PCI=m
+		CONFIG_PCI_STUB=y 
+		(WRL has these driver enabled by default)
+
+Bind PCI Device To Stub Driver
+==============================
+Before unbinding the device, the vendor ID and the device address must
+be obtained. Query the PCI bus with "lspci".   For example, to unbind an
+Intel 82599ES 10G ethernet card, do the following:
+
+	$ lspci -nn |grep Eth
+	84:00.0 Ethernet controller [0200]: Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection [8086:10fb] (rev 01)
+
+Note the vendor ID [8086:10fb] and the pci address 84:00.0.  Here is
+an example script used to unbind the device:
+
+	$ cat > unbind_pci_dev.sh << EOF
+	VENDOR_ID="8086 10fb"
+	DEVICE="0000:84:00.0"
+	SHORT_DEVICE="84:00.0"
+
+	echo $VENDOR_ID > /sys/bus/pci/drivers/pci-stub/new_id
+	echo $DEVICE > /sys/bus/pci/devices/${DEVICE}/driver/unbind
+	echo $DEVICE > /sys/bus/pci/drivers/pci-stub/bind
+	EOF
+	$ sh unbind_pci_dev.sh
+
+Now, the device is ready for use by a VM.
+
+Add Tracepoints To Guest Kernel
+===============================
+Profile the guest kernel to see the kernel cost for PCI hotplug.
+Note: there are no tracepoints in the kernel for measuring PCI device
+bring up.  The function "__pci_hp_register" does the heavy lifting, so
+profile that function.  "trace_printk" is a very useful tool to add
+debug print outs to the trace log.  Every trace_printk prints a time
+stamp as well.  For the purposes of this example, the simple
+"trace_printk" method can be used to instrument the code, e.g.:
+
+diff --git a/drivers/pci/hotplug/pci_hotplug_core.c b/drivers/pci/hotplug/pci_hotplug_core.c
+index 202f4a9..62908b9 100644
+--- a/drivers/pci/hotplug/pci_hotplug_core.c
++++ b/drivers/pci/hotplug/pci_hotplug_core.c
+@@ -438,6 +438,7 @@ int __pci_hp_register(struct hotplug_slot *slot, struct pci_bus *bus,
+        int result;
+        struct pci_slot *pci_slot;
+ 
++trace_printk( KERN_INFO "%s start\n",__func__);
+        if (slot == NULL)
+                return -ENODEV;
+        if ((slot->info == NULL) || (slot->ops == NULL))
+@@ -473,6 +474,7 @@ int __pci_hp_register(struct hotplug_slot *slot, struct pci_bus *bus,
+        dbg("Added slot %s to the list\n", name);
+ out:
+        mutex_unlock(&pci_hp_mutex);
++trace_printk( KERN_INFO "%s end\n",__func__);
+        return result;
+ }
+ 
+@@ -489,7 +491,7 @@ int pci_hp_deregister(struct hotplug_slot *hotplug)
+ {
+        struct hotplug_slot *temp;
+        struct pci_slot *slot;
+-
++trace_printk( KERN_INFO "%s start\n",__func__);
+        if (!hotplug)
+                return -ENODEV;
+ 
+@@ -510,6 +512,7 @@ int pci_hp_deregister(struct hotplug_slot *hotplug)
+        slot->hotplug = NULL;
+        pci_destroy_slot(slot);
+        mutex_unlock(&pci_hp_mutex);
++trace_printk( KERN_INFO "%s end\n",__func__);
+ 
+        return 0;
+ }
+
+Recompile the guest kernel and modules.
+
+Bring Up A VM
+=============
+Nothing special is required in the qemu start up script if the PCI
+device will be hotplugged in, as long as the requirements outlined
+above are met.  The following script should suffice as an example to
+test PCI hotplug:
+
+	$ cat > vm1.sh << EOF
+	KERNEL=<path to kernel>
+	ROOTFS=<path to rootfs>
+	$QEMU -nographic -k en-us -m 8192 \
+		-enable-kvm \
+		-kernel $KERNEL \
+		-append 'root=/dev/vda ro console=ttyS0 selinux=0 enforcing=0 ' \
+		-drive file=${ROOTFS},if=virtio
+	EOF
+
+Launch the script to bring up the VM:
+	$ sh vm1.sh
+
+Setup Tracing
+=============
+Once the VM is up and running, enable trace_printk and tracing:
+ 
+	echo 1 > /sys/kernel/debug/tracing/options/trace_printk
+	echo 1 > /sys/kernel/debug/tracing/tracing_on
+
+Hotplug The PCI Device
+======================
+Load the required modules:
+	$ modprobe acpiphp; modprobe pci_hotplug
+
+Switch to the qemu monitor (CRTL-A C) and add the device:
+
+	(qemu) device_add pci-assign,host=84:00.0,id=mynic
+
+The device initialization log follows:
+	pci 0000:00:06.0: BAR 0: assigned [mem 0xe0000000-0xe007ffff 64bit pref]
+	pci 0000:00:06.0: BAR 4: assigned [mem 0xe0080000-0xe0083fff 64bit pref]
+	pci 0000:00:06.0: BAR 2: assigned [io  0x1000-0x101f]
+	pci 0000:00:00.0: no hotplug settings from platform
+	pci 0000:00:00.0: using default PCI settings
+	pci 0000:00:01.0: no hotplug settings from platform
+	pci 0000:00:01.0: using default PCI settings
+	ata_piix 0000:00:01.1: no hotplug settings from platform
+	ata_piix 0000:00:01.1: using default PCI settings
+	pci 0000:00:01.3: no hotplug settings from platform
+	pci 0000:00:01.3: using default PCI settings
+	pci 0000:00:02.0: no hotplug settings from platform
+	pci 0000:00:02.0: using default PCI settings
+	e1000 0000:00:03.0: no hotplug settings from platform
+	e1000 0000:00:03.0: using default PCI settings
+	virtio-pci 0000:00:04.0: no hotplug settings from platform
+	virtio-pci 0000:00:04.0: using default PCI settings
+	virtio-pci 0000:00:05.0: no hotplug settings from platform
+	virtio-pci 0000:00:05.0: using default PCI settings
+	pci 0000:00:06.0: no hotplug settings from platform
+	ixgbe 0000:00:06.0: enabling device (0140 -> 0142)
+	ACPI: PCI Interrupt Link [LNKB] enabled at IRQ 10
+	ixgbe 0000:00:06.0: Multiqueue Enabled: Rx Queue count = 2, Tx Queue count = 2
+	ixgbe 0000:00:06.0: (PCI Express:5.0GT/s:Width x8) 90:e2:ba:4b:ed:e4
+	ixgbe 0000:00:06.0: MAC: 2, PHY: 15, SFP+: 5, PBA No: E70854-008
+	ixgbe 0000:00:06.0: Intel(R) 10 Gigabit Network Connection
+
+Now the device is hotplugged in and ready for use.
+
+Dump The Trace
+==============
+In the VM, disable tracing:
+	$ echo 0 > /sys/kernel/debug/tracing/tracing_on
+
+The trace log will be very long, but only the __pci_hp_register is of
+interest:
+
+	$ cat /sys/kernel/debug/tracing/trace | less
+	    ....................
+            <...>-1     [000] .......     0.487453: __pci_hp_register:
+            <...>-1     [000] .......     0.487470: __pci_hp_register:
+            <...>-1     [000] .......     0.487725: __pci_hp_register:
+            <...>-1     [000] .......     0.487742: __pci_hp_register:
+            <...>-1     [000] .......     0.488002: __pci_hp_register:
+            <...>-1     [000] .......     0.488018: __pci_hp_register:
+            <...>-1     [000] .......     0.488321: __pci_hp_register:
+            <...>-1     [000] .......     0.488330: __pci_hp_register:
+            <...>-1     [000] .......     0.488584: __pci_hp_register:
+            <...>-1     [000] .......     0.488592: __pci_hp_register:
+            <...>-1     [000] .......     0.488893: __pci_hp_register:
+            <...>-1     [000] .......     0.488902: __pci_hp_register:
+            <...>-1     [000] .......     0.489194: __pci_hp_register:
+            <...>-1     [000] .......     0.489211: __pci_hp_register:
+            <...>-1     [000] .......     0.489467: __pci_hp_register:
+            <...>-1     [000] .......     0.489476: __pci_hp_register:
+            <...>-1     [000] .......     0.489736: __pci_hp_register:
+            <...>-1     [000] .......     0.489744: __pci_hp_register:
+            <...>-1     [000] .......     0.490020: __pci_hp_register:
+            <...>-1     [000] .......     0.490029: __pci_hp_register:
+            <...>-1     [000] .......     0.490339: __pci_hp_register:
+            <...>-1     [000] .......     0.490356: __pci_hp_register:
+            <...>-1     [000] .......     0.490661: __pci_hp_register:
+            <...>-1     [000] .......     0.490669: __pci_hp_register:
+            <...>-1     [000] .......     0.490936: __pci_hp_register:
+            <...>-1     [000] .......     0.490944: __pci_hp_register:
+            <...>-1     [000] .......     0.491255: __pci_hp_register:
+            <...>-1     [000] .......     0.491264: __pci_hp_register:
+            <...>-1     [000] .......     0.491532: __pci_hp_register:
+            <...>-1     [000] .......     0.491546: __pci_hp_register:
+            <...>-1     [000] .......     0.491813: __pci_hp_register:
+            <...>-1     [000] .......     0.491821: __pci_hp_register:
+            <...>-1     [000] .......     0.492124: __pci_hp_register:
+            <...>-1     [000] .......     0.492133: __pci_hp_register:
+            <...>-1     [000] .......     0.492447: __pci_hp_register:
+            <...>-1     [000] .......     0.492464: __pci_hp_register:
+            <...>-1     [000] .......     0.492725: __pci_hp_register:
+            <...>-1     [000] .......     0.492734: __pci_hp_register:
+            <...>-1     [000] .......     0.493007: __pci_hp_register:
+            <...>-1     [000] .......     0.493016: __pci_hp_register:
+            <...>-1     [000] .......     0.493332: __pci_hp_register:
+            <...>-1     [000] .......     0.493341: __pci_hp_register:
+            <...>-1     [000] .......     0.493602: __pci_hp_register:
+            <...>-1     [000] .......     0.493617: __pci_hp_register:
+            <...>-1     [000] .......     0.493930: __pci_hp_register:
+            <...>-1     [000] .......     0.493939: __pci_hp_register:
+            <...>-1     [000] .......     0.494255: __pci_hp_register:
+            <...>-1     [000] .......     0.494264: __pci_hp_register:
+            <...>-1     [000] .......     0.494524: __pci_hp_register:
+            <...>-1     [000] .......     0.494532: __pci_hp_register:
+            <...>-1     [000] .......     0.494796: __pci_hp_register:
+            <...>-1     [000] .......     0.494813: __pci_hp_register:
+            <...>-1     [000] .......     0.495073: __pci_hp_register:
+            <...>-1     [000] .......     0.495081: __pci_hp_register:
+            <...>-1     [000] .......     0.495434: __pci_hp_register:
+            <...>-1     [000] .......     0.495443: __pci_hp_register:
+            <...>-1     [000] .......     0.495703: __pci_hp_register:
+            <...>-1     [000] .......     0.495711: __pci_hp_register:
+
+The kernel cost for pci hotplug for this particular device is:
+	0.495711-0.487453=8,258 us

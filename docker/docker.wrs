@@ -1,0 +1,125 @@
+Docker Intro
+------------
+
+(taken from docs.docker.com)
+
+The Docker daemon runs on a host machine. The user does not directly
+interact with the daemon, but instead through the Docker client.
+
+The Docker client, in the form of the docker binary, is the primary user
+interface to Docker. It accepts commands from the user and communicates
+back and forth with a Docker daemon.
+
+A Docker image is a read-only template. For example, an image could
+contain an Ubuntu operating system with Apache and your web application
+installed. Images are used to create Docker containers. Docker provides
+a simple way to build new images or update existing images, or you can
+download Docker images that other people have already created. Docker
+images are the build component of Docker.
+
+The Docker registry is the store for your Docker images. Once you build
+a Docker image you can push it to a public registry Docker Hub or to
+your own registry running behind your firewall.
+
+Docker containers are similar to a directory. A Docker container holds
+everything that is needed for an application to run. Each container
+is created from a Docker image. Docker containers can be run, started,
+stopped, moved, and deleted. Each container is an isolated and secure
+application platform. Docker containers are the run component of Docker.
+
+Docker makes use of union file systems to combine these layers into a
+single image. Union file systems allow files and directories of separate
+file systems, known as branches, to be transparently overlaid, forming
+a single coherent file system.
+
+One of the reasons Docker is so lightweight is because of these
+layers. When you change a Docker image?for example, update an
+application to a new version? a new layer gets built. Thus, rather
+than replacing the whole image or entirely rebuilding, as you may do
+with a virtual machine, only that layer is added or updated. Now you
+don't need to distribute a whole new image, just the update, making
+distributing Docker images faster and simpler.
+
+Every image starts from a base image, for example ubuntu, a base Ubuntu
+image, or fedora, a base Fedora image. You can also use images of your
+own as the basis for a new image, for example if you have a base Apache
+image you could use this as the base of all your web application images.
+
+
+Basic Operations
+----------------
+
+When ovp-kvm boots up, the docker engine and docker-registry should
+be up and running.
+
+Example operations include searching for images, pulling images and
+running images:
+
+	root@128:~# docker search debian
+	NAME                                      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+	debian                                    (Semi) Official Debian base image.              349       [OK]       
+	google/debian                                                                             36                   [OK]
+	neurodebian                               NeuroDebian provides neuroscience research...   5         [OK]       
+	hanswesterbeek/google-debian-oracle-jdk   Oracle's JDK installed on top of Google's ...   5                    [OK]
+	tutum/debian                              Debian image with SSH access. For the root...   3                    [OK]
+	shuron/debian-openjdk-7                   Open JDK 7 64x on plain debian (Jessie) La...   2                    [OK]
+	mschuerig/debian-subsonic                 Subsonic 5.1 on Debian/wheezy.                  2                    [OK]
+	webhippie/cedarish-debian                 Heroku cedar-ish base images for Docker bu...   2                    [OK]
+	jesselang/debian-vagrant                  Stock Debian Images made Vagrant-friendly ...   1                    [OK]
+	eboraas/debian                            Debian base images, for all currently-avai...   1                    [OK]
+	maxexcloo/debian                          Docker base image built on Debian with Sup...   1                    [OK]
+	fike/debian-postgresql                    PostgreSQL 9.4 beta until 9.0 version runn...   1                    [OK]
+	kalabox/debian                                                                            1                    [OK]
+	jprjr/debian-nginx                                                                        1                    [OK]
+	takeshi81/debian-wheezy-php               Debian wheezy based PHP repo.                   1                    [OK]
+	icco/simple-debian                        A debian build with Ruby 2.1 installed and...   1                    [OK]
+	razmo/debian                              Debian base                                     0                    [OK]
+	reinblau/debian                           Debian with usefully default packages for ...   0                    [OK]
+	thedutchselection/debian                                                                  0                    [OK]
+	tianon/debian-devel                                                                       0                    [OK]
+	alexisvincent/debian                                                                      0                    [OK]
+	solict/provisionous-puppet-debian         Debian provisions with Puppet included          0                    [OK]
+	essembeh/debian                           My own Debian Jessie image                      0                    [OK]
+	yaronr/debian-wheezy                      Debian Wheezy, 85mb, with a few extras          0                    [OK]
+	calebj/debian                                                                             0                    [OK]
+	root@128:~# docker pull debian
+	latest: Pulling from debian
+	30d39e59ffe2: Pull complete 
+	c90d655b99b2: Pull complete 
+	511136ea3c5a: Already exists 
+	debian:latest: The image you are pulling has been verified. Important: image verification is a tech preview feature and should not be relied on to provide security.
+	Status: Downloaded newer image for debian:latest
+
+	root@128:~# docker images
+	REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+	debian              latest              c90d655b99b2        3 weeks ago         85.01 MB
+
+	root@128:~# docker run -i -t debian /bin/bash
+	root@d9d4344a62f1:/# uname -a
+	Linux d9d4344a62f1 3.14.28-rt22-WR7.0.0.0_ovp #5 SMP Wed Feb 18 17:10:45 EST 2015 x86_64 GNU/Linux
+	root@d9d4344a62f1:/# cat /etc/issue
+	Debian GNU/Linux 7 \n \l
+	root@d9d4344a62f1:/# mount
+	none on / type aufs (rw,relatime,si=e0268e8b0e2c7bec,dio)
+
+(from another terminal)
+	root@128:~# docker ps
+	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+	d9d4344a62f1        debian:latest       "/bin/bash"         39 seconds ago      Up 38 seconds                           serene_pasteur      
+
+
+(back to guest)
+	root@d9d4344a62f1:/# exit
+	root@128:~# docker ps
+	CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+
+A host directory can be mounted in the running image
+
+	# docker run -t -i -v /root:/opt/root  debian  /bin/bash 
+	root@eb753d5cdec0:/# touch opt/root/foo
+
+	# host
+	root@128:~# ls -l
+	total 0
+	-rw-r--r-- 1 root root 0 Feb 19 19:33 foo

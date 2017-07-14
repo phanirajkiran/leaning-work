@@ -94,3 +94,18 @@ git shortlog -sn --no-merges
 git log --date-order --pretty=format:"%ad %H"
 VS
 git log --date-order --pretty=format:"%cd %H"
+
+
+lyang001@pek-lyang0-d1:~/WORK/updates/wr-kernel$ git log --pretty=fuller --since='11 days ago'  --name-status origin/WRLINUX_9_BASE
+commit 0ab329348d4912bea5c942c44b68b220e807b787
+Author:     He Zhe <zhe.he@windriver.com>
+AuthorDate: Thu Dec 29 14:38:21 2016 +0800
+Commit:     He Zhe <zhe.he@windriver.com>
+CommitDate: Thu Dec 29 14:38:21 2016 +0800
+
+    cgl: Add ktype and kbranch for qemux86 qemux86-64
+    
+    Signed-off-by: He Zhe <zhe.he@windriver.com>
+
+M       recipes-kernel/linux/linux-windriver_4.8.bb
+M       recipes-kernel/linux/qemu.inc

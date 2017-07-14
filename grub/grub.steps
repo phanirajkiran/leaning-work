@@ -1,0 +1,35 @@
+
+4.1.2 SATA, USB and SAS
+-----------------------
+
+To boot from SATA, USB and SAS disks, please select the right devices from the
+BIOS "Boot" sub-menu. GRUB must be installed on the boot disk partition.
+Assuming "/dev/sda1" is the boot partition, the following commands can be
+used:
+
+	$ mount /dev/sda1 /mnt/
+	$ grub-install --root-directory=/mnt/ /dev/sda
+	$ vi /mnt/boot/grub/menu.lst
+
+	default        0
+	timeout        6
+
+	title           WRLinux BSP Booting
+	root            (hd0,0)
+	kernel          /boot/bzImage root=/dev/sda1 rw ip=dhcp
+
+In the GRUB configuration file "/mnt/boot/grub/menu.lst", please make sure
+that the 'root' option and the 'kernel' option have the right settings.
+For detailed instructions on installing and booting Wind River Linux
+from a hard disk, please see the User's Guide. Note: In 6.0 and some linux
+distributions, grub2 is used instead of grub. To maintain simplicity and
+compatibility, this document uses the grub style configuration and
+command. At the last step, use grub-menulst2cfg to convert the configuration
+file to the grub2-style:
+
+	$ grub-menulst2cfg /mnt/boot/grub/menu.lst /mnt/boot/grub/grub.cfg
+
+The only thing different from SATA/SAS when booting from a USB device is that 
+you should pass "rootwait" to the kernel, which specifies that the kernel
+will wait for the root device to show up, otherwise the kernel cannot detect 
+the USB storage device when mounting rootfs.

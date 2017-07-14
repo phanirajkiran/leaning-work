@@ -1,3 +1,3 @@
 [filter1]
-summary=New_Incomplete for CGP7, SCP7, LIN7, LINBDF7, LIN8, CGP8, SCP8, OVP8, GWP8, LINPUL8,IDP3
-filter=project in (CGP7, SCP7, LIN7, LINBDF7, LIN8, CGP8, SCP8, OVP8, GWP8, LINPUL8, IDP3) AND status = New_Incomplete AND reporter in (membersOf(CDC-ENG-Linux-core-test), membersOf(IDP-ENG-Test))
+summary=On Hond defects for LIN9
+filter=project in (LIN9) AND status = "On Hold" AND reporter in (membersOf(CDC-ENG-Linux-core-test), membersOf(IDP-ENG-Test)) AND "On Hold Disposition" = "Waiting For Reporter"

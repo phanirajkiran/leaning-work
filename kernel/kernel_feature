@@ -1,0 +1,60 @@
+1)F2FS all arch 
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable$ git tag --contains a14d53937
+v3.10
+v3.10-rc1
+v3.10-rc2
+v3.10-rc3
+v3.10-rc4
+v3.10-rc5
+v3.10-rc6
+v3.10-rc7
+v3.10.1
+v3.10.10
+
+
+2)KASAN 
+lyang001@lyang001-OptiPlex-9010:~/WORK/trees/linux-stable/arch/arm64$ git tag --contains f1b9032f6
+v4.4
+v4.4-rc3
+v4.4-rc4
+v4.4-rc5
+v4.4-rc6
+v4.4-rc7
+v4.4-rc8
+v4.4.1
+v4.4.10
+
+x86-64 : Y
+arm64  : Y, v4.4
+
+
+
+3)BPF: all
+init/Kconfig 
+config BPF 
+        bool
+config BPF_SYSCALL
+        bool "Enable bpf() system call"
+        select ANON_INODES
+        select BPF
+        default n
+        help
+          Enable the bpf() system call that allows to manipulate eBPF
+          programs and maps via file descriptors.
+
+
+
+4)DAM_API_DEBUG not comp with PREEMPT_RT_FULL
+From fdb88589136ad5e9c2ae58f11167670dd9ae15aa Mon Sep 17 00:00:00 2001
+From: fupan li <fupan.li@windriver.com>
+Date: Fri, 14 Nov 2014 09:20:25 +0800
+Subject: [PATCH 4/7] set DMA_API_DEBUG feature depending on !PREEMPT_RT_FULL
+
+Since DMA_API_DEBUG feature will causes a performance
+degradation and a spinlock error as below, so disable
+it on RT kernel.
+
+5)CONFIG_NO_HZ_FULL https://jira.wrs.com:8443/browse/LIN6-11399
+
+
+6)latencytop: x86 and powerpc

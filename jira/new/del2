@@ -1,0 +1,288 @@
+{
+    "key": "LIN8-4914", 
+    "fields": {
+        "customfield_10701": null, 
+        "customfield_10700": null, 
+        "customfield_10702": null, 
+        "customfield_10707": null, 
+        "labels": [
+            "lx04"
+        ], 
+        "assignee": {
+            "displayName": "Hao, Kexin", 
+            "name": "khao", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=khao", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Kexin.Hao@windriver.com", 
+            "key": "khao", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "lastViewed": null, 
+        "customfield_10015": null, 
+        "customfield_11302": "TA160914", 
+        "customfield_10010": null, 
+        "customfield_11301": 69570818840.0, 
+        "votes": {
+            "hasVoted": false, 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/LIN8-4914/votes", 
+            "votes": 0
+        }, 
+        "customfield_11001": "/net/pek-hostel-deb04/buildarea1/nightly/WRL8/product_install/wrlinux-8/wrlinux/configure --enable-board=intel-apollolake-i-64 --enable-kernel=preempt-rt --enable-rootfs=glibc-std\r\n --with-layer=/lpg-build/cdc/WASSP_LINUX_80/testcases/wrlinux/wr-testing/bts-dev --with-template=feature/bts --enable-internet-download=yes --enable-jobs=8 --enable-parallel-pkgbuilds=8 --enable-reconfig=yes\r\n/opt/wr-test/testcases/bts/hwmonitor_test/runtest.sh", 
+        "customfield_11000": [
+            {
+                "archived": false, 
+                "name": "8.0.0.10", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/version/26000", 
+                "releaseDate": "2016-10-14", 
+                "released": true, 
+                "id": "26000"
+            }
+        ], 
+        "customfield_11002": {
+            "released": false, 
+            "self": "https://jira.wrs.com:8443/rest/api/2/version/26201", 
+            "archived": false, 
+            "id": "26201", 
+            "name": "8.0.0.11"
+        }, 
+        "customfield_12400": null, 
+        "timespent": null, 
+        "customfield_12407": "2016-10-24T02:52:00.000-0700", 
+        "duedate": null, 
+        "updated": "2016-10-29T20:15:55.000-0700", 
+        "worklog": {
+            "worklogs": [], 
+            "total": 0, 
+            "startAt": 0, 
+            "maxResults": 20
+        }, 
+        "customfield_10800": null, 
+        "customfield_10801": null, 
+        "customfield_10008": null, 
+        "customfield_10006": null, 
+        "customfield_10007": null, 
+        "customfield_11700": null, 
+        "customfield_10005": null, 
+        "aggregatetimeoriginalestimate": null, 
+        "customfield_12800": null, 
+        "customfield_12100": null, 
+        "summary": "intel-apollolake-i bsp hwmonitor_test failed.", 
+        "timetracking": {}, 
+        "issuetype": {
+            "name": "Bug", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+            "iconUrl": "https://jira.wrs.com:8443/secure/viewavatar?size=xsmall&avatarId=14303&avatarType=issuetype", 
+            "subtask": false, 
+            "avatarId": 14303, 
+            "id": "1", 
+            "description": "A problem which impairs or prevents the functions of the product."
+        }, 
+        "timeestimate": null, 
+        "creator": {
+            "displayName": "Chi, Liang", 
+            "name": "LChi1", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=LChi1", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Liang.Chi@windriver.com", 
+            "key": "lchi1", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "customfield_10520": null, 
+        "customfield_12801": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/14202", 
+            "id": "14202", 
+            "value": "Reproducible"
+        }, 
+        "customfield_11202": "https://rally1.rallydev.com/slm/#/detail/task/69570818840", 
+        "customfield_11201": "US88463", 
+        "customfield_11404": null, 
+        "customfield_12500": null, 
+        "progress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_10012": {
+            "displayName": "Chi, Liang", 
+            "name": "LChi1", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=LChi1", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Liang.Chi@windriver.com", 
+            "key": "lchi1", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "aggregateprogress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_12200": null, 
+        "reporter": {
+            "displayName": "Chi, Liang", 
+            "name": "LChi1", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=LChi1", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Liang.Chi@windriver.com", 
+            "key": "lchi1", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "customfield_10103": null, 
+        "environment": null, 
+        "created": "2016-10-17T22:41:26.000-0700", 
+        "aggregatetimespent": null, 
+        "customfield_10901": null, 
+        "customfield_10900": null, 
+        "comment": {
+            "total": 0, 
+            "startAt": 0, 
+            "comments": [], 
+            "maxResults": 0
+        }, 
+        "aggregatetimeestimate": null, 
+        "customfield_10501": null, 
+        "customfield_10508": null, 
+        "customfield_11904": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11902", 
+            "id": "11902", 
+            "value": "No"
+        }, 
+        "customfield_10004": null, 
+        "priority": {
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/critical.svg", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/priority/2", 
+            "name": "P2", 
+            "id": "2"
+        }, 
+        "customfield_11905": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11904", 
+            "id": "11904", 
+            "value": "No"
+        }, 
+        "customfield_11906": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11906", 
+            "id": "11906", 
+            "value": "No"
+        }, 
+        "customfield_11900": null, 
+        "customfield_11901": null, 
+        "customfield_11902": null, 
+        "customfield_11908": "http://epm.wrs.com/rally/US88463", 
+        "customfield_11500": null, 
+        "customfield_10517": null, 
+        "watches": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/LIN8-4914/watchers", 
+            "watchCount": 1, 
+            "isWatching": false
+        }, 
+        "customfield_10512": null, 
+        "customfield_10518": null, 
+        "customfield_10519": null, 
+        "resolutiondate": "2016-10-20T19:20:07.000-0700", 
+        "project": {
+            "name": "Linux 8", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/project/14501", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/projectavatar?size=small&pid=14501&avatarId=10011", 
+                "32x32": "https://jira.wrs.com:8443/secure/projectavatar?size=medium&pid=14501&avatarId=10011", 
+                "48x48": "https://jira.wrs.com:8443/secure/projectavatar?pid=14501&avatarId=10011", 
+                "16x16": "https://jira.wrs.com:8443/secure/projectavatar?size=xsmall&pid=14501&avatarId=10011"
+            }, 
+            "projectCategory": {
+                "self": "https://jira.wrs.com:8443/rest/api/2/projectCategory/11200", 
+                "id": "11200", 
+                "name": "Linux", 
+                "description": ""
+            }, 
+            "key": "LIN8", 
+            "id": "14501"
+        }, 
+        "customfield_10804": null, 
+        "customfield_13002": null, 
+        "customfield_13001": null, 
+        "customfield_13000": "0|i26udj:", 
+        "workratio": -1, 
+        "customfield_10608": null, 
+        "issuelinks": [], 
+        "customfield_10600": null, 
+        "customfield_10601": null, 
+        "customfield_10602": null, 
+        "customfield_10603": null, 
+        "customfield_10604": null, 
+        "customfield_10605": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/10439", 
+            "id": "10439", 
+            "value": "Standard"
+        }, 
+        "customfield_10606": null, 
+        "customfield_10607": null, 
+        "subtasks": [], 
+        "customfield_11100": null, 
+        "customfield_10802": null, 
+        "attachment": [], 
+        "customfield_12703": null, 
+        "customfield_12702": null, 
+        "status": {
+            "statusCategory": {
+                "name": "Done", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/3", 
+                "id": 3, 
+                "key": "done", 
+                "colorName": "green"
+            }, 
+            "description": "Issue has been solved", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/status/5", 
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/resolved.png", 
+            "id": "5", 
+            "name": "Resolved"
+        }, 
+        "description": "Problem Description\r\n======================\r\nDefault kernel option not enabled.\r\n\r\nExpected Behavior\r\n======================\r\nDefault kernel option enabled.\r\n\r\nObserved Behavior\r\n======================\r\nDefault kernel option not enabled.\r\n\r\nLogs\r\n======================\r\nroot@128.224.179.251:/root# modprobe coretemp\r\nmodprobe: FATAL: Module coretemp not found.", 
+        "customfield_10011": null, 
+        "timeoriginalestimate": null, 
+        "customfield_10200": null, 
+        "customfield_10201": "Log location\r\n======================\r\nhttp://pek-lpgtest3.wrs.com/lpg-build/cdc/publiclog/WRLinux80AsyncBSPs/2016-10/Week1/GIT_20161014/BSP/intel-apollolake-i-64_preempt-rt_glibc-std/intel_oxbow_hill_WR_systemd/hwmonitor_test/", 
+        "customfield_13300": null, 
+        "customfield_13301": null, 
+        "customfield_13302": null, 
+        "customfield_13303": null, 
+        "customfield_13304": null, 
+        "customfield_13305": null, 
+        "components": [
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/component/20607", 
+                "id": "20607", 
+                "name": "BSP - Async"
+            }
+        ], 
+        "resolution": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/resolution/1", 
+            "id": "1", 
+            "name": "Fixed", 
+            "description": "A fix for this issue is checked into the tree and tested."
+        }
+    }, 
+    "self": "https://jira.wrs.com:8443/rest/api/2/issue/715361", 
+    "id": "715361", 
+    "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog,versionedRepresentations"
+}

@@ -1,0 +1,7 @@
+root@ad7f61772b47:/# sudo dpkg --get-selections | grep -v deinstall |grep post
+postgresql					install
+postgresql-9.4					install
+postgresql-client-9.4				install
+postgresql-client-common			install
+postgresql-common				install
+

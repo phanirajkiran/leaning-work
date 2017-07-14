@@ -1,0 +1,12 @@
+1)install given version pacakges
+https://packages.debian.org/jessie-backports/python-pyudev
+apt-get install python-pyudev="0.21.0-1~bpo8+1"
+--->
+apt-get install -y python-pyudev="0.21.0-1~bpo8+1"
+
+Need to get 109 MB of archives.
+After this operation, 246 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Abort.
+INFO[0028] The command [/bin/sh -c apt-get update &&    DEBIAN_FRONTEND=noninteractive apt-get install csh openjdk-7-jdk openjdk-7-jre &&    apt-get -y --force-yes install lib32z1 lib32ncurses5] returned a non-zero code: 1 
+use "-y"
+DEBIAN_FRONTEND=noninteractive apt-get install -y csh openjdk-7-jdk openjdk-7-jre 

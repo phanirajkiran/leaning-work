@@ -24,3 +24,7 @@
 6)替换
 
   替换当前字符 r
+
+set nobackup
+set nowritebackup
+set noundofile

@@ -1,0 +1,36 @@
+https://dba.stackexchange.com/questions/82227/error-var-lib-postgresql-9-3-main-is-not-accessible-or-does-not-exist
+ 2
+down vote
+	
+
+If you suspect there's something wrong with our database (cluster), make a copy of your database directory before you continue. Just to be sure. On Ubuntu the default directory would be: /var/lib/postgresql/9.3/main/ - but your installation may differ.
+
+Actually, your command should work (in default Ubuntu installations), because the service command starts the postgres server process with appropriate privileges (as system user postgres)
+
+sudo service postgresql start
+
+Translates to something like:
+
+sudo -u postgres /usr/lib/postgresql/9.3/bin/pg_ctl -D /var/lib/postgresql/9.3/main/ -o "-c config_file=/etc/postgresql/9.3/main/postgresql.conf" start
+
+That starts all db clusters you may have. To start a particular one, use the wrapper pg_ctlcluster:
+
+sudo -u postgres pg_ctlcluster 9.3 main start
+
+To get the status of all currently installed db clusters use pg_ctlclusters:
+
+sudo -u postgres pg_lscluster
+
+You must be aware that the data directory is not the same as the config directory in default Debian or Ubuntu Postgres installations. For Postgres 9.3 that would be:
+
+data dir: /var/lib/postgresql/9.3/main/
+config dir: /etc/postgresql/9.3/main/
+
+You can check the /etc/postgresql/9.3/main/postgrsql.conf for the actual data dir. It's the line starting with
+
+data_directory = 
+
+The error message indicates that Postgres tries to start with the default data dir, but it is not there or the privileges have been changed. Did you check?
+
+Or are you running a non-default installation?
+

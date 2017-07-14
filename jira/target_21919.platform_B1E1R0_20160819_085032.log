@@ -1,0 +1,887 @@
+
+
+U-Boot 2015.01QorIQ-SDK-V1.8+g6ba8eed (Jun 14 2015 - 06:33:44)
+
+CPU0:  T2080E, Version: 1.0, (0x85380010)
+Core:  e6500, Version: 2.0, (0x80400020)
+Clock Configuration:
+       CPU0:1533.180 MHz, CPU1:1533.180 MHz, CPU2:1533.180 MHz, CPU3:1533.180 MHz, 
+       CCB:599.940 MHz,
+       DDR:799.980 MHz (1599.960 MT/s data rate) (Asynchronous), IFC:149.985 MHz
+       FMAN1: 699.930 MHz
+       QMAN:  299.970 MHz
+       PME:   599.940 MHz
+L1:    D-cache 32 KiB enabled
+       I-cache 32 KiB enabled
+Reset Configuration Word (RCW):
+       00000000: 120c0017 15000000 00000000 00000000
+       00000010: 66150002 00000000 ec027000 c1000000
+       00000020: 00e00000 00000000 00000000 000307fc
+       00000030: 00000000 00000000 00000000 00000004
+Board: T2080RDB, Board rev: 0x01 CPLD ver: 0x03, boot from NOR vBank1
+SERDES Reference Clocks:
+SD1_CLK1=156.25MHZ, SD1_CLK2=100.00MHZ
+SD2_CLK1=100.00MHZ, SD2_CLK2=100.00MHZ
+I2C:   ready
+SPI:   ready
+DRAM:  Initializing....using SPD
+Detected UDIMM 18KSF51272HZ-1G6K2
+2 GiB left unmapped
+4 GiB (DDR3, 64-bit, CL=11, ECC on)
+       DDR Chip-Select Interleaving Mode: CS0+CS1
+Flash: 128 MiB
+L2:    2 MiB enabled
+Corenet Platform Cache: 512 KiB enabled
+Using SERDES1 Protocol: 102 (0x66)
+Using SERDES2 Protocol: 21 (0x15)
+SEC0: RNG instantiated
+NAND:  512 MiB
+MMC:   FSL_SDHC: 0
+EEPROM: Invalid ID (ff ff ff ff)
+PCIe1: Root Complex, x4 gen1, regs @ 0xfe240000
+  01:00.0     - 8086:105e - Network controller
+  01:00.1     - 8086:105e - Network controller
+PCIe1: Bus 00 - 01
+PCIe2: Root Complex, x2 gen1, regs @ 0xfe250000
+  03:00.0     - 1957:0808 - Processor
+PCIe2: Bus 02 - 03
+PCIe3: disabled
+PCIe4: Endpoint, undetermined, regs @ 0xfe270000
+PCIe4: Bus 04 - 04
+In:    serial
+Out:   serial
+Err:   serial
+Net:   Fman1: Uploading microcode version 106.4.15
+PHY reset timed out
+Not found Cortina PHY ucode at 0xefe00000
+PHY reset timed out
+Not found Cortina PHY ucode at 0xefe00000
+e1000: 00:15:17:b0:01:76
+       e1000: 00:15:17:b0:01:77
+       FM1@DTSEC3 [PRIME], FM1@DTSEC4, FM1@TGEC1, FM1@TGEC2, FM1@TGEC3, FM1@TGEC4, e1000#0
+Warning: e1000#0 MAC addresses don't match:
+Address in SROM is         00:15:17:b0:01:76
+Address in environment is  00:04:9f:00:7a:06
+, e1000#1
+Warning: e1000#1 MAC addresses don't match:
+Address in SROM is         00:15:17:b0:01:77
+Address in environment is  00:04:9f:00:7a:07
+
+Hit any key to stop autoboot:  3  0 
+=> n
+Unknown command 'n' - try 'help'
+=> printenv
+baudrate=115200
+bdev=sda3
+bootargs=root=/dev/nfs rw nfsroot=128.224.178.20:/export/pxeboot/vlm-boards/21919/rootfs ip=128.224.178.34:128.224.178.20:128.224.178.1:255.255.254.0:t2080rdb:eth2:off console=ttyS0,115200
+bootcmd=run nfsboot
+bootdelay=3
+bootfile=vlm-boards/21919/kernel
+consoledev=ttyS0
+diskboot=setenv bootargs root=/dev/sda1 rootdelay=5 rw ip=$ipaddr:$serverip:$gatewayip:$netmask:$hostname:$netdev:off console=$consoledev,$baudrate $othbootargs;tftp $loadaddr $bootfile;tftp $fdtaddr $fdtfile;bootm $loadaddr - $fdtaddr
+eth10addr=00:04:9f:00:7a:0a
+eth11addr=00:04:9f:00:7a:0b
+eth12addr=00:04:9f:00:7a:0c
+eth13addr=00:04:9f:00:7a:0d
+eth14addr=00:04:9f:00:7a:0e
+eth15addr=00:04:9f:00:7a:0f
+eth1addr=00:04:9f:00:7a:01
+eth2addr=00:04:9f:00:7a:02
+eth3addr=00:04:9f:00:7a:03
+eth4addr=00:04:9f:00:7a:04
+eth5addr=00:04:9f:00:7a:05
+eth6addr=00:04:9f:00:7a:06
+eth7addr=00:04:9f:00:7a:07
+eth8addr=00:04:9f:00:7a:08
+eth9addr=00:04:9f:00:7a:09
+ethact=FM1@DTSEC3
+ethaddr=00:04:9f:00:7a:00
+ethprime=FM1@DTSEC3
+fdtaddr=1900000
+fdtfile=vlm-boards/21919/dtb
+fileaddr=1900000
+filesize=98ca
+fman_ucode=eff00000
+gatewayip=128.224.178.1
+hostname=t2080rdb
+hvboot=setenv bootargs console=ttyS0,115200 config-addr=0xfe8900000;bootm 0xfe8700000 - 0xfe8800000
+hwconfig=fsl_ddr:ctlr_intlv=cacheline,bank_intlv=auto;usb1:dr_mode=peripheral,phy_type=utmi;fsl_fm1_xaui_phy:xfi
+ipaddr=128.224.178.34
+loadaddr=1000000
+nb=setenv bootargs root=/dev/nfs rw nfsroot=$serverip:$rootpath ip=dhcp console=$consoledev,$baudrate $othbootargs;tftp $loadaddr $bootfile;tftp $fdtaddr $fdtfile;bootm $loadaddr - $fdtaddr
+netdev=eth2
+netmask=255.255.254.0
+nfsboot=setenv bootargs root=/dev/nfs rw nfsroot=$serverip:$rootpath ip=$ipaddr:$serverip:$gatewayip:$netmask:$hostname:$netdev:off console=$consoledev,$baudrate $othbootargs;tftp $loadaddr $bootfile;tftp $fdtaddr $fdtfile;bootm $loadaddr - $fdtaddr
+othbootargs=oprofile.timer=1
+ramboot=setenv bootargs root=/dev/ram rw console=$consoledev,$baudrate $othbootargs;tftp $ramdiskaddr $ramdiskfile;tftp $loadaddr $bootfile;tftp $fdtaddr $fdtfile;bootm $loadaddr $ramdiskaddr $fdtaddr
+ramdiskaddr=4000000
+ramdiskfile=ramdisk.uboot
+rootpath=/export/pxeboot/vlm-boards/21919/rootfs
+sataboot=setenv bootargs root=/dev/sda1 rootdelay=5 rw console=$consoledev,$baudrate $othbootargs;bootm e8020000 - e8800000
+sdaboot=setenv bootargs root=/dev/sda1 rw console=$consoledev,$baudrate $othbootargs;tftp $loadaddr $bootfile;tftp $fdtaddr $fdtfile;bootm $loadaddr - $fdtaddr
+serverip=128.224.178.20
+stderr=serial
+stdin=serial
+stdout=serial
+tftpflash=tftpboot $loadaddr $uboot && protect off $ubootaddr +$filesize && erase $ubootaddr +$filesize && cp.b $loadaddr $ubootaddr $filesize && protect on $ubootaddr +$filesize && cmp.b $loadaddr $ubootaddr $filesize
+uboot="u-boot.bin"
+ubootaddr=0xeff40000
+
+Environment size: 2916/8188 bytes
+=> setenv ipaddr 128.224.178.34
+=> setenv netmask 255.255.254.0
+=> setenv serverip 128.224.178.20
+=> setenv gatewayip 128.224.178.1
+=> setenv bootargs 'root=/dev/nfs rw nfsroot=128.224.178.20:/export/pxeboot/vlm-boards/21919/rootfs TCF=1 ip=128.224.178.34:128.224.178.20:128.224.178.1:255.255.254.0:2080rdb:eth2:off console=ttyS0,115200 usb-storage.delay_use=10 selinux=0 enforcing=0'
+=> sleep 3
+=> tftp 1000000 vlm-boards/21919/kernel
+Using FM1@DTSEC3 device
+TFTP from server 128.224.178.20; our IP address is 128.224.178.34
+Filename 'vlm-boards/21919/kernel'.
+Load address: 0x1000000
+Loading: *#################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 #################################################################
+	 ################
+	 2.5 MiB/s
+done
+Bytes transferred = 6905708 (695f6c hex)
+=> tftp 1900000 vlm-boards/21919/dtb
+Using FM1@DTSEC3 device
+TFTP from server 128.224.178.20; our IP address is 128.224.178.34
+Filename 'vlm-boards/21919/dtb'.
+Load address: 0x1900000
+Loading: *###
+	 1.4 MiB/s
+done
+Bytes transferred = 39114 (98ca hex)
+=> bootm 1000000 - 1900000
+WARNING: adjusting available memory to 30000000
+## Booting kernel from Legacy Image at 01000000 ...
+   Image Name:   Linux-4.1.21-rt13-WR9.0.0.0_pree
+   Image Type:   PowerPC Linux Kernel Image (gzip compressed)
+   Data Size:    6905644 Bytes = 6.6 MiB
+   Load Address: 00000000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+## Flattened Device Tree blob at 01900000
+   Booting using the fdt blob at 0x1900000
+   Uncompressing Kernel Image ... OK
+   Loading Device Tree to 03fe3000, end 03fff8c9 ... OK
+Using CoreNet Generic machine description
+MMU: Supported page sizes
+         4 KB as direct
+      1024 KB as direct
+      2048 KB as direct & indirect
+      4096 KB as direct
+     16384 KB as direct
+     65536 KB as direct
+    262144 KB as direct
+   1048576 KB as direct
+MMU: Book3E HW tablewalk enabled
+No /soc@ffe000000/qman@318000 property 'fsl,qman-fqd', using memblock_alloc(0000000000400000)
+No /soc@ffe000000/qman@318000 property 'fsl,qman-pfdr', using memblock_alloc(0000000002000000)
+Qman ver:0a01,03,01,02
+No /soc@ffe000000/bman@31a000 property 'fsl,bman-fbpr', using memblock_alloc(0000000001000000)
+Bman ver:0a02,02,01
+pme: No /soc@ffe000000/pme@316000 property 'fsl,pme-pdsr', using memblock_alloc(0x0000000001000000)
+pme: No /soc@ffe000000/pme@316000 property 'fsl,pme-sre', using memblock_alloc(0x0000000000a00000)
+No USDPAA memory, no 'usdpaa_mem' bootarg
+ <- setup_system()
+bootconsole [udbg0] enabled
+CPU maps initialized for 2 threads per core
+Starting Linux PPC64 #1 SMP PREEMPT RT Fri Aug 19 11:36:46 CST 2016
+-----------------------------------------------------
+ppc64_pft_size    = 0x0
+phys_mem_size     = 0x100000000
+dcache_line_size  = 0x40
+icache_line_size  = 0x40
+cpu_features      = 0x00180480581802c8
+  possible        = 0x00180480581802c8
+  always          = 0x00180400581802c0
+cpu_user_features = 0xdc008000 0x08000000
+mmu_features      = 0x000a0010
+firmware_features = 0x0000000000000000
+-----------------------------------------------------
+Initializing cgroup subsys cpuset
+Initializing cgroup subsys cpu
+Initializing cgroup subsys cpuacct
+Linux version 4.1.21-rt13-WR9.0.0.0_preempt-rt (wr-taf@pek-lpgtest16.wrs.com) (gcc version 6.1.1 20160511 (GCC) ) #1 SMP PREEMPT RT Fri Aug 19 11:36:46 CST 2016
+CoreNet Generic board
+Zone ranges:
+  DMA      [mem 0x0000000000000000-0x000000007fffffff]
+  DMA32    empty
+  Normal   [mem 0x0000000080000000-0x00000000ffffffff]
+Movable zone start for each node
+Early memory node ranges
+  node   0: [mem 0x0000000000000000-0x00000000ffffffff]
+Initmem setup node 0 [mem 0x0000000000000000-0x00000000ffffffff]
+MMU: Allocated 2112 bytes of context maps for 255 contexts
+PERCPU: Embedded 469 pages/cpu @c0000000f2600000 s1882832 r0 d38192 u2097152
+Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 1032192
+Kernel command line: root=/dev/nfs rw nfsroot=128.224.178.20:/export/pxeboot/vlm-boards/21919/rootfs TCF=1 ip=128.224.178.34:128.224.178.20:128.224.178.1:255.255.254.0:2080rdb:eth2:off console=ttyS0,115200 usb-storage.delay_use=10 selinux=0 enforcing=0
+PID hash table entries: 4096 (order: 3, 32768 bytes)
+Dentry cache hash table entries: 524288 (order: 13, 41943040 bytes)
+Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes)
+Sorting __ex_table...
+Memory: 3832916K/4194304K available (11612K kernel code, 1956K rwdata, 3928K rodata, 4160K init, 15031K bss, 361388K reserved, 0K cma-reserved)
+SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+Running RCU self tests
+Preemptible hierarchical RCU implementation.
+	RCU lockdep checking is enabled.
+	Additional per-CPU info printed with stalls.
+	RCU kthread priority: 1.
+NR_IRQS:512 nr_irqs:512 16
+mpic: Setting up MPIC " OpenPIC  " version 1.2 at ffe040000, max 8 CPUs
+mpic: ISU size: 512, shift: 9, mask: 1ff
+mpic: Initializing for 512 sources
+clocksource timebase: mask: 0xffffffffffffffff max_cycles: 0x8a5d528ca, max_idle_ns: 440795203517 ns
+clocksource: timebase mult[1aab5972] shift[24] registered
+Console: colour dummy device 80x25
+Lock dependency validator: Copyright (c) 2006 Red Hat, Inc., Ingo Molnar
+... MAX_LOCKDEP_SUBCLASSES:  8
+... MAX_LOCK_DEPTH:          48
+... MAX_LOCKDEP_KEYS:        8191
+... CLASSHASH_SIZE:          4096
+... MAX_LOCKDEP_ENTRIES:     32768
+... MAX_LOCKDEP_CHAINS:      65536
+... CHAINHASH_SIZE:          32768
+ memory used by lock dependency info: 8671 kB
+ per task-struct memory footprint: 2688 bytes
+------------------------
+| Locking API testsuite:
+----------------------------------------------------------------------------
+                                 | spin |wlock |rlock |mutex | wsem | rsem |
+  --------------------------------------------------------------------------
+                     A-A deadlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+                 A-B-B-A deadlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+             A-B-B-C-C-A deadlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+             A-B-C-A-B-C deadlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+         A-B-B-C-C-D-D-A deadlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+         A-B-C-D-B-D-D-A deadlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+         A-B-C-D-B-C-D-A deadlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+                    double unlock:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+                  initialize held:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+                 bad unlock order:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+  --------------------------------------------------------------------------
+              recursive read-lock:             |  ok  |             |  ok  |
+           recursive read-lock #2:             |  ok  |             |  ok  |
+            mixed read-write-lock:             |  ok  |             |  ok  |
+            mixed write-read-lock:             |  ok  |             |  ok  |
+  --------------------------------------------------------------------------
+     hard-irqs-on + irq-safe-A/12:  ok  |
+     hard-irqs-on + irq-safe-A/21:  ok  |
+         hard-safe-A + irqs-on/12:  ok  |
+         hard-safe-A + irqs-on/21:  ok  |
+    hard-safe-A + unsafe-B #1/123:  ok  |
+    hard-safe-A + unsafe-B #1/132:  ok  |
+    hard-safe-A + unsafe-B #1/213:  ok  |
+    hard-safe-A + unsafe-B #1/231:  ok  |
+    hard-safe-A + unsafe-B #1/312:  ok  |
+    hard-safe-A + unsafe-B #1/321:  ok  |
+    hard-safe-A + unsafe-B #2/123:  ok  |
+    hard-safe-A + unsafe-B #2/132:  ok  |
+    hard-safe-A + unsafe-B #2/213:  ok  |
+    hard-safe-A + unsafe-B #2/231:  ok  |
+    hard-safe-A + unsafe-B #2/312:  ok  |
+    hard-safe-A + unsafe-B #2/321:  ok  |
+  --------------------------------------------------------------------------
+  | Wound/wait tests |
+  ---------------------
+                  ww api failures:  ok  |  ok  |  ok  |
+               ww contexts mixing:  ok  |  ok  |
+             finishing ww context:  ok  |  ok  |  ok  |  ok  |
+               locking mismatches:  ok  |  ok  |  ok  |
+                 EDEADLK handling:  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |  ok  |
+           spinlock nest unlocked:  ok  |
+  -----------------------------------------------------
+                                 |block | try  |context|
+  -----------------------------------------------------
+                          context:  ok  |  ok  |  ok  |
+                              try:  ok  |  ok  |  ok  |
+                            block:  ok  |  ok  |  ok  |
+                         spinlock:  ok  |  ok  |  ok  |
+-------------------------------------------------------
+Good, all 119 testcases passed! |
+---------------------------------
+pid_max: default: 32768 minimum: 301
+Security Framework initialized
+Mount-cache hash table entries: 8192 (order: 4, 65536 bytes)
+Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes)
+Initializing cgroup subsys blkio
+Initializing cgroup subsys memory
+Initializing cgroup subsys devices
+Initializing cgroup subsys freezer
+Initializing cgroup subsys net_cls
+Initializing cgroup subsys bfqio
+Initializing cgroup subsys debug
+ftrace: allocating 26968 entries in 159 pages
+e6500 family performance monitor hardware support registered
+Brought up 8 CPUs
+devtmpfs: initialized
+clocksource jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 7645041785100000 ns
+xor: measuring software checksum speed
+   8regs     :  3048.000 MB/sec
+   8regs_prefetch:  2809.000 MB/sec
+   32regs    :  2441.000 MB/sec
+   32regs_prefetch:  2275.000 MB/sec
+   altivec   :  4655.000 MB/sec
+xor: using function: altivec (4655.000 MB/sec)
+NET: Registered protocol family 16
+Found FSL PCI host bridge at 0x0000000ffe240000. Firmware bus number: 0->1
+PCI host bridge /pcie@ffe240000  ranges:
+ MEM 0x0000000c00000000..0x0000000c1fffffff -> 0x00000000e0000000 
+  IO 0x0000000ff8000000..0x0000000ff800ffff -> 0x0000000000000000
+/pcie@ffe240000: PCICSRBAR @ 0xdf000007
+/pcie@ffe240000: Setup 64-bit PCI DMA window
+/pcie@ffe240000: DMA window size is 0xdf000007
+platform ffe240000.pcie:pcie@0: Invalid size 0xfffff9 for dma-range
+Found FSL PCI host bridge at 0x0000000ffe250000. Firmware bus number: 0->1
+PCI host bridge /pcie@ffe250000  ranges:
+ MEM 0x0000000c20000000..0x0000000c2fffffff -> 0x00000000e0000000 
+  IO 0x0000000ff8010000..0x0000000ff801ffff -> 0x0000000000000000
+/pcie@ffe250000: PCICSRBAR @ 0xff000007
+/pcie@ffe250000: Setup 64-bit PCI DMA window
+/pcie@ffe250000: WARNING: Outbound window cfg leaves gaps in memory map. Adjusting the memory map could reduce unnecessary bounce buffering.
+/pcie@ffe250000: DMA window size is 0xe0000000
+platform ffe250000.pcie:pcie@0: Invalid size 0xfffff9 for dma-range
+platform ffe270000.pcie:pcie@0: Invalid size 0xfffff9 for dma-range
+software IO TLB [mem 0xebe00000-0xefe00000] (64MB) mapped at [c0000000ebe00000-c0000000efdfffff]
+PCI: Probing PCI hardware
+fsl-pci ffe240000.pcie: PCI host bridge to bus 0000:00
+pci_bus 0000:00: root bus resource [io  0x10000-0x1ffff] (bus address [0x0000-0xffff])
+pci_bus 0000:00: root bus resource [mem 0xc00000000-0xc1fffffff] (bus address [0xe0000000-0xffffffff])
+pci_bus 0000:00: root bus resource [bus 00-01]
+pci 0000:00:00.0: IOMMU is currently not supported for PCI
+pci 0000:01:00.0: IOMMU is currently not supported for PCI
+pci 0000:01:00.1: IOMMU is currently not supported for PCI
+pci 0000:01:00.0: disabling ASPM on pre-1.1 PCIe device.  You can enable it with 'pcie_aspm=force'
+pci 0000:00:00.0: PCI bridge to [bus 01-ff]
+fsl-pci ffe250000.pcie: PCI host bridge to bus 0001:00
+pci_bus 0001:00: root bus resource [io  0x21000-0x30fff] (bus address [0x0000-0xffff])
+pci_bus 0001:00: root bus resource [mem 0xc20000000-0xc2fffffff] (bus address [0xe0000000-0xefffffff])
+pci_bus 0001:00: root bus resource [bus 00-01]
+pci 0001:00:00.0: [Firmware Bug]: reg 0x10: invalid BAR (can't size)
+pci 0001:00:00.0: IOMMU is currently not supported for PCI
+pci 0001:01:00.0: IOMMU is currently not supported for PCI
+pci 0001:00:00.0: PCI bridge to [bus 01-ff]
+PCI: Cannot allocate resource region 0 of device 0000:00:00.0, will remap
+pci 0000:00:00.0: BAR 6: no space for [mem size 0x01000000 pref]
+pci 0000:00:00.0: BAR 6: failed to assign [mem size 0x01000000 pref]
+pci 0000:00:00.0: BAR 9: no space for [mem size 0x00100000 pref]
+pci 0000:00:00.0: BAR 9: failed to assign [mem size 0x00100000 pref]
+pci 0000:00:00.0: BAR 0: no space for [io  size 0x0004]
+pci 0000:00:00.0: BAR 0: failed to assign [io  size 0x0004]
+pci 0000:01:00.0: BAR 6: assigned [mem 0xc00080000-0xc0009ffff pref]
+pci 0000:01:00.1: BAR 6: assigned [mem 0xc000a0000-0xc000bffff pref]
+pci 0000:00:00.0: PCI bridge to [bus 01]
+pci 0000:00:00.0:   bridge window [io  0x10000-0x1ffff]
+pci 0000:00:00.0:   bridge window [mem 0xc00000000-0xc1fffffff]
+pci_bus 0000:00: Some PCI device resources are unassigned, try booting with pci=realloc
+pci 0001:00:00.0: BAR 6: no space for [mem size 0x01000000 pref]
+pci 0001:00:00.0: BAR 6: failed to assign [mem size 0x01000000 pref]
+pci 0001:00:00.0: PCI bridge to [bus 01]
+pci 0001:00:00.0:   bridge window [io  0x21000-0x30fff]
+pci 0001:00:00.0:   bridge window [mem 0xc20000000-0xc2fffffff]
+raid6: altivecx1 gen()   928 MB/s
+raid6: altivecx2 gen()  1569 MB/s
+raid6: altivecx4 gen()  2583 MB/s
+raid6: altivecx8 gen()  2096 MB/s
+raid6: int64x1  gen()   440 MB/s
+raid6: int64x1  xor()   650 MB/s
+raid6: int64x2  gen()   763 MB/s
+raid6: int64x2  xor()   780 MB/s
+raid6: int64x4  gen()  1136 MB/s
+raid6: int64x4  xor()   867 MB/s
+raid6: int64x8  gen()  1014 MB/s
+raid6: int64x8  xor()   729 MB/s
+raid6: using algorithm altivecx4 gen() 2583 MB/s
+raid6: using intx1 recovery algorithm
+Freescale Elo series DMA driver
+fsl-elo-dma ffe100300.dma: #0 (fsl,eloplus-dma-channel), irq 28
+fsl-elo-dma ffe100300.dma: #1 (fsl,eloplus-dma-channel), irq 29
+fsl-elo-dma ffe100300.dma: #2 (fsl,eloplus-dma-channel), irq 30
+fsl-elo-dma ffe100300.dma: #3 (fsl,eloplus-dma-channel), irq 31
+fsl-elo-dma ffe100300.dma: #4 (fsl,eloplus-dma-channel), irq 76
+fsl-elo-dma ffe100300.dma: #5 (fsl,eloplus-dma-channel), irq 77
+fsl-elo-dma ffe100300.dma: #6 (fsl,eloplus-dma-channel), irq 78
+fsl-elo-dma ffe100300.dma: #7 (fsl,eloplus-dma-channel), irq 79
+fsl-elo-dma ffe101300.dma: #0 (fsl,eloplus-dma-channel), irq 32
+fsl-elo-dma ffe101300.dma: #1 (fsl,eloplus-dma-channel), irq 33
+fsl-elo-dma ffe101300.dma: #2 (fsl,eloplus-dma-channel), irq 34
+fsl-elo-dma ffe101300.dma: #3 (fsl,eloplus-dma-channel), irq 35
+fsl-elo-dma ffe101300.dma: #4 (fsl,eloplus-dma-channel), irq 80
+fsl-elo-dma ffe101300.dma: #5 (fsl,eloplus-dma-channel), irq 81
+fsl-elo-dma ffe101300.dma: #6 (fsl,eloplus-dma-channel), irq 82
+fsl-elo-dma ffe101300.dma: #7 (fsl,eloplus-dma-channel), irq 83
+fsl-elo-dma ffe102300.dma: #0 (fsl,eloplus-dma-channel), irq 464
+fsl-elo-dma ffe102300.dma: #1 (fsl,eloplus-dma-channel), irq 465
+fsl-elo-dma ffe102300.dma: #2 (fsl,eloplus-dma-channel), irq 466
+fsl-elo-dma ffe102300.dma: #3 (fsl,eloplus-dma-channel), irq 467
+fsl-elo-dma ffe102300.dma: #4 (fsl,eloplus-dma-channel), irq 473
+fsl-elo-dma ffe102300.dma: #5 (fsl,eloplus-dma-channel), irq 474
+fsl-elo-dma ffe102300.dma: #6 (fsl,eloplus-dma-channel), irq 475
+fsl-elo-dma ffe102300.dma: #7 (fsl,eloplus-dma-channel), irq 476
+vgaarb: loaded
+SCSI subsystem initialized
+usbcore: registered new interface driver usbfs
+usbcore: registered new interface driver hub
+usbcore: registered new device driver usb
+Bman err interrupt handler present
+Bman portal initialised, cpu 0
+Bman portal initialised, cpu 1
+Bman portal initialised, cpu 2
+Bman portal initialised, cpu 3
+Bman portal initialised, cpu 4
+Bman portal initialised, cpu 5
+Bman portal initialised, cpu 6
+Bman portal initialised, cpu 7
+Bman portals initialised
+Qman err interrupt handler present
+QMan: Allocated lookup table at 8000000000000000, entry count 65537
+Qman portal initialised, cpu 0
+Qman portal initialised, cpu 1
+Qman portal initialised, cpu 2
+Qman portal initialised, cpu 3
+Qman portal initialised, cpu 4
+Qman portal initialised, cpu 5
+Qman portal initialised, cpu 6
+Qman portal initialised, cpu 7
+Qman portals initialised
+Bman: BPID allocator includes range 32:32
+Qman: FQID allocator includes range 256:512
+Qman: FQID allocator includes range 32768:32768
+Qman: CGRID allocator includes range 0:256
+Qman: pool channel allocator includes range 1025:15
+fsl-ifc ffe124000.localbus: Freescale Integrated Flash Controller
+fsl-ifc ffe124000.localbus: IFC version 1.3, 8 banks
+Switched to clocksource timebase
+NET: Registered protocol family 2
+TCP established hash table entries: 32768 (order: 6, 262144 bytes)
+TCP bind hash table entries: 32768 (order: 10, 6553600 bytes)
+TCP: Hash tables configured (established 32768 bind 32768)
+UDP hash table entries: 2048 (order: 7, 851968 bytes)
+UDP-Lite hash table entries: 2048 (order: 7, 851968 bytes)
+NET: Registered protocol family 1
+RPC: Registered named UNIX socket transport module.
+RPC: Registered udp transport module.
+RPC: Registered tcp transport module.
+RPC: Registered tcp NFSv4.1 backchannel transport module.
+futex hash table entries: 2048 (order: 7, 524288 bytes)
+HugeTLB registered 1 MB page size, pre-allocated 0 pages
+HugeTLB registered 4 MB page size, pre-allocated 0 pages
+HugeTLB registered 16 MB page size, pre-allocated 0 pages
+HugeTLB registered 64 MB page size, pre-allocated 0 pages
+HugeTLB registered 256 MB page size, pre-allocated 0 pages
+HugeTLB registered 1 GB page size, pre-allocated 0 pages
+NFS: Registering the id_resolver key type
+Key type id_resolver registered
+Key type id_legacy registered
+Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
+io scheduler noop registered
+io scheduler deadline registered
+io scheduler cfq registered
+io scheduler bfq registered (default)
+BFQ I/O-scheduler: v7r8
+pcieport 0000:00:00.0: Signaling PME through PCIe PME interrupt
+pci 0000:01:00.0: Signaling PME through PCIe PME interrupt
+pci 0000:01:00.1: Signaling PME through PCIe PME interrupt
+pcieport 0001:00:00.0: Signaling PME through PCIe PME interrupt
+pci 0001:01:00.0: Signaling PME through PCIe PME interrupt
+Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+console [ttyS0] disabled
+serial8250.0: ttyS0 at MMIO 0xffe11c500 (irq = 36, base_baud = 18748125) is a 16550A
+console [ttyS0] enabled
+console [ttyS0] enabled
+bootconsole [udbg0] disabled
+bootconsole [udbg0] disabled
+serial8250.0: ttyS1 at MMIO 0xffe11c600 (irq = 36, base_baud = 18748125) is a 16550A
+serial8250.0: ttyS2 at MMIO 0xffe11d500 (irq = 37, base_baud = 18748125) is a 16550A
+serial8250.0: ttyS3 at MMIO 0xffe11d600 (irq = 37, base_baud = 18748125) is a 16550A
+brd: module loaded
+fsl-sata ffe220000.sata: Sata FSL Platform/CSB Driver init
+scsi host0: sata_fsl
+ata1: SATA max UDMA/133 irq 68
+fsl-sata ffe221000.sata: Sata FSL Platform/CSB Driver init
+scsi host1: sata_fsl
+ata2: SATA max UDMA/133 irq 69
+fe8000000.nor: Found 1 x16 devices at 0x0 in 16-bit bank. Manufacturer ID 0x000089 Chip ID 0x00227e
+ata2: Signature Update detected @ 0 msecs
+Amd/Fujitsu Extended Query Table at 0x0040
+  Amd/Fujitsu Extended Query version 1.3.
+number of CFI chips: 1
+14 ofpart partitions found on MTD device fe8000000.nor
+Creating 14 MTD partitions on "fe8000000.nor":
+0x000000000000-0x000000020000 : "rcw"
+0x000000020000-0x000000800000 : "kernel1"
+0x000000800000-0x000000900000 : "dtb1"
+0x000000900000-0x000003f00000 : "fs1"
+0x000003f00000-0x000003f20000 : "alt-fman-firmware"
+0x000003f20000-0x000003f40000 : "alt-uboot-env"
+0x000003f40000-0x000004000000 : "alt-u-boot"
+0x000004000000-0x000004020000 : "alt-rcw"
+0x000004020000-0x000004800000 : "kernel2"
+0x000004800000-0x000004900000 : "dtb2"
+0x000004900000-0x000007f00000 : "fs2"
+0x000007f00000-0x000007f20000 : "fman-firmware"
+ata2: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+0x000007f20000-0x000007f40000 : "u-boot env"
+0x000007f40000-0x000008000000 : "u-boot"
+nand: device found, Manufacturer ID: 0x2c, Chip ID: 0xac
+nand: Micron MT29F4G08ABBDAH4
+nand: 512 MiB, SLC, erase size: 128 KiB, page size: 2048, OOB size: 64
+Bad block table found at page 262080, version 0x01
+Bad block table found at page 262016, version 0x01
+fsl,ifc-nand fff800000.nand: IFC NAND device at 0xfff800000, bank 1
+fsl_espi ffe110000.spi: cs=0, init_csmode=0x100008
+m25p80 spi32766.0: n25q512ax3 (65536 Kbytes)
+fsl_espi ffe110000.spi: at 0x80000800801f0000 (irq = 53)
+libphy: Fixed MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+libphy: Freescale XGMAC MDIO Bus: probed
+Freescale FM module , FMD API version 21.1.0
+Freescale FM Ports module 
+fsl_mac: fsl_mac: FSL FMan MAC API based driver ()
+fsl_mac ffe4e0000.ethernet: FMan MEMAC
+fsl_mac ffe4e0000.ethernet: FMan MAC address: 00:04:9f:00:7a:00
+fsl_mac ffe4e2000.ethernet: FMan MEMAC
+fsl_mac ffe4e2000.ethernet: FMan MAC address: 00:04:9f:00:7a:01
+fsl_mac ffe4e4000.ethernet: FMan MEMAC
+fsl_mac ffe4e4000.ethernet: FMan MAC address: 00:04:9f:00:7a:02
+ata1: No Device OR PHYRDY change,Hstatus = 0xa0000000
+fsl_mac ffe4e6000.ethernet: FMan MEMAC
+fsl_mac ffe4e6000.ethernet: FMan MAC address: 00:04:9f:00:7a:03
+fsl_mac ffe4f0000.ethernet: FMan MEMAC
+fsl_mac ffe4f0000.ethernet: FMan MAC address: 00:04:9f:00:7a:08
+fsl_mac ffe4f2000.ethernet: FMan MEMAC
+fsl_mac ffe4f2000.ethernet: FMan MAC address: 00:04:9f:00:7a:09
+fsl_dpa: FSL DPAA Ethernet driver ()
+fsl_dpa: FSL DPAA Ethernet debugfs entries ()
+fsl_dpa: fsl_dpa: Probed interface eth0
+ata1: SATA link down (SStatus 10 SControl 300)
+fsl_dpa: fsl_dpa: Probed interface eth1
+fsl_dpa: fsl_dpa: Probed interface eth2
+fsl_dpa: fsl_dpa: Probed interface eth3
+fsl_dpa: fsl_dpa: Probed interface eth4
+fsl_dpa: fsl_dpa: Probed interface eth5
+fsl_advanced: FSL DPAA Advanced drivers: ()
+fsl_proxy: FSL DPAA Proxy initialization driver ()
+fsl_dpa_shared: FSL DPAA Shared Ethernet driver ()
+fsl_dpa_macless: FSL DPAA MACless Ethernet driver ()
+fsl_oh: FSL FMan Offline Parsing port driver ()
+ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+ehci-pci: EHCI PCI platform driver
+fsl-ehci fsl-ehci.1: Freescale On-Chip EHCI Host Controller
+fsl-ehci fsl-ehci.1: new USB bus registered, assigned bus number 1
+fsl-ehci fsl-ehci.1: irq 45, io mem 0xffe211000
+fsl-ehci fsl-ehci.1: USB 2.0 started, EHCI 1.00
+hub 1-0:1.0: USB hub found
+hub 1-0:1.0: 1 port detected
+usbcore: registered new interface driver usb-storage
+mousedev: PS/2 mouse device common for all mice
+i2c /dev entries driver
+mpc-i2c ffe118000.i2c: timeout 1000000 us
+rtc-ds1307 0-0068: SET TIME!
+rtc-ds1307 0-0068: rtc core: registered ds1339 as rtc0
+at24 0-0050: 32768 byte 24c256 EEPROM, writable, 1 bytes/write
+mpc-i2c ffe118100.i2c: timeout 1000000 us
+mpc-i2c ffe119000.i2c: timeout 1000000 us
+mpc-i2c ffe119100.i2c: timeout 1000000 us
+i2c i2c-1: Added multiplexed i2c bus 4
+i2c i2c-1: Added multiplexed i2c bus 5
+i2c i2c-1: Added multiplexed i2c bus 6
+i2c i2c-1: Added multiplexed i2c bus 7
+pca954x 1-0077: registered 4 multiplexed busses for I2C switch pca9546
+booke_wdt: powerpc book-e watchdog driver loaded
+md: linear personality registered for level -1
+md: raid0 personality registered for level 0
+md: raid1 personality registered for level 1
+md: raid10 personality registered for level 10
+md: multipath personality registered for level -4
+md: faulty personality registered for level -5
+device-mapper: ioctl: 4.31.0-ioctl (2015-3-12) initialised: dm-devel@redhat.com
+sdhci: Secure Digital Host Controller Interface driver
+sdhci: Copyright(c) Pierre Ossman
+sdhci-pltfm: SDHCI platform and OF driver helper
+sdhci-esdhc ffe114000.sdhc: No vmmc regulator found
+sdhci-esdhc ffe114000.sdhc: No vqmmc regulator found
+mmc0: SDHCI controller on ffe114000.sdhc [ffe114000.sdhc] using ADMA 64-bit
+platform caam_qi.0: Linux CAAM Queue I/F driver initialised
+caam ffe300000.crypto: Instantiated RNG4 SH1
+caam ffe300000.crypto: device ID = 0x0a13020000000000 (Era 6)
+caam ffe300000.crypto: job rings = 4, qi = 1
+caam algorithms registered in /proc/crypto
+platform caam_qi.0: fsl,sec-v5.2 algorithms registered in /proc/crypto
+caam_jr ffe301000.jr: registering rng-caam
+caam ffe300000.crypto: fsl,sec-v5.2 algorithms registered in /proc/crypto
+usbcore: registered new interface driver usbhid
+usbhid: USB HID core driver
+Freescale USDPAA process driver
+fsl-usdpaa: no region found
+Freescale USDPAA process IRQ driver
+fsl-pme ffe316000.pme: ver: 0x00100201
+mmc0: new high speed SDHC card at address e624
+Freescale pme2 db driver
+Freescale pme2 scan driver
+fsl-pme2-scan: device pme_scan registered
+fsl-of-rman ffe1e0000.rman: Of-device /soc@ffe000000/rman@1e0000 initialized
+fsl-of-rman ffe1e0000.rman: RMan inbound block0 initialized.
+fsl-of-rman ffe1e0000.rman: RMan inbound block1 initialized.
+fsl-of-rman ffe1e0000.rman: RMan inbound block2 initialized.
+fsl-of-rman ffe1e0000.rman: RMan inbound block3 initialized.
+dce_sys_init done!
+fsl-dce ffe312000.dce: Device /soc@ffe000000/dce@312000 initialized ver: 0x0af00101
+
+u32 classifier
+    Actions configured
+NET: Registered protocol family 10
+sit: IPv6 over IPv4 tunneling driver
+NET: Registered protocol family 17
+Key type dns_resolver registered
+kmemleak: Kernel memory leak detector initialized
+kmemleak: Automatic memory scanning thread started
+Btrfs loaded
+mmcblk0: mmc0:e624 SS08G 7.40 GiB 
+console [netcon0] enabled
+netconsole: network logging started
+fsl_generic: FSL DPAA Generic Ethernet driver ()
+fsl_generic: FSL DPAA Ethernet debugfs entries ()
+ mmcblk0: p1
+rtc-ds1307 0-0068: setting system clock to 2000-01-01 00:00:16 UTC (946684816)
+IPv6: ADDRCONF(NETDEV_UP): eth2: link is not ready
+ata2.00: qc timeout (cmd 0xef)
+ata2.00: failed to IDENTIFY (SPINUP failed, err_mask=0x4)
+ata2: Hardreset failed, not off-lined 0
+ata2: Signature Update detected @ 0 msecs
+ata2: SATA link up 3.0 Gbps (SStatus 123 SControl 300)
+ata2.00: ATA-8: Hitachi HDS721050CLA362, JP2OA3MA, max UDMA/133
+ata2.00: 976773168 sectors, multi 0: LBA48 NCQ (depth 16/32)
+ata2.00: configured for UDMA/133
+scsi 1:0:0:0: Direct-Access     ATA      Hitachi HDS72105 A3MA PQ: 0 ANSI: 5
+sd 1:0:0:0: [sda] 976773168 512-byte logical blocks: (500 GB/466 GiB)
+sd 1:0:0:0: [sda] Write Protect is off
+sd 1:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+ sda: sda1 sda2
+sd 1:0:0:0: [sda] Attached SCSI disk
+IPv6: ADDRCONF(NETDEV_CHANGE): eth2: link becomes ready
+IP-Config: Complete:
+     device=eth2, hwaddr=00:04:9f:00:7a:02, ipaddr=128.224.178.34, mask=255.255.254.0, gw=128.224.178.1
+     host=2080rdb, domain=, nis-domain=(none)
+     bootserver=128.224.178.20, rootserver=128.224.178.20, rootpath=
+md: Waiting for all devices to be available before autodetect
+md: If you don't use raid, use raid=noautodetect
+md: Autodetecting RAID arrays.
+md: Scanned 0 and added 0 devices.
+md: autorun ...
+md: ... autorun DONE.
+VFS: Mounted root (nfs filesystem) on device 0:21.
+devtmpfs: mounted
+Freeing unused kernel memory: 4160K (c000000000f34000 - c000000001344000)
+systemd[1]: System time before build time, advancing clock.
+random: systemd urandom read with 117 bits of entropy available
+systemd[1]: systemd 230 running in system mode. (+PAM -AUDIT -SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP -LIBCRYPTSETUP -GCRYPT -GNUTLS +ACL +XZ -LZ4 -SECCOMP +BLKID -ELFUTILS +KMOD -IDN)
+systemd[1]: Detected architecture ppc64.
+
+Welcome to [1mWind River Linux 9.0.0.0[0m!
+
+systemd[1]: Initializing machine ID from random generator.
+random: nonblocking pool is initialized
+systemd[1]: [/lib/systemd/system/watchdog.service:9] Unknown lvalue 'ControlGroup' in section 'Service'
+systemd[1]: Listening on Network Service Netlink Socket.
+[[0;32m  OK  [0m] Listening on Network Service Netlink Socket.
+systemd[1]: Listening on udev Kernel Socket.
+[[0;32m  OK  [0m] Listening on udev Kernel Socket.
+systemd[1]: Listening on /dev/initctl Compatibility Named Pipe.
+[[0;32m  OK  [0m] Listening on /dev/initctl Compatibility Named Pipe.
+systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Started Forward Password Requests to Wall Directory Watch.
+systemd[1]: Listening on Journal Socket.
+[[0;32m  OK  [0m] Listening on Journal Socket.
+systemd[1]: Listening on Journal Socket (/dev/log).
+[[0;32m  OK  [0m] Listening on Journal Socket (/dev/log).
+systemd[1]: Reached target Swap.
+[[0;32m  OK  [0m] Reached target Swap.
+systemd[1]: Created slice User and Session Slice.
+[[0;32m  OK  [0m] Created slice User and Session Slice.
+systemd[1]: Listening on Syslog Socket.
+[[0;32m  OK  [0m] Listening on Syslog Socket.
+systemd[1]: Created slice System Slice.
+[[0;32m  OK  [0m] Created slice System Slice.
+systemd[1]: Mounting POSIX Message Queue File System...
+         Mounting POSIX Message Queue File System...
+systemd[1]: Created slice system-getty.slice.
+[[0;32m  OK  [0m] Created slice system-getty.slice.
+systemd[1]: Starting Create list of required static device nodes for the current kernel...
+         Starting Create list of required st... nodes for the current kernel...
+systemd[1]: Mounting Debug File System...
+         Mounting Debug File System...
+systemd[1]: Starting Journal Service...
+         Starting Journal Service...
+systemd[1]: Mounting Temporary Directory...
+         Mounting Temporary Directory...
+systemd[1]: Starting Load Kernel Modules...
+         Starting Load Kernel Modules...
+systemd[1]: Mounting Huge Pages File System...
+         Mounting Huge Pages File System...
+systemd[1]: Starting Setup Virtual Console...
+         Starting Setup Virtual Console...
+systemd[1]: Reached target Slices.
+softdog: Unknown symbol mcount (err 0)
+[[0;32m  OK  [0m] Reached target Slices.
+systemd[1]: Created slice system-serial\x2dgetty.slice.
+[[0;32m  OK  [0m] Created slice system-serial\x2dgetty.slice.
+systemd[1]: Starting Remount Root and Kernel File Systems...
+         Starting Remount Root and Kernel File Systems...
+systemd[1]: Reached target Remote File Systems.
+[[0;32m  OK  [0m] Reached target Remote File Systems.
+systemd[1]: Started Dispatch Password Requests to Console Directory Watch.
+[[0;32m  OK  [0m] Started Dispatch Password Requests to Console Directory Watch.
+systemd[1]: Reached target Paths.
+[[0;32m  OK  [0m] Reached target Paths.
+systemd[1]: Listening on udev Control Socket.
+[[0;32m  OK  [0m] Listening on udev Control Socket.
+systemd[1]: Mounted Debug File System.
+[[0;32m  OK  [0m] Mounted Debug File System.
+systemd[1]: Mounted POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted POSIX Message Queue File System.
+systemd[1]: Mounted Huge Pages File System.
+[[0;32m  OK  [0m] Mounted Huge Pages File System.
+systemd[1]: Mounted Temporary Directory.
+[[0;32m  OK  [0m] Mounted Temporary Directory.
+systemd[1]: Started Create list of required static device nodes for the current kernel.
+[[0;32m  OK  [0m] Started Create list of required sta...ce nodes for the current kernel.
+systemd[1]: systemd-modules-load.service: Main process exited, code=exited, status=1/FAILURE
+systemd[1]: Failed to start Load Kernel Modules.
+[[0;1;31mFAILED[0m] Failed to start Load Kernel Modules.
+See 'systemctl status systemd-modules-load.service' for details.
+systemd[1]: systemd-modules-load.service: Unit entered failed state.
+systemd[1]: systemd-modules-load.service: Failed with result 'exit-code'.
+systemd[1]: Started Setup Virtual Console.
+[[0;32m  OK  [0m] Started Setup Virtual Console.
+systemd[1]: Started Remount Root and Kernel File Systems.
+[[0;32m  OK  [0m] Started Remount Root and Kernel File Systems.
+systemd[1]: Starting Rebuild Hardware Database...
+         Starting Rebuild Hardware Database...
+systemd[1]: Starting Create System Users...
+         Starting Create System Users...
+systemd[1]: Starting Apply Kernel Variables...
+         Starting Apply Kernel Variables...
+systemd[1]: Started Journal Service.
+[[0;32m  OK  [0m] Started Journal Service.
+sch_fq_codel: Unknown symbol mcount (err 0)
+         Starting Load Kernel Modules...
+         Starting Flush Journal to Persistent Storage...
+[[0;32m  OK  [0m] Started Apply Kernel Variables.
+softdog: Unknown symbol mcount (err 0)
+[[0;32m  OK  [0m] Started Create System Users.
+         Starting Create Static Device Nodes in /dev...
+[[0;1;31mFAILED[0m] Failed to start Load Kernel Modules.
+See 'systemctl status systemd-modules-load.service' for details.
+systemd-journald[345]: Received request to flush runtime journal from PID 1
+[[0;32m  OK  [0m] Started Flush Journal to Persistent Storage.
+[[0;32m  OK  [0m] Started Create Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Reached target Local File Systems (Pre).
+         Mounting /var/volatile...
+         Starting udev Kernel Device Manager...
+[[0;32m  OK  [0m] Mounted /var/volatile.
+[[0;32m  OK  [0m] Reached target Local File Systems.
+         Starting Rebuild Journal Catalog...
+         Starting Rebuild Dynamic Linker Cache...
+         Starting Create Volatile Files and Directories...
+         Starting Load/Save Random Seed...
+[[0;32m  OK  [0m] Started Load/Save Random Seed.
+[[0;32m  OK  [0m] Started Rebuild Journal Catalog.
+[[0;32m  OK  [0m] Started udev Kernel Device Manager.
+[[0;32m  OK  [0m] Started Create Volatile Files and Directories.
+         Starting Network Time Synchronization...
+         Starting Update UTMP about System Boot/Shutdown...
+         Starting Run pending postinsts...
+[[0;32m  OK  [0m] Started Update UTMP about System Boot/Shutdown.
+[[0;32m  OK  [0m] Started Network Time Synchronization.
+[[0;32m  OK  [0m] Reached target System Time Synchronized.
+[[0;32m  OK  [0m] Started Rebuild Hardware Database.
+         Starting udev Coldplug all Devices...
+[[0;32m  OK  [0m] Started Rebuild Dynamic Linker Cache.
+         Starting Update is Completed...
+[[0;32m  OK  [0m] Started Update is Completed.
+[[0;32m  OK  [0m] Started Run pending postinsts.
+edac_core: Unknown symbol iffies (err 0)
+edac_core: Unknown symbol mcount (err 0)
+BTRFS: device fsid 9c259148-7f9a-492b-8de8-005fb2214a7c devid 1 transid 154 /dev/sda2
+[[0;32m  OK  [0m] Found device /dev/ttyS0.
+[[0;32m  OK  [0m] Started udev Coldplug all Devices.
+[[0;32m  OK  [0m] Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.
+[[0;32m  OK  [0m] Reached target System Initialization.
+[[0;32m  OK  [0m] Listening on Avahi mDNS/DNS-SD Stack Activation Socket.
+[[0;32m  OK  [0m] Listening on D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Listening on sockets activating rrdcached.
+[[0;32m  OK  [0m] Listening on RPCbind Server Activation Socket.
+         Starting sshd.socket.
+[[0;32m  OK  [0m] Started Daily Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Reached target Timers.
+[[0;32m  OK  [0m] Listening on sshd.socket.
+[[0;32m  OK  [0m] Reached target Sockets.
+[[0;32m  OK  [0m] Reached target Basic System.
+         Starting watchdog daemon...
+[[0;32m  OK  [0m] Started Job spooling tools.
+         Starting Avahi mDNS/DNS-SD Stack...
+         Starting sysklogd Kernel Logging Service...
+[[0;32m  OK  [0m] Started Dynamic Host Configuration Protocol (DHCP).
+[[0;32m  OK  [0m] Started Periodic Command Scheduler.
+         Starting Login Service...
+[[0;32m  OK  [0m] Started irqbalance daemon.
+         Starting System Logging Service...
+[[0;32m  OK  [0m] Started D-Bus System Message Bus.
+[[0;32m  OK  [0m] Started Avahi mDNS/DNS-SD Stack.
+         Starting Network Service...
+[[0;32m  OK  [0m] Started Data caching daemon for rrdtool.
+[[0;32m  OK  [0m] Started watchdog daemon.
+[[0;32m  OK  [0m] Started sysklogd Kernel Logging Service.
+[[0;32m  OK  [0m] Started System Logging Service.
+[[0;32m  OK  [0m] Started Login Service.
+[[0;32m  OK  [0m] Started Network Service.
+[[0;32m  OK  [0m] Reached target Network.
+         Starting Postfix Mail Transport Agent...
+         Starting Berkeley Internet Name Domain (DNS)...
+         Starting DNS forwarder and DHCP server...
+         Starting /etc/rc.local Compatibility...
+         Starting Check tcf-agent autostart...
+         Starting Permit User Sessions...
+[[0;32m  OK  [0m] Started /etc/rc.local Compatibility.
+[[0;32m  OK  [0m] Started Permit User Sessions.
+[[0;32m  OK  [0m] Started DNS forwarder and DHCP server.
+[[0;32m  OK  [0m] Started Serial Getty on ttyS0.
+[[0;32m  OK  [0m] Started Getty on tty1.
+[[0;32m  OK  [0m] Reached target Login Prompts.
+[[0;32m  OK  [0m] Started Berkeley Internet Name Domain (DNS).
+[[0;32m  OK  [0m] Reached target Host and Network Name Lookups.
+
+tcf-agent: WARNING listening on port for commands to monitor/modify the system.
+[[0;32m  OK  [0m] Started Check tcf-agent autostart.
+[[0;32m  OK  [0m] Started Postfix Mail Transport Agent.
+[[0;32m  OK  [0m] Reached target Multi-User System.
+         Starting Update UTMP about System Runlevel Changes...
+[[0;32m  OK  [0m] Started Update UTMP about System Runlevel Changes.
+
+Wind River Linux 9.0.0.0 2080rdb ttyS0
+
+2080rdb login: root
+Password: 
+root@2080rdb:~# 
+root@2080rdb:~# 
+root@2080rdb:~# unttyS0: 1 input overrun(s)
+ame -a
+Linux 2080rdb 4.1.21-rt13-WR9.0.0.0_preempt-rt #1 SMP PREEMPT RT Fri Aug 19 11:36:46 CST 2016 ppc64 ppc64 ppc64 GNU/Linux
+root@2080rdb:~# cat /proc/cmdlinopt/wr-test/main_test.py -s bpf_teskmemleak: 719 new suspected memory leaks (see /sys/kernel/debug/kmemleak)

@@ -1,0 +1,32 @@
+There can be multiple Docker containers in a single machine and containers are completely isolated from one another as well as from the host machine.
+
+the Docker containers could be fluently run on x64 Linux kernel
+supporting namespaces, control groups, and file systems, such as Another Union
+File System (AUFS).
+
+
+This makes the number of images go
+up steadily, and so managing them becomes a complicated affair. However, the
+storage space is not a big challenge because the new image that is generated is only
+comprised of the newly added modules.
+
+
+When you
+start a container, you actually refer to an image through its unique ID . Docker pulls
+the required image and its parent image. It continues to pull all the parent images
+until it reaches the base image.
+
+
+A Docker Registry is a place where the Docker images can be stored in order to be
+publicly found, accessed, and used by the worldwide developers for quickly crafting
+fresh and composite applications without any risks. Because all the stored images
+would have gone through multiple validations, verifications, and refinements, the
+quality of those images will be really high.
+
+
+
+
+A Docker Repository is a namespace that is used for storing a Docker image. For
+instance, if your app is named helloworld and your username or namespace for the
+Registry is thedockerbook then, in the Docker Repository, where this image would
+be stored in the Docker Registry would be named thedockerbook/helloworld .

@@ -1,6 +1,12 @@
 criu
 lxc
 cgroup
+fs:
+  -f2fs 
+  -xfs 
+  -btrfs 
+  -orange fs
+  -trace fs 
 ======
 http://coolshell.cn/articles/17049.html
 root@ISG_WalnutCanyonII-2:~# mkdir cgroup

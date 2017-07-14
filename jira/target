@@ -1,0 +1,73 @@
+
+
+Start testcase ###pacakge xxx failed to build### testing
+
+test results:
+drivers/net/ethernet/intel/ixgb/ixgb.o
+|   CC      drivers/staging/lttng/probes/lttng-kretprobes.o
+|   CC      drivers/gpu/drm/i915/intel_dsi_pll.o
+|   CC      drivers/staging/lttng/probes/lttng-ftrace.o
+|   LD      drivers/net/ethernet/intel/ixgb/built-in.o
+|   CC      drivers/acpi/acpica/utstring.o
+|   CC      drivers/acpi/acpica/utstate.o
+|   CC      drivers/gpu/drm/i915/intel_dvo.o
+|   CC      drivers/gpu/drm/i915/intel_hdmi.o
+|   CC      drivers/gpu/drm/i915/intel_i2c.o
+|   CC      drivers/gpu/drm/i915/intel_lvds.o
+|   CC      drivers/gpu/drm/i915/intel_panel.o
+|   CC      drivers/gpu/drm/i915/intel_sdvo.o
+|   CC      drivers/acpi/acpica/utxface.o
+|   CC      drivers/acpi/acpica/utxfinit.o
+|   CC      drivers/acpi/acpica/utxferror.o
+|   CC      drivers/gpu/drm/i915/i915_vgpu.o
+|   CC      drivers/gpu/drm/i915/intel_tv.o
+|   CC      drivers/acpi/acpica/utxfmutex.o
+|   LD      drivers/net/ethernet/intel/igb/igb.o
+|   LD      drivers/net/ethernet/intel/igb/built-in.o
+|   LD      drivers/acpi/acpica/acpi.o
+|   LD      drivers/acpi/acpica/built-in.o
+|   LD      drivers/acpi/built-in.o
+|   LD      drivers/net/ethernet/intel/e1000e/e1000e.o
+|   LD      drivers/net/ethernet/intel/e1000e/built-in.o
+|   LD      drivers/net/ethernet/realtek/built-in.o
+|   LD      drivers/net/ethernet/intel/ixgbe/ixgbe.o
+|   LD      drivers/net/ethernet/intel/ixgbe/built-in.o
+|   LD      drivers/net/ethernet/intel/built-in.o
+|   LD      drivers/net/ethernet/built-in.o
+|   LD      drivers/net/built-in.o
+|   LD      drivers/staging/lttng/probes/built-in.o
+|   LD      drivers/gpu/drm/i915/i915.o
+|   LD      drivers/gpu/drm/i915/built-in.o
+|   LD      drivers/gpu/drm/built-in.o
+|   LD      drivers/gpu/built-in.o
+|   LD      drivers/staging/lttng/lttng-tracer.o
+|   LD      drivers/staging/lttng/built-in.o
+|   LD      drivers/staging/built-in.o
+|   LD      drivers/built-in.o
+|   LINK    vmlinux
+|   LD      vmlinux.o
+|   MODPOST vmlinux.o
+|   GEN     .version
+|   CHK     include/generated/compile.h
+|   UPD     include/generated/compile.h
+|   CC      init/version.o
+|   LD      init/built-in.o
+| drivers/built-in.o: In function `__event_probe__kvm_x86_emulate_insn':
+| /buildarea1/lyang0/x86-build-bts/tmp/work-shared/intel-x86-64/kernel-source/drivers/staging/lttng/probes/../instrumentation/events/lttng-module/arch/x86/kvm/trace.h:421: undefined reference to `kvm_x86_ops'
+| drivers/built-in.o: In function `__event_prepare_filter_stack__kvm_x86_emulate_insn':
+| /buildarea1/lyang0/x86-build-bts/tmp/work-shared/intel-x86-64/kernel-source/drivers/staging/lttng/probes/../instrumentation/events/lttng-module/arch/x86/kvm/trace.h:421: undefined reference to `kvm_x86_ops'
+| drivers/built-in.o: In function `__event_probe__kvm_x86_exit':
+| /buildarea1/lyang0/x86-build-bts/tmp/work-shared/intel-x86-64/kernel-source/drivers/staging/lttng/probes/../instrumentation/events/lttng-module/arch/x86/kvm/trace.h:117: undefined reference to `kvm_x86_ops'
+| drivers/built-in.o: In function `kvm_register_read':
+| /buildarea1/lyang0/x86-build-bts/tmp/work-shared/intel-x86-64/kernel-source/include/../arch/x86/kvm/kvm_cache_regs.h:13: undefined reference to `kvm_x86_ops'
+| /buildarea1/lyang0/x86-build-bts/tmp/work-shared/intel-x86-64/kernel-source/include/../arch/x86/kvm/kvm_cache_regs.h:13: undefined reference to `kvm_x86_ops'
+| make[2]: *** [/buildarea1/lyang0/x86-build-bts/tmp/work-shared/intel-x86-64/kernel-source/Makefile:949: vmlinux] Error 1
+| make[1]: *** [Makefile:150: sub-make] Error 2
+| make: *** [Makefile:24: __sub-make] Error 2
+| ERROR: Function failed: do_compile (log file is located at /buildarea1/lyang0/x86-build-bts/tmp/work/intel_x86_64-wrs-linux/linux-windriver/4.8-rc7-r0/temp/log.do_compile.77741)
+Excution Time
+
+Testing Env                                                            
+eanble CONFIG_KVM
+bitbake wrlinux-image-glibc-std
+Extra Info

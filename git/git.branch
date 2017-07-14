@@ -39,4 +39,10 @@ $ touch readme
 $ git add . 
 $ git commit -m "empty branch"
 
+
 in this way, "empty branch" is the first commit 
+
+
+
+for branch in `git branch -r | grep -v HEAD`;do echo -e `git show --format="%ci" $branch | head -n 1` \\t$branch; done |sort -r |grep -v next | head -1 | awk '{print $NF}'
+https://gist.github.com/jasonrudolph/1810768

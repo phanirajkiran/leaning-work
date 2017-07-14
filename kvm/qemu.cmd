@@ -348,4 +348,10 @@ tap:
 
 
 cpu flags:
+
+
 qemu-system-x86_64 -cpu qemu64,+x2apic -enable-kvm -net nic,macaddr=52:54:00:EE:EE:E1,model=virtio -net tap,script=/etc/ovs-br-ifup,downscript=/etc/ovs-br-ifdown -drive file=/boot/guest_raw.test,if=virtio  -kernel /boot/guest.kernel -append "root=/dev/vda rw console=ttyS0,115200 ip=192.168.2.2"  -nographic
+
+
+add a usb disk
+qemu-system-x86_64 -enable-kvm -smp 2 -m 1G,slots=3,maxmem=4G -net nic,macaddr=00:01:02:03:04:06,model=virtio          -net tap,script=../../configs/qemu-ifup.tap  -drive file=/tmp/vm2 -drive if=none,id=uas-disk1,file=/tmp/vm2 -device nec-usb-xhci,id=xhci -device usb-uas,id=uas,bus=xhci.0 -device scsi-hd,bus=uas.0,scsi-id=0,lun=0,drive=uas-disk1          -kernel /boot/kernel -append "root=/dev/sda rw console=ttyS0,115200 ip=dhcp"  -nographic 

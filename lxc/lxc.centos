@@ -1,0 +1,118 @@
+reference:
+https://www.unixmen.com/setup-linux-containers-using-lxc-on-ubuntu-15-04/
+
+1)
+lyang001@lyang001-OptiPlex-9010:~/leaning-work$ lxc-checkconfig 
+Kernel configuration not found at /proc/config.gz; searching...
+Kernel configuration found at /boot/config-3.16.0-30-generic
+--- Namespaces ---
+Namespaces: enabled
+Utsname namespace: enabled
+Ipc namespace: enabled
+Pid namespace: enabled
+User namespace: enabled
+Network namespace: enabled
+Multiple /dev/pts instances: enabled
+
+--- Control groups ---
+Cgroup: enabled
+Cgroup clone_children flag: enabled
+Cgroup device: enabled
+Cgroup sched: enabled
+Cgroup cpu account: enabled
+Cgroup memory controller: enabled
+Cgroup cpuset: enabled
+
+--- Misc ---
+Veth pair device: enabled
+Macvlan: enabled
+Vlan: enabled
+Bridges: enabled
+Advanced netfilter: enabled
+CONFIG_NF_NAT_IPV4: enabled
+CONFIG_NF_NAT_IPV6: enabled
+CONFIG_IP_NF_TARGET_MASQUERADE: enabled
+CONFIG_IP6_NF_TARGET_MASQUERADE: enabled
+CONFIG_NETFILTER_XT_TARGET_CHECKSUM: enabled
+FUSE (for use with lxcfs): enabled
+
+--- Checkpoint/Restore ---
+checkpoint restore: enabled
+CONFIG_FHANDLE: enabled
+CONFIG_EVENTFD: enabled
+CONFIG_EPOLL: enabled
+CONFIG_UNIX_DIAG: enabled
+CONFIG_INET_DIAG: enabled
+CONFIG_PACKET_DIAG: enabled
+CONFIG_NETLINK_DIAG: enabled
+File capabilities: enabled
+
+Note : Before booting a new kernel, you can check its configuration
+usage : CONFIG=/path/to/config /usr/bin/lxc-checkconfig
+
+2)
+lyang001@lyang001-OptiPlex-9010:~$ sudo ls /usr/share/lxc/templates/
+lxc-alpine    lxc-archlinux  lxc-centos  lxc-debian    lxc-fedora  lxc-openmandriva  lxc-oracle  lxc-pld	lxc-sparclinux	lxc-ubuntu	  lxc-voidlinux
+lxc-altlinux  lxc-busybox    lxc-cirros  lxc-download  lxc-gentoo  lxc-opensuse      lxc-plamo	 lxc-slackware	lxc-sshd	lxc-ubuntu-cloud
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-create -n centos -t centos
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo  ls /var/lib/lxc/centos/rootfs
+bin  boot  dev	etc  home  lib	lib64  media  mnt  opt	proc  root  sbin  selinux  srv	sys  tmp  usr  var
+lyang001@lyang001-OptiPlex-9010:~$ 
+
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-start -n centos /bin/sleep 100 
+lyang001@lyang001-OptiPlex-9010:~$ sudo lxc-attach -n centos 
+bash-4.1# cat /etc/issue
+CentOS release 6.8 (Final)
+Kernel \r on an \m
+
+bash-4.1# ps -aux 
+Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   4132   448 ?        Ss   21:29   0:00 /bin/sleep 100
+root       186  0.0  0.0 108372  3456 ?        Ss   21:29   0:00 /bin/bash
+root       188  0.0  0.0 110256  2396 ?        R+   21:29   0:00 ps -aux
+bash-4.1# 
+
+
+lyang001@lyang001-OptiPlex-9010:~$ sudo ls /var/lib/lxc/centos/config  
+/var/lib/lxc/centos/config
+lyang001@lyang001-OptiPlex-9010:~$ sudo cat /var/lib/lxc/centos/config  
+# Template used to create this container: /usr/share/lxc/templates/lxc-centos
+# Parameters passed to the template:
+# Template script checksum (SHA-1): 85868977b29d63f5ada56fd0d3a138854d0b5eff
+# For additional config options, please look at lxc.container.conf(5)
+
+# Uncomment the following line to support nesting containers:
+#lxc.include = /usr/share/lxc/config/nesting.conf
+# (Be aware this has security implications)
+
+lxc.network.type = veth
+lxc.network.link = lxcbr0
+lxc.network.hwaddr = fe:cc:9e:77:04:09
+lxc.network.flags = up
+lxc.rootfs = /var/lib/lxc/centos/rootfs
+lxc.rootfs.backend = dir
+
+# Include common configuration
+lxc.include = /usr/share/lxc/config/centos.common.conf
+
+lxc.arch = x86_64
+lxc.utsname = centos
+
+# When using LXC with apparmor, uncomment the next line to run unconfined:
+#lxc.aa_profile = unconfined
+
+# example simple networking setup, uncomment to enable
+#lxc.network.type = veth
+#lxc.network.flags = up
+#lxc.network.link = lxcbr0
+#lxc.network.name = eth0
+# Additional example for veth network type
+#    static MAC address,
+#lxc.network.hwaddr = 00:16:3e:77:52:20
+#    persistent veth device name on host side
+#        Note: This may potentially collide with other containers of same name!
+#lxc.network.veth.pair = v-centos-e0

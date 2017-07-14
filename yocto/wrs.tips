@@ -178,3 +178,5 @@ LAYERDEPENDS_wr-userspace-extended = "normal wrlinux wr-userspace-base"
 
 COMPATIBLE_HOST = "^(?!mips64).*"
 
+kernel_feature_append
+http://ala-git.wrs.com/cgit/layers/ovp/commit/?h=WRLINUX_8_0_HEAD&id=f8b18bbd78c381a0faeffd182f5c6af85d5de169

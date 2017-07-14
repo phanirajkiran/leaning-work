@@ -1,3 +1,3 @@
 [filter1]
-summary=All P1,P2 open defects 
-filter=project = OVP8 AND summary !~ "Security" AND issuetype = Bug AND priority in (P1, P2) AND resolution = Unresolved ORDER BY priority DESC,assignee ASC
+summary=All OVP8 P1,P2 open defects(lables !=NON_GATING) 
+filter=project = OVP8 AND status in (Open, "In progress", Reopened, Blocked_On_Input, "On Hold", New_Incomplete, New) AND priority in (P1, P2) AND labels != OVP8_NON_GATING ORDER BY component ASC

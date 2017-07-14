@@ -67,3 +67,12 @@ do
 done < <(cat $testdir/test_case.conf |sed -n '/FEATURE_CFG/,/ \"/{/ \"/b;p}' | grep CONFIG)
 
 echo $L
+
+if [ "${ltarget}" = "${ldir}" -a "${ltarget/wr-bsps/}" != "${ldir}" ]
+
+http://stackoverflow.com/questions/16854280/modifying-variable-inside-while-loop-is-not-remembered
+while read line; do
+...
+done <<EOT
+$(echo -e $lines)
+EOT

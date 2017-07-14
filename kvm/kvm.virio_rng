@@ -1,0 +1,23 @@
+https://fedoraproject.org/wiki/QA:Testcase_Virtualization_VirtioRNG
+how to test
+Host /dev/random passthrough
+
+This feeds the guest RNG with data from the host /dev/random entropy pool.
+Warning.png
+This is just for demonstration purposes
+In real deployments this will likely exhaust the host's entropy pool if used with more than 1 virtual machine. This is mostly useful for sanity testing.
+
+    Stop the VM
+    sudo virsh edit f19
+        Stick this XML in the <devices> section 
+
+   <rng model='virtio'>
+     <backend model='random'>/dev/random</backend>
+   </rng>
+
+        Save and exit 
+    Verify the guest sees the RNG device
+        Start the VM, log in
+        Verify /dev/hwrng exists
+        Verify module is loaded: lsmod | grep virtio_rng 
+

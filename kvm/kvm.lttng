@@ -1,2 +1,164 @@
 http://blog.csdn.net/gudujianjsk/article/details/8253634
 http://www.mail-archive.com/kvm@vger.kernel.org/msg39516.html KVM picture 
+
+Tracing In Qemu With LTTng
+==========================
+Building:
+	$ configure --enable-board=intel-x86-64 --enable-rootfs=ovp-kvm \
+		--enable-addons=wr-ovp 
+	$ make fs
+
+Qemu uses a tool to generate the actual TRACEPOINT_EVENT macros.
+Edit "trace-events" and add the prototype and format string.  The
+comment at the top of that file describes the format in detail.  Here
+are example trace points used to profile device_add:
+
+	# used in qdev-monitor.c
+	do_device_add_enter(void *mon, void *qdict, void **ret_data) "mon %p qdict %p ret_data %p";
+	do_device_add_error(void *mon, void *qdict, void **ret_data) "mon %p qdict %p ret_data %p";
+	do_device_add_fast_return(void *mon, void *qdict, void **ret_data) "mon %p qdict %p ret_data %p";
+	do_device_add_return(void *mon, void *qdict, void **ret_data) "mon %p qdict %p ret_data %p";
+
+Once trace points have been defined as above, instrument the function
+to be traced with "trace_" prefixed commands.  E.g. do_device_add in
+qdev-monitor.c:
+	diff --git a/qdev-monitor.c b/qdev-monitor.c
+	index dc37a43..02ab570 100644
+	--- a/qdev-monitor.c
+	+++ b/qdev-monitor.c
+	@@ -24,6 +24,8 @@
+	 #include "qmp-commands.h"
+	 #include "sysemu/arch_init.h"
+	 #include "qemu/config-file.h"
+	+#include "trace.h"
+	 
+	 /*
+	  * Aliases were a bad idea from the start.  Let's keep them
+	@@ -647,23 +649,28 @@ int do_device_add(Monitor *mon, const QDict *qdict, QObject **ret_data)
+	     Error *local_err = NULL;
+	     QemuOpts *opts;
+	     DeviceState *dev;
+	
+	     opts = qemu_opts_from_qdict(qemu_find_opts("device"), qdict, &local_err);
+	+    trace_do_device_add_enter(mon, qdict, ret_data);
+	     if (error_is_set(&local_err)) {
+		 qerror_report_err(local_err);
+		 error_free(local_err);
+	+        trace_do_device_add_error(mon, qdict, ret_data);
+		 return -1;
+	     }
+	     if (!monitor_cur_is_qmp() && qdev_device_help(opts)) {
+		 qemu_opts_del(opts);
+	+        trace_do_device_add_fast_return(mon, qdict, ret_data);
+		 return 0;
+	     }
+	     dev = qdev_device_add(opts);
+	     if (!dev) {
+		 qemu_opts_del(opts);
+	+        trace_do_device_add_error(mon, qdict, ret_data);
+		 return -1;
+	     }
+	     object_unref(OBJECT(dev));
+	+    trace_do_device_add_return(mon, qdict, ret_data);
+	     return 0;
+	 }
+
+Now that the trace points have been declared and the code
+instrumented, build qemu with --enable-trace-backend=ust.  In WRLinux,
+edit base/recipes-devtools/qemu/qemu_1.7.0.bbappend and add "ust" to
+PACKAGECONFIG:
+
+PACKAGECONFIG ?= "spice vnc-tls cap-ng linux-aio xfsctl attr \
+                  virtfs \
+                  glusterfs \
+                  rbd vhost pie \
+                  ust \
+                 " 
+
+Now, compile qemu:
+
+	$ make -C build qemu.rebuild
+
+The trace tool will generate the full trace functions automatically.
+The output will be in trace/generated-ust-provider.h, e.g.:
+
+	TRACEPOINT_EVENT(
+	   qemu,
+	   do_device_add_enter,
+	   TP_ARGS(void *, mon, void *, qdict, void **, ret_data),
+	   TP_FIELDS(
+	       ctf_integer_hex(unsigned long, mon, mon)
+	       ctf_integer_hex(unsigned long, qdict, qdict)
+	       ctf_integer_hex(unsigned long, ret_data, ret_data)
+	   )
+	)
+
+	TRACEPOINT_EVENT(
+	   qemu,
+	   do_device_add_error,
+	   TP_ARGS(void *, mon, void *, qdict, void **, ret_data),
+	   TP_FIELDS(
+	       ctf_integer_hex(unsigned long, mon, mon)
+	       ctf_integer_hex(unsigned long, qdict, qdict)
+	       ctf_integer_hex(unsigned long, ret_data, ret_data)
+	   )
+	)
+
+	TRACEPOINT_EVENT(
+	   qemu,
+	   do_device_add_fast_return,
+	   TP_ARGS(void *, mon, void *, qdict, void **, ret_data),
+	   TP_FIELDS(
+	       ctf_integer_hex(unsigned long, mon, mon)
+	       ctf_integer_hex(unsigned long, qdict, qdict)
+	       ctf_integer_hex(unsigned long, ret_data, ret_data)
+	   )
+	)
+
+	TRACEPOINT_EVENT(
+	   qemu,
+	   do_device_add_return,
+	   TP_ARGS(void *, mon, void *, qdict, void **, ret_data),
+	   TP_FIELDS(
+	       ctf_integer_hex(unsigned long, mon, mon)
+	       ctf_integer_hex(unsigned long, qdict, qdict)
+	       ctf_integer_hex(unsigned long, ret_data, ret_data)
+	   )
+	)
+
+Running LTTng
+=============
+Start tracing on the host:
+	$ lttng create
+	$ lttng enable-event -u -a
+	$ lttng start
+
+Boot the VM.  Once the VM is up and login.  The goal of this example
+is to profile device_add.  The device to add is a 10G Ethernet card
+with device ID 83:00.  Make sure to load the kmods for pci hotplug:
+
+VM:
+	$ modprobe pci_stub
+	$ modprobe pci_hotplug
+
+Now, get into the qemu monitor and add the device (CTRL-A C):
+	(qemu) device_add pci-assign,host=83:00.0,id=mynic
+
+That is enough to trigger a trace.  Shutdown the guest.
+
+On the host:
+	$ lttng stop
+	$ lttng view qemu
+
+	..........
+[17:42:18.430157785] (+0.000002870) SPECserver qemu:do_device_add_enter: { cpu_id = 0 }, { mon = 0x7F535C0B4D50, qdict = 0x7F535C0E3000, ret_data = 0x7FFFA713C6F0 }
+[17:42:19.825892256] (+0.000004153) SPECserver qemu:do_device_add_return: { cpu_id = 0 }, { mon = 0x7F535C0B4D50, qdict = 0x7F535C0E3000, ret_data = 0x7FFFA713C6F0 }
+	..........
+
+	$ lttng destroy
+The above snippet of the trace log shows the timestamps for the two
+trace points added earlier.  This shows the cost of adding a 10G
+Ethernet card:
+
+17:42:19.825892256 - 17:42:18.430157785 == 1.395 seconds
+

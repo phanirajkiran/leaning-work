@@ -1,3 +1,6 @@
+great
+http://apprize.info/linux/beaglebone/4.html
+
 bitbake -c listtasks <recipe> 
 bitbake -c compile linux-windriver
 ==================================================================
@@ -275,3 +278,30 @@ package installing the package that is being replaced will be removed since it i
 when this package is installed.
 
 
+${@bb.utils.contains("KERNEL_ALL_DEBUG", "1", "file://${TOPDIR}/all_noises.cfg", "file://${TOPDIR}/empty.cfg" ,d)} \
+#RANDOM_INC ?= "${@bb.utils.contains("KERNEL_RANDOM_CFG", "1", "kernel-test.inc", "empty.inc", d)}"
+#require ${RANDOM_INC}
+
+ZZ := "${THISDIR}" ------> bbapend 
+ZZ := "${@os.path.dirname(d.getVar('FILE', True))}" ------->template.conf
+
+
+http://www.xlgps.com/article/186662.html
+
+https://github.com/openembedded/openembedded-core/blob/master/meta-skeleton/recipes-multilib/images/core-image-multilib-example.bb
+IMAGE_INSTALL += "lib32-bash"
+
+
+function should use ":=" to call it 
+global variable in bb ,it should use ${} when calling it 
+
+
+IVI_COREBASE := '${@os.path.normpath("${LAYERDIR}/../")}'
+save_cwd = os.getcwd()
+ os.chdir(save_cwd)
+
+python fsl_bin_do_unpack() {
+
+TOPDIR := '${@os.path.dirname(os.path.dirname(FILE))}'
+
+bb.build.exec_func('fsl_bin_do_unpack', d)

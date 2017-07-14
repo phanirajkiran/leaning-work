@@ -1,0 +1,253 @@
+{
+    "key": "LIN9-1768", 
+    "fields": {
+        "customfield_10701": null, 
+        "customfield_10700": null, 
+        "customfield_10702": null, 
+        "customfield_10707": null, 
+        "labels": [
+            "NXBF"
+        ], 
+        "assignee": {
+            "displayName": "Huang, Jie (Jackie)", 
+            "name": "JHuang0", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=JHuang0", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&ownerId=jhuang0&avatarId=10703", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&ownerId=jhuang0&avatarId=10703", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?ownerId=jhuang0&avatarId=10703", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&ownerId=jhuang0&avatarId=10703"
+            }, 
+            "emailAddress": "Jackie.Huang@windriver.com", 
+            "key": "jhuang0", 
+            "active": true, 
+            "timeZone": "Asia/Shanghai"
+        }, 
+        "lastViewed": null, 
+        "customfield_10015": null, 
+        "customfield_11302": null, 
+        "customfield_10010": null, 
+        "customfield_11301": null, 
+        "votes": {
+            "hasVoted": false, 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/LIN9-1768/votes", 
+            "votes": 0
+        }, 
+        "customfield_11001": "1 configure --enable-board=qemux86 --enable-kernel=standard --enable-rootfs=glibc-small --with-layer=meta-selinux,common-downloads --enable-test=yes --enable-parallel-pkgbuilds=20 --enable-jobs=10 --enable-patchresolve=noop --enable-rm-work=yes --enable-buildstats=yes --enable-prserver=no --enable-error-report=yes --enable-bootimage=noimage\r\n\r\n2 make boost", 
+        "customfield_11000": [
+            {
+                "released": false, 
+                "self": "https://jira.wrs.com:8443/rest/api/2/version/24557", 
+                "archived": false, 
+                "id": "24557", 
+                "name": "unknown"
+            }
+        ], 
+        "customfield_11002": null, 
+        "customfield_12400": null, 
+        "timespent": null, 
+        "customfield_12407": null, 
+        "duedate": null, 
+        "updated": "2016-10-18T19:36:07.000-0700", 
+        "worklog": {
+            "worklogs": [], 
+            "total": 0, 
+            "startAt": 0, 
+            "maxResults": 20
+        }, 
+        "customfield_10800": null, 
+        "customfield_10801": null, 
+        "customfield_10008": null, 
+        "customfield_10006": null, 
+        "customfield_10007": null, 
+        "customfield_11700": null, 
+        "customfield_10005": null, 
+        "aggregatetimeoriginalestimate": null, 
+        "customfield_13200": null, 
+        "customfield_12800": null, 
+        "customfield_12100": null, 
+        "summary": "[wraxl] boost_1.61.0 failed (do_compile_ptest_base) of qemux86_small_world10.", 
+        "timetracking": {}, 
+        "issuetype": {
+            "name": "Bug", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/issuetype/1", 
+            "iconUrl": "https://jira.wrs.com:8443/secure/viewavatar?size=xsmall&avatarId=14303&avatarType=issuetype", 
+            "subtask": false, 
+            "avatarId": 14303, 
+            "id": "1", 
+            "description": "A problem which impairs or prevents the functions of the product."
+        }, 
+        "timeestimate": null, 
+        "creator": {
+            "displayName": "Kang, Kai", 
+            "name": "KKang", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=KKang", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Kai.Kang@windriver.com", 
+            "key": "kkang", 
+            "active": true, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "customfield_10520": null, 
+        "customfield_12801": null, 
+        "customfield_11202": null, 
+        "customfield_11201": null, 
+        "customfield_11404": null, 
+        "customfield_12500": null, 
+        "progress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_10012": null, 
+        "aggregateprogress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_12200": null, 
+        "reporter": {
+            "displayName": "Kang, Kai", 
+            "name": "KKang", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/user?username=KKang", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com:8443/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com:8443/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com:8443/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Kai.Kang@windriver.com", 
+            "key": "kkang", 
+            "active": true, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "customfield_10103": null, 
+        "environment": null, 
+        "created": "2016-10-18T19:36:07.000-0700", 
+        "aggregatetimespent": null, 
+        "customfield_10901": null, 
+        "customfield_10900": null, 
+        "comment": {
+            "total": 0, 
+            "startAt": 0, 
+            "comments": [], 
+            "maxResults": 0
+        }, 
+        "aggregatetimeestimate": null, 
+        "customfield_10501": null, 
+        "customfield_10508": null, 
+        "customfield_11904": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11902", 
+            "id": "11902", 
+            "value": "No"
+        }, 
+        "customfield_10004": null, 
+        "priority": {
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/priorities/critical.svg", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/priority/2", 
+            "name": "P2", 
+            "id": "2"
+        }, 
+        "customfield_11905": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11904", 
+            "id": "11904", 
+            "value": "No"
+        }, 
+        "customfield_11906": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/11906", 
+            "id": "11906", 
+            "value": "No"
+        }, 
+        "customfield_11900": null, 
+        "customfield_11901": null, 
+        "customfield_11902": null, 
+        "customfield_11908": null, 
+        "customfield_11500": null, 
+        "customfield_10517": null, 
+        "watches": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/issue/LIN9-1768/watchers", 
+            "watchCount": 1, 
+            "isWatching": false
+        }, 
+        "customfield_10512": null, 
+        "customfield_10518": null, 
+        "customfield_10519": null, 
+        "resolutiondate": null, 
+        "project": {
+            "name": "Linux 9", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/project/15904", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com:8443/secure/projectavatar?size=small&pid=15904&avatarId=10011", 
+                "32x32": "https://jira.wrs.com:8443/secure/projectavatar?size=medium&pid=15904&avatarId=10011", 
+                "48x48": "https://jira.wrs.com:8443/secure/projectavatar?pid=15904&avatarId=10011", 
+                "16x16": "https://jira.wrs.com:8443/secure/projectavatar?size=xsmall&pid=15904&avatarId=10011"
+            }, 
+            "projectCategory": {
+                "self": "https://jira.wrs.com:8443/rest/api/2/projectCategory/11200", 
+                "id": "11200", 
+                "name": "Linux", 
+                "description": ""
+            }, 
+            "key": "LIN9", 
+            "id": "15904"
+        }, 
+        "customfield_10804": null, 
+        "customfield_13002": null, 
+        "customfield_13001": null, 
+        "customfield_13000": "0|i26v6f:", 
+        "workratio": -1, 
+        "customfield_10608": null, 
+        "issuelinks": [], 
+        "customfield_10600": null, 
+        "customfield_10601": null, 
+        "customfield_10602": null, 
+        "customfield_10603": null, 
+        "customfield_10604": null, 
+        "customfield_10605": {
+            "self": "https://jira.wrs.com:8443/rest/api/2/customFieldOption/10439", 
+            "id": "10439", 
+            "value": "Standard"
+        }, 
+        "customfield_10606": null, 
+        "customfield_10607": null, 
+        "subtasks": [], 
+        "customfield_11100": null, 
+        "customfield_10802": null, 
+        "attachment": [], 
+        "customfield_12703": null, 
+        "customfield_12702": null, 
+        "status": {
+            "statusCategory": {
+                "name": "To Do", 
+                "self": "https://jira.wrs.com:8443/rest/api/2/statuscategory/2", 
+                "id": 2, 
+                "key": "new", 
+                "colorName": "blue-gray"
+            }, 
+            "description": "", 
+            "self": "https://jira.wrs.com:8443/rest/api/2/status/1", 
+            "iconUrl": "https://jira.wrs.com:8443/images/icons/statuses/up.png", 
+            "id": "1", 
+            "name": "Open"
+        }, 
+        "description": "Build in centos7_64 x86_64\r\nBranch being built is master\r\nLogfiles are 00-wrconfig.log and 00-wrbuild.log\r\nRelevant bits of the config were:\r\n     --enable-board=qemux86 --enable-kernel=standard --enable-rootfs=glibc-small --with-layer=meta-selinux,common-downloads --enable-test=yes --enable-parallel-pkgbuilds=20 --enable-jobs=10 --enable-patchresolve=noop --enable-rm-work=yes --enable-buildstats=yes --enable-prserver=no --enable-error-report=yes --enable-bootimage=noimage\r\n\r\n[2016-10-18 12:48:26.796655385-07:00] Build Configuration:\r\n[2016-10-18 12:48:26.797396596-07:00] BB_VERSION        = \"1.32.0\"\r\n[2016-10-18 12:48:26.798221273-07:00] BUILD_SYS         = \"x86_64-linux\"\r\n[2016-10-18 12:48:26.798945911-07:00] NATIVELSBSTRING   = \"CentOSLinux-7.2.1511\"\r\n[2016-10-18 12:48:26.799736151-07:00] DISTRO            = \"wrlinux-small\"\r\n[2016-10-18 12:48:26.800469874-07:00] DISTRO_VERSION    = \"9.0.0.0\"\r\n[2016-10-18 12:48:26.801178146-07:00] MACHINE           = \"qemux86\"\r\n[2016-10-18 12:48:26.801922718-07:00] DEFAULTTUNE       = \"i586\"\r\n[2016-10-18 12:48:26.802666536-07:00] TARGET_SYS        = \"i586-wrs-linux\"\r\n[2016-10-18 12:48:26.803388787-07:00] TUNE_FEATURES     = \"m32 i586\"\r\n[2016-10-18 12:48:26.804107335-07:00] TARGET_FPU        = \"\"\r\n[2016-10-18 12:48:26.804843047-07:00] wrlinux           = \"master:43ffa2f624a4fd6885ec0c91373a3f8e7f17be1b\"\r\n[2016-10-18 12:48:26.805574076-07:00] wrlcompat         = \"master:138a38b823f5feb3409d631ae9a4914c01c38077\"\r\n[2016-10-18 12:48:26.806385473-07:00] wr-tcwrappers     = \"master:09ee6155500d6c03ca0aea6b40c951a2b6225d64\"\r\n[2016-10-18 12:48:26.807211430-07:00] meta              = \"wr-9.0-20161016:17553fcc9ab9023e1861671838cadc363f01adcf\"\r\n[2016-10-18 12:48:26.808078492-07:00] oe-core-dl-2.0    = \"master:f344ad1193f5a1888fdc7f27dfcf660f78fa9a9d\"\r\n[2016-10-18 12:48:26.808915092-07:00] meta-downloads    = \"master:6df2fac82b08dce43ac8d8821b7e0fea94b1990f\"\r\n[2016-10-18 12:48:26.809739533-07:00] wr-kernel         = \"master:f2e94dad7c0147d2b8459e1bbda7789dfa630bb9\"\r\n[2016-10-18 12:48:26.810513281-07:00] qemux86           = \"master:6987875012999638b2920a60a59a00fb602e6573\"\r\n[2016-10-18 12:48:26.811370221-07:00] wr-base           = \"master:44305cab68c511d7d17a5bc948e27fdab851a56d\"\r\n[2016-10-18 12:48:26.812189116-07:00] wr-fixes          = \"master:eabc15be0fbdf72e0bdecfeaa34fe2485ae44b54\"\r\n[2016-10-18 12:48:26.813016555-07:00] wr-tools-profile  = \"master:73c9c7cf26561befb5ed491a9c41300bc159483b\"\r\n[2016-10-18 12:48:26.813851789-07:00] wr-tools-debug    = \"master:28d66e3237c0a41b9d887d655b36054df7f1c348\"\r\n[2016-10-18 12:48:26.814670822-07:00] meta-filesystems  \r\n[2016-10-18 12:48:26.815399522-07:00] meta-initramfs    \r\n[2016-10-18 12:48:26.816160988-07:00] meta-gnome        \r\n[2016-10-18 12:48:26.816890295-07:00] meta-multimedia   \r\n[2016-10-18 12:48:26.817606167-07:00] meta-networking   \r\n[2016-10-18 12:48:26.818344056-07:00] meta-oe           \r\n[2016-10-18 12:48:26.819056789-07:00] meta-python       \r\n[2016-10-18 12:48:26.819860944-07:00] meta-perl         \r\n[2016-10-18 12:48:26.820660964-07:00] meta-webserver    \r\n[2016-10-18 12:48:26.821535458-07:00] meta-xfce         = \"wr-9.0-20161016:b8539c2fb54aa92e1d3ae8e2858cbf3d1f17a0b9\"\r\n[2016-10-18 12:48:26.822412820-07:00] wr-prebuilts      = \"master:2064e07d7b2c42a90285f4e3d2042dbcb2303343\"\r\n[2016-10-18 12:48:26.823220138-07:00] meta-selinux      = \"wr-9.0-20161016:2be4a3775d79381c434c6aea0a7031d920bde641\"\r\n[2016-10-18 12:48:26.824080550-07:00] common-downloads  = \"master:d95e7357b001d8975b1362a89017f9e483a8e578\"\r\n[2016-10-18 12:48:26.824850982-07:00] extra-downloads   \r\n[2016-10-18 12:48:26.825656205-07:00] local             = \"<unknown>:<unknown>\"\r\n[2016-10-18 12:48:26.826487668-07:00] \r\n[2016-10-18 12:48:26.827377270-07:00] ----------------------------------------------------------------------\r\n[2016-10-18 12:48:26.828075400-07:00] NOTE: The meta-selinux layer(s) are part of the optional Extras Layer\r\n[2016-10-18 12:48:26.828758328-07:00] which contains a preview of upcoming features. Standard Service Level\r\n[2016-10-18 12:48:26.829451852-07:00] Agreements do not apply to issues reported against this layer. Wind\r\nFailed step: do_compile_ptest_base in file: /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/temp/do_compile_ptest_base/log.do_compile_ptest_base.14407\r\n\r\nHere is some context from around the error:\r\n --------------------------------------------------\r\n[2016-10-18 14:12:50.855730352-07:00] NOTE: recipe libxkbcommon-0.6.1-r0: task do_configure: Started\r\n[2016-10-18 14:12:50.870715425-07:00] NOTE: recipe lzop-1.03-r0: task do_packagedata: Started\r\n[2016-10-18 14:12:50.948740726-07:00] NOTE: recipe libvpx-1.5.0-r0: task do_configure: Started\r\n[2016-10-18 14:12:51.012448472-07:00] ERROR: boost-1.61.0-r0 do_compile_ptest_base: Function failed: do_compile_ptest_base (log file is located at /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/temp/do_compile_ptest_base/log.do_compile_ptest_base.14407)\r\n[2016-10-18 14:12:51.059126788-07:00] NOTE: recipe aoetools-36-r0: task do_configure: Started\r\n[2016-10-18 14:12:51.137357644-07:00] NOTE: recipe aoetools-36-r0: task do_configure: Succeeded\r\n[2016-10-18 14:12:51.140035232-07:00] NOTE: Running task 14220 of 15467 (/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/layers/meta-openembedded/meta-networking/recipes-support/aoetools/aoetools_36.bb:do_compile)\r\n--\r\n[2016-10-18 14:12:54.382581085-07:00] NOTE: Running task 14233 of 15467 (/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/layers/oe-core/meta/recipes-devtools/cve-check-tool/cve-check-tool_5.6.4.bb:do_package_qa)\r\n[2016-10-18 14:12:54.589836436-07:00] NOTE: recipe cve-check-tool-5.6.4-r0: task do_package_write_rpm: Started\r\n[2016-10-18 14:12:54.963093150-07:00] NOTE: recipe cve-check-tool-5.6.4-r0: task do_package_qa: Started\r\n[2016-10-18 14:12:56.311394304-07:00] ERROR: Logfile of failure stored in: /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/temp/do_compile_ptest_base/log.do_compile_ptest_base.14407\r\n[2016-10-18 14:12:56.830778167-07:00] Log data follows:\r\n[2016-10-18 14:12:56.831890145-07:00] | DEBUG: Executing shell function do_compile_ptest_base\r\n[2016-10-18 14:12:56.832901135-07:00] | Performing configuration checks\r\n--\r\n[2016-10-18 14:15:28.233590283-07:00] | WARNING: /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/temp/do_compile_ptest_base/run.do_compile_ptest_base.14407:1 exit 1 from 'bjam -j10 -d+2 -q --ignore-site-config '-sTOOLS=gcc' '-sGCC=i586-wrs-linux-gcc  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_wor\r\nld10/bitbake_build/tmp/sysroots/qemux86 '\"'-DBOOST_PLATFORM_CONFIG=\\\"boost/config/platform/linux.hpp\\\"'\" '-sGXX=i586-wrs-linux-g++  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86 '\"'-DBOOST_PLATFORM_CONFIG=\\\"boost/config/platform/linux.hpp\\\"'\" '-sGCC_INCLUDE_DIRECTORY=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_wor\r\nld10/bitbake_build/tmp/sysroots/qemux86/usr/include' '-sGCC_STDLIB_DIRECTORY=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/lib' '-sBUILD=release <optimization>space <threading>multi <inlining>on <debug-symbols>off' '-sPYTHON_ROOT=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86//usr' '--layout=system' -sBOOST_BUILD_USER_CONFIG=/home/wrlbuild/b\r\nuilds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/user-config.jam --build-dir=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/boost_1_61_0/i586-wrs-linux --disable-icu --with-atomic --with-chrono --with-container --with-date_time --with-exception --with-filesystem --with-graph --with-iostreams --with-log --with-math --with-progr\r\nam_options --with-random --with-regex --with-serialization --with-signals --with-system --with-timer --with-test --with-thread --with-wave --with-locale --with-graph_parallel --with-mpi --with-python --with-context --with-coroutine --prefix=/usr --exec-prefix=/usr --libdir=/usr/lib --includedir=/usr/include'\r\n[2016-10-18 14:15:28.234444446-07:00] | ERROR: Function failed: do_compile_ptest_base (log file is located at /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/temp/do_compile_ptest_base/log.do_compile_ptest_base.14407)\r\n[2016-10-18 14:15:28.235192300-07:00] NOTE: recipe boost-1.61.0-r0: task do_compile_ptest_base: Failed\r\n[2016-10-18 14:15:28.236018612-07:00] ERROR: Task (/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/layers/oe-core/meta/recipes-support/boost/boost_1.61.0.bb:do_compile_ptest_base) failed with exit code '1'\r\n[2016-10-18 14:15:28.236844322-07:00] NOTE: Running task 14234 of 15467 (/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/layers/meta-openembedded/meta-networking/recipes-support/aoetools/aoetools_36.bb:do_populate_sysroot)\r\n[2016-10-18 14:15:28.237615755-07:00] NOTE: recipe cve-check-tool-5.6.4-r0: task do_package_qa: Succeeded\r\n[2016-10-18 14:15:28.238349601-07:00] NOTE: recipe aoetools-36-r0: task do_populate_sysroot: Started\r\n --------------------------------------------------\r\n\r\nHere is the tail of log.do_compile_ptest_base.14407:\r\n --------------------------------------------------\r\nIn file included from ../../../boost/python/converter/arg_to_python.hpp:10:0,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../boost/python/import.hpp:8,\r\n                 from ../../../libs/python/src/import.cpp:6:\r\n../../../boost/python/to_python_indirect.hpp: In static member function 'static PyObject* boost::python::detail::make_owning_holder::execute(T*)':\r\n../../../boost/python/to_python_indirect.hpp:90:24: warning: 'template<class> class std::auto_ptr' is deprecated [-Wdeprecated-declarations]\r\n           typedef std::auto_ptr<T> smart_pointer;\r\n                        ^~~~~~~~\r\nIn file included from /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/memory:81:0,\r\n                 from ../../../boost/config/no_tr1/memory.hpp:21,\r\n                 from ../../../boost/get_pointer.hpp:14,\r\n                 from ../../../boost/python/object/pointer_holder.hpp:11,\r\n                 from ../../../boost/python/to_python_indirect.hpp:10,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:10,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../boost/python/import.hpp:8,\r\n                 from ../../../libs/python/src/import.cpp:6:\r\n/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/bits/unique_ptr.h:49:28: note: declared here\r\n   template<typename> class auto_ptr;\r\n                            ^~~~~~~~\r\nIn file included from ../../../boost/python/object/function_handle.hpp:10:0,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:19,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../boost/python/import.hpp:8,\r\n                 from ../../../libs/python/src/import.cpp:6:\r\n../../../boost/python/object/py_function.hpp: At global scope:\r\n../../../boost/python/object/py_function.hpp:167:18: warning: 'template<class> class std::auto_ptr' is deprecated [-Wdeprecated-declarations]\r\n     mutable std::auto_ptr<py_function_impl_base> m_impl;\r\n                  ^~~~~~~~\r\nIn file included from /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/memory:81:0,\r\n                 from ../../../boost/config/no_tr1/memory.hpp:21,\r\n                 from ../../../boost/get_pointer.hpp:14,\r\n                 from ../../../boost/python/object/pointer_holder.hpp:11,\r\n                 from ../../../boost/python/to_python_indirect.hpp:10,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:10,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../boost/python/import.hpp:8,\r\n                 from ../../../libs/python/src/import.cpp:6:\r\n/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/bits/unique_ptr.h:49:28: note: declared here\r\n   template<typename> class auto_ptr;\r\n                            ^~~~~~~~\r\ngcc.compile.c++ /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/boost_1_61_0/i586-wrs-linux/boost/bin.v2/libs/python/build/b09c8a55ab65bd2898c132cf6c0d517f/object/stl_iterator.o\r\n\r\n    \"i586-wrs-linux-g++\" \"-m32\" \"-march=i586\" \"-Wl,-O1\" \"-Wl,--hash-style=gnu\" \"-Wl,--as-needed\" \"--sysroot=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86\"  -ftemplate-depth-128 -O2 -pipe -g -fvisibility-inlines-hidden -O0 -fno-inline -Wall -g -march=i686 -fPIC -m32  -DBOOST_ALL_NO_LIB=1 -DBOOST_PYTHON_SOURCE  -I\"../../..\" -I\"/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_\r\nbuild/tmp/sysroots/qemux86/usr/include/python2.7\" -c -o \"/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/boost_1_61_0/i586-wrs-linux/boost/bin.v2/libs/python/build/b09c8a55ab65bd2898c132cf6c0d517f/object/stl_iterator.o\" \"../../../libs/python/src/object/stl_iterator.cpp\"\r\n\r\nIn file included from ../../../boost/python/detail/is_xxx.hpp:8:0,\r\n                 from ../../../boost/python/detail/is_auto_ptr.hpp:9,\r\n                 from ../../../boost/python/detail/copy_ctor_mutates_rhs.hpp:8,\r\n                 from ../../../boost/python/detail/value_arg.hpp:7,\r\n                 from ../../../boost/python/object/forward.hpp:13,\r\n                 from ../../../boost/python/object/pointer_holder.hpp:16,\r\n                 from ../../../boost/python/to_python_indirect.hpp:10,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:10,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../libs/python/src/object/stl_iterator.cpp:10:\r\n../../../boost/python/detail/is_auto_ptr.hpp:17:40: warning: 'template<class> class std::auto_ptr' is deprecated [-Wdeprecated-declarations]\r\n BOOST_PYTHON_IS_XXX_DEF(auto_ptr, std::auto_ptr, 1)\r\n                                        ^\r\n../../../boost/detail/is_xxx.hpp:20:4: note: in definition of macro 'BOOST_DETAIL_IS_XXX_DEF'\r\n    qualified_name< BOOST_PP_ENUM_PARAMS_Z(1, nargs, T) >        \\\r\n    ^~~~~~~~~~~~~~\r\n../../../boost/python/detail/is_auto_ptr.hpp:17:1: note: in expansion of macro 'BOOST_PYTHON_IS_XXX_DEF'\r\n BOOST_PYTHON_IS_XXX_DEF(auto_ptr, std::auto_ptr, 1)\r\n ^~~~~~~~~~~~~~~~~~~~~~~\r\nIn file included from /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/memory:81:0,\r\n                 from ../../../boost/config/no_tr1/memory.hpp:21,\r\n                 from ../../../boost/get_pointer.hpp:14,\r\n                 from ../../../boost/python/object/pointer_holder.hpp:11,\r\n                 from ../../../boost/python/to_python_indirect.hpp:10,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:10,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../libs/python/src/object/stl_iterator.cpp:10:\r\n/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/bits/unique_ptr.h:49:28: note: declared here\r\n   template<typename> class auto_ptr;\r\n                            ^~~~~~~~\r\nIn file included from ../../../boost/python/refcount.hpp:9:0,\r\n                 from ../../../boost/python/to_python_indirect.hpp:19,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:10,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../libs/python/src/object/stl_iterator.cpp:10:\r\n../../../boost/python/cast.hpp: In function 'void boost::python::detail::assert_castable(boost::type<T>*)':\r\n../../../boost/python/cast.hpp:73:20: warning: typedef 'must_be_a_complete_type' locally defined but not used [-Wunused-local-typedefs]\r\n       typedef char must_be_a_complete_type[sizeof(T)];\r\n                    ^~~~~~~~~~~~~~~~~~~~~~~\r\nIn file included from ../../../boost/python/converter/arg_to_python.hpp:10:0,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../libs/python/src/object/stl_iterator.cpp:10:\r\n../../../boost/python/to_python_indirect.hpp: In static member function 'static PyObject* boost::python::detail::make_owning_holder::execute(T*)':\r\n../../../boost/python/to_python_indirect.hpp:90:24: warning: 'template<class> class std::auto_ptr' is deprecated [-Wdeprecated-declarations]\r\n           typedef std::auto_ptr<T> smart_pointer;\r\n                        ^~~~~~~~\r\nIn file included from /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/memory:81:0,\r\n                 from ../../../boost/config/no_tr1/memory.hpp:21,\r\n                 from ../../../boost/get_pointer.hpp:14,\r\n                 from ../../../boost/python/object/pointer_holder.hpp:11,\r\n                 from ../../../boost/python/to_python_indirect.hpp:10,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:10,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../libs/python/src/object/stl_iterator.cpp:10:\r\n/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/bits/unique_ptr.h:49:28: note: declared here\r\n   template<typename> class auto_ptr;\r\n                            ^~~~~~~~\r\nIn file included from ../../../boost/python/object/function_handle.hpp:10:0,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:19,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../libs/python/src/object/stl_iterator.cpp:10:\r\n../../../boost/python/object/py_function.hpp: At global scope:\r\n../../../boost/python/object/py_function.hpp:167:18: warning: 'template<class> class std::auto_ptr' is deprecated [-Wdeprecated-declarations]\r\n     mutable std::auto_ptr<py_function_impl_base> m_impl;\r\n                  ^~~~~~~~\r\nIn file included from /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/memory:81:0,\r\n                 from ../../../boost/config/no_tr1/memory.hpp:21,\r\n                 from ../../../boost/get_pointer.hpp:14,\r\n                 from ../../../boost/python/object/pointer_holder.hpp:11,\r\n                 from ../../../boost/python/to_python_indirect.hpp:10,\r\n                 from ../../../boost/python/converter/arg_to_python.hpp:10,\r\n                 from ../../../boost/python/call.hpp:15,\r\n                 from ../../../boost/python/object_core.hpp:14,\r\n                 from ../../../boost/python/object.hpp:9,\r\n                 from ../../../libs/python/src/object/stl_iterator.cpp:10:\r\n/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/include/c++/6.2.0/bits/unique_ptr.h:49:28: note: declared here\r\n   template<typename> class auto_ptr;\r\n                            ^~~~~~~~\r\ngcc.compile.c++ /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/boost_1_61_0/i586-wrs-linux/boost/bin.v2/libs/python/build/b09c8a55ab65bd2898c132cf6c0d517f/object/inheritance.o\r\n\r\n    \"i586-wrs-linux-g++\" \"-m32\" \"-march=i586\" \"-Wl,-O1\" \"-Wl,--hash-style=gnu\" \"-Wl,--as-needed\" \"--sysroot=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86\"  -ftemplate-depth-128 -O2 -pipe -g -fvisibility-inlines-hidden -O0 -fno-inline -Wall -g -march=i686 -fPIC -m32  -DBOOST_ALL_NO_LIB=1 -DBOOST_PYTHON_SOURCE  -I\"../../..\" -I\"/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_\r\nbuild/tmp/sysroots/qemux86/usr/include/python2.7\" -c -o \"/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/boost_1_61_0/i586-wrs-linux/boost/bin.v2/libs/python/build/b09c8a55ab65bd2898c132cf6c0d517f/object/inheritance.o\" \"../../../libs/python/src/object/inheritance.cpp\"\r\n\r\n...failed updating 1 target...\r\nWARNING: /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/temp/do_compile_ptest_base/run.do_compile_ptest_base.14407:1 exit 1 from 'bjam -j10 -d+2 -q --ignore-site-config '-sTOOLS=gcc' '-sGCC=i586-wrs-linux-gcc  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86 \r\n'\"'-DBOOST_PLATFORM_CONFIG=\\\"boost/config/platform/linux.hpp\\\"'\" '-sGXX=i586-wrs-linux-g++  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86 '\"'-DBOOST_PLATFORM_CONFIG=\\\"boost/config/platform/linux.hpp\\\"'\" '-sGCC_INCLUDE_DIRECTORY=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/\r\nusr/include' '-sGCC_STDLIB_DIRECTORY=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86/usr/lib' '-sBUILD=release <optimization>space <threading>multi <inlining>on <debug-symbols>off' '-sPYTHON_ROOT=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/sysroots/qemux86//usr' '--layout=system' -sBOOST_BUILD_USER_CONFIG=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab\r\n89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/user-config.jam --build-dir=/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/boost_1_61_0/i586-wrs-linux --disable-icu --with-atomic --with-chrono --with-container --with-date_time --with-exception --with-filesystem --with-graph --with-iostreams --with-log --with-math --with-program_options --with-random --with-regex --\r\nwith-serialization --with-signals --with-system --with-timer --with-test --with-thread --with-wave --with-locale --with-graph_parallel --with-mpi --with-python --with-context --with-coroutine --prefix=/usr --exec-prefix=/usr --libdir=/usr/lib --includedir=/usr/include'\r\nERROR: Function failed: do_compile_ptest_base (log file is located at /home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boost/1.61.0-r0/temp/do_compile_ptest_base/log.do_compile_ptest_base.14407)\r\n --------------------------------------------------\r\n\r\nHere is the tail of qa.log\r\n --------------------------------------------------\r\ntsocks-1.8beta5: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/tsocks/1.8beta5-r0/packages-split/tsocks/usr/lib/libtsocks.so.1.8' [ldflags]\r\ntunctl-1.5: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/tunctl/1.5-r0/packages-split/tunctl/usr/sbin/tunctl' [ldflags]\r\ndbus-test-1.10.10: dbus-test-ptest rdepends on libselinux, but it isn't a build dependency, missing libselinux in DEPENDS or PACKAGECONFIG? [build-deps]\r\naugeas-1.5.0: libaugeas rdepends on libselinux, but it isn't a build dependency, missing libselinux in DEPENDS or PACKAGECONFIG? [build-deps]\r\nintel-pcm-2.3a: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/intel-pcm/2.3a-r0/packages-split/intel-pcm/usr/sbin/pcm-msr.x'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/intel-pcm/2.3a-r0/packages-split/intel-pcm/usr/sbin/pcm-power.x'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/intel-pcm/2.3a-r0/packages-split/intel-pcm/usr/sbin/pcm-sensor.x'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/intel-pcm/2.3a-r0/packages-split/intel-pcm/usr/sbin/pcm.x'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/intel-pcm/2.3a-r0/packages-split/intel-pcm/usr/sbin/pcm-memory.x' [ldflags]\r\nvblade-20: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/vblade/20-r0/packages-split/vblade/usr/sbin/vblade' [ldflags]\r\nnuttcp-7.2.1: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/nuttcp/7.2.1-r0/packages-split/nuttcp/usr/bin/nuttcp' [ldflags]\r\nopensaf-5.0.0: opensaf: /opensaf/etc/init.d/opensafd is owned by uid 1000, which is the same as the user running bitbake. This may be due to host contamination [host-user-contaminated]\r\nvdso-test-1.0: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/vdso-test/1.0-r0/packages-split/vdso-test/usr/bin/vdso_test-x86' [ldflags]\r\ncma-test-0.0.1: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/cma-test/0.0.1-r0/packages-split/cma-test/usr/bin/t_process_vm_readv_iovec'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/cma-test/0.0.1-r0/packages-split/cma-test/usr/bin/t_process_vm_readv_simple'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/cma-test/0.0.1-r0/packages-split/cma-test/usr/bin/setup_process_vm_readv_simple'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/cma-test/0.0.1-r0/packages-split/cma-test/usr/bin/setup_process_vm_writev'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/cma-test/0.0.1-r0/packages-split/cma-test/usr/bin/t_process_vm_writev'\r\nNo GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/cma-test/0.0.1-r0/packages-split/cma-test/usr/bin/setup_process_vm_readv_iovec' [ldflags]\r\nhello-1.0: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/hello/1.0-r1/packages-split/hello/usr/bin/hello' [ldflags]\r\nboottime-5.0: No GNU_HASH in the elf binary: '/home/wrlbuild/builds/builds-1982af75-bf9a-4ad4-8ada-5ab89eb4528f/qemux86_small_world10/bitbake_build/tmp/work/i586-wrs-linux/boottime/5.0-r1/packages-split/boottime/opt/WindRiver/boottime/marker-template' [ldflags]\r\n --------------------------------------------------\r\n --------------------------------------\r\n \r\nThis file, and more detailed log info can be found at:\r\nhttp://git.wrs.com/cgit/projects/wraxl/fails/.git/log/?h=qemux86_small_world10-boost_1.61.0-2016-10-18-144501\r\nTo reproduce this failure with a local docker instance, see wraxl docs:\r\n  http://ala-git.wrs.com/cgi-bin/cgit.cgi/lpd-ops/wr-buildscripts.git/tree/README.md\r\n --------------------------------------\r\nHost: ala-blade54\r\nDocker Version: Docker version 1.11.2, build b9f10c9\r\n\r\n", 
+        "customfield_10011": null, 
+        "timeoriginalestimate": null, 
+        "customfield_10200": null, 
+        "customfield_10201": null, 
+        "components": [
+            {
+                "self": "https://jira.wrs.com:8443/rest/api/2/component/22366", 
+                "id": "22366", 
+                "name": "Userspace"
+            }
+        ], 
+        "resolution": null
+    }, 
+    "self": "https://jira.wrs.com:8443/rest/api/2/issue/715491", 
+    "id": "715491", 
+    "expand": "renderedFields,names,schema,transitions,operations,editmeta,changelog,versionedRepresentations"
+}

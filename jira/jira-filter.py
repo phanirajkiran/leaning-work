@@ -180,7 +180,8 @@ def jira_test(jira,summary,jql):
         create_time = time.strptime(issue.fields.created[:19], "%Y-%m-%dT%H:%M:%S")
         create_time = time.strftime("%Y/%m/%d", create_time)
 	d0=date(int(today.split('-')[0]),int(today.split('-')[1]),int(today.split('-')[2]))
-	integrate_time=getattr(issue.fields,'customfield_12407',None)
+	#integrate_time=getattr(issue.fields,'customfield_12407',None)
+	integrate_time=getattr(issue.fields,'resolutiondate',None)
 	if integrate_time:
             integrate_time = time.strptime(integrate_time[:19], "%Y-%m-%dT%H:%M:%S")
             integrate_time = time.strftime("%Y/%m/%d", integrate_time)
@@ -195,6 +196,10 @@ def jira_test(jira,summary,jql):
         issue_dict[i.key].append(i.key)
         issue_dict[i.key].append(issue.fields.priority.name)
         issue_dict[i.key].append(issue.fields.status)
+	if issue.fields.resolution:
+            issue_dict[i.key].append(issue.fields.resolution.name)
+	else:
+            issue_dict[i.key].append("null")
         issue_dict[i.key].append(issue.fields.summary) #4
         if not issue.fields.components:
             componet=None
@@ -282,6 +287,7 @@ u {
     <td width="7%%"><strong>ID</strong></td>
     <td width="5%%"><strong>Priority</strong></td>          
     <td width="5%%"><strong>Status</strong></td>          
+    <td width="5%%"><strong>Resolution</strong></td>          
     <td width="25%%"><strong>Summary</strong></td>          
     <td width="6%%"><strong>Component/s</strong></td>
     <td width="10%%"><strong>Developer</strong></td>
@@ -303,26 +309,27 @@ u {
     <td width="7%%"><a href='https://jira.wrs.com:8443/browse/%s'>%s</a></td>
     <td width="5%%">%s</td>          
     <td width="5%%">%s</td>          
+    <td width="5%%">%s</td>          
     <td width="25%%">%s</td>
     <td width="6%%">%s</td>
     <td width="10%%">%s</td>
     <td width="10%%">%s</td>
-''' %(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7])
+''' %(d[0],d[1],d[2],d[3],d[4],d[5],d[6],d[7],d[8])
 	    if "WOH" in summary:
-                if d[12] >= 7:
-                    L+='''    <td width="8%%"><font color="red"><b>%s</b></font></td>''' %d[8]
+                if d[13] >= 7:
+                    L+='''    <td width="8%%"><font color="red"><b>%s</b></font></td>''' %d[9]
                 else: 
-                    L+='''    <td width="8%%">%s</td>''' %d[8]
+                    L+='''    <td width="8%%">%s</td>''' %d[9]
 	    else:
-                L+='''    <td width="8%%">%s</td>''' %d[8]
+                L+='''    <td width="8%%">%s</td>''' %d[9]
 	    L +='''
     <td width="8%%">%s</td>
     <td width="8%%">%s</td>
-'''%(d[9],d[11])
-            if d[12] >= 7 and "WOH" in summary:
-                L+='''    <td width="8%%"><font color="red"><b>%s</b></font></td>''' %d[12]
+'''%(d[10],d[12])
+            if d[13] >= 7 and "WOH" in summary:
+                L+='''    <td width="8%%"><font color="red"><b>%s</b></font></td>''' %d[13]
             elif "WOH" in summary: 
-                L+='''    <td width="8%%">%s</td>''' %d[12]
+                L+='''    <td width="8%%">%s</td>''' %d[13]
             L+="   </tr>"
 #'''% (i.key,i.key,issue.fields.priority,issue.fields.components[0],issue.fields.summary,issue.fields.assignee,issue.fields.customfield_10012,create_time)
 

@@ -168,3 +168,16 @@ week3
 lyang001@lyang001-OptiPlex-9010:~/WORK/updates$ echo $a 
 /lpg-build/cdc/WASSP_LINUX_80/testmatrices/wrlinux/wrlinux-8.0/S6/week3/userspace/qemux86-64/qemux86-64_standard_glibc-std_WR_systemd.xls
 
+
+
+
+
+
+lyang001@lyang001-OptiPlex-9010:~$ echo $a
+/buildarea1/WRL9_regression/build_dir/userspace/intel-x86-64/Wildcast_Pass_standard_glibc_std_WR_systemd/lxbuilds/Wildcast_Pass_platform_up/intel-x86-64-standard-glibc-std/wrlinux/bitbake_build/tmp/work/intel_x86_64-wrs-linux/wrlinux-image-glibc-std/1.0-r5/rpms/corei7_64
+
+lyang001@lyang001-OptiPlex-9010:~$ echo $a |sed 's:/[^/]\{1,\}/::'
+WRL9_regression/build_dir/userspace/intel-x86-64/Wildcast_Pass_standard_glibc_std_WR_systemd/lxbuilds/Wildcast_Pass_platform_up/intel-x86-64-standard-glibc-std/wrlinux/bitbake_build/tmp/work/intel_x86_64-wrs-linux/wrlinux-image-glibc-std/1.0-r5/rpms/corei7_64
+
+lyang001@lyang001-OptiPlex-9010:~$ echo $a |sed 's:\(/[^/]\{1,\}/\)\(.*\):/\2:'
+/WRL9_regression/build_dir/userspace/intel-x86-64/Wildcast_Pass_standard_glibc_std_WR_systemd/lxbuilds/Wildcast_Pass_platform_up/intel-x86-64-standard-glibc-std/wrlinux/bitbake_build/tmp/work/intel_x86_64-wrs-linux/wrlinux-image-glibc-std/1.0-r5/rpms/corei7_64
