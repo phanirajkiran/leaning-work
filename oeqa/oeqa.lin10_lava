@@ -1,0 +1,31 @@
+#!/bin/sh
+wr_lava() {
+    FIXED_TUNE_PKGARCH=`echo ${TUNE_PKGARCH} |sed 's/-/_/g'`
+    if [ -d ${TMPDIR}/testexport ];then
+        tar xzf ${TMPDIR}/testexport/wrlinux-image-*/testexport.tar.gz -C ${IMAGE_ROOTFS}/root/
+        cd ${IMAGE_ROOTFS}/root/wrlinux-image-*
+        mkdir -p tmp-glibc/deploy/rpm/${FIXED_TUNE_PKGARCH}
+        cp ${DEPLOY_DIR}/rpm/*/rpm-doc-*.rpm ${IMAGE_ROOTFS}/root/wrlinux-image-glibc-std/tmp-glibc/deploy/rpm/${FIXED_TUNE_PKGARCH}
+    fi
+}
+ROOTFS_POSTPROCESS_COMMAND += "wr_lava ;"
+
+
+TEST_SUITES="ping ssh df date scp pam perl python rpm ldd smart"
+INHERIT +="testexport"
+PNWHITELIST_intel += 'linux-intel'
+PNWHITELIST_intel += 'linux-intel-rt'
+PREFERRED_PROVIDER_virtual/kernel = "linux-yocto"
+PREFERRED_VERSION_linux-yocto = "4.12.%"
+PNWHITELIST_intel += 'rmc'
+PNWHITELIST_intel += 'rmc-efi'
+PNWHITELIST_intel += 'thermald'
+PNWHITELIST_intel += 'intel-microcode'
+PNWHITELIST_intel += 'lms'
+PNWHITELIST_intel += 'iucode-tool'
+IMAGE_INSTALL_append = " python3-pkgutil"
+IMAGE_INSTALL_append = " python3-unittest"
+IMAGE_INSTALL_append = " python3-multiprocessing"
+IMAGE_CLASSES +="oeqa_lavav2"
+
+ bitbake wrlinux-image-glibc-std && bitbake wrlinux-image-glibc-std -c testexport && bitbake wrlinux-image-glibc-std -c clean && bitbake wrlinux-image-glibc-std

@@ -9,3 +9,9 @@ eg: git push ssh://ala-git.wrs.com/git/layers/wr-testing WRLINUX_Penguin_Dev:WRL
 git branch -d kill-this # remove local
 
 
+
+[Linux] Git: push 出错的解决 master -> master (branch is currently checked out)
+这是由于git默认拒绝了push操作，需要进行设置，修改.git/config添加如下代码：
+
+    [receive]
+    denyCurrentBranch = ignore

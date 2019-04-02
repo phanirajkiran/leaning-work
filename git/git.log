@@ -109,3 +109,6 @@ CommitDate: Thu Dec 29 14:38:21 2016 +0800
 
 M       recipes-kernel/linux/linux-windriver_4.8.bb
 M       recipes-kernel/linux/qemu.inc
+
+
+git log -m -1 --name-only  9fd6452d67fb2acda12e5914e2ad371f067f3465

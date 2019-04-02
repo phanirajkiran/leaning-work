@@ -1,3 +1,8 @@
+http://manpages.ubuntu.com/manpages/bionic/man1/perf-list.1.html
+ perf list [--no-desc] [--long-desc]
+                   [hw|sw|cache|tracepoint|pmu|sdt|metric|metricgroup|event_glob]
+
+
 0d68bc92c48167130b61b449f08be27dc862dba2
 
 
@@ -141,3 +146,15 @@ c4ac732a0377d1544a8385393a9877b693ff0652
 
 
 
+
+
+2) perf analysis CPU usage 
+
+http://linuxperf.com/?p=36
+
+
+3)function 
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_for_real_time/7/html/tuning_guide/about_perf
+
+4)
+https://github.com/spotify/linux/blob/master/Documentation/trace/tracepoint-analysis.txt

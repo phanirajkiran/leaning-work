@@ -53,6 +53,29 @@ eg:
 13 16 * * 1-6 cd /home/lyang001/WORK/updates/;./gen_status.py
 from Mon to Sat 16:13 run 
 
+How to Run Cron Every 5 Minutes, Seconds, Hours, Days, Months
+https://www.thegeekstuff.com/2011/07/cron-every-5-minutes
+
+https://support.asperasoft.com/hc/en-us/articles/216127358-How-to-run-a-cron-job-every-5-minutes
+
+every two hours
+0 */2 * * *  /home/username/test.sh
+every 5 mins 
+*/5 * * * * /home/aspera/my_script.sh
+
+
+What the above shows, per column:
+
+    Minute to run on, a value of 0-59: 5 means on the 5th minute of the hour
+    The Hour, a value of 0-23: * means every hour
+    Day of the Month, 1-31: * means every day of the month
+    The Month, 1-12: * means every month
+    Day of the Week, 0-7 (0 and 7 are both Sunday): * means every day
+    The Command: In this case, a command at/home/aspera/my_script.sh
+
+
+
+
 gsettings set org.gnome.Vino disable-xdamage true
 
 
@@ -77,3 +100,7 @@ sudo apt-get update && sudo apt-get install skype
 sudo aptitude install python-setuptools mongodb python-django python-pymongo
 
 usermod -a -G sudo lyang0
+
+
+wrsadmin@pek-lyang0-u17:~/WORK/linux-kselftest/tools/testing/selftests/memfd$ dpkg -S /usr/include/linux/mroute.h 
+linux-libc-dev:amd64: /usr/include/linux/mroute.h

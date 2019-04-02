@@ -1,0 +1,15 @@
+go get github.com/golang/dep/cmd/dep
+
+Packages from the standard library are available in the GOROOT location. The packages that are created by yourself, and third-party packages which you have imported, are available in the GOPATH location.
+
+
+import "github.com/MakeNowJust/heredoc"
+
+The path you're seeing in your import line is not a url, but only the path the package is located in (normally relative to $GOROOT/src/pkg or $GOPATH/src). So your package heredoc is most probably located in the directory $GOPATH/src/github.com/MakeNowJust/heredoc
+
+
+Package Main   
+
+When you build reusable pieces of code, you will develop a package as a shared library. But when you develop executable programs, you will use the package “main” for making the package as an executable program. The package “main” tells the Go compiler that the package should compile as an executable program instead of a shared library. The main function in the package “main” will be the entry point of our executable program. When you build shared libraries, you will not have any main package and main function in the package.
+
+Here’s a sample executable program that uses package main in which the function main is the entry point.

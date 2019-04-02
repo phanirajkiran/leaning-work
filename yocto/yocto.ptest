@@ -1,0 +1,7 @@
+look at sed recipe as an examle
+https://www.gnu.org/software/automake/manual/html_node/Dependency-Tracking.html#Dependency-Tracking
+https://wiki.yoctoproject.org/wiki/Ptest
+https://www.gnu.org/software/automake/manual/html_node/true.html#true
+https://www.gnu.org/software/automake/manual/html_node/automake-Invocation.html#automake-Invocation
+
+http://git.yoctoproject.org/cgit/cgit.cgi/poky/tree/meta/recipes-devtools/automake/automake/buildtest.patch

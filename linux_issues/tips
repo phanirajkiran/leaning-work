@@ -1,0 +1,4 @@
+There was an error creating the child process for this terminal
+getpt failed: Permission denied
+
+A:  sudo chmod 666 /dev/pts/ptmx

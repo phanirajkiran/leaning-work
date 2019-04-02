@@ -1,1 +1,10 @@
 git clone -b test git@github.com:leiyang/git_testA.git
+
+# clone only the remote primary HEAD (default: origin/master)
+git clone --single-branch
+
+as in:
+git clone <url> --branch <branch> --single-branch [<folder>]
+
+
+git clone -b master --single-branch git://pek-git.wrs.com/git/layers/wr-bsps/intel-x86 xyz

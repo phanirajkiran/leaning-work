@@ -1,0 +1,3 @@
+[filter1]
+summary=Defect for LIN1018
+filter=project = LIN1018 AND issuetype = Bug AND status in (Open, "In progress", "On Hold") AND priority in (P1, P2) ORDER BY assignee ASC, priority DESC, updated DESC

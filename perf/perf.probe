@@ -1,0 +1,14 @@
+root@intel-x86-64:/tmp# perf probe --list 
+root@intel-x86-64:/tmp# perf probe --add tcp_sendmsg
+Added new event:
+  probe:tcp_sendmsg    (on tcp_sendmsg)
+
+You can now use it in all perf tools, such as:
+
+	perf record -e probe:tcp_sendmsg -aR sleep 1
+
+root@intel-x86-64:/tmp# perf probe --list 
+  probe:tcp_sendmsg    (on tcp_sendmsg)
+root@intel-x86-64:/tmp# perf record -e probe:tcp_sendmsg -aR sleep 1
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.091 MB perf.data (1 samples) ]

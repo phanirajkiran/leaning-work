@@ -1,0 +1,545 @@
+{
+    "key": "LIN8-4538", 
+    "fields": {
+        "customfield_10701": null, 
+        "customfield_10700": null, 
+        "customfield_10702": null, 
+        "customfield_10707": null, 
+        "customfield_11100": null, 
+        "customfield_10517": null, 
+        "labels": [
+            "linux-bugboard-reviewed"
+        ], 
+        "assignee": {
+            "displayName": "Stone, Ronald", 
+            "name": "RStone", 
+            "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Ronald.Stone@windriver.com", 
+            "key": "rstone", 
+            "active": true, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "lastViewed": null, 
+        "customfield_10015": null, 
+        "customfield_11302": null, 
+        "customfield_10010": null, 
+        "customfield_11301": null, 
+        "customfield_13704": null, 
+        "votes": {
+            "hasVoted": false, 
+            "self": "https://jira.wrs.com/rest/api/2/issue/LIN8-4538/votes", 
+            "votes": 0
+        }, 
+        "customfield_11001": null, 
+        "customfield_11000": [
+            {
+                "released": false, 
+                "self": "https://jira.wrs.com/rest/api/2/version/23583", 
+                "archived": false, 
+                "id": "23583", 
+                "name": "8.0"
+            }
+        ], 
+        "customfield_11002": {
+            "archived": false, 
+            "name": "8.0.0.8", 
+            "self": "https://jira.wrs.com/rest/api/2/version/25759", 
+            "releaseDate": "2016-08-10", 
+            "released": true, 
+            "id": "25759"
+        }, 
+        "customfield_13602": null, 
+        "customfield_12400": "2016-11-06T23:19:46.000-0800", 
+        "timespent": 7200, 
+        "customfield_12407": null, 
+        "duedate": null, 
+        "attachment": [
+            {
+                "mimeType": "application/pdf", 
+                "author": {
+                    "displayName": "Stone, Ronald", 
+                    "name": "RStone", 
+                    "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+                    "avatarUrls": {
+                        "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                        "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                        "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                        "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                    }, 
+                    "emailAddress": "Ronald.Stone@windriver.com", 
+                    "key": "rstone", 
+                    "active": true, 
+                    "timeZone": "America/Los_Angeles"
+                }, 
+                "self": "https://jira.wrs.com/rest/api/2/attachment/199979", 
+                "created": "2016-10-18T13:59:16.000-0700", 
+                "filename": "Wind_River_Linux_Debug_and_Analysis_Workbench_Tutorials,_8.0.pdf", 
+                "content": "https://jira.wrs.com/secure/attachment/199979/Wind_River_Linux_Debug_and_Analysis_Workbench_Tutorials%2C_8.0.pdf", 
+                "id": "199979", 
+                "size": 6709308
+            }
+        ], 
+        "updated": "2016-11-06T23:20:07.000-0800", 
+        "worklog": {
+            "worklogs": [
+                {
+                    "comment": "The instructions in the guide work as written. ", 
+                    "updated": "2016-10-18T14:04:54.000-0700", 
+                    "issueId": "710553", 
+                    "created": "2016-10-18T14:04:54.000-0700", 
+                    "started": "2016-10-18T14:03:00.000-0700", 
+                    "self": "https://jira.wrs.com/rest/api/2/issue/710553/worklog/43944", 
+                    "author": {
+                        "displayName": "Stone, Ronald", 
+                        "name": "RStone", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ronald.Stone@windriver.com", 
+                        "key": "rstone", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "updateAuthor": {
+                        "displayName": "Stone, Ronald", 
+                        "name": "RStone", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ronald.Stone@windriver.com", 
+                        "key": "rstone", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "timeSpent": "2h", 
+                    "timeSpentSeconds": 7200, 
+                    "id": "43944"
+                }
+            ], 
+            "total": 1, 
+            "startAt": 0, 
+            "maxResults": 20
+        }, 
+        "customfield_10800": null, 
+        "customfield_10801": null, 
+        "customfield_10008": null, 
+        "customfield_10006": null, 
+        "customfield_10007": null, 
+        "customfield_11700": null, 
+        "customfield_10005": null, 
+        "aggregatetimeoriginalestimate": null, 
+        "customfield_12800": null, 
+        "customfield_12100": null, 
+        "summary": "\"Creating a Session for Tracing\" of wrlinux 8.0 document need to be updated", 
+        "timetracking": {
+            "timeSpentSeconds": 7200, 
+            "timeSpent": "2h", 
+            "remainingEstimateSeconds": 0, 
+            "remainingEstimate": "0m"
+        }, 
+        "issuetype": {
+            "name": "Bug", 
+            "self": "https://jira.wrs.com/rest/api/2/issuetype/1", 
+            "iconUrl": "https://jira.wrs.com/secure/viewavatar?size=xsmall&avatarId=14303&avatarType=issuetype", 
+            "subtask": false, 
+            "avatarId": 14303, 
+            "id": "1", 
+            "description": "A problem which impairs or prevents the functions of the product."
+        }, 
+        "timeestimate": 0, 
+        "creator": {
+            "displayName": "Cheng, Yongmin", 
+            "name": "YCheng", 
+            "self": "https://jira.wrs.com/rest/api/2/user?username=YCheng", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Yongmin.Cheng@windriver.com", 
+            "key": "ycheng", 
+            "active": false, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "customfield_10520": null, 
+        "customfield_10802": null, 
+        "customfield_12801": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/14202", 
+            "id": "14202", 
+            "value": "Reproducible"
+        }, 
+        "customfield_11202": null, 
+        "customfield_11201": null, 
+        "description": "\"Creating a Session for Tracing\" chapter of \"Wind River Linux Debug and Analysis Workbench Tutorials, 8.0\" document need to be updated.\r\n \r\nCreate a Session by the following steps:\r\n1) Make WB4 target connection to the QEMU target;\r\n2) Click \"analysis actions for the selected connection\" button and select \"Lttng Tracing\".\r\n3) Click \"yes\" button in \"Lttng Tracing\" window.\r\n4) Select Sessions->context-switches\r\n5) click the green triangular \"start\" button.\r\n6) Wait one minute.\r\n7) Click the yellow \"stop\" button.\r\n8) Click \"import...\" button in control window.\r\n9) Click \"OK\" button in import traces window.\r\n10) File-> Import...->Lttng Trace for system Viewer\r\n       Type <Workspace path>/Remote/Traces/context-switches-<Time stamp> as Log Folder\r\n       Click \"finish\" button.", 
+        "customfield_12500": null, 
+        "progress": {
+            "progress": 7200, 
+            "total": 7200, 
+            "percent": 100
+        }, 
+        "customfield_10012": null, 
+        "aggregateprogress": {
+            "progress": 7200, 
+            "total": 7200, 
+            "percent": 100
+        }, 
+        "customfield_12200": null, 
+        "reporter": {
+            "displayName": "Cheng, Yongmin", 
+            "name": "YCheng", 
+            "self": "https://jira.wrs.com/rest/api/2/user?username=YCheng", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Yongmin.Cheng@windriver.com", 
+            "key": "ycheng", 
+            "active": false, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "customfield_10103": null, 
+        "customfield_13902": {
+            "formatted": "Yes", 
+            "value": {
+                "text": "Yes", 
+                "id": 11, 
+                "value": "Yes"
+            }
+        }, 
+        "customfield_13903": {
+            "formatted": "Yes", 
+            "value": {
+                "text": "Yes", 
+                "id": 13, 
+                "value": "Yes"
+            }
+        }, 
+        "customfield_13900": {
+            "formatted": "Linux", 
+            "value": "Linux"
+        }, 
+        "customfield_13901": null, 
+        "environment": null, 
+        "created": "2016-08-23T00:21:27.000-0700", 
+        "customfield_13006": null, 
+        "aggregatetimespent": 7200, 
+        "customfield_10901": null, 
+        "customfield_10900": null, 
+        "comment": {
+            "total": 3, 
+            "startAt": 0, 
+            "maxResults": 3, 
+            "comments": [
+                {
+                    "body": "I was able to successfully follow the instructions in the System Analysis tutorial as written. Note that, to complete the full procedure implied by the steps above, you need to complete all three topics in the tutorial. See the attached guide for the latest instructions.", 
+                    "updateAuthor": {
+                        "displayName": "Stone, Ronald", 
+                        "name": "RStone", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ronald.Stone@windriver.com", 
+                        "key": "rstone", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "created": "2016-10-18T14:03:33.000-0700", 
+                    "self": "https://jira.wrs.com/rest/api/2/issue/710553/comment/404843", 
+                    "author": {
+                        "displayName": "Stone, Ronald", 
+                        "name": "RStone", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ronald.Stone@windriver.com", 
+                        "key": "rstone", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "updated": "2016-10-18T14:03:33.000-0700", 
+                    "id": "404843"
+                }, 
+                {
+                    "body": "The instructions in the guide work as written. ", 
+                    "updateAuthor": {
+                        "displayName": "Stone, Ronald", 
+                        "name": "RStone", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ronald.Stone@windriver.com", 
+                        "key": "rstone", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "created": "2016-10-18T14:04:54.000-0700", 
+                    "self": "https://jira.wrs.com/rest/api/2/issue/710553/comment/404845", 
+                    "author": {
+                        "displayName": "Stone, Ronald", 
+                        "name": "RStone", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=RStone", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Ronald.Stone@windriver.com", 
+                        "key": "rstone", 
+                        "active": true, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "updated": "2016-10-18T14:04:54.000-0700", 
+                    "id": "404845"
+                }, 
+                {
+                    "body": "Move it to the final Closed state.", 
+                    "updateAuthor": {
+                        "displayName": "Zhao, Zhenfeng", 
+                        "name": "ZZhao1", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=ZZhao1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Zhenfeng.Zhao@windriver.com", 
+                        "key": "zzhao1", 
+                        "active": true, 
+                        "timeZone": "Asia/Chongqing"
+                    }, 
+                    "created": "2016-11-06T23:20:07.000-0800", 
+                    "self": "https://jira.wrs.com/rest/api/2/issue/710553/comment/411989", 
+                    "author": {
+                        "displayName": "Zhao, Zhenfeng", 
+                        "name": "ZZhao1", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=ZZhao1", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "Zhenfeng.Zhao@windriver.com", 
+                        "key": "zzhao1", 
+                        "active": true, 
+                        "timeZone": "Asia/Chongqing"
+                    }, 
+                    "updated": "2016-11-06T23:20:07.000-0800", 
+                    "id": "411989"
+                }
+            ]
+        }, 
+        "aggregatetimeestimate": 0, 
+        "customfield_10501": [
+            {
+                "displayName": "Reyna, David", 
+                "name": "dreyna", 
+                "self": "https://jira.wrs.com/rest/api/2/user?username=dreyna", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                    "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                    "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                    "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                }, 
+                "emailAddress": "david.reyna@windriver.com", 
+                "key": "dreyna", 
+                "active": true, 
+                "timeZone": "America/Los_Angeles"
+            }, 
+            {
+                "displayName": "Wang, Ting [X]", 
+                "name": "twang0", 
+                "self": "https://jira.wrs.com/rest/api/2/user?username=twang0", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                    "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                    "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                    "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                }, 
+                "emailAddress": "Ting.Wang@windriver.com", 
+                "key": "twang0", 
+                "active": false, 
+                "timeZone": "America/Los_Angeles"
+            }, 
+            {
+                "displayName": "Zhao, Zhenfeng", 
+                "name": "ZZhao1", 
+                "self": "https://jira.wrs.com/rest/api/2/user?username=ZZhao1", 
+                "avatarUrls": {
+                    "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                    "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                    "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                    "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                }, 
+                "emailAddress": "Zhenfeng.Zhao@windriver.com", 
+                "key": "zzhao1", 
+                "active": true, 
+                "timeZone": "Asia/Chongqing"
+            }
+        ], 
+        "customfield_10508": null, 
+        "customfield_11904": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11902", 
+            "id": "11902", 
+            "value": "No"
+        }, 
+        "customfield_14202": null, 
+        "customfield_10004": null, 
+        "priority": {
+            "iconUrl": "https://jira.wrs.com/images/icons/priorities/critical.svg", 
+            "self": "https://jira.wrs.com/rest/api/2/priority/2", 
+            "name": "P2", 
+            "id": "2"
+        }, 
+        "customfield_11905": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11904", 
+            "id": "11904", 
+            "value": "No"
+        }, 
+        "customfield_11906": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11906", 
+            "id": "11906", 
+            "value": "No"
+        }, 
+        "customfield_11900": null, 
+        "customfield_11901": null, 
+        "customfield_11902": null, 
+        "customfield_11908": null, 
+        "customfield_13401": null, 
+        "customfield_11500": null, 
+        "customfield_13800": null, 
+        "watches": {
+            "self": "https://jira.wrs.com/rest/api/2/issue/LIN8-4538/watchers", 
+            "watchCount": 4, 
+            "isWatching": false
+        }, 
+        "customfield_10512": null, 
+        "customfield_14303": null, 
+        "customfield_10518": null, 
+        "customfield_10519": null, 
+        "customfield_13403": "0.0", 
+        "resolutiondate": "2016-10-18T14:04:54.000-0700", 
+        "project": {
+            "name": "Linux 8", 
+            "self": "https://jira.wrs.com/rest/api/2/project/14501", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/projectavatar?size=small&pid=14501&avatarId=10011", 
+                "32x32": "https://jira.wrs.com/secure/projectavatar?size=medium&pid=14501&avatarId=10011", 
+                "48x48": "https://jira.wrs.com/secure/projectavatar?pid=14501&avatarId=10011", 
+                "16x16": "https://jira.wrs.com/secure/projectavatar?size=xsmall&pid=14501&avatarId=10011"
+            }, 
+            "projectCategory": {
+                "self": "https://jira.wrs.com/rest/api/2/projectCategory/11200", 
+                "id": "11200", 
+                "name": "Linux", 
+                "description": ""
+            }, 
+            "key": "LIN8", 
+            "id": "14501"
+        }, 
+        "customfield_10804": null, 
+        "customfield_13002": null, 
+        "customfield_13001": null, 
+        "customfield_13000": "0|i262rb:", 
+        "workratio": -1, 
+        "customfield_10608": null, 
+        "issuelinks": [], 
+        "customfield_10600": null, 
+        "customfield_10601": null, 
+        "customfield_10602": null, 
+        "customfield_10603": null, 
+        "customfield_10604": null, 
+        "customfield_10605": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/10439", 
+            "id": "10439", 
+            "value": "Standard"
+        }, 
+        "customfield_10606": null, 
+        "customfield_10607": null, 
+        "subtasks": [], 
+        "customfield_13313": null, 
+        "customfield_13312": null, 
+        "customfield_13311": null, 
+        "customfield_14415": null, 
+        "customfield_13706": null, 
+        "customfield_13701": null, 
+        "customfield_13702": null, 
+        "customfield_13703": null, 
+        "customfield_12703": null, 
+        "customfield_12702": null, 
+        "status": {
+            "statusCategory": {
+                "name": "Done", 
+                "self": "https://jira.wrs.com/rest/api/2/statuscategory/3", 
+                "id": 3, 
+                "key": "done", 
+                "colorName": "green"
+            }, 
+            "description": "Issue is closed", 
+            "self": "https://jira.wrs.com/rest/api/2/status/6", 
+            "iconUrl": "https://jira.wrs.com/images/icons/statuses/closed.png", 
+            "id": "6", 
+            "name": "Closed"
+        }, 
+        "customfield_11404": null, 
+        "customfield_10011": null, 
+        "timeoriginalestimate": null, 
+        "customfield_10200": null, 
+        "customfield_10201": "Requirement No.: N/A\r\nPeer Reviewer: Wang, Ting\r\nWRLinux Version: wrlinux-8\r\nWorkbench Version: N/A\r\nBinary/FS From: N/A\r\nBSP/Configuration:N/A\r\nHOST OS: N/A", 
+        "customfield_13300": null, 
+        "customfield_13301": null, 
+        "customfield_13302": null, 
+        "customfield_13303": null, 
+        "customfield_13304": null, 
+        "customfield_13305": null, 
+        "components": [
+            {
+                "self": "https://jira.wrs.com/rest/api/2/component/20609", 
+                "id": "20609", 
+                "name": "Documentation"
+            }
+        ], 
+        "customfield_13307": null, 
+        "customfield_13308": null, 
+        "resolution": {
+            "self": "https://jira.wrs.com/rest/api/2/resolution/7", 
+            "id": "7", 
+            "name": "Rejected", 
+            "description": "The issue Is not a defect"
+        }
+    }, 
+    "self": "https://jira.wrs.com/rest/api/2/issue/710553", 
+    "id": "710553", 
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations"
+}

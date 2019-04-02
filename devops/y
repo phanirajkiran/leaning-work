@@ -1,0 +1,400 @@
+{
+    "key": "SCP9-98", 
+    "fields": {
+        "customfield_10701": null, 
+        "customfield_10700": null, 
+        "customfield_10702": null, 
+        "customfield_10707": null, 
+        "customfield_11100": null, 
+        "customfield_10517": null, 
+        "labels": [
+            "Verified"
+        ], 
+        "assignee": {
+            "displayName": "Kang, Kai", 
+            "name": "KKang", 
+            "self": "https://jira.wrs.com/rest/api/2/user?username=KKang", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Kai.Kang@windriver.com", 
+            "key": "kkang", 
+            "active": true, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "lastViewed": null, 
+        "customfield_10015": null, 
+        "customfield_11302": null, 
+        "customfield_10010": null, 
+        "customfield_11301": null, 
+        "votes": {
+            "hasVoted": false, 
+            "self": "https://jira.wrs.com/rest/api/2/issue/SCP9-98/votes", 
+            "votes": 0
+        }, 
+        "customfield_11001": null, 
+        "customfield_11000": [
+            {
+                "released": false, 
+                "self": "https://jira.wrs.com/rest/api/2/version/27062", 
+                "archived": true, 
+                "id": "27062", 
+                "name": "9.0"
+            }
+        ], 
+        "customfield_11002": {
+            "released": false, 
+            "self": "https://jira.wrs.com/rest/api/2/version/27062", 
+            "archived": true, 
+            "id": "27062", 
+            "name": "9.0"
+        }, 
+        "customfield_13602": null, 
+        "customfield_12400": "2017-07-09T21:15:03.000-0700", 
+        "timespent": null, 
+        "customfield_12407": null, 
+        "duedate": null, 
+        "attachment": [], 
+        "updated": "2017-07-09T21:15:03.000-0700", 
+        "worklog": {
+            "worklogs": [], 
+            "total": 0, 
+            "startAt": 0, 
+            "maxResults": 20
+        }, 
+        "customfield_10800": null, 
+        "customfield_10801": null, 
+        "customfield_10008": null, 
+        "customfield_10006": null, 
+        "customfield_10007": null, 
+        "customfield_11700": null, 
+        "customfield_10005": null, 
+        "aggregatetimeoriginalestimate": null, 
+        "customfield_12800": null, 
+        "customfield_12100": null, 
+        "summary": "Tarballs in layer meta-measured-dl are redundant", 
+        "timetracking": {}, 
+        "issuetype": {
+            "name": "Bug", 
+            "self": "https://jira.wrs.com/rest/api/2/issuetype/1", 
+            "iconUrl": "https://jira.wrs.com/secure/viewavatar?size=xsmall&avatarId=14303&avatarType=issuetype", 
+            "subtask": false, 
+            "avatarId": 14303, 
+            "id": "1", 
+            "description": "A problem which impairs or prevents the functions of the product."
+        }, 
+        "timeestimate": null, 
+        "creator": {
+            "displayName": "Kang, Kai", 
+            "name": "KKang", 
+            "self": "https://jira.wrs.com/rest/api/2/user?username=KKang", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Kai.Kang@windriver.com", 
+            "key": "kkang", 
+            "active": true, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "customfield_10520": null, 
+        "customfield_10802": null, 
+        "customfield_12801": null, 
+        "customfield_11202": null, 
+        "customfield_11201": null, 
+        "description": "Tarballs in layer meta-measured-dl downloads directory are redundant. Please remove them.", 
+        "customfield_12500": null, 
+        "progress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_10012": {
+            "displayName": "Wen, Tingting [X]", 
+            "name": "TWen", 
+            "self": "https://jira.wrs.com/rest/api/2/user?username=TWen", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=twen&avatarId=14801", 
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=twen&avatarId=14801", 
+                "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=twen&avatarId=14801", 
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=twen&avatarId=14801"
+            }, 
+            "emailAddress": "Tingting.Wen@windriver.com", 
+            "key": "twen", 
+            "active": false, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "aggregateprogress": {
+            "progress": 0, 
+            "total": 0
+        }, 
+        "customfield_12200": null, 
+        "reporter": {
+            "displayName": "Kang, Kai", 
+            "name": "KKang", 
+            "self": "https://jira.wrs.com/rest/api/2/user?username=KKang", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+            }, 
+            "emailAddress": "Kai.Kang@windriver.com", 
+            "key": "kkang", 
+            "active": true, 
+            "timeZone": "America/Los_Angeles"
+        }, 
+        "customfield_10103": null, 
+        "customfield_13902": {
+            "formatted": "Yes", 
+            "value": {
+                "text": "Yes", 
+                "id": 11, 
+                "value": "Yes"
+            }
+        }, 
+        "customfield_13903": {
+            "formatted": "Yes", 
+            "value": {
+                "text": "Yes", 
+                "id": 13, 
+                "value": "Yes"
+            }
+        }, 
+        "customfield_13900": {
+            "formatted": "SCP", 
+            "value": "SCP"
+        }, 
+        "customfield_13901": null, 
+        "environment": null, 
+        "created": "2017-06-28T23:23:22.000-0700", 
+        "customfield_13006": null, 
+        "aggregatetimespent": null, 
+        "customfield_10901": null, 
+        "customfield_10900": null, 
+        "comment": {
+            "total": 2, 
+            "startAt": 0, 
+            "maxResults": 2, 
+            "comments": [
+                {
+                    "body": "Commit: [83d6d5eab94738392d97e651efb03a41b322dea2|http://ala-git.wrs.com/cgit/layers/meta-measured-dl/commit/?h=WRLINUX_9_BASE&id=83d6d5eab94738392d97e651efb03a41b322dea2]", 
+                    "updateAuthor": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "key": "jira-git", 
+                        "active": true, 
+                        "timeZone": "America/New_York"
+                    }, 
+                    "created": "2017-06-29T01:51:28.000-0700", 
+                    "self": "https://jira.wrs.com/rest/api/2/issue/740984/comment/494688", 
+                    "author": {
+                        "displayName": "Jira/Git interface", 
+                        "name": "jira-git", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=jira-git", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&avatarId=10122", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&avatarId=10122", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?avatarId=10122", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&avatarId=10122"
+                        }, 
+                        "emailAddress": "konrad.scherer@windriver.com", 
+                        "key": "jira-git", 
+                        "active": true, 
+                        "timeZone": "America/New_York"
+                    }, 
+                    "updated": "2017-06-29T01:51:28.000-0700", 
+                    "id": "494688"
+                }, 
+                {
+                    "body": "Verified PASS with wrlinux90 RCPL0008_LX04\r\n\r\n1. project\r\n# /folk/lpg-build/cdc/fast_prod/wrlinux90RCPL/RCPL0008_LX04/wrlinux-9/setup.sh --machines=intel-x86-64 --kernel=standard --layers=meta-secure-env  --dl-layers --accept-eula=yes\r\n# . ./environment-setup-x86_64-wrlinuxsdk-linux\r\n# . ./oe-init-build-env\r\n# bitbake wrlinux-image-glibc-std\r\n\r\n2. check the commits are here:\r\n[twen@pek-lpgtest16 meta-measured-dl]$ git log 83d6d5eab94738392d97e651efb03a41b322dea2\r\ncommit 83d6d5eab94738392d97e651efb03a41b322dea2\r\nAuthor: Kai Kang <kai.kang@windriver.com>\r\nDate:   Thu Jun 29 14:51:34 2017 +0800\r\n\r\n    meta-measured-dl: remove tarballs that recipes are not in whitelist\r\n    \r\n    Issue: LIN9-4484\r\n    \r\n    Remove tarballs that recipes are not in whitelist for layer\r\n    meta-measured.\r\n    \r\n    Signed-off-by: Kai Kang <kai.kang@windriver.com>\r\n\r\n3. boot the target successfully", 
+                    "updateAuthor": {
+                        "displayName": "Wen, Tingting [X]", 
+                        "name": "TWen", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=TWen", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=twen&avatarId=14801", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=twen&avatarId=14801", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=twen&avatarId=14801", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=twen&avatarId=14801"
+                        }, 
+                        "emailAddress": "Tingting.Wen@windriver.com", 
+                        "key": "twen", 
+                        "active": false, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "created": "2017-07-04T20:24:55.000-0700", 
+                    "self": "https://jira.wrs.com/rest/api/2/issue/740984/comment/496202", 
+                    "author": {
+                        "displayName": "Wen, Tingting [X]", 
+                        "name": "TWen", 
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=TWen", 
+                        "avatarUrls": {
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=twen&avatarId=14801", 
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=twen&avatarId=14801", 
+                            "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=twen&avatarId=14801", 
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=twen&avatarId=14801"
+                        }, 
+                        "emailAddress": "Tingting.Wen@windriver.com", 
+                        "key": "twen", 
+                        "active": false, 
+                        "timeZone": "America/Los_Angeles"
+                    }, 
+                    "updated": "2017-07-04T20:24:55.000-0700", 
+                    "id": "496202"
+                }
+            ]
+        }, 
+        "aggregatetimeestimate": null, 
+        "customfield_10501": null, 
+        "customfield_10508": null, 
+        "customfield_11904": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11902", 
+            "id": "11902", 
+            "value": "No"
+        }, 
+        "customfield_14202": null, 
+        "customfield_10004": null, 
+        "priority": {
+            "iconUrl": "https://jira.wrs.com/images/icons/priorities/major.svg", 
+            "self": "https://jira.wrs.com/rest/api/2/priority/3", 
+            "name": "P3", 
+            "id": "3"
+        }, 
+        "customfield_11905": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11904", 
+            "id": "11904", 
+            "value": "No"
+        }, 
+        "customfield_11906": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11906", 
+            "id": "11906", 
+            "value": "No"
+        }, 
+        "customfield_11900": null, 
+        "customfield_11901": null, 
+        "customfield_11902": null, 
+        "customfield_11908": null, 
+        "customfield_13401": null, 
+        "customfield_11500": null, 
+        "customfield_13800": null, 
+        "watches": {
+            "self": "https://jira.wrs.com/rest/api/2/issue/SCP9-98/watchers", 
+            "watchCount": 2, 
+            "isWatching": false
+        }, 
+        "customfield_10512": null, 
+        "customfield_14303": null, 
+        "customfield_10518": null, 
+        "customfield_10519": null, 
+        "customfield_13403": "0.0", 
+        "resolutiondate": "2017-07-04T18:48:32.000-0700", 
+        "project": {
+            "name": "Secure Linux 9", 
+            "self": "https://jira.wrs.com/rest/api/2/project/16502", 
+            "avatarUrls": {
+                "24x24": "https://jira.wrs.com/secure/projectavatar?size=small&pid=16502&avatarId=10011", 
+                "32x32": "https://jira.wrs.com/secure/projectavatar?size=medium&pid=16502&avatarId=10011", 
+                "48x48": "https://jira.wrs.com/secure/projectavatar?pid=16502&avatarId=10011", 
+                "16x16": "https://jira.wrs.com/secure/projectavatar?size=xsmall&pid=16502&avatarId=10011"
+            }, 
+            "projectCategory": {
+                "self": "https://jira.wrs.com/rest/api/2/projectCategory/13400", 
+                "id": "13400", 
+                "name": "zObsolete", 
+                "description": "Category to place obsolete or eol projects to get them out of the way of active projects"
+            }, 
+            "key": "SCP9", 
+            "id": "16502"
+        }, 
+        "customfield_10804": null, 
+        "customfield_13002": null, 
+        "customfield_13001": null, 
+        "customfield_13000": "0|i2b72f:", 
+        "workratio": -1, 
+        "customfield_10608": null, 
+        "issuelinks": [], 
+        "customfield_10600": null, 
+        "customfield_10601": null, 
+        "customfield_10602": null, 
+        "customfield_10603": null, 
+        "customfield_10604": null, 
+        "customfield_10605": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/10439", 
+            "id": "10439", 
+            "value": "Standard"
+        }, 
+        "customfield_10606": null, 
+        "customfield_10607": null, 
+        "subtasks": [], 
+        "customfield_13313": null, 
+        "customfield_13312": null, 
+        "customfield_13311": null, 
+        "customfield_13704": null, 
+        "customfield_13706": null, 
+        "customfield_13701": null, 
+        "customfield_13702": null, 
+        "customfield_13703": null, 
+        "customfield_12703": null, 
+        "customfield_12702": null, 
+        "status": {
+            "statusCategory": {
+                "name": "Done", 
+                "self": "https://jira.wrs.com/rest/api/2/statuscategory/3", 
+                "id": 3, 
+                "key": "done", 
+                "colorName": "green"
+            }, 
+            "description": "Issue is closed", 
+            "self": "https://jira.wrs.com/rest/api/2/status/6", 
+            "iconUrl": "https://jira.wrs.com/images/icons/statuses/closed.png", 
+            "id": "6", 
+            "name": "Closed"
+        }, 
+        "customfield_11404": null, 
+        "customfield_10011": null, 
+        "timeoriginalestimate": null, 
+        "customfield_10200": null, 
+        "customfield_10201": null, 
+        "customfield_13300": null, 
+        "customfield_13301": null, 
+        "customfield_13302": null, 
+        "customfield_13303": null, 
+        "customfield_13304": {
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/15421", 
+            "id": "15421", 
+            "value": "Review"
+        }, 
+        "customfield_13305": "2017-06-29T01:51:00.000-0700", 
+        "components": [
+            {
+                "self": "https://jira.wrs.com/rest/api/2/component/23122", 
+                "id": "23122", 
+                "name": "Userspace"
+            }
+        ], 
+        "customfield_13307": null, 
+        "customfield_13308": null, 
+        "resolution": {
+            "self": "https://jira.wrs.com/rest/api/2/resolution/1", 
+            "id": "1", 
+            "name": "Fixed", 
+            "description": "A fix for this issue is checked into the tree and tested."
+        }
+    }, 
+    "self": "https://jira.wrs.com/rest/api/2/issue/740984", 
+    "id": "740984", 
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations"
+}

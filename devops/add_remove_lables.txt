@@ -1,0 +1,10 @@
+"update": {
+    "labels": [
+        {
+           "add": "triaged"
+        },
+        {
+            "remove": "blocker"
+        }
+    ]
+}

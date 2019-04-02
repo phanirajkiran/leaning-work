@@ -1,6 +1,165 @@
+kernel mail list search 
+https://lkml.org/lkml/2013/1/1
+
+
+lyang001@pek-lyang0-d1:~/WORK/trees/linux-latest$ ./scripts/get_maintainer.pl -f tools/testing/selftests/vm/compaction_test.c 
+Shuah Khan <shuah@kernel.org> (maintainer:KERNEL SELFTEST FRAMEWORK,commit_signer:1/2=50%)
+Greg Kroah-Hartman <gregkh@linuxfoundation.org> (commit_signer:1/2=50%,authored:1/2=50%,added_lines:1/3=33%)
+Philippe Ombredanne <pombredanne@nexb.com> (commit_signer:1/2=50%)
+Arnd Bergmann <arnd@arndb.de> (commit_signer:1/2=50%,authored:1/2=50%,added_lines:2/3=67%)
+Kate Stewart <kstewart@linuxfoundation.org> (commit_signer:1/2=50%)
+linux-kselftest@vger.kernel.org (open list:KERNEL SELFTEST FRAMEWORK)
+linux-kernel@vger.kernel.org (open list)
+
+
 qemu:
 https://github.com/qemu/qemu/tree/master/tests/qemu-iotests
 http://risingtidesystems.com/git/?p=scsi-testsuite.git;a=blob;f=common.rc;h=94d3692b1041d82f953207976524afac91a4b0d5;hb=HEAD
 https://github.com/peo3/cgroup-utils
 https://github.com/archanabs/libvirt-basics
     M src/tests/lxc-test-autostart
+
+https://wiki.ubuntu.com/Security/Features
+GREATE https://git.launchpad.net/qa-regression-testing/log/
+https://wiki.ubuntu.com/Releases
+http://tldp.org/HOWTO/Module-HOWTO/
+
+
+Filesystem
+https://wiki.archlinux.org/index.php/file_systems
+https://www.kernel.org/doc/Documentation/filesystems/
+
+
+perf 
+http://www.brendangregg.com/perf.html
+
+ftrace
+https://source.android.com/devices/tech/debug/ftrace
+
+
+profilling 
+https://blog.selectel.com/kernel-tracing-ftrace/
+
+
+bpf 
+
+
+list - features 
+
+      core/ BPF-JIT              :|                        HAVE_BPF_JIT #  arch supports BPF JIT optimizations
+      core/ generic-idle-thread  :|             GENERIC_SMP_IDLE_THREAD #  arch makes use of the generic SMP idle thread facility
+      core/ jump-labels          :|                HAVE_ARCH_JUMP_LABEL #  arch supports live patched, high efficiency branches
+      core/ tracehook            :|                 HAVE_ARCH_TRACEHOOK #  arch supports tracehook (ptrace) register handling APIs
+     debug/ gcov-profile-all     :|           ARCH_HAS_GCOV_PROFILE_ALL #  arch supports whole-kernel GCOV code coverage profiling
+     debug/ KASAN                :|                     HAVE_ARCH_KASAN #  arch supports the KASAN runtime memory checker
+     debug/ kprobes              :|                        HAVE_KPROBES #  arch supports live patched kernel probe
+     debug/ kprobes-on-ftrace    :|              HAVE_KPROBES_ON_FTRACE #  arch supports combined kprobes and ftrace live patching
+     debug/ kretprobes           :|                     HAVE_KRETPROBES #  arch supports kernel function-return probes
+     debug/ optprobes            :|                      HAVE_OPTPROBES #  arch supports live patched optprobes
+     debug/ stackprotector       :|              HAVE_CC_STACKPROTECTOR #  arch supports compiler driven stack overflow protection
+     debug/ uprobes              :|               ARCH_SUPPORTS_UPROBES #  arch supports live patched user probes
+     debug/ user-ret-profiler    :|           HAVE_USER_RETURN_NOTIFIER #  arch supports user-space return from system call profiler
+        io/ dma-api-debug        :|                  HAVE_DMA_API_DEBUG #  arch supports DMA debug facilities
+        io/ dma-contiguous       :|                 HAVE_DMA_CONTIGUOUS #  arch supports the DMA CMA (continuous memory allocator)
+        io/ sg-chain             :|                   ARCH_HAS_SG_CHAIN #  arch supports chained scatter-gather lists
+       lib/ strncasecmp          :|             __HAVE_ARCH_STRNCASECMP #  arch provides an optimized strncasecmp() function
+   locking/ cmpxchg-local        :|                  HAVE_CMPXCHG_LOCAL #  arch supports the this_cpu_cmpxchg() API
+   locking/ lockdep              :|                     LOCKDEP_SUPPORT #  arch supports the runtime locking correctness debug facility
+   locking/ queued-rwlocks       :|             ARCH_USE_QUEUED_RWLOCKS #  arch supports queued rwlocks
+   locking/ queued-spinlocks     :|           ARCH_USE_QUEUED_SPINLOCKS #  arch supports queued spinlocks
+   locking/ rwsem-optimized      :|               Optimized asm/rwsem.h #  arch provides optimized rwsem APIs
+      perf/ kprobes-event        :|      HAVE_REGS_AND_STACK_ACCESS_API #  arch supports kprobes with perf events
+      perf/ perf-regs            :|                      HAVE_PERF_REGS #  arch supports perf events register access
+      perf/ perf-stackdump       :|           HAVE_PERF_USER_STACK_DUMP #  arch supports perf events stack dumps
+     sched/ membarrier-sync-core :|       ARCH_HAS_MEMBARRIER_SYNC_CORE #  arch supports core serializing membarrier
+     sched/ numa-balancing       :|        ARCH_SUPPORTS_NUMA_BALANCING #  arch supports NUMA balancing
+   seccomp/ seccomp-filter       :|            HAVE_ARCH_SECCOMP_FILTER #  arch supports seccomp filters
+      time/ arch-tick-broadcast  :|             ARCH_HAS_TICK_BROADCAST #  arch provides tick_broadcast()
+      time/ clockevents          :|                 GENERIC_CLOCKEVENTS #  arch support generic clock events
+      time/ context-tracking     :|               HAVE_CONTEXT_TRACKING #  arch supports context tracking for NO_HZ_FULL
+      time/ irq-time-acct        :|            HAVE_IRQ_TIME_ACCOUNTING #  arch supports precise IRQ time accounting
+      time/ modern-timekeeping   :|            !ARCH_USES_GETTIMEOFFSET #  arch does not use arch_gettimeoffset() anymore
+      time/ virt-cpuacct         :|            HAVE_VIRT_CPU_ACCOUNTING #  arch supports precise virtual CPU time accounting
+        vm/ ELF-ASLR             :|              ARCH_HAS_ELF_RANDOMIZE #  arch randomizes the stack, heap and binary images of ELF binaries
+        vm/ huge-vmap            :|                 HAVE_ARCH_HUGE_VMAP #  arch supports the ioremap_pud_enabled() and ioremap_pmd_enabled() VM APIs
+        vm/ ioremap_prot         :|                   HAVE_IOREMAP_PROT #  arch has ioremap_prot()
+        vm/ numa-memblock        :|              HAVE_MEMBLOCK_NODE_MAP #  arch supports NUMA aware memblocks
+        vm/ PG_uncached          :|               ARCH_USES_PG_UNCACHED #  arch supports the PG_uncached page flag
+        vm/ pte_special          :|             __HAVE_ARCH_PTE_SPECIAL #  arch supports the pte_special()/pte_mkspecial() VM APIs
+        vm/ THP                  :|      HAVE_ARCH_TRANSPARENT_HUGEPAGE #  arch supports transparent hugepages
+        vm/ batch-unmap-tlb-flush:|   ARCH_WANT_BATCHED_UNMAP_TLB_FLUSH #  arch supports deferral of TLB flush until multiple pages are unmapped
+
+
+
+
+
+CONFIG_TEST_SYSCTL
+CONFIG_TEST_KMOD
+CONFIG_TEST_DEBUG_VIRTUAL
+CONFIG_STRING_SELFTEST
+CONFIG_TEST_UBSAN
+CONFIG_CHASH_SELFTEST
+CONFIG_ANDROID_BINDER_IPC_SELFTEST
+
+
+
+
+CONFIG_CPU_ISOLATION
+
+
+CONFIG_FUTEX_PI
+
+
+memory-hotplug
+cpu-hotplug 
+lock_torture
+rcutorture
+mountns
+mqns          
+netns         
+pidns
+kmsg
+dynamic_debug
+
+
+cgroup 
+https://bugzilla.kernel.org/show_bug.cgi?id=200651
+
+
+io sched 
+https://bugzilla.kernel.org/show_bug.cgi?id=199175
+
+
+fsc 
+https://bugzilla.kernel.org/show_bug.cgi?id=200159
+
+
+LTP --------------------> dmesg
+[ 4448.994800] LTP: starting dio22 (diotest2 -b 65536 -i 1000 -o 104857600)
+[ 4452.836562] LTP: starting dio23 (diotest3 -b 65536 -i 1000 -o 104857600)
+[ 4463.705346] LTP: starting dio24 (diotest5 -b 65536 -i 1000 -o 104857600)
+[ 4574.557155] LTP: starting dio25 (diotest6 -b 65536 -i 1000 -o 104857600)
+[ 4756.943103] LTP: starting dio26 (diotest6 -b 8192 -v 100)
+[ 4768.774168] LTP: starting dio27 (diotest6 -b 8192 -o 1024000 -i 1000 -v 100)
+[ 4886.375987] LTP: starting dio28 (diotest6 -b 8192 -o 1024000 -i 1000 -v 200)
+[ 5113.664943] LTP: starting dio29 (diotest3 -b 65536 -n 100 -i 100 -o 1024000)
+[ 5188.822588] LTP: starting dio30 (diotest6 -b 65536 -n 100 -i 100 -o 1024000)
+[ 6657.829218] LTP: starting aio01
+[ 6657.904958] LTP: starting aio02 (aio_tio)
+[ 6658.347221] LTP: starting mm01 (mmap001 -m 10000)
+root@intel-x86-64:~#  
+
+
+
+
+
+ LTP is designed to be dead simple; the primary design goals are:
+
+    Each test is an executable.
+    Each test is as self-contained as possible.
+    Each test covers a well-defined assertion or a small group of similar assertions.
+    Each test runs automatically. (There is no need for manual setup nor input during the test run.)
+    Overall test status is passed as an exit value.
+    Additional information is printed to stdout.
+    Global parameters are passed via environment variables.
+

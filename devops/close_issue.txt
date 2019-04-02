@@ -1,0 +1,12 @@
+{
+    "update": {
+        "comment": [
+            {
+                "add": {
+                    "body": "Bug has been rejected."
+                }
+            }
+        ]
+    },
+   "transition" : {"id":"51"}
+}

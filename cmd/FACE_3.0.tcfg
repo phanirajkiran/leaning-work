@@ -1,0 +1,48 @@
+pathdirs: "/usr/bin"
+language: LANG_C
+toolchain_segment_type: OSS_TOOLCHAIN
+profiles: PROF_GENERAL
+toolchain_specific_config {
+  allowed_definitions {
+  }
+  exact_types {
+    FACE_int8_t: "char"
+    FACE_int16_t: "short int"
+    FACE_int32_t: "int "
+    FACE_int64_t: "long int"
+    FACE_uint8_t: "unsigned char"
+    FACE_uint16_t: "unsigned short int "
+    FACE_uint32_t: "unsigned int "
+    FACE_uint64_t: "unsigned long int"
+    FACE_size_t: "long unsigned int "
+    FACE_SUPPORTS_64_BIT: true
+  }
+  face_null_definition: "#define FACE_NULL ((void*)0)"
+  eglplatform_filename: ""
+  gl2platform_filename: ""
+  khrplatform_filename: ""
+}
+operating_system: "Sys: [Linux], Release: [4.18.20-yocto-standard], Version: [#1 SMP PREEMPT Mon Feb 11 08:26:16 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux], Arch: [64 bits]"
+file_extensions {
+  obj: "o"
+  src: "c"
+  hdr: "h"
+  lib: "a"
+}
+compiler {
+  exe: "cc"
+  flags: "-std=c99 -c"
+  output_flag: "-o"
+}
+linker {
+  exe: "gcc"
+  flags: "-lpthread -lm -lrt"
+  output_flag: "-o"
+}
+archiver {
+  exe: "ar"
+  flags: "cr"
+}
+binder {
+}
+toolchain_template: "/FACEConformanceTestSuite_3.0.0/datafiles/stringtemplate/defaultC++CToolchainTemplates.stg"

@@ -1,0 +1,3 @@
+[filter1]
+summary=Fix verification in LIN1017
+filter=project = LIN10 AND status = Resolved AND resolution = Fixed AND labels not in (Verified) ORDER BY tester DESC,component ASC

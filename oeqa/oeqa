@@ -1,0 +1,58 @@
+http://www.yoctoproject.org/docs/current/dev-manual/dev-manual.html#performing-automated-runtime-testing
+
+
+1)simpleremote 
+  steps:
+  local.conf
+  TEST_TARGET = "SimpleRemoteTarget"
+  TEST_POWERCONTROL_CMD = "/folk/vlm/commandline/vlmTool reboot -s amazon -t 22025"
+  TEST_SERIALCONTROL_CMD = "telnet 128.224.164.92 2003"
+  IMAGE_FSTYPES += "tar.gz"
+  TEST_SUITES = "ping ssh rpm"
+  INHERIT += "testimage"
+  TEST_TARGET_IP = "128.224.179.129"
+  TEST_SERVER_IP = "128.224.179.220"
+
+
+then deplpy the images on the target ;
+
+and then bitbake -c testimage wrlinux-image-glibc-std 
+
+
+
+
+
+  TEST_TARGET = "IntelshumwayTarget"
+  TEST_POWERCONTROL_CMD = "/folk/vlm/commandline/vlmTool reboot -s amazon -t 22025"
+  TEST_SERIALCONTROL_CMD = "telnet 128.224.164.92 2003"
+  IMAGE_FSTYPES += "tar.gz"
+  INHERIT += "testimage"
+  TEST_TARGET_IP = "128.224.179.129"
+  TEST_SERVER_IP = "128.224.179.220"
+
+
+[lyang0@pek-lpgtest19 oeqa]$ git status 
+# Not currently on any branch.
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	__init__.py
+#	controllers/intel_shumway_2.py
+#	controllers/pexpect.bak/
+#	controllers/pexpect/
+#	controllers/ptyprocess/
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+
+Initialising tasks: 100% |########################################################################################################################################################################################| Time: 0:00:07
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+wrlinux-image-glibc-std-1.0-r5 do_testimage: wrlinux-image-glibc-std - boot test image on target
+wrlinux-image-glibc-std-1.0-r5 do_testimage: wrlinux-image-glibc-std - start running tests
+wrlinux-image-glibc-std-1.0-r5 do_testimage: test_ping (oeqa.runtime.ping.PingTest) ... ok
+wrlinux-image-glibc-std-1.0-r5 do_testimage: test_ssh (oeqa.runtime.ssh.SshTest) ... ok
+wrlinux-image-glibc-std-1.0-r5 do_testimage: test_rpm_help (oeqa.runtime.rpm.RpmBasicTest) ... ok
+wrlinux-image-glibc-std-1.0-r5 do_testimage: test_rpm_query (oeqa.runtime.rpm.RpmBasicTest) ... ok
+Currently  1 running tasks (253 of 253)  99% |################################################################################################################################################################################# |
+0: wrlinux-image-glibc-std-1.0-r5 do_testimage - 236s (pid 90737)

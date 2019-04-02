@@ -1,0 +1,17 @@
+HTTP/1.1 400 
+Date: Thu, 07 Mar 2019 08:40:02 GMT
+X-AREQUESTID: 40x5379612x6
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+X-ASEN: SEN-2218777
+X-Seraph-LoginReason: OK
+X-ASESSIONID: 1lkfmea
+X-AUSERNAME: apiuser
+Cache-Control: no-cache, no-store, no-transform
+Content-Type: application/json;charset=UTF-8
+Set-Cookie: JSESSIONID=50D41976B02199AB5EE413A388A2F65A;path=/;Secure;HttpOnly
+Set-Cookie: atlassian.xsrf.token=BWL4-5HLJ-GBHK-V1OT|5cd693addf6c6c8cb1879cb91f2684f2652487e7|lin;path=/;Secure
+Connection: close
+Transfer-Encoding: chunked
+
+{"errorMessages":["Error in the JQL Query: Expecting operator before the end of the query. The valid operators are '=', '!=', '<', '>', '<=', '>=', '~', '!~', 'IN', 'NOT IN', 'IS' and 'IS NOT'."],"errors":{}}

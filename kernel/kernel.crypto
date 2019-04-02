@@ -1,0 +1,10 @@
+
+
+I had to compile the kernel modules. This built the "tcrypt.ko" module too. Then I used "insmod" command to load the module. Once loaded, the module was started with :
+
+modprobe tcrypt sec=1 mode=200
+
+(where mode is the algorithm to test)
+
+
+https://patchwork.kernel.org/patch/5436441/

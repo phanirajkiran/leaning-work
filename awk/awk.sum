@@ -21,3 +21,5 @@ awk '/Amt Ccy/ {sum+=$3} END {print sum}' FS="[<>]" file
 ===================================================================================
 awk '{ sum+=$1; } END { print sum }'
 http://www.math.utah.edu/docs/info/gawk_4.html
+
+https://stackoverflow.com/questions/19149731/use-awk-to-find-average-of-a-column

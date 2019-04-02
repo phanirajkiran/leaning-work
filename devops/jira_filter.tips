@@ -1,0 +1,23 @@
+https://developer.atlassian.com/cloud/jira/platform/rest/v3/#api-rest-api-3-filter-get
+
+create a fitler, and copy the address to google chrome it will give you the format could fill curl command
+
+curl -u apiuser:apiuser -X GET -H "Content-Type: application/json"   'https://jira.wrs.com/rest/api/2/search?jql=resolutiondate%20>%20-7h%20and%20project%20%3D%20"Linux%2010.19"
+
+if you want to add fields, you could use: 
+
+curl -u apiuser:apiuser -X GET -H "Content-Type: application/json"   'https://jira.wrs.com/rest/api/2/search?jql=resolutiondate%20>%20-7h%20and%20project%20%3D%20"Linux%2010.19"&fields=id,key,priority,assignee,reporter,resolution,component'
+
+if you don't know what exact fields, you could click the tab of the jira web page, it will tell you in query [] like reporter = currentUser() ORDER BY component ASC, resolution ASC, reporter ASC, assignee ASC, created DESC
+
+Don't use -D- like this page https://developer.atlassian.com/server/jira/platform/jira-rest-api-examples/#searching-for-issues-examples , or it will include the HTTP-header in the output.
+
+
+import json
+
+d = json.loads(j)
+
+>>> d['issues'][0]['key']
+u'LIN1019-243'
+>>> d['issues'][0]['fields']['assignee']['name']
+u'ytao'

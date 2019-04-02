@@ -2,3 +2,25 @@ git send-email HEAD^
 
 
 git send-email --annotate --cover-letter origin/master
+
+
+[wrgit]
+        username = Lei Yang
+[user]
+        name = Lei Yang
+        email = Lei.Yang@windriver.com
+#       email = yanglei.fage@gmail.com
+[sendemail]
+        smtpserver = smtp.gmail.com
+        smtpserverport = 587
+        smtpencryption = tls
+        smtpuser = yanglei.fage@gmail.com
+        smtppass = fage888123
+        confirm = auto
+        from = yanglei.fage@gmail.com
+        suppresscc = all
+[core]
+        editor = vim
+
+[push]
+        default = matching

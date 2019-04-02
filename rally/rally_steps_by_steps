@@ -1,0 +1,24 @@
+
+Reference: https://help.rallydev.com/wsapi-introduction
+
+For US102572:
+
+https://rally1.rallydev.com/slm/webservice/v2.0/hierarchicalrequirement?query=(FormattedID%20%3D%20US102572)
+
+then:
+
+type https://rally1.rallydev.com/slm/webservice/v2.0/hierarchicalrequirement?query=(FormattedID%20%3D%20US102572)
+
+get:
+{"QueryResult": {"_rallyAPIMajor": "2", "_rallyAPIMinor": "0", "Errors": [], "Warnings": [], "TotalResultCount": 1, "StartIndex": 1, "PageSize": 20, "Results": [{"_rallyAPIMajor": "2", "_rallyAPIMinor": "0", "_ref": "https://rally1.rallydev.com/slm/webservice/v2.0/hierarchicalrequirement/145025634056", "_refObjectUUID": "2b12280e-02f3-4275-87cd-633f79237a49", "_refObjectName": "EPIC: [CF] Add Denverton-NS (Harcuvar) support in WRL10", "_type": "HierarchicalRequirement"}]}}
+
+then type:
+
+https://rally1.rallydev.com/slm/webservice/v2.0/hierarchicalrequirement/145025634056   get what I need 
+
+then I use 
+
+curl -u "lei.yang@windriver.com:windwind001" https://rally1.rallydev.com/slm/webservice/v2.0/hierarchicalrequirement/145025634056
+
+check 
+userstory_to_iteration.py

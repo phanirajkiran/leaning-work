@@ -76,3 +76,22 @@ while read line; do
 done <<EOT
 $(echo -e $lines)
 EOT
+
+How to split one string into multiple strings separated by at least one space in bash shell?
+The trick is to NOT quote the variable in the for command
+
+sentence="This is   a sentence."
+for word in $sentence
+do
+    echo $word
+done
+
+ 
+
+This
+is
+a
+sentence.
+
+
+seq -f "abcdefghijklmnopqrstuvwxyz012345%.0f" 100000 | xargs touch

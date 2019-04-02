@@ -1,0 +1,60 @@
+https://www.cyberciti.biz/faq/stress-test-linux-unix-server-with-stress-ng/
+fsstreess 
+mmapstress
+mallocstress
+testfloat
+stress-ng 
+fio 
+rt-stress
+modprobe stress
+ftrace stress 
+msgstress
+memcg_process_stress
+aio-stress
+
+
+
+unixbench
+tbench
+tiobench
+synctest? 
+pi_tests 
+iozone
+bonnie++
+
+
+
+ftrace_onoff
+
+
+hackbench
+locktorture
+rcutorture 
+trinity
+postmark ??
+fs_mark ?
+
+drystone
+
+
+https://github.com/ruscur/lkp-tests/blob/master/tests/ext4-frags
+
+
+x="tea xcbc gf128mul camellia_generic ccm wp512 blowfish_generic serpent_generic md4 cryptd dh_generic crypto_simd khazad gcm cast_common cast6_generic anubis blowfish_common twofish_common crct10dif_generic ghash-generic tcrypt cast5_generic sha512_generic twofish_generic crct10dif_common crc-itu-t ts_bm crc-ccitt ts_kmp crc-t10dif ts_fsm sha512-ssse3 sha1-ssse3 glue_helper aesni-intel crct10dif-pclmul aes-x86_64 sha256-ssse3 lttng-lib-ring-buffer lttng-statedump lttng-ring-buffer-metadata-client lttng-ring-buffer-client-mmap-discard lttng-ring-buffer-client-discard lttng-ring-buffer-metadata-mmap-client lttng-probe-block lttng-probe-jbd2 lttng-ftrace lttng-probe-compaction lttng-probe-ext4 lttng-probe-random lttng-probe-module lttng-probe-i2c lttng-probe-scsi lttng-probe-skb lttng-probe-sunrpc lttng-probe-sched lttng-probe-signal lttng-probe-workqueue lttng-probe-sock lttng-probe-regmap lttng-probe-gpio lttng-probe-rcu lttng-probe-napi lttng-probe-x86-exceptions lttng-probe-net lttng-probe-x86-irq-vectors lttng-probe-power lttng-probe-kmem lttng-probe-udp lttng-probe-timer lttng-kprobes lttng-kretprobes lttng-probe-vmscan lttng-probe-irq lttng-probe-writeback lttng-probe-statedump lttng-probe-btrfs lttng-probe-printk lttng-clock-plugin-test lttng-test lttng-ring-buffer-client-mmap-overwrite lttng-ring-buffer-client-overwrite lttng-tracer lttng-clock ac97_bus snd-hda-core snd-hda-codec-analog snd-hda-codec-cirrus snd-hda-codec-conexant snd-hda-codec-realtek snd-hda-codec snd-hda-codec-hdmi snd-hda-codec-ca0132 snd-hda-codec-generic snd-hda-codec-ca0110 snd-hda-codec-si3054 snd-hda-codec-idt snd-hda-intel snd-hda-codec-cmedia snd-hda-codec-via snd-atiixp-modem snd-rme96 snd-cmipci snd-ca0106 snd-ctxfi snd-emu10k1-synth snd-emu10k1x snd-emu10k1 snd-intel8x0 snd-atiixp snd-oxygen-lib snd-virtuoso snd-oxygen snd-ice17xx-ak4xxx snd-ice1724 snd-ice1712 snd-rme9652 snd-hdspm snd-hdsp snd-ac97-codec snd-aloop snd-mpu401-uart snd-opl3-lib snd-opl3-synth snd-pcm snd-hwdep snd-seq-device snd-timer snd-hrtimer snd-rawmidi snd-seq snd-seq-midi-emul snd-seq-midi-event snd-seq-virmidi snd-seq-midi snd-usb-audio snd-usbmidi-lib snd-usb-us122l snd-usb-usx2y snd-usb-hiface snd-i2c snd-cs8427 snd-ak4113 snd-ak4114 snd-ak4xxx-adda snd-pt2258 snd-util-mem snd-emux-synth bluetooth_6lowpan rfcomm bnep cmtp hidp cfg80211 bridge ebt_vlan ebt_dnat ebt_mark ebtable_filter ebt_limit ebtable_nat ebtables ebtable_broute ebt_snat ebt_arpreply ebt_redirect ebt_arp ebt_ip ebt_mark_m ebt_pkttype ebt_log ebt_among ebt_802_3 ebt_ip6 ebt_stp ebt_nflog br_netfilter af_key ip6_tunnel ip6t_hbh ip6t_ipv6header ip6t_rt ip6table_raw ip6t_frag nf_defrag_ipv6 ip6table_mangle ip6table_filter ip6_tables ip6t_eui64 ipcomp6 xfrm6_tunnel ip6_udp_tunnel tunnel6 sctp sctp_diag xt_TCPMSS nf_nat_sip nfnetlink_queue nf_nat_tftp xt_state xt_connlimit xt_tcpudp nf_nat_ftp nf_conntrack_pptp nf_conncount nf_conntrack_irc nfnetlink nfnetlink_log xt_multiport xt_mark xt_nat nf_nat_irc xt_tcpmss nf_conntrack_broadcast xt_comment xt_policy xt_connbytes nf_conntrack_proto_gre xt_realm xt_esp xt_string xt_hl nf_conntrack_sip nf_synproxy_core xt_u32 xt_HL x_tables nf_conntrack_netlink xt_NETMAP nf_conntrack xt_NFLOG xt_pkttype xt_CT nf_nat_amanda xt_limit xt_connmark xt_ecn nf_conntrack_h323 xt_REDIRECT xt_mac xt_dccp xt_hashlimit xt_statistic nf_conntrack_tftp nf_nat xt_length nf_conntrack_ftp xt_helper xt_conntrack nf_conntrack_amanda xt_CLASSIFY xt_dscp xt_TRACE nf_conntrack_sane xt_NFQUEUE xt_sctp xt_DSCP xt_quota nf_conntrack_netbios_ns pktgen mac80211 llc psnap p8022 stp xfrm_user xfrm_ipcomp nhc_udp nhc_hop nhc_dest nhc_routing 6lowpan nhc_fragment nhc_ipv6 nhc_mobility esp4 udp_tunnel ah4 ipip ip_gre arp_tables arptable_filter nf_reject_ipv4 nf_nat_ipv4 iptable_security ipt_rpfilter iptable_filter iptable_mangle arpt_mangle iptable_raw ip_tables ipt_ECN ipt_MASQUERADE iptable_nat ipt_ah ipt_REJECT nf_nat_h323 ipt_SYNPROXY nf_defrag_ipv4 nf_nat_proto_gre nf_nat_pptp ipt_CLUSTERIP xfrm4_tunnel ipcomp gre sch_prio sch_teql sch_ingress act_mirred sch_codel sch_red sch_gred sch_netem sch_cbq sch_hfsc sch_sfq sch_htb sch_dsmark sch_tbf diag tipc 8021q cifs nls_iso8859-7 nls_cp864 nls_iso8859-4 nls_cp862 nls_cp950 nls_cp852 nls_cp1251 nls_euc-jp nlsi8-ru nls_cp932 nls_iso8859-2 nls_cp1255 nls_cp949 nls_cp936 nls_cp861 nls_cp855 nls_cp1250 nls_iso8859-9 nls_cp874 nls_cp775 nls_cp863 nls_cp860 nls_cp869 nls_iso8859-3 nls_cp857 nlsi8-u nlsi8-r nls_utf8 nls_ascii nls_iso8859-13 nls_iso8859-15 nls_cp866 nls_iso8859-5 nls_iso8859-14 nls_cp865 nls_cp850 nls_cp737 nls_iso8859-6 efivarfs binfmt_misc cuse fuse romfs uio btbcm btintel btusb btrtl nbd cryptoloop lpc_sch intel_soc_pmic_bxtwc lpc_ich spidev pci-stub sb_edac pnd2_edac skx_edac intel_ips mxm-wmi intel_pmc_ipc wmi-bmof wmi nvme-core nvme ttm radeon sil164 ch7006 i915 nouveau zforce_ts thermal ec_sys einj acpi_pad battery video ac sbshc custom_method fan sbs efi-pstore efivars dmi-sysfs acpi-cpufreq cpufreq_powersave pcc-cpufreq nvram intel_soc_dts_iosf intel_soc_dts_thermal intel_powerclamp x86_pkg_temp_thermal int3403_thermal int340x_thermal_zone processor_thermal_device int3400_thermal int3402_thermal acpi_thermal_rel intel_bxt_pmic_thermal idma64 r8723bs iTCO_wdt iTCO_vendor_support ie6xx_wdt i6300esb wdat_wdt softdog ata_generic pppoe ppp_generic bsd_comp ppp_deflate pppox ppp_async ppp_synctty mwifiex_pcie mwifiex iwlwifi iwldvm iwlmvm rt73usb rt2x00lib rt2x00usb tun i40evf ixgbevf igbvf i40e dummy bonding slip slhc intel_rapl eeprom rtsx_pci acpi_power_meter coretemp gpio-ich gpio-sch matroxfb_DAC1064 matroxfb_Ti3026 matroxfb_g450 g450_pll matroxfb_base matroxfb_crtc2 matroxfb_misc matroxfb_accel radeonfb fb_ddc lcd cdc-acm dwc3-haps dwc3-pci dwc3 ftdi_sio cp210x pl2303 libcomposite usb_f_mass_storage usb_f_printer g_mass_storage g_printer xhci-plat-hcd i2c-dev i2c-smbus i2c-i801 i2c-ismt i2c-isch pinctrl-broxton kernelcapi intel-ishtp intel-ish-ipc intel-ishtp-hid rtsx_pci_sdmmc"
+while :
+do
+   for i in $x
+   do
+      modprobe -v $i
+      rmmod $i
+   done
+done
+
+
+
+
+==============
+https://github.com/ruscur/lkp-tests/blob/master/tests/cpu-hotplug
+
+=================
+https://github.com/ruscur/lkp-tests/blob/master/tests/ftrace_onoff

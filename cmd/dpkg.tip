@@ -5,3 +5,18 @@ postgresql-client-9.4				install
 postgresql-client-common			install
 postgresql-common				install
 
+
+
+lyang001@pek-lyang0-d1:~$ dpkg -L python
+/.
+/usr
+/usr/bin
+/usr/bin/dh_python2
+/usr/lib
+/usr/lib/valgrind
+/usr/lib/valgrind/python.supp
+/usr/share
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/dh_python2.1.gz
+/usr/share/lintian

@@ -1,0 +1,1 @@
+git send-email -1 --compose --subject 'selftests: add missing test result status in memory-hotplug test' --subject-prefix=PATCH -to lei.yang@windriver.com --to shuahkh@osg.samsung.com  -to linux-kselftest@vger.kernel.org -to linux-kernel@vger.kernel.org

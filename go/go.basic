@@ -1,0 +1,41 @@
+root@0574a817ccf2:/src# go env
+
+root@0574a817ccf2:/src# go get gopkg.in/mgo.v2
+# cd .; git clone https://gopkg.in/mgo.v2 /go/src/gopkg.in/mgo.v2
+Cloning into '/go/src/gopkg.in/mgo.v2'...
+error: RPC failed; curl 56 GnuTLS recv error (-9): A TLS packet with unexpected length was received.
+fatal: The remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+package gopkg.in/mgo.v2: exit status 128
+
+
+
+
+root@0574a817ccf2:/src# go get -v github.com/shijuvar/go-samples-thenewstack/packagedemo/lib
+github.com/shijuvar/go-samples-thenewstack (download)
+github.com/shijuvar/go-samples-thenewstack/packagedemo/lib
+
+
+========================================================
+To get the package, execute:
+
+go get gopkg.in/mgo.v2
+
+To import this package, add the following line to your code:
+
+import "gopkg.in/mgo.v2"
+
+====================================
+
+root@0574a817ccf2:/src# go get github.com/shijuvar/go-samples-thenewstack/packagedemo/lib
+root@0574a817ccf2:/src# ls /go/src/github.com/shijuvar/go-samples-thenewstack/packagedemo/lib/languages.go 
+
+root@0574a817ccf2:/src# go doc lib
+package lib // import "github.com/shijuvar/go-samples-thenewstack/packagedemo/lib"
+
+func Add(key, value string)
+func Get(key string) string
+func GetAll() map[string]string
+
+

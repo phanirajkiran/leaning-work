@@ -1,0 +1,17 @@
+TEST_SUITES="ping ssh df date scp pam perl python rpm ldd smart"
+INHERIT +="testexport"
+PNWHITELIST_intel += 'linux-intel'
+PNWHITELIST_intel += 'linux-intel-rt'
+PREFERRED_PROVIDER_virtual/kernel = "linux-yocto"
+PREFERRED_VERSION_linux-yocto = "4.12.%"
+PNWHITELIST_intel += 'rmc'
+PNWHITELIST_intel += 'rmc-efi'
+PNWHITELIST_intel += 'thermald'
+PNWHITELIST_intel += 'intel-microcode'
+PNWHITELIST_intel += 'lms'
+PNWHITELIST_intel += 'iucode-tool'
+IMAGE_INSTALL_append = " python3-pkgutil"
+IMAGE_INSTALL_append = " python3-unittest"
+
+
+./tmp-glibc/testexport/wrlinux-image-glibc-std/oe-test runtime --target-ip 128.224.179.129 --test-data-file ./tmp-glibc/testexport/wrlinux-image-glibc-std/data/testdata.json --packages-manifest ./tmp-glibc/testexport/wrlinux-image-glibc-std/data/manifest

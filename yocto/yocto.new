@@ -1,0 +1,316 @@
+what that means is that recipe from the dynamic-layers/<layer> will be
+parsed/added *only if* <layer> is already added in your build
+environment. e.g. if you have meta-qt5 in BBLAYERS in
+<build>/conf/bblayers.conf, then the recipes from
+"dynamic-layers/qt5-layer" are used as well.
+
+
+# The dynamic-layers directory hosts the extensions and layer specific
+# modifications related to Freescale products.
+#
+# The .bbappend and .bb files are included if the respective layer
+# collection is available.
+BBFILES += "${@' '.join('${LAYERDIR}/dynamic-layers/%s/recipes*/*/*.bbappend' % layer \
+               for layer in BBFILE_COLLECTIONS.split())}"
+BBFILES += "${@' '.join('${LAYERDIR}/dynamic-layers/%s/recipes*/*/*.bb' % layer \
+for layer in BBFILE_COLLECTIONS.split())}"
+
+
+inherit rootfs_${IMAGE_PKGTYPE}
+
+
+bb.utils.filter() 
+
+-PACKAGECONFIG ?= "\
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'acl', 'acl', '', d)} \
+-    ${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'selinux', '', d)} \
+-"
++PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'acl selinux', d)}"
+https://patchwork.openembedded.org/patch/137476/
+
+==================================================================
+commit 3b3ae91a22d6f685e804df4f32cdeebe1bd6bd88
+Author: Patrick Ohly <patrick.ohly@intel.com>
+Date:   Fri Jun 9 15:04:03 2017 +0200
+
+    bitbake.conf: DISTRO_FEATURES as overrides
+    
+    As discussed in "[Openembedded-architecture] Yocto Compatible 2.0 +
+    signature changes", changes in .bbappend must depend on some explicit
+    configuration change, typically selecting a distro feature.
+    
+    For _append and _remove, adding an override that is set only when the
+    corresponding entry is in DISTRO_FEATURES achieves that:
+    
+    In local.conf:
+      DISTRO_FEATURES_append = " my-distro-feature"
+    
+    In layer.conf:
+      DISTRO_FEATURES_OVERRIDES += "my-distro-feature"
+    
+    In a .bbappend:
+      do_install_append_df-my-distro-feature () {
+           ...
+      }
+    
+    The subset of DISTRO_FEATURES that are made available as overrides
+    must be configured explicitly because using them this way should
+    be a conscious decision.
+
+
+========================================================
+
+diff --git a/meta/conf/bitbake.conf b/meta/conf/bitbake.conf
+index f41680b27e..6f53b23a67 100644
+--- a/meta/conf/bitbake.conf
++++ b/meta/conf/bitbake.conf
+@@ -476,7 +476,7 @@ HOSTTOOLS += " \
+     [ ar as awk basename bash bzip2 cat chgrp chmod chown chrpath cmp cp cpio \
+     cpp cut date dd diff diffstat dirname du echo egrep env expand expr false \
+     fgrep file find flock g++ gawk gcc getconf getopt git grep gunzip gzip \
+-    head hostname install ld ldd ln ls make makeinfo md5sum mkdir mknod \
++    head hostname id install ld ldd ln ls make makeinfo md5sum mkdir mknod \
+     mktemp mv nm objcopy objdump od patch perl pod2man pr printf pwd python python2 \
+     python2.7 python3 ranlib readelf readlink rm rmdir rpcgen sed sh sha256sum \
+     sleep sort split stat strings strip tail tar tee test touch tr true uname \
+
+
+====================================================
+
+[lyang0@pek-lpgtest19 oe-core]$ git show 6e7f9c158e
+commit 6e7f9c158e26d4b60479b2e88d87b02443a07cb4
+Author: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
+Date:   Wed Sep 20 10:17:17 2017 -0700
+
+    linux-yocto-tiny: Enable qemux86-64 on linux-yocto-tiny 4.12
+    
+    Signed-off-by: Alejandro Hernandez <alejandro.hernandez@linux.intel.com>
+    Signed-off-by: Ross Burton <ross.burton@intel.com>
+
+diff --git a/meta/recipes-kernel/linux/linux-yocto-tiny_4.12.bb b/meta/recipes-kernel/linux/linux-yocto-tiny_4.12.bb
+index efd876aee5..ba67af357e 100644
+--- a/meta/recipes-kernel/linux/linux-yocto-tiny_4.12.bb
++++ b/meta/recipes-kernel/linux/linux-yocto-tiny_4.12.bb
+@@ -17,7 +17,7 @@ PV = "${LINUX_VERSION}+git${SRCPV}"
+ SRC_URI = "git://git.yoctoproject.org/linux-yocto-4.12.git;branch=${KBRANCH};name=machine \
+            git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-4.12;destsuffix=${KMETA}"
+ 
+-COMPATIBLE_MACHINE = "(qemux86$)"
++COMPATIBLE_MACHINE = "qemux86|qemux86-64"
+ 
+ # Functionality flags
+ KERNEL_FEATURES = ""
+
+
+==============================
+
+[lyang0@pek-lpgtest19 oe-core]$ git show df5ae8143f
+commit df5ae8143ff1764b6ed5973ed3d6f1a83ecf45ee
+Author: Joshua Lock <joshua.g.lock@intel.com>
+Date:   Thu Sep 21 11:18:34 2017 +0100
+
+    oe-build-perf-report-email.py: add cc and bcc options
+    
+    Enable carbon copy and blind carbon copy recipients for the performance
+    report emails.
+    
+    Signed-off-by: Joshua Lock <joshua.g.lock@intel.com>
+    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+
+diff --git a/scripts/contrib/oe-build-perf-report-email.py b/scripts/contrib/oe-build-perf-report-email.py
+index 261ca514e5..64e85c26ad 100755
+--- a/scripts/contrib/oe-build-perf-report-email.py
++++ b/scripts/contrib/oe-build-perf-report-email.py
+@@ -71,6 +71,10 @@ def parse_args(argv):
+                         help="Only print errors")
+     parser.add_argument('--to', action='append',
+                         help="Recipients of the email")
++    parser.add_argument('--cc', action='append',
++                        help="Carbon copy recipients of the email")
++    parser.add_argument('--bcc', action='append',
++                        help="Blind carbon copy recipients of the email")
+     parser.add_argument('--subject', default="Yocto build perf test report",
+                         help="Email subject")
+     parser.add_argument('--outdir', '-o',
+
+
+============================================
+
+
+[lyang0@pek-lpgtest19 oe-core]$ git show 6699e66841
+commit 6699e668413c10704ffa8094b3dca67a9b88422a
+Author: Otavio Salvador <otavio@ossystems.com.br>
+Date:   Wed Sep 13 14:54:07 2017 -0300
+
+    go.bbclass: Add "ldflags" to QA skip list
+    
+    Currently every Go package will end with GNU_HASH in the ELF binary
+    however adding it to every recipe is cumbersome so instead we handle
+    that here.
+    
+    Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+    Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+
+diff --git a/meta/classes/go.bbclass b/meta/classes/go.bbclass
+index d805dc2713..4af148e302 100644
+--- a/meta/classes/go.bbclass
++++ b/meta/classes/go.bbclass
+@@ -109,3 +109,5 @@ EXPORT_FUNCTIONS do_unpack do_configure do_compile do_install
+ 
+ FILES_${PN}-dev = "${libdir}/go/src"
+ FILES_${PN}-staticdev = "${libdir}/go/pkg"
++
++INSANE_SKIP_${PN} += "ldflags"
+diff --git a/meta/recipes-devtools/go/go-dep_0.3.0.bb b/meta/recipes-devtools/go/go-dep_0.3.0.bb
+index 5e4544a104..abfeb48370 100644
+--- a/meta/recipes-devtools/go/go-dep_0.3.0.bb
++++ b/meta/recipes-devtools/go/go-dep_0.3.0.bb
+@@ -13,6 +13,4 @@ inherit go
+ 
+ GO_INSTALL = "${GO_IMPORT}/cmd/dep"
+ 
+-INSANE_SKIP_${PN} += "ldflags"
+-
+
+
+==============================
+
+
+next time to send ????
+
+commit eeb10ebe19558be709d270c94ffeac3a0448966e
+Author: Robert Yang <liezhi.yang@windriver.com>
+Date:   Tue Sep 22 03:37:19 2015 +0000
+
+    runqemu-extract-sdk: allow install debugfs on rootfs
+    
+    Usually, the debugfs' (-dbg.tar.*) work follow is:
+    1) Install regular rootfs to dir_foo
+    2) Install debugfs (-dbg.tar.*) to the same dir_foo
+    
+    So we need allow install debugfs on rootfs.
+    
+    (LOCAL REV: NOT UPSTREAM) -- Sent to oe-core on 20150922
+    
+    Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+
+
+================
+
+
+...skipping...
+commit eeb10ebe19558be709d270c94ffeac3a0448966e
+Author: Robert Yang <liezhi.yang@windriver.com>
+Date:   Tue Sep 22 03:37:19 2015 +0000
+
+    runqemu-extract-sdk: allow install debugfs on rootfs
+    
+    Usually, the debugfs' (-dbg.tar.*) work follow is:
+    1) Install regular rootfs to dir_foo
+    2) Install debugfs (-dbg.tar.*) to the same dir_foo
+    
+    So we need allow install debugfs on rootfs.
+    
+    (LOCAL REV: NOT UPSTREAM) -- Sent to oe-core on 20150922
+    
+    Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+
+
+local revs means we have some locals will uprove to upstream,
+
+in the email 
+
+Robert Yang (12):
+      runqemu-extract-sdk: allow install debugfs on rootfs
+      oe/copy_buildsystem.py: add SDK_LAYERS_EXCLUDE_PATTERN
+      site/powerpc64-linux: add cvs_cv_func_printf_ptr
+      cross-canadian/libgcc: fix aarch64's multilib SDK
+      staging.bbclass: make subprocess.check_output() capture stderr
+      testsdk.bbclass: add a newline after own-mirrors
+      populate_sdk_ext.bbclass: don't rename layers when failed
+      oe/copy_buildsystem.py: make sure layer exists
+      staging.bbclass: fix for multilib
+      populate_sdk_ext.bbclass: fix for multilib
+      sstate.bbclass: sstate_hardcode_path(): fix for multilib
+      staging.bbclass: staging_populate_sysroot_dir(): fix for multilib
+
+git shortlog base/wr-10.17-20171204..base/wr-10.17-20171212 got 14 
+
+Robert Yang (14):
+      runqemu-extract-sdk: allow install debugfs on rootfs
+      oe/copy_buildsystem.py: add SDK_LAYERS_EXCLUDE_PATTERN
+      site/powerpc64-linux: add cvs_cv_func_printf_ptr
+      cross-canadian/libgcc: fix aarch64's multilib SDK
+      staging.bbclass: make subprocess.check_output() capture stderr
+      testsdk.bbclass: add a newline after own-mirrors
+      populate_sdk_ext.bbclass: don't rename layers when failed
+      oe/copy_buildsystem.py: make sure layer exists
+      staging.bbclass: fix for multilib
+      populate_sdk_ext.bbclass: fix for multilib
+      sstate.bbclass: sstate_hardcode_path(): fix for multilib
+      staging.bbclass: staging_populate_sysroot_dir(): fix for multilib
+      image-live.bbclass: add MLPREFIX to core-image-minimal-initramfs
+      image-live.bbclass: remove MLPREFIX from syslinux
+
+
++= append 
+https://lists.yoctoproject.org/pipermail/yocto/2012-June/007363.html
+=========================
+
+> +KBRANCH ?= "standard/preempt-rt/intel-x86"
+> +
+
+I think this is incorrect, as it assumes that only intel-x86 BSP will ever be
+supported.
+
+We may still need to adjust the KBRANCH appropriately for the preempt-rt case(s).
+
+KBRANCH_intel-x86 = "standard/preempt-rt/intel-x86"
+
+============================================================
+intel-x86/conf/layer.conf:PREFERRED_PROVIDER_virtual/kernel ?= "linux-yocto"
+meta-intel/conf/machine/include/meta-intel.inc:PREFERRED_PROVIDER_virtual/kernel ?= "linux-intel"
+meta-intel/conf/machine/include/meta-intel.inc:PREFERRED_PROVIDER_virtual/kernel_poky-tiny ?= "linux-intel"
+meta-intel/conf/machine/include/meta-intel.inc:PREFERRED_PROVIDER_virtual/kernel_linuxstdbase ?= "linux-yocto"
+
+
+=====================================================
+[lyang0@pek-lpgtest19 wrlinux]$ grep "BBMASK" * -r 
+wrlinux-kernel-dev/conf/layer.conf:BBMASK += "${@'' if d.getVar('ENABLE_KERNEL_DEV') == '1' else '${LAYERDIR}'}"
+wrlinux-ovp/conf/layer.conf:BBMASK += "${LAYERDIR}/recipes-devtools/qemu/qemu_2.7.0.bbappend"
+
+
+=======================================================
+
+Make /dev/kvm available to members of the kvm group. This improves
+security since it avoids having to be root to make use of kvm.
+
+Signed-off-by: Vu Tran <vu.tran@windriver.com>
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ Makefile.am        | 3 ++-
+ rules/99-kvm.rules | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+ create mode 100644 rules/99-kvm.rules
+
+diff --git a/Makefile.am b/Makefile.am
+index 09d1533..24d4863 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -3407,7 +3407,8 @@ dist_udevrules_DATA += \
+ 	rules/70-mouse.rules \
+ 	rules/75-net-description.rules \
+ 	rules/78-sound-card.rules \
+-	rules/80-net-setup-link.rules
++	rules/80-net-setup-link.rules \
++	rules/99-kvm.rules
+ 
+ nodist_udevrules_DATA += \
+ 	rules/99-systemd.rules
+diff --git a/rules/99-kvm.rules b/rules/99-kvm.rules
+new file mode 100644
+index 0000000..c2f7317
+--- /dev/null
++++ b/rules/99-kvm.rules
+@@ -0,0 +1 @@
++KERNEL=="kvm", GROUP="kvm", MODE="0660"

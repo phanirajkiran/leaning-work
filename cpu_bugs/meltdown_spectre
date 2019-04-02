@@ -1,0 +1,596 @@
+https://meltdownattack.com/
+
+https://www.cyberciti.biz/faq/check-linux-server-for-spectre-meltdown-vulnerability/
+https://www.ostechnix.com/check-meltdown-spectre-vulnerabilities-patch-linux/
+
+
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=64a48099b3b31568ac45716b7fafcb74a0c2fcfe
+
+http://www.zdnet.com/article/the-linux-vs-meltdown-and-spectre-battle-continues/
+
+http://www.zdnet.com/article/how-linux-is-dealing-with-meltdown-and-spectre/
+
+http://www.zdnet.com/article/the-linux-vs-meltdown-and-spectre-battle-continues/
+
+http://www.businessinsider.com/intels-telling-customers-not-to-install-its-fix-for-spectre-2018-1
+
+    CVE-2017-5754 is the most severe of the three. This exploit uses speculative cache loading to enable a local attacker to read the contents of memory. This issue is corrected with kernel patches.
+    CVE-2017-5753 is a Bounds-checking exploit during branching. This issue is corrected with a kernel patch.
+    CVE-2017-5715 is an indirect branching poisoning attack that can lead to data leakage. This attack allows for a virtualized guest to read memory from the host system. This issue is corrected with microcode, along with kernel and virtualization updates to both guest and host virtualization software.
+
+
+http://kroah.com/log/blog/2018/01/06/meltdown-status/
+
+all these patches address the Meltdown problem. Spectre is a different story. There are no Spectre patches available yet. That's because, as Kroah-Hartman explained, "Spectre issues were the last to be addressed by the kernel developers. All of us were working on the Meltdown issue, and we had no real information on exactly what the Spectre problem was at all, and what patches were floating around were in even worse shape than what have been publicly posted."
+
+====================================================
+
+commit 87590ce6e373d1a5401f6539f0c59ef92dd924a9
+Author: Thomas Gleixner <tglx@linutronix.de>
+Date:   Sun Jan 7 22:48:00 2018 +0100
+
+    sysfs/cpu: Add vulnerability folder
+    
+    As the meltdown/spectre problem affects several CPU architectures, it makes
+    sense to have common way to express whether a system is affected by a
+    particular vulnerability or not. If affected the way to express the
+    mitigation should be common as well.
+    
+    Create /sys/devices/system/cpu/vulnerabilities folder and files for
+    meltdown, spectre_v1 and spectre_v2.
+    
+    Allow architectures to override the show function.
+    
+    Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+    Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Cc: Peter Zijlstra <peterz@infradead.org>
+    Cc: Will Deacon <will.deacon@arm.com>
+    Cc: Dave Hansen <dave.hansen@intel.com>
+    Cc: Linus Torvalds <torvalds@linuxfoundation.org>
+    Cc: Borislav Petkov <bp@alien8.de>
+    Cc: David Woodhouse <dwmw@amazon.co.uk>
+    Link: https://lkml.kernel.org/r/20180107214913.096657732@linutronix.de
+
+diff --git a/Documentation/ABI/testing/sysfs-devices-system-cpu b/Documentation/ABI/testing/sysfs-devices-system-cpu
+index f3d5817..bd3a88e 100644
+--- a/Documentation/ABI/testing/sysfs-devices-system-cpu
++++ b/Documentation/ABI/testing/sysfs-devices-system-cpu
+@@ -373,3 +373,19 @@ Contact:   Linux kernel mailing list <linux-kernel@vger.kernel.org>
+ Description:   information about CPUs heterogeneity.
+ 
+                cpu_capacity: capacity of cpu#.
++
++What:          /sys/devices/system/cpu/vulnerabilities
++               /sys/devices/system/cpu/vulnerabilities/meltdown
++               /sys/devices/system/cpu/vulnerabilities/spectre_v1
++               /sys/devices/system/cpu/vulnerabilities/spectre_v2
++Date:          Januar 2018
++Contact:       Linux kernel mailing list <linux-kernel@vger.kernel.org>
++Description:   Information about CPU vulnerabilities
++
++               The files are named after the code names of CPU
++               vulnerabilities. The output of those files reflects the
++               state of the CPUs in the system. Possible output values:
++
++               "Not affected"    CPU is not affected by the vulnerability
++               "Vulnerable"      CPU is affected and no mitigation in effect
++               "Mitigation: $M"  CPU is affetcted and mitigation $M is in effect
+
+
+
+============================
+
+commit b8b9ce4b5aec8de9e23cabb0a26b78641f9ab1d6
+Author: Thomas Gleixner <tglx@linutronix.de>
+Date:   Sun Jan 14 22:13:29 2018 +0100
+
+    x86/retpoline: Remove compile time warning
+    
+    Remove the compile time warning when CONFIG_RETPOLINE=y and the compiler
+    does not have retpoline support. Linus rationale for this is:
+    
+      It's wrong because it will just make people turn off RETPOLINE, and the
+      asm updates - and return stack clearing - that are independent of the
+      compiler are likely the most important parts because they are likely the
+      ones easiest to target.
+    
+      And it's annoying because most people won't be able to do anything about
+      it. The number of people building their own compiler? Very small. So if
+      their distro hasn't got a compiler yet (and pretty much nobody does), the
+      warning is just annoying crap.
+    
+      It is already properly reported as part of the sysfs interface. The
+      compile-time warning only encourages bad things.
+
+
+
+
+================
+commit 40548c6b6c134275c750eb372dc2cf8ee1bbc3d4
+Merge: 2c1cfa4 99a9dc9
+Author: Linus Torvalds <torvalds@linux-foundation.org>
+Date:   Sun Jan 14 09:51:25 2018 -0800
+
+    Merge branch 'x86-pti-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+    
+    Pull x86 pti updates from Thomas Gleixner:
+     "This contains:
+    
+       - a PTI bugfix to avoid setting reserved CR3 bits when PCID is
+         disabled. This seems to cause issues on a virtual machine at least
+         and is incorrect according to the AMD manual.
+    
+       - a PTI bugfix which disables the perf BTS facility if PTI is
+
+
+==================
+git log 
+
+       - the initial spectre_v2 mitigations, aka retpoline:
+    
+          + The necessary ASM thunk and compiler support
+    
+          + The ASM variants of retpoline and the conversion of affected ASM
+            code
+    
+          + Make LFENCE serializing on AMD so it can be used as speculation
+            trap
+    
+          + The RSB fill after vmexit
+    
+       - initial objtool support for retpoline
+
+
+https://www.cyberciti.biz/faq/check-linux-server-for-spectre-meltdown-vulnerability/
+https://www.unixarena.com/2018/01/fix-meltdown-spectre-vulnerabilities-redhat-linux.html
+https://www.unixarena.com/2018/01/meltdown-spectre-vulnerabilities-big-threat.html
+
+
+Here is the list of three discovered variants:
+
+    Variant 1: bounds check bypass (CVE-2017-5753) – a.k.a. Spectre
+    Variant 2: branch target injection (CVE-2017-5715) – a.k.a. Spectre
+    Variant 3: rogue data cache load (CVE-2017-5754) – a.k.a. Meltdown
+
+
+Specre: 
+Paul Turner of Google has posted some "request for comments" patches on a "Retpoline" implementation for the Linux kernel. The Retpoline patches are intended for fending off Spectre, the attack that breaks isolation between different applications. Unfortunately the Retpoline patching does add an additional cost to the kernel performance with the overall overhead being reported up to a 1.5% range
+
+There are also GCC compiler patches needed too for dealing with retpoline patches. Currently those patches are not yet mainline but can be found here. The work includes adding new -mindirect-branch=thunk, -mindirect-branch-loop, -mfunction-return and -mno-indirect-branch-register options.
+
+Andi Kleen of Intel meanwhile has posted another series for avoiding speculative indirect calls within the kernel to avoid side-channel attacks leaking arbitrary kernel data. These patches also rely upon the new GCC patches as well. There are no performance numbers there yet on the impact.
+
+
+Further testing has uncovered problems with the microcode provided along with the “Spectre” CVE-2017-5715 mitigation that could lead to system instabilities. As a result, Red Hat is providing a microcode update that reverts to the last known and tested microcode version dated before 03 January 2018 and does not address “Spectre” CVE-2017-5715. In order to mitigate “Spectre” CVE-2017-5715 fully, Red Hat strongly recommends that customers contact their hardware provider for the latest microprocessor firmware updates.
+
+“Meltdown breaks the most fundamental isolation between user applications and the operating system. This attack allows a program to access the memory, and thus also the secrets, of other programs and the operating system. If your computer has a vulnerable processor and runs an unpatched operating system, it is not safe to work with sensitive information without the chance of leaking the information.
+
+
+“Spectre breaks the isolation between different applications. It allows an attacker to trick error-free programs, which follow best practices, into leaking their secrets. In fact, the safety checks of said best practices actually increase the attack surface and may make applications more susceptible to Spectre”
+
+
+What are the processors affected by Meltdown? 
+
+Most of the intel process is affected by meltdown which is manufactured after 1995.  AMD hasn’t confirmed the Meltdown vulnerability for their processors. Some of the ARM processors also exposed to meltdown. IBM Power 7, Power 8  and Power 9 also affected. Check out IBM knowledge article to mitigate the risk on Power environment.
+What are the processors affected by Spectre? 
+
+Almost every system is affected by Spectre: Desktops, Laptops, Cloud Servers, as well as Smartphones. More specifically, all modern processors capable of keeping many instructions in flight are potentially vulnerable. In particular, we have verified Spectre on Intel, AMD, and ARM processors.
+
+
+How to mitigate the risk?
+
+Complete mitigation of this vulnerability for any Systems involves installing patches to both system firmware and operating systems. The firmware patch provides partial remediation to these vulnerabilities and is a pre-requisite for the OS patch to be effective.  You must target the internet facing servers first. But remember that, these new OS patches and firmware upgrade might reduce the system performance by 30%. Do the extensive testing before moving to production.
+
+
+Fix in kernel 
+
+1) meltdown 
+   x86 
+    after being left out of the loop, Linux developers are making significant progress on patches, even if they're not particularly happy about being put in this position. The latest update of the stable Linux kernel (4.14.13) includes patches designed to mitigate Meltdown with Kernel Page Table Isolation (KPTI).
+   arm (v1 v2 v3) 
+   More comprehensive patches (including fixes for ARM64 processors) will be available in 4.15, scheduled for release in two weeks.  
+   https://git.kernel.org/pub/scm/linux/kernel/git/arm64/linux.git/log/?h=kpti
+   arm affection
+   https://developer.arm.com/support/security-update
+
+2)spectre 
+
+ greatest 
+ https://blog.barkly.com/meltdown-spectre-patches-list-windows-update-help
+ https://wiki.ubuntu.com/SecurityTeam/KnowledgeBase/SpectreAndMeltdown/TechFAQ
+
+
+great status 
+https://www.unixarena.com/2018/01/meltdown-spectre-vulnerabilities-big-threat.html -----> check ubuntu 
+
+great status II
+https://blog.barkly.com/meltdown-spectre-patches-list-windows-update-help
+
+great status III
+https://github.com/hannob/meltdownspectre-patches
+
+
+greatest 
+https://unix.stackexchange.com/questions/414786/how-to-mitigate-the-spectre-and-meltdown-vulnerabilities-on-linux-systems
+"Those wanting to disable the Retpoline support can boot the patched kernels with noretpoline."
+
+redhat update
+https://access.redhat.com/solutions/3307851
+
+packages affected 
+https://github.com/hatsari/ansible-role-Update_linux_to_prevent_meltdown
+https://alpaca0984.github.io/2018/01/09/Against-the-Meltdown-and-Spectre-for-RHEL/
+
+qemu affection 
+https://www.qemu.org/2018/02/14/qemu-2-11-1-and-spectre-update/
+https://github.com/speed47/spectre-meltdown-checker/issues/65
+https://access.redhat.com/solutions/3307851
+
+https://github.com/speed47/spectre-meltdown-checker/issues/65
+i386
+http://lists.nongnu.org/archive/html/qemu-devel/2018-01/msg04214.html
+http://lists.nongnu.org/archive/html/qemu-devel/2018-01/msg04213.html
+
+kvm affection 
+https://marc.info/?l=kvm&m=151543506500957&w=2
+https://github.com/speed47/spectre-meltdown-checker/issues/65
+
+https://access.redhat.com/solutions/3307851
+
+questions 
+https://www.unixarena.com/2018/01/meltdown-spectre-vulnerabilities-big-threat.html
+
+
+update  microcode
+https://www.cyberciti.biz/faq/check-linux-server-for-spectre-meltdown-vulnerability/
+https://www.pcsuggest.com/update-cpu-microcode-in-linux/  usage
+https://wiki.archlinux.org/index.php/microcode
+
+
+from phoronix 
+https://www.phoronix.com/scan.php?page=news_item&px=Spectre-Meltdown-More-For-4.16
+Spectre & KPTI Get More Fixes In Linux 4.16, Offsets Some KVM Performance Losses
+
+
+https://www.phoronix.com/scan.php?page=news_item&px=Linux-4.14-4.15-ARM64-KPTI
+Today's Linux 4.14.20 and 4.15.4 kernels include the back-ported KPTI support after the work originally landed upstream in Linux 4.16. KPTI is for addressing the Meltdown CPU vulnerability on the ARM processors affected. KPTI is needed by 64-bit ARM SoCs except for the Broadcom Vulcan / Cavium Thunder X2 processors are white-listed. With Linux 4.16 there is also Spectre mitigation too, but that work doesn't seem to be back-ported to these current releases. 
+
+https://www.phoronix.com/scan.php?page=news_item&px=ARM-Spectre-Meltdown-Backport
+Will Deacon of ARM Holdings sent in a Git pull request to Greg KH for getting their Spectre and Meltdown mitigations into the Linux 4.15 stable tree. Another developer meanwhile is working on getting this code backported to Linux 4.14.
+
+Normally backports of invasive work aren't permitted to stable trees, but as we've seen with the x86 Spectre/Meltdown mitigation, given the severity and high impact, the stable trees have seen a lot of additional churn over the past month.
+
+https://www.phoronix.com/scan.php?page=news_item&px=Clear-Linux-Retpoline-KPTI
+Clear Linux 20240 is the rolling-release distribution's latest update today that takes care of Meltdown and Spectre protection. The Meltdown protection comes with pulling in the Linux 4.14.12 kernel and enabling the CONFIG_PAGE_TABLE_ISOLATION Kconfig switch for KPTI support. 
+
+lyang001@pek-lyang0-d1:~/WORK/trees/linux-stable$ git tag --contains 385ce0ea4
+v4.15
+v4.15-rc6   ------------------> first time introduced 
+v4.15-rc7
+v4.15-rc8
+v4.15-rc9
+v4.15.1
+v4.15.2
+v4.15.3
+v4.15.4
+v4.15.5
+v4.16-rc1
+v4.16-rc2
+
+
+https://www.phoronix.com/scan.php?page=article&item=linux-kpti-pcid&num=1
+ PCID the PCID (Process Context Identifier) support in the Linux kernel that is used to lessen the impact of KPTI. It need hardware support 
+ And of course for marking Intel CPUs as "cpu_insecure" via /proc/cpuinfo
+
+
+With PostgreSQL, Linux 4.14 overall is the fastest in this databsse benchmark and this is one of the I/O workloads where Kernel Page Table Isolation does cause a performance increase. But the relative performance for the three tested kernels with KPTI on/off were about the same with no significantly different performance out of the older kernels lacking PCID optimizations.
+
+
+ dmesg |grep "table pages" to check "KPTI is on/off"
+
+
+https://news.ycombinator.com/item?id=16094349
+others +1 yes, pcid makes a big improvement (I've been testing the KPTI patches with and without pcid).
+https://askubuntu.com/questions/992137/how-to-check-that-kpti-is-enabled-on-my-ubuntu
+
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb cat_l3 cdp_l3 invpcid_single pti intel_ppin intel_pt mba tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm cqm mpx rdt_a avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts hwp hwp_act_window hwp_epp hwp_pkg_req pku ospke
+bugs		: cpu_meltdown
+bogomips	: 3200.00
+clflush size	: 64
+cache_alignment	: 64
+
+
+When support 
+https://stackoverflow.com/questions/20155304/does-linux-use-x86-cpus-pcid-feature-for-tlb-if-not-why
+vim arch/x86/include/asm/cpufeatures.h
+
+ */
+#define X86_BUG_ESPFIX                  X86_BUG(9) /* "" IRET to 16-bit SS corrupts ESP/RSP high bits */
+#endif
+#define X86_BUG_NULL_SEG                X86_BUG(10) /* Nulling a selector preserves the base */
+#define X86_BUG_SWAPGS_FENCE            X86_BUG(11) /* SWAPGS without input dep on GS */
+#define X86_BUG_MONITOR                 X86_BUG(12) /* IPI required to wake up remote CPU */
+#define X86_BUG_AMD_E400                X86_BUG(13) /* CPU is among the affected by Erratum 400 */
+#define X86_BUG_CPU_MELTDOWN            X86_BUG(14) /* CPU is affected by meltdown attack and needs kernel page table isolation */
+#define X86_BUG_SPECTRE_V1              X86_BUG(15) /* CPU is affected by Spectre variant 1 attack with conditional branches */
+#define X86_BUG_SPECTRE_V2              X86_BUG(16) /* CPU is affected by Spectre variant 2 attack with indirect branches */
+
+
+Documentation/ABI/testing/sysfs-devices-system-cpu
+What:           /sys/devices/system/cpu/vulnerabilities
+                /sys/devices/system/cpu/vulnerabilities/meltdown
+                /sys/devices/system/cpu/vulnerabilities/spectre_v1
+                /sys/devices/system/cpu/vulnerabilities/spectre_v2
+Date:           January 2018
+Contact:        Linux kernel mailing list <linux-kernel@vger.kernel.org>
+Description:    Information about CPU vulnerabilities
+
+                The files are named after the code names of CPU
+                vulnerabilities. The output of those files reflects the
+                state of the CPUs in the system. Possible output values:
+
+                "Not affected"    CPU is not affected by the vulnerability
+                "Vulnerable"      CPU is affected and no mitigation in effect
+                "Mitigation: $M"  CPU is affected and mitigation $M is in effect
+
+from 
+
+commit 87590ce6e373d1a5401f6539f0c59ef92dd924a9
+Author: Thomas Gleixner <tglx@linutronix.de>
+Date:   Sun Jan 7 22:48:00 2018 +0100
+
+    sysfs/cpu: Add vulnerability folder
+    
+    As the meltdown/spectre problem affects several CPU architectures, it makes
+    sense to have common way to express whether a system is affected by a
+    particular vulnerability or not. If affected the way to express the
+    mitigation should be common as well.
+    
+    Create /sys/devices/system/cpu/vulnerabilities folder and files for
+    meltdown, spectre_v1 and spectre_v2.
+    
+    Allow architectures to override the show function.
+    
+    Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+    Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+    Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+    Cc: Peter Zijlstra <peterz@infradead.org>
+    Cc: Will Deacon <will.deacon@arm.com>
+    Cc: Dave Hansen <dave.hansen@intel.com>
+    Cc: Linus Torvalds <torvalds@linuxfoundation.org>
+    Cc: Borislav Petkov <bp@alien8.de>
+    Cc: David Woodhouse <dwmw@amazon.co.uk>
+    Link: https://lkml.kernel.org/r/20180107214913.096657732@linutronix.d
+
+
+
+commit cba4671af7550e008f7a7835f06df0763825bf3e
+Author: Andy Lutomirski <luto@kernel.org>
+Date:   Thu Jun 29 08:53:19 2017 -0700
+
+    x86/mm: Disable PCID on 32-bit kernels
+    
+    32-bit kernels on new hardware will see PCID in CPUID, but PCID can
+    only be used in 64-bit mode.  Rather than making all PCID code
+    conditional, just disable the feature on 32-bit builds.
+    
+    Signed-off-by: Andy Lutomirski <luto@kernel.org>
+    Reviewed-by: Nadav Amit <nadav.amit@gmail.com>
+    Reviewed-by: Borislav Petkov <bp@suse.de>
+    Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
+    Cc: Andrew Morton <akpm@linux-foundation.org>
+    Cc: Arjan van de Ven <arjan@linux.intel.com>
+    Cc: Borislav Petkov <bp@alien8.de>
+    Cc: Dave Hansen <dave.hansen@intel.com>
+    Cc: Linus Torvalds <torvalds@linux-foundation.org>
+    Cc: Mel Gorman <mgorman@suse.de>
+    Cc: Peter Zijlstra <peterz@infradead.org>
+    Cc: Rik van Riel <riel@redhat.com>
+    Cc: linux-mm@kvack.org
+    Link: http://lkml.kernel.org/r/2e391769192a4d31b808410c383c6bf0734bc6ea.1498751203.git.luto@kernel.org
+    Signed-off-by: Ingo Molnar <mingo@kernel.org>
+
+./Documentation/admin-guide/kernel-parameters.txt
+        pti=            [X86_64] Control Page Table Isolation of user and
+                        kernel address spaces.  Disabling this feature
+                        removes hardening, but improves performance of
+                        system calls and interrupts.
+
+                        on   - unconditionally enable
+                        off  - unconditionally disable
+                        auto - kernel detects whether your CPU model is
+                               vulnerable to issues that PTI mitigates
+
+                        Not specifying this option is equivalent to pti=auto.
+
+        nopti           [X86_64]
+                        Equivalent to pti=off
+
+
+arm:
+
+lyang001@pek-lyang0-d1:~/WORK/trees/linux$ git show 0ba2e29c7fc1d58a90fab614d41bf487e28e3840
+commit 0ba2e29c7fc1d58a90fab614d41bf487e28e3840
+Author: Jayachandran C <jnair@caviumnetworks.com>
+Date:   Fri Jan 19 04:22:48 2018 -0800
+
+    arm64: Turn on KPTI only on CPUs that need it
+    
+    Whitelist Broadcom Vulcan/Cavium ThunderX2 processors in
+    unmap_kernel_at_el0(). These CPUs are not vulnerable to
+    CVE-2017-5754 and do not need KPTI when KASLR is off.
+    
+    Acked-by: Will Deacon <will.deacon@arm.com>
+    Signed-off-by: Jayachandran C <jnair@caviumnetworks.com>
+    Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
+
+when to enable PCID (Process-Context Identifiers)
+https://stackoverflow.com/questions/20155304/does-linux-use-x86-cpus-pcid-feature-for-tlb-if-not-why
+it requires hardware and kernel support 
+great status
+========================================================================================================================================
+http://forum.notebookreview.com/threads/cpu-vulnerabilities-meltdown-and-spectre-kernel-page-table-isolation-patches-and-more.812424/
+https://www.techarp.com/articles/meltdown-spectre-cpu-flaws/
+http://kroah.com/log/blog/2018/01/06/meltdown-status/  vdso issue
+http://kroah.com/log/blog/2018/01/19/meltdown-status-2/
+
+
+gettimeoftoday
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_MRG/1.3/html/Realtime_Tuning_Guide/sect-Realtime_Tuning_Guide-General_System_Tuning-gettimeofday_speedup.html
+
+meltdown chinese codes 
+https://github.com/21cnbao/meltdown-example
+
+
+actions add test_**vdeso.c
+
+
+nospectre_v2 
+
+
+#
+The backporting of -mindirect-branch, -mindirect-return and -mindirect-branch-register, a.k.a. the GCC "Retpoline" patches, have been back-ported and merged into the GCC 7 branch. 
+There's been talk of these functions being back-ported all the way to GCC 4.x releases, but as of writing only the back-port has happened for GCC 7.x with no work merged in the GCC 4/5/6 branches, but if that happens we'll of course update. I currently have some GCC 8.0.1 benchmarks coming looking at the impact of -mindirect-branch=thunk for user-space applications rather than just the kernel Retpoline benchmarks.
+
+
+==========
+commit f19fbd5ed642dc31c809596412dab1ed56f2f156
+Author: Martin Schwidefsky <schwidefsky@de.ibm.com>
+Date:   Fri Jan 26 12:46:47 2018 +0100
+
+    s390: introduce execute-trampolines for branches
+    
+    Add CONFIG_EXPOLINE to enable the use of the new -mindirect-branch= and
+    -mfunction_return= compiler options to create a kernel fortified against
+    the specte v2 attack.
+    
+    With CONFIG_EXPOLINE=y all indirect branches will be issued with an
+    execute type instruction. For z10 or newer the EXRL instruction will
+    be used, for older machines the EX instruction. The typical indirect
+    call
+    
+        basr    %r14,%r1
+    
+    is replaced with a PC relative call to a new thunk
+    
+        brasl   %r14,__s390x_indirect_jump_r1
+    
+    The thunk contains the EXRL/EX instruction to the indirect branch
+    
+    __s390x_indirect_jump_r1:
+        exrl    0,0f
+        j       .
+    0:  br      %r1
+    
+    The detour via the execute type instruction has a performance impact.
+    To get rid of the detour the new kernel parameter "nospectre_v2" and
+    "spectre_v2=[on,off,auto]" can be used. If the parameter is specified
+    the kernel and module code will be patched at runtime.
+    
+    Signed-off-by: Martin Schwidefsky <schwidefsky@de.ibm.com>
+
+
+
+For one thing, Retpoline does not work on Intel Skylake processors. More importantly, it requires that code be recompiled in order to "immunize" it. While recompiling the kernel with Retpoline is one thing, updating every userspace application is anything but a quick fix. As this FAQ on the Ubuntu Wiki puts it, "until every piece of code on a system is rebuilt with retpoline the kernel must use microcode-based mitigations to protect userspace." In other words, Retpoline isn't a complete substitution for applying microcode updates — yet.
+
+
+performance impact
+https://forum.manjaro.org/t/meltdown-kpti-performance-benchmarks-and-results/37999
+
+
+enable and disable 
+https://access.redhat.com/articles/3311301
+
+
+commit dd84441a797150dcc49298ec95c459a8891d8bb1
+Author: David Woodhouse <dwmw@amazon.co.uk>
+Date:   Mon Feb 19 10:50:54 2018 +0000
+
+    x86/speculation: Use IBRS if available before calling into firmware
+    
+    Retpoline means the kernel is safe because it has no indirect branches.
+    But firmware isn't, so use IBRS for firmware calls if it's available.
+    
+    Block preemption while IBRS is set, although in practice the call sites
+    already had to be doing that.
+    
+    Ignore hpwdt.c for now. It's taking spinlocks and calling into firmware
+    code, from an NMI handler. I don't want to touch that with a bargepole.
+    
+    Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+    Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
+    Cc: Linus Torvalds <torvalds@linux-foundation.org>
+    Cc: Peter Zijlstra <peterz@infradead.org>
+    Cc: arjan.van.de.ven@intel.com
+    Cc: bp@alien8.de
+    Cc: dave.hansen@intel.com
+    Cc: jmattson@google.com
+    Cc: karahmed@amazon.de
+    Cc: kvm@vger.kernel.org
+    Cc: pbonzini@redhat.com
+    Cc: rkrcmar@redhat.com
+    Link: http://lkml.kernel.org/r/1519037457-7643-2-git-send-email-dwmw@amazon.co.uk
+    Signed-off-by: Ingo Molnar <mingo@kernel.org>
+
+commit d1c99108af3c5992640aa2afa7d2e88c3775c06e
+
+
+
+ IBRS (Indirect Branch Restricted Speculation) support on Skylake and use it by default rather than Retpoline.
+
+
+commit 15d45071523d89b3fb7372e2135fbd72f6af9506
+Author: Ashok Raj <ashok.raj@intel.com>
+Date:   Thu Feb 1 22:59:43 2018 +0100
+
+    KVM/x86: Add IBPB support
+    
+    The Indirect Branch Predictor Barrier (IBPB) is an indirect branch
+    control mechanism. It keeps earlier branches from influencing
+    later ones.
+    
+    Unlike IBRS and STIBP, IBPB does not define a new mode of operation.
+    It's a command that ensures predicted branch targets aren't used after
+    the barrier. Although IBRS and IBPB are enumerated by the same CPUID
+    enumeration, IBPB is very different.
+    
+    IBPB helps mitigate against three potential attacks:
+    
+    * Mitigate guests from being attacked by other guests.
+      - This is addressed by issing IBPB when we do a guest switch.
+    
+    * Mitigate attacks from guest/ring3->host/ring3.
+      These would require a IBPB during context switch in host, or after
+      VMEXIT. The host process has two ways to mitigate
+      - Either it can be compiled with retpoline
+      - If its going through context switch, and has set !dumpable then
+        there is a IBPB in that path.
+        (Tim's patch: https://patchwork.kernel.org/patch/10192871)
+      - The case where after a VMEXIT you return back to Qemu might make
+        Qemu attackable from guest when Qemu isn't compiled with retpoline.
+      There are issues reported when doing IBPB on every VMEXIT that resulted
+      in some tsc calibration woes in guest.
+
+
+
+1)
+spectre v1 bugs
+
+https://www.phoronix.com/scan.php?page=news_item&px=Spectre-Variant-One-Linux-4.16
+https://www.phoronix.com/scan.php?page=news_item&px=Spectre-v1-IBPB-Linux-4.16-Pull
+
+2)
+https://www.phoronix.com/scan.php?page=news_item&px=Retpoline-v5-Published
+
+
+3)benchmark impact
+https://www.phoronix.com/scan.php?page=news_item&px=Q1-2018-Most-Exciting 
+https://www.phoronix.com/scan.php?page=article&item=linux-retpoline-benchmarks&num=5
+https://wiki.ubuntu.com/SecurityTeam/KnowledgeBase/SpectreAndMeltdown/PublishedApplicationData great
+
+4)
+https://lwn.net/Articles/744287/
+
+skylake patches 
+https://www.phoronix.com/scan.php?page=news_item&px=RETPOLINE_UNDERFLOW

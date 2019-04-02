@@ -41,6 +41,7 @@ make x86_64_defconfig && make bzImage
 make modules
 make modules INSTALL_MOD_PATH=xx
 
+make CROSS_COMPILE=/usr/bin/arm-linux-gnueabi- oldconfig
 [lyang0@pek-lpgbuild8 delme]$ ./xx.sh 
 /buildarea1/lyang0/delme/xx.sh
 [lyang0@pek-lpgbuild8 delme]$ cat xx.sh 

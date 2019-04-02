@@ -1,0 +1,70 @@
+make[1]: Entering directory `/home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/capabilities'
+gcc -O2 -g -std=gnu99 -Wall    test_execve.c -lcap-ng -lrt -ldl -o /home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/capabilities/test_execve
+test_execve.c:3:20: fatal error: cap-ng.h: No such file or directory
+ #include <cap-ng.h>
+                    ^
+compilation terminated.
+
+
+make[1]: Entering directory `/home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/memfd'
+gcc -D_FILE_OFFSET_BITS=64 -I../../../../include/uapi/ -I../../../../include/ -I../../../../usr/include/    fuse_mnt.c  -o /home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/memfd/fuse_mnt
+fuse_mnt.c:16:18: fatal error: fuse.h: No such file or directory
+ #include <fuse.h>
+                  ^
+compilation terminated.
+
+
+make[1]: Entering directory `/home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/mqueue'
+gcc -O2    mq_open_tests.c -lrt -lpthread -lpopt -o /home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/mqueue/mq_open_tests
+/usr/bin/ld: cannot find -lpopt
+collect2: error: ld returned 1 exit status
+
+sudo apt-get install libfuse-dev libcap-ng-dev libpopt-dev
+
+
+fix
+make[1]: Entering directory `/home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/sync'
+gcc -c sync.c -o /home/lyang001/WORK/trees/linux-kselftest-2/tools/testing/selftests/sync/sync.o
+sync.c:42:29: fatal error: linux/sync_file.h: No such file or directory
+ #include <linux/sync_file.h>
+                             ^
+compilation terminated.
+
+
+zu
+memfd_test.c:517:3: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘size_t’ [-Wformat=]
+   printf("malloc(%d) failed: %m\n", mfd_def_size * 8);
+   ^
+memfd_test.c: In function ‘mfd_fail_grow_write’:
+memfd_test.c:537:3: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘size_t’ [-Wformat=]
+   printf("malloc(%d) failed: %m\n", mfd_def_size * 8);
+
+
+dmaengine: at_xdmac: Fix compilation warning.
+ Replace '%d' by '%zu' to fix the following compilation warning:
+
+
+
+
+
+wrsadmin@pek-lyang0-u17:~/WORK/linux-kselftest/tools/testing/selftests/net$ make 
+gcc -Wall -Wl,--no-as-needed -O2 -g -I../../../../usr/include/    reuseport_bpf.c  -o /home/wrsadmin/WORK/linux-kselftest/tools/testing/selftests/net/reuseport_bpf
+gcc -Wall -Wl,--no-as-needed -O2 -g -I../../../../usr/include/    reuseport_bpf_cpu.c  -o /home/wrsadmin/WORK/linux-kselftest/tools/testing/selftests/net/reuseport_bpf_cpu
+gcc -Wall -Wl,--no-as-needed -O2 -g -I../../../../usr/include/  -lnuma  reuseport_bpf_numa.c  -o /home/wrsadmin/WORK/linux-kselftest/tools/testing/selftests/net/reuseport_bpf_numa
+reuseport_bpf_numa.c:23:18: fatal error: numa.h: No such file or directory
+ #include <numa.h>
+                  ^
+compilation terminated.
+libnuma-dev
+
+
+
+gcc -Wall -I ../../../../usr/include     mlock-random-test.c -lrt -lcap -o /home/wrsadmin/WORK/linux-kselftest/tools/testing/selftests/vm/mlock-random-test
+mlock-random-test.c:7:28: fatal error: sys/capability.h: No such file or directory
+ #include <sys/capability.h>
+                            ^
+compilation terminated.
+../lib.mk:106: recipe for target '/home/wrsadmin/WORK/linux-kselftest/tools/testing/selftests/vm/mlock-random-test' failed
+
+
+sudo libcap-dev

@@ -1,0 +1,72 @@
+Hi Lei,
+
+Here is the notes I got from Paul G. The idea is use git rev-list to printo=
+ut a list of commits id in arch/powerpc/kvm and arch/powerpc/include/asm/kv=
+m* which is new to v3.5-rc1. Once I have the list, I use helper function gi=
+t-cextract to retriever patches.=20
+
+I am no expert in git, so I manually git-am each patch into a clean v3.4 di=
+rectory. If the patch failed, use helper script wig to automatic fix the pa=
+tch. Or, sometime manually fix the patch. Once all the patch is applied to =
+v3.4. Use git format-patch to retrieve the fixed patches.
+
+Following is the complete list of comments which Paul G did for me couple a=
+ day ago. You may want to use it as a reference.
+
+Hope it helps.
+
+Thank you,
+Thomas
+
+# helper scripts from Paul G
+scp <your_id>@128.224.146.68:/folk/ttai/bin/git-cextract
+scp <your_id>@128.224.146.68:/folk/ttai/bin/dr
+scp <your_id>@128.224.146.68:/folk/ttai/bin/am
+scp <your_id>@128.224.146.68:/folk/ttai/bin/amr
+scp <your_id>@128.224.146.68:/folk/ttai/bin/wig
+
+# We assume the changes is in arch/powerpc/kvm and arch/powerpc/include/asm=
+/kvm*
+# use git whatchanged to quick peek all commits that is not in v3.4 but is =
+in v3.5-rc1
+
+git whatchanged ^v3.4 v3.5-rc1 arch/powerpc/kvm arch/powerpc/include/asm/kv=
+m*
+
+# use git rev-list to get a list of commmits that is not in v3.4 but is in =
+v3.5-rc1
+git rev-list --no-merges ^v3.4 v3.5-rc1 arch/powerpc/kvm arch/powerpc/inclu=
+de/asm/kvm*
+              
+
+# we want the list in reverse order and pipe into a file x
+git rev-list --no-merges ^v3.4 v3.5-rc1 arch/powerpc/kvm arch/powerpc/inclu=
+de/asm/kvm* |tac > x
+
+# use the helper script git-cextract to extract the patch series
+rm -rf z ; mkdir  z ; for i in `cat /tmp/x ` ; do git cextract $i ; echo 0*=
+patch >> z/series ; mv 0*patch z ; done
+
+# we have a list of patches and the series file to keep the series of the f=
+ile name
+ls z
+cat z/series
+
+# put all the patches into a single file
+rm -rf /tmp/mbox ; for i in `cat z/series ` ; do cat z/$i >> /tmp/mbox ; do=
+ne
+
+# switch over to a clean v3.4 and git am the mbox
+git am /tmp/mbox
+
+# if you hit problem, wig can be use to fix the problem.=20
+# use helper functions to apply git am the patch.
+# dr - dry run to test the patch in .git/rebaser-apply/patch
+# am - apply the patch in .git/rebaser-apply/patch
+# amr - git am the applied patch=20
+
+
+One of the
+> best ways for a person to help remember it is to help teach another
+> person.   You can keep me on the to/cc list and I can jump in to
+> help clarify things if need be.                                                                                   

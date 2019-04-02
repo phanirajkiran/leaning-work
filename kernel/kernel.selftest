@@ -2,3 +2,5 @@ mkdir /tmp/install_dir
 ./kselftest_install.sh /tmp/install_dir
 
 ./gen_kselftest_tar.sh tarbz2
+
+https://blogs.s-osg.org/kselftest-linux-4-14-adds-support-test-object-relocation/

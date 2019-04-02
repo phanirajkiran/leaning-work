@@ -51,3 +51,41 @@ lyang001@pek-lyang0-d1:~/lava-dockers/lava-docker$ git remote -v
 origin	https://github.com/kernelci/lava-docker.git (fetch)
 origin	https://github.com/kernelci/lava-docker.git (push)
 
+
+
+4) young's 
+lyang001@pek-lyang0-d1:~/lava-dockers/lava-docker-wrs$ git remote -v 
+origin	https://github.com/ywangwrs/lava-base.git (fetch)
+origin	https://github.com/ywangwrs/lava-base.git (push)
+sudo docker run -it -p 69:69 -p 80:80 -p 2022:22 -h lava-server --privileged 741be8c4bd52
+
+5)
+lyang001@pek-lyang0-d1:~/lava-dockers/lava-docker-v2$ sudo docker run -it -p 69:69 -p 80:80 -p 2022:22 -h lava-server --privileged e2784b614365
+Starting postgresql
+Starting PostgreSQL 9.6 database server: main.
+Starting apache2
+Starting Apache httpd web server: apache2AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.17.0.20. Set the 'ServerName' directive globally to suppress this message
+.
+Starting lava-server
+Starting lava-server manage scheduler : lava-daemon.
+Starting lava-master
+Starting lava-server manage dispatcher-master : lava-master.
+Starting lava-coordinator
+Starting lava-coordinator : lava-coordinato.
+Starting lava-slave
+Starting lava-slave : lava-slave.
+Starting lava-server-gunicorn
+Starting lava-server gunicorn wsgi support : lava-server-gunicorn.
+Starting tftpd-hpa
+Starting HPA's tftpd: in.tftpd.
+Waiting for lavaserver database to be active
+.....
+[ ok ] LAVA server ready
+Reloading Apache httpd web server: apache2.
+n51sp8jy3mug33eiss9coibqw9au1bgmhqzj3trfeyn82s1300z9y6y7wt5eqpnja66etghy0ic1bkglfhwemgs2o8nb8m28pn1aqhkdyeb2tsuskotalelmafy6j40s
+root@lava-server:/# exit 
+exit
+lyang001@pek-lyang0-d1:~/lava-dockers/lava-docker-v2$ git branch 
+* kernelci-v2
+  master
+

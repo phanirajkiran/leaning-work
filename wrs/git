@@ -1,0 +1,18 @@
+git add
+
+git commit
+Update bts case: There is subcase_error in bts testing log if case failed.
+
+Issue: LTAF9-989
+
+
+/lpg-build/cdc/fast_prod/wrlinux80/WRL80_GIT/bin/wrgit rr
+
+/lpg-build/cdc/fast_prod/wrlinux80/WRL80_GIT/bin/wrgit send-email --compose --subject "[Review request] Add extra_key when creating spreadsheet used by WASSP" \
+--to Xiangyu.Dong@windriver.com \
+--to Chi.Xu@windriver.com \
+--to Jian.Kang@windriver.com \
+--cc lpd-eng-tr@windriver.com \
+/tmp/wrgit-rr.gKchXLRzEu/0001-Add-extra_key-when-creating-spreadsheet-used-by-WASS.patch
+
+

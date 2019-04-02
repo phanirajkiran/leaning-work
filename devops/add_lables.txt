@@ -1,0 +1,9 @@
+{
+    "update": {
+        "labels": [
+            {
+                "add": "TEST"
+            }
+        ]
+    }
+}

@@ -1,0 +1,81 @@
+TEST_TARGET = "IntelshumwayTarget"
+BARCODE="22025"
+TEST_POWERCONTROL_CMD = "/folk/vlm/commandline/vlmTool reboot -s amazon -t ${BARCODE}"
+TEST_SERIALCONTROL_CMD = "telnet 128.224.164.92 2003"
+INHERIT += "testimage"
+TEST_TARGET_IP = "128.224.179.129"
+TEST_SERVER_IP = "128.224.179.220"
+
+import socket
+import os
+import bb
+import time
+import subprocess
+import sys
+import getpass
+
+import oeqa.utils.sshcontrol as sshcontrol
+from oeqa.controllers.masterimage import MasterImageHardwareTarget
+class IntelshumwayTarget(MasterImageHardwareTarget):
+
+
+
+    def __init__(self, d):
+        super(IntelshumwayTarget, self).__init__(d)
+
+        self.barcode=d.getVar("BARCODE", True)
+        self.powercontrol_cmd = "/folk/vlm/commandline/vlmTool reboot -s amazon -t {}".format(self.barcode)
+        _user=getpass.getuser()
+        home_dir="/folk/{}".format(_user) 
+        self.new_kernel,self.new_rootfs="/folk/{}/kernel_{}".format(_user,os.getpid()),"/folk/{}/rootfs_{}".format(_user,os.getpid())
+        os.system("rm -rf {} {}".format(self.new_kernel,self.new_rootfs))
+        os.system("cp {} {}".format(self.kernel,self.new_kernel))
+        os.system("cp {} {}".format(self.rootfs,self.new_rootfs))
+        upload_kernel='/folk/vlm/commandline/vlmTool copyFile -s amazon -t {}  -k {}'.format(self.barcode,self.new_kernel)
+        upload_rootfs='/folk/vlm/commandline/vlmTool copyFile -s amazon -t {}  -r {}'.format(self.barcode,self.new_rootfs)
+        bb.plain("deploy kernel and rootfs on target {}".format(self.barcode))
+        bb.plain(upload_kernel)
+        bb.plain(upload_rootfs)
+        self.deploy_cmds = [
+                upload_kernel,
+                upload_rootfs,
+                ]
+
+
+        if not self.serialcontrol_cmd:
+            bb.fatal("This TEST_TARGET needs a TEST_SERIALCONTROL_CMD defined in local.conf.")
+
+
+
+    def deploy(self):
+        super(MasterImageHardwareTarget, self).deploy()
+        self.master = sshcontrol.SSHControl(ip=self.ip, logfile=self.sshlog, timeout=600, port=self.port)
+        for cmd in self.deploy_cmds:
+            os.system(cmd)
+        #os.system("rm -rf {} {}".format(self.new_kernel,self.new_rootfs))
+
+    def _deploy(self):
+        pass
+
+    def power_cycle(self):
+        if self.powercontrol_cmd:
+            os.system(self.powercontrol_cmd)
+
+
+    #fix me which is in  masteriamge.py mismatched with ./classes/testimage.bbclass
+    def start(self, extra_bootparams=None):
+        bb.plain("%s - boot test image on target" % self.pn)
+        self._start()
+        # set the ssh object for the target/test image
+        self.connection = sshcontrol.SSHControl(self.ip, logfile=self.sshlog, port=self.port)
+        bb.plain("%s - start running tests" % self.pn)
+
+            
+    def _start(self):
+        self.power_cycle()
+        time.sleep(180)
+
+
+    def stop(self):
+        bb.plain("stop target")
+        self.power_cycle()

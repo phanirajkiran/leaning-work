@@ -1,0 +1,11 @@
+root@lava-server:/# apt-cache policy python-django
+python-django:
+  Installed: (none)
+  Candidate: 1.7.11-1+deb8u2
+  Version table:
+     1.8.18-1~bpo8+1 0
+        100 http://deb.debian.org/debian/ jessie-backports/main amd64 Packages
+        100 http://httpredir.debian.org/debian/ jessie-backports/main amd64 Packages
+     1.7.11-1+deb8u2 0
+        500 http://deb.debian.org/debian/ jessie/main amd64 Packages
+        500 http://security.debian.org/ jessie/updates/main amd64 Packages

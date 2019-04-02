@@ -40,3 +40,6 @@ lyang001@lyang001-OptiPlex-9010:~/wrlinux-x/layers/wr-base$ git diff master upre
        ·   X: "unknown" change type (most probably a bug, please report it)
 
 
+$ git diff v4.14 v4.15-rc1 --shortstat
+11966 files changed, 610003 insertions(+), 301083 deletions(-)
+[ +308920 LOC ] 

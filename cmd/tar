@@ -1,0 +1,2 @@
+How to untar an archive without the root folder, but keeping the full hierarchy inside it?
+tar -xf archive.tar --strip-components=1

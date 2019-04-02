@@ -1,0 +1,8 @@
+1. cd /sys/kernel/debug/tracing/
+2. echo function_graph > current_tracer
+3. echo 1 > tracing_on
+
+===========
+https://www.cnblogs.com/muahao/p/8907916.html
+https://lwn.net/Articles/370423/
+

@@ -1,0 +1,67 @@
+fun main () { 
+
+} 
+
+import("math/rand")  rand is the subpackage 
+
+fmt.PrintlN("a number from 1-100",rand.Intn(100))
+
+go run gotut.go 
+
+
+godoc fmt Println
+
+
+fun add(x float64,y float64) float64{
+    return 
+
+}
+
+ var num1 float64 =5.6
+ var num1,num2 float64 = 5.6,9.5
+
+ num1,num2 :=5.6,9.5 (default float64)
+
+
+constant x int = 5 
+
+
+func multiple(a,b string) (string,string) {
+
+    return a,b 
+}
+
+
+var a int = 62
+var b float64 = float64(a)
+
+x :=a // x will be type int 
+
+x :=15 
+a :=&a //memeory address 
+
+
+fmt.Println(a)
+fmt.Println(*a)
+*a=5
+fmt.Println(x)
+
+
+type car struct {
+
+   gas_pedal unit16
+}
+
+a_car :=car{gas_pedal:22341}
+a_car :=car{22341}
+fmt.Println(a_car.gas_pedal)
+
+
+func (c car) kmh() float64 {
+    return floa64(c.gas_pedal)
+}
+
+fmt.Println(a_car.kmh())
+
+Pointer Receivers - Go Lang Practical Programming Tutorial p.8
+

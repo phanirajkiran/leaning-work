@@ -3,3 +3,14 @@ http://community.hpe.com/t5/All-About-the-Apps/5-types-of-regression-software-te
 
 https://lists.yoctoproject.org/pipermail/yocto/2013-November/017451.html
 
+
+http://delta.tigris.org/ 
+
+Delta assists you in minimizing "interesting" files subject to a test of their interestingness. A common such situation is when attempting to isolate a small failure-inducing substring of a large input that causes your program to exhibit a bug. 
+
+
+1)monkey testing
+https://en.wikipedia.org/wiki/Monkey_testing
+
+2) fuzzing testing 
+Fuzzing or fuzz testing is an automated software testing technique that involves providing invalid, unexpected, or random data as inputs to a computer program. The program is then monitored for exceptions such as crashes, failing built-in code assertions, or potential memory leaks

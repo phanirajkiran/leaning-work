@@ -1,0 +1,7 @@
+download from https://bitbucket.org/atlassian_tutorial/jira-rest-tutorial-examples/src/master/python/
+sudo apt-get install  python-pygraphviz
+sudo apt-get install  python-restkit
+
+./draw_chart.py -u lyang0 -p Tradewar123$ LIN7-88  -j https://jira.wrs.com  -f lyang0.png o
+
+eg: https://github.com/pawelrychlik/jira-dependency-graph

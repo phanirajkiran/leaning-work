@@ -1,0 +1,247 @@
+show columns from table_name from db_name;
+八查询前n条记录
+?
+1
+	
+SELECT * FROM tb_name LIMIT 0,$N;
+
+ limit语句与其他语句，如order by等语句联合使用，会使用SQL语句千变万化，使程序非常灵活
+
+九查询后n条记录
+?
+1
+	
+SELECT * FROM tb_stu ORDER BY id ASC LIMIT $n
+
+
+SELECT * FROM tb_stu WHERE age>$_POST[age] ORDER BY age;
+
+
+SELECT * FROM tb_stu WHERE age BETWEEN 0 AND 18
+
+SELECT * FROM tb_name WHERE sum > 100;
+
+
+
+mysql> DESCRIBE requirement;
++-------------------------------+------------------+------+-----+---------+----------------+
+| Field                         | Type             | Null | Key | Default | Extra          |
++-------------------------------+------------------+------+-----+---------+----------------+
+| requirement_id                | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| requirement_us_id             | varchar(10)      | NO   | MUL |         |                |
+| requirement_summary           | varchar(200)     | NO   |     |         |                |
+| requirement_status            | varchar(20)      | NO   |     |         |                |
+| requirement_priority          | varchar(10)      | NO   |     |         |                |
+| requirement_project           | varchar(30)      | NO   |     |         |                |
+| requirement_requested_release | varchar(30)      | NO   |     |         |                |
+| requirement_release           | varchar(50)      | NO   |     |         |                |
+| requirement_sprint            | varchar(50)      | NO   |     |         |                |
+| requirement_testing_required  | varchar(30)      | NO   |     |         |                |
+| requirement_domain            | varchar(30)      | NO   |     |         |                |
+| requirement_tester            | varchar(30)      | NO   |     |         |                |
+| requirement_release_id        | int(10) unsigned | NO   | MUL | NULL    |                |
+| requirement_feature           | varchar(200)     | NO   | MUL |         |                |
+| requirement_feature_link      | varchar(200)     | NO   |     |         |                |
+| requirement_us_link           | varchar(200)     | NO   |     |         |                |
++-------------------------------+------------------+------+-----+---------+----------------+
+16 rows in set (0.00 sec)
+
+
+mysql> SHOW COLUMNS FROM requirement;
++-------------------------------+------------------+------+-----+---------+----------------+
+| Field                         | Type             | Null | Key | Default | Extra          |
++-------------------------------+------------------+------+-----+---------+----------------+
+| requirement_id                | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| requirement_us_id             | varchar(10)      | NO   | MUL |         |                |
+| requirement_summary           | varchar(200)     | NO   |     |         |                |
+| requirement_status            | varchar(20)      | NO   |     |         |                |
+| requirement_priority          | varchar(10)      | NO   |     |         |                |
+| requirement_project           | varchar(30)      | NO   |     |         |                |
+| requirement_requested_release | varchar(30)      | NO   |     |         |                |
+| requirement_release           | varchar(50)      | NO   |     |         |                |
+| requirement_sprint            | varchar(50)      | NO   |     |         |                |
+| requirement_testing_required  | varchar(30)      | NO   |     |         |                |
+| requirement_domain            | varchar(30)      | NO   |     |         |                |
+| requirement_tester            | varchar(30)      | NO   |     |         |                |
+| requirement_release_id        | int(10) unsigned | NO   | MUL | NULL    |                |
+| requirement_feature           | varchar(200)     | NO   | MUL |         |                |
+| requirement_feature_link      | varchar(200)     | NO   |     |         |                |
+| requirement_us_link           | varchar(200)     | NO   |     |         |                |
++-------------------------------+------------------+------+-----+---------+----------------+
+16 rows in set (0.00 sec)
+
+mysql> select table_name ,column_name from information_schema.columns where table_schema='ltaf' and column_name='requirement_us_id';
++-------------+-------------------+
+| table_name  | column_name       |
++-------------+-------------------+
+| requirement | requirement_us_id |
++-------------+-------------------+
+1 row in set (0.01 sec)
+
+
+例如查找含有字段名为path的表名
+搜索
+select table_name
+ from information_schema.columns 
+ where column_name='path'
+
+
+====================================================
+mysql> select database();
++--------------------+
+| database()         |
++--------------------+
+| information_schema |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> use ltaf;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select database();
++------------+
+| database() |
++------------+
+| ltaf       |
++------------+
+1 row in set (0.00 sec)
+
+mysql> 
+
+
+
+=============================================================
+
+mysql> select requirement_us_id from requirement;
+
+去掉重复的
+mysql> select distinct test_component from test;
++------------------+
+| test_component   |
++------------------+
+|                  |
+| aaa              |
+| ABC              |
+| arm              |
+| bc               |
+| Benchmark        |
+| bsp              |
+| BSP-M3M4         |
+| building         |
+| BuildSystem      |
+| cert             |
+| cert-performance |
+| compiler         |
+| Connectivity     |
+| core             |
+| core-M3M4        |
+| DCOM             |
+| ddd              |
+| Deployment       |
+| Documentation    |
+| driver           |
+| fs               |
+| graphics         |
+| Hypervisor       |
+| ia               |
+| IDP              |
+| Installer        |
+| iot              |
+| Kernel           |
+| KPI              |
+| Kselftest        |
+| LTAF_COMP        |
+| LTP              |
+| LuCI             |
+| mrt              |
+| mw               |
+| networking       |
+| networking-kong  |
+| OOBE             |
+| osconfig         |
+| OVP              |
+| performance      |
+| POSIX            |
+| ppc              |
+| Pulsar           |
+| Puslar           |
+| Security         |
+| ssss             |
+| system           |
+| Test_COMPONENT   |
+| Tools            |
+| ui               |
+| usb              |
+| Userspace        |
+| Userspace_std    |
+| Vulnerability    |
+| vxst             |
+| WindShare        |
+| Workbench        |
+| yocto            |
++------------------+
+60 rows in set (0.02 sec)
+
+
+
+
+mysql> select distinct tr_domain from testresults;
++-----------------+
+| tr_domain       |
++-----------------+
+|                 |
+| 0               |
+| arm             |
+| bc              |
+| bsp             |
+| cert            |
+| compiler        |
+| core            |
+| fs              |
+| fs_manualy      |
+| graphics        |
+| hv              |
+| hypervisor      |
+| ia              |
+| iot             |
+| mw              |
+| networking      |
+| networking-kong |
+| OOBE            |
+| performance     |
+| ppc             |
+| Security        |
+| system          |
+| testdomain      |
+| ui              |
+| usb             |
+| usbDemo         |
+| Workbench       |
++-----------------+
+28 rows in set (0.12 sec)
+
+
+
+mysql> 
+==============================================================
+
+mysql> SELECT * FROM testresults LIMIT 0,1;
++--------+-----------+----------------------------------+--------+--------------+--------------+--------+--------+--------+------------------------+--------+--------+---------+--------+--------+--------+--------+--------+-----------+------------------------------------+----------------+----------+------------+------------+----------------------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------+----------------+----------+------------+-----------------+-------------------+-------------------+-----------------+-----------------------+------------------+------------------+-------------+-----------+
+| tr_id  | tr_status | tr_tc_id                         | tr_kf1 | tr_kf2       | tr_kf3       | tr_kf4 | tr_kf5 | tr_kf6 | tr_kf7                 | tr_kf8 | tr_kf9 | tr_kf10 | tr_ef1 | tr_ef2 | tr_ef3 | tr_ef4 | tr_ef5 | tr_tester | tr_sprint                          | tr_whentostart | tr_build | tr_barcode | tr_cadence | tr_uid                           | tr_updatetime       | tr_log                                                                                                                                                                                                                                                           | tr_description | tr_release_id | tr_requirement | tr_tags  | tr_defects | tr_wassp_env_id | tr_wassp_env_name | tr_wassp_rel_name | tr_wassp_system | tr_wassp_system_label | tr_function_pass | tr_function_fail | tr_comments | tr_domain |
++--------+-----------+----------------------------------+--------+--------------+--------------+--------+--------+--------+------------------------+--------+--------+---------+--------+--------+--------+--------+--------+-----------+------------------------------------+----------------+----------+------------+------------+----------------------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------+----------------+----------+------------+-----------------+-------------------+-------------------+-----------------+-----------------------+------------------+------------------+-------------+-----------+
+| 604538 | Pass      | 96be403571c59d01ba51cee99b33ef05 |        | ti_keystone2 | ti_keystone2 | smp    | diab   |        | ti_keystone2_k2e_local | -smp   | -j 32  |         | TBD    |        |        |        |        |           | Sprint 48 - Ending 22 January 2016 | Week3          | PASS     | 21832      |            | 01f7f5cf161a2ff4846b73a2a571c337 | 2016-01-18 14:11:16 | http://ctu-cc-pb02l.wrs.com///net/ctu-cc-pb02l/testcloud/Log/LOG_VX7/Vx-7_ARM_Arch-BSP/Vx7_SR0440_Release/20160115_172001_SR04400113/coreos/vxTest_user_tls_romfs/ti_keystone2_platform_smp/ti_keystone2_k2e_local.j32.ti_keystone2_k2e_evm.smp.true.diab.vsbdir |                |            28 | US72949        | LTAF_TAG |            | isID            | isName            | isRN              | isSystem        | isSystemL             |                0 |                0 |             |           |
++--------+-----------+----------------------------------+--------+--------------+--------------+--------+--------+--------+------------------------+--------+--------+---------+--------+--------+--------+--------+--------+-----------+------------------------------------+----------------+----------+------------+------------+----------------------------------+---------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+---------------+----------------+----------+------------+-----------------+-------------------+-------------------+-----------------+-----------------------+------------------+------------------+-------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> 
+
+
+找关联的键 ， 如共用的学号、身份证号码、客户号等，选定主表、从表
+
+select t.*,b.* from t left join b on t.a=b.a 
+
+
+connect: 
+http://blog.csdn.net/androidxiaogang/article/details/52137627

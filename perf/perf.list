@@ -1,0 +1,7 @@
+#	perf list hardware
+#	perf list cache
+#	perf list software
+#	perf list tracepoint
+#	perf list xfs:*
+#	perf list hardware xfs:*
+#	perf list # list all events

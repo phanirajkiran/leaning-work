@@ -1,0 +1,349 @@
+{
+    "expand": "renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations",
+    "fields": {
+        "aggregateprogress": {
+            "progress": 0,
+            "total": 0
+        },
+        "aggregatetimeestimate": null,
+        "aggregatetimeoriginalestimate": null,
+        "aggregatetimespent": null,
+        "assignee": {
+            "active": true,
+            "avatarUrls": {
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=lyang0&avatarId=11400",
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=lyang0&avatarId=11400",
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=lyang0&avatarId=11400",
+                "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=lyang0&avatarId=11400"
+            },
+            "displayName": "Yang, Lei",
+            "emailAddress": "Lei.Yang@windriver.com",
+            "key": "lyang0",
+            "name": "LYang0",
+            "self": "https://jira.wrs.com/rest/api/2/user?username=LYang0",
+            "timeZone": "America/Los_Angeles"
+        },
+        "attachment": [],
+        "comment": {
+            "comments": [
+                {
+                    "author": {
+                        "active": true,
+                        "avatarUrls": {
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=lyang0&avatarId=11400",
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=lyang0&avatarId=11400",
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=lyang0&avatarId=11400",
+                            "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=lyang0&avatarId=11400"
+                        },
+                        "displayName": "Yang, Lei",
+                        "emailAddress": "Lei.Yang@windriver.com",
+                        "key": "lyang0",
+                        "name": "LYang0",
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=LYang0",
+                        "timeZone": "America/Los_Angeles"
+                    },
+                    "body": "http://ala-git.wrs.com/cgit/projects/wassp-repos/testcases/wrlinux/commit/wr-testing/kts-dev/tools/gen_kselftest_conf.py?id=2c89d564c82471b695309d1ecb36c939986c588b",
+                    "created": "2016-10-14T01:25:40.000-0700",
+                    "id": "403479",
+                    "self": "https://jira.wrs.com/rest/api/2/issue/710558/comment/403479",
+                    "updateAuthor": {
+                        "active": true,
+                        "avatarUrls": {
+                            "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=lyang0&avatarId=11400",
+                            "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=lyang0&avatarId=11400",
+                            "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=lyang0&avatarId=11400",
+                            "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=lyang0&avatarId=11400"
+                        },
+                        "displayName": "Yang, Lei",
+                        "emailAddress": "Lei.Yang@windriver.com",
+                        "key": "lyang0",
+                        "name": "LYang0",
+                        "self": "https://jira.wrs.com/rest/api/2/user?username=LYang0",
+                        "timeZone": "America/Los_Angeles"
+                    },
+                    "updated": "2016-10-14T01:25:40.000-0700"
+                }
+            ],
+            "maxResults": 1,
+            "startAt": 0,
+            "total": 1
+        },
+        "components": [
+            {
+                "description": "Linux Test Infrastructure",
+                "id": "22500",
+                "name": "Test Infrastructure",
+                "self": "https://jira.wrs.com/rest/api/2/component/22500"
+            }
+        ],
+        "created": "2016-08-23T02:22:45.000-0700",
+        "creator": {
+            "active": true,
+            "avatarUrls": {
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=lyang0&avatarId=11400",
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=lyang0&avatarId=11400",
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=lyang0&avatarId=11400",
+                "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=lyang0&avatarId=11400"
+            },
+            "displayName": "Yang, Lei",
+            "emailAddress": "Lei.Yang@windriver.com",
+            "key": "lyang0",
+            "name": "LYang0",
+            "self": "https://jira.wrs.com/rest/api/2/user?username=LYang0",
+            "timeZone": "America/Los_Angeles"
+        },
+        "customfield_10004": null,
+        "customfield_10005": null,
+        "customfield_10006": null,
+        "customfield_10007": null,
+        "customfield_10008": null,
+        "customfield_10010": null,
+        "customfield_10011": null,
+        "customfield_10012": null,
+        "customfield_10015": null,
+        "customfield_10103": null,
+        "customfield_10200": null,
+        "customfield_10201": null,
+        "customfield_10501": null,
+        "customfield_10508": null,
+        "customfield_10512": null,
+        "customfield_10517": null,
+        "customfield_10518": null,
+        "customfield_10519": null,
+        "customfield_10520": null,
+        "customfield_10600": null,
+        "customfield_10601": null,
+        "customfield_10602": null,
+        "customfield_10603": null,
+        "customfield_10604": null,
+        "customfield_10605": {
+            "id": "10439",
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/10439",
+            "value": "Standard"
+        },
+        "customfield_10606": null,
+        "customfield_10607": null,
+        "customfield_10608": null,
+        "customfield_10700": null,
+        "customfield_10701": null,
+        "customfield_10702": null,
+        "customfield_10707": null,
+        "customfield_10800": null,
+        "customfield_10801": null,
+        "customfield_10802": null,
+        "customfield_10804": null,
+        "customfield_10900": null,
+        "customfield_10901": null,
+        "customfield_11000": [
+            {
+                "archived": false,
+                "description": "Linux 8.0",
+                "id": "24595",
+                "name": "8.0",
+                "releaseDate": "2015-12-15",
+                "released": false,
+                "self": "https://jira.wrs.com/rest/api/2/version/24595"
+            }
+        ],
+        "customfield_11001": null,
+        "customfield_11002": {
+            "archived": false,
+            "description": "Linux 8.0",
+            "id": "24595",
+            "name": "8.0",
+            "releaseDate": "2015-12-15",
+            "released": false,
+            "self": "https://jira.wrs.com/rest/api/2/version/24595"
+        },
+        "customfield_11100": null,
+        "customfield_11201": null,
+        "customfield_11202": null,
+        "customfield_11301": null,
+        "customfield_11302": null,
+        "customfield_11404": null,
+        "customfield_11500": null,
+        "customfield_11700": null,
+        "customfield_11900": null,
+        "customfield_11901": null,
+        "customfield_11902": null,
+        "customfield_11904": {
+            "id": "11902",
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11902",
+            "value": "No"
+        },
+        "customfield_11905": {
+            "id": "11904",
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11904",
+            "value": "No"
+        },
+        "customfield_11906": {
+            "id": "11906",
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/11906",
+            "value": "No"
+        },
+        "customfield_11908": null,
+        "customfield_12100": null,
+        "customfield_12200": null,
+        "customfield_12400": "2016-10-14T01:25:40.000-0700",
+        "customfield_12407": null,
+        "customfield_12500": null,
+        "customfield_12702": null,
+        "customfield_12703": null,
+        "customfield_12800": null,
+        "customfield_12801": {
+            "id": "14202",
+            "self": "https://jira.wrs.com/rest/api/2/customFieldOption/14202",
+            "value": "Reproducible"
+        },
+        "customfield_13000": "0|i262sf:",
+        "customfield_13001": null,
+        "customfield_13002": null,
+        "customfield_13006": null,
+        "customfield_13300": null,
+        "customfield_13301": null,
+        "customfield_13302": null,
+        "customfield_13303": null,
+        "customfield_13304": null,
+        "customfield_13305": null,
+        "customfield_13307": null,
+        "customfield_13308": null,
+        "customfield_13311": null,
+        "customfield_13312": null,
+        "customfield_13313": null,
+        "customfield_13401": null,
+        "customfield_13403": "0.0",
+        "customfield_13602": null,
+        "customfield_13701": null,
+        "customfield_13702": null,
+        "customfield_13703": null,
+        "customfield_13704": null,
+        "customfield_13706": null,
+        "customfield_13800": null,
+        "customfield_13900": {
+            "formatted": "Linux TAF",
+            "value": "Linux TAF"
+        },
+        "customfield_13901": null,
+        "customfield_13902": null,
+        "customfield_13903": {
+            "formatted": "Yes",
+            "value": {
+                "id": 13,
+                "text": "Yes",
+                "value": "Yes"
+            }
+        },
+        "customfield_14202": null,
+        "customfield_14303": null,
+        "customfield_14409": null,
+        "customfield_14410": null,
+        "description": "since kernel 4.6+\r\nit gives the necessary kernel config for each test case by \r\ncommit 8c749ce93ee69e789e46b3be98de9e0cbfcf8ed8\r\nAuthor: Bamvor Jian Zhang <bamvor.zhangjian@linaro.org>\r\nDate:   Fri Jan 8 15:27:33 2016 +0800\r\n\r\n    selftests: create test-specific kconfig fragments\r\n    \r\n    Create the config file in each directory of testcase which need\r\n    more kernel configuration than the default defconfig. User could\r\n    use these configs with merge_config.sh script:\r\n    \r\n    Enable config for specific testcase:\r\n\r\n\r\na tool will help to collect from config file to CORE_CFG   ",
+        "duedate": null,
+        "environment": null,
+        "issuelinks": [],
+        "issuetype": {
+            "avatarId": 14303,
+            "description": "A problem which impairs or prevents the functions of the product.",
+            "iconUrl": "https://jira.wrs.com/secure/viewavatar?size=xsmall&avatarId=14303&avatarType=issuetype",
+            "id": "1",
+            "name": "Bug",
+            "self": "https://jira.wrs.com/rest/api/2/issuetype/1",
+            "subtask": false
+        },
+        "labels": [
+            "CDC_TEST_IMPROVEMENT"
+        ],
+        "lastViewed": "2019-03-01T00:51:49.523-0800",
+        "priority": {
+            "iconUrl": "https://jira.wrs.com/images/icons/priorities/critical.svg",
+            "id": "2",
+            "name": "P2",
+            "self": "https://jira.wrs.com/rest/api/2/priority/2"
+        },
+        "progress": {
+            "progress": 0,
+            "total": 0
+        },
+        "project": {
+            "avatarUrls": {
+                "16x16": "https://jira.wrs.com/secure/projectavatar?size=xsmall&pid=15905&avatarId=10011",
+                "24x24": "https://jira.wrs.com/secure/projectavatar?size=small&pid=15905&avatarId=10011",
+                "32x32": "https://jira.wrs.com/secure/projectavatar?size=medium&pid=15905&avatarId=10011",
+                "48x48": "https://jira.wrs.com/secure/projectavatar?pid=15905&avatarId=10011"
+            },
+            "id": "15905",
+            "key": "LTAF8",
+            "name": "Linux TAF 8",
+            "projectCategory": {
+                "description": "",
+                "id": "11302",
+                "name": "Linux TAF",
+                "self": "https://jira.wrs.com/rest/api/2/projectCategory/11302"
+            },
+            "self": "https://jira.wrs.com/rest/api/2/project/15905"
+        },
+        "reporter": {
+            "active": true,
+            "avatarUrls": {
+                "16x16": "https://jira.wrs.com/secure/useravatar?size=xsmall&ownerId=lyang0&avatarId=11400",
+                "24x24": "https://jira.wrs.com/secure/useravatar?size=small&ownerId=lyang0&avatarId=11400",
+                "32x32": "https://jira.wrs.com/secure/useravatar?size=medium&ownerId=lyang0&avatarId=11400",
+                "48x48": "https://jira.wrs.com/secure/useravatar?ownerId=lyang0&avatarId=11400"
+            },
+            "displayName": "Yang, Lei",
+            "emailAddress": "Lei.Yang@windriver.com",
+            "key": "lyang0",
+            "name": "LYang0",
+            "self": "https://jira.wrs.com/rest/api/2/user?username=LYang0",
+            "timeZone": "America/Los_Angeles"
+        },
+        "resolution": {
+            "description": "A fix for this issue is checked into the tree and tested.",
+            "id": "1",
+            "name": "Fixed",
+            "self": "https://jira.wrs.com/rest/api/2/resolution/1"
+        },
+        "resolutiondate": "2016-10-14T01:25:40.000-0700",
+        "status": {
+            "description": "Issue is closed",
+            "iconUrl": "https://jira.wrs.com/images/icons/statuses/closed.png",
+            "id": "6",
+            "name": "Closed",
+            "self": "https://jira.wrs.com/rest/api/2/status/6",
+            "statusCategory": {
+                "colorName": "green",
+                "id": 3,
+                "key": "done",
+                "name": "Done",
+                "self": "https://jira.wrs.com/rest/api/2/statuscategory/3"
+            }
+        },
+        "subtasks": [],
+        "summary": "KTS (Kernel Test Suite) Evolvement: generate required kernel configs for each kselftest case automatcially ",
+        "timeestimate": null,
+        "timeoriginalestimate": null,
+        "timespent": null,
+        "timetracking": {},
+        "updated": "2016-10-14T01:25:40.000-0700",
+        "votes": {
+            "hasVoted": false,
+            "self": "https://jira.wrs.com/rest/api/2/issue/LTAF8-620/votes",
+            "votes": 0
+        },
+        "watches": {
+            "isWatching": false,
+            "self": "https://jira.wrs.com/rest/api/2/issue/LTAF8-620/watchers",
+            "watchCount": 1
+        },
+        "worklog": {
+            "maxResults": 20,
+            "startAt": 0,
+            "total": 0,
+            "worklogs": []
+        },
+        "workratio": -1
+    },
+    "id": "710558",
+    "key": "LTAF8-620",
+    "self": "https://jira.wrs.com/rest/api/2/issue/710558"
+}

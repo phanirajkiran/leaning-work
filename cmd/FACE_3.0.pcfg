@@ -1,0 +1,53 @@
+segment: OSS
+language: LANG_C
+profile: PROF_GENERAL
+partition: PART_POSIX
+toolchain_filename: "FACE_3.0.tcfg"
+base_dir: "/FACEConformanceTestSuite_3.0.0/face_conformance_app"
+gold_standard_lib_dir: "/FACEConformanceTestSuite_3.0.0/sample/projects/C/OSS/General/POSIX"
+versions {
+}
+operating_system: "Sys: [Linux], Release: [4.18.20-yocto-standard], Version: [#1 SMP PREEMPT Mon Feb 11 08:26:16 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux], Arch: [64 bits]"
+oss {
+  arinc653 {
+    api_under_test: false
+  }
+  c99 {
+    api_under_test: true
+    compiler_flags: ""
+    linker_flags: ""
+  }
+  cpp2003 {
+    api_under_test: false
+  }
+  posix2008 {
+    api_under_test: true
+    compiler_flags: "-D_POSIX_C_SOURCE=200809L -D _GNU_SOURCE"
+    linker_flags: ""
+  }
+  hmfm {
+    api_under_test: false
+  }
+  config {
+    api_under_test: false
+  }
+  opengl_sc {
+    api_under_test: false
+  }
+  opengl_sc20 {
+    api_under_test: false
+  }
+  opengl_es20 {
+    api_under_test: false
+  }
+  egl14 {
+    api_under_test: false
+  }
+  lcm {
+    api_under_test: false
+  }
+  lcm_config {
+  }
+}
+base_directory_path: "/FACEConformanceTestSuite_3.0.0/face_conformance_app"
+uop_name: ""

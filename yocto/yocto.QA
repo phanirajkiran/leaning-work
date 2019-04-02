@@ -37,3 +37,7 @@ python populate_packages_prepend() {
         d.setVar("INSANE_SKIP_%s" % p, "ldflags dev-so")
 }
 
+
+
+Integrate DISTRO_FEATURES with KERNEL_FEATURES
+https://bugzilla.yoctoproject.org/show_bug.cgi?id=2267

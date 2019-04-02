@@ -35,3 +35,6 @@ libvirt:
     server: irc.oftc.net
     port: 6667 (the usual IRC port)
     channel: #virt
+
+
+/msg nickserv register [password] [email]

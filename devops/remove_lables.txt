@@ -1,0 +1,9 @@
+{
+    "update": {
+        "labels": [
+            {
+                "remove": "TEST"
+            }
+        ]
+    }
+}

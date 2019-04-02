@@ -1,3 +1,276 @@
 ./runltp -p -q -d /tmp -l results.txt -c 6 -i 6 
 
 /var/volatile/tmp/ltp-XXXXtXjpQQ/alltests list all the default one 
+
+
+
+
+
+    -t DURATION     Execute the testsuite for given duration. Examples:
+                      -t 60s = 60 seconds
+                      -t 45m = 45 minutes
+                      -t 24h = 24 hours
+                      -t 2d  = 2 days
+    -I ITERATIONS   Execute the testsuite ITERATIONS times.
+
+
+ -a EMAIL_TO     EMAIL all your Reports to this E-mail Address
+    -g HTMLFILE     Create an additional HTML output format
+
+
+    -K DMESG_LOG_DIR
+Log Kernel messages generated for each test cases inside this directory
+    -l LOGFILE      Log results of test in a logfile.
+
+
+
+-M CHECK_TYPE
+[CHECK_TYPE=1 => Full Memory Leak Check tracing children as well]
+[CHECK_TYPE=2 => Thread Concurrency Check tracing children as well]
+[CHECK_TYPE=3 => Full Memory Leak & Thread Concurrency Check tracing children as well]
+
+
+
+  -p              Human readable format logfiles.
+
+
+
+    -B LTP_DEV_FS_TYPE The file system of test block devices.
+    -z BIG_DEVICE   Some tests require a big unmounted block device
+                    to run correctly.
+    -Z  LTP_BIG_DEV_FS_TYPE The file system of the big device
+
+
+ -N              Run all the networking tests.
+
+
+For example, to run all the tests listed in the /opt/ltp/runtest/fs file, you can simply call:
+
+    /opt/ltp/runltp -f fs
+
+
+=============================================================================
+One  of  the  design  goals  of  the  Linux  Test
+Project was to make it easy to use. To facilitate
+this, the LTP includes three scripts for execut-
+ing subsets of the automated tests. They are
+
+
+network.sh – runs all the automated net-
+work tests in sequential order
+
+
+root@intel-x86-64:/opt# ls /opt/ltp/testscripts/
+adp.sh		 adp_test.sh  autofs4.sh  exportfs.sh			     ltp-aiodio.sh	ltpdmmapper.sh	ltpfsnolvm.sh  network.sh      sysfs.sh		test_realtime.sh
+adp_children.sh  autofs1.sh   diskio.sh   load_stress_all_kernel_modules.sh  ltp-scsi_debug.sh	ltpfslvm.sh	ltpstress.sh   runEALtests.sh  test_fs_bind.sh	tpm_tools.sh
+
+
+
+root@intel-x86-64:/opt/ltp/testscripts# ./ltp-aiodio.sh -f ly.tmp -b /dev/sdb1 -a    
+No filesystems passed to test
+Please pass at least one supported filesystem or the -a 1 flag to run all 
+usage: ltp-aiodio.sh [ -f large_filename -b partition] [-o optional partition] [-e 1] [-t 1] [-j 1] [-x 1] or [-a 1]
+
+defaults:
+file1=ly.tmp
+part1=/dev/sdb1
+        ext2=0
+        ext3=0
+        jfs=0
+        xfs=0
+      example: ltp-aiodio.sh -f MyLargeFile -b /dev/hdc1 [-o /dev/hdc2] [-a 1] or
+[-e 1] [-x 1] [-j 1] [-t 1]
+        -o = optional partition allows some of the tests to utilize multiple filesystems to further stress AIO/DIO
+        -e = test ex2 filesystem.
+        -t = test ext3 filesystem
+        -j = test JFS filesystem
+        -x = test XFS filesystem
+                    or
+        -a = test all supported filesystems, this will override any other filesystem flags passed.
+
+        - a 1 turns on the test for the above supported filesystem, just omit passing the flag to skip that filesystem.
+
+        - A Large file should be passed to fully stress the test. You must pass at least one filesystem to test, you can pass any combination
+          but there is not a default filesystem. ReiserFS does not support AIO so these tests will not support ReiserFS.
+
+        - WARNING !! The partition you pass will be overwritten. This is a destructive test so only pass a partition where data can be destroyed.
+
+
+
+=============================================
+
+no big block device was specified on commandline.
+Tests which require a big block device are disabled.
+You can specify it with option -z
+COMMAND:    /opt/ltp/bin/ltp-pan   -e -S   -a 1778     -n 1778 -p -f /tmp/ltp-GfN5acoHQT/alltests -l /opt/ltp/resultLTP: starting fallocate04
+s/LTP_RUN_ON-2018_12_25-02h_47m_25s.log  -C /opt/ltp/output/LTP_RUN_ON-2018_12_25-02h_47m_25s.failed -T /opt/ltp/output/LTP_RUN_ON-2018_12_25-02h_47m_25s.tconf
+INFO: Restricted to fallocate04
+LOG File: /opt/ltp/results/LTP_RUN_ON-2018_12_25-02h_47m_25s.log
+FAILED COMMAND File: /opt/ltp/output/LTP_RUN_ON-2018_12_25-02h_47m_25s.failed
+TCONF COMMAND File: /opt/ltp/output/LTP_RUN_ON-2018_12_25-02h_47m_25s.tconf
+Running tests.......
+<<<test_start>>>
+tag=fallocate04 stime=1545706047
+cmdline="fallocate04"
+contacts=""
+analysis=exit
+<<<test_output>>>
+incrementing stop
+tst_device.c:230: INFO: Using test device LTP_DEV=fuse init (API version 7.27)
+'/dev/loop0'
+tst_supported_fs_types.c:72: INFO: Kernel supports ext2
+tst_supported_fs_types.c:56: INFO: mkfs.ext2 does exist
+tst_supported_fs_types.c:72: INFO: Kernel supports ext3
+tst_supported_fs_types.c:56: INFO: mkfs.ext3 does exist
+tst_supported_fs_types.c:72: INFO: Kernel supports ext4
+tst_supported_fs_types.c:56: INFO: mkfs.ext4 does exist
+tst_supported_fs_types.c:95: INFO: Filesystem xfs is not supported
+tst_supported_fs_types.c:72: INFO: Kernel supports btrfs
+tst_supported_fs_types.c:52: INFO: mkfs.btrfs does not exist
+tst_supported_fs_types.c:72: INFO: Kernel supports vfat
+tst_supported_fs_types.c:52: INFO: mkfs.vfat does not exist
+tst_supported_fs_types.c:95: INFO: Filesystem exfat is not supported
+tst_supported_fs_types.c:95: INFO: Filesystem ntfs is not supported
+tst_test.c:1133: INFO: Testing on ext2
+tst_mkfs.c:90: INFO: Formatting /dev/loop0 with ext2 opts='' extra opts=''
+mke2fs 1.44.3 (10-July-2018)
+EXT4-fs (loop0): mounting ext2 file system using the ext4 subsystem
+EXT4-fs (loop0): mounted filesystem without journal. Opts: (null)
+tst_test.c:1072: INFO: Timeout per run is 0h 05m 00s
+fallocate04.c:96: INFO: allocate '3072' bytes
+fallocate04.c:100: CONF: fallocate() not supported
+tst_test.c:1133: INFO: Testing on ext3
+tst_mkfs.c:90: INFO: Formatting /dev/loop0 with ext3 opts='' extra opts=''
+mke2fs 1.44.3 (10-July-2018)
+EXT4-fs (loop0): mounting ext3 file system using the ext4 subsystem
+EXT4-fs (loop0): mounted filesystem with ordered data mode. Opts: (null)
+tst_test.c:1072: INFO: Timeout per run is 0h 05m 00s
+fallocate04.c:96: INFO: allocate '3072' bytes
+fallocate04.c:100: CONF: fallocate() not supported
+tst_test.c:1133: INFO: Testing on ext4
+tst_mkfs.c:90: INFO: Formatting /dev/loop0 with ext4 opts='' extra opts=''
+mke2fs 1.44.3 (10-July-2018)
+EXT4-fs (loop0): mounted filesystem with ordered data mode. Opts: (null)
+tst_test.c:1072: INFO: Timeout per run is 0h 05m 00s
+fallocate04.c:96: INFO: allocate '3072' bytes
+fallocate04.c:110: PASS: test-case succeeded
+fallocate04.c:117: INFO: read allocated file size '3072'
+fallocate04.c:118: INFO: make a hole with FALLOC_FL_PUNCH_HOLE
+fallocate04.c:134: INFO: check that file has a hole with lseek(,,SEEK_HOLE)
+fallocate04.c:151: INFO: found a hole at '1024' offset
+fallocate04.c:157: INFO: allocated file size before '3072' and after '2048'
+fallocate04.c:80: INFO: reading the file, compare with expected buffer
+fallocate04.c:168: PASS: test-case succeeded
+fallocate04.c:173: INFO: zeroing file space with FALLOC_FL_ZERO_RANGE
+fallocate04.c:182: INFO: read current allocated file size '2048'
+fallocate04.c:199: INFO: allocated file size before '2048' and after '3072'
+fallocate04.c:80: INFO: reading the file, compare with expected buffer
+fallocate04.c:210: PASS: test-case succeeded
+fallocate04.c:215: INFO: collapsing file space with FALLOC_FL_COLLAPSE_RANGE
+fallocate04.c:219: INFO: read current allocated file size '3072'
+fallocate04.c:233: INFO: allocated file size before '3072' and after '2048'
+fallocate04.c:80: INFO: reading the file, compare with expected buffer
+fallocate04.c:250: PASS: test-case succeeded
+fallocate04.c:255: INFO: inserting space with FALLOC_FL_INSERT_RANGE
+fallocate04.c:259: INFO: read current allocated file size '2048'
+fallocate04.c:277: INFO: allocated file size before '2048' and after '3072'
+fallocate04.c:80: INFO: reading the file, compare with expected buffer
+fallocate04.c:288: PASS: test-case succeeded
+
+
+
+
+
+./runltp -s chown04 -B btrfs
+
+
+
+root@intel-x86-64:/opt/ltp# LTP_DEV_FS_TYPE=btrfs;./testcases/bin/chown04
+chown04     0  TINFO  :  Found free device '/dev/loop0'
+chown04     0  TINFO  :  Formatting /dev/loop0 with btrfs opts='' extra opts=''
+chown04     1  TCONF  :  tst_mkfs.c:98: chown04.c:152: mkfs.btrfs not found in $PATH
+chown04     2  TCONF  :  tst_mkfs.c:98: Remaining cases not appropriate for configuration
+
+
+==================================================================================================
+
+
+
+
+
+scenario_groups/default:fs_ext4
+
+
+
+> +    For example:
+> +    s1 = "a b c"
+> +    s2 = "b c d"
+> +    s3 = set_union(s1, s2)
+> +    => s3 = "b c"
+> +    """
+
+
+
+quotactl01.dmesg.log:[ 4002.227232] EXT4-fs (loop0): usrquota option not supported
+
+fix 
+After that run modprobe quota_v2 and modprobe quota_v1 in order to get ready to run quotas. Also remember to put the modules on /etc/modules.
+CONFIG_QFMT_V2=y
+
+
+
+
+https://serverfault.com/questions/545708/direct-i-o-on-linux
+
+search not 
+
+cgroup_regression_test    4  TCONF  :  ltpapicmd.c:188: CONFIG_LOCKDEP is not enabled
+
+
+https://wiki.linuxfoundation.org/realtime/documentation/howto/tools/ltp
+========================
+# please make sure to include the '-l' argument even though it is specified as optional 
+# because there is a bug in ltp which throughs out a syntax error if the argument is not specified.
+
+$> ./run.sh -t all -l 1
+
+./runltp -l full.log -B xfs -z /dev/sdb1  -K dmesg -c 5 -p -M 3 
+
+
+root@intel-x86-64:/opt/ltp# cat scenario_groups/default 
+syscalls
+fs
+fs_perms_simple
+fsx
+dio
+io
+mm
+ipc
+sched
+math
+nptl
+pty
+containers
+fs_bind
+controllers
+filecaps
+cap_bounds
+fcntl-locktests
+connectors
+admin_tools
+timers
+power_management_tests
+numa
+hugetlb
+commands
+hyperthreading
+kernel_misc
+modules
+fs_ext4
+pipes
+can
+cpuhotplug
+net.ipv6_lib
+input
+cve
+

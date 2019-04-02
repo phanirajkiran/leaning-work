@@ -1,0 +1,45 @@
+
+
+serge@ubuntu:~/test$ cat fail.c
+#include <stdio.h>
+
+#include <linux/fcntl.h> /* for AT_EMPTY_PATH */
+#include <fcntl.h>
+
+int main()
+{
+        printf("hello, world\n");
+}
+serge@ubuntu:~/test$ make fail
+cc fail.c -o fail
+In file included from /usr/include/fcntl.h:34:0,
+                 from fail.c:4:
+/usr/include/x86_64-linux-gnu/bits/fcntl.h:168:8: error: redefinition of ‘struct flock’
+/usr/include/asm-generic/fcntl.h:167:8: note: originally defined here
+make: *** [fail] Error 1
+
+==============================
+
+wrsadmin@pek-lyang0-u17:/usr$ dpkg -s linux-libc-dev 
+Package: linux-libc-dev
+Status: install ok installed
+Priority: optional
+Section: devel
+Installed-Size: 4728
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Architecture: amd64
+Multi-Arch: same
+Source: linux
+Version: 4.10.0-38.42
+Replaces: linux-kernel-headers
+Provides: linux-kernel-headers
+Conflicts: linux-kernel-headers
+Description: Linux Kernel Headers for development
+ This package provides headers from the Linux kernel.  These headers
+ are used by the installed headers for GNU glibc and other system
+ libraries. They are NOT meant to be used to build third-party modules for
+ your kernel. Use linux-headers-* packages for that.
+
+
+wrsadmin@pek-lyang0-u17:/usr$ uname -a 
+Linux pek-lyang0-u17 4.10.0-38-generic #42-Ubuntu SMP Tue Oct 10 13:24:27 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux

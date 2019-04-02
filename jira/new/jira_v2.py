@@ -25,7 +25,7 @@ class Jira(object):
         #url = "https://jira.wrs.com:8443/rest/api/2/issue/LTAF8-620"
         #url = "https://jira.wrs.com:8443/rest/api/2/issue/LIN9-1768"
         #url = "https://jira.wrs.com:8443/rest/api/2/issue/LIN8-2661"
-        url = "https://jira.wrs.com:8443/rest/api/2/issue/LIN8-4538"
+        url = "https://jira.wrs.com/rest/api/2/issue/LIN8-4538"
         #url = "https://jira.wrs.com:8443/rest/api/2/issue/LIN8-4914"
         #url = "https://jira.wrs.com:8443/rest/api/2/search"
         r = requests.get(url, auth=("apiuser", "apiuser"))

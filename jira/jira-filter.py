@@ -68,7 +68,7 @@ def con_jira():
     # (see https://developer.atlassian.com/display/DOCS/Installing+the+Atlassian+Plugin+SDK for details).
     # Override this with the options parameter.
     options = {
-        'server': 'https://jira.wrs.com:8443'
+        'server': 'https://jira.wrs.com'
     }
 
 
@@ -133,7 +133,7 @@ def draw_table0(L,comments,var_list,var_dict,first,num):
     <td width="10%%"><strong><font color='red'>%s</font></strong></td>
 ''' %(b[3])
             L += '''
-    <td width="7%%"><a href='https://jira.wrs.com:8443/browse/%s'>%s</a></td>
+    <td width="7%%"><a href='https://jira.wrs.com/browse/%s'>%s</a></td>
     <td width="5%%">%s</td>
 '''%(b[0],b[1],b[2])
             if num != 3:
@@ -306,7 +306,7 @@ u {
         #for k,d in issue_dict.items():
             L += '''
   <tr>
-    <td width="7%%"><a href='https://jira.wrs.com:8443/browse/%s'>%s</a></td>
+    <td width="7%%"><a href='https://jira.wrs.com/browse/%s'>%s</a></td>
     <td width="5%%">%s</td>          
     <td width="5%%">%s</td>          
     <td width="5%%">%s</td>          

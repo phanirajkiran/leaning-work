@@ -1,0 +1,29 @@
+http://www.cnblogs.com/polestar/p/6086552.html
+ Linux下配置APACHE支持PHP环境
+复制代码
+
+编辑 /usr/local/apache2/conf/httpd.conf 文件时要注意：         
+
+找到：    
+AddType  application/x-compress .Z    
+AddType application/x-gzip .gz .tgz    
+在后面添加：    
+AddType application/x-httpd-php .php（使Apcche支持PHP）    
+AddType application/x-httpd-php-source .php5       
+
+找到：    <IfModule dir_module>    DirectoryIndex index.html    </IfModule>    
+添加：    <IfModule dir_module>    DirectoryIndex index.html index.php    </IfModule>        
+
+找到：    ＃ServerName www.example.com:80    
+修改为：  ServerName 127.0.0.1:80或者ServerName localhost:80    记得要去掉前面的“＃”  
+
+
+修改默认的Web站点目录
+
+找到：DocumentRoot "/usr/local/apache2/htdocs"
+修改为：DocumentRoot "/home/www/WebSite" --该目录为自己创建的目录
+ 
+找到：<Directory "/usr/local/apache2/htdocs"> 
+修改为：<Directory "/home/www/WebSite">
+
+复制代码

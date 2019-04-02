@@ -1,0 +1,3 @@
+[filter1]
+summary=LTS19: Resolved defects over the last 7 days 
+filter=project = LIN1019 AND issuetype = Bug AND resolved >= -7d ORDER BY assignee ASC, priority DESC, updated DESC

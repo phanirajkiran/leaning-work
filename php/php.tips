@@ -23,3 +23,32 @@ sudo apt-get install mysql-server mysql-client php5-mysql
 
 
 http://openenergymonitor.org/emon/node/107
+
+to avoid PHP Parse error:  syntax error, unexpected end of file in /usr/share/apache2/default-site/htdocs/index.php on line 443
+root@intel-x86-64:/usr/share/apache2/default-site/htdocs# cat /etc/php/apache2-php5/php.ini |grep short_open
+; short_open_tag
+short_open_tag = On
+
+
+https://www.w3schools.com/php/php_forms.asp  get data
+
+
+curl in php
+http://www.giantflyingsaucer.com/blog/?p=2125
+
+<?php exec("path/you/got/from/which/curl http://www.google.com") ?>
+
+https://gist.github.com/subfuzion/08c5d85437d5d4f00e58
+
+
+https://stackoverflow.com/questions/11792129/print-python-script-output-correctly-in-php
+
+$output=shell_exec('/usr/bin/python hello.py');
+echo "<pre>";
+print_r($output);
+echo "</pre>";
+
+
+http://php.net/manual/zh/features.commandline.webserver.php
+
+https://www.w3.org/wiki/CSS/Properties/white-space
